@@ -1,0 +1,27 @@
+# Playwright & Testing
+playwright==1.48.0
+pytest==8.3.3
+pytest-playwright==0.5.2
+pytest-asyncio==0.24.0
+pytest-xdist==3.6.1  # Parallele Ausführung
+
+# Robot Framework (Phase 2+)
+robotframework==7.1.1
+robotframework-browser==18.9.1
+
+# Utilities
+python-dotenv==1.0.1
+pydantic==2.9.2
+pydantic-settings==2.6.0
+
+# Reporting
+allure-pytest==2.13.5
+
+# Code Quality
+black==24.10.0
+isort==5.13.2
+ruff==0.7.1
+mypy==1.13.0
+
+# Type Stubs
+types-requests==2.32.0
