@@ -51,5 +51,8 @@ mass_test:
   success_rate_threshold: 0.95
 
 # Testdaten
+# Format: /p/produktname/ge-p-NUMMER (Grüne Erde spezifisch)
 test_products:
-  - "693278"
+  - "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+  - "p/blusenshirt-aus-bio-leinen/ge-p-863190"
+  - "p/kleiderstaender-jukai-pur/ge-p-693645"

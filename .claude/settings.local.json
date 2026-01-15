@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(superpowers:brainstorming)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(move checkout_page.py playwright_testspagescheckout_page.py)",
+      "Bash(move test_checkout_mass.py playwright_teststeststest_checkout_mass.py)",
+      "WebFetch(domain:grueneerde.scalecommerce.cloud)",
+      "Bash(git config:*)",
+      "Bash(git push:*)",
+      "Bash(docker-compose build:*)",
+      "Bash(docker-compose run:*)",
+      "Bash(MSYS_NO_PATHCONV=1 docker-compose run:*)"
+    ]
+  }
+}

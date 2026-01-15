@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "superpower-tools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@anthropic/superpower-tools@latest"]
+    }
+  }
+}

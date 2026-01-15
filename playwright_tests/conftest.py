@@ -1,19 +1,13 @@
 """
 Pytest Fixtures für Playwright E2E Tests.
 
-Stellt Browser, Pages und Konfiguration für alle Tests bereit.
+Nutzt pytest-playwright's eingebaute Fixtures und erweitert sie.
 """
 import pytest
 from pathlib import Path
-from typing import AsyncGenerator
+from typing import Generator
 
-from playwright.async_api import (
-    Browser,
-    BrowserContext,
-    Page,
-    Playwright,
-    async_playwright,
-)
+from playwright.sync_api import Page, BrowserContext
 
 from .config import TestConfig, get_config
 
@@ -80,7 +74,7 @@ def config(request) -> TestConfig:
 
 @pytest.fixture(scope="session")
 def base_url(config: TestConfig) -> str:
-    """Basis-URL des zu testenden Shops."""
+    """Basis-URL des zu testenden Shops (überschreibt pytest-playwright)."""
     return config.base_url
 
 
@@ -132,105 +126,37 @@ def products(request, config: TestConfig) -> list[str]:
 
 
 # =============================================================================
-# Playwright Fixtures
+# pytest-playwright Konfiguration
 # =============================================================================
 
 @pytest.fixture(scope="session")
-async def playwright() -> AsyncGenerator[Playwright, None]:
-    """Playwright-Instanz für die Session."""
-    async with async_playwright() as p:
-        yield p
+def browser_type_launch_args(config: TestConfig) -> dict:
+    """Browser-Launch-Argumente für pytest-playwright."""
+    return {
+        "headless": config.headless,
+        "slow_mo": config.slow_mo,
+    }
 
 
 @pytest.fixture(scope="session")
-async def browser(playwright: Playwright, config: TestConfig) -> AsyncGenerator[Browser, None]:
-    """
-    Browser-Instanz für die gesamte Test-Session.
+def browser_context_args(config: TestConfig) -> dict:
+    """Browser-Context-Argumente für pytest-playwright."""
+    args = {
+        "viewport": {
+            "width": config.viewport.width,
+            "height": config.viewport.height,
+        },
+        "locale": config.locale,
+    }
 
-    Der Browser wird einmal gestartet und für alle Tests wiederverwendet.
-    """
-    browser_type = getattr(playwright, config.browser)
-
-    browser = await browser_type.launch(
-        headless=config.headless,
-        slow_mo=config.slow_mo,
-    )
-
-    yield browser
-
-    await browser.close()
-
-
-@pytest.fixture
-async def context(
-    browser: Browser,
-    config: TestConfig
-) -> AsyncGenerator[BrowserContext, None]:
-    """
-    Browser-Kontext für einen einzelnen Test.
-
-    Jeder Test bekommt einen isolierten Kontext mit eigenem Storage.
-    """
     # HTTP Basic Auth für .htaccess-geschützte Staging-Umgebungen
-    http_credentials = None
     if config.htaccess_user and config.htaccess_password:
-        http_credentials = {
+        args["http_credentials"] = {
             "username": config.htaccess_user,
             "password": config.htaccess_password,
         }
 
-    context = await browser.new_context(
-        viewport={
-            "width": config.viewport.width,
-            "height": config.viewport.height,
-        },
-        locale=config.locale,
-        http_credentials=http_credentials,
-    )
-
-    # Tracing aktivieren wenn konfiguriert
-    if config.trace_on_failure:
-        await context.tracing.start(
-            screenshots=True,
-            snapshots=True,
-            sources=True,
-        )
-
-    yield context
-
-    await context.close()
-
-
-@pytest.fixture
-async def page(
-    context: BrowserContext,
-    config: TestConfig,
-    request,
-) -> AsyncGenerator[Page, None]:
-    """
-    Page-Instanz für einen einzelnen Test.
-
-    Bei Fehlern werden automatisch Screenshots und Traces gespeichert.
-    """
-    page = await context.new_page()
-
-    yield page
-
-    # Bei Test-Fehler: Debugging-Artefakte speichern
-    if request.node.rep_call.failed if hasattr(request.node, "rep_call") else False:
-        # Screenshot speichern
-        if config.screenshot_on_failure:
-            screenshot_path = Path(config.reports.screenshots) / f"{request.node.name}.png"
-            screenshot_path.parent.mkdir(parents=True, exist_ok=True)
-            await page.screenshot(path=str(screenshot_path), full_page=True)
-
-        # Trace speichern
-        if config.trace_on_failure:
-            trace_path = Path(config.reports.traces) / f"{request.node.name}.zip"
-            trace_path.parent.mkdir(parents=True, exist_ok=True)
-            await context.tracing.stop(path=str(trace_path))
-
-    await page.close()
+    return args
 
 
 # =============================================================================
