@@ -1,0 +1,55 @@
+# E2E Test Konfiguration
+# Profil-Auswahl via Umgebungsvariable TEST_PROFILE
+
+profiles:
+  staging:
+    base_url: "https://grueneerde.scalecommerce.cloud"
+    timeout: 30000
+    parallel_workers: 5
+    headless: true
+    slow_mo: 0
+
+  production:
+    base_url: "https://www.gruene-erde.com"
+    timeout: 45000
+    parallel_workers: 2
+    headless: true
+    slow_mo: 0
+
+  local:
+    base_url: "http://localhost:8000"
+    timeout: 15000
+    parallel_workers: 3
+    headless: false
+    slow_mo: 100  # Langsamer für bessere Beobachtung
+
+# Standard-Profil wenn nichts angegeben
+default_profile: staging
+
+# Browser-Einstellungen
+browser: chromium
+locale: de-AT
+viewport:
+  width: 1920
+  height: 1080
+
+# Debugging & Traces
+trace_on_failure: true
+screenshot_on_failure: true
+video_on_failure: false
+
+# Report-Pfade (relativ zum Projekt-Root)
+reports:
+  html: reports/html
+  traces: reports/traces
+  screenshots: reports/screenshots
+
+# Massentest-Defaults
+mass_test:
+  default_orders: 100
+  default_parallel: 5
+  success_rate_threshold: 0.95
+
+# Testdaten
+test_products:
+  - "693278"
