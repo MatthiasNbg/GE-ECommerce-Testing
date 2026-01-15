@@ -79,6 +79,7 @@ class TestConfig(BaseSettings):
 
     # Testdaten
     test_products: list[str] = Field(default_factory=lambda: ["SW-10001"])
+    test_search_term: str = "Bett"
 
     # Secrets (aus .env)
     test_customer_email: str = Field(default="", alias="TEST_CUSTOMER_EMAIL")

@@ -4,15 +4,29 @@ Smoke Tests - Schnelle Validierung der Kernfunktionalität.
 Diese Tests sollten nach jedem Deployment laufen und grundlegende
 Funktionalität des Shops verifizieren.
 """
+import base64
 import pytest
 from playwright.sync_api import Page, expect
 
 
 @pytest.mark.smoke
-def test_homepage_loads(page: Page, base_url: str):
+def test_homepage_loads(page: Page, base_url: str, request):
     """Startseite ist erreichbar und lädt korrekt."""
     page.goto(base_url)
-    page.wait_for_load_state("domcontentloaded")
+    page.wait_for_load_state("networkidle")
+
+    # Screenshot als Base64 für Report
+    screenshot_bytes = page.screenshot(full_page=True)
+    screenshot_base64 = base64.b64encode(screenshot_bytes).decode()
+
+    # Screenshot zum pytest-html Report hinzufügen
+    if hasattr(request.node, "extras"):
+        request.node.extras = request.node.extras or []
+    else:
+        request.node.extras = []
+
+    from pytest_html import extras
+    request.node.extras.append(extras.image(f"data:image/png;base64,{screenshot_base64}", "Homepage Screenshot"))
 
     # Prüfen, dass die Seite geladen wurde
     assert page.title(), "Seite hat keinen Titel"
@@ -23,36 +37,41 @@ def test_homepage_loads(page: Page, base_url: str):
 
 
 @pytest.mark.smoke
-def test_search_works(page: Page, base_url: str):
-    """Produktsuche ist funktionsfähig."""
+def test_search_works(page: Page, base_url: str, test_search_term: str):
+    """Produktsuche E2E: Toggle → Suche → Ergebnisse → Produktdetails."""
     page.goto(base_url)
     page.wait_for_load_state("domcontentloaded")
 
-    # Grüne Erde: Suchfeld ist versteckt, erst Toggle klicken
-    search_toggle = page.locator(".search-toggle, [data-search-toggle]")
-    if search_toggle.count() > 0 and search_toggle.first.is_visible():
-        search_toggle.first.click()
-        page.wait_for_timeout(500)  # Animation abwarten
+    # Schritt 1: Such-Toggle klicken
+    search_toggle = page.locator("button.search-toggle-btn.js-search-toggle-btn")
+    search_toggle.click()
+    page.wait_for_timeout(500)  # Collapse-Animation abwarten
 
-    # Such-Input finden
-    search_input = page.locator(
-        "input[type='search'], "
-        "input[name='search'], "
-        ".header-search-input"
-    )
+    # Schritt 2: Suchbegriff eingeben
+    search_input = page.locator("input#header-main-search-input")
+    expect(search_input).to_be_visible()
+    search_input.fill(test_search_term)
 
-    # Prüfen ob Suche sichtbar ist
-    if search_input.count() > 0 and search_input.first.is_visible():
-        search_input.first.fill("Shirt")
-        search_input.first.press("Enter")
+    # Schritt 3: Suche abschicken mit Enter
+    search_input.press("Enter")
 
-        # Warten auf Suchergebnisse
-        page.wait_for_load_state("domcontentloaded")
+    # Schritt 4: Auf Ergebnisseite warten
+    page.wait_for_load_state("domcontentloaded")
 
-        # Prüfen, dass wir auf einer Suchergebnisseite sind
-        current_url = page.url
-        assert "search" in current_url.lower() or "suche" in current_url.lower(), \
-            f"Suche hat nicht navigiert: {current_url}"
+    # Schritt 5: Verifizieren, dass wir auf der Suchergebnisseite sind
+    current_url = page.url
+    assert "search" in current_url.lower() or test_search_term.lower() in current_url.lower(), \
+        f"Suche hat nicht zur Ergebnisseite navigiert: {current_url}"
+
+    # Schritt 6: Erstes Produkt aus Ergebnissen auswählen
+    product_link = page.locator(".product-box a.product-name, .product-item a, .cms-listing-col .product-link").first
+    expect(product_link).to_be_visible(timeout=5000)
+    product_link.click()
+
+    # Schritt 7: Produktdetails verifizieren
+    page.wait_for_load_state("domcontentloaded")
+    product_title = page.locator("h1")
+    expect(product_title).to_be_visible()
 
 
 @pytest.mark.smoke

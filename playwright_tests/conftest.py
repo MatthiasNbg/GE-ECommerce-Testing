@@ -94,6 +94,12 @@ def test_product_id(config: TestConfig) -> str:
     return config.test_products[0] if config.test_products else "SW-10001"
 
 
+@pytest.fixture(scope="session")
+def test_search_term(config: TestConfig) -> str:
+    """Suchbegriff für Search-Tests."""
+    return config.test_search_term
+
+
 # =============================================================================
 # Massentest Fixtures
 # =============================================================================
@@ -160,12 +166,16 @@ def browser_context_args(config: TestConfig) -> dict:
 
 
 # =============================================================================
-# Pytest Hooks für Failure Detection
+# Pytest Hooks für Failure Detection & Reporting
 # =============================================================================
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Speichert Test-Ergebnis für Fixture-Cleanup."""
+    """Speichert Test-Ergebnis und extras für Report."""
     outcome = yield
     rep = outcome.get_result()
     setattr(item, f"rep_{rep.when}", rep)
+
+    # Extras (Screenshots etc.) zum Report hinzufügen
+    if hasattr(item, "extras"):
+        rep.extras = item.extras
