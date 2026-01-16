@@ -38,3 +38,6 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
+
+# Worktrees
+.worktrees/
