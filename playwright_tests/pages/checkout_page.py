@@ -7,6 +7,7 @@ from typing import Optional
 from playwright.async_api import Page, expect
 
 from .base_page import BasePage
+from ..config import get_config
 
 
 @dataclass
@@ -140,27 +141,49 @@ class CheckoutPage(BasePage):
     
     async def select_payment_method(self, method: str) -> None:
         """
-        Wählt eine Zahlungsart aus.
-        
+        Wählt eine Zahlungsart aus - unterstützt englische Aliases und deutsche Labels.
+
         Args:
-            method: invoice, credit_card, paypal, klarna, etc.
+            method: Englischer Alias (z.B. "invoice", "credit_card")
+                   oder deutscher Label (z.B. "Rechnung", "Kreditkarte")
+
+        Raises:
+            ValueError: Wenn Zahlungsart nicht im DOM gefunden wurde
+
+        Examples:
+            await page.select_payment_method("invoice")     # Alias
+            await page.select_payment_method("Rechnung")    # Direkter Label
         """
-        selector_map = {
-            "invoice": self.PAYMENT_INVOICE,
-            "rechnung": self.PAYMENT_INVOICE,
-            "credit_card": self.PAYMENT_CREDIT_CARD,
-            "kreditkarte": self.PAYMENT_CREDIT_CARD,
-            "paypal": self.PAYMENT_PAYPAL,
-        }
-        
-        selector = selector_map.get(method.lower())
-        if selector:
-            payment_option = self.page.locator(selector)
-            if await payment_option.is_visible():
-                await payment_option.click()
-        else:
-            # Fallback: Versuche nach data-Attribut oder ID zu suchen
-            await self.page.click(f"css=[data-payment-method='{method}'], #paymentMethod-{method}")
+        # Config laden und Alias-Mapping holen
+        config = get_config()
+        aliases = config.payment_method_aliases
+
+        # Alias zu Label übersetzen (falls method ein Alias ist)
+        label = aliases.get(method, method)
+
+        # DOM-basierte Suche nach Label-Text
+        # Grüne Erde verwendet <label> mit class="payment-method-label" oder ähnlich
+        payment_labels = self.page.locator(
+            "label.payment-method-label, "
+            "label.payment-name, "
+            ".confirm-payment-method-label"
+        )
+
+        # Nach Label-Text filtern (case-insensitive, trimmed)
+        matching_label = payment_labels.filter(has_text=label)
+
+        # Prüfen ob gefunden
+        count = await matching_label.count()
+        if count == 0:
+            raise ValueError(
+                f"Zahlungsart '{label}' nicht gefunden. "
+                f"Input: '{method}', verfügbare Aliases: {list(aliases.keys())}"
+            )
+
+        # Zum Radio-Button navigieren und klicken
+        # Das <label> ist typischerweise mit einem <input type="radio"> verknüpft
+        radio_button = matching_label.first.locator("input[type='radio']")
+        await radio_button.click()
     
     async def get_selected_payment_method(self) -> Optional[str]:
         """Gibt die aktuell ausgewählte Zahlungsart zurück."""
