@@ -21,6 +21,7 @@ def generate_aliases(discovered_methods: dict[str, list[str]]) -> dict[str, str]
         "Vorkasse": "prepayment",
         "PayPal": "paypal",
         "Klarna": "klarna",
+        "Sofortüberweisung": "sofort",
     }
 
     aliases = {}
@@ -35,12 +36,12 @@ def generate_aliases(discovered_methods: dict[str, list[str]]) -> dict[str, str]
         if label in known_mappings:
             alias = known_mappings[label]
         else:
-            # Generischer Alias: lowercase, Umlaute entfernen
+            # Generischer Alias: lowercase, Umlaute ersetzen
             alias = (
                 label.lower()
-                .replace("ä", "a")
-                .replace("ö", "o")
-                .replace("ü", "u")
+                .replace("ä", "ae")
+                .replace("ö", "oe")
+                .replace("ü", "ue")
                 .replace("ß", "ss")
                 .replace(" ", "_")
             )

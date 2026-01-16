@@ -6,7 +6,7 @@ from playwright_tests.utils.payment_discovery import generate_aliases
 def test_generate_aliases_known_mappings():
     """Bekannte deutsche Labels werden zu englischen Aliases."""
     discovered = {
-        "AT": ["Rechnung", "Kreditkarte", "Vorkasse"]
+        "AT": ["Rechnung", "Kreditkarte", "Vorkasse", "Sofortüberweisung"]
     }
 
     aliases = generate_aliases(discovered)
@@ -14,6 +14,7 @@ def test_generate_aliases_known_mappings():
     assert aliases["invoice"] == "Rechnung"
     assert aliases["credit_card"] == "Kreditkarte"
     assert aliases["prepayment"] == "Vorkasse"
+    assert aliases["sofort"] == "Sofortüberweisung"
 
 
 def test_generate_aliases_handles_duplicates():
@@ -33,13 +34,13 @@ def test_generate_aliases_handles_duplicates():
 def test_generate_aliases_unknown_labels():
     """Unbekannte Labels bekommen generischen Alias."""
     discovered = {
-        "AT": ["Sofortüberweisung"]
+        "AT": ["Überweisung"]
     }
 
     aliases = generate_aliases(discovered)
 
-    # Generischer Alias: lowercase, keine Umlaute/Sonderzeichen
-    assert aliases["sofortuberweisung"] == "Sofortüberweisung"
+    # Generischer Alias: lowercase, Umlaute ersetzen (ü→ue)
+    assert aliases["ueberweisung"] == "Überweisung"
 
 
 def test_generate_aliases_empty_input():
