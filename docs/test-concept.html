@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-Konzept: Grüne Erde E-Commerce Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-color: #2c5f2d;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --error-color: #dc3545;
+            --info-color: #17a2b8;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            font-size: 24px;
+        }
+
+        .back-to-top:hover {
+            background: #1a3a1b;
+            transform: translateY(-5px);
+        }
+
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            scroll-margin-top: 20px;
+        }
+
+        h3 {
+            color: #495057;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            scroll-margin-top: 20px;
+        }
+
+        h4 {
+            color: #495057;
+            font-size: 1.25em;
+            margin: 25px 0 10px 0;
+            scroll-margin-top: 20px;
+        }
+
+        h5 {
+            color: #6c757d;
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #1a3a1b;
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 0 2px;
+            white-space: nowrap;
+        }
+
+        .badge-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning-color);
+            color: #333;
+        }
+
+        .badge-error {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .badge-pending {
+            background: #6c757d;
+            color: white;
+        }
+
+        .badge-priority-p0 {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge-priority-p1 {
+            background: #fd7e14;
+            color: white;
+        }
+
+        .badge-priority-p2 {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .test-table thead {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .test-table th,
+        .test-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        .test-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .test-table tbody tr:hover {
+            background: #e9ecef;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding: 10px 20px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            font-style: italic;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid var(--border-color);
+            margin: 30px 0;
+        }
+
+        .metadata {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            color: #6c757d;
+        }
+
+        .metadata strong {
+            color: var(--text-color);
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            margin: 20px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .back-to-top {
+                display: none;
+            }
+
+            h2 {
+                page-break-before: always;
+            }
+
+            .test-table {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: var(--text-color);
+                text-decoration: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .test-table {
+                font-size: 0.85em;
+            }
+
+            .test-table th,
+            .test-table td {
+                padding: 8px 10px;
+            }
+
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* Highlight für verlinkte Sektionen */
+        :target {
+            animation: highlight 2s;
+        }
+
+        @keyframes highlight {
+            0% {
+                background-color: #fff3cd;
+            }
+            100% {
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Test-Konzept: Grüne Erde E-Commerce Shop</h1>
+            <div class="metadata">
+                <div><strong>Projekt:</strong> GE-ECommerce-Testing</div>
+                <div><strong>Datum:</strong> 2026-01-16</div>
+                <div><strong>Version:</strong> 1.0</div>
+                <div><strong>Status:</strong> Entwurf zur Abstimmung</div>
+            </div>
+        </header>
+
+        <main>
+            <h1 id="test-konzept-gruene-erde-e-commerce-shop">Test-Konzept: Grüne Erde E-Commerce Shop</h1>
+
+<strong>Projekt:</strong> GE-ECommerce-Testing
+<strong>Datum:</strong> 2026-01-16
+<strong>Version:</strong> 1.0
+<strong>Status:</strong> Entwurf zur Abstimmung
+
+<hr>
+
+<h2 id="executive-summary">Executive Summary</h2>
+
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>81-101 Testfällen</strong> in 10 Kategorien. </p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~9%</strong>.</p>
+
+<strong>Aktuelle Situation:</strong>
+<ul>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Basis-Tests (Smoke: 5/5) implementiert</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (3/8)</li>
+</ul>
+<ul>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (1/38 implementiert)</li>
+</ul>
+<strong>Prioritäten:</strong>
+<ol>
+<li>**Kritische Business-Flows** (Gast-Checkout, Zahlungsarten) → Phase 1</li>
+<li>**Feature-Abdeckung** (Warenkorb, Suche, Account) → Phase 2-4</li>
+<li>**Versandarten & Promotions** → Phase 5-6</li>
+<li>**Qualitätssicherung** (Regression, Load-Tests) → Phase 7-9</li>
+</ol>
+<hr>
+
+<h2 id="thematische-uebersicht-der-testfaelle">Thematische Übersicht der Testfälle</h2>
+
+<strong>Schnellübersicht: Was wird wo getestet?</strong>
+
+<h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Funktionsbereich</th>
+<th>Tests</th>
+<th>Status</th>
+<th>Priorität</th>
+<th>Was wird geprüft?</th>
+</tr></thead><tbody>
+<tr>
+<td>🏠 **Smoke Tests**</td>
+<td>5</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 5/5</td>
+<td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
+<td>Homepage, Produktseiten, Navigation</td>
+</tr>
+<tr>
+<td>🛒 **Critical Path Tests**</td>
+<td>8</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 3/8</td>
+<td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
+<td>Gast-Checkout, Registrierter Checkout, Zahlungsarten</td>
+</tr>
+<tr>
+<td>🛍️ **Feature Tests - Warenkorb**</td>
+<td>8</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Produkte hinzufügen, Mengen ändern, Preis-Berechnung</td>
+</tr>
+<tr>
+<td>🔍 **Feature Tests - Suche**</td>
+<td>6</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 1/6</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Produktsuche, Filter, Autocomplete, Kategorien</td>
+</tr>
+<tr>
+<td>👤 **Feature Tests - Account**</td>
+<td>8</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Registrierung, Login, Profil, Adressen</td>
+</tr>
+<tr>
+<td>📦 **Feature Tests - Versandarten**</td>
+<td>8</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
+<td>Post, Spedi, Abholung, Versandkosten</td>
+</tr>
+<tr>
+<td>🎟️ **Feature Tests - Promotions**</td>
+<td>8</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
+<td>Rabattcodes, Mindestbestellwert, Versandkostenfrei</td>
+</tr>
+<tr>
+<td>📊 **Data Validation Tests**</td>
+<td>10</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 1/10</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Preise, Versandkosten, MwSt., Verfügbarkeit</td>
+</tr>
+<tr>
+<td>🔄 **Regression Tests**</td>
+<td>15-20</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 3/15-20</td>
+<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
+<td>Regression-Tests nach Änderungen</td>
+</tr>
+<tr>
+<td>⚡ **Load Tests**</td>
+<td>5</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/5</td>
+<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
+<td>Load-Tests, Response-Zeiten, Race Conditions</td>
+</tr>
+</tbody></table></div>
+<strong>Legende:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Vollständig | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
+
+<hr>
+
+<h2 id="inhaltsverzeichnis">Inhaltsverzeichnis</h2>
+
+<ol>
+<li><a href="#testfall-übersicht">Testfall-Übersicht</a> - Alle Tests auf einen Blick</li>
+<li><a href="#test-kategorien">Test-Kategorien</a> - Was wird getestet?</li>
+<li><a href="#smoke">Smoke Tests</a> - (5 Tests)</li>
+<li><a href="#critical-path">Critical Path Tests</a> - (8 Tests)</li>
+<li><a href="#cart">Feature Tests - Warenkorb</a> - (8 Tests)</li>
+<li><a href="#search">Feature Tests - Suche</a> - (6 Tests)</li>
+<li><a href="#account">Feature Tests - Account</a> - (8 Tests)</li>
+<li><a href="#shipping">Feature Tests - Versandarten</a> - (8 Tests)</li>
+<li><a href="#promotions">Feature Tests - Promotions</a> - (8 Tests)</li>
+<li><a href="#data-validation">Data Validation Tests</a> - (10 Tests)</li>
+<li><a href="#regression">Regression Tests</a> - (15-20 Tests)</li>
+<li><a href="#load">Load Tests</a> - (5 Tests)</li>
+<li><a href="#implementierungs-roadmap">Implementierungs-Roadmap</a> - Welche Reihenfolge?</li>
+</ol>
+<hr>
+
+<h2 id="testfall-uebersicht">Testfall-Übersicht</h2>
+
+<h3 id="gesamtuebersicht">Gesamtübersicht</h3>
+
+<strong>Gesamt:</strong> 91 Tests
+<ul>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 8</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 83</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
+<li>**Abdeckung:** 9%</li>
+</ul>
+<hr>
+
+<h2 id="test-kategorien">Test-Kategorien</h2>
+
+<h3 id="🏠-smoke-tests">🏠 Smoke Tests</h3>
+
+<strong>Priorität:</strong> P0
+<strong>Tests:</strong> 5/5 implementiert
+<strong>Beschreibung:</strong> Homepage, Produktseiten, Navigation
+<strong>Dauer:</strong> < 5 Min
+<strong>Ausführung:</strong> Bei jedem Build, vor jedem Deployment
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-SMOKE-001</td>
+<td>Homepage lädt erfolgreich</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SMOKE-002</td>
+<td>Produktseite lädt erfolgreich</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SMOKE-003</td>
+<td>Produkt zum Warenkorb hinzufügen</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SMOKE-004</td>
+<td>Checkout-Seite erreichbar</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SMOKE-005</td>
+<td>Suche funktioniert</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+<h3 id="🛒-critical-path-tests">🛒 Critical Path Tests</h3>
+
+<strong>Priorität:</strong> P0
+<strong>Tests:</strong> 3/8 implementiert
+<strong>Beschreibung:</strong> Gast-Checkout, Registrierter Checkout, Zahlungsarten
+<strong>Dauer:</strong> 10-30 Min
+<strong>Ausführung:</strong> Vor jedem Deployment (Staging + Production)
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CRITICAL-001</td>
+<td>Gast-Checkout vollständig (AT)</td>
+<td>P0</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-002</td>
+<td>Gast-Checkout vollständig (DE)</td>
+<td>P0</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-003</td>
+<td>Gast-Checkout vollständig (CH)</td>
+<td>P0</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-004</td>
+<td>Registrierter User Checkout</td>
+<td>P0</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-005</td>
+<td>Zahlungsarten verfügbar (AT)</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-006</td>
+<td>Zahlungsarten verfügbar (DE)</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-007</td>
+<td>Zahlungsarten verfügbar (CH)</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-008</td>
+<td>Warenkorb-Persistenz</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+<h3 id="🛍️-feature-tests---warenkorb">🛍️ Feature Tests - Warenkorb</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/8 implementiert
+<strong>Beschreibung:</strong> Produkte hinzufügen, Mengen ändern, Preis-Berechnung
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<hr>
+
+<h3 id="🔍-feature-tests---suche">🔍 Feature Tests - Suche</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 1/6 implementiert
+<strong>Beschreibung:</strong> Produktsuche, Filter, Autocomplete, Kategorien
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<hr>
+
+<h3 id="👤-feature-tests---account">👤 Feature Tests - Account</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/8 implementiert
+<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen
+<strong>Dauer:</strong> 10-20 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<hr>
+
+<h3 id="📦-feature-tests---versandarten">📦 Feature Tests - Versandarten</h3>
+
+<strong>Priorität:</strong> P2
+<strong>Tests:</strong> 0/8 implementiert
+<strong>Beschreibung:</strong> Post, Spedi, Abholung, Versandkosten
+<strong>Dauer:</strong> 10-20 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<hr>
+
+<h3 id="🎟️-feature-tests---promotions">🎟️ Feature Tests - Promotions</h3>
+
+<strong>Priorität:</strong> P2
+<strong>Tests:</strong> 0/8 implementiert
+<strong>Beschreibung:</strong> Rabattcodes, Mindestbestellwert, Versandkostenfrei
+<strong>Dauer:</strong> 10-20 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<hr>
+
+<h3 id="📊-data-validation-tests">📊 Data Validation Tests</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 1/10 implementiert
+<strong>Beschreibung:</strong> Preise, Versandkosten, MwSt., Verfügbarkeit
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> Täglich (Monitoring), vor Deployments
+
+<hr>
+
+<h3 id="🔄-regression-tests">🔄 Regression Tests</h3>
+
+<strong>Priorität:</strong> P2
+<strong>Tests:</strong> 3/15-20 implementiert
+<strong>Beschreibung:</strong> Regression-Tests nach Änderungen
+<strong>Dauer:</strong> 1-4 Std
+<strong>Ausführung:</strong> Nightly Builds, vor Major Releases
+
+<hr>
+
+<h3 id="⚡-load-tests">⚡ Load Tests</h3>
+
+<strong>Priorität:</strong> P2
+<strong>Tests:</strong> 0/5 implementiert
+<strong>Beschreibung:</strong> Load-Tests, Response-Zeiten, Race Conditions
+<strong>Dauer:</strong> 30 Min - 4 Std
+<strong>Ausführung:</strong> Vor Releases, bei Performance-Änderungen
+
+<hr>
+
+<h2 id="implementierungs-roadmap">Implementierungs-Roadmap</h2>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Phase</th>
+<th>Name</th>
+<th>Status</th>
+<th>Tests</th>
+<th>Abdeckung-Ziel</th>
+</tr></thead><tbody>
+<tr>
+<td>phase_0</td>
+<td>Phase 0 - Basis-Setup</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>8</td>
+<td>-%</td>
+</tr>
+<tr>
+<td>phase_1</td>
+<td>Phase 1 - Critical Path</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>5</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>phase_2</td>
+<td>Phase 2 - Warenkorb</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>8</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>phase_3</td>
+<td>Phase 3 - Account</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>8</td>
+<td>35%</td>
+</tr>
+<tr>
+<td>phase_4</td>
+<td>Phase 4 - Suche</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>5</td>
+<td>40%</td>
+</tr>
+<tr>
+<td>phase_5</td>
+<td>Phase 5 - Versandarten</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>8</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>phase_6</td>
+<td>Phase 6 - Promotions</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>8</td>
+<td>60%</td>
+</tr>
+<tr>
+<td>phase_7</td>
+<td>Phase 7 - Data Validation</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>9</td>
+<td>70%</td>
+</tr>
+<tr>
+<td>phase_8</td>
+<td>Phase 8 - Regression</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>15-20</td>
+<td>85%</td>
+</tr>
+<tr>
+<td>phase_9</td>
+<td>Phase 9 - Load Tests</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>5</td>
+<td>90%</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+
+<p>*Generiert am 2026-01-16 18:12 aus test-inventory.yaml*</p>
+
+        </main>
+
+        <footer class="footer">
+            <p>Generiert am 16.01.2026 um 18:12 Uhr</p>
+            <p>GE-ECommerce-Testing © 2026</p>
+        </footer>
+    </div>
+
+    <a href="#test-konzept-gruene-erde-e-commerce-shop" class="back-to-top" title="Zurück nach oben">↑</a>
+</body>
+</html>

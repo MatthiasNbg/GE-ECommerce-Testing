@@ -1,0 +1,45 @@
+#!/bin/sh
+# Pre-commit Hook: Validiert Test-Inventar und Dokumentation
+# Installation: git config core.hooksPath .githooks
+
+echo "🔍 Pre-commit Check: Test-Dokumentation"
+echo ""
+
+# Prüfe ob test-inventory.yaml geändert wurde
+if git diff --cached --name-only | grep -q "test-inventory.yaml"; then
+    echo "📝 test-inventory.yaml wurde geändert - validiere..."
+
+    # Validiere YAML-Syntax
+    python -c "import yaml; yaml.safe_load(open('test-inventory.yaml', encoding='utf-8'))" 2>/dev/null
+    if [ $? -ne 0 ]; then
+        echo "❌ FEHLER: test-inventory.yaml hat ungültige YAML-Syntax"
+        exit 1
+    fi
+
+    # Validiere Inventar
+    python scripts/sync_test_documentation.py --check
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "❌ COMMIT ABGELEHNT: Test-Inventar ist inkonsistent"
+        echo ""
+        echo "Bitte beheben Sie die Fehler in test-inventory.yaml"
+        echo "Oder führen Sie aus: python scripts/sync_test_documentation.py"
+        exit 1
+    fi
+
+    echo "✓ Test-Inventar validiert"
+    echo ""
+    echo "⚠️  WICHTIG: Haben Sie die Dokumentation aktualisiert?"
+    echo "    Führen Sie aus: python scripts/sync_test_documentation.py"
+    echo ""
+fi
+
+# Prüfe ob Test-Dateien geändert wurden
+if git diff --cached --name-only | grep -q "playwright_tests/tests/"; then
+    echo "📝 Test-Dateien wurden geändert"
+    echo "⚠️  ERINNERUNG: test-inventory.yaml aktualisieren, falls neue Tests hinzugefügt wurden"
+    echo ""
+fi
+
+echo "✓ Pre-commit Checks abgeschlossen"
+exit 0

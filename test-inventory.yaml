@@ -1,0 +1,325 @@
+# Test-Inventar: Single Source of Truth für alle Testfälle
+# Diese Datei wird von Scripts automatisch ausgelesen und in Dokumentation konvertiert
+# Version: 1.0
+# Letzte Aktualisierung: 2026-01-16
+
+metadata:
+  project: GE-ECommerce-Testing
+  total_tests: 81-101
+  implemented: 8
+  coverage_percent: 10
+
+categories:
+  - id: smoke
+    name: Smoke Tests
+    name_en: Smoke Tests
+    priority: P0
+    priority_label: Kritisch
+    count: 5
+    implemented: 5
+    status: complete
+    icon: "🏠"
+    description: "Homepage, Produktseiten, Navigation"
+    duration: "< 5 Min"
+    execution: "Bei jedem Build, vor jedem Deployment"
+
+  - id: critical_path
+    name: Critical Path Tests
+    name_en: Critical Path
+    priority: P0
+    priority_label: Kritisch
+    count: 8
+    implemented: 3
+    status: partial
+    icon: "🛒"
+    description: "Gast-Checkout, Registrierter Checkout, Zahlungsarten"
+    duration: "10-30 Min"
+    execution: "Vor jedem Deployment (Staging + Production)"
+
+  - id: cart
+    name: Feature Tests - Warenkorb
+    name_en: Warenkorb
+    priority: P1
+    priority_label: Hoch
+    count: 8
+    implemented: 0
+    status: missing
+    icon: "🛍️"
+    description: "Produkte hinzufügen, Mengen ändern, Preis-Berechnung"
+    duration: "5-15 Min"
+    execution: "In CI/CD, vor Feature-Release"
+
+  - id: search
+    name: Feature Tests - Suche
+    name_en: Suche
+    priority: P1
+    priority_label: Hoch
+    count: 6
+    implemented: 1
+    status: partial
+    icon: "🔍"
+    description: "Produktsuche, Filter, Autocomplete, Kategorien"
+    duration: "5-15 Min"
+    execution: "In CI/CD, vor Feature-Release"
+
+  - id: account
+    name: Feature Tests - Account
+    name_en: Account
+    priority: P1
+    priority_label: Hoch
+    count: 8
+    implemented: 0
+    status: missing
+    icon: "👤"
+    description: "Registrierung, Login, Profil, Adressen"
+    duration: "10-20 Min"
+    execution: "In CI/CD, vor Feature-Release"
+
+  - id: shipping
+    name: Feature Tests - Versandarten
+    name_en: Versandarten
+    priority: P2
+    priority_label: Mittel
+    count: 8
+    implemented: 0
+    status: missing
+    icon: "📦"
+    description: "Post, Spedi, Abholung, Versandkosten"
+    duration: "10-20 Min"
+    execution: "In CI/CD, vor Feature-Release"
+
+  - id: promotions
+    name: Feature Tests - Promotions
+    name_en: Promotions
+    priority: P2
+    priority_label: Mittel
+    count: 8
+    implemented: 0
+    status: missing
+    icon: "🎟️"
+    description: "Rabattcodes, Mindestbestellwert, Versandkostenfrei"
+    duration: "10-20 Min"
+    execution: "In CI/CD, vor Feature-Release"
+
+  - id: data_validation
+    name: Data Validation Tests
+    name_en: Daten-Qualität
+    priority: P1
+    priority_label: Hoch
+    count: 10
+    implemented: 1
+    status: partial
+    icon: "📊"
+    description: "Preise, Versandkosten, MwSt., Verfügbarkeit"
+    duration: "5-15 Min"
+    execution: "Täglich (Monitoring), vor Deployments"
+
+  - id: regression
+    name: Regression Tests
+    name_en: Stabilität
+    priority: P2
+    priority_label: Mittel
+    count: 15-20
+    implemented: 3
+    status: partial
+    icon: "🔄"
+    description: "Regression-Tests nach Änderungen"
+    duration: "1-4 Std"
+    execution: "Nightly Builds, vor Major Releases"
+
+  - id: load
+    name: Load Tests
+    name_en: Performance
+    priority: P2
+    priority_label: Mittel
+    count: 5
+    implemented: 0
+    status: missing
+    icon: "⚡"
+    description: "Load-Tests, Response-Zeiten, Race Conditions"
+    duration: "30 Min - 4 Std"
+    execution: "Vor Releases, bei Performance-Änderungen"
+
+tests:
+  # Smoke Tests
+  - id: TC-SMOKE-001
+    name: "Homepage lädt erfolgreich"
+    category: smoke
+    priority: P0
+    status: implemented
+    countries: [AT, DE, CH]
+    file: "playwright_tests/tests/test_shop_smoke.py"
+    markers: ["smoke"]
+
+  - id: TC-SMOKE-002
+    name: "Produktseite lädt erfolgreich"
+    category: smoke
+    priority: P0
+    status: implemented
+    countries: [AT, DE, CH]
+    file: "playwright_tests/tests/test_shop_smoke.py"
+    markers: ["smoke"]
+
+  - id: TC-SMOKE-003
+    name: "Produkt zum Warenkorb hinzufügen"
+    category: smoke
+    priority: P0
+    status: implemented
+    countries: [AT, DE, CH]
+    file: "playwright_tests/tests/test_shop_smoke.py"
+    markers: ["smoke", "cart"]
+
+  - id: TC-SMOKE-004
+    name: "Checkout-Seite erreichbar"
+    category: smoke
+    priority: P0
+    status: implemented
+    countries: [AT, DE, CH]
+    file: "playwright_tests/tests/test_shop_smoke.py"
+    markers: ["smoke", "checkout"]
+
+  - id: TC-SMOKE-005
+    name: "Suche funktioniert"
+    category: smoke
+    priority: P0
+    status: implemented
+    countries: [AT, DE, CH]
+    file: "playwright_tests/tests/test_shop_smoke.py"
+    markers: ["smoke", "search"]
+
+  # Critical Path Tests
+  - id: TC-CRITICAL-001
+    name: "Gast-Checkout vollständig (AT)"
+    category: critical_path
+    priority: P0
+    status: missing
+    countries: [AT]
+    file: null
+    markers: ["critical", "checkout", "payment"]
+
+  - id: TC-CRITICAL-002
+    name: "Gast-Checkout vollständig (DE)"
+    category: critical_path
+    priority: P0
+    status: missing
+    countries: [DE]
+    file: null
+    markers: ["critical", "checkout", "payment"]
+
+  - id: TC-CRITICAL-003
+    name: "Gast-Checkout vollständig (CH)"
+    category: critical_path
+    priority: P0
+    status: missing
+    countries: [CH]
+    file: null
+    markers: ["critical", "checkout", "payment"]
+
+  - id: TC-CRITICAL-004
+    name: "Registrierter User Checkout"
+    category: critical_path
+    priority: P0
+    status: missing
+    countries: [AT]
+    file: null
+    markers: ["critical", "checkout", "account"]
+
+  - id: TC-CRITICAL-005
+    name: "Zahlungsarten verfügbar (AT)"
+    category: critical_path
+    priority: P0
+    status: implemented
+    countries: [AT]
+    file: "playwright_tests/tests/test_payment_methods_available.py"
+    markers: ["critical", "data_validation", "payment"]
+
+  - id: TC-CRITICAL-006
+    name: "Zahlungsarten verfügbar (DE)"
+    category: critical_path
+    priority: P0
+    status: implemented
+    countries: [DE]
+    file: "playwright_tests/tests/test_payment_methods_available.py"
+    markers: ["critical", "data_validation", "payment"]
+
+  - id: TC-CRITICAL-007
+    name: "Zahlungsarten verfügbar (CH)"
+    category: critical_path
+    priority: P0
+    status: implemented
+    countries: [CH]
+    file: "playwright_tests/tests/test_payment_methods_available.py"
+    markers: ["critical", "data_validation", "payment"]
+
+  - id: TC-CRITICAL-008
+    name: "Warenkorb-Persistenz"
+    category: critical_path
+    priority: P1
+    status: missing
+    countries: [AT, DE, CH]
+    file: null
+    markers: ["critical", "cart"]
+
+# Weitere Tests würden hier folgen...
+# Format bleibt konsistent durch YAML-Schema-Validierung
+
+phases:
+  - id: phase_0
+    name: "Phase 0 - Basis-Setup"
+    status: complete
+    tests_completed: 8
+    coverage: 10
+
+  - id: phase_1
+    name: "Phase 1 - Critical Path"
+    status: pending
+    tests_planned: 5
+    coverage_target: 15
+
+  - id: phase_2
+    name: "Phase 2 - Warenkorb"
+    status: pending
+    tests_planned: 8
+    coverage_target: 25
+
+  - id: phase_3
+    name: "Phase 3 - Account"
+    status: pending
+    tests_planned: 8
+    coverage_target: 35
+
+  - id: phase_4
+    name: "Phase 4 - Suche"
+    status: pending
+    tests_planned: 5
+    coverage_target: 40
+
+  - id: phase_5
+    name: "Phase 5 - Versandarten"
+    status: pending
+    tests_planned: 8
+    coverage_target: 50
+
+  - id: phase_6
+    name: "Phase 6 - Promotions"
+    status: pending
+    tests_planned: 8
+    coverage_target: 60
+
+  - id: phase_7
+    name: "Phase 7 - Data Validation"
+    status: pending
+    tests_planned: 9
+    coverage_target: 70
+
+  - id: phase_8
+    name: "Phase 8 - Regression"
+    status: pending
+    tests_planned: 15-20
+    coverage_target: 85
+
+  - id: phase_9
+    name: "Phase 9 - Load Tests"
+    status: pending
+    tests_planned: 5
+    coverage_target: 90
