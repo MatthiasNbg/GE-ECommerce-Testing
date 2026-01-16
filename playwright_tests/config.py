@@ -81,6 +81,15 @@ class TestConfig(BaseSettings):
     test_products: list[str] = Field(default_factory=lambda: ["SW-10001"])
     test_search_term: str = "Bett"
 
+    # Zahlungsarten (länderspezifisch)
+    country_paths: dict[str, str] = Field(default_factory=lambda: {
+        "AT": "/",
+        "DE": "/de-de",
+        "CH": "/de-ch"
+    })
+    payment_methods: dict[str, list[str]] = Field(default_factory=dict)
+    payment_method_aliases: dict[str, str] = Field(default_factory=dict)
+
     # Secrets (aus .env)
     test_customer_email: str = Field(default="", alias="TEST_CUSTOMER_EMAIL")
     test_customer_password: str = Field(default="", alias="TEST_CUSTOMER_PASSWORD")
