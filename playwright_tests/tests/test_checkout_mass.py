@@ -298,37 +298,65 @@ async def test_mass_orders_payment_matrix(
 ):
     """
     Testet Massenbestellungen mit verschiedenen Zahlungsarten.
-    
-    Führt für jede Zahlungsart 20 Bestellungen durch.
+
+    Verwendet die für das Land (Standard: AT) konfigurierten Zahlungsarten
+    aus config.yaml und führt für jede 10 Bestellungen durch.
+
+    Überspringt den Test, falls keine Zahlungsarten ermittelt wurden.
     """
-    payment_methods = ["invoice", "credit_card", "paypal"]
-    orders_per_method = 20
-    
+    # Land aus Config (default: AT)
+    country = shop_config.get("country", "AT")
+
+    # Zahlungsarten für das Land abrufen
+    payment_methods_config = shop_config.get("payment_methods", {})
+    country_payment_methods = payment_methods_config.get(country, [])
+
+    # Test überspringen falls keine Payment Methods
+    if not country_payment_methods:
+        pytest.skip(
+            f"Keine Zahlungsarten für Land {country} konfiguriert. "
+            f"Führe 'pytest -m discovery' aus, um sie zu ermitteln."
+        )
+
+    # Aliases für bessere Lesbarkeit
+    aliases = shop_config.get("payment_method_aliases", {})
+
+    orders_per_method = 10
     all_results: dict[str, MassTestResult] = {}
-    
-    for payment_method in payment_methods:
+
+    for payment_method in country_payment_methods:
+        # Alias für Logging verwenden falls verfügbar
+        display_name = next(
+            (alias for alias, label in aliases.items() if label == payment_method),
+            payment_method
+        )
+
         runner = MassOrderRunner(
             browser=browser,
             base_url=shop_config["base_url"],
             parallel_workers=parallel,
             payment_methods=[payment_method],
         )
-        
+
         result = await runner.run_mass_orders(
             num_orders=orders_per_method,
             product_ids=products,
         )
-        
+
         all_results[payment_method] = result
-        
-        print(f"\n{payment_method.upper()}: "
+
+        print(f"\n{display_name.upper()}: "
               f"{result.successful_orders}/{result.total_orders} "
               f"({result.success_rate:.1%})")
-    
+
     # Alle Zahlungsarten müssen >= 90% Erfolgsrate haben
     for method, result in all_results.items():
+        display_name = next(
+            (alias for alias, label in aliases.items() if label == method),
+            method
+        )
         assert result.success_rate >= 0.90, (
-            f"Zahlungsart {method}: Erfolgsrate {result.success_rate:.1%} "
+            f"Zahlungsart {display_name}: Erfolgsrate {result.success_rate:.1%} "
             f"unter Schwellwert 90%"
         )
 
