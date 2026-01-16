@@ -138,7 +138,37 @@ def test_update_config_creates_backup():
 
 
 def test_update_config_adds_country_paths():
-    """Country paths werden hinzugefügt falls nicht vorhanden."""
+    """Country paths werden hinzugefügt nur für entdeckte Länder."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config_dir = Path(tmpdir) / "config"
+        config_dir.mkdir()
+        config_path = config_dir / "config.yaml"
+
+        initial_config = {
+            "profiles": {
+                "staging": {
+                    "base_url": "https://example.com"
+                }
+            }
+        }
+        with open(config_path, "w") as f:
+            yaml.dump(initial_config, f)
+
+        discovered = {"AT": ["Rechnung"], "DE": ["PayPal"]}
+        update_config_with_payment_methods("staging", discovered, config_path)
+
+        with open(config_path) as f:
+            updated = yaml.safe_load(f)
+
+        assert "country_paths" in updated["profiles"]["staging"]
+        assert updated["profiles"]["staging"]["country_paths"]["AT"] == "/"
+        assert updated["profiles"]["staging"]["country_paths"]["DE"] == "/de-de"
+        # CH sollte NICHT hinzugefügt werden, da nicht in discovered_methods
+        assert "CH" not in updated["profiles"]["staging"]["country_paths"]
+
+
+def test_update_config_raises_error_for_invalid_profile():
+    """KeyError wird geworfen wenn Profil nicht existiert."""
     with tempfile.TemporaryDirectory() as tmpdir:
         config_dir = Path(tmpdir) / "config"
         config_dir.mkdir()
@@ -155,12 +185,16 @@ def test_update_config_adds_country_paths():
             yaml.dump(initial_config, f)
 
         discovered = {"AT": ["Rechnung"]}
-        update_config_with_payment_methods("staging", discovered, config_path)
 
-        with open(config_path) as f:
-            updated = yaml.safe_load(f)
+        with pytest.raises(KeyError, match="Profil 'invalid_profile' nicht in Config gefunden"):
+            update_config_with_payment_methods("invalid_profile", discovered, config_path)
 
-        assert "country_paths" in updated["profiles"]["staging"]
-        assert updated["profiles"]["staging"]["country_paths"]["AT"] == "/"
-        assert updated["profiles"]["staging"]["country_paths"]["DE"] == "/de-de"
-        assert updated["profiles"]["staging"]["country_paths"]["CH"] == "/de-ch"
+
+def test_update_config_raises_error_for_missing_file():
+    """FileNotFoundError wird geworfen wenn config.yaml nicht existiert."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config_path = Path(tmpdir) / "config" / "config.yaml"
+        discovered = {"AT": ["Rechnung"]}
+
+        with pytest.raises(FileNotFoundError, match="Config nicht gefunden"):
+            update_config_with_payment_methods("staging", discovered, config_path)

@@ -80,26 +80,32 @@ def update_config_with_payment_methods(
     if not config_path.exists():
         raise FileNotFoundError(f"Config nicht gefunden: {config_path}")
 
-    # Backup erstellen
-    backup_path = config_path.with_suffix(".yaml.backup")
-    shutil.copy2(config_path, backup_path)
-    print(f"[Discovery] Backup erstellt: {backup_path}")
-
     # Config laden
     with open(config_path, encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
-    # Validierung
+    # Validierung (vor Backup, um orphaned backups zu vermeiden)
     if "profiles" not in config or profile_name not in config["profiles"]:
         raise KeyError(f"Profil '{profile_name}' nicht in Config gefunden")
 
-    # Country paths hinzufügen (falls nicht vorhanden)
+    # Backup erstellen (erst nach erfolgreicher Validierung)
+    backup_path = config_path.with_suffix(".yaml.backup")
+    shutil.copy2(config_path, backup_path)
+    print(f"[Discovery] Backup erstellt: {backup_path}")
+
+    # Country paths hinzufügen (nur für entdeckte Länder)
     if "country_paths" not in config["profiles"][profile_name]:
-        config["profiles"][profile_name]["country_paths"] = {
-            "AT": "/",
-            "DE": "/de-de",
-            "CH": "/de-ch"
-        }
+        config["profiles"][profile_name]["country_paths"] = {}
+
+    # Standard-Pfade für entdeckte Länder
+    default_paths = {
+        "AT": "/",
+        "DE": "/de-de",
+        "CH": "/de-ch"
+    }
+    for country in discovered_methods.keys():
+        if country not in config["profiles"][profile_name]["country_paths"]:
+            config["profiles"][profile_name]["country_paths"][country] = default_paths.get(country, "/")
 
     # Payment methods hinzufügen
     config["profiles"][profile_name]["payment_methods"] = discovered_methods
