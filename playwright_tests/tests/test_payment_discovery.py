@@ -11,6 +11,7 @@ import pytest
 from playwright.sync_api import Page, expect
 from playwright_tests.config import TestConfig
 from playwright_tests.utils.payment_discovery import update_config_with_payment_methods
+from playwright_tests.pages.checkout_page import Address
 
 
 def add_test_product_to_cart(page: Page, base_url: str, product_path: str) -> None:
@@ -34,6 +35,129 @@ def add_test_product_to_cart(page: Page, base_url: str, product_path: str) -> No
 
     # Warten auf Feedback (Offcanvas oder Notification)
     page.wait_for_timeout(2000)
+
+
+def complete_checkout_to_payment_page(page: Page, base_url: str, country_code: str) -> None:
+    """
+    Führt den Checkout-Flow durch bis zur Zahlungsarten-Seite.
+
+    Args:
+        page: Playwright Page-Objekt
+        base_url: Basis-URL des Shops
+        country_code: Ländercode (AT, DE, CH)
+    """
+    # Zum Checkout navigieren
+    page.goto(f"{base_url}/checkout/register")
+    page.wait_for_load_state("domcontentloaded")
+
+    # Cookie-Banner schließen falls vorhanden
+    cookie_button = page.locator("css=button.cookie-notice-accept, button[data-cookie-permission-button]")
+    if cookie_button.count() > 0:
+        cookie_button.first.click()
+        page.wait_for_timeout(500)
+
+    # Gast-Checkout aktivieren
+    guest_button = page.locator("css=[data-toggle='collapse'][href='#collapseGuestCheckout'], .register-guest, button:has-text('Als Gast bestellen')")
+    if guest_button.count() > 0:
+        guest_button.first.click(force=True)
+        page.wait_for_timeout(1000)
+
+    # Test-Adressdaten basierend auf Land
+    test_addresses = {
+        "AT": Address(
+            salutation="mr",
+            first_name="Test",
+            last_name="Discovery",
+            street="Teststraße 1",
+            zip_code="4020",
+            city="Linz",
+            country="AT",
+            email="discovery@test.local"
+        ),
+        "DE": Address(
+            salutation="mr",
+            first_name="Test",
+            last_name="Discovery",
+            street="Teststraße 1",
+            zip_code="10115",
+            city="Berlin",
+            country="DE",
+            email="discovery@test.local"
+        ),
+        "CH": Address(
+            salutation="mr",
+            first_name="Test",
+            last_name="Discovery",
+            street="Teststrasse 1",
+            zip_code="8001",
+            city="Zürich",
+            country="CH",
+            email="discovery@test.local"
+        )
+    }
+
+    address = test_addresses.get(country_code, test_addresses["AT"])
+
+    # Felder ausfüllen - NUR im Gast-Checkout-Bereich suchen
+    try:
+        # Gast-Checkout-Container finden und warten
+        guest_container = page.locator("#collapseGuestCheckout, #guest, .register-form, form.register-form").first
+        guest_container.locator("input[name*='firstName'], #personalFirstName").first.wait_for(state="visible", timeout=10000)
+
+        # Persönliche Daten ausfüllen
+        guest_container.locator("input[name*='firstName'], #personalFirstName").first.fill(address.first_name)
+        guest_container.locator("input[name*='lastName'], #personalLastName").first.fill(address.last_name)
+        guest_container.locator("input[name*='email'], input[type='email'], #personalMail").first.fill(address.email)
+
+        # Adresse ausfüllen
+        guest_container.locator("input[name*='street'], input[name*='addressStreet']").first.fill(address.street)
+        guest_container.locator("input[name*='zipcode'], input[name*='postalCode']").first.fill(address.zip_code)
+        guest_container.locator("input[name*='city']").first.fill(address.city)
+
+        # Anrede auswählen (Pflichtfeld)
+        salutation = guest_container.locator("select[name*='salutation'], #personalSalutation")
+        if salutation.count() > 0:
+            try:
+                salutation.first.select_option(label="Herr", timeout=2000)
+            except:
+                salutation.first.select_option("mr", timeout=2000)
+
+        # Land auswählen (falls nötig)
+        country = guest_container.locator("select[name*='country'], #billingAddressAddressCountry")
+        if country.count() > 0:
+            try:
+                country.first.select_option(address.country, timeout=2000)
+            except:
+                pass  # Land bereits vorausgewählt
+
+    except Exception as e:
+        print(f"[Discovery] WARNUNG: Fehler beim Ausfüllen: {str(e)}")
+
+    # "Weiter"-Button finden - im Gast-Checkout-Bereich
+    # Erst versuchen, spezifischen Button mit "Weiter"-Text zu finden
+    continue_button = page.locator("button[type='submit']:visible").filter(has_text="Weiter")
+
+    # Fallback: Alle sichtbaren Submit-Buttons
+    if continue_button.count() == 0:
+        continue_button = page.locator("button[type='submit']:visible")
+
+    # Pflicht-Checkboxen aktivieren (AGBs, Datenschutz)
+    checkboxes = page.locator("input[type='checkbox'][required], input[type='checkbox'][aria-required='true']")
+    for i in range(checkboxes.count()):
+        checkbox = checkboxes.nth(i)
+        if not checkbox.is_checked():
+            checkbox.check()
+
+    # "Weiter"-Button klicken
+    for i in range(continue_button.count()):
+        button = continue_button.nth(i)
+        if button.is_visible():
+            button_text = button.inner_text()
+            if "Weiter" in button_text or "weiter" in button_text:
+                button.click()
+                page.wait_for_load_state("domcontentloaded")
+                page.wait_for_timeout(2000)
+                break
 
 
 @pytest.mark.discovery
@@ -75,23 +199,13 @@ def test_discover_payment_methods(page: Page, config: TestConfig):
         print(f"[Discovery] Füge Produkt hinzu: {test_product}")
         add_test_product_to_cart(page, country_base_url, test_product)
 
-        # Zur Checkout-Seite navigieren
-        checkout_url = f"{country_base_url}/checkout/confirm"
-        print(f"[Discovery] Navigiere zu: {checkout_url}")
-        page.goto(checkout_url)
-        page.wait_for_load_state("domcontentloaded")
-
-        # Warten, bis Zahlungsarten geladen sind
-        page.wait_for_timeout(2000)
+        # Checkout-Flow durchlaufen bis zur Zahlungsarten-Seite
+        print(f"[Discovery] Durchlaufe Checkout-Flow...")
+        complete_checkout_to_payment_page(page, country_base_url, country_code)
 
         # Zahlungsarten extrahieren
-        # Grüne Erde verwendet .payment-method-label oder ähnliche Klassen
-        payment_labels = page.locator(
-            ".payment-method-label, "
-            ".payment-name, "
-            "[data-payment-method-name], "
-            ".confirm-payment-method-label"
-        ).all_inner_texts()
+        # Grüne Erde: <label class="payment-method-label"><strong>Name</strong>...</label>
+        payment_labels = page.locator(".payment-method-label strong").all_inner_texts()
 
         # Bereinigen (Whitespace entfernen, leere Einträge filtern)
         payment_labels = [label.strip() for label in payment_labels if label.strip()]
@@ -111,7 +225,7 @@ def test_discover_payment_methods(page: Page, config: TestConfig):
         discovered_methods=discovered_methods
     )
 
-    print("[Discovery] ✓ Discovery abgeschlossen!")
+    print("[Discovery] Discovery abgeschlossen!")
 
     # Assertion damit Test als "passed" gilt
     assert len(discovered_methods) > 0, "Keine Zahlungsarten entdeckt"

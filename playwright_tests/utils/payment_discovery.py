@@ -120,4 +120,4 @@ def update_config_with_payment_methods(
     with open(config_path, "w", encoding="utf-8") as f:
         yaml.dump(config, f, allow_unicode=True, sort_keys=False)
 
-    print(f"[Discovery] ✓ Config aktualisiert: {config_path}")
+    print(f"[Discovery] Config aktualisiert: {config_path}")
