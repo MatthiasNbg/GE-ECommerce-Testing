@@ -256,6 +256,27 @@ payment_method_aliases:
 
 Tests verwenden automatisch die richtigen Zahlungsarten pro Land.
 
+### Payment Methods Validation
+
+Automatisierter Test zur Validierung, dass alle konfigurierten Zahlungsarten für Gast-User verfügbar sind:
+
+```bash
+# Alle Länder testen
+pytest playwright_tests/tests/test_payment_methods_available.py -v
+
+# Nur ein bestimmtes Land testen
+pytest playwright_tests/tests/test_payment_methods_available.py::test_payment_methods_available[AT] -v
+```
+
+Der Test:
+1. Fügt Testprodukt zum Warenkorb hinzu
+2. Durchläuft Gast-Checkout-Formular
+3. Navigiert zur Zahlungsarten-Seite
+4. Extrahiert verfügbare Zahlungsarten
+5. Validiert gegen `config.yaml` (payment_methods)
+
+**Wichtig:** Test schlägt fehl, wenn eine erwartete Zahlungsart fehlt oder der Shop die Zahlungsarten geändert hat.
+
 ## Test-Szenarien
 
 ### Massentest: Bestellungen
