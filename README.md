@@ -218,6 +218,44 @@ robot --include massentest --exclude wip robot_tests/
 robot --outputdir reports/$(date +%Y%m%d) robot_tests/
 ```
 
+### Payment Discovery
+
+Das Projekt unterstützt automatische Ermittlung länderspezifischer Zahlungsarten:
+
+```bash
+# Zahlungsarten für alle Länder ermitteln
+pytest -m discovery
+
+# Nur für bestimmtes Profil
+pytest -m discovery --profile=production
+```
+
+Der Discovery-Test:
+1. Navigiert zu AT/DE/CH Shop-URLs
+2. Fügt Testprodukt zum Warenkorb hinzu
+3. Geht zum Checkout
+4. Extrahiert Zahlungsarten-Labels
+5. Generiert englische Aliases
+6. Aktualisiert `config/config.yaml`
+
+Nach Discovery sind die ermittelten Zahlungsarten in `config.yaml` verfügbar:
+
+```yaml
+profiles:
+  staging:
+    payment_methods:
+      AT: ["Kreditkarte", "Vorkasse", "Rechnung"]
+      DE: ["Kreditkarte", "PayPal", "Rechnung"]
+      CH: ["Kreditkarte", "Vorkasse"]
+
+payment_method_aliases:
+  invoice: "Rechnung"
+  credit_card: "Kreditkarte"
+  prepayment: "Vorkasse"
+```
+
+Tests verwenden automatisch die richtigen Zahlungsarten pro Land.
+
 ## Test-Szenarien
 
 ### Massentest: Bestellungen
