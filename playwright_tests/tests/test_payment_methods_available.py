@@ -11,6 +11,7 @@ Usage:
 import pytest
 from playwright.sync_api import Page
 from playwright_tests.config import TestConfig
+from playwright_tests.conftest import accept_cookie_banner
 
 
 def add_product_and_navigate_to_checkout(page: Page, base_url: str, product_path: str) -> None:
@@ -44,11 +45,8 @@ def complete_guest_checkout_form(page: Page, country_code: str) -> None:
         page: Playwright Page-Objekt
         country_code: Ländercode (AT, DE, CH)
     """
-    # Cookie-Banner schließen
-    cookie_button = page.locator("button.cookie-notice-accept, button[data-cookie-permission-button]")
-    if cookie_button.count() > 0:
-        cookie_button.first.click()
-        page.wait_for_timeout(500)
+    # Cookie-Banner akzeptieren (Usercentrics oder Shopware)
+    accept_cookie_banner(page)
 
     # Gast-Checkout aktivieren
     guest_button = page.locator(

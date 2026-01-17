@@ -13,6 +13,84 @@ from .config import TestConfig, get_config
 
 
 # =============================================================================
+# Cookie-Banner Hilfsfunktionen
+# =============================================================================
+
+def accept_cookie_banner(page: Page, timeout: int = 3000) -> bool:
+    """
+    Akzeptiert das Cookie-Banner, falls sichtbar (sync Version).
+
+    Unterstützt:
+    - Usercentrics Banner (#accept.uc-accept-button)
+    - Shopware 6 Standard Banner (.js-cookie-accept-all-button)
+
+    Args:
+        page: Playwright Page-Instanz
+        timeout: Timeout in ms für die Sichtbarkeitsprüfung
+
+    Returns:
+        True wenn Banner akzeptiert wurde, False wenn nicht vorhanden
+    """
+    # Selektoren für verschiedene Cookie-Banner
+    cookie_selectors = [
+        "#accept.uc-accept-button",  # Usercentrics
+        "button[data-action-type='accept']",  # Usercentrics alternativ
+        ".js-cookie-accept-all-button",  # Shopware 6
+        "[data-cookie-accept-all]",  # Shopware 6 alternativ
+    ]
+
+    for selector in cookie_selectors:
+        try:
+            button = page.locator(selector)
+            if button.is_visible(timeout=timeout):
+                button.click()
+                # Kurz warten bis Banner verschwindet
+                page.wait_for_timeout(500)
+                return True
+        except Exception:
+            continue
+
+    return False
+
+
+async def accept_cookie_banner_async(page, timeout: int = 3000) -> bool:
+    """
+    Akzeptiert das Cookie-Banner, falls sichtbar (async Version).
+
+    Unterstützt:
+    - Usercentrics Banner (#accept.uc-accept-button)
+    - Shopware 6 Standard Banner (.js-cookie-accept-all-button)
+
+    Args:
+        page: Playwright async Page-Instanz
+        timeout: Timeout in ms für die Sichtbarkeitsprüfung
+
+    Returns:
+        True wenn Banner akzeptiert wurde, False wenn nicht vorhanden
+    """
+    # Selektoren für verschiedene Cookie-Banner
+    cookie_selectors = [
+        "#accept.uc-accept-button",  # Usercentrics
+        "button[data-action-type='accept']",  # Usercentrics alternativ
+        ".js-cookie-accept-all-button",  # Shopware 6
+        "[data-cookie-accept-all]",  # Shopware 6 alternativ
+    ]
+
+    for selector in cookie_selectors:
+        try:
+            button = page.locator(selector)
+            if await button.is_visible(timeout=timeout):
+                await button.click()
+                # Kurz warten bis Banner verschwindet
+                await page.wait_for_timeout(500)
+                return True
+        except Exception:
+            continue
+
+    return False
+
+
+# =============================================================================
 # Pytest Hooks
 # =============================================================================
 
@@ -96,7 +174,8 @@ def shop_config(config: TestConfig) -> dict:
 @pytest.fixture(scope="session")
 def test_product_id(config: TestConfig) -> str:
     """Erste Produkt-ID für einfache Tests."""
-    return config.test_products[0] if config.test_products else "SW-10001"
+    products = config.get_all_products()
+    return products[0] if products else "SW-10001"
 
 
 @pytest.fixture(scope="session")
@@ -133,7 +212,7 @@ def products(request, config: TestConfig) -> list[str]:
     cli_value = request.config.getoption("--products")
     if cli_value:
         return [p.strip() for p in cli_value.split(",")]
-    return config.test_products
+    return config.get_all_products()
 
 
 # =============================================================================

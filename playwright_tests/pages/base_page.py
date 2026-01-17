@@ -14,9 +14,9 @@ class BasePage:
     häufige Interaktionen bereit.
     """
 
-    # Cookie-Banner Selektoren (Shopware 6 Standard)
-    COOKIE_ACCEPT_BUTTON = "css=.js-cookie-accept-all-button, [data-cookie-accept-all]"
-    COOKIE_BANNER = "css=.cookie-permission-container, .js-cookie-permission"
+    # Cookie-Banner Selektoren (Shopware 6 Standard + Usercentrics)
+    COOKIE_ACCEPT_BUTTON = "css=.js-cookie-accept-all-button, [data-cookie-accept-all], #accept.uc-accept-button, button[data-action-type='accept']"
+    COOKIE_BANNER = "css=.cookie-permission-container, .js-cookie-permission, #usercentrics-root"
 
     # Allgemeine Fehler-Selektoren
     ERROR_ALERT = "css=.alert-danger, .alert-error"

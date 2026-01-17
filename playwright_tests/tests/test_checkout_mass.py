@@ -14,6 +14,7 @@ from typing import Optional
 import pytest
 from playwright.async_api import Browser, BrowserContext
 
+from playwright_tests.conftest import accept_cookie_banner_async
 from playwright_tests.pages.checkout_page import Address, CheckoutPage, CheckoutResult
 
 
@@ -119,7 +120,10 @@ class MassOrderRunner:
             # Zur Produktseite navigieren
             await page.goto(f"{self.base_url}/detail/{product_id}")
             await page.wait_for_load_state("networkidle")
-            
+
+            # Cookie-Banner akzeptieren (Usercentrics oder Shopware)
+            await accept_cookie_banner_async(page)
+
             # Zum Warenkorb hinzufügen
             add_to_cart = page.locator("css=.btn-buy, [data-add-to-cart]")
             await add_to_cart.click()

@@ -4,6 +4,7 @@ Einzelner Checkout-Test zur Diagnose.
 import pytest
 from playwright.async_api import Browser
 
+from ..conftest import accept_cookie_banner_async
 from ..pages.checkout_page import CheckoutPage, Address
 
 
@@ -35,13 +36,10 @@ async def test_single_guest_checkout(browser: Browser, config):
         await page.wait_for_load_state("domcontentloaded")
         print(f"   URL: {page.url}")
 
-        # Cookie-Banner akzeptieren
-        cookie_btn = page.locator(".js-cookie-accept-all-button, [data-cookie-accept-all]")
-        try:
-            if await cookie_btn.is_visible(timeout=3000):
-                await cookie_btn.click()
-                print("   Cookie-Banner akzeptiert")
-        except Exception:
+        # Cookie-Banner akzeptieren (Usercentrics oder Shopware)
+        if await accept_cookie_banner_async(page):
+            print("   Cookie-Banner akzeptiert")
+        else:
             print("   Kein Cookie-Banner")
 
         # Screenshot der Produktseite

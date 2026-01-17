@@ -22,6 +22,7 @@ import pytest
 from playwright.async_api import Browser, BrowserContext
 
 from playwright_tests.config import TestConfig, TestCustomer, get_config
+from playwright_tests.conftest import accept_cookie_banner_async
 from playwright_tests.pages.checkout_page import Address, CheckoutPage, CheckoutResult
 
 
@@ -206,6 +207,7 @@ class PerformanceTestRunner:
     ) -> None:
         """Fügt Produkte zum Warenkorb hinzu."""
         page = await context.new_page()
+        cookie_accepted = False
 
         try:
             for product_id in product_ids:
@@ -213,6 +215,11 @@ class PerformanceTestRunner:
                 product_url = f"{self.base_url}/{product_id}" if not product_id.startswith("/") else f"{self.base_url}{product_id}"
                 await page.goto(product_url)
                 await page.wait_for_load_state("networkidle")
+
+                # Cookie-Banner akzeptieren (nur beim ersten Produkt nötig)
+                if not cookie_accepted:
+                    await accept_cookie_banner_async(page)
+                    cookie_accepted = True
 
                 # Zum Warenkorb hinzufügen
                 add_to_cart = page.locator("css=.btn-buy, [data-add-to-cart], .product-detail-buy button")
@@ -312,6 +319,9 @@ class PerformanceTestRunner:
                 page = await context.new_page()
                 await page.goto(f"{self.base_url}/account/login")
                 await page.wait_for_load_state("domcontentloaded")
+
+                # Cookie-Banner akzeptieren (Usercentrics oder Shopware)
+                await accept_cookie_banner_async(page)
 
                 # Login-Formular ausfüllen
                 await page.fill("css=#loginMail, input[name='email']", customer.email)

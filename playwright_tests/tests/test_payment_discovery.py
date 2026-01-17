@@ -10,6 +10,7 @@ Usage:
 import pytest
 from playwright.sync_api import Page, expect
 from playwright_tests.config import TestConfig
+from playwright_tests.conftest import accept_cookie_banner
 from playwright_tests.utils.payment_discovery import update_config_with_payment_methods
 from playwright_tests.pages.checkout_page import Address
 
@@ -50,11 +51,8 @@ def complete_checkout_to_payment_page(page: Page, base_url: str, country_code: s
     page.goto(f"{base_url}/checkout/register")
     page.wait_for_load_state("domcontentloaded")
 
-    # Cookie-Banner schließen falls vorhanden
-    cookie_button = page.locator("css=button.cookie-notice-accept, button[data-cookie-permission-button]")
-    if cookie_button.count() > 0:
-        cookie_button.first.click()
-        page.wait_for_timeout(500)
+    # Cookie-Banner akzeptieren (Usercentrics oder Shopware)
+    accept_cookie_banner(page)
 
     # Gast-Checkout aktivieren
     guest_button = page.locator("css=[data-toggle='collapse'][href='#collapseGuestCheckout'], .register-guest, button:has-text('Als Gast bestellen')")

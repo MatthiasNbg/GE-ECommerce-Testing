@@ -8,12 +8,17 @@ import base64
 import pytest
 from playwright.sync_api import Page, expect
 
+from ..conftest import accept_cookie_banner
+
 
 @pytest.mark.smoke
 def test_homepage_loads(page: Page, base_url: str, request):
     """Startseite ist erreichbar und lädt korrekt."""
     page.goto(base_url)
     page.wait_for_load_state("networkidle")
+
+    # Cookie-Banner akzeptieren (falls vorhanden)
+    accept_cookie_banner(page)
 
     # Screenshot als Base64 für Report
     screenshot_bytes = page.screenshot(full_page=True)
@@ -41,6 +46,9 @@ def test_search_works(page: Page, base_url: str, test_search_term: str):
     """Produktsuche E2E: Toggle → Suche → Ergebnisse → Produktdetails."""
     page.goto(base_url)
     page.wait_for_load_state("domcontentloaded")
+
+    # Cookie-Banner akzeptieren (falls vorhanden)
+    accept_cookie_banner(page)
 
     # Schritt 1: Such-Toggle klicken
     search_toggle = page.locator("button.search-toggle-btn.js-search-toggle-btn")
@@ -81,6 +89,9 @@ def test_product_page_accessible(page: Page, base_url: str, test_product_id: str
     page.goto(f"{base_url}/{test_product_id}")
     page.wait_for_load_state("domcontentloaded")
 
+    # Cookie-Banner akzeptieren (falls vorhanden)
+    accept_cookie_banner(page)
+
     # Prüfen auf Produktseiten-Elemente (Grüne Erde spezifisch)
     product_elements = page.locator(
         "h1, "
@@ -100,6 +111,9 @@ def test_add_to_cart(page: Page, base_url: str, test_product_id: str):
     # Produktseite aufrufen (Format: /p/produktname/ge-p-NUMMER)
     page.goto(f"{base_url}/{test_product_id}")
     page.wait_for_load_state("domcontentloaded")
+
+    # Cookie-Banner akzeptieren (falls vorhanden)
+    accept_cookie_banner(page)
 
     # "In den Warenkorb" Button finden
     add_to_cart = page.locator(".btn-buy, [data-add-to-cart]")
@@ -130,6 +144,9 @@ def test_cart_accessible(page: Page, base_url: str):
     page.goto(f"{base_url}/checkout/cart")
     page.wait_for_load_state("domcontentloaded")
 
+    # Cookie-Banner akzeptieren (falls vorhanden)
+    accept_cookie_banner(page)
+
     # Prüfen, dass wir auf der Warenkorb-Seite sind
     cart_elements = page.locator(
         "css=.checkout-cart, "
@@ -153,6 +170,9 @@ def test_checkout_accessible(page: Page, base_url: str):
     """Checkout-Seite ist grundsätzlich erreichbar."""
     page.goto(f"{base_url}/checkout/confirm")
     page.wait_for_load_state("domcontentloaded")
+
+    # Cookie-Banner akzeptieren (falls vorhanden)
+    accept_cookie_banner(page)
 
     # Bei leerem Warenkorb erfolgt Redirect oder Fehlermeldung
     # Das ist OK - wir prüfen nur, ob der Endpunkt antwortet
