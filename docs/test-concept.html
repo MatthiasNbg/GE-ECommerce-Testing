@@ -354,9 +354,9 @@
             <h1>Test-Konzept: Grüne Erde E-Commerce Shop</h1>
             <div class="metadata">
                 <div><strong>Projekt:</strong> GE-ECommerce-Testing</div>
-                <div><strong>Datum:</strong> 2026-01-16</div>
-                <div><strong>Version:</strong> 1.0</div>
-                <div><strong>Status:</strong> Entwurf zur Abstimmung</div>
+                <div><strong>Datum:</strong> 2026-01-17</div>
+                <div><strong>Version:</strong> 1.1</div>
+                <div><strong>Status:</strong> Performance-Tests implementiert</div>
             </div>
         </header>
 
@@ -472,9 +472,16 @@
 <tr>
 <td>⚡ **Load Tests**</td>
 <td>5</td>
-<td><span class="badge badge-error">✗ Fehlend</span> 0/5</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 3/5</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Load-Tests, Response-Zeiten, Race Conditions</td>
+</tr>
+<tr>
+<td>🚀 **Performance Tests**</td>
+<td>3</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 3/3</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>150 Bestellungen, Stress-Test, Multi-Szenario</td>
 </tr>
 </tbody></table></div>
 <strong>Legende:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Vollständig | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
@@ -496,6 +503,7 @@
 <li><a href="#data-validation">Data Validation Tests</a> - (10 Tests)</li>
 <li><a href="#regression">Regression Tests</a> - (15-20 Tests)</li>
 <li><a href="#load">Load Tests</a> - (5 Tests)</li>
+<li><a href="#🚀-performance-tests">Performance Tests</a> - (3 Tests) <span class="badge badge-success">NEU</span></li>
 <li><a href="#implementierungs-roadmap">Implementierungs-Roadmap</a> - Welche Reihenfolge?</li>
 </ol>
 <hr>
@@ -504,13 +512,21 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 91 Tests
+<strong>Gesamt:</strong> 94 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 8</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 11</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 83</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li>**Abdeckung:** 9%</li>
+<li>**Abdeckung:** 12%</li>
 </ul>
+<div class="summary-box">
+<strong>Neu hinzugefügt:</strong> Performance-Tests für Staging (3 Tests)
+<ul>
+<li>150 Bestellungen Haupttest</li>
+<li>30 Bestellungen Quick-Test</li>
+<li>300 Bestellungen Stress-Test</li>
+</ul>
+</div>
 <hr>
 
 <h2 id="test-kategorien">Test-Kategorien</h2>
@@ -717,10 +733,109 @@
 <h3 id="⚡-load-tests">⚡ Load Tests</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 0/5 implementiert
+<strong>Tests:</strong> 3/5 implementiert
 <strong>Beschreibung:</strong> Load-Tests, Response-Zeiten, Race Conditions
 <strong>Dauer:</strong> 30 Min - 4 Std
 <strong>Ausführung:</strong> Vor Releases, bei Performance-Änderungen
+
+<hr>
+
+<h3 id="🚀-performance-tests">🚀 Performance Tests (150 Bestellungen)</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 3/3 implementiert
+<strong>Beschreibung:</strong> Massenbestellungen für Staging-Performance-Validierung
+<strong>Dauer:</strong> 10-30 Min
+<strong>Ausführung:</strong> Vor Releases, nach Infrastruktur-Änderungen
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Bestellungen</th>
+<th>Parallelität</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PERF-001</td>
+<td>Performance-Test 150 Bestellungen</td>
+<td>150</td>
+<td>15 Worker</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-PERF-002</td>
+<td>Performance Quick-Test</td>
+<td>30</td>
+<td>10 Worker</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-PERF-003</td>
+<td>Performance Stress-Test</td>
+<td>300</td>
+<td>25 Worker</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+</tbody></table></div>
+
+<h4>Bestellungsverteilung (150 Orders)</h4>
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Szenario</th>
+<th>Anzahl</th>
+<th>Kundentyp</th>
+<th>Versandart</th>
+</tr></thead><tbody>
+<tr>
+<td>Standard Post</td>
+<td>60</td>
+<td>Gast</td>
+<td>Postversand</td>
+</tr>
+<tr>
+<td>Standard Spedition</td>
+<td>30</td>
+<td>Gast</td>
+<td>Speditionsversand</td>
+</tr>
+<tr>
+<td>Registriert Post</td>
+<td>30</td>
+<td>Registriert</td>
+<td>Postversand</td>
+</tr>
+<tr>
+<td>Registriert Spedition</td>
+<td>15</td>
+<td>Registriert</td>
+<td>Speditionsversand</td>
+</tr>
+<tr>
+<td>Multi-Produkt</td>
+<td>15</td>
+<td>Gast</td>
+<td>Gemischt</td>
+</tr>
+</tbody></table></div>
+
+<h4>Erfolgskriterien</h4>
+<ul>
+<li><strong>Erfolgsrate:</strong> ≥ 95%</li>
+<li><strong>Maximale Dauer:</strong> 15 Minuten für 150 Bestellungen</li>
+<li><strong>Durchsatz:</strong> ≥ 10 Orders/Minute</li>
+</ul>
+
+<h4>Ausführung</h4>
+<pre><code># Haupttest (150 Bestellungen)
+pytest -m performance playwright_tests/tests/test_performance.py::test_staging_performance_150_orders --profile=staging
+
+# Schnelltest (30 Bestellungen)
+pytest -m performance playwright_tests/tests/test_performance.py::test_staging_performance_quick --profile=staging
+
+# Stress-Test (300 Bestellungen)
+pytest -m performance playwright_tests/tests/test_performance.py::test_staging_performance_stress --profile=staging
+</code></pre>
 
 <hr>
 
@@ -808,12 +923,12 @@
 <hr>
 
 
-<p>*Generiert am 2026-01-16 18:12 aus test-inventory.yaml*</p>
+<p>*Aktualisiert am 2026-01-17 - Performance-Tests hinzugefügt*</p>
 
         </main>
 
         <footer class="footer">
-            <p>Generiert am 16.01.2026 um 18:12 Uhr</p>
+            <p>Aktualisiert am 17.01.2026</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

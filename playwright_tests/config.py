@@ -32,6 +32,67 @@ class MassTestConfig(BaseModel):
     success_rate_threshold: float = 0.95
 
 
+class PerformanceTestDistribution(BaseModel):
+    """Verteilung der Bestellungen im Performance-Test."""
+    guest_post: int = 60
+    guest_spedition: int = 30
+    registered_post: int = 30
+    registered_spedition: int = 15
+    multi_product: int = 15
+
+
+class PerformanceTestConfig(BaseModel):
+    """Performance-Test Konfiguration (150 Bestellungen)."""
+    target_orders: int = 150
+    parallel_workers: int = 15
+    success_rate_threshold: float = 0.95
+    max_duration_minutes: int = 15
+    distribution: PerformanceTestDistribution = Field(default_factory=PerformanceTestDistribution)
+
+
+class TestCustomer(BaseModel):
+    """Konfiguration für einen Testkunden."""
+    email: str
+    password_env: str = ""
+    name: str = ""
+    customer_type: str = "private"
+    country: str = "AT"
+
+
+class CityZip(BaseModel):
+    """Stadt mit PLZ."""
+    city: str
+    zip: str
+
+
+class GuestAddressPool(BaseModel):
+    """Pool für Gast-Adressen."""
+    countries: list[str] = Field(default_factory=lambda: ["AT", "DE", "CH"])
+    cities: dict[str, list[CityZip]] = Field(default_factory=dict)
+
+
+class TestCustomersConfig(BaseModel):
+    """Testkunden-Konfiguration."""
+    registered: list[TestCustomer] = Field(default_factory=list)
+    guest_address_pool: GuestAddressPool = Field(default_factory=GuestAddressPool)
+
+
+class TestProduct(BaseModel):
+    """Produkt mit Metadaten."""
+    id: str
+    name: str = ""
+    min_stock: int = 100
+    category: str = ""
+
+
+class TestProductsConfig(BaseModel):
+    """Produkte nach Versandart."""
+    default: list[str] = Field(default_factory=list)
+    post_shipping: list[TestProduct] = Field(default_factory=list)
+    spedition_shipping: list[TestProduct] = Field(default_factory=list)
+    mixed_ratio: dict[str, int] = Field(default_factory=lambda: {"post_percent": 70, "spedition_percent": 30})
+
+
 class ProfileConfig(BaseModel):
     """Konfiguration für ein einzelnes Profil."""
     base_url: str
@@ -77,8 +138,14 @@ class TestConfig(BaseSettings):
     # Massentests
     mass_test: MassTestConfig = Field(default_factory=MassTestConfig)
 
-    # Testdaten
-    test_products: list[str] = Field(default_factory=lambda: ["SW-10001"])
+    # Performance-Test (150 Bestellungen)
+    performance_test: PerformanceTestConfig = Field(default_factory=PerformanceTestConfig)
+
+    # Testkunden
+    test_customers: TestCustomersConfig = Field(default_factory=TestCustomersConfig)
+
+    # Testdaten - Legacy (einfache Liste für Abwärtskompatibilität)
+    test_products: TestProductsConfig | list[str] = Field(default_factory=lambda: ["SW-10001"])
     test_search_term: str = "Bett"
 
     # Zahlungsarten (länderspezifisch)
@@ -89,6 +156,37 @@ class TestConfig(BaseSettings):
     })
     payment_methods: dict[str, list[str]] = Field(default_factory=dict)
     payment_method_aliases: dict[str, str] = Field(default_factory=dict)
+
+    def get_post_products(self) -> list[str]:
+        """Gibt Produkt-IDs für Postversand zurück."""
+        if isinstance(self.test_products, TestProductsConfig):
+            return [p.id for p in self.test_products.post_shipping if not p.id.startswith("TBD")]
+        return self.test_products if isinstance(self.test_products, list) else []
+
+    def get_spedition_products(self) -> list[str]:
+        """Gibt Produkt-IDs für Speditionsversand zurück."""
+        if isinstance(self.test_products, TestProductsConfig):
+            return [p.id for p in self.test_products.spedition_shipping if not p.id.startswith("TBD")]
+        return []
+
+    def get_all_products(self) -> list[str]:
+        """Gibt alle konfigurierten Produkt-IDs zurück."""
+        if isinstance(self.test_products, TestProductsConfig):
+            return self.test_products.default or (self.get_post_products() + self.get_spedition_products())
+        return self.test_products if isinstance(self.test_products, list) else []
+
+    def get_registered_customer(self, index: int = 0) -> TestCustomer | None:
+        """Gibt einen registrierten Testkunden zurück."""
+        customers = self.test_customers.registered
+        if customers and index < len(customers):
+            return customers[index]
+        return None
+
+    def get_customer_password(self, customer: TestCustomer) -> str:
+        """Lädt das Passwort eines Kunden aus der Umgebungsvariable."""
+        if customer.password_env:
+            return os.environ.get(customer.password_env, "")
+        return ""
 
     # Secrets (aus .env)
     test_customer_email: str = Field(default="", alias="TEST_CUSTOMER_EMAIL")

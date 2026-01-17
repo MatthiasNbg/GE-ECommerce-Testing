@@ -50,10 +50,140 @@ mass_test:
   default_orders: 100
   default_parallel: 5
   success_rate_threshold: 0.95
+
+# =============================================================================
+# Performance-Test Konfiguration (150 Bestellungen)
+# =============================================================================
+
+performance_test:
+  target_orders: 150
+  parallel_workers: 15
+  success_rate_threshold: 0.95
+  max_duration_minutes: 15
+
+  # Verteilung der Bestellungen
+  distribution:
+    guest_post: 60          # Gast-Checkout mit Postversand
+    guest_spedition: 30     # Gast-Checkout mit Speditionsversand
+    registered_post: 30     # Registrierte Kunden mit Postversand
+    registered_spedition: 15 # Registrierte Kunden mit Speditionsversand
+    multi_product: 15       # Bestellungen mit mehreren Produkten
+
+# =============================================================================
+# Testkunden
+# =============================================================================
+
+test_customers:
+  # Registrierte Testkunden für Performance-Tests
+  # Passwörter werden aus .env geladen
+  registered:
+    - email: "perf-test-01@gruene-erde-test.com"
+      password_env: "TEST_CUSTOMER_PASSWORD_01"
+      name: "Performance Tester Eins"
+      customer_type: "private"
+      country: "AT"
+    - email: "perf-test-02@gruene-erde-test.com"
+      password_env: "TEST_CUSTOMER_PASSWORD_02"
+      name: "Performance Tester Zwei"
+      customer_type: "private"
+      country: "DE"
+    - email: "perf-test-03@gruene-erde-test.com"
+      password_env: "TEST_CUSTOMER_PASSWORD_03"
+      name: "Performance Tester Drei"
+      customer_type: "business"
+      country: "AT"
+
+  # Gast-Checkout Adresspool
+  guest_address_pool:
+    countries:
+      - "AT"
+      - "DE"
+      - "CH"
+    cities:
+      AT:
+        - city: "Wien"
+          zip: "1010"
+        - city: "Linz"
+          zip: "4020"
+        - city: "Salzburg"
+          zip: "5020"
+        - city: "Graz"
+          zip: "8010"
+        - city: "Innsbruck"
+          zip: "6020"
+      DE:
+        - city: "München"
+          zip: "80331"
+        - city: "Berlin"
+          zip: "10115"
+        - city: "Hamburg"
+          zip: "20095"
+        - city: "Frankfurt"
+          zip: "60311"
+        - city: "Köln"
+          zip: "50667"
+      CH:
+        - city: "Zürich"
+          zip: "8001"
+        - city: "Bern"
+          zip: "3011"
+        - city: "Basel"
+          zip: "4001"
+        - city: "Genf"
+          zip: "1201"
+        - city: "Luzern"
+          zip: "6003"
+
+# =============================================================================
+# Produkte nach Versandart
+# =============================================================================
+
 test_products:
-- p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990
-- p/blusenshirt-aus-bio-leinen/ge-p-863190
-- p/kleiderstaender-jukai-pur/ge-p-693645
+  # Legacy-Format für Abwärtskompatibilität (wird von bestehenden Tests verwendet)
+  default:
+    - p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990
+    - p/blusenshirt-aus-bio-leinen/ge-p-863190
+    - p/kleiderstaender-jukai-pur/ge-p-693645
+
+  # Postversand - kleine/leichte Artikel (Textilien, Accessoires)
+  post_shipping:
+    - id: "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+      name: "Kurzarmshirt Bio-Baumwolle"
+      min_stock: 200
+      category: "Textil"
+    - id: "p/blusenshirt-aus-bio-leinen/ge-p-863190"
+      name: "Blusenshirt Bio-Leinen"
+      min_stock: 200
+      category: "Textil"
+    - id: "TBD-accessoire-produkt"  # TODO: Echte Produkt-ID eintragen
+      name: "Accessoire (Postversand)"
+      min_stock: 200
+      category: "Accessoires"
+
+  # Speditionsversand - große/schwere Artikel (Möbel, Betten)
+  spedition_shipping:
+    - id: "p/kleiderstaender-jukai-pur/ge-p-693645"
+      name: "Kleiderständer Jukai Pur"
+      min_stock: 50
+      category: "Möbel"
+    - id: "TBD-bett-produkt"  # TODO: Echte Produkt-ID eintragen
+      name: "Massivholzbett (Spedition)"
+      min_stock: 30
+      category: "Möbel/Betten"
+    - id: "TBD-schrank-produkt"  # TODO: Echte Produkt-ID eintragen
+      name: "Kleiderschrank (Spedition)"
+      min_stock: 30
+      category: "Möbel/Schränke"
+
+  # Verteilung für gemischte Szenarien
+  mixed_ratio:
+    post_percent: 70
+    spedition_percent: 30
+
+# =============================================================================
+# Zahlungsarten
+# =============================================================================
+
 payment_method_aliases:
   prepayment: Vorkasse
   credit_card: Kreditkarte

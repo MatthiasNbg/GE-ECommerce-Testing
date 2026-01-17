@@ -50,6 +50,7 @@ def pytest_configure(config):
     """Registriert custom Marker."""
     config.addinivalue_line("markers", "smoke: Smoke-Tests für schnelle Validierung")
     config.addinivalue_line("markers", "massentest: Massentests für Bestellungen")
+    config.addinivalue_line("markers", "performance: Performance-Tests (150+ Bestellungen)")
     config.addinivalue_line("markers", "slow: Langsame Tests (explizit anfordern)")
     config.addinivalue_line("markers", "discovery: Discovery-Tests für automatische Ermittlung")
 
@@ -86,6 +87,9 @@ def shop_config(config: TestConfig) -> dict:
         "base_url": config.base_url,
         "timeout": config.timeout,
         "parallel_workers": config.parallel_workers,
+        "payment_methods": getattr(config, 'payment_methods', {}),
+        "payment_method_aliases": getattr(config, 'payment_method_aliases', {}),
+        "country": "AT",
     }
 
 
