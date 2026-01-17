@@ -1,5 +1,7 @@
 """
 Einzelner Checkout-Test zur Diagnose.
+
+Führt einen kompletten Gast-Checkout mit Zahlungsart "Rechnung" durch.
 """
 import pytest
 from playwright.async_api import Browser
@@ -31,9 +33,12 @@ async def test_single_guest_checkout(browser: Browser, config):
     try:
         # Schritt 1: Produkt in Warenkorb legen
         print("\n[1] Produkt laden...")
-        product_url = f"{config.base_url}/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        products = config.get_all_products()
+        product_path = products[0] if products else "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        product_url = f"{config.base_url}/{product_path}"
+        print(f"   Produkt: {product_path}")
         await page.goto(product_url, timeout=60000)
-        await page.wait_for_load_state("domcontentloaded")
+        await page.wait_for_load_state("networkidle")
         print(f"   URL: {page.url}")
 
         # Cookie-Banner akzeptieren (Usercentrics oder Shopware)
@@ -91,11 +96,19 @@ async def test_single_guest_checkout(browser: Browser, config):
         print(f"   URL: {page.url}")
         print("   Screenshot: debug_06_confirm.png")
 
-        # Schritt 6: Zahlungsart wählen
-        print("\n[7] Zahlungsmethode wählen...")
+        # Schritt 6: Zahlungsart "Rechnung" wählen (keine Kreditkartendaten nötig)
+        print("\n[7] Zahlungsmethode 'Rechnung' wählen...")
         try:
-            await checkout.select_payment_method("invoice")
-            print("   Erfolgreich: Rechnung")
+            # Direkt auf Rechnung-Label klicken (robuster als select_payment_method)
+            rechnung_label = page.locator(".payment-method-label:has-text('Rechnung'), label:has-text('Rechnung')")
+            if await rechnung_label.count() > 0:
+                await rechnung_label.first.click()
+                await page.wait_for_timeout(500)
+                print("   Rechnung ausgewählt (via Label)")
+            else:
+                # Fallback: via checkout method
+                await checkout.select_payment_method("invoice")
+                print("   Rechnung ausgewählt (via select_payment_method)")
         except Exception as e:
             print(f"   FEHLER: {e}")
             await page.screenshot(path="debug_07_payment_error.png")
