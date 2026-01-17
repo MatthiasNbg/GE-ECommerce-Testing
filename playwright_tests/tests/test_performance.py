@@ -230,9 +230,14 @@ class PerformanceTestRunner:
     ) -> PerformanceOrderResult:
         """Führt eine Gast-Bestellung durch."""
         async with self.semaphore:
-            context = await self.browser.new_context(
-                viewport={"width": 1920, "height": 1080}
-            )
+            # HTTP-Credentials für htaccess-geschützte Staging-Umgebungen
+            context_options = {"viewport": {"width": 1920, "height": 1080}}
+            if self.config.htaccess_user and self.config.htaccess_password:
+                context_options["http_credentials"] = {
+                    "username": self.config.htaccess_user,
+                    "password": self.config.htaccess_password,
+                }
+            context = await self.browser.new_context(**context_options)
 
             start_time = time.time()
 
@@ -291,9 +296,14 @@ class PerformanceTestRunner:
     ) -> PerformanceOrderResult:
         """Führt eine Bestellung mit registriertem Kunden durch."""
         async with self.semaphore:
-            context = await self.browser.new_context(
-                viewport={"width": 1920, "height": 1080}
-            )
+            # HTTP-Credentials für htaccess-geschützte Staging-Umgebungen
+            context_options = {"viewport": {"width": 1920, "height": 1080}}
+            if self.config.htaccess_user and self.config.htaccess_password:
+                context_options["http_credentials"] = {
+                    "username": self.config.htaccess_user,
+                    "password": self.config.htaccess_password,
+                }
+            context = await self.browser.new_context(**context_options)
 
             start_time = time.time()
 
@@ -301,7 +311,7 @@ class PerformanceTestRunner:
                 # Login
                 page = await context.new_page()
                 await page.goto(f"{self.base_url}/account/login")
-                await page.wait_for_load_state("networkidle")
+                await page.wait_for_load_state("domcontentloaded")
 
                 # Login-Formular ausfüllen
                 await page.fill("css=#loginMail, input[name='email']", customer.email)

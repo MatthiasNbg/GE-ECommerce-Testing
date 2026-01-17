@@ -104,6 +104,16 @@ class BasePage:
         """
         await self.page.select_option(selector, value)
 
+    async def select_option_by_label(self, selector: str, label: str) -> None:
+        """
+        Wählt eine Option in einem Select-Element anhand des Labels.
+
+        Args:
+            selector: CSS-Selektor des Select-Elements
+            label: Sichtbarer Text der Option
+        """
+        await self.page.select_option(selector, label=label)
+
     async def check(self, selector: str) -> None:
         """Aktiviert eine Checkbox."""
         checkbox = self.page.locator(selector)

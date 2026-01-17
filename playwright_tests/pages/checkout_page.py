@@ -52,17 +52,18 @@ class CheckoutPage(BasePage):
     STEP_CONFIRM = "css=[data-checkout-step='confirm']"
     
     # Gast vs. Login
-    GUEST_CHECKOUT_BUTTON = "css=[data-toggle='collapse'][href='#collapseGuestCheckout']"
+    GUEST_CHECKOUT_BUTTON = "button:has-text('Als Gast')"
+    GUEST_CHECKOUT_BUTTON_ALT = "css=[data-toggle='collapse'][href='#collapseGuestCheckout']"
     GUEST_CHECKOUT_FORM = "css=#collapseGuestCheckout"
     
     # Persönliche Daten
     SALUTATION_SELECT = "css=#personalSalutation"
-    FIRST_NAME_INPUT = "css=#personalFirstName"
-    LAST_NAME_INPUT = "css=#personalLastName"
+    FIRST_NAME_INPUT = "css=#billingAddress-personalFirstName"
+    LAST_NAME_INPUT = "css=#billingAddress-personalLastName"
     EMAIL_INPUT = "css=#personalMail"
-    
+
     # Adresse
-    STREET_INPUT = "css=#billingAddressAddressStreet"
+    STREET_INPUT = "css=#billingAddress-AddressStreet"
     ZIP_CODE_INPUT = "css=#billingAddressAddressZipcode"
     CITY_INPUT = "css=#billingAddressAddressCity"
     COUNTRY_SELECT = "css=#billingAddressAddressCountry"
@@ -79,10 +80,14 @@ class CheckoutPage(BasePage):
     # Versandarten
     SHIPPING_METHOD_RADIO = "css=input[name='shippingMethodId']"
     
-    # AGB & Bestellung
+    # Datenschutz (Register-Seite)
+    PRIVACY_CHECKBOX = "css=#acceptedDataProtection, input[name='acceptedDataProtection']"
+    CONTINUE_BUTTON = "button:has-text('Weiter')"
+
+    # AGB & Bestellung (Confirm-Seite)
     AGB_CHECKBOX = "css=#tos"
     REVOCATION_CHECKBOX = "css=#revocation"
-    SUBMIT_ORDER_BUTTON = "css=#confirmFormSubmit"
+    SUBMIT_ORDER_BUTTON = "css=#confirmFormSubmit, button:has-text('Kostenpflichtig bestellen')"
     
     # Bestätigungsseite
     ORDER_CONFIRMATION = "css=.finish-header, .checkout-finish"
@@ -94,7 +99,8 @@ class CheckoutPage(BasePage):
     
     def __init__(self, page: Page, base_url: str):
         super().__init__(page, base_url)
-        self.checkout_path = "/checkout/confirm"
+        self.checkout_path = "/checkout/register"  # Shopware 6 Checkout-Einstieg
+        self.checkout_confirm_path = "/checkout/confirm"
     
     # =========================================================================
     # Navigation
@@ -111,14 +117,31 @@ class CheckoutPage(BasePage):
     
     async def start_guest_checkout(self) -> None:
         """Startet den Gast-Checkout."""
+        # Primärer Selektor: "Als Gast bestellen" Button
         guest_button = self.page.locator(self.GUEST_CHECKOUT_BUTTON)
-        if await guest_button.is_visible():
+        if await guest_button.count() > 0 and await guest_button.is_visible():
             await guest_button.click()
+            # Warte auf Navigation zur Gast-Checkout-Seite oder Formular
+            await self.page.wait_for_load_state("domcontentloaded")
+            return
+
+        # Fallback: Collapse-Button (ältere Shopware-Versionen)
+        guest_button_alt = self.page.locator(self.GUEST_CHECKOUT_BUTTON_ALT)
+        if await guest_button_alt.count() > 0 and await guest_button_alt.is_visible():
+            await guest_button_alt.click()
             await self.page.locator(self.GUEST_CHECKOUT_FORM).wait_for(state="visible")
     
     async def fill_personal_data(self, address: Address) -> None:
         """Füllt die persönlichen Daten aus."""
-        await self.select_option(self.SALUTATION_SELECT, address.salutation)
+        # Anrede: Mapping von Kurzform zu deutschem Label
+        salutation_map = {
+            "mr": "Herr",
+            "mrs": "Frau",
+            "": "Keine Angabe",
+        }
+        salutation_label = salutation_map.get(address.salutation, address.salutation)
+        await self.select_option_by_label(self.SALUTATION_SELECT, salutation_label)
+
         await self.fill(self.FIRST_NAME_INPUT, address.first_name)
         await self.fill(self.LAST_NAME_INPUT, address.last_name)
         await self.fill(self.EMAIL_INPUT, address.email)
@@ -128,7 +151,15 @@ class CheckoutPage(BasePage):
         await self.fill(self.STREET_INPUT, address.street)
         await self.fill(self.ZIP_CODE_INPUT, address.zip_code)
         await self.fill(self.CITY_INPUT, address.city)
-        await self.select_option(self.COUNTRY_SELECT, address.country)
+
+        # Land: Mapping von ISO-Code zu deutschem Label
+        country_map = {
+            "AT": "Österreich",
+            "DE": "Deutschland",
+            "CH": "Schweiz",
+        }
+        country_label = country_map.get(address.country, address.country)
+        await self.select_option_by_label(self.COUNTRY_SELECT, country_label)
     
     async def fill_guest_address(self, address: Address) -> None:
         """Füllt alle Adressdaten für Gast-Checkout aus."""
@@ -161,29 +192,67 @@ class CheckoutPage(BasePage):
         # Alias zu Label übersetzen (falls method ein Alias ist)
         label = aliases.get(method, method)
 
-        # DOM-basierte Suche nach Label-Text
-        # Grüne Erde verwendet <label> mit class="payment-method-label" oder ähnlich
-        payment_labels = self.page.locator(
-            "label.payment-method-label, "
-            "label.payment-name, "
-            ".confirm-payment-method-label"
+        # Strategie 1: Container mit Text finden, der den Radio-Button enthält
+        # Shopware 6 verwendet verschiedene Strukturen für Zahlungsmethoden
+        selectors = [
+            # Shopware 6 Standard-Theme Selektoren
+            ".payment-method",
+            ".confirm-payment-method",
+            ".payment-methods .payment-method-item",
+            ".confirm-checkout-payment .payment-method",
+            # Label-basierte Selektoren
+            "label[for*='paymentMethod']",
+            ".payment-method-label",
+            # Fallback: Div/Container mit Radio-Button
+            "div:has(input[name='paymentMethodId'])",
+        ]
+
+        for selector in selectors:
+            containers = self.page.locator(selector)
+            if await containers.count() > 0:
+                # Nach Container mit passendem Text filtern
+                matching = containers.filter(has_text=label)
+                if await matching.count() > 0:
+                    # Radio-Button im Container finden und klicken
+                    radio = matching.first.locator("input[type='radio'], input[name='paymentMethodId']")
+                    if await radio.count() > 0:
+                        await radio.first.click()
+                        return
+                    # Falls kein Radio im Container, Container selbst klicken
+                    await matching.first.click()
+                    return
+
+        # Strategie 2: Direkt nach Radio-Button mit Label-Text suchen
+        # Suche nach allen Radio-Buttons und prüfe deren Labels
+        radios = self.page.locator("input[name='paymentMethodId']")
+        radio_count = await radios.count()
+
+        for i in range(radio_count):
+            radio = radios.nth(i)
+            radio_id = await radio.get_attribute("id")
+
+            if radio_id:
+                # Zugehöriges Label finden
+                label_elem = self.page.locator(f"label[for='{radio_id}']")
+                if await label_elem.count() > 0:
+                    label_text = await label_elem.text_content() or ""
+                    if label.lower() in label_text.lower():
+                        await radio.click()
+                        return
+
+            # Fallback: Parent-Element prüfen
+            parent = radio.locator("xpath=..")
+            parent_text = await parent.text_content() or ""
+            if label.lower() in parent_text.lower():
+                await radio.click()
+                return
+
+        # Wenn nichts gefunden, Fehler mit Debug-Info
+        raise ValueError(
+            f"Zahlungsart '{label}' nicht gefunden. "
+            f"Input: '{method}', verfügbare Aliases: {list(aliases.keys())}. "
+            f"Gefundene Radio-Buttons: {radio_count}"
         )
-
-        # Nach Label-Text filtern (case-insensitive, trimmed)
-        matching_label = payment_labels.filter(has_text=label)
-
-        # Prüfen ob gefunden
-        count = await matching_label.count()
-        if count == 0:
-            raise ValueError(
-                f"Zahlungsart '{label}' nicht gefunden. "
-                f"Input: '{method}', verfügbare Aliases: {list(aliases.keys())}"
-            )
-
-        # Zum Radio-Button navigieren und klicken
-        # Das <label> ist typischerweise mit einem <input type="radio"> verknüpft
-        radio_button = matching_label.first.locator("input[type='radio']")
-        await radio_button.click()
     
     async def get_selected_payment_method(self) -> Optional[str]:
         """Gibt die aktuell ausgewählte Zahlungsart zurück."""
@@ -258,54 +327,79 @@ class CheckoutPage(BasePage):
     # Kompletter Checkout-Flow
     # =========================================================================
     
+    async def accept_privacy_and_continue(self) -> None:
+        """Akzeptiert Datenschutz und klickt 'Weiter' zur Confirm-Seite."""
+        # Datenschutz-Checkbox akzeptieren
+        privacy = self.page.locator(self.PRIVACY_CHECKBOX)
+        if await privacy.count() > 0:
+            if not await privacy.first.is_checked():
+                await privacy.first.check()
+
+        # "Weiter"-Button klicken
+        continue_btn = self.page.locator(self.CONTINUE_BUTTON)
+        if await continue_btn.count() > 0:
+            await continue_btn.first.click()
+            # Warten auf Navigation zur Confirm-Seite
+            await self.page.wait_for_url("**/checkout/confirm**", timeout=30000)
+            await self.page.wait_for_load_state("domcontentloaded")
+
     async def execute_guest_checkout(
-        self, 
+        self,
         address: Address,
         payment_method: str = "invoice"
     ) -> CheckoutResult:
         """
         Führt einen kompletten Gast-Checkout durch.
-        
+
+        Shopware 6 zweistufiger Prozess:
+        1. /checkout/register - Adresse eingeben, Datenschutz
+        2. /checkout/confirm - Zahlungsart, AGB, Bestellen
+
         Args:
             address: Adressdaten für die Bestellung
             payment_method: Gewünschte Zahlungsart
-            
+
         Returns:
             CheckoutResult mit Erfolg/Misserfolg und Details
         """
         import time
         start_time = time.time()
-        
+
         try:
+            # === SCHRITT 1: Register-Seite ===
             # Gast-Checkout starten
             await self.start_guest_checkout()
-            
+
             # Adresse eingeben
             await self.fill_guest_address(address)
-            
+
+            # Datenschutz akzeptieren und "Weiter"
+            await self.accept_privacy_and_continue()
+
+            # === SCHRITT 2: Confirm-Seite ===
             # Zahlungsart wählen
             await self.select_payment_method(payment_method)
-            
+
             # AGB akzeptieren
             await self.accept_terms()
-            
+
             # Bestellung abschließen
             await self.place_order()
-            
+
             # Auf Bestätigung warten
             await self.wait_for_confirmation()
-            
+
             # Bestellinformationen sammeln
             order_number = await self.get_order_number()
             order_id = await self.get_order_id_from_url()
-            
+
             return CheckoutResult(
                 success=True,
                 order_id=order_id,
                 order_number=order_number,
                 duration_seconds=time.time() - start_time
             )
-            
+
         except Exception as e:
             error_msg = await self.get_error_message()
             return CheckoutResult(
