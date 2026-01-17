@@ -4,6 +4,11 @@
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@anthropic/superpower-tools@latest"]
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }
