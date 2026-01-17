@@ -5,6 +5,8 @@ profiles:
     parallel_workers: 5
     headless: true
     slow_mo: 0
+    HTACCESS_USER: grueneerde
+    HTACCESS_PASSWORD: IlyGn7WfMPElA7mu9iDrF36Q
     country_paths:
       AT: /
       DE: /de-de
