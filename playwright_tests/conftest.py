@@ -33,8 +33,9 @@ def accept_cookie_banner(page: Page, timeout: int = 3000) -> bool:
     """
     # Selektoren für verschiedene Cookie-Banner
     cookie_selectors = [
-        "#accept.uc-accept-button",  # Usercentrics
-        "button[data-action-type='accept']",  # Usercentrics alternativ
+        "button#accept",  # Usercentrics (primär)
+        "#accept",  # Usercentrics (alternativ)
+        "button[data-action-type='accept']",  # Usercentrics data-attribute
         ".js-cookie-accept-all-button",  # Shopware 6
         "[data-cookie-accept-all]",  # Shopware 6 alternativ
     ]
@@ -44,8 +45,14 @@ def accept_cookie_banner(page: Page, timeout: int = 3000) -> bool:
             button = page.locator(selector)
             if button.is_visible(timeout=timeout):
                 button.click()
-                # Kurz warten bis Banner verschwindet
-                page.wait_for_timeout(500)
+                # Warten bis Banner verschwindet
+                page.wait_for_timeout(1000)
+                # Prüfen ob Banner weg ist
+                banner = page.locator("#usercentrics-cmp-ui")
+                try:
+                    banner.wait_for(state="hidden", timeout=5000)
+                except Exception:
+                    pass  # Banner evtl. anders strukturiert
                 return True
         except Exception:
             continue
@@ -70,8 +77,9 @@ async def accept_cookie_banner_async(page, timeout: int = 3000) -> bool:
     """
     # Selektoren für verschiedene Cookie-Banner
     cookie_selectors = [
-        "#accept.uc-accept-button",  # Usercentrics
-        "button[data-action-type='accept']",  # Usercentrics alternativ
+        "button#accept",  # Usercentrics (primär)
+        "#accept",  # Usercentrics (alternativ)
+        "button[data-action-type='accept']",  # Usercentrics data-attribute
         ".js-cookie-accept-all-button",  # Shopware 6
         "[data-cookie-accept-all]",  # Shopware 6 alternativ
     ]
@@ -81,8 +89,14 @@ async def accept_cookie_banner_async(page, timeout: int = 3000) -> bool:
             button = page.locator(selector)
             if await button.is_visible(timeout=timeout):
                 await button.click()
-                # Kurz warten bis Banner verschwindet
-                await page.wait_for_timeout(500)
+                # Warten bis Banner verschwindet
+                await page.wait_for_timeout(1000)
+                # Prüfen ob Banner weg ist
+                banner = page.locator("#usercentrics-cmp-ui")
+                try:
+                    await banner.wait_for(state="hidden", timeout=5000)
+                except Exception:
+                    pass  # Banner evtl. anders strukturiert
                 return True
         except Exception:
             continue
