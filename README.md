@@ -277,6 +277,169 @@ Der Test:
 
 **Wichtig:** Test schlägt fehl, wenn eine erwartete Zahlungsart fehlt oder der Shop die Zahlungsarten geändert hat.
 
+---
+
+## Penetration Testing (Security Testing)
+
+⚠️ **WICHTIGER HINWEIS**: Penetration Tests dürfen **NUR auf autorisierten Systemen** durchgeführt werden!
+
+Dieses Projekt enthält eine umfassende Penetration Testing Suite für E-Commerce-Sicherheit.
+
+### Dokumentation
+
+Vollständige Dokumentation: [docs/penetration-testing-guide.md](docs/penetration-testing-guide.md)
+
+Die Dokumentation umfasst:
+- Einführung in Penetration Testing
+- OWASP Top 10 für E-Commerce
+- E-Commerce spezifische Angriffsvektoren
+- Implementierungsbeispiele mit Playwright
+- Best Practices & rechtliche Aspekte
+
+### Penetration Tests ausführen
+
+```bash
+# ALLE Penetration Tests (Vorsicht: Nur auf Test-Umgebungen!)
+pytest -m pentest
+
+# Nur Injection-Tests (SQL, XSS, Command)
+pytest -m injection
+
+# Nur Authentication Tests
+pytest -m auth
+
+# Nur Authorization & Access Control Tests
+pytest -m authz
+
+# Nur E-Commerce Business Logic Tests
+pytest -m business_logic
+
+# Nur Session Security Tests
+pytest -m session
+
+# Bestimmte Test-Datei
+pytest playwright_tests/tests/pentest/test_injection_attacks.py -v
+```
+
+### Test-Kategorien
+
+#### 1. Injection Attacks (`-m injection`)
+
+**Datei**: `playwright_tests/tests/pentest/test_injection_attacks.py`
+
+Tests für:
+- SQL Injection in Suchfeldern, Formularen
+- Cross-Site Scripting (XSS) in Checkout, Produktbewertungen
+- Command Injection in Datei-Operationen
+- Path Traversal in Downloads
+
+**Beispiel-Test:**
+```python
+@pytest.mark.pentest
+@pytest.mark.injection
+async def test_sql_injection_in_search(page: Page, base_url: str):
+    """Testet Produktsuche auf SQL Injection-Anfälligkeit."""
+```
+
+#### 2. Authentication Security (`-m auth`)
+
+**Datei**: `playwright_tests/tests/pentest/test_authentication.py`
+
+Tests für:
+- Brute-Force-Schutz
+- Schwache Passwort-Policies
+- Session Fixation
+- Username Enumeration
+- Default Credentials
+
+#### 3. Authorization & Access Control (`-m authz`)
+
+**Datei**: `playwright_tests/tests/pentest/test_authorization.py`
+
+Tests für:
+- IDOR (Insecure Direct Object References)
+- Privilege Escalation
+- Admin-Panel-Zugriff ohne Auth
+- API-Endpoint-Schutz
+- CORS-Fehlkonfigurationen
+
+#### 4. E-Commerce Business Logic (`-m business_logic`)
+
+**Datei**: `playwright_tests/tests/pentest/test_business_logic.py`
+
+Tests für:
+- **Price Manipulation** (Frontend & Backend)
+- **Negative Quantity Injection**
+- **Integer Overflow** bei Mengen
+- **Inventory Bypass** (ausverkaufte Produkte bestellen)
+- **Coupon Brute-Force**
+- **Payment Bypass**
+- **Race Conditions** (z.B. Einmal-Gutscheine mehrfach verwenden)
+
+**Beispiel-Test:**
+```python
+@pytest.mark.pentest
+@pytest.mark.business_logic
+async def test_price_manipulation_frontend(page: Page, base_url: str):
+    """Testet Price Manipulation via Frontend (DevTools/JavaScript)."""
+```
+
+#### 5. Session Security (`-m session`)
+
+**Datei**: `playwright_tests/tests/pentest/test_session_security.py`
+
+Tests für:
+- Sichere Cookie-Attribute (HttpOnly, Secure, SameSite)
+- Session-ID-Komplexität
+- CSRF-Token-Validierung
+- Session Hijacking
+- Clickjacking-Schutz
+- Security Headers (CSP, HSTS, X-Frame-Options)
+- HTTPS-Only Enforcement
+
+### Best Practices für Penetration Tests
+
+1. **Autorisierung**: Immer schriftliche Genehmigung einholen
+2. **Nur Test-Umgebungen**: Niemals auf Produktions-Systemen ohne explizite Erlaubnis
+3. **Regelmäßige Ausführung**: In CI/CD-Pipeline integrieren (nur Staging)
+4. **Dokumentation**: Gefundene Vulnerabilities sofort melden
+
+### CI/CD Integration
+
+```yaml
+# .github/workflows/security-tests.yml
+jobs:
+  security-tests:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.base_ref == 'staging'
+    steps:
+      - name: Run Penetration Tests
+        run: pytest -m pentest
+        env:
+          SHOP_BASE_URL: ${{ secrets.STAGING_URL }}
+```
+
+**Wichtig**: Penetration Tests sollten **NICHT** auf Produktions-Umgebungen in CI/CD ausgeführt werden!
+
+### Payload-Sammlung
+
+Wiederverwendbare Attack-Payloads: `playwright_tests/utils/pentest_payloads.py`
+
+Enthält:
+- SQL Injection Payloads
+- XSS Payloads
+- Command Injection Payloads
+- Path Traversal Payloads
+- E-Commerce spezifische Payloads (Price Manipulation, Coupon Codes)
+
+### Weiterführende Ressourcen
+
+- **OWASP Top 10**: https://owasp.org/www-project-top-ten/
+- **OWASP Testing Guide**: https://owasp.org/www-project-web-security-testing-guide/
+- **PortSwigger Web Security Academy**: https://portswigger.net/web-security
+
+---
+
 ## Test-Szenarien
 
 ### Massentest: Bestellungen
