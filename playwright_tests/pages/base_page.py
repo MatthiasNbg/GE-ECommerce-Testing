@@ -61,20 +61,70 @@ class BasePage:
     # Cookie-Banner
     # =========================================================================
 
-    async def accept_cookies_if_visible(self) -> None:
-        """Akzeptiert das Cookie-Banner, falls sichtbar."""
+    async def accept_cookies_if_visible(self, timeout: int = 5000) -> bool:
+        """
+        Akzeptiert das Cookie-Banner, falls sichtbar.
+
+        Unterstützt Usercentrics (mit Shadow DOM) und Shopware 6 Standard-Banner.
+
+        Returns:
+            True wenn Banner akzeptiert wurde, False wenn nicht vorhanden
+        """
+        # Warten bis Seite vollständig geladen ist
+        await self.page.wait_for_load_state("networkidle")
+
+        # Kurz warten, damit Usercentrics-Banner Zeit hat zu erscheinen
+        await self.page.wait_for_timeout(2000)
+
+        # Methode 1: Usercentrics Shadow DOM - per JavaScript klicken
         try:
-            accept_button = self.page.locator(self.COOKIE_ACCEPT_BUTTON)
-            if await accept_button.is_visible(timeout=2000):
-                await accept_button.click()
-                # Warten bis Banner verschwindet
-                await self.page.locator(self.COOKIE_BANNER).wait_for(
-                    state="hidden",
-                    timeout=5000
-                )
-        except Exception:
-            # Cookie-Banner nicht vorhanden oder bereits akzeptiert
+            clicked = await self.page.evaluate("""
+                () => {
+                    // Usercentrics Banner im Shadow DOM finden
+                    const ucBanner = document.querySelector('#usercentrics-cmp-ui');
+                    if (ucBanner && ucBanner.shadowRoot) {
+                        const acceptBtn = ucBanner.shadowRoot.querySelector('button#accept, button[data-action-type="accept"], .uc-accept-button');
+                        if (acceptBtn) {
+                            acceptBtn.click();
+                            return true;
+                        }
+                    }
+                    // Fallback: Button direkt im DOM (ohne Shadow DOM)
+                    const directBtn = document.querySelector('button#accept, button[data-action-type="accept"]');
+                    if (directBtn) {
+                        directBtn.click();
+                        return true;
+                    }
+                    return false;
+                }
+            """)
+            if clicked:
+                print("   Cookie-Banner akzeptiert (via Shadow DOM)")
+                await self.page.wait_for_timeout(1500)
+                return True
+        except Exception as e:
             pass
+
+        # Methode 2: Shopware 6 Standard-Banner (kein Shadow DOM)
+        cookie_selectors = [
+            ".js-cookie-accept-all-button",  # Shopware 6
+            "[data-cookie-accept-all]",  # Shopware 6 alternativ
+        ]
+
+        for selector in cookie_selectors:
+            try:
+                button = self.page.locator(selector)
+                if await button.count() > 0:
+                    if await button.first.is_visible(timeout=timeout):
+                        print(f"   Cookie-Banner gefunden: {selector}")
+                        await button.first.click()
+                        await self.page.wait_for_timeout(1500)
+                        return True
+            except Exception:
+                continue
+
+        print("   Kein Cookie-Banner gefunden")
+        return False
 
     # =========================================================================
     # Formular-Interaktionen

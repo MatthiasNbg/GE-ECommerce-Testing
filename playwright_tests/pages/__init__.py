@@ -5,5 +5,13 @@ Jede Seite wird als Klasse mit Selektoren und Interaktionsmethoden abgebildet.
 """
 from .base_page import BasePage
 from .checkout_page import Address, CheckoutPage, CheckoutResult
+from .account_page import AccountPage, RegistrationData
 
-__all__ = ["BasePage", "CheckoutPage", "Address", "CheckoutResult"]
+__all__ = [
+    "BasePage",
+    "CheckoutPage",
+    "Address",
+    "CheckoutResult",
+    "AccountPage",
+    "RegistrationData",
+]

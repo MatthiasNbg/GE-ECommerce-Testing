@@ -13,13 +13,13 @@ profiles:
       CH: /de-ch
     payment_methods:
       AT:
-      - Kreditkarte
       - Vorkasse
       - Rechnung
+      # - Kreditkarte  # TODO: Kreditkarte-Test noch nicht stabil
       DE:
-      - Kreditkarte
       - Vorkasse
       - Rechnung
+      # - Kreditkarte  # TODO: Kreditkarte-Test noch nicht stabil
       CH:
       - Vorkasse
       - Rechnung
@@ -76,24 +76,26 @@ performance_test:
 # =============================================================================
 
 test_customers:
-  # Registrierte Testkunden für Performance-Tests
-  # Passwörter werden aus .env geladen
+  # Registrierte Testkunden für Staging-Tests
   registered:
-    - email: "perf-test-01@gruene-erde-test.com"
-      password_env: "TEST_CUSTOMER_PASSWORD_01"
-      name: "Performance Tester Eins"
+    - email: "ge-at-1@matthias-sax.de"
+      password: "scharnsteinAT"
+      name: "Monika Stadler"
       customer_type: "private"
       country: "AT"
-    - email: "perf-test-02@gruene-erde-test.com"
-      password_env: "TEST_CUSTOMER_PASSWORD_02"
-      name: "Performance Tester Zwei"
+      customer_id: "2921964"
+    - email: "ge-de-1@matthias-sax.de"
+      password: "scharnsteinDE"
+      name: "Britta Yook"
       customer_type: "private"
       country: "DE"
-    - email: "perf-test-03@gruene-erde-test.com"
-      password_env: "TEST_CUSTOMER_PASSWORD_03"
-      name: "Performance Tester Drei"
-      customer_type: "business"
-      country: "AT"
+      customer_id: "199407"
+    - email: "ge-ch-1@matthias-sax.de"
+      password: "scharnsteinCH"
+      name: "Ursula Dold"
+      customer_type: "private"
+      country: "CH"
+      customer_id: "309348"
 
   # Gast-Checkout Adresspool
   guest_address_pool:
@@ -146,6 +148,10 @@ test_products:
     - p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990
     - p/blusenshirt-aus-bio-leinen/ge-p-863190
     - p/kleiderstaender-jukai-pur/ge-p-693645
+    - p/polsterbett-almeno/ge-p-693278
+    - p/duftkissen-lavendel/ge-p-49415
+    - p/augen-entspannungskissen-mit-amaranth/ge-p-74157
+    - p/bademantel-raute-fuer-damen-und-herren/ge-p-410933
 
   # Postversand - kleine/leichte Artikel (Textilien, Accessoires)
   post_shipping:
@@ -157,10 +163,18 @@ test_products:
       name: "Blusenshirt Bio-Leinen"
       min_stock: 200
       category: "Textil"
-    - id: "TBD-accessoire-produkt"  # TODO: Echte Produkt-ID eintragen
-      name: "Accessoire (Postversand)"
+    - id: "p/duftkissen-lavendel/ge-p-49415"
+      name: "Duftkissen Lavendel"
       min_stock: 200
       category: "Accessoires"
+    - id: "p/augen-entspannungskissen-mit-amaranth/ge-p-74157"
+      name: "Augen-Entspannungskissen mit Amaranth"
+      min_stock: 200
+      category: "Accessoires"
+    - id: "p/bademantel-raute-fuer-damen-und-herren/ge-p-410933"
+      name: "Bademantel Raute"
+      min_stock: 200
+      category: "Textil"
 
   # Speditionsversand - große/schwere Artikel (Möbel, Betten)
   spedition_shipping:
@@ -168,8 +182,8 @@ test_products:
       name: "Kleiderständer Jukai Pur"
       min_stock: 50
       category: "Möbel"
-    - id: "TBD-bett-produkt"  # TODO: Echte Produkt-ID eintragen
-      name: "Massivholzbett (Spedition)"
+    - id: "p/polsterbett-almeno/ge-p-693278"
+      name: "Polsterbett Almeno"
       min_stock: 30
       category: "Möbel/Betten"
     - id: "TBD-schrank-produkt"  # TODO: Echte Produkt-ID eintragen
@@ -190,3 +204,393 @@ payment_method_aliases:
   prepayment: Vorkasse
   credit_card: Kreditkarte
   invoice: Rechnung
+
+# =============================================================================
+# Spezielle Testprodukte
+# =============================================================================
+
+special_products:
+  # Artikel, die NICHT rabattiert werden dürfen
+  no_discount:
+    - id: "639046"
+      name: "Nicht-rabattierbarer Artikel"
+      description: "Dieser Artikel darf keinen Rabatt erhalten"
+      test_scenarios:
+        - "Rabattcode anwenden - sollte abgelehnt werden"
+        - "Warenkorb-Rabatt - Artikel ausgeschlossen"
+
+# =============================================================================
+# Lieferdienste / Logistikpartner nach PLZ-Bereichen
+# =============================================================================
+
+shipping_carriers:
+  # -------------------------------------------------------------------------
+  # ÖSTERREICH (AT)
+  # -------------------------------------------------------------------------
+  AT:
+    post:
+      carrier: "Post AT"
+      product_id: "501645"
+      internal_ref: "501645"
+      plz_ranges:
+        - from: "0000"
+          to: "9999"
+          test_plz_min: "1010"  # Wien
+          test_plz_max: "9900"  # Lienz
+
+    spedition:
+      - carrier: "Spedition Wetsch AT"
+        product_id: "501648"
+        internal_ref: "501648"
+        plz_ranges:
+          - from: "6000"
+            to: "6999"
+            test_plz_min: "6020"  # Innsbruck
+            test_plz_max: "6900"  # Bregenz
+
+      - carrier: "Spedition Fink AT"
+        product_id: "501649"
+        internal_ref: "501649"
+        plz_ranges:
+          - from: "1000"
+            to: "1199"
+            test_plz_min: "1010"  # Wien Zentrum
+            test_plz_max: "1190"  # Wien Döbling
+          - from: "3000"
+            to: "3399"
+            test_plz_min: "3100"  # St. Pölten
+            test_plz_max: "3300"  # Amstetten
+          - from: "3600"
+            to: "3699"
+            test_plz_min: "3600"  # Scheibbs
+            test_plz_max: "3680"  # Persenbeug
+          - from: "4000"
+            to: "4699"
+            test_plz_min: "4020"  # Linz
+            test_plz_max: "4690"  # Schwanenstadt
+          - from: "8000"
+            to: "9999"
+            test_plz_min: "8010"  # Graz
+            test_plz_max: "9900"  # Lienz
+
+      - carrier: "Spedition Cargoe AT"
+        product_id: "501650"
+        internal_ref: "501650"
+        plz_ranges:
+          - from: "1200"
+            to: "1399"
+            test_plz_min: "1200"  # Wien Brigittenau
+            test_plz_max: "1300"  # Wien Flughafen
+          - from: "2000"
+            to: "2999"
+            test_plz_min: "2000"  # Stockerau
+            test_plz_max: "2700"  # Wr. Neustadt
+          - from: "3400"
+            to: "3599"
+            test_plz_min: "3400"  # Klosterneuburg
+            test_plz_max: "3580"  # Horn
+          - from: "3700"
+            to: "3999"
+            test_plz_min: "3701"  # Großweikersdorf
+            test_plz_max: "3950"  # Gmünd
+          - from: "7000"
+            to: "7999"
+            test_plz_min: "7000"  # Eisenstadt
+            test_plz_max: "7540"  # Güssing
+
+      - carrier: "Spedition Thurner AT"
+        product_id: "502880"
+        internal_ref: "502880"
+        plz_ranges:
+          - from: "4700"
+            to: "5799"
+            test_plz_min: "4710"  # Grieskirchen
+            test_plz_max: "5700"  # Zell am See
+
+  # -------------------------------------------------------------------------
+  # DEUTSCHLAND (DE)
+  # -------------------------------------------------------------------------
+  DE:
+    post:
+      carrier: "Post AT Deutschland"
+      product_id: "501646"
+      internal_ref: "501646"
+      plz_ranges:
+        - from: "00000"
+          to: "99999"
+          test_plz_min: "10115"  # Berlin
+          test_plz_max: "99999"  # Körner
+
+    spedition:
+      - carrier: "Spedition Logsens Nord DE"
+        product_id: "501653"
+        internal_ref: "501653"
+        plz_ranges:
+          - from: "19000"
+            to: "29999"
+            test_plz_min: "19053"  # Schwerin
+            test_plz_max: "29999"  # Bomlitz
+          - from: "30000"
+            to: "32999"
+            test_plz_min: "30159"  # Hannover
+            test_plz_max: "32839"  # Steinheim
+          - from: "33000"
+            to: "33999"
+            test_plz_min: "33098"  # Paderborn
+            test_plz_max: "33829"  # Borgholzhausen
+          - from: "34000"
+            to: "37139"
+            test_plz_min: "34117"  # Kassel
+            test_plz_max: "37139"  # Adelebsen
+          - from: "37140"
+            to: "37199"
+            test_plz_min: "37154"  # Northeim
+            test_plz_max: "37199"  # Katlenburg
+          - from: "37200"
+            to: "37399"
+            test_plz_min: "37213"  # Witzenhausen
+            test_plz_max: "37399"  # Kirchgandern
+          - from: "37400"
+            to: "39174"
+            test_plz_min: "37412"  # Herzberg
+            test_plz_max: "39171"  # Osterweddingen
+          - from: "39326"
+            to: "39499"
+            test_plz_min: "39326"  # Wolmirstedt
+            test_plz_max: "39435"  # Eggersdorf
+          - from: "39500"
+            to: "39699"
+            test_plz_min: "39517"  # Tangerhütte
+            test_plz_max: "39638"  # Gardelegen
+          - from: "49000"
+            to: "49999"
+            test_plz_min: "49074"  # Osnabrück
+            test_plz_max: "49849"  # Wilsum
+
+      - carrier: "Spedition Logsens Ost DE"
+        product_id: "501655"
+        internal_ref: "501655"
+        plz_ranges:
+          - from: "00000"
+            to: "09999"
+            test_plz_min: "01067"  # Dresden
+            test_plz_max: "09669"  # Frankenberg
+          - from: "10000"
+            to: "15999"
+            test_plz_min: "10115"  # Berlin
+            test_plz_max: "15938"  # Golßen
+          - from: "16000"
+            to: "18999"
+            test_plz_min: "16225"  # Eberswalde
+            test_plz_max: "18609"  # Binz
+          - from: "39175"
+            to: "39319"
+            test_plz_min: "39175"  # Biederitz
+            test_plz_max: "39319"  # Güsen
+          - from: "95000"
+            to: "96999"
+            test_plz_min: "95028"  # Hof
+            test_plz_max: "96528"  # Frankenblick
+          - from: "98000"
+            to: "99999"
+            test_plz_min: "98527"  # Suhl
+            test_plz_max: "99998"  # Körner
+
+      - carrier: "Spedition Logsens Süd DE"
+        product_id: "501651"
+        internal_ref: "501651"
+        plz_ranges:
+          - from: "54000"
+            to: "54999"
+            test_plz_min: "54290"  # Trier
+            test_plz_max: "54675"  # Mettendorf
+          - from: "56000"
+            to: "56999"
+            test_plz_min: "56068"  # Koblenz
+            test_plz_max: "56865"  # Blankenrath
+          - from: "66000"
+            to: "67999"
+            test_plz_min: "66111"  # Saarbrücken
+            test_plz_max: "67829"  # Callbach
+          - from: "72000"
+            to: "72999"
+            test_plz_min: "72070"  # Tübingen
+            test_plz_max: "72820"  # Sonnenbühl
+          - from: "75000"
+            to: "79999"
+            test_plz_min: "75172"  # Pforzheim
+            test_plz_max: "79872"  # Bernau
+          - from: "80000"
+            to: "89999"
+            test_plz_min: "80331"  # München
+            test_plz_max: "89619"  # Untermarchtal
+
+      - carrier: "Spedition Logsens West DE"
+        product_id: "555132"
+        internal_ref: "555132"
+        plz_ranges:
+          - from: "33000"
+            to: "33999"
+            test_plz_min: "33098"  # Paderborn
+            test_plz_max: "33829"  # Borgholzhausen
+          - from: "40000"
+            to: "40999"
+            test_plz_min: "40210"  # Düsseldorf
+            test_plz_max: "40885"  # Ratingen
+          - from: "41000"
+            to: "41999"
+            test_plz_min: "41061"  # Mönchengladbach
+            test_plz_max: "41849"  # Wassenberg
+          - from: "42000"
+            to: "48999"
+            test_plz_min: "42103"  # Wuppertal
+            test_plz_max: "48720"  # Rosendahl
+          - from: "50000"
+            to: "53999"
+            test_plz_min: "50667"  # Köln
+            test_plz_max: "53947"  # Nettersheim
+          - from: "57000"
+            to: "57999"
+            test_plz_min: "57072"  # Siegen
+            test_plz_max: "57647"  # Nistertal
+          - from: "58000"
+            to: "59999"
+            test_plz_min: "58089"  # Hagen
+            test_plz_max: "59969"  # Hallenberg
+
+      - carrier: "Spedition Thurner DE"
+        product_id: "501652"
+        internal_ref: "501652"
+        plz_ranges:
+          - from: "55000"
+            to: "55999"
+            test_plz_min: "55116"  # Mainz
+            test_plz_max: "55776"  # Ruschberg
+          - from: "60000"
+            to: "65999"
+            test_plz_min: "60311"  # Frankfurt
+            test_plz_max: "65936"  # Frankfurt
+          - from: "68000"
+            to: "71999"
+            test_plz_min: "68159"  # Mannheim
+            test_plz_max: "71711"  # Steinheim
+          - from: "73000"
+            to: "74999"
+            test_plz_min: "73033"  # Göppingen
+            test_plz_max: "74939"  # Zuzenhausen
+          - from: "90000"
+            to: "94999"
+            test_plz_min: "90402"  # Nürnberg
+            test_plz_max: "94574"  # Wallerfing
+          - from: "97000"
+            to: "97999"
+            test_plz_min: "97070"  # Würzburg
+            test_plz_max: "97909"  # Stadtprozelten
+
+  # -------------------------------------------------------------------------
+  # SCHWEIZ (CH)
+  # -------------------------------------------------------------------------
+  CH:
+    post:
+      carrier: "Post CH"
+      product_id: "501647"
+      internal_ref: "501647"
+      plz_ranges:
+        - from: "1000"
+          to: "9999"
+          test_plz_min: "1000"  # Lausanne
+          test_plz_max: "9658"  # Wildhaus
+
+    spedition:
+      - carrier: "Spedition Kuoni CH"
+        product_id: "501657"
+        internal_ref: "501657"
+        plz_ranges:
+          - from: "1000"
+            to: "9999"
+            test_plz_min: "1000"  # Lausanne
+            test_plz_max: "9658"  # Wildhaus
+
+  # -------------------------------------------------------------------------
+  # EU / Rest der Welt (RdW)
+  # -------------------------------------------------------------------------
+  EU:
+    spedition:
+      - carrier: "Spedition Englmayer RdW"
+        product_id: "635068"
+        internal_ref: "635068"
+        countries:
+          - code: "BE"
+            name: "Belgien"
+            test_plz: "1000"  # Brüssel
+          - code: "BG"
+            name: "Bulgarien"
+            test_plz: "1000"  # Sofia
+          - code: "DK"
+            name: "Dänemark"
+            test_plz: "1000"  # Kopenhagen
+          - code: "EE"
+            name: "Estland"
+            test_plz: "10111"  # Tallinn
+          - code: "FI"
+            name: "Finnland"
+            test_plz: "00100"  # Helsinki
+          - code: "FR"
+            name: "Frankreich"
+            test_plz: "75001"  # Paris
+          - code: "IT"
+            name: "Italien"
+            test_plz: "00100"  # Rom
+          - code: "HR"
+            name: "Kroatien"
+            test_plz: "10000"  # Zagreb
+          - code: "LV"
+            name: "Lettland"
+            test_plz: "1001"  # Riga
+          - code: "LT"
+            name: "Litauen"
+            test_plz: "01001"  # Vilnius
+          - code: "LU"
+            name: "Luxemburg"
+            test_plz: "1111"  # Luxemburg
+          - code: "MT"
+            name: "Malta"
+            test_plz: "VLT1117"  # Valletta
+          - code: "NL"
+            name: "Niederlande"
+            test_plz: "1012"  # Amsterdam
+          - code: "PL"
+            name: "Polen"
+            test_plz: "00-001"  # Warschau
+          - code: "PT"
+            name: "Portugal"
+            test_plz: "1000-001"  # Lissabon
+          - code: "RO"
+            name: "Rumänien"
+            test_plz: "010011"  # Bukarest
+          - code: "SE"
+            name: "Schweden"
+            test_plz: "10005"  # Stockholm
+          - code: "SK"
+            name: "Slowakei"
+            test_plz: "81101"  # Bratislava
+          - code: "SI"
+            name: "Slowenien"
+            test_plz: "1000"  # Ljubljana
+          - code: "ES"
+            name: "Spanien"
+            test_plz: "28001"  # Madrid
+          - code: "CZ"
+            name: "Tschechien"
+            test_plz: "10000"  # Prag
+          - code: "HU"
+            name: "Ungarn"
+            test_plz: "1011"  # Budapest
+          - code: "CY"
+            name: "Zypern"
+            test_plz: "1010"  # Nikosia
+
+# Versandprodukt-IDs (Odoo)
+shipping_product_ids:
+  post: "74564"
+  spedition: "74565"

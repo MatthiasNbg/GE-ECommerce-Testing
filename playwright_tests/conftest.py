@@ -182,6 +182,8 @@ def shop_config(config: TestConfig) -> dict:
         "payment_methods": getattr(config, 'payment_methods', {}),
         "payment_method_aliases": getattr(config, 'payment_method_aliases', {}),
         "country": "AT",
+        "htaccess_user": config.htaccess_user,
+        "htaccess_password": config.htaccess_password,
     }
 
 
@@ -234,11 +236,22 @@ def products(request, config: TestConfig) -> list[str]:
 # =============================================================================
 
 @pytest.fixture(scope="session")
-def browser_type_launch_args(config: TestConfig) -> dict:
+def browser_type_launch_args(request, config: TestConfig) -> dict:
     """Browser-Launch-Argumente für pytest-playwright."""
+    # CLI --headed überschreibt Konfiguration
+    headless = config.headless
+    if request.config.getoption("--headed", default=False):
+        headless = False
+
+    # CLI --slowmo überschreibt Konfiguration
+    slow_mo = config.slow_mo
+    cli_slowmo = request.config.getoption("--slowmo", default=None)
+    if cli_slowmo is not None:
+        slow_mo = int(cli_slowmo)
+
     return {
-        "headless": config.headless,
-        "slow_mo": config.slow_mo,
+        "headless": headless,
+        "slow_mo": slow_mo,
     }
 
 

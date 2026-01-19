@@ -517,16 +517,6 @@ def create_html_document(md_file: Path, output_file: Path):
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Test-Konzept: Grüne Erde E-Commerce Shop</h1>
-            <div class="metadata">
-                <div><strong>Projekt:</strong> GE-ECommerce-Testing</div>
-                <div><strong>Datum:</strong> 2026-01-16</div>
-                <div><strong>Version:</strong> 1.0</div>
-                <div><strong>Status:</strong> Entwurf zur Abstimmung</div>
-            </div>
-        </header>
-
         <main>
             {body_html}
         </main>

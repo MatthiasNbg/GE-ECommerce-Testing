@@ -53,10 +53,12 @@ class PerformanceTestConfig(BaseModel):
 class TestCustomer(BaseModel):
     """Konfiguration für einen Testkunden."""
     email: str
-    password_env: str = ""
+    password: str = ""  # Direktes Passwort
+    password_env: str = ""  # Oder aus Umgebungsvariable
     name: str = ""
     customer_type: str = "private"
     country: str = "AT"
+    customer_id: str = ""  # Shopware Kunden-ID
 
 
 class CityZip(BaseModel):
@@ -183,10 +185,21 @@ class TestConfig(BaseSettings):
         return None
 
     def get_customer_password(self, customer: TestCustomer) -> str:
-        """Lädt das Passwort eines Kunden aus der Umgebungsvariable."""
+        """Lädt das Passwort eines Kunden (direkt oder aus Umgebungsvariable)."""
+        # Direktes Passwort hat Vorrang
+        if customer.password:
+            return customer.password
+        # Fallback auf Umgebungsvariable
         if customer.password_env:
             return os.environ.get(customer.password_env, "")
         return ""
+
+    def get_customer_by_country(self, country: str) -> TestCustomer | None:
+        """Gibt einen Testkunden nach Land zurück."""
+        for customer in self.test_customers.registered:
+            if customer.country == country:
+                return customer
+        return None
 
     # Secrets (aus .env)
     test_customer_email: str = Field(default="", alias="TEST_CUSTOMER_EMAIL")

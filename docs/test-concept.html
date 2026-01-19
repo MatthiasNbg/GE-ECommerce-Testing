@@ -350,21 +350,11 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Test-Konzept: Grüne Erde E-Commerce Shop</h1>
-            <div class="metadata">
-                <div><strong>Projekt:</strong> GE-ECommerce-Testing</div>
-                <div><strong>Datum:</strong> 2026-01-17</div>
-                <div><strong>Version:</strong> 1.1</div>
-                <div><strong>Status:</strong> Performance-Tests implementiert</div>
-            </div>
-        </header>
-
         <main>
             <h1 id="test-konzept-gruene-erde-e-commerce-shop">Test-Konzept: Grüne Erde E-Commerce Shop</h1>
 
 <strong>Projekt:</strong> GE-ECommerce-Testing
-<strong>Datum:</strong> 2026-01-16
+<strong>Datum:</strong> 2026-01-19
 <strong>Version:</strong> 1.0
 <strong>Status:</strong> Entwurf zur Abstimmung
 
@@ -372,16 +362,16 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>81-101 Testfällen</strong> in 10 Kategorien. </p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~9%</strong>.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>115 Testfällen</strong> in 10 Kategorien. </p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~20%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Basis-Tests (Smoke: 5/5) implementiert</li>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (3/8)</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (5/9)</li>
 </ul>
 <ul>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (1/38 implementiert)</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (11/128 implementiert - Account 10/8, Suche 1/6)</li>
 </ul>
 <strong>Prioritäten:</strong>
 <ol>
@@ -415,8 +405,8 @@
 </tr>
 <tr>
 <td>🛒 **Critical Path Tests**</td>
-<td>8</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 3/8</td>
+<td>9</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 5/9</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
 <td>Gast-Checkout, Registrierter Checkout, Zahlungsarten</td>
 </tr>
@@ -437,16 +427,16 @@
 <tr>
 <td>👤 **Feature Tests - Account**</td>
 <td>8</td>
-<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 10/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Registrierung, Login, Profil, Adressen</td>
 </tr>
 <tr>
 <td>📦 **Feature Tests - Versandarten**</td>
-<td>8</td>
-<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
-<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
-<td>Post, Spedi, Abholung, Versandkosten</td>
+<td>98</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/98</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Post, Spedition, PLZ-Bereiche, Logistikpartner</td>
 </tr>
 <tr>
 <td>🎟️ **Feature Tests - Promotions**</td>
@@ -476,13 +466,6 @@
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Load-Tests, Response-Zeiten, Race Conditions</td>
 </tr>
-<tr>
-<td>🚀 **Performance Tests**</td>
-<td>3</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span> 3/3</td>
-<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
-<td>150 Bestellungen, Stress-Test, Multi-Szenario</td>
-</tr>
 </tbody></table></div>
 <strong>Legende:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Vollständig | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
 
@@ -498,12 +481,11 @@
 <li><a href="#cart">Feature Tests - Warenkorb</a> - (8 Tests)</li>
 <li><a href="#search">Feature Tests - Suche</a> - (6 Tests)</li>
 <li><a href="#account">Feature Tests - Account</a> - (8 Tests)</li>
-<li><a href="#shipping">Feature Tests - Versandarten</a> - (8 Tests)</li>
+<li><a href="#shipping">Feature Tests - Versandarten</a> - (98 Tests)</li>
 <li><a href="#promotions">Feature Tests - Promotions</a> - (8 Tests)</li>
 <li><a href="#data-validation">Data Validation Tests</a> - (10 Tests)</li>
 <li><a href="#regression">Regression Tests</a> - (15-20 Tests)</li>
 <li><a href="#load">Load Tests</a> - (5 Tests)</li>
-<li><a href="#🚀-performance-tests">Performance Tests</a> - (3 Tests) <span class="badge badge-success">NEU</span></li>
 <li><a href="#implementierungs-roadmap">Implementierungs-Roadmap</a> - Welche Reihenfolge?</li>
 </ol>
 <hr>
@@ -512,21 +494,13 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 94 Tests
+<strong>Gesamt:</strong> 115 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 11</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 83</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 104</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li>**Abdeckung:** 12%</li>
+<li>**Abdeckung:** 10%</li>
 </ul>
-<div class="summary-box">
-<strong>Neu hinzugefügt:</strong> Performance-Tests für Staging (3 Tests)
-<ul>
-<li>150 Bestellungen Haupttest</li>
-<li>30 Bestellungen Quick-Test</li>
-<li>300 Bestellungen Stress-Test</li>
-</ul>
-</div>
 <hr>
 
 <h2 id="test-kategorien">Test-Kategorien</h2>
@@ -588,7 +562,7 @@
 <h3 id="🛒-critical-path-tests">🛒 Critical Path Tests</h3>
 
 <strong>Priorität:</strong> P0
-<strong>Tests:</strong> 3/8 implementiert
+<strong>Tests:</strong> 5/9 implementiert
 <strong>Beschreibung:</strong> Gast-Checkout, Registrierter Checkout, Zahlungsarten
 <strong>Dauer:</strong> 10-30 Min
 <strong>Ausführung:</strong> Vor jedem Deployment (Staging + Production)
@@ -605,28 +579,28 @@
 <td>TC-CRITICAL-001</td>
 <td>Gast-Checkout vollständig (AT)</td>
 <td>P0</td>
-<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT</td>
 </tr>
 <tr>
 <td>TC-CRITICAL-002</td>
 <td>Gast-Checkout vollständig (DE)</td>
 <td>P0</td>
-<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>DE</td>
 </tr>
 <tr>
 <td>TC-CRITICAL-003</td>
 <td>Gast-Checkout vollständig (CH)</td>
 <td>P0</td>
-<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>CH</td>
 </tr>
 <tr>
 <td>TC-CRITICAL-004</td>
 <td>Registrierter User Checkout</td>
 <td>P0</td>
-<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT</td>
 </tr>
 <tr>
@@ -654,8 +628,15 @@
 <td>TC-CRITICAL-008</td>
 <td>Warenkorb-Persistenz</td>
 <td>P1</td>
-<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CRITICAL-009</td>
+<td>Kreditkarten-Zahlung</td>
+<td>P0</td>
+<td><span class="badge badge-warning">⚠ Offen</span></td>
+<td>AT, DE</td>
 </tr>
 </tbody></table></div>
 <hr>
@@ -683,7 +664,7 @@
 <h3 id="👤-feature-tests---account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 0/8 implementiert
+<strong>Tests:</strong> 10/8 implementiert (Login parametrisiert für AT/DE/CH)
 <strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen
 <strong>Dauer:</strong> 10-20 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
@@ -692,12 +673,707 @@
 
 <h3 id="📦-feature-tests---versandarten">📦 Feature Tests - Versandarten</h3>
 
-<strong>Priorität:</strong> P2
-<strong>Tests:</strong> 0/8 implementiert
-<strong>Beschreibung:</strong> Post, Spedi, Abholung, Versandkosten
-<strong>Dauer:</strong> 10-20 Min
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/98 implementiert
+<strong>Beschreibung:</strong> Post, Spedition, PLZ-Bereiche, Logistikpartner
+<strong>Dauer:</strong> 30-60 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-SHIP-AT-POST-001</td>
+<td>Post AT - PLZ 0000-9999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-POST-002</td>
+<td>Post AT - PLZ 0000-9999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-WETSCH-001</td>
+<td>Wetsch AT - PLZ 6000-6999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-WETSCH-002</td>
+<td>Wetsch AT - PLZ 6000-6999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-001</td>
+<td>Fink AT - PLZ 1000-1199 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-002</td>
+<td>Fink AT - PLZ 1000-1199 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-003</td>
+<td>Fink AT - PLZ 3000-3399 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-004</td>
+<td>Fink AT - PLZ 3000-3399 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-005</td>
+<td>Fink AT - PLZ 3600-3699 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-006</td>
+<td>Fink AT - PLZ 3600-3699 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-007</td>
+<td>Fink AT - PLZ 4000-4699 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-008</td>
+<td>Fink AT - PLZ 4000-4699 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-009</td>
+<td>Fink AT - PLZ 8000-9999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-FINK-010</td>
+<td>Fink AT - PLZ 8000-9999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-001</td>
+<td>Cargoe AT - PLZ 1200-1399 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-002</td>
+<td>Cargoe AT - PLZ 1200-1399 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-003</td>
+<td>Cargoe AT - PLZ 2000-2999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-004</td>
+<td>Cargoe AT - PLZ 2000-2999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-005</td>
+<td>Cargoe AT - PLZ 3400-3599 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-006</td>
+<td>Cargoe AT - PLZ 3400-3599 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-007</td>
+<td>Cargoe AT - PLZ 3700-3999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-008</td>
+<td>Cargoe AT - PLZ 3700-3999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-009</td>
+<td>Cargoe AT - PLZ 7000-7999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-CARGO-010</td>
+<td>Cargoe AT - PLZ 7000-7999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-TH-001</td>
+<td>Thurner AT - PLZ 4700-5799 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-AT-TH-002</td>
+<td>Thurner AT - PLZ 4700-5799 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-POST-001</td>
+<td>Post DE - PLZ 00000-99999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-POST-002</td>
+<td>Post DE - PLZ 00000-99999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-001</td>
+<td>Logsens Nord - PLZ 19000-29999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-002</td>
+<td>Logsens Nord - PLZ 19000-29999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-003</td>
+<td>Logsens Nord - PLZ 30000-32999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-004</td>
+<td>Logsens Nord - PLZ 30000-32999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-005</td>
+<td>Logsens Nord - PLZ 34000-37139 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-006</td>
+<td>Logsens Nord - PLZ 34000-37139 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-007</td>
+<td>Logsens Nord - PLZ 37140-37199 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-008</td>
+<td>Logsens Nord - PLZ 37140-37199 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-009</td>
+<td>Logsens Nord - PLZ 37200-37399 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-010</td>
+<td>Logsens Nord - PLZ 37200-37399 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-011</td>
+<td>Logsens Nord - PLZ 37400-39174 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-012</td>
+<td>Logsens Nord - PLZ 37400-39174 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-013</td>
+<td>Logsens Nord - PLZ 39326-39499 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-014</td>
+<td>Logsens Nord - PLZ 39326-39499 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-015</td>
+<td>Logsens Nord - PLZ 39500-39699 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-016</td>
+<td>Logsens Nord - PLZ 39500-39699 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-017</td>
+<td>Logsens Nord - PLZ 49000-49999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LN-018</td>
+<td>Logsens Nord - PLZ 49000-49999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-001</td>
+<td>Logsens Ost - PLZ 00000-09999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-002</td>
+<td>Logsens Ost - PLZ 00000-09999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-003</td>
+<td>Logsens Ost - PLZ 10000-15999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-004</td>
+<td>Logsens Ost - PLZ 10000-15999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-005</td>
+<td>Logsens Ost - PLZ 16000-18999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-006</td>
+<td>Logsens Ost - PLZ 16000-18999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-007</td>
+<td>Logsens Ost - PLZ 39175-39319 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-008</td>
+<td>Logsens Ost - PLZ 39175-39319 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-009</td>
+<td>Logsens Ost - PLZ 95000-96999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-010</td>
+<td>Logsens Ost - PLZ 95000-96999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-011</td>
+<td>Logsens Ost - PLZ 98000-99999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LO-012</td>
+<td>Logsens Ost - PLZ 98000-99999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-001</td>
+<td>Logsens Süd - PLZ 54000-54999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-002</td>
+<td>Logsens Süd - PLZ 54000-54999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-003</td>
+<td>Logsens Süd - PLZ 56000-56999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-004</td>
+<td>Logsens Süd - PLZ 56000-56999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-005</td>
+<td>Logsens Süd - PLZ 66000-67999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-006</td>
+<td>Logsens Süd - PLZ 66000-67999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-007</td>
+<td>Logsens Süd - PLZ 72000-72999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-008</td>
+<td>Logsens Süd - PLZ 72000-72999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-009</td>
+<td>Logsens Süd - PLZ 75000-79999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-010</td>
+<td>Logsens Süd - PLZ 75000-79999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-011</td>
+<td>Logsens Süd - PLZ 80000-89999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LS-012</td>
+<td>Logsens Süd - PLZ 80000-89999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-001</td>
+<td>Logsens West - PLZ 33000-33999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-002</td>
+<td>Logsens West - PLZ 33000-33999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-003</td>
+<td>Logsens West - PLZ 41000-41999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-004</td>
+<td>Logsens West - PLZ 41000-41999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-005</td>
+<td>Logsens West - PLZ 42000-48999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-006</td>
+<td>Logsens West - PLZ 42000-48999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-007</td>
+<td>Logsens West - PLZ 50000-53999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-008</td>
+<td>Logsens West - PLZ 50000-53999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-009</td>
+<td>Logsens West - PLZ 57000-57999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-010</td>
+<td>Logsens West - PLZ 57000-57999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-011</td>
+<td>Logsens West - PLZ 58000-59999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-LW-012</td>
+<td>Logsens West - PLZ 58000-59999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-001</td>
+<td>Thurner DE - PLZ 55000-55999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-002</td>
+<td>Thurner DE - PLZ 55000-55999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-003</td>
+<td>Thurner DE - PLZ 60000-65999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-004</td>
+<td>Thurner DE - PLZ 60000-65999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-005</td>
+<td>Thurner DE - PLZ 68000-71999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-006</td>
+<td>Thurner DE - PLZ 68000-71999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-007</td>
+<td>Thurner DE - PLZ 73000-74999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-008</td>
+<td>Thurner DE - PLZ 73000-74999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-009</td>
+<td>Thurner DE - PLZ 90000-94999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-010</td>
+<td>Thurner DE - PLZ 90000-94999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-011</td>
+<td>Thurner DE - PLZ 97000-97999 Min</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-DE-TH-012</td>
+<td>Thurner DE - PLZ 97000-97999 Max</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-SHIP-CH-001</td>
+<td>Post CH - PLZ Min (1000)</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-SHIP-CH-002</td>
+<td>Post CH - PLZ Max (9658)</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-SHIP-CH-003</td>
+<td>Spedition Kuoni CH - PLZ Min (1000)</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-SHIP-CH-004</td>
+<td>Spedition Kuoni CH - PLZ Max (9658)</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>CH</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="🎟️-feature-tests---promotions">🎟️ Feature Tests - Promotions</h3>
@@ -708,6 +1384,22 @@
 <strong>Dauer:</strong> 10-20 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-001</td>
+<td>Nicht-rabattierbarer Artikel (639046)</td>
+<td>P1</td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="📊-data-validation-tests">📊 Data Validation Tests</h3>
@@ -738,105 +1430,36 @@
 <strong>Dauer:</strong> 30 Min - 4 Std
 <strong>Ausführung:</strong> Vor Releases, bei Performance-Änderungen
 
-<hr>
-
-<h3 id="🚀-performance-tests">🚀 Performance Tests (150 Bestellungen)</h3>
-
-<strong>Priorität:</strong> P1
-<strong>Tests:</strong> 3/3 implementiert
-<strong>Beschreibung:</strong> Massenbestellungen für Staging-Performance-Validierung
-<strong>Dauer:</strong> 10-30 Min
-<strong>Ausführung:</strong> Vor Releases, nach Infrastruktur-Änderungen
-
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
 <th>Name</th>
-<th>Bestellungen</th>
-<th>Parallelität</th>
+<th>Priorität</th>
 <th>Status</th>
+<th>Länder</th>
 </tr></thead><tbody>
 <tr>
 <td>TC-PERF-001</td>
 <td>Performance-Test 150 Bestellungen</td>
-<td>150</td>
-<td>15 Worker</td>
+<td>P2</td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
 </tr>
 <tr>
 <td>TC-PERF-002</td>
 <td>Performance Quick-Test</td>
-<td>30</td>
-<td>10 Worker</td>
+<td>P2</td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
 </tr>
 <tr>
 <td>TC-PERF-003</td>
 <td>Performance Stress-Test</td>
-<td>300</td>
-<td>25 Worker</td>
+<td>P2</td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
 </tr>
 </tbody></table></div>
-
-<h4>Bestellungsverteilung (150 Orders)</h4>
-<div class="table-wrapper"><table class="test-table">
-<thead><tr>
-<th>Szenario</th>
-<th>Anzahl</th>
-<th>Kundentyp</th>
-<th>Versandart</th>
-</tr></thead><tbody>
-<tr>
-<td>Standard Post</td>
-<td>60</td>
-<td>Gast</td>
-<td>Postversand</td>
-</tr>
-<tr>
-<td>Standard Spedition</td>
-<td>30</td>
-<td>Gast</td>
-<td>Speditionsversand</td>
-</tr>
-<tr>
-<td>Registriert Post</td>
-<td>30</td>
-<td>Registriert</td>
-<td>Postversand</td>
-</tr>
-<tr>
-<td>Registriert Spedition</td>
-<td>15</td>
-<td>Registriert</td>
-<td>Speditionsversand</td>
-</tr>
-<tr>
-<td>Multi-Produkt</td>
-<td>15</td>
-<td>Gast</td>
-<td>Gemischt</td>
-</tr>
-</tbody></table></div>
-
-<h4>Erfolgskriterien</h4>
-<ul>
-<li><strong>Erfolgsrate:</strong> ≥ 95%</li>
-<li><strong>Maximale Dauer:</strong> 15 Minuten für 150 Bestellungen</li>
-<li><strong>Durchsatz:</strong> ≥ 10 Orders/Minute</li>
-</ul>
-
-<h4>Ausführung</h4>
-<pre><code># Haupttest (150 Bestellungen)
-pytest -m performance playwright_tests/tests/test_performance.py::test_staging_performance_150_orders --profile=staging
-
-# Schnelltest (30 Bestellungen)
-pytest -m performance playwright_tests/tests/test_performance.py::test_staging_performance_quick --profile=staging
-
-# Stress-Test (300 Bestellungen)
-pytest -m performance playwright_tests/tests/test_performance.py::test_staging_performance_stress --profile=staging
-</code></pre>
-
 <hr>
 
 <h2 id="implementierungs-roadmap">Implementierungs-Roadmap</h2>
@@ -923,12 +1546,12 @@ pytest -m performance playwright_tests/tests/test_performance.py::test_staging_p
 <hr>
 
 
-<p>*Aktualisiert am 2026-01-17 - Performance-Tests hinzugefügt*</p>
+<p>*Generiert am 2026-01-19 13:38 aus test-inventory.yaml*</p>
 
         </main>
 
         <footer class="footer">
-            <p>Aktualisiert am 17.01.2026</p>
+            <p>Generiert am 19.01.2026 um 13:38 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
