@@ -32,19 +32,19 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:115:171:67 -->
+<!-- PROGRESS_BAR:120:171:70 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
 | 🏠 **Smoke Tests** | 5 | ✅ 5/5 | 🔴 P0 | Homepage, Produktseiten, Navigation |
 | 🛒 **Critical Path Tests** | 8 | ✅ 8/8 | 🔴 P0 | Gast-Checkout, Registrierter Checkout, Zahlungsarten |
 | 🛍️ **Feature Tests - Warenkorb** | 8 | ❌ 0/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
-| 🔍 **Feature Tests - Suche** | 6 | ❌ 0/6 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
+| 🔍 **Feature Tests - Suche** | 6 | ⚠️ 1/6 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
 | 👤 **Feature Tests - Account** | 8 | ❌ 0/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 8 | ⚠️ 1/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
-| 📊 **Data Validation Tests** | 10 | ❌ 0/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
-| 🔄 **Regression Tests** | 15 | ❌ 0/15 | 🟡 P2 | Regression-Tests nach Änderungen |
+| 📊 **Data Validation Tests** | 10 | ⚠️ 1/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
+| 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
 **Legende:** ✅ Vollständig | ⚠️ Teilweise | ❌ Fehlend
@@ -331,4 +331,4 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ---
 
 
-*Generiert am 2026-01-20 10:17 aus test-inventory.yaml*
+*Generiert am 2026-01-20 10:22 aus test-inventory.yaml*

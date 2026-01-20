@@ -211,7 +211,7 @@ def generate_markdown(inventory: dict, output_file: Path):
     md_lines.append("**Schnellübersicht: Was wird wo getestet?**\n")
     md_lines.append("### Nach Funktionsbereichen\n")
 
-    # Fortschrittsanzeige berechnen - zähle DEFINIERTE Tests (im YAML vorhanden)
+    # Fortschrittsanzeige berechnen
     total_planned = sum(c.get('count', 0) if isinstance(c.get('count', 0), int) else int(c.get('count', '0').split('-')[0]) for c in categories)
 
     # Zähle tatsächlich im YAML definierte Tests pro Kategorie
@@ -220,10 +220,17 @@ def generate_markdown(inventory: dict, output_file: Path):
         cat_id = test['category']
         defined_by_cat[cat_id] = defined_by_cat.get(cat_id, 0) + 1
 
-    total_defined = sum(defined_by_cat.values())
-    progress_percent = round(total_defined / total_planned * 100) if total_planned > 0 else 0
+    # Berechne Fortschritt pro Kategorie (max von defined und implemented)
+    total_progress = 0
+    for cat in categories:
+        cat_id = cat['id']
+        defined = defined_by_cat.get(cat_id, 0)
+        implemented = cat.get('implemented', 0)
+        total_progress += max(defined, implemented)
 
-    md_lines.append(f"<!-- PROGRESS_BAR:{total_defined}:{total_planned}:{progress_percent} -->")
+    progress_percent = round(total_progress / total_planned * 100) if total_planned > 0 else 0
+
+    md_lines.append(f"<!-- PROGRESS_BAR:{total_progress}:{total_planned}:{progress_percent} -->")
     md_lines.append("")
     md_lines.append("| Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |")
     md_lines.append("|------------------|-------|--------|-----------|-------------------|")
@@ -244,14 +251,18 @@ def generate_markdown(inventory: dict, output_file: Path):
 
         # Tatsächlich definierte Tests in dieser Kategorie
         defined = defined_by_cat.get(cat_id, 0)
+        # Fallback auf implemented aus Kategorie wenn keine Tests definiert
+        implemented = cat.get('implemented', 0)
+        # Verwende den höheren Wert
+        progress = max(defined, implemented)
 
-        # Status basierend auf definierten Tests
-        if defined >= count:
-            status_display = f"✅ {defined}/{count}"
-        elif defined > 0:
-            status_display = f"⚠️ {defined}/{count}"
+        # Status basierend auf Fortschritt
+        if progress >= count:
+            status_display = f"✅ {progress}/{count}"
+        elif progress > 0:
+            status_display = f"⚠️ {progress}/{count}"
         else:
-            status_display = f"❌ {defined}/{count}"
+            status_display = f"❌ {progress}/{count}"
 
         # Priorität-Icon
         prio_icon = "🔴" if priority == "P0" else "🟠" if priority == "P1" else "🟡"
