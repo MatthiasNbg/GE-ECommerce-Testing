@@ -25,6 +25,7 @@ def markdown_to_html(md_content: str) -> str:
     md_content = md_content.replace('⚠️', '<span class="badge badge-warning">⚠ Teilweise</span>')
     md_content = md_content.replace('❌', '<span class="badge badge-error">✗ Fehlend</span>')
     md_content = md_content.replace('⏳', '<span class="badge badge-pending">⏳ Offen</span>')
+    md_content = md_content.replace('○', '<span class="badge badge-defined">○ Definiert</span>')
 
     # Ersetze Prioritäten mit Badges
     md_content = md_content.replace('🔴 P0', '<span class="badge badge-priority-p0">P0 Kritisch</span>')
@@ -328,6 +329,11 @@ def create_html_document(md_file: Path, output_file: Path):
 
         .badge-pending {{
             background: #6c757d;
+            color: white;
+        }}
+
+        .badge-defined {{
+            background: #17a2b8;
             color: white;
         }}
 

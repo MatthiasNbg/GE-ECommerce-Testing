@@ -269,7 +269,7 @@ def generate_markdown(inventory: dict, output_file: Path):
 
         md_lines.append(f"| {icon} **{name}** | {count} | {status_display} | {prio_icon} {priority} | {desc} |")
 
-    md_lines.append("\n**Legende:** ✅ Vollständig | ⚠️ Teilweise | ❌ Fehlend\n")
+    md_lines.append("\n**Legende:** ✅ Implementiert | ○ Definiert | ⚠️ Teilweise | ❌ Fehlend\n")
     md_lines.append("---\n")
 
     # Inhaltsverzeichnis
@@ -338,7 +338,8 @@ def generate_markdown(inventory: dict, output_file: Path):
                 status = test.get('status', 'missing')
                 countries = ', '.join(test.get('countries', []))
 
-                status_icon = "✅" if status == 'implemented' else "⚠️" if status == 'partial' else "❌"
+                # Tests im YAML sind "definiert", nicht "fehlend"
+                status_icon = "✅" if status == 'implemented' else "⚠️" if status == 'partial' else "○"
 
                 md_lines.append(f"| {test_id} | {name} | {priority} | {status_icon} | {countries} |")
 

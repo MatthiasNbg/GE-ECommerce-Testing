@@ -47,7 +47,7 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
-**Legende:** ✅ Vollständig | ⚠️ Teilweise | ❌ Fehlend
+**Legende:** ✅ Implementiert | ○ Definiert | ⚠️ Teilweise | ❌ Fehlend
 
 ---
 
@@ -111,14 +111,14 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
-| TC-CRITICAL-001 | Gast-Checkout vollständig (AT) | P0 | ❌ | AT |
-| TC-CRITICAL-002 | Gast-Checkout vollständig (DE) | P0 | ❌ | DE |
-| TC-CRITICAL-003 | Gast-Checkout vollständig (CH) | P0 | ❌ | CH |
-| TC-CRITICAL-004 | Registrierter User Checkout | P0 | ❌ | AT |
+| TC-CRITICAL-001 | Gast-Checkout vollständig (AT) | P0 | ○ | AT |
+| TC-CRITICAL-002 | Gast-Checkout vollständig (DE) | P0 | ○ | DE |
+| TC-CRITICAL-003 | Gast-Checkout vollständig (CH) | P0 | ○ | CH |
+| TC-CRITICAL-004 | Registrierter User Checkout | P0 | ○ | AT |
 | TC-CRITICAL-005 | Zahlungsarten verfügbar (AT) | P0 | ✅ | AT |
 | TC-CRITICAL-006 | Zahlungsarten verfügbar (DE) | P0 | ✅ | DE |
 | TC-CRITICAL-007 | Zahlungsarten verfügbar (CH) | P0 | ✅ | CH |
-| TC-CRITICAL-008 | Warenkorb-Persistenz | P1 | ❌ | AT, DE, CH |
+| TC-CRITICAL-008 | Warenkorb-Persistenz | P1 | ○ | AT, DE, CH |
 
 ---
 
@@ -162,104 +162,104 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
-| TC-SHIP-AT-POST-001 | Post AT - PLZ 0000-9999 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-POST-002 | Post AT - PLZ 0000-9999 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-WETSCH-001 | Wetsch AT - PLZ 6000-6999 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-WETSCH-002 | Wetsch AT - PLZ 6000-6999 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-001 | Fink AT - PLZ 1000-1199 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-002 | Fink AT - PLZ 1000-1199 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-003 | Fink AT - PLZ 3000-3399 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-004 | Fink AT - PLZ 3000-3399 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-005 | Fink AT - PLZ 3600-3699 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-006 | Fink AT - PLZ 3600-3699 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-007 | Fink AT - PLZ 4000-4699 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-008 | Fink AT - PLZ 4000-4699 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-009 | Fink AT - PLZ 8000-9999 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-FINK-010 | Fink AT - PLZ 8000-9999 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-001 | Cargoe AT - PLZ 1200-1399 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-002 | Cargoe AT - PLZ 1200-1399 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-003 | Cargoe AT - PLZ 2000-2999 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-004 | Cargoe AT - PLZ 2000-2999 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-005 | Cargoe AT - PLZ 3400-3599 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-006 | Cargoe AT - PLZ 3400-3599 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-007 | Cargoe AT - PLZ 3700-3999 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-008 | Cargoe AT - PLZ 3700-3999 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-009 | Cargoe AT - PLZ 7000-7999 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-CARGO-010 | Cargoe AT - PLZ 7000-7999 Max | P1 | ❌ | AT |
-| TC-SHIP-AT-TH-001 | Thurner AT - PLZ 4700-5799 Min | P1 | ❌ | AT |
-| TC-SHIP-AT-TH-002 | Thurner AT - PLZ 4700-5799 Max | P1 | ❌ | AT |
-| TC-SHIP-DE-POST-001 | Post DE - PLZ 00000-99999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-POST-002 | Post DE - PLZ 00000-99999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-001 | Logsens Nord - PLZ 19000-29999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-002 | Logsens Nord - PLZ 19000-29999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-003 | Logsens Nord - PLZ 30000-32999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-004 | Logsens Nord - PLZ 30000-32999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-005 | Logsens Nord - PLZ 34000-37139 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-006 | Logsens Nord - PLZ 34000-37139 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-007 | Logsens Nord - PLZ 37140-37199 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-008 | Logsens Nord - PLZ 37140-37199 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-009 | Logsens Nord - PLZ 37200-37399 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-010 | Logsens Nord - PLZ 37200-37399 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-011 | Logsens Nord - PLZ 37400-39174 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-012 | Logsens Nord - PLZ 37400-39174 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-013 | Logsens Nord - PLZ 39326-39499 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-014 | Logsens Nord - PLZ 39326-39499 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-015 | Logsens Nord - PLZ 39500-39699 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-016 | Logsens Nord - PLZ 39500-39699 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-017 | Logsens Nord - PLZ 49000-49999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LN-018 | Logsens Nord - PLZ 49000-49999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-001 | Logsens Ost - PLZ 00000-09999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-002 | Logsens Ost - PLZ 00000-09999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-003 | Logsens Ost - PLZ 10000-15999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-004 | Logsens Ost - PLZ 10000-15999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-005 | Logsens Ost - PLZ 16000-18999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-006 | Logsens Ost - PLZ 16000-18999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-007 | Logsens Ost - PLZ 39175-39319 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-008 | Logsens Ost - PLZ 39175-39319 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-009 | Logsens Ost - PLZ 95000-96999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-010 | Logsens Ost - PLZ 95000-96999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-011 | Logsens Ost - PLZ 98000-99999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LO-012 | Logsens Ost - PLZ 98000-99999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-001 | Logsens Süd - PLZ 54000-54999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-002 | Logsens Süd - PLZ 54000-54999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-003 | Logsens Süd - PLZ 56000-56999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-004 | Logsens Süd - PLZ 56000-56999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-005 | Logsens Süd - PLZ 66000-67999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-006 | Logsens Süd - PLZ 66000-67999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-007 | Logsens Süd - PLZ 72000-72999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-008 | Logsens Süd - PLZ 72000-72999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-009 | Logsens Süd - PLZ 75000-79999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-010 | Logsens Süd - PLZ 75000-79999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-011 | Logsens Süd - PLZ 80000-89999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LS-012 | Logsens Süd - PLZ 80000-89999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-001 | Logsens West - PLZ 33000-33999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-002 | Logsens West - PLZ 33000-33999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-003 | Logsens West - PLZ 41000-41999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-004 | Logsens West - PLZ 41000-41999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-005 | Logsens West - PLZ 42000-48999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-006 | Logsens West - PLZ 42000-48999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-007 | Logsens West - PLZ 50000-53999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-008 | Logsens West - PLZ 50000-53999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-009 | Logsens West - PLZ 57000-57999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-010 | Logsens West - PLZ 57000-57999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-011 | Logsens West - PLZ 58000-59999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-LW-012 | Logsens West - PLZ 58000-59999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-001 | Thurner DE - PLZ 55000-55999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-002 | Thurner DE - PLZ 55000-55999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-003 | Thurner DE - PLZ 60000-65999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-004 | Thurner DE - PLZ 60000-65999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-005 | Thurner DE - PLZ 68000-71999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-006 | Thurner DE - PLZ 68000-71999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-007 | Thurner DE - PLZ 73000-74999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-008 | Thurner DE - PLZ 73000-74999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-009 | Thurner DE - PLZ 90000-94999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-010 | Thurner DE - PLZ 90000-94999 Max | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-011 | Thurner DE - PLZ 97000-97999 Min | P1 | ❌ | DE |
-| TC-SHIP-DE-TH-012 | Thurner DE - PLZ 97000-97999 Max | P1 | ❌ | DE |
-| TC-SHIP-CH-001 | Post CH - PLZ Min (1000) | P1 | ❌ | CH |
-| TC-SHIP-CH-002 | Post CH - PLZ Max (9658) | P1 | ❌ | CH |
-| TC-SHIP-CH-003 | Spedition Kuoni CH - PLZ Min (1000) | P1 | ❌ | CH |
-| TC-SHIP-CH-004 | Spedition Kuoni CH - PLZ Max (9658) | P1 | ❌ | CH |
+| TC-SHIP-AT-POST-001 | Post AT - PLZ 0000-9999 Min | P1 | ○ | AT |
+| TC-SHIP-AT-POST-002 | Post AT - PLZ 0000-9999 Max | P1 | ○ | AT |
+| TC-SHIP-AT-WETSCH-001 | Wetsch AT - PLZ 6000-6999 Min | P1 | ○ | AT |
+| TC-SHIP-AT-WETSCH-002 | Wetsch AT - PLZ 6000-6999 Max | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-001 | Fink AT - PLZ 1000-1199 Min | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-002 | Fink AT - PLZ 1000-1199 Max | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-003 | Fink AT - PLZ 3000-3399 Min | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-004 | Fink AT - PLZ 3000-3399 Max | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-005 | Fink AT - PLZ 3600-3699 Min | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-006 | Fink AT - PLZ 3600-3699 Max | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-007 | Fink AT - PLZ 4000-4699 Min | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-008 | Fink AT - PLZ 4000-4699 Max | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-009 | Fink AT - PLZ 8000-9999 Min | P1 | ○ | AT |
+| TC-SHIP-AT-FINK-010 | Fink AT - PLZ 8000-9999 Max | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-001 | Cargoe AT - PLZ 1200-1399 Min | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-002 | Cargoe AT - PLZ 1200-1399 Max | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-003 | Cargoe AT - PLZ 2000-2999 Min | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-004 | Cargoe AT - PLZ 2000-2999 Max | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-005 | Cargoe AT - PLZ 3400-3599 Min | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-006 | Cargoe AT - PLZ 3400-3599 Max | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-007 | Cargoe AT - PLZ 3700-3999 Min | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-008 | Cargoe AT - PLZ 3700-3999 Max | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-009 | Cargoe AT - PLZ 7000-7999 Min | P1 | ○ | AT |
+| TC-SHIP-AT-CARGO-010 | Cargoe AT - PLZ 7000-7999 Max | P1 | ○ | AT |
+| TC-SHIP-AT-TH-001 | Thurner AT - PLZ 4700-5799 Min | P1 | ○ | AT |
+| TC-SHIP-AT-TH-002 | Thurner AT - PLZ 4700-5799 Max | P1 | ○ | AT |
+| TC-SHIP-DE-POST-001 | Post DE - PLZ 00000-99999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-POST-002 | Post DE - PLZ 00000-99999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-001 | Logsens Nord - PLZ 19000-29999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-002 | Logsens Nord - PLZ 19000-29999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-003 | Logsens Nord - PLZ 30000-32999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-004 | Logsens Nord - PLZ 30000-32999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-005 | Logsens Nord - PLZ 34000-37139 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-006 | Logsens Nord - PLZ 34000-37139 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-007 | Logsens Nord - PLZ 37140-37199 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-008 | Logsens Nord - PLZ 37140-37199 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-009 | Logsens Nord - PLZ 37200-37399 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-010 | Logsens Nord - PLZ 37200-37399 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-011 | Logsens Nord - PLZ 37400-39174 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-012 | Logsens Nord - PLZ 37400-39174 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-013 | Logsens Nord - PLZ 39326-39499 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-014 | Logsens Nord - PLZ 39326-39499 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-015 | Logsens Nord - PLZ 39500-39699 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-016 | Logsens Nord - PLZ 39500-39699 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LN-017 | Logsens Nord - PLZ 49000-49999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LN-018 | Logsens Nord - PLZ 49000-49999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LO-001 | Logsens Ost - PLZ 00000-09999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LO-002 | Logsens Ost - PLZ 00000-09999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LO-003 | Logsens Ost - PLZ 10000-15999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LO-004 | Logsens Ost - PLZ 10000-15999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LO-005 | Logsens Ost - PLZ 16000-18999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LO-006 | Logsens Ost - PLZ 16000-18999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LO-007 | Logsens Ost - PLZ 39175-39319 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LO-008 | Logsens Ost - PLZ 39175-39319 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LO-009 | Logsens Ost - PLZ 95000-96999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LO-010 | Logsens Ost - PLZ 95000-96999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LO-011 | Logsens Ost - PLZ 98000-99999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LO-012 | Logsens Ost - PLZ 98000-99999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LS-001 | Logsens Süd - PLZ 54000-54999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LS-002 | Logsens Süd - PLZ 54000-54999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LS-003 | Logsens Süd - PLZ 56000-56999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LS-004 | Logsens Süd - PLZ 56000-56999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LS-005 | Logsens Süd - PLZ 66000-67999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LS-006 | Logsens Süd - PLZ 66000-67999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LS-007 | Logsens Süd - PLZ 72000-72999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LS-008 | Logsens Süd - PLZ 72000-72999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LS-009 | Logsens Süd - PLZ 75000-79999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LS-010 | Logsens Süd - PLZ 75000-79999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LS-011 | Logsens Süd - PLZ 80000-89999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LS-012 | Logsens Süd - PLZ 80000-89999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LW-001 | Logsens West - PLZ 33000-33999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LW-002 | Logsens West - PLZ 33000-33999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LW-003 | Logsens West - PLZ 41000-41999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LW-004 | Logsens West - PLZ 41000-41999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LW-005 | Logsens West - PLZ 42000-48999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LW-006 | Logsens West - PLZ 42000-48999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LW-007 | Logsens West - PLZ 50000-53999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LW-008 | Logsens West - PLZ 50000-53999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LW-009 | Logsens West - PLZ 57000-57999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LW-010 | Logsens West - PLZ 57000-57999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-LW-011 | Logsens West - PLZ 58000-59999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-LW-012 | Logsens West - PLZ 58000-59999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-TH-001 | Thurner DE - PLZ 55000-55999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-TH-002 | Thurner DE - PLZ 55000-55999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-TH-003 | Thurner DE - PLZ 60000-65999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-TH-004 | Thurner DE - PLZ 60000-65999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-TH-005 | Thurner DE - PLZ 68000-71999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-TH-006 | Thurner DE - PLZ 68000-71999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-TH-007 | Thurner DE - PLZ 73000-74999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-TH-008 | Thurner DE - PLZ 73000-74999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-TH-009 | Thurner DE - PLZ 90000-94999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-TH-010 | Thurner DE - PLZ 90000-94999 Max | P1 | ○ | DE |
+| TC-SHIP-DE-TH-011 | Thurner DE - PLZ 97000-97999 Min | P1 | ○ | DE |
+| TC-SHIP-DE-TH-012 | Thurner DE - PLZ 97000-97999 Max | P1 | ○ | DE |
+| TC-SHIP-CH-001 | Post CH - PLZ Min (1000) | P1 | ○ | CH |
+| TC-SHIP-CH-002 | Post CH - PLZ Max (9658) | P1 | ○ | CH |
+| TC-SHIP-CH-003 | Spedition Kuoni CH - PLZ Min (1000) | P1 | ○ | CH |
+| TC-SHIP-CH-004 | Spedition Kuoni CH - PLZ Max (9658) | P1 | ○ | CH |
 
 ---
 
@@ -273,7 +273,7 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
-| TC-PROMO-001 | Nicht-rabattierbarer Artikel (639046) | P1 | ❌ | AT, DE, CH |
+| TC-PROMO-001 | Nicht-rabattierbarer Artikel (639046) | P1 | ○ | AT, DE, CH |
 
 ---
 
@@ -331,4 +331,4 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ---
 
 
-*Generiert am 2026-01-20 10:22 aus test-inventory.yaml*
+*Generiert am 2026-01-20 12:23 aus test-inventory.yaml*
