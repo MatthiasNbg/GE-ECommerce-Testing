@@ -9,14 +9,14 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **115 Testfällen** in 10 Kategorien. 
-Der aktuelle Implementierungsstand liegt bei **~10%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **115 Testfällen** in 10 Kategorien.
+Der aktuelle Implementierungsstand liegt bei **~90%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 5/5) implementiert
-- ⚠️ Critical Path (3/8) 
-(5/8 offen)
-- ⚠️ Feature-Tests (1/128 implementiert)
+- ⚠️ Critical Path (5/9) - Kreditkarte noch offen
+- ✅ Feature-Tests - Versandarten (92/98 implementiert)
+- ⚠️ Feature-Tests - Sonstige (1/30 implementiert)
 
 **Prioritäten:**
 1. **Kritische Business-Flows** (Gast-Checkout, Zahlungsarten) → Phase 1
@@ -41,7 +41,7 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 | 🛍️ **Feature Tests - Warenkorb** | 8 | ❌ 0/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 6 | ⚠️ 1/6 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
 | 👤 **Feature Tests - Account** | 8 | ❌ 0/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
-| 📦 **Feature Tests - Versandarten** | 98 | ❌ 0/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
+| 📦 **Feature Tests - Versandarten** | 98 | ✅ 92/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 8 | ❌ 0/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
 | 📊 **Data Validation Tests** | 10 | ⚠️ 1/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
 | 🔄 **Regression Tests** | 15-20 | ⚠️ 3/15-20 | 🟡 P2 | Regression-Tests nach Änderungen |
@@ -74,10 +74,10 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ### Gesamtübersicht
 
 **Gesamt:** 115 Tests
-- ✅ Implementiert: 11
-- ❌ Fehlend: 104
+- ✅ Implementiert: 103
+- ❌ Fehlend: 12
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 10%
+- **Abdeckung:** ~90%
 
 ---
 
@@ -155,10 +155,22 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ### 📦 Feature Tests - Versandarten
 
 **Priorität:** P1
-**Tests:** 0/98 implementiert
-**Beschreibung:** Post, Spedition, PLZ-Bereiche, Logistikpartner
-**Dauer:** 30-60 Min
+**Tests:** 92/98 implementiert (nur Spedition, nicht Paket)
+**Beschreibung:** PLZ-basierte Speditionszuordnung für AT, DE, CH
+**Dauer:** ~25 Min (92 Tests)
 **Ausführung:** In CI/CD, vor Feature-Release
+
+**Testdatei:** `playwright_tests/tests/test_shipping_plz.py`
+**Testdaten:** `playwright_tests/data/shipping_rules.py`
+**Testprodukt:** Polsterbett Almeno (693278) - Speditionsware
+
+**Implementierte Speditionen:**
+- AT: Wetsch, Fink, Cargoe, Thurner
+- DE: Logsens Nord/Ost/Süd/West, Thurner
+- CH: Kuoni
+
+**Hinweis:** Diese Tests prüfen nur Speditionsware (große Produkte).
+Für Paketversand gelten andere Regeln.
 
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
