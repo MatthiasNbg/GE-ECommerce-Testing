@@ -1,7 +1,7 @@
 metadata:
   project: GE-ECommerce-Testing
   total_tests: 171
-  implemented: 109
+  implemented: 134
   coverage_percent: 64
 categories:
 - id: smoke
@@ -34,8 +34,8 @@ categories:
   priority: P1
   priority_label: Hoch
   count: 8
-  implemented: 0
-  status: missing
+  implemented: 8
+  status: complete
   icon: 🛍️
   description: Produkte hinzufügen, Mengen ändern, Preis-Berechnung
   duration: 5-15 Min
@@ -45,9 +45,9 @@ categories:
   name_en: Suche
   priority: P1
   priority_label: Hoch
-  count: 6
-  implemented: 1
-  status: partial
+  count: 9
+  implemented: 9
+  status: complete
   icon: 🔍
   description: Produktsuche, Filter, Autocomplete, Kategorien
   duration: 5-15 Min
@@ -58,8 +58,8 @@ categories:
   priority: P1
   priority_label: Hoch
   count: 8
-  implemented: 0
-  status: missing
+  implemented: 8
+  status: complete
   icon: 👤
   description: Registrierung, Login, Profil, Adressen
   duration: 10-20 Min
@@ -2105,6 +2105,306 @@ tests:
     plz: '9658'
     city: Wildhaus
     product_type: spedition_shipping
+- id: TC-CART-001
+  name: Produkt zum Warenkorb hinzufügen
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-002
+  name: Warenkorb-Zähler aktualisiert sich
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-003
+  name: Menge ändern aktualisiert Gesamtpreis
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-004
+  name: Produkt entfernen aktualisiert Warenkorb
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-005
+  name: Leerer Warenkorb zeigt Meldung
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-006
+  name: Warenkorb bleibt zwischen Seiten erhalten
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-007
+  name: Mehrere Produkte hinzufügen
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-CART-008
+  name: Preisberechnung korrekt
+  category: cart
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_cart.py
+  markers:
+  - cart
+- id: TC-SEARCH-001
+  name: Autocomplete zeigt korrektes Produkt
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-002
+  name: Autocomplete-Klick navigiert zu Produkt
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-003
+  name: Suchergebnisseite zeigt korrektes Produkt
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-004
+  name: Suchergebnis-Klick navigiert zu Produkt
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-005
+  name: Keine Ergebnisse bei ungültigem Artikel
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-006
+  name: Suchvorschläge erscheinen bei Eingabe
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-007
+  name: Suchvorschläge zeigen Kategorien
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-008
+  name: Autocomplete zeigt Produktbilder
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-SEARCH-009
+  name: Autocomplete Produktinfo vollständig
+  category: search
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_search.py
+  markers:
+  - search
+- id: TC-ACCOUNT-001
+  name: Registrierung erfolgreich
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-002
+  name: Registrierung mit existierender Email schlägt fehl
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-003
+  name: Registrierung mit ungültiger Email zeigt Fehler
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-004
+  name: Schwaches Passwort wird abgelehnt
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-005
+  name: Login erfolgreich
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-006
+  name: Login mit falschen Daten schlägt fehl
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-007
+  name: Profil anzeigen und bearbeiten
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
+- id: TC-ACCOUNT-008
+  name: Adressverwaltung
+  category: account
+  priority: P1
+  status: implemented
+  countries:
+  - AT
+  - DE
+  - CH
+  file: playwright_tests/tests/test_account.py
+  markers:
+  - account
 phases:
 - id: phase_0
   name: Phase 0 - Basis-Setup

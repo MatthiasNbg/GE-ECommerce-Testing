@@ -447,7 +447,7 @@
 <h2 id="executive-summary">Executive Summary</h2>
 
 <p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>171 Testfällen</strong> in 10 Kategorien. </p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~64%</strong>.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~78%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
@@ -455,7 +455,7 @@
 <li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (3/8)</li>
 </ul>
 <ul>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (99/128 implementiert)</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (123/131 implementiert)</li>
 </ul>
 <strong>Prioritäten:</strong>
 <ol>
@@ -472,7 +472,7 @@
 
 <h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
 
-<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>120</strong> von <strong>171</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 70%;"></div></div><div class="progress-percent">70%</div></div>
+<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>144</strong> von <strong>174</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 83%;"></div></div><div class="progress-percent">83%</div></div>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -499,21 +499,21 @@
 <tr>
 <td>🛍️ **Feature Tests - Warenkorb**</td>
 <td>8</td>
-<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produkte hinzufügen, Mengen ändern, Preis-Berechnung</td>
 </tr>
 <tr>
 <td>🔍 **Feature Tests - Suche**</td>
-<td>6</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 1/6</td>
+<td>9</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 9/9</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produktsuche, Filter, Autocomplete, Kategorien</td>
 </tr>
 <tr>
 <td>👤 **Feature Tests - Account**</td>
 <td>8</td>
-<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Registrierung, Login, Profil, Adressen</td>
 </tr>
@@ -565,7 +565,7 @@
 <li><a href="#smoke">Smoke Tests</a> - (5 Tests)</li>
 <li><a href="#critical-path">Critical Path Tests</a> - (8 Tests)</li>
 <li><a href="#cart">Feature Tests - Warenkorb</a> - (8 Tests)</li>
-<li><a href="#search">Feature Tests - Suche</a> - (6 Tests)</li>
+<li><a href="#search">Feature Tests - Suche</a> - (9 Tests)</li>
 <li><a href="#account">Feature Tests - Account</a> - (8 Tests)</li>
 <li><a href="#shipping">Feature Tests - Versandarten</a> - (98 Tests)</li>
 <li><a href="#promotions">Feature Tests - Promotions</a> - (8 Tests)</li>
@@ -582,10 +582,10 @@
 
 <strong>Gesamt:</strong> 171 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 109</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 62</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 134</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 37</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li>**Abdeckung:** 64%</li>
+<li>**Abdeckung:** 78%</li>
 </ul>
 <hr>
 
@@ -723,31 +723,233 @@
 <h3 id="🛍️-feature-tests---warenkorb">🛍️ Feature Tests - Warenkorb</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 0/8 implementiert
+<strong>Tests:</strong> 8/8 implementiert
 <strong>Beschreibung:</strong> Produkte hinzufügen, Mengen ändern, Preis-Berechnung
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CART-001</td>
+<td>Produkt zum Warenkorb hinzufügen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-002</td>
+<td>Warenkorb-Zähler aktualisiert sich</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-003</td>
+<td>Menge ändern aktualisiert Gesamtpreis</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-004</td>
+<td>Produkt entfernen aktualisiert Warenkorb</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-005</td>
+<td>Leerer Warenkorb zeigt Meldung</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-006</td>
+<td>Warenkorb bleibt zwischen Seiten erhalten</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-007</td>
+<td>Mehrere Produkte hinzufügen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-CART-008</td>
+<td>Preisberechnung korrekt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="🔍-feature-tests---suche">🔍 Feature Tests - Suche</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 1/6 implementiert
+<strong>Tests:</strong> 9/9 implementiert
 <strong>Beschreibung:</strong> Produktsuche, Filter, Autocomplete, Kategorien
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-SEARCH-001</td>
+<td>Autocomplete zeigt korrektes Produkt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-002</td>
+<td>Autocomplete-Klick navigiert zu Produkt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-003</td>
+<td>Suchergebnisseite zeigt korrektes Produkt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-004</td>
+<td>Suchergebnis-Klick navigiert zu Produkt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-005</td>
+<td>Keine Ergebnisse bei ungültigem Artikel</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-006</td>
+<td>Suchvorschläge erscheinen bei Eingabe</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-007</td>
+<td>Suchvorschläge zeigen Kategorien</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-008</td>
+<td>Autocomplete zeigt Produktbilder</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-SEARCH-009</td>
+<td>Autocomplete Produktinfo vollständig</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="👤-feature-tests---account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 0/8 implementiert
+<strong>Tests:</strong> 8/8 implementiert
 <strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen
 <strong>Dauer:</strong> 10-20 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-ACCOUNT-001</td>
+<td>Registrierung erfolgreich</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-002</td>
+<td>Registrierung mit existierender Email schlägt fehl</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-003</td>
+<td>Registrierung mit ungültiger Email zeigt Fehler</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-004</td>
+<td>Schwaches Passwort wird abgelehnt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-005</td>
+<td>Login erfolgreich</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-006</td>
+<td>Login mit falschen Daten schlägt fehl</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-007</td>
+<td>Profil anzeigen und bearbeiten</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-008</td>
+<td>Adressverwaltung</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="📦-feature-tests---versandarten">📦 Feature Tests - Versandarten</h3>
@@ -1625,12 +1827,12 @@
 <hr>
 
 
-<p>*Generiert am 2026-01-20 12:28 aus test-inventory.yaml*</p>
+<p>*Generiert am 2026-01-20 13:58 aus test-inventory.yaml*</p>
 
         </main>
 
         <footer class="footer">
-            <p>Generiert am 20.01.2026 um 12:28 Uhr</p>
+            <p>Generiert am 20.01.2026 um 13:58 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

@@ -10,13 +10,13 @@
 ## Executive Summary
 
 Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **171 Testfällen** in 10 Kategorien. 
-Der aktuelle Implementierungsstand liegt bei **~64%**.
+Der aktuelle Implementierungsstand liegt bei **~78%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 5/5) implementiert
 - ⚠️ Critical Path (3/8) 
 (5/8 offen)
-- ⚠️ Feature-Tests (99/128 implementiert)
+- ⚠️ Feature-Tests (123/131 implementiert)
 
 **Prioritäten:**
 1. **Kritische Business-Flows** (Gast-Checkout, Zahlungsarten) → Phase 1
@@ -32,15 +32,15 @@ Der aktuelle Implementierungsstand liegt bei **~64%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:120:171:70 -->
+<!-- PROGRESS_BAR:144:174:83 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
 | 🏠 **Smoke Tests** | 5 | ✅ 5/5 | 🔴 P0 | Homepage, Produktseiten, Navigation |
 | 🛒 **Critical Path Tests** | 8 | ✅ 8/8 | 🔴 P0 | Gast-Checkout, Registrierter Checkout, Zahlungsarten |
-| 🛍️ **Feature Tests - Warenkorb** | 8 | ❌ 0/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
-| 🔍 **Feature Tests - Suche** | 6 | ⚠️ 1/6 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
-| 👤 **Feature Tests - Account** | 8 | ❌ 0/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
+| 🛍️ **Feature Tests - Warenkorb** | 8 | ✅ 8/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
+| 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
+| 👤 **Feature Tests - Account** | 8 | ✅ 8/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 8 | ⚠️ 1/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
 | 📊 **Data Validation Tests** | 10 | ⚠️ 1/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
@@ -58,7 +58,7 @@ Der aktuelle Implementierungsstand liegt bei **~64%**.
 3. [Smoke Tests](#smoke) - (5 Tests)
 4. [Critical Path Tests](#critical-path) - (8 Tests)
 5. [Feature Tests - Warenkorb](#cart) - (8 Tests)
-6. [Feature Tests - Suche](#search) - (6 Tests)
+6. [Feature Tests - Suche](#search) - (9 Tests)
 7. [Feature Tests - Account](#account) - (8 Tests)
 8. [Feature Tests - Versandarten](#shipping) - (98 Tests)
 9. [Feature Tests - Promotions](#promotions) - (8 Tests)
@@ -74,10 +74,10 @@ Der aktuelle Implementierungsstand liegt bei **~64%**.
 ### Gesamtübersicht
 
 **Gesamt:** 171 Tests
-- ✅ Implementiert: 109
-- ❌ Fehlend: 62
+- ✅ Implementiert: 134
+- ❌ Fehlend: 37
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 64%
+- **Abdeckung:** 78%
 
 ---
 
@@ -125,30 +125,64 @@ Der aktuelle Implementierungsstand liegt bei **~64%**.
 ### 🛍️ Feature Tests - Warenkorb
 
 **Priorität:** P1
-**Tests:** 0/8 implementiert
+**Tests:** 8/8 implementiert
 **Beschreibung:** Produkte hinzufügen, Mengen ändern, Preis-Berechnung
 **Dauer:** 5-15 Min
 **Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-CART-001 | Produkt zum Warenkorb hinzufügen | P1 | ✅ | AT, DE, CH |
+| TC-CART-002 | Warenkorb-Zähler aktualisiert sich | P1 | ✅ | AT, DE, CH |
+| TC-CART-003 | Menge ändern aktualisiert Gesamtpreis | P1 | ✅ | AT, DE, CH |
+| TC-CART-004 | Produkt entfernen aktualisiert Warenkorb | P1 | ✅ | AT, DE, CH |
+| TC-CART-005 | Leerer Warenkorb zeigt Meldung | P1 | ✅ | AT, DE, CH |
+| TC-CART-006 | Warenkorb bleibt zwischen Seiten erhalten | P1 | ✅ | AT, DE, CH |
+| TC-CART-007 | Mehrere Produkte hinzufügen | P1 | ✅ | AT, DE, CH |
+| TC-CART-008 | Preisberechnung korrekt | P1 | ✅ | AT, DE, CH |
 
 ---
 
 ### 🔍 Feature Tests - Suche
 
 **Priorität:** P1
-**Tests:** 1/6 implementiert
+**Tests:** 9/9 implementiert
 **Beschreibung:** Produktsuche, Filter, Autocomplete, Kategorien
 **Dauer:** 5-15 Min
 **Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-SEARCH-001 | Autocomplete zeigt korrektes Produkt | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-002 | Autocomplete-Klick navigiert zu Produkt | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-003 | Suchergebnisseite zeigt korrektes Produkt | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-004 | Suchergebnis-Klick navigiert zu Produkt | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-005 | Keine Ergebnisse bei ungültigem Artikel | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-006 | Suchvorschläge erscheinen bei Eingabe | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-007 | Suchvorschläge zeigen Kategorien | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-008 | Autocomplete zeigt Produktbilder | P1 | ✅ | AT, DE, CH |
+| TC-SEARCH-009 | Autocomplete Produktinfo vollständig | P1 | ✅ | AT, DE, CH |
 
 ---
 
 ### 👤 Feature Tests - Account
 
 **Priorität:** P1
-**Tests:** 0/8 implementiert
+**Tests:** 8/8 implementiert
 **Beschreibung:** Registrierung, Login, Profil, Adressen
 **Dauer:** 10-20 Min
 **Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-ACCOUNT-001 | Registrierung erfolgreich | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-002 | Registrierung mit existierender Email schlägt fehl | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-003 | Registrierung mit ungültiger Email zeigt Fehler | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-004 | Schwaches Passwort wird abgelehnt | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-005 | Login erfolgreich | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-006 | Login mit falschen Daten schlägt fehl | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-007 | Profil anzeigen und bearbeiten | P1 | ✅ | AT, DE, CH |
+| TC-ACCOUNT-008 | Adressverwaltung | P1 | ✅ | AT, DE, CH |
 
 ---
 
@@ -331,4 +365,4 @@ Der aktuelle Implementierungsstand liegt bei **~64%**.
 ---
 
 
-*Generiert am 2026-01-20 12:28 aus test-inventory.yaml*
+*Generiert am 2026-01-20 13:58 aus test-inventory.yaml*
