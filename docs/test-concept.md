@@ -1,7 +1,7 @@
 # Test-Konzept: Grüne Erde E-Commerce Shop
 
 **Projekt:** GE-ECommerce-Testing
-**Datum:** 2026-01-19
+**Datum:** 2026-01-20
 **Version:** 1.0
 **Status:** Entwurf zur Abstimmung
 
@@ -329,4 +329,4 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ---
 
 
-*Generiert am 2026-01-19 13:38 aus test-inventory.yaml*
+*Generiert am 2026-01-20 09:54 aus test-inventory.yaml*

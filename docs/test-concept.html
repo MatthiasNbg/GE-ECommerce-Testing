@@ -354,7 +354,7 @@
             <h1 id="test-konzept-gruene-erde-e-commerce-shop">Test-Konzept: Grüne Erde E-Commerce Shop</h1>
 
 <strong>Projekt:</strong> GE-ECommerce-Testing
-<strong>Datum:</strong> 2026-01-19
+<strong>Datum:</strong> 2026-01-20
 <strong>Version:</strong> 1.0
 <strong>Status:</strong> Entwurf zur Abstimmung
 
@@ -363,15 +363,15 @@
 <h2 id="executive-summary">Executive Summary</h2>
 
 <p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>115 Testfällen</strong> in 10 Kategorien. </p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~20%</strong>.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~10%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Basis-Tests (Smoke: 5/5) implementiert</li>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (5/9)</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (3/8)</li>
 </ul>
 <ul>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (11/128 implementiert - Account 10/8, Suche 1/6)</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (1/128 implementiert)</li>
 </ul>
 <strong>Prioritäten:</strong>
 <ol>
@@ -405,8 +405,8 @@
 </tr>
 <tr>
 <td>🛒 **Critical Path Tests**</td>
-<td>9</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 5/9</td>
+<td>8</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 3/8</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
 <td>Gast-Checkout, Registrierter Checkout, Zahlungsarten</td>
 </tr>
@@ -427,7 +427,7 @@
 <tr>
 <td>👤 **Feature Tests - Account**</td>
 <td>8</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span> 10/8</td>
+<td><span class="badge badge-error">✗ Fehlend</span> 0/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Registrierung, Login, Profil, Adressen</td>
 </tr>
@@ -562,7 +562,7 @@
 <h3 id="🛒-critical-path-tests">🛒 Critical Path Tests</h3>
 
 <strong>Priorität:</strong> P0
-<strong>Tests:</strong> 5/9 implementiert
+<strong>Tests:</strong> 3/8 implementiert
 <strong>Beschreibung:</strong> Gast-Checkout, Registrierter Checkout, Zahlungsarten
 <strong>Dauer:</strong> 10-30 Min
 <strong>Ausführung:</strong> Vor jedem Deployment (Staging + Production)
@@ -579,28 +579,28 @@
 <td>TC-CRITICAL-001</td>
 <td>Gast-Checkout vollständig (AT)</td>
 <td>P0</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
 <td>AT</td>
 </tr>
 <tr>
 <td>TC-CRITICAL-002</td>
 <td>Gast-Checkout vollständig (DE)</td>
 <td>P0</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
 <td>DE</td>
 </tr>
 <tr>
 <td>TC-CRITICAL-003</td>
 <td>Gast-Checkout vollständig (CH)</td>
 <td>P0</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
 <td>CH</td>
 </tr>
 <tr>
 <td>TC-CRITICAL-004</td>
 <td>Registrierter User Checkout</td>
 <td>P0</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
 <td>AT</td>
 </tr>
 <tr>
@@ -628,15 +628,8 @@
 <td>TC-CRITICAL-008</td>
 <td>Warenkorb-Persistenz</td>
 <td>P1</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td><span class="badge badge-error">✗ Fehlend</span></td>
 <td>AT, DE, CH</td>
-</tr>
-<tr>
-<td>TC-CRITICAL-009</td>
-<td>Kreditkarten-Zahlung</td>
-<td>P0</td>
-<td><span class="badge badge-warning">⚠ Offen</span></td>
-<td>AT, DE</td>
 </tr>
 </tbody></table></div>
 <hr>
@@ -664,7 +657,7 @@
 <h3 id="👤-feature-tests---account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 10/8 implementiert (Login parametrisiert für AT/DE/CH)
+<strong>Tests:</strong> 0/8 implementiert
 <strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen
 <strong>Dauer:</strong> 10-20 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
@@ -1546,12 +1539,12 @@
 <hr>
 
 
-<p>*Generiert am 2026-01-19 13:38 aus test-inventory.yaml*</p>
+<p>*Generiert am 2026-01-20 09:54 aus test-inventory.yaml*</p>
 
         </main>
 
         <footer class="footer">
-            <p>Generiert am 19.01.2026 um 13:38 Uhr</p>
+            <p>Generiert am 20.01.2026 um 09:54 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
