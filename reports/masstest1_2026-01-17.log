@@ -1,0 +1,162 @@
+=============================================================================
+MASSENTEST PROTOKOLL - Masstest1
+=============================================================================
+Datum: 2026-01-17 22:53:14 - 2026-01-18 04:58:04
+Dauer: 6:04:52 (durch Windows-Standby unterbrochen)
+Test: test_mass_orders_multi_product_50
+
+=============================================================================
+KONFIGURATION
+=============================================================================
+Bestellungen:       50
+Parallele Worker:   5
+Produkte/Bestellung: 1-5 (zufaellig)
+Zahlungsarten:      Vorkasse, Rechnung
+Nachname-Praefix:   Masstest1
+Timeout:            60s (checkout/finish)
+
+=============================================================================
+ERGEBNIS
+=============================================================================
+Erfolgreich:        29 (58%)
+Fehlgeschlagen:     21 (42%)
+Ziel-Schwellwert:   70%
+Status:             NICHT BESTANDEN (Standby-Unterbrechung)
+
+=============================================================================
+ERFOLGREICHE BESTELLUNGEN (29)
+=============================================================================
+Order  0: Bestellnummer 3000683, Dauer: 36.2s
+Order  1: Bestellnummer 3000685, Dauer: 43.2s
+Order  2: Bestellnummer 3000682, Dauer: 26.8s
+Order  3: Bestellnummer 3000684, Dauer: 37.6s
+Order  5: Bestellnummer 3000687, Dauer: 39.9s
+Order  7: Bestellnummer 3000686, Dauer: 16.2s
+Order  9: Bestellnummer 3000688, Dauer: 28.6s
+Order 10: Bestellnummer 3000690, Dauer: 40.3s
+Order 11: Bestellnummer 3000689, Dauer: 16.7s
+Order 12: Bestellnummer 3000692, Dauer: 39.5s
+Order 13: Bestellnummer 3000691, Dauer: 15.8s
+Order 16: Bestellnummer 3000693, Dauer: 34.1s
+Order 22: Bestellnummer 3000694, Dauer: 15.8s
+Order 23: Bestellnummer 3000695, Dauer: 20.5s
+Order 25: Bestellnummer 3000697, Dauer: 37.8s
+Order 26: Bestellnummer 3000696, Dauer: 14.7s
+Order 29: Bestellnummer 3000698, Dauer: 14.9s
+Order 30: Bestellnummer 3000699, Dauer: 25.9s
+Order 31: Bestellnummer 3000700, Dauer: 26.0s
+Order 33: Bestellnummer 3000702, Dauer: 26.2s
+Order 34: Bestellnummer 3000701, Dauer: 21.7s
+Order 35: Bestellnummer 3000703, Dauer: 15.0s
+Order 36: Bestellnummer 3000706, Dauer: 42.7s
+Order 37: Bestellnummer 3000704, Dauer: 35.9s
+Order 38: Bestellnummer 3000705, Dauer: 35.5s
+Order 40: Bestellnummer 3000707, Dauer: 22.7s
+Order 47: Bestellnummer 3000710, Dauer: 6932.8s (Standby-betroffen)
+Order 48: Bestellnummer 3000711, Dauer: 6945.6s (Standby-betroffen)
+Order 49: Bestellnummer 3000712, Dauer: 49.9s
+
+=============================================================================
+FEHLGESCHLAGENE BESTELLUNGEN (21)
+=============================================================================
+
+--- VOR STANDBY (Server-Timeouts) ---
+
+Order  4: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 84.4s
+
+Order  6: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 87.1s
+
+Order  8: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 85.8s
+
+Order 14: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 98.0s
+
+Order 15: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 91.9s
+
+Order 17: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 97.3s
+
+Order 18: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 81.4s
+
+Order 19: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 74.5s
+
+Order 20: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 74.3s
+
+Order 21: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 85.6s
+
+Order 24: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 85.3s
+
+Order 27: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 74.0s
+
+Order 28: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 96.8s
+
+Order 32: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 90.8s
+
+--- WAEHREND/NACH STANDBY (Netzwerk unterbrochen) ---
+
+Order 39: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 14511.3s (4+ Stunden - Standby!)
+
+Order 41: Timeout 60000ms exceeded
+          Dauer: 21407.2s (6+ Stunden - Standby!)
+
+Order 42: Locator.click Timeout 30000ms
+          Button "Zahlungspflichtig bestellen" - Navigation wartend
+          Dauer: 14493.1s (4+ Stunden - Standby!)
+
+Order 43: Page.goto Timeout 90000ms
+          Navigation zu Produktseite fehlgeschlagen
+          Dauer: 14475.5s (4+ Stunden - Standby!)
+
+Order 44: ERR_NETWORK_IO_SUSPENDED
+          Netzwerk durch Standby unterbrochen
+          Dauer: 0.7s
+
+Order 45: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 7009.2s (2+ Stunden - Standby!)
+
+Order 46: Timeout 60000ms - checkout/finish Navigation
+          Dauer: 7006.3s (2+ Stunden - Standby!)
+
+=============================================================================
+ANALYSE
+=============================================================================
+
+Vor Standby (echte Server-Last-Probleme):
+- 14 von 21 Fehlern waren Timeouts durch Serverlast
+- Diese traten auf, bevor der Rechner in den Standby ging
+- Ursache: 5 parallele Checkouts ueberlasten den Staging-Server
+
+Waehrend/Nach Standby:
+- 7 Fehler wurden durch den Windows-Standby verursacht
+- ERR_NETWORK_IO_SUSPENDED zeigt die Netzwerkunterbrechung
+- Browser-Sessions wurden durch Standby unterbrochen
+
+=============================================================================
+EMPFEHLUNGEN
+=============================================================================
+
+1. Windows-Energieoptionen anpassen:
+   - Bildschirm ausschalten: Nie (waehrend Tests)
+   - Standbymodus: Nie (waehrend Tests)
+   - Oder: powercfg /change standby-timeout-ac 0
+
+2. Fuer stabilere Tests:
+   - Parallele Worker auf 3 reduzieren
+   - Oder sequentielle Ausfuehrung verwenden
+
+3. Test wiederholen ohne Standby-Unterbrechung
+
+=============================================================================

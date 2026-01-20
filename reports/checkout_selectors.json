@@ -1,0 +1,1353 @@
+[
+  {
+    "page": "checkout_register",
+    "url": "https://grueneerde.scalecommerce.cloud/checkout/register",
+    "inputs": [
+      {
+        "id": "loginMail",
+        "name": "username",
+        "type": "email",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required,email"
+        }
+      },
+      {
+        "id": "loginPassword",
+        "name": "password",
+        "type": "password",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddress-personalFirstName",
+        "name": "billingAddress[firstName]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddress-personalLastName",
+        "name": "billingAddress[lastName]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddresscompany",
+        "name": "billingAddress[company]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddressdepartment",
+        "name": "billingAddress[department]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {}
+      },
+      {
+        "id": "vatIds",
+        "name": "vatIds[]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": ""
+        }
+      },
+      {
+        "id": "personalMail",
+        "name": "email",
+        "type": "email",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required,email"
+        }
+      },
+      {
+        "id": "personalPassword",
+        "name": "password",
+        "type": "password",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required,minLength"
+        }
+      },
+      {
+        "id": "personalPasswordConfirmation",
+        "name": "passwordConfirmation",
+        "type": "password",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required,confirmation"
+        }
+      },
+      {
+        "id": "billingAddress-AddressStreet",
+        "name": "billingAddress[street]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddressAddressZipcode",
+        "name": "billingAddress[zipcode]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-input-name": "zipcodeInput",
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddressAddressCity",
+        "name": "billingAddress[city]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "billingAddressAddressPhoneNumber",
+        "name": "billingAddress[phoneNumber]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {}
+      },
+      {
+        "id": "shippingAddress-personalFirstName",
+        "name": "shippingAddress[firstName]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "shippingAddress-personalLastName",
+        "name": "shippingAddress[lastName]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "shippingAddresscompany",
+        "name": "shippingAddress[company]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "shippingAddressdepartment",
+        "name": "shippingAddress[department]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {}
+      },
+      {
+        "id": "shippingAddress-AddressStreet",
+        "name": "shippingAddress[street]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "shippingAddressAddressZipcode",
+        "name": "shippingAddress[zipcode]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-input-name": "zipcodeInput",
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "shippingAddressAddressCity",
+        "name": "shippingAddress[city]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {
+          "data-validation": "required"
+        }
+      },
+      {
+        "id": "shippingAddressAddressPhoneNumber",
+        "name": "shippingAddress[phoneNumber]",
+        "type": "text",
+        "class": "form-control",
+        "placeholder": "",
+        "data_attrs": {}
+      },
+      {
+        "id": "",
+        "name": "shopware_surname_confirm",
+        "type": "text",
+        "class": "d-none",
+        "placeholder": "",
+        "data_attrs": {}
+      }
+    ],
+    "selects": [
+      {
+        "id": "-accountType",
+        "name": "accountType",
+        "class": "form-select contact-select",
+        "options": [
+          "Privat",
+          "Gewerblich"
+        ]
+      },
+      {
+        "id": "personalSalutation",
+        "name": "salutationId",
+        "class": "form-select",
+        "options": [
+          "Keine Angabe",
+          "Frau",
+          "Herr"
+        ]
+      },
+      {
+        "id": "personalBirthday",
+        "name": "birthdayDay",
+        "class": "form-select",
+        "options": [
+          "Tag",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      },
+      {
+        "id": "personalBirthdayMonth",
+        "name": "birthdayMonth",
+        "class": "form-select",
+        "options": [
+          "Monat",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      },
+      {
+        "id": "personalBirthdayYear",
+        "name": "birthdayYear",
+        "class": "form-select",
+        "options": [
+          "Jahr",
+          "2026",
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018"
+        ]
+      },
+      {
+        "id": "billingAddressAddressCountry",
+        "name": "billingAddress[countryId]",
+        "class": "form-select country-select",
+        "options": [
+          "Deutschland",
+          "Vereinigtes Königreich",
+          "Afghanistan",
+          "Ägypten",
+          "Åland",
+          "Albanien",
+          "Algerien",
+          "Amerikanische Jungferninseln",
+          "Andorra",
+          "Angola"
+        ]
+      },
+      {
+        "id": "billingAddressAddressCountryState",
+        "name": "billingAddress[countryStateId]",
+        "class": "form-select country-state-select",
+        "options": [
+          "Bundesland auswählen ..."
+        ]
+      },
+      {
+        "id": "shippingAddress-accountType",
+        "name": "shippingAddress[accountType]",
+        "class": "form-select contact-select",
+        "options": [
+          "Privat",
+          "Gewerblich"
+        ]
+      },
+      {
+        "id": "shippingAddresspersonalSalutation",
+        "name": "shippingAddress[salutationId]",
+        "class": "form-select",
+        "options": [
+          "Keine Angabe",
+          "Frau",
+          "Herr"
+        ]
+      },
+      {
+        "id": "shippingAddressAddressCountry",
+        "name": "shippingAddress[countryId]",
+        "class": "form-select country-select",
+        "options": [
+          "Deutschland",
+          "Vereinigtes Königreich",
+          "Afghanistan",
+          "Ägypten",
+          "Åland",
+          "Albanien",
+          "Algerien",
+          "Amerikanische Jungferninseln",
+          "Andorra",
+          "Angola"
+        ]
+      },
+      {
+        "id": "shippingAddressAddressCountryState",
+        "name": "shippingAddress[countryStateId]",
+        "class": "form-select country-state-select",
+        "options": [
+          "Bundesland auswählen ..."
+        ]
+      }
+    ],
+    "buttons": [
+      {
+        "text": "Zurück zum Shop",
+        "id": "",
+        "class": "btn btn-outline-primary header-minimal-back-to-shop-button d-none d-sm-inline-block",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Anmelden",
+        "id": "",
+        "class": "btn btn-primary",
+        "type": "submit",
+        "data_attrs": {}
+      },
+      {
+        "text": "Kundenkonto anlegen",
+        "id": "",
+        "class": "btn btn-primary register-button",
+        "type": "button",
+        "data_attrs": {
+          "data-bs-toggle": "collapse",
+          "data-bs-target": ".register-collapse"
+        }
+      },
+      {
+        "text": "Als Gast bestellen",
+        "id": "",
+        "class": "btn btn-outline-primary guest-button",
+        "type": "button",
+        "data_attrs": {
+          "data-bs-toggle": "collapse",
+          "data-bs-target": ".register-collapse"
+        }
+      },
+      {
+        "text": "Datenschutzbestimmungen",
+        "id": "",
+        "class": "btn btn-link-inline",
+        "type": "button",
+        "data_attrs": {
+          "data-ajax-modal": "true",
+          "data-url": "/widgets/cms/01954d38b50c728eabd6a73e25c7a822"
+        }
+      },
+      {
+        "text": "AGB",
+        "id": "",
+        "class": "btn btn-link-inline",
+        "type": "button",
+        "data_attrs": {
+          "data-ajax-modal": "true",
+          "data-url": "/widgets/cms/01954d38b50273b7b09d58a7669df8fb"
+        }
+      },
+      {
+        "text": "Weiter",
+        "id": "",
+        "class": "btn btn-primary btn-lg",
+        "type": "submit",
+        "data_attrs": {}
+      },
+      {
+        "text": "Zum Merkzettel hinzufügen",
+        "id": "",
+        "class": "product-wishlist-4a9955cfc38695cfffd41d015d915f3b product-wishlist-action product-wishlist-not-added z-2",
+        "type": "",
+        "data_attrs": {
+          "data-add-to-wishlist": "true",
+          "data-add-to-wishlist-options": "{\"productId\":\"4a9955cfc38695cfffd41d015d915f3b\",\"router\":{\"add\":{\"afterLoginPath\":\"\\/wishlist\\/add-after-login\\/4a9955cfc38695cfffd41d015d915f3b\",\"path\":\"\\/wishlist\\/add\\/4a9955cfc38695cfffd41d015d915f3b\"},\"remove\":{\"path\":\"\\/wishlist\\/remove\\/4a9955cfc38695cfffd41d015d915f3b\"}},\"texts\":{\"add\":\"Zum Merkzettel hinzuf\\u00fcgen\",\"remove\":\"Vom Merkzettel entfernen\"}}"
+        }
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn btn-light line-item-remove-button",
+        "type": "submit",
+        "data_attrs": {
+          "data-product-id": "4a9955cfc38695cfffd41d015d915f3b"
+        }
+      },
+      {
+        "text": "0",
+        "id": "",
+        "class": "btn btn-primary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Frage?",
+        "id": "",
+        "class": "btn btn-success",
+        "type": "button",
+        "data_attrs": {
+          "data-bs-toggle": "dropdown"
+        }
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn btn-primary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn-close close",
+        "type": "button",
+        "data_attrs": {
+          "data-bs-dismiss": "modal"
+        }
+      },
+      {
+        "text": "×",
+        "id": "",
+        "class": "close",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Abbrechen",
+        "id": "",
+        "class": "btn btn-secondary abort-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Cookie-Konfigurator öffnen",
+        "id": "",
+        "class": "btn btn-primary cookies-not-allowed-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Weiter",
+        "id": "",
+        "class": "btn btn-primary cookies-allowed-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "JENTIS",
+        "id": "jts-dev-toggle",
+        "class": "",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Copy",
+        "id": "jts-copy",
+        "class": "secondary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Download",
+        "id": "jts-download",
+        "class": "secondary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Clear",
+        "id": "jts-clear",
+        "class": "",
+        "type": "",
+        "data_attrs": {}
+      }
+    ],
+    "checkboxes": [
+      {
+        "id": "differentShippingAddress",
+        "name": "differentShippingAddress",
+        "class": "form-check-input js-different-shipping-checkbox",
+        "label": "Lieferadresse weicht von Rechnungsadresse ab."
+      },
+      {
+        "id": "acceptedDataProtection",
+        "name": "acceptedDataProtection",
+        "class": "form-check-input",
+        "label": "Ich habe die Datenschutzbestimmungen zur Kenntnis genommen und die AGB gelesen und bin mit ihnen ein"
+      },
+      {
+        "id": "acceptedNewsletter",
+        "name": "acceptedNewsletter",
+        "class": "form-check-input",
+        "label": "Ich möchte den Grüne Erde-Newsletter zu aktuellen Themen und Aktionen per E-Mail erhalten. Meine Ein"
+      },
+      {
+        "id": "acceptedFriendscircle",
+        "name": "acceptedFriendscircle",
+        "class": "form-check-input",
+        "label": "Ich möchte Mitglied im Grüne Erde-Freundeskreis werden und sichere mir neben meinem Willkommensgesch"
+      }
+    ],
+    "radios": [
+      {
+        "id": "personalGuest",
+        "name": "createCustomerAccount",
+        "value": "false",
+        "class": "form-check-input",
+        "label": "Als Gast bestellen"
+      },
+      {
+        "id": "personalRegister",
+        "name": "createCustomerAccount",
+        "value": "true",
+        "class": "form-check-input",
+        "label": "Kundenkonto anlegen"
+      }
+    ],
+    "containers": [
+      {
+        "class": "has-info-banner is-ctl-register is-act-checkoutregisterpage is-active-route-frontend-checkout-register-page",
+        "tag": "body"
+      },
+      {
+        "class": "checkout",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-container",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-main",
+        "tag": "div"
+      },
+      {
+        "class": "col-lg-6 collapse show register-collapse",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-md-12 login-mail",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-md-12 login-password",
+        "tag": "div"
+      },
+      {
+        "class": "card login-advantages register-opener-card ",
+        "tag": "div"
+      },
+      {
+        "class": "register-open",
+        "tag": "div"
+      },
+      {
+        "class": "btn btn-primary register-button",
+        "tag": "button"
+      },
+      {
+        "class": "btn btn-outline-primary guest-button",
+        "tag": "button"
+      },
+      {
+        "class": "col-lg-12 collapse register-collapse",
+        "tag": "div"
+      },
+      {
+        "class": "card register-card",
+        "tag": "div"
+      },
+      {
+        "class": "register-close",
+        "tag": "div"
+      },
+      {
+        "class": "register-form",
+        "tag": "form"
+      },
+      {
+        "class": "register-personal mb-3",
+        "tag": "fieldset"
+      },
+      {
+        "class": "register-personal-title visually-hidden",
+        "tag": "legend"
+      },
+      {
+        "class": "form-group col-md-6 contact-type",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-md-3 col-sm-6",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-sm-6",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-12",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-md-6",
+        "tag": "div"
+      },
+      {
+        "class": "form-check register-guest-control",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-sm-6 js-form-field-toggle-guest-mode d-block",
+        "tag": "div"
+      },
+      {
+        "class": "register-address mb-5",
+        "tag": "div"
+      },
+      {
+        "class": "register-billing",
+        "tag": "fieldset"
+      },
+      {
+        "class": "form-group col-md-3 col-4",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-md-3 col-8",
+        "tag": "div"
+      },
+      {
+        "class": "form-group col-md-6 d-none",
+        "tag": "div"
+      },
+      {
+        "class": "form-check register-different-shipping mb-3",
+        "tag": "div"
+      },
+      {
+        "class": "form-check-input js-different-shipping-checkbox",
+        "tag": "input"
+      },
+      {
+        "class": "register-shipping js-form-field-toggle-shipping-address d-none mb-4",
+        "tag": "fieldset"
+      },
+      {
+        "class": "js-field-toggle-contact-type-company-shippingAddress d-none",
+        "tag": "div"
+      },
+      {
+        "class": "shopware_surname_confirm",
+        "tag": "div"
+      },
+      {
+        "class": "form-group form-check",
+        "tag": "div"
+      },
+      {
+        "class": "register-required-info",
+        "tag": "p"
+      },
+      {
+        "class": "register-submit d-grid col-md-6 offset-md-6",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside ",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-container",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-summary",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-summary-header",
+        "tag": "h2"
+      },
+      {
+        "class": "checkout-aside-summary-list-container",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-summary-container",
+        "tag": "div"
+      },
+      {
+        "class": "cart-live-update visually-hidden",
+        "tag": "div"
+      },
+      {
+        "class": "row checkout-aside-summary-list g-0 ",
+        "tag": "dl"
+      },
+      {
+        "class": "col-7 checkout-aside-summary-label",
+        "tag": "dt"
+      },
+      {
+        "class": "col-5 checkout-aside-summary-value",
+        "tag": "dd"
+      },
+      {
+        "class": "col-7 checkout-aside-summary-label checkout-aside-summary-total",
+        "tag": "dt"
+      },
+      {
+        "class": "col-5 checkout-aside-summary-value checkout-aside-summary-total",
+        "tag": "dd"
+      },
+      {
+        "class": "col-7 checkout-aside-summary-label summary-net",
+        "tag": "dt"
+      },
+      {
+        "class": "col-5 checkout-aside-summary-value summary-net",
+        "tag": "dd"
+      },
+      {
+        "class": "col-7 checkout-aside-summary-label summary-tax",
+        "tag": "dt"
+      },
+      {
+        "class": "col-5 checkout-aside-summary-value summary-tax",
+        "tag": "dd"
+      }
+    ],
+    "links": []
+  },
+  {
+    "page": "checkout_confirm",
+    "url": "https://grueneerde.scalecommerce.cloud/checkout/confirm",
+    "inputs": [
+      {
+        "id": "",
+        "name": "quantity",
+        "type": "number",
+        "class": "form-control js-quantity-selector quantity-selector-group-input quantity-input-4a9955cfc38695cfffd41d015d915f3b ",
+        "placeholder": "",
+        "data_attrs": {
+          "data-focus-id": "line-item-default-quantity-4a9955cfc38695cfffd41d015d915f3b"
+        }
+      },
+      {
+        "id": "",
+        "name": "hash",
+        "type": "text",
+        "class": "",
+        "placeholder": "",
+        "data_attrs": {}
+      }
+    ],
+    "selects": [],
+    "buttons": [
+      {
+        "text": "Zurück zum Shop",
+        "id": "",
+        "class": "btn btn-outline-primary header-minimal-back-to-shop-button d-none d-sm-inline-block",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Widerrufsbelehrung",
+        "id": "",
+        "class": "btn btn-link-inline",
+        "type": "button",
+        "data_attrs": {
+          "data-ajax-modal": "true",
+          "data-url": "/widgets/cms/01954d38b507707ba37d08c0db7cc9a6"
+        }
+      },
+      {
+        "text": "AGB",
+        "id": "",
+        "class": "checkout-confirm-terms-modal btn btn-link-inline",
+        "type": "button",
+        "data_attrs": {
+          "data-ajax-modal": "true",
+          "data-url": "/widgets/cms/01954d38b50273b7b09d58a7669df8fb"
+        }
+      },
+      {
+        "text": "Lieferadresse ändern",
+        "id": "",
+        "class": "btn btn-light",
+        "type": "",
+        "data_attrs": {
+          "data-address-manager": "true",
+          "data-address-manager-options": "{\"initialTab\":\"shipping\",\"activeShippingAddressId\":\"019bcc9fa0e07262ad8d95f50d0848d2\",\"addressManagerUrl\":\"\\/widgets\\/account\\/address-manager\",\"addressSwitchUrl\":\"\\/account\\/address\\/switch\"}"
+        }
+      },
+      {
+        "text": "Versandhinweise",
+        "id": "",
+        "class": "btn btn-link checkout-shipping-costs-btn btn-collapse collapsed d-flex d-sm-none",
+        "type": "",
+        "data_attrs": {
+          "data-bs-toggle": "collapse"
+        }
+      },
+      {
+        "text": "Zum Merkzettel hinzufügen",
+        "id": "",
+        "class": "product-wishlist-4a9955cfc38695cfffd41d015d915f3b product-wishlist-action product-wishlist-not-added z-2",
+        "type": "",
+        "data_attrs": {
+          "data-add-to-wishlist": "true",
+          "data-add-to-wishlist-options": "{\"productId\":\"4a9955cfc38695cfffd41d015d915f3b\",\"router\":{\"add\":{\"afterLoginPath\":\"\\/wishlist\\/add-after-login\\/4a9955cfc38695cfffd41d015d915f3b\",\"path\":\"\\/wishlist\\/add\\/4a9955cfc38695cfffd41d015d915f3b\"},\"remove\":{\"path\":\"\\/wishlist\\/remove\\/4a9955cfc38695cfffd41d015d915f3b\"}},\"texts\":{\"add\":\"Zum Merkzettel hinzuf\\u00fcgen\",\"remove\":\"Vom Merkzettel entfernen\"}}"
+        }
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn btn-outline-light btn-minus js-btn-minus",
+        "type": "button",
+        "data_attrs": {
+          "data-focus-id": "line-item-default-quantity-down-4a9955cfc38695cfffd41d015d915f3b"
+        }
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn btn-outline-light btn-plus js-btn-plus",
+        "type": "button",
+        "data_attrs": {
+          "data-focus-id": "line-item-default-quantity-up-4a9955cfc38695cfffd41d015d915f3b"
+        }
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn btn-light line-item-remove-button",
+        "type": "submit",
+        "data_attrs": {
+          "data-product-id": "4a9955cfc38695cfffd41d015d915f3b"
+        }
+      },
+      {
+        "text": "×",
+        "id": "",
+        "class": "close",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Abbrechen",
+        "id": "",
+        "class": "btn btn-secondary abort-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Cookie-Konfigurator öffnen",
+        "id": "",
+        "class": "btn btn-primary cookies-not-allowed-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Weiter",
+        "id": "",
+        "class": "btn btn-primary cookies-allowed-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Widerrufsbelehrung",
+        "id": "",
+        "class": "btn btn-link-inline",
+        "type": "button",
+        "data_attrs": {
+          "data-ajax-modal": "true",
+          "data-url": "/widgets/cms/01954d38b507707ba37d08c0db7cc9a6"
+        }
+      },
+      {
+        "text": "AGB",
+        "id": "",
+        "class": "checkout-confirm-terms-modal btn btn-link-inline",
+        "type": "button",
+        "data_attrs": {
+          "data-ajax-modal": "true",
+          "data-url": "/widgets/cms/01954d38b50273b7b09d58a7669df8fb"
+        }
+      },
+      {
+        "text": "Zahlungspflichtig bestellen",
+        "id": "confirmFormSubmit",
+        "class": "btn btn-primary btn-lg",
+        "type": "submit",
+        "data_attrs": {}
+      },
+      {
+        "text": "0",
+        "id": "",
+        "class": "btn btn-primary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Frage?",
+        "id": "",
+        "class": "btn btn-success",
+        "type": "button",
+        "data_attrs": {
+          "data-bs-toggle": "dropdown"
+        }
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn btn-primary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "",
+        "id": "",
+        "class": "btn-close close",
+        "type": "button",
+        "data_attrs": {
+          "data-bs-dismiss": "modal"
+        }
+      },
+      {
+        "text": "×",
+        "id": "",
+        "class": "close",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Abbrechen",
+        "id": "",
+        "class": "btn btn-secondary abort-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Cookie-Konfigurator öffnen",
+        "id": "",
+        "class": "btn btn-primary cookies-not-allowed-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "Weiter",
+        "id": "",
+        "class": "btn btn-primary cookies-allowed-button",
+        "type": "button",
+        "data_attrs": {}
+      },
+      {
+        "text": "JENTIS",
+        "id": "jts-dev-toggle",
+        "class": "",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Copy",
+        "id": "jts-copy",
+        "class": "secondary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Download",
+        "id": "jts-download",
+        "class": "secondary",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "Clear",
+        "id": "jts-clear",
+        "class": "",
+        "type": "",
+        "data_attrs": {}
+      },
+      {
+        "text": "view",
+        "id": "",
+        "class": "secondary",
+        "type": "",
+        "data_attrs": {
+          "data-idx": "0"
+        }
+      },
+      {
+        "text": "view",
+        "id": "",
+        "class": "secondary",
+        "type": "",
+        "data_attrs": {
+          "data-idx": "1"
+        }
+      }
+    ],
+    "checkboxes": [
+      {
+        "id": "tos",
+        "name": "tos",
+        "class": "checkout-confirm-tos-checkbox form-check-input",
+        "label": "Ich habe die AGB gelesen und bin mit ihnen einverstanden."
+      },
+      {
+        "id": "acceptedNewsletter",
+        "name": "acceptedNewsletter",
+        "class": "form-check-input",
+        "label": "Ich möchte den Grüne Erde-Newsletter zu aktuellen Themen und Aktionen per E-Mail erhalten. Meine Ein"
+      },
+      {
+        "id": "acceptedFriendscircle",
+        "name": "acceptedFriendscircle",
+        "class": "form-check-input",
+        "label": "Ich möchte Mitglied im Grüne Erde-Freundeskreis werden und sichere mir neben meinem Willkommensgesch"
+      }
+    ],
+    "radios": [
+      {
+        "id": "paymentMethod019685c086307133b77e4197e87e2996",
+        "name": "paymentMethodId",
+        "value": "019685c086307133b77e4197e87e2996",
+        "class": "form-check-input payment-method-input",
+        "label": "Kreditkarte\n                                                                        \n               "
+      },
+      {
+        "id": "paymentMethod01954d38abc77123ad8eef6b26c5c0cc",
+        "name": "paymentMethodId",
+        "value": "01954d38abc77123ad8eef6b26c5c0cc",
+        "class": "form-check-input payment-method-input",
+        "label": "Vorkasse\n                                                                        \n                  "
+      },
+      {
+        "id": "paymentMethod01954d38abc47169b446b1a3660bfc51",
+        "name": "paymentMethodId",
+        "value": "01954d38abc47169b446b1a3660bfc51",
+        "class": "form-check-input payment-method-input",
+        "label": "Rechnung\n                                                                        \n                  "
+      },
+      {
+        "id": "shippingMethod019730a691677bfca7dfd9e2e804c15e",
+        "name": "shippingMethodId",
+        "value": "019730a691677bfca7dfd9e2e804c15e",
+        "class": "form-check-input shipping-method-input",
+        "label": "Postversand Österreich, Liechtenstein"
+      },
+      {
+        "id": "shippingMethoda37c78a6a0e649f7a5995c73ff002599",
+        "name": "shippingMethodId",
+        "value": "a37c78a6a0e649f7a5995c73ff002599",
+        "class": "form-check-input shipping-method-input",
+        "label": "Lieferung an den Store"
+      }
+    ],
+    "containers": [
+      {
+        "class": "has-info-banner is-ctl-checkout is-act-confirmpage is-active-route-frontend-checkout-confirm-page",
+        "tag": "body"
+      },
+      {
+        "class": "checkout",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-container",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-main",
+        "tag": "div"
+      },
+      {
+        "class": "confirm-main-header",
+        "tag": "h1"
+      },
+      {
+        "class": "confirm-tos",
+        "tag": "div"
+      },
+      {
+        "class": "card checkout-card",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-confirm-tos-checkbox form-check-input",
+        "tag": "input"
+      },
+      {
+        "class": "checkout-confirm-tos-label custom-control-label",
+        "tag": "label"
+      },
+      {
+        "class": "checkout-confirm-terms-modal btn btn-link-inline",
+        "tag": "button"
+      },
+      {
+        "class": "confirm-address",
+        "tag": "div"
+      },
+      {
+        "class": "row js-confirm-overview-addresses",
+        "tag": "div"
+      },
+      {
+        "class": "col-sm-6 card-col confirm-shipping-address",
+        "tag": "div"
+      },
+      {
+        "class": "confirm-address-shipping",
+        "tag": "div"
+      },
+      {
+        "class": "address",
+        "tag": "div"
+      },
+      {
+        "class": "col-sm-6 card-col confirm-billing-address",
+        "tag": "div"
+      },
+      {
+        "class": "confirm-address-billing mb-3",
+        "tag": "div"
+      },
+      {
+        "class": "confirm-payment-shipping",
+        "tag": "div"
+      },
+      {
+        "class": "col-sm-6 confirm-payment",
+        "tag": "div"
+      },
+      {
+        "class": "payment-methods",
+        "tag": "div"
+      },
+      {
+        "class": "payment-method",
+        "tag": "div"
+      },
+      {
+        "class": "payment-form-group form-group",
+        "tag": "div"
+      },
+      {
+        "class": "form-check payment-method-radio",
+        "tag": "div"
+      },
+      {
+        "class": "form-check-input payment-method-input",
+        "tag": "input"
+      },
+      {
+        "class": "form-check-label payment-method-label",
+        "tag": "label"
+      },
+      {
+        "class": "payment-method-description",
+        "tag": "div"
+      },
+      {
+        "class": "col-sm-6 confirm-shipping",
+        "tag": "div"
+      },
+      {
+        "class": "shipping-methods",
+        "tag": "div"
+      },
+      {
+        "class": "shipping-method",
+        "tag": "div"
+      },
+      {
+        "class": "shipping-form-group form-group",
+        "tag": "div"
+      },
+      {
+        "class": "form-check shipping-method-radio",
+        "tag": "div"
+      },
+      {
+        "class": "form-check-input shipping-method-input",
+        "tag": "input"
+      },
+      {
+        "class": "form-check-label shipping-method-label",
+        "tag": "label"
+      },
+      {
+        "class": "shipping-method-description",
+        "tag": "div"
+      },
+      {
+        "class": "card checkout-card card-transparent",
+        "tag": "div"
+      },
+      {
+        "class": "btn btn-link checkout-shipping-costs-btn btn-collapse collapsed d-flex d-sm-none",
+        "tag": "a"
+      },
+      {
+        "class": "checkout-shipping-costs collapse",
+        "tag": "div"
+      },
+      {
+        "class": "confirm-product",
+        "tag": "div"
+      },
+      {
+        "class": "card checkout-product-table",
+        "tag": "div"
+      },
+      {
+        "class": "card-title cart-table-header",
+        "tag": "li"
+      },
+      {
+        "class": "row cart-header-row",
+        "tag": "div"
+      },
+      {
+        "class": "col-5 cart-header-info ",
+        "tag": "div"
+      },
+      {
+        "class": "col-2 cart-header-quantity",
+        "tag": "div"
+      },
+      {
+        "class": "col-2 cart-header-tax-price",
+        "tag": "div"
+      },
+      {
+        "class": "col-2 cart-header-total-price",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside ",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-container",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-summary",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-summary-header",
+        "tag": "h2"
+      },
+      {
+        "class": "checkout-aside-summary-list-container",
+        "tag": "div"
+      },
+      {
+        "class": "checkout-aside-summary-container",
+        "tag": "div"
+      },
+      {
+        "class": "cart-live-update visually-hidden",
+        "tag": "div"
+      },
+      {
+        "class": "row checkout-aside-summary-list g-0 ",
+        "tag": "dl"
+      },
+      {
+        "class": "col-7 checkout-aside-summary-label",
+        "tag": "dt"
+      },
+      {
+        "class": "col-5 checkout-aside-summary-value",
+        "tag": "dd"
+      },
+      {
+        "class": "col-7 checkout-aside-summary-label checkout-aside-summary-total",
+        "tag": "dt"
+      }
+    ],
+    "links": []
+  }
+]
