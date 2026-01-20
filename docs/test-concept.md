@@ -32,7 +32,7 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:16:171:9 -->
+<!-- PROGRESS_BAR:115:171:67 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
@@ -331,4 +331,4 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ---
 
 
-*Generiert am 2026-01-20 10:11 aus test-inventory.yaml*
+*Generiert am 2026-01-20 10:15 aus test-inventory.yaml*

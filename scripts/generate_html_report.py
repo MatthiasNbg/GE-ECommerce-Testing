@@ -17,7 +17,7 @@ def markdown_to_html(md_content: str) -> str:
         impl = progress_match.group(1)
         total = progress_match.group(2)
         percent = progress_match.group(3)
-        progress_html = f'<div class="progress-container"><div class="progress-header"><span class="progress-title">Gesamtfortschritt</span><span class="progress-stats"><strong>{impl}</strong> von <strong>{total}</strong> Tests implementiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: {percent}%;"></div></div><div class="progress-percent">{percent}%</div></div>'
+        progress_html = f'<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>{impl}</strong> von <strong>{total}</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: {percent}%;"></div></div><div class="progress-percent">{percent}%</div></div>'
         md_content = re.sub(progress_pattern, progress_html, md_content)
 
     # Ersetze Status-Symbole mit HTML-Badges
