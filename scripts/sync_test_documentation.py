@@ -210,6 +210,14 @@ def generate_markdown(inventory: dict, output_file: Path):
     md_lines.append("## Thematische Übersicht der Testfälle\n")
     md_lines.append("**Schnellübersicht: Was wird wo getestet?**\n")
     md_lines.append("### Nach Funktionsbereichen\n")
+
+    # Fortschrittsanzeige berechnen
+    total_tests_all = sum(c.get('count', 0) if isinstance(c.get('count', 0), int) else int(c.get('count', '0').split('-')[0]) for c in categories)
+    impl_tests_all = sum(c.get('implemented', 0) for c in categories)
+    progress_percent = round(impl_tests_all / total_tests_all * 100) if total_tests_all > 0 else 0
+
+    md_lines.append(f"<!-- PROGRESS_BAR:{impl_tests_all}:{total_tests_all}:{progress_percent} -->")
+    md_lines.append("")
     md_lines.append("| Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |")
     md_lines.append("|------------------|-------|--------|-----------|-------------------|")
 

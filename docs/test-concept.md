@@ -32,6 +32,8 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 
 ### Nach Funktionsbereichen
 
+<!-- PROGRESS_BAR:16:171:9 -->
+
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
 | 🏠 **Smoke Tests** | 5 | ✅ 5/5 | 🔴 P0 | Homepage, Produktseiten, Navigation |
@@ -329,4 +331,4 @@ Der aktuelle Implementierungsstand liegt bei **~10%**.
 ---
 
 
-*Generiert am 2026-01-20 09:54 aus test-inventory.yaml*
+*Generiert am 2026-01-20 10:01 aus test-inventory.yaml*

@@ -10,6 +10,16 @@ from datetime import datetime
 def markdown_to_html(md_content: str) -> str:
     """Konvertiert Markdown zu HTML mit Custom-Styling."""
 
+    # Ersetze Progress-Bar Kommentar mit HTML (einzeilig um p-Tag-Problem zu vermeiden)
+    progress_pattern = r'<!-- PROGRESS_BAR:(\d+):(\d+):(\d+) -->'
+    progress_match = re.search(progress_pattern, md_content)
+    if progress_match:
+        impl = progress_match.group(1)
+        total = progress_match.group(2)
+        percent = progress_match.group(3)
+        progress_html = f'<div class="progress-container"><div class="progress-header"><span class="progress-title">Gesamtfortschritt</span><span class="progress-stats"><strong>{impl}</strong> von <strong>{total}</strong> Tests implementiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: {percent}%;"></div></div><div class="progress-percent">{percent}%</div></div>'
+        md_content = re.sub(progress_pattern, progress_html, md_content)
+
     # Ersetze Status-Symbole mit HTML-Badges
     md_content = md_content.replace('✅', '<span class="badge badge-success">✓ Abgeschlossen</span>')
     md_content = md_content.replace('⚠️', '<span class="badge badge-warning">⚠ Teilweise</span>')
@@ -431,6 +441,85 @@ def create_html_document(md_file: Path, output_file: Path):
             border-radius: 8px;
             border-left: 5px solid var(--primary-color);
             margin: 20px 0;
+        }}
+
+        /* Progress Bar Styles */
+        .progress-container {{
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0 25px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }}
+
+        .progress-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }}
+
+        .progress-title {{
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--primary-color);
+        }}
+
+        .progress-stats {{
+            color: #6c757d;
+            font-size: 0.95em;
+        }}
+
+        .progress-stats strong {{
+            color: var(--text-color);
+        }}
+
+        .progress-bar-wrapper {{
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 24px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }}
+
+        .progress-bar {{
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #4a9c4b 100%);
+            border-radius: 10px;
+            transition: width 0.6s ease;
+            position: relative;
+        }}
+
+        .progress-bar::after {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            animation: shimmer 2s infinite;
+        }}
+
+        @keyframes shimmer {{
+            0% {{ transform: translateX(-100%); }}
+            100% {{ transform: translateX(100%); }}
+        }}
+
+        .progress-percent {{
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary-color);
         }}
 
         @media print {{
