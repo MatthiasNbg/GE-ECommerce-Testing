@@ -231,14 +231,27 @@ def generate_markdown(inventory: dict, output_file: Path):
     for cat in categories:
         icon = cat.get('icon', '📋')
         name = cat.get('name', cat['id'])
-        count = cat.get('count', 0)
-        impl = cat.get('implemented', 0)
-        status = cat.get('status', 'missing')
+        cat_id = cat['id']
         priority = cat.get('priority', 'P2')
         desc = cat.get('description', '')
 
-        # Status-Icon
-        status_display = f"✅ {impl}/{count}" if status == 'complete' else f"⚠️ {impl}/{count}" if status == 'partial' else f"❌ {impl}/{count}"
+        # Count kann ein Bereich sein (z.B. "15-20")
+        count_raw = cat.get('count', 0)
+        if isinstance(count_raw, str) and '-' in count_raw:
+            count = int(count_raw.split('-')[0])
+        else:
+            count = int(count_raw) if count_raw else 0
+
+        # Tatsächlich definierte Tests in dieser Kategorie
+        defined = defined_by_cat.get(cat_id, 0)
+
+        # Status basierend auf definierten Tests
+        if defined >= count:
+            status_display = f"✅ {defined}/{count}"
+        elif defined > 0:
+            status_display = f"⚠️ {defined}/{count}"
+        else:
+            status_display = f"❌ {defined}/{count}"
 
         # Priorität-Icon
         prio_icon = "🔴" if priority == "P0" else "🟠" if priority == "P1" else "🟡"
