@@ -365,4 +365,4 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 ---
 
 
-*Generiert am 2026-01-20 13:58 aus test-inventory.yaml*
+*Generiert am 2026-01-20 15:03 aus test-inventory.yaml*
