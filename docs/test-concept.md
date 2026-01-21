@@ -9,8 +9,8 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **176 Testfällen** in 10 Kategorien.
-Der aktuelle Implementierungsstand liegt bei **~84%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **178 Testfällen** in 10 Kategorien.
+Der aktuelle Implementierungsstand liegt bei **~91%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 5/5) implementiert
@@ -32,7 +32,7 @@ Der aktuelle Implementierungsstand liegt bei **~84%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:148:176:84 -->
+<!-- PROGRESS_BAR:162:178:91 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
@@ -44,7 +44,7 @@ Der aktuelle Implementierungsstand liegt bei **~84%**.
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 8 | ⚠️ 1/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
 | 📊 **Data Validation Tests** | 15 | ✅ 15/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
-| 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
+| 🔄 **Regression Tests** | 17 | ✅ 17/17 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
 **Legende:** ✅ Implementiert | ○ Definiert | ⚠️ Teilweise | ❌ Fehlend
@@ -73,11 +73,11 @@ Der aktuelle Implementierungsstand liegt bei **~84%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 176 Tests
-- ✅ Implementiert: 148
-- ❌ Fehlend: 28
+**Gesamt:** 178 Tests
+- ✅ Implementiert: 162
+- ❌ Fehlend: 16
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 84%
+- **Abdeckung:** 91%
 
 ---
 
@@ -337,10 +337,30 @@ Der aktuelle Implementierungsstand liegt bei **~84%**.
 ### 🔄 Regression Tests
 
 **Priorität:** P2
-**Tests:** 3/15-20 implementiert
+**Tests:** 17/17 implementiert
 **Beschreibung:** Regression-Tests nach Änderungen
-**Dauer:** 1-4 Std
+**Dauer:** ~2 Min
 **Ausführung:** Nightly Builds, vor Major Releases
+
+| Test-ID | Name | Priorität | Status |
+|---------|------|-----------|--------|
+| TC-REG-001 | Homepage erreichbar | P2 | ✅ |
+| TC-REG-002 | Suchseite erreichbar | P2 | ✅ |
+| TC-REG-003 | Warenkorb erreichbar | P2 | ✅ |
+| TC-REG-004 | Login erreichbar | P2 | ✅ |
+| TC-REG-005 | Produktseite lädt mit Daten | P2 | ✅ |
+| TC-REG-006 | Suche "Bett" liefert Ergebnisse | P2 | ✅ |
+| TC-REG-007 | Suche "Kissen" liefert Ergebnisse | P2 | ✅ |
+| TC-REG-008 | Suche nach Artikelnummer | P2 | ✅ |
+| TC-REG-009 | Warenkorb hinzufügen funktioniert | P2 | ✅ |
+| TC-REG-010 | Warenkorb-Berechnung korrekt | P2 | ✅ |
+| TC-REG-011 | Checkout erreichbar | P2 | ✅ |
+| TC-REG-012 | Login-Seite funktionsfähig | P2 | ✅ |
+| TC-REG-013 | Registrierung erreichbar | P2 | ✅ |
+| TC-REG-014 | Navigation funktioniert | P2 | ✅ |
+| TC-REG-015 | Footer vorhanden | P2 | ✅ |
+| TC-REG-016 | Bilder laden | P2 | ✅ |
+| TC-REG-017 | Keine kritischen JS-Fehler | P2 | ✅ |
 
 ---
 
@@ -372,7 +392,7 @@ Der aktuelle Implementierungsstand liegt bei **~84%**.
 | phase_5 | Phase 5 - Versandarten | ⏳ | 8 | 50% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 8 | 60% |
 | phase_7 | Phase 7 - Data Validation | ✅ | 15 | 70% |
-| phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
+| phase_8 | Phase 8 - Regression | ✅ | 17 | 85% |
 | phase_9 | Phase 9 - Load Tests | ⏳ | 5 | 90% |
 
 ---

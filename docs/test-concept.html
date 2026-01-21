@@ -446,8 +446,8 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>176 Testfällen</strong> in 10 Kategorien.</p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~84%</strong>.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>178 Testfällen</strong> in 10 Kategorien.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~91%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
@@ -472,7 +472,7 @@
 
 <h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
 
-<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>148</strong> von <strong>176</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 84%;"></div></div><div class="progress-percent">84%</div></div>
+<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>162</strong> von <strong>178</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 91%;"></div></div><div class="progress-percent">91%</div></div>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -540,8 +540,8 @@
 </tr>
 <tr>
 <td>🔄 **Regression Tests**</td>
-<td>15</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 3/15</td>
+<td>17</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 17/17</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Regression-Tests nach Änderungen</td>
 </tr>
@@ -580,12 +580,12 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 176 Tests
+<strong>Gesamt:</strong> 178 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 148</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 28</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 162</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 16</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li>**Abdeckung:** 84%</li>
+<li>**Abdeckung:** 91%</li>
 </ul>
 <hr>
 
@@ -1775,11 +1775,121 @@
 <h3 id="🔄-regression-tests">🔄 Regression Tests</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 3/15-20 implementiert
+<strong>Tests:</strong> 17/17 implementiert
 <strong>Beschreibung:</strong> Regression-Tests nach Änderungen
-<strong>Dauer:</strong> 1-4 Std
+<strong>Dauer:</strong> ~2 Min
 <strong>Ausführung:</strong> Nightly Builds, vor Major Releases
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-REG-001</td>
+<td>Homepage erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-002</td>
+<td>Suchseite erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-003</td>
+<td>Warenkorb erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-004</td>
+<td>Login erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-005</td>
+<td>Produktseite lädt mit Daten</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-006</td>
+<td>Suche "Bett" liefert Ergebnisse</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-007</td>
+<td>Suche "Kissen" liefert Ergebnisse</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-008</td>
+<td>Suche nach Artikelnummer</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-009</td>
+<td>Warenkorb hinzufügen funktioniert</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-010</td>
+<td>Warenkorb-Berechnung korrekt</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-011</td>
+<td>Checkout erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-012</td>
+<td>Login-Seite funktionsfähig</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-013</td>
+<td>Registrierung erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-014</td>
+<td>Navigation funktioniert</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-015</td>
+<td>Footer vorhanden</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-016</td>
+<td>Bilder laden</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+<tr>
+<td>TC-REG-017</td>
+<td>Keine kritischen JS-Fehler</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="⚡-load-tests">⚡ Load Tests</h3>
@@ -1891,8 +2001,8 @@
 <tr>
 <td>phase_8</td>
 <td>Phase 8 - Regression</td>
-<td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>15-20</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>17</td>
 <td>85%</td>
 </tr>
 <tr>
@@ -1911,7 +2021,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 21.01.2026 um 11:26 Uhr</p>
+            <p>Generiert am 21.01.2026 um 15:28 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
