@@ -446,8 +446,8 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>171 Testfällen</strong> in 10 Kategorien. </p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~78%</strong>.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>176 Testfällen</strong> in 10 Kategorien.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~84%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
@@ -472,7 +472,7 @@
 
 <h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
 
-<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>144</strong> von <strong>174</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 83%;"></div></div><div class="progress-percent">83%</div></div>
+<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>148</strong> von <strong>176</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 84%;"></div></div><div class="progress-percent">84%</div></div>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -533,8 +533,8 @@
 </tr>
 <tr>
 <td>📊 **Data Validation Tests**</td>
-<td>10</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 1/10</td>
+<td>15</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 15/15</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Preise, Versandkosten, MwSt., Verfügbarkeit</td>
 </tr>
@@ -580,12 +580,12 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 171 Tests
+<strong>Gesamt:</strong> 176 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 134</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 37</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 148</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 28</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li>**Abdeckung:** 78%</li>
+<li>**Abdeckung:** 84%</li>
 </ul>
 <hr>
 
@@ -1686,11 +1686,90 @@
 <h3 id="📊-data-validation-tests">📊 Data Validation Tests</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 1/10 implementiert
+<strong>Tests:</strong> 15/15 implementiert
 <strong>Beschreibung:</strong> Preise, Versandkosten, MwSt., Verfügbarkeit
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> Täglich (Monitoring), vor Deployments
 
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-DATA-001</td>
+<td>Produktpreis konsistent (PDP = Warenkorb)</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-002</td>
+<td>Zwischensumme korrekt (Preis × Menge)</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-003</td>
+<td>MwSt.-Berechnung AT (20%)</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-004</td>
+<td>Versandkosten Post-Versand</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-005</td>
+<td>Versandkosten Spedition</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-006</td>
+<td>Gesamtsumme korrekt (Zwischensumme + Versand)</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-007</td>
+<td>Verfügbarkeit/Lieferzeit angezeigt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-008</td>
+<td>Währung konsistent (EUR)</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-009</td>
+<td>Artikelnummer korrekt angezeigt</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-DATA-010</td>
+<td>Preis entspricht erwartetem Wert</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="🔄-regression-tests">🔄 Regression Tests</h3>
@@ -1805,8 +1884,8 @@
 <tr>
 <td>phase_7</td>
 <td>Phase 7 - Data Validation</td>
-<td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>9</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>15</td>
 <td>70%</td>
 </tr>
 <tr>
@@ -1832,7 +1911,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 20.01.2026 um 15:03 Uhr</p>
+            <p>Generiert am 21.01.2026 um 11:26 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

@@ -9,8 +9,8 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **171 Testfällen** in 10 Kategorien. 
-Der aktuelle Implementierungsstand liegt bei **~78%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **176 Testfällen** in 10 Kategorien.
+Der aktuelle Implementierungsstand liegt bei **~84%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 5/5) implementiert
@@ -32,7 +32,7 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:144:174:83 -->
+<!-- PROGRESS_BAR:148:176:84 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
@@ -43,7 +43,7 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 | 👤 **Feature Tests - Account** | 8 | ✅ 8/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 8 | ⚠️ 1/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
-| 📊 **Data Validation Tests** | 10 | ⚠️ 1/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
+| 📊 **Data Validation Tests** | 15 | ✅ 15/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
@@ -73,11 +73,11 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 171 Tests
-- ✅ Implementiert: 134
-- ❌ Fehlend: 37
+**Gesamt:** 176 Tests
+- ✅ Implementiert: 148
+- ❌ Fehlend: 28
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 78%
+- **Abdeckung:** 84%
 
 ---
 
@@ -314,10 +314,23 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 ### 📊 Data Validation Tests
 
 **Priorität:** P1
-**Tests:** 1/10 implementiert
+**Tests:** 15/15 implementiert
 **Beschreibung:** Preise, Versandkosten, MwSt., Verfügbarkeit
 **Dauer:** 5-15 Min
 **Ausführung:** Täglich (Monitoring), vor Deployments
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-DATA-001 | Produktpreis konsistent (PDP = Warenkorb) | P1 | ✅ | AT |
+| TC-DATA-002 | Zwischensumme korrekt (Preis × Menge) | P1 | ✅ | AT |
+| TC-DATA-003 | MwSt.-Berechnung AT (20%) | P1 | ✅ | AT |
+| TC-DATA-004 | Versandkosten Post-Versand | P1 | ✅ | AT |
+| TC-DATA-005 | Versandkosten Spedition | P1 | ✅ | AT |
+| TC-DATA-006 | Gesamtsumme korrekt (Zwischensumme + Versand) | P1 | ✅ | AT |
+| TC-DATA-007 | Verfügbarkeit/Lieferzeit angezeigt | P1 | ✅ | AT |
+| TC-DATA-008 | Währung konsistent (EUR) | P1 | ✅ | AT |
+| TC-DATA-009 | Artikelnummer korrekt angezeigt | P1 | ✅ | AT |
+| TC-DATA-010 | Preis entspricht erwartetem Wert | P1 | ✅ | AT |
 
 ---
 
@@ -358,7 +371,7 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 | phase_4 | Phase 4 - Suche | ⏳ | 5 | 40% |
 | phase_5 | Phase 5 - Versandarten | ⏳ | 8 | 50% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 8 | 60% |
-| phase_7 | Phase 7 - Data Validation | ⏳ | 9 | 70% |
+| phase_7 | Phase 7 - Data Validation | ✅ | 15 | 70% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
 | phase_9 | Phase 9 - Load Tests | ⏳ | 5 | 90% |
 
