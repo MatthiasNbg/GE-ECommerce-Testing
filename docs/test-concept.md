@@ -353,10 +353,10 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 |-------|------|--------|-------|----------------|
 | phase_0 | Phase 0 - Basis-Setup | ✅ | 8 | -% |
 | phase_1 | Phase 1 - Critical Path | ⏳ | 5 | 15% |
-| phase_2 | Phase 2 - Warenkorb | ⏳ | 8 | 25% |
-| phase_3 | Phase 3 - Account | ⏳ | 8 | 35% |
-| phase_4 | Phase 4 - Suche | ⏳ | 5 | 40% |
-| phase_5 | Phase 5 - Versandarten | ⏳ | 8 | 50% |
+| phase_2 | Phase 2 - Warenkorb | ✅ | 8 | -% |
+| phase_3 | Phase 3 - Account | ✅ | 8 | -% |
+| phase_4 | Phase 4 - Suche | ✅ | 9 | -% |
+| phase_5 | Phase 5 - Versandarten | ✅ | 98 | -% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 8 | 60% |
 | phase_7 | Phase 7 - Data Validation | ⏳ | 9 | 70% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
@@ -435,4 +435,4 @@ Die folgenden Testdaten werden für die automatisierten Tests verwendet.
 ---
 
 
-*Generiert am 2026-01-22 08:44 aus test-inventory.yaml und config/config.yaml*
+*Generiert am 2026-01-22 08:59 aus test-inventory.yaml und config/config.yaml*

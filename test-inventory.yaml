@@ -2418,24 +2418,24 @@ phases:
   coverage_target: 15
 - id: phase_2
   name: Phase 2 - Warenkorb
-  status: pending
-  tests_planned: 8
-  coverage_target: 25
+  status: complete
+  tests_completed: 8
+  coverage: 25
 - id: phase_3
   name: Phase 3 - Account
-  status: pending
-  tests_planned: 8
-  coverage_target: 35
+  status: complete
+  tests_completed: 8
+  coverage: 35
 - id: phase_4
   name: Phase 4 - Suche
-  status: pending
-  tests_planned: 5
-  coverage_target: 40
+  status: complete
+  tests_completed: 9
+  coverage: 40
 - id: phase_5
   name: Phase 5 - Versandarten
-  status: pending
-  tests_planned: 8
-  coverage_target: 50
+  status: complete
+  tests_completed: 98
+  coverage: 50
 - id: phase_6
   name: Phase 6 - Promotions
   status: pending
@@ -2453,6 +2453,7 @@ phases:
   coverage_target: 85
 - id: phase_9
   name: Phase 9 - Load Tests
-  status: pending
+  status: in_progress
+  tests_completed: 3
   tests_planned: 5
   coverage_target: 90
