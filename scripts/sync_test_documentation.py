@@ -367,8 +367,83 @@ def generate_markdown(inventory: dict, output_file: Path):
 
         md_lines.append("\n---\n")
 
+    # Testdaten aus config.yaml laden
+    config_file = output_file.parent.parent / "config" / "config.yaml"
+    if config_file.exists():
+        with open(config_file, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+
+        md_lines.append("## Testdaten\n")
+        md_lines.append("Die folgenden Testdaten werden für die automatisierten Tests verwendet.\n")
+
+        # Registrierte Testkunden
+        if 'test_customers' in config and 'registered' in config['test_customers']:
+            md_lines.append("### 👤 Registrierte Testkunden\n")
+            md_lines.append("| Land | Name | E-Mail | Kunden-ID |")
+            md_lines.append("|------|------|--------|-----------|")
+            for customer in config['test_customers']['registered']:
+                md_lines.append(f"| {customer.get('country', '')} | {customer.get('name', '')} | {customer.get('email', '')} | {customer.get('customer_id', '')} |")
+            md_lines.append("")
+
+        # Gast-Adresspool
+        if 'test_customers' in config and 'guest_address_pool' in config['test_customers']:
+            md_lines.append("### 📍 Gast-Adresspool\n")
+            pool = config['test_customers']['guest_address_pool']
+            if 'cities' in pool:
+                md_lines.append("| Land | Stadt | PLZ |")
+                md_lines.append("|------|-------|-----|")
+                for country, cities in pool['cities'].items():
+                    for city_data in cities:
+                        md_lines.append(f"| {country} | {city_data.get('city', '')} | {city_data.get('zip', '')} |")
+            md_lines.append("")
+
+        # Testprodukte
+        if 'test_products' in config:
+            md_lines.append("### 📦 Testprodukte\n")
+
+            if 'post_shipping' in config['test_products']:
+                md_lines.append("**Postversand (kleine/leichte Artikel):**\n")
+                md_lines.append("| Produkt | Kategorie | Produkt-ID |")
+                md_lines.append("|---------|-----------|------------|")
+                for product in config['test_products']['post_shipping']:
+                    prod_id = product.get('id', '').split('/')[-1] if '/' in product.get('id', '') else product.get('id', '')
+                    md_lines.append(f"| {product.get('name', '')} | {product.get('category', '')} | {prod_id} |")
+                md_lines.append("")
+
+            if 'spedition_shipping' in config['test_products']:
+                md_lines.append("**Speditionsversand (große/schwere Artikel):**\n")
+                md_lines.append("| Produkt | Kategorie | Produkt-ID |")
+                md_lines.append("|---------|-----------|------------|")
+                for product in config['test_products']['spedition_shipping']:
+                    prod_id = product.get('id', '').split('/')[-1] if '/' in product.get('id', '') else product.get('id', '')
+                    md_lines.append(f"| {product.get('name', '')} | {product.get('category', '')} | {prod_id} |")
+                md_lines.append("")
+
+        # Spezielle Produkte
+        if 'special_products' in config and 'no_discount' in config['special_products']:
+            md_lines.append("### 🏷️ Spezielle Testprodukte\n")
+            md_lines.append("**Nicht-rabattierbare Artikel:**\n")
+            md_lines.append("| Artikel-ID | Name | Beschreibung |")
+            md_lines.append("|------------|------|--------------|")
+            for product in config['special_products']['no_discount']:
+                md_lines.append(f"| {product.get('id', '')} | {product.get('name', '')} | {product.get('description', '')} |")
+            md_lines.append("")
+
+        # Zahlungsarten
+        staging = config.get('profiles', {}).get('staging', {})
+        if 'payment_methods' in staging:
+            md_lines.append("### 💳 Zahlungsarten (Staging)\n")
+            md_lines.append("| Land | Verfügbare Zahlungsarten |")
+            md_lines.append("|------|--------------------------|")
+            for country, methods in staging['payment_methods'].items():
+                if methods:
+                    md_lines.append(f"| {country} | {', '.join(methods)} |")
+            md_lines.append("")
+
+        md_lines.append("---\n")
+
     # Footer
-    md_lines.append(f"\n*Generiert am {datetime.now().strftime('%Y-%m-%d %H:%M')} aus test-inventory.yaml*\n")
+    md_lines.append(f"\n*Generiert am {datetime.now().strftime('%Y-%m-%d %H:%M')} aus test-inventory.yaml und config/config.yaml*\n")
 
     # Schreibe Datei
     output_file.parent.mkdir(parents=True, exist_ok=True)

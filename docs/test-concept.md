@@ -1,7 +1,7 @@
 # Test-Konzept: Grüne Erde E-Commerce Shop
 
 **Projekt:** GE-ECommerce-Testing
-**Datum:** 2026-01-20
+**Datum:** 2026-01-22
 **Version:** 1.0
 **Status:** Entwurf zur Abstimmung
 
@@ -9,8 +9,8 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **178 Testfällen** in 10 Kategorien.
-Der aktuelle Implementierungsstand liegt bei **~91%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **171 Testfällen** in 10 Kategorien. 
+Der aktuelle Implementierungsstand liegt bei **~78%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 5/5) implementiert
@@ -32,7 +32,7 @@ Der aktuelle Implementierungsstand liegt bei **~91%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:162:178:91 -->
+<!-- PROGRESS_BAR:144:174:83 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
@@ -43,8 +43,8 @@ Der aktuelle Implementierungsstand liegt bei **~91%**.
 | 👤 **Feature Tests - Account** | 8 | ✅ 8/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 8 | ⚠️ 1/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
-| 📊 **Data Validation Tests** | 15 | ✅ 15/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
-| 🔄 **Regression Tests** | 17 | ✅ 17/17 | 🟡 P2 | Regression-Tests nach Änderungen |
+| 📊 **Data Validation Tests** | 10 | ⚠️ 1/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
+| 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
 **Legende:** ✅ Implementiert | ○ Definiert | ⚠️ Teilweise | ❌ Fehlend
@@ -73,11 +73,11 @@ Der aktuelle Implementierungsstand liegt bei **~91%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 178 Tests
-- ✅ Implementiert: 162
-- ❌ Fehlend: 16
+**Gesamt:** 171 Tests
+- ✅ Implementiert: 134
+- ❌ Fehlend: 37
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 91%
+- **Abdeckung:** 78%
 
 ---
 
@@ -314,53 +314,20 @@ Der aktuelle Implementierungsstand liegt bei **~91%**.
 ### 📊 Data Validation Tests
 
 **Priorität:** P1
-**Tests:** 15/15 implementiert
+**Tests:** 1/10 implementiert
 **Beschreibung:** Preise, Versandkosten, MwSt., Verfügbarkeit
 **Dauer:** 5-15 Min
 **Ausführung:** Täglich (Monitoring), vor Deployments
-
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-DATA-001 | Produktpreis konsistent (PDP = Warenkorb) | P1 | ✅ | AT |
-| TC-DATA-002 | Zwischensumme korrekt (Preis × Menge) | P1 | ✅ | AT |
-| TC-DATA-003 | MwSt.-Berechnung AT (20%) | P1 | ✅ | AT |
-| TC-DATA-004 | Versandkosten Post-Versand | P1 | ✅ | AT |
-| TC-DATA-005 | Versandkosten Spedition | P1 | ✅ | AT |
-| TC-DATA-006 | Gesamtsumme korrekt (Zwischensumme + Versand) | P1 | ✅ | AT |
-| TC-DATA-007 | Verfügbarkeit/Lieferzeit angezeigt | P1 | ✅ | AT |
-| TC-DATA-008 | Währung konsistent (EUR) | P1 | ✅ | AT |
-| TC-DATA-009 | Artikelnummer korrekt angezeigt | P1 | ✅ | AT |
-| TC-DATA-010 | Preis entspricht erwartetem Wert | P1 | ✅ | AT |
 
 ---
 
 ### 🔄 Regression Tests
 
 **Priorität:** P2
-**Tests:** 17/17 implementiert
+**Tests:** 3/15-20 implementiert
 **Beschreibung:** Regression-Tests nach Änderungen
-**Dauer:** ~2 Min
+**Dauer:** 1-4 Std
 **Ausführung:** Nightly Builds, vor Major Releases
-
-| Test-ID | Name | Priorität | Status |
-|---------|------|-----------|--------|
-| TC-REG-001 | Homepage erreichbar | P2 | ✅ |
-| TC-REG-002 | Suchseite erreichbar | P2 | ✅ |
-| TC-REG-003 | Warenkorb erreichbar | P2 | ✅ |
-| TC-REG-004 | Login erreichbar | P2 | ✅ |
-| TC-REG-005 | Produktseite lädt mit Daten | P2 | ✅ |
-| TC-REG-006 | Suche "Bett" liefert Ergebnisse | P2 | ✅ |
-| TC-REG-007 | Suche "Kissen" liefert Ergebnisse | P2 | ✅ |
-| TC-REG-008 | Suche nach Artikelnummer | P2 | ✅ |
-| TC-REG-009 | Warenkorb hinzufügen funktioniert | P2 | ✅ |
-| TC-REG-010 | Warenkorb-Berechnung korrekt | P2 | ✅ |
-| TC-REG-011 | Checkout erreichbar | P2 | ✅ |
-| TC-REG-012 | Login-Seite funktionsfähig | P2 | ✅ |
-| TC-REG-013 | Registrierung erreichbar | P2 | ✅ |
-| TC-REG-014 | Navigation funktioniert | P2 | ✅ |
-| TC-REG-015 | Footer vorhanden | P2 | ✅ |
-| TC-REG-016 | Bilder laden | P2 | ✅ |
-| TC-REG-017 | Keine kritischen JS-Fehler | P2 | ✅ |
 
 ---
 
@@ -391,11 +358,81 @@ Der aktuelle Implementierungsstand liegt bei **~91%**.
 | phase_4 | Phase 4 - Suche | ⏳ | 5 | 40% |
 | phase_5 | Phase 5 - Versandarten | ⏳ | 8 | 50% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 8 | 60% |
-| phase_7 | Phase 7 - Data Validation | ✅ | 15 | 70% |
-| phase_8 | Phase 8 - Regression | ✅ | 17 | 85% |
+| phase_7 | Phase 7 - Data Validation | ⏳ | 9 | 70% |
+| phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
 | phase_9 | Phase 9 - Load Tests | ⏳ | 5 | 90% |
 
 ---
 
+## Testdaten
 
-*Generiert am 2026-01-20 15:03 aus test-inventory.yaml*
+Die folgenden Testdaten werden für die automatisierten Tests verwendet.
+
+### 👤 Registrierte Testkunden
+
+| Land | Name | E-Mail | Kunden-ID |
+|------|------|--------|-----------|
+| AT | Monika Stadler | ge-at-1@matthias-sax.de | 2921964 |
+| DE | Britta Yook | ge-de-1@matthias-sax.de | 199407 |
+| CH | Ursula Dold | ge-ch-1@matthias-sax.de | 309348 |
+
+### 📍 Gast-Adresspool
+
+| Land | Stadt | PLZ |
+|------|-------|-----|
+| AT | Wien | 1010 |
+| AT | Linz | 4020 |
+| AT | Salzburg | 5020 |
+| AT | Graz | 8010 |
+| AT | Innsbruck | 6020 |
+| DE | München | 80331 |
+| DE | Berlin | 10115 |
+| DE | Hamburg | 20095 |
+| DE | Frankfurt | 60311 |
+| DE | Köln | 50667 |
+| CH | Zürich | 8001 |
+| CH | Bern | 3011 |
+| CH | Basel | 4001 |
+| CH | Genf | 1201 |
+| CH | Luzern | 6003 |
+
+### 📦 Testprodukte
+
+**Postversand (kleine/leichte Artikel):**
+
+| Produkt | Kategorie | Produkt-ID |
+|---------|-----------|------------|
+| Kurzarmshirt Bio-Baumwolle | Textil | ge-p-862990 |
+| Blusenshirt Bio-Leinen | Textil | ge-p-863190 |
+| Duftkissen Lavendel | Accessoires | ge-p-49415 |
+| Augen-Entspannungskissen mit Amaranth | Accessoires | ge-p-74157 |
+| Bademantel Raute | Textil | ge-p-410933 |
+
+**Speditionsversand (große/schwere Artikel):**
+
+| Produkt | Kategorie | Produkt-ID |
+|---------|-----------|------------|
+| Kleiderständer Jukai Pur | Möbel | ge-p-693645 |
+| Polsterbett Almeno | Möbel/Betten | ge-p-693278 |
+| Kleiderschrank (Spedition) | Möbel/Schränke | TBD-schrank-produkt |
+
+### 🏷️ Spezielle Testprodukte
+
+**Nicht-rabattierbare Artikel:**
+
+| Artikel-ID | Name | Beschreibung |
+|------------|------|--------------|
+| 639046 | Nicht-rabattierbarer Artikel | Dieser Artikel darf keinen Rabatt erhalten |
+
+### 💳 Zahlungsarten (Staging)
+
+| Land | Verfügbare Zahlungsarten |
+|------|--------------------------|
+| AT | Vorkasse, Rechnung |
+| DE | Vorkasse, Rechnung |
+| CH | Vorkasse, Rechnung |
+
+---
+
+
+*Generiert am 2026-01-22 08:44 aus test-inventory.yaml und config/config.yaml*
