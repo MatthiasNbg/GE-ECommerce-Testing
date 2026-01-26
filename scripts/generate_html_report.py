@@ -7,6 +7,26 @@ import re
 from pathlib import Path
 from datetime import datetime
 
+def create_anchor_id(text: str) -> str:
+    """Erstellt eine valide Anker-ID aus einem Text."""
+    # Entferne Emojis (alle Unicode-Zeichen > \u00FF)
+    text = re.sub(r'[^\u0000-\u00FF]+', '', text)
+    # Konvertiere Umlaute
+    text = text.replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+    text = text.replace('Ä', 'Ae').replace('Ö', 'Oe').replace('Ü', 'Ue')
+    text = text.replace('ß', 'ss')
+    # Lowercase
+    text = text.lower()
+    # Entferne Sonderzeichen außer Bindestriche und Leerzeichen
+    text = re.sub(r'[^a-z0-9\s-]', '', text)
+    # Ersetze Leerzeichen durch Bindestriche
+    text = re.sub(r'\s+', '-', text)
+    # Entferne multiple Bindestriche
+    text = re.sub(r'-+', '-', text)
+    # Entferne führende/nachfolgende Bindestriche
+    text = text.strip('-')
+    return text
+
 def markdown_to_html(md_content: str) -> str:
     """Konvertiert Markdown zu HTML mit Custom-Styling."""
 
@@ -59,24 +79,24 @@ def markdown_to_html(md_content: str) -> str:
 
         # Headers mit IDs für Anker
         if line.startswith('# '):
-            text = line[2:]
-            anchor_id = text.lower().replace(' ', '-').replace(':', '').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+            text = line[2:].strip()
+            anchor_id = create_anchor_id(text)
             html_lines.append(f'<h1 id="{anchor_id}">{text}</h1>')
         elif line.startswith('## '):
-            text = line[3:]
-            anchor_id = text.lower().replace(' ', '-').replace(':', '').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+            text = line[3:].strip()
+            anchor_id = create_anchor_id(text)
             html_lines.append(f'<h2 id="{anchor_id}">{text}</h2>')
         elif line.startswith('### '):
-            text = line[4:]
-            anchor_id = text.lower().replace(' ', '-').replace(':', '').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+            text = line[4:].strip()
+            anchor_id = create_anchor_id(text)
             html_lines.append(f'<h3 id="{anchor_id}">{text}</h3>')
         elif line.startswith('#### '):
-            text = line[5:]
-            anchor_id = text.lower().replace(' ', '-').replace(':', '').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+            text = line[5:].strip()
+            anchor_id = create_anchor_id(text)
             html_lines.append(f'<h4 id="{anchor_id}">{text}</h4>')
         elif line.startswith('##### '):
-            text = line[6:]
-            anchor_id = text.lower().replace(' ', '-').replace(':', '').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+            text = line[6:].strip()
+            anchor_id = create_anchor_id(text)
             html_lines.append(f'<h5 id="{anchor_id}">{text}</h5>')
         # Tabellen
         elif '|' in line and line.strip().startswith('|'):
@@ -117,6 +137,10 @@ def markdown_to_html(md_content: str) -> str:
                     html_lines.append('<ul>')
                     in_list = True
                 content = line.strip()[2:]
+                # Konvertiere Markdown-Formatierung
+                content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', content)
+                # Konvertiere Inline Code
+                content = re.sub(r'`([^`]+)`', r'<code>\1</code>', content)
                 # Konvertiere Markdown-Links
                 content = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', r'<a href="\2">\1</a>', content)
                 html_lines.append(f'<li>{content}</li>')
@@ -129,6 +153,10 @@ def markdown_to_html(md_content: str) -> str:
                     html_lines.append('<ol>')
                     in_ordered_list = True
                 content = re.sub(r'^\d+\.\s', '', line.strip())
+                # Konvertiere Markdown-Formatierung
+                content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', content)
+                # Konvertiere Inline Code
+                content = re.sub(r'`([^`]+)`', r'<code>\1</code>', content)
                 # Konvertiere Markdown-Links
                 content = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', r'<a href="\2">\1</a>', content)
                 html_lines.append(f'<li>{content}</li>')

@@ -446,8 +446,8 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>171 Testfällen</strong> in 10 Kategorien. </p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~78%</strong>.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>215 Testfällen</strong> in 10 Kategorien.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~65%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
@@ -459,10 +459,10 @@
 </ul>
 <strong>Prioritäten:</strong>
 <ol>
-<li>**Kritische Business-Flows** (Gast-Checkout, Zahlungsarten) → Phase 1</li>
-<li>**Feature-Abdeckung** (Warenkorb, Suche, Account) → Phase 2-4</li>
-<li>**Versandarten & Promotions** → Phase 5-6</li>
-<li>**Qualitätssicherung** (Regression, Load-Tests) → Phase 7-9</li>
+<li><strong>Kritische Business-Flows</strong> (Gast-Checkout, Zahlungsarten) → Phase 1</li>
+<li><strong>Feature-Abdeckung</strong> (Warenkorb, Suche, Account) → Phase 2-4</li>
+<li><strong>Versandarten & Promotions</strong> → Phase 5-6</li>
+<li><strong>Qualitätssicherung</strong> (Regression, Load-Tests) → Phase 7-9</li>
 </ol>
 <hr>
 
@@ -526,17 +526,17 @@
 </tr>
 <tr>
 <td>🎟️ **Feature Tests - Promotions**</td>
-<td>8</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 1/8</td>
+<td>47</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 0/47</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
-<td>Rabattcodes, Mindestbestellwert, Versandkostenfrei</td>
+<td>Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows</td>
 </tr>
 <tr>
 <td>📊 **Data Validation Tests**</td>
-<td>10</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 1/10</td>
+<td>15</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 0/15</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
-<td>Preise, Versandkosten, MwSt., Verfügbarkeit</td>
+<td>Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten</td>
 </tr>
 <tr>
 <td>🔄 **Regression Tests**</td>
@@ -560,18 +560,19 @@
 <h2 id="inhaltsverzeichnis">Inhaltsverzeichnis</h2>
 
 <ol>
-<li><a href="#testfall-übersicht">Testfall-Übersicht</a> - Alle Tests auf einen Blick</li>
+<li><a href="#testfall-uebersicht">Testfall-Übersicht</a> - Alle Tests auf einen Blick</li>
 <li><a href="#test-kategorien">Test-Kategorien</a> - Was wird getestet?</li>
-<li><a href="#smoke">Smoke Tests</a> - (5 Tests)</li>
-<li><a href="#critical-path">Critical Path Tests</a> - (8 Tests)</li>
-<li><a href="#cart">Feature Tests - Warenkorb</a> - (8 Tests)</li>
-<li><a href="#search">Feature Tests - Suche</a> - (9 Tests)</li>
-<li><a href="#account">Feature Tests - Account</a> - (8 Tests)</li>
-<li><a href="#shipping">Feature Tests - Versandarten</a> - (98 Tests)</li>
-<li><a href="#promotions">Feature Tests - Promotions</a> - (8 Tests)</li>
-<li><a href="#data-validation">Data Validation Tests</a> - (10 Tests)</li>
-<li><a href="#regression">Regression Tests</a> - (15-20 Tests)</li>
-<li><a href="#load">Load Tests</a> - (5 Tests)</li>
+<li><a href="#smoke-tests">Smoke Tests</a> - (5 Tests)</li>
+<li><a href="#critical-path-tests">Critical Path Tests</a> - (8 Tests)</li>
+<li><a href="#feature-tests-warenkorb">Feature Tests - Warenkorb</a> - (8 Tests)</li>
+<li><a href="#feature-tests-suche">Feature Tests - Suche</a> - (9 Tests)</li>
+<li><a href="#feature-tests-account">Feature Tests - Account</a> - (8 Tests)</li>
+<li><a href="#feature-tests-versandarten">Feature Tests - Versandarten</a> - (98 Tests)</li>
+<li><a href="#feature-tests-promotions">Feature Tests - Promotions</a> - (47 Tests)</li>
+<li><a href="#data-validation-tests">Data Validation Tests</a> - (15 Tests)</li>
+<li><a href="#regression-tests">Regression Tests</a> - (15-20 Tests)</li>
+<li><a href="#load-tests">Load Tests</a> - (5 Tests)</li>
+<li><a href="#testdaten">Testdaten</a> - Testprodukte, Adressen, Gutscheine</li>
 <li><a href="#implementierungs-roadmap">Implementierungs-Roadmap</a> - Welche Reihenfolge?</li>
 </ol>
 <hr>
@@ -580,18 +581,18 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 171 Tests
+<strong>Gesamt:</strong> 215 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 134</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 37</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 81</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li>**Abdeckung:** 78%</li>
+<li><strong>Abdeckung:</strong> 65%</li>
 </ul>
 <hr>
 
 <h2 id="test-kategorien">Test-Kategorien</h2>
 
-<h3 id="🏠-smoke-tests">🏠 Smoke Tests</h3>
+<h3 id="smoke-tests">🏠 Smoke Tests</h3>
 
 <strong>Priorität:</strong> P0
 <strong>Tests:</strong> 5/5 implementiert
@@ -645,7 +646,7 @@
 </tbody></table></div>
 <hr>
 
-<h3 id="🛒-critical-path-tests">🛒 Critical Path Tests</h3>
+<h3 id="critical-path-tests">🛒 Critical Path Tests</h3>
 
 <strong>Priorität:</strong> P0
 <strong>Tests:</strong> 3/8 implementiert
@@ -720,7 +721,7 @@
 </tbody></table></div>
 <hr>
 
-<h3 id="🛍️-feature-tests---warenkorb">🛍️ Feature Tests - Warenkorb</h3>
+<h3 id="feature-tests-warenkorb">🛍️ Feature Tests - Warenkorb</h3>
 
 <strong>Priorität:</strong> P1
 <strong>Tests:</strong> 8/8 implementiert
@@ -795,7 +796,7 @@
 </tbody></table></div>
 <hr>
 
-<h3 id="🔍-feature-tests---suche">🔍 Feature Tests - Suche</h3>
+<h3 id="feature-tests-suche">🔍 Feature Tests - Suche</h3>
 
 <strong>Priorität:</strong> P1
 <strong>Tests:</strong> 9/9 implementiert
@@ -877,7 +878,7 @@
 </tbody></table></div>
 <hr>
 
-<h3 id="👤-feature-tests---account">👤 Feature Tests - Account</h3>
+<h3 id="feature-tests-account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
 <strong>Tests:</strong> 8/8 implementiert
@@ -952,7 +953,7 @@
 </tbody></table></div>
 <hr>
 
-<h3 id="📦-feature-tests---versandarten">📦 Feature Tests - Versandarten</h3>
+<h3 id="feature-tests-versandarten">📦 Feature Tests - Versandarten</h3>
 
 <strong>Priorität:</strong> P1
 <strong>Tests:</strong> 98/98 implementiert
@@ -1657,13 +1658,15 @@
 </tbody></table></div>
 <hr>
 
-<h3 id="🎟️-feature-tests---promotions">🎟️ Feature Tests - Promotions</h3>
+<h3 id="feature-tests-promotions">🎟️ Feature Tests - Promotions</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 0/8 implementiert
-<strong>Beschreibung:</strong> Rabattcodes, Mindestbestellwert, Versandkostenfrei
-<strong>Dauer:</strong> 10-20 Min
+<strong>Tests:</strong> 0/47 implementiert
+<strong>Beschreibung:</strong> Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Mengenrabatte, Promo-Kombinationen, Gutschein-Checkout-Flows, Automatisierte Promotions, Warenkorb-Rabatte
+<strong>Dauer:</strong> 60-120 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<h4 id="warenkorb-promotions">Warenkorb-Promotions</h4>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -1680,20 +1683,859 @@
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
 </tr>
+<tr>
+<td>TC-PROMO-002</td>
+<td>Ausschluss Kauf rabattierter Artikel</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-003</td>
+<td>Ausschluss Kaufgutscheine mit Rabatten</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-004</td>
+<td>Kein Rabatt auf Wertgutschein</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-CART-PERCENT-001</td>
+<td>Prozentuale Aktion auf Warenkorb mit Ausschlüssen</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<strong>Detaillierte Testbeschreibungen:</strong>
+
+<strong>TC-PROMO-CART-PERCENT-001: Prozentuale Aktion auf Warenkorb mit Ausschlüssen</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Vorlage für %-Aktionen auf Warenkorb - prüft prozentuale Rabatte auf den gesamten Warenkorb mit Produktausschlüssen</li>
+<li><strong>Bedingung:</strong></li>
+<li>Ausschließen von folgenden Produkten:</li>
+<li>nicht_rabattierbar (von Odoo je Variante) = true</li>
+<li>Einkaufsgutscheine</li>
+<li>Shopware-Regel: <strong>[GE-Template-Warenkorb]</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Name (FE):</strong> Promohülse</li>
+<li><strong>Interner Name:</strong> [je nach Kampagne]</li>
+<li><strong>Gültig ab und bis:</strong> [je nach Kampagne]</li>
+<li><strong>Gesamtnutzung:</strong> 1</li>
+<li><strong>Nutzung je Kunde:</strong> 5</li>
+<li><strong>Aktiv:</strong> true</li>
+<li><strong>Aktionscodetyp:</strong> je Kampagne</li>
+<li><strong>Rabattkonfiguration für Odoo:</strong> je Kampagne IDs und Rabattart</li>
+<li><strong>Verkaufskanäle:</strong> AT, DE, CH</li>
+<li><strong>Warenkorb-Regel:</strong> [GE-Template-Warenkorb]</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Warenkorb</li>
+<li><strong>Art:</strong> Prozentual</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt nur auf rabattierbare Produkte angewendet wird</li>
+<li>Verifizieren, dass nicht-rabattierbare Produkte ausgeschlossen werden</li>
+<li>Verifizieren, dass Einkaufsgutscheine ausgeschlossen werden</li>
+<li>Prozentuale Rabatt-Berechnung validieren</li>
+<li>Nutzungslimits prüfen (1x global, 5x pro Kunde)</li>
+<li>Test in allen Verkaufskanälen (AT, DE, CH) durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Promotion wird mit gültigem Code angewendet</li>
+<li>Rabatt wird nur auf rabattierbare Produkte angewendet</li>
+<li>Nicht-rabattierbare Produkte (nicht_rabattierbar = true) werden ausgeschlossen</li>
+<li>Einkaufsgutscheine werden vom Rabatt ausgeschlossen</li>
+<li>Prozentuale Berechnung ist korrekt</li>
+<li>Nutzungslimits werden eingehalten</li>
+<li>Funktioniert in allen DACH-Verkaufskanälen</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019beaf9d194714dbe77b182ea9a1a02/base">Shopware-Regel Template</a></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beaf618b376a9b82416a15d3fc0c8/base">Promotion Template</a></li>
+</ul>
+<h4 id="gutschein-sicherheit-brute-force-tests">Gutschein-Sicherheit (Brute-Force Tests)</h4>
+</ol>
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-SEC-001</td>
+<td>Ausnutzungsmöglichkeiten Kaufgutscheine</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SEC-002</td>
+<td>Gutschein-Kombination für kostenlosen Warenkorb</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SEC-003</td>
+<td>Gutscheine zum Erreichen von MBW</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SEC-004</td>
+<td>Alle Gutschein-Kombinationen (Brute-Force)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="gutschein-checkout-flows">Gutschein-Checkout-Flows</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-CHK-001</td>
+<td>Gutschein zu regulärem Warenkorb blockiert</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-CHK-002</td>
+<td>Reguläres Produkt zu Gutschein-Warenkorb blockiert</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-CHK-003</td>
+<td>Promotion auf Gutschein blockiert</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-CHK-004</td>
+<td>Gemischter Warenkorb im Checkout blockiert</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-CHK-005</td>
+<td>Mehrere Gutscheine erlaubt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<strong>Detaillierte Testbeschreibungen:</strong>
+
+<strong>TC-PROMO-CHK-001: Gutschein zu regulärem Warenkorb blockiert</strong>
+<ul>
+<li><strong>Ausgangssituation:</strong> Warenkorb enthält reguläres Produkt (z.B. Bett "Somnia")</li>
+<li><strong>Aktion:</strong> User versucht Gutschein (Artikel 736675, HC Code 6609) hinzuzufügen</li>
+<li><strong>Event:</strong> BeforeLineItemAddedEvent wird gefeuert</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Event->stopPropagation() wird aufgerufen</li>
+<li>Fehlermeldung: "Einkaufsgutscheine können nur separat gekauft werden. Bitte entfernen Sie zunächst die Produkte im Warenkorb, um die Einkaufsgutscheine kaufen zu können."</li>
+<li>Gutschein wird NICHT hinzugefügt</li>
+<li>User bleibt auf PDP oder wird zu Cart geleitet</li>
+</ul>
+<strong>TC-PROMO-CHK-002: Reguläres Produkt zu Gutschein-Warenkorb blockiert</strong>
+<ul>
+<li><strong>Ausgangssituation:</strong> Warenkorb enthält Einkaufsgutschein 50€ (Artikel 736675)</li>
+<li><strong>Aktion:</strong> User versucht reguläres Produkt (z.B. Kissen) hinzuzufügen</li>
+<li><strong>Event:</strong> BeforeLineItemAddedEvent wird gefeuert</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Event->stopPropagation() wird aufgerufen</li>
+<li>Fehlermeldung: "Einkaufsgutscheine können nur separat gekauft werden. Bitte schließen Sie den Kauf ab oder entfernen Sie die Einkaufsgutscheine von Ihrem Warenkorb."</li>
+<li>Produkt wird NICHT hinzugefügt</li>
+<li>User sieht Fehlermeldung im Frontend</li>
+</ul>
+<strong>TC-PROMO-CHK-003: Promotion auf Gutschein blockiert</strong>
+<ul>
+<li><strong>Ausgangssituation:</strong> Warenkorb enthält Einkaufsgutschein 100€</li>
+<li><strong>Aktion:</strong> User gibt Promotion-Code "SOMMER20" im Gutscheinfeld ein</li>
+<li><strong>Event:</strong> checkout.promotion.added wird gefeuert</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Promotion wird aus cart.lineItems entfernt</li>
+<li>Fehlermeldung: "Rabattcodes können nicht auf Einkaufsgutscheine angewendet werden."</li>
+<li>Promotion-Code wird nicht angewendet</li>
+<li>Warenkorb zeigt vollen Gutschein-Preis</li>
+<li><strong>Alternative:</strong> Button zum Anwenden von Codes wird bei Gutscheinen direkt ausgeblendet (bessere UX)</li>
+</ul>
+<strong>TC-PROMO-CHK-004: Gemischter Warenkorb im Checkout blockiert</strong>
+<ul>
+<li><strong>Ausgangssituation:</strong> User hat durch API/Manipulation gemischten Warenkorb (Gutschein + reguläres Produkt)</li>
+<li><strong>Aktion:</strong> User klickt "Zur Kasse"</li>
+<li><strong>Event:</strong> CartVerifyPersistEvent wird gefeuert</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>CartValidator prüft kompletten Warenkorb</li>
+<li>Findet: Gutschein UND reguläres Produkt</li>
+<li>Fügt BlockingError hinzu mit blockOrder() = true</li>
+<li>Checkout wird verhindert</li>
+<li>User wird zu Warenkorb zurückgeleitet</li>
+<li>Fehlermeldung wird angezeigt</li>
+<li>User MUSS Warenkorb bereinigen (Sicherheitsnetz)</li>
+</ul>
+<strong>TC-PROMO-CHK-005: Mehrere Gutscheine erlaubt</strong>
+<ul>
+<li><strong>Ausgangssituation:</strong> Warenkorb enthält Gutschein 50€</li>
+<li><strong>Aktion:</strong> User fügt Gutschein 100€ hinzu</li>
+<li><strong>Event:</strong> BeforeLineItemAddedEvent wird gefeuert</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Prüfung: Neues Item ist Gutschein + Warenkorb enthält nur Gutscheine</li>
+<li>Gutschein wird erfolgreich hinzugefügt</li>
+<li>Warenkorb zeigt beide Gutscheine (50€ + 100€)</li>
+<li>Checkout ist möglich</li>
+<li>Gesamtpreis: 150€</li>
+</ul>
+<h4 id="versandkostenfrei-promotions">Versandkostenfrei-Promotions</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-SHIP-001</td>
+<td>Versandkostenfrei nur Post (DE/AT)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-002</td>
+<td>Versandkostenfrei nur Post (CH)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-003</td>
+<td>Versandkostenfrei nur Spedi (DE/AT)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-004</td>
+<td>Versandkostenfrei nur Spedi (CH)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-005</td>
+<td>Versandkostenfrei Post ab MBW EUR 50 (DE/AT)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-006</td>
+<td>Versandkostenfrei Post ab MBW CHF 50 (CH)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>CH</td>
+</tr>
+</tbody></table></div>
+<strong>Detaillierte Testbeschreibungen:</strong>
+
+<strong>TC-PROMO-SHIP-001: Versandkostenfrei nur Post (DE/AT)</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Versandkostenfreie Lieferung nur für Postartikel in DE/AT ohne Mindestbestellwert</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = DE, AT</li>
+<li>Verwendete Versandart = Postversand DE, Postversand AT</li>
+<li>Shopware-Regel: <strong>GE_Promo_Lieferland-DA_nurPostversand</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Name (FE):</strong> Promohülse</li>
+<li><strong>Gültig ab und bis:</strong> [je nach Kampagne]</li>
+<li><strong>Gesamtnutzung:</strong> 1</li>
+<li><strong>Nutzung je Kunde:</strong> 5</li>
+<li><strong>Aktiv:</strong> true</li>
+<li><strong>Aktionscodetyp:</strong> je Kampagne</li>
+<li><strong>Rabattkonfiguration für Odoo:</strong> je Kampagne IDs und Rabattart</li>
+<li><strong>Verkaufskanäle:</strong> AT, DE</li>
+<li><strong>Warenkorb-Regel:</strong> GE_Promo_Lieferland-DA_nurPostversand</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Versandkosten</li>
+<li><strong>Art:</strong> Absolut = 5,95 EUR</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Versandkosten auf 0 reduziert werden</li>
+<li>Verifizieren, dass Rabatt absolut 5,95 EUR beträgt</li>
+<li>Prüfen, dass nur Postversand-Methode betroffen ist</li>
+<li>Nutzungslimits testen (1x global, 5x pro Kunde)</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Versandkosten werden auf 0 gesetzt</li>
+<li>Rabatt von 5,95 EUR wird auf Versandkosten angewendet</li>
+<li>Funktioniert nur für Postversand DE/AT</li>
+<li>Speditionsversand ist nicht betroffen</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/01976f6aee8279dd97dd90c31a120032/base">Shopware-Regel</a></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec0a3baf723185fbbdfa46d3e7ad/base">Promotion Template</a></li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Versandkostenfreie Lieferung nur für Postartikel in CH ohne Mindestbestellwert</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = CH</li>
+<li>Verwendete Versandart = Postversand Schweiz</li>
+<li>Shopware-Regel: <strong>GE_Promo_LieferlandCH_nurPostversand</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Verkaufskanäle:</strong> CH</li>
+<li><strong>Warenkorb-Regel:</strong> GE_Promo_LieferlandCH_nurPostversand</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Versandkosten</li>
+<li><strong>Art:</strong> Absolut = 6,95 CHF</li>
+<li>Weitere Konfiguration wie TC-PROMO-SHIP-001</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Rabatt von 6,95 CHF wird auf Versandkosten angewendet</li>
+<li>Funktioniert nur für Postversand CH</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/0197e57bfea470c9bf7964360934c5e7/base">Shopware-Regel</a></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec1280c9709b8190c555644401f0/base">Promotion Template</a></li>
+</ul>
+<strong>TC-PROMO-SHIP-003: Versandkostenfrei nur Spedi (DE/AT)</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Versandkostenfreie Lieferung nur für Speditionsartikel in DE/AT</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = DE, AT</li>
+<li>Verwendete Versandart = Spedi-Versand AT und DE</li>
+<li>Shopware-Regel: <strong>GE_Promo_MBW50_LieferlandDA_nurSpedi</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Verkaufskanäle:</strong> AT, DE</li>
+<li><strong>Warenkorb-Regel:</strong> GE_Promo_MBW50_LieferlandDA_nurSpedi</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Versandkosten</li>
+<li><strong>Art:</strong> Absolut</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Versandkosten auf 0 reduziert werden</li>
+<li>Verifizieren, dass nur Speditionsversand betroffen ist</li>
+<li>Prüfen, dass Postversand nicht betroffen ist</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Versandkosten für Spedition werden auf 0 gesetzt</li>
+<li>Funktioniert nur für Speditionsversand</li>
+<li>Postversand ist nicht betroffen</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019974fd6455701b9c6772d9f544f234/base">Shopware-Regel</a></li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Versandkostenfreie Lieferung nur für Speditionsartikel in CH</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = CH</li>
+<li>Verwendete Versandart = Spedition Schweiz</li>
+<li>Shopware-Regel: <strong>GE_Promo_MBW50_LieferlandCH_nurSpedi</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Verkaufskanäle:</strong> CH</li>
+<li><strong>Warenkorb-Regel:</strong> GE_Promo_MBW50_LieferlandCH_nurSpedi</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Versandkosten</li>
+<li><strong>Art:</strong> Absolut</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Versandkosten für Spedition CH werden auf 0 gesetzt</li>
+<li>Funktioniert nur für Speditionsversand CH</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0fb87c716489912f1af4a421e9/base">Shopware-Regel</a></li>
+</ul>
+<strong>TC-PROMO-SHIP-005: Versandkostenfrei Post ab MBW EUR 50 (DE/AT)</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Versandkostenfreie Postlieferung ab Mindestbestellwert 50 EUR für DE/AT</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = DE, AT</li>
+<li>Verwendete Versandart = Postversand DE, Postversand AT</li>
+<li>Summe = >50 EUR (Mindestbestellwert)</li>
+<li>Shopware-Regel: <strong>GE_Promo_MBW50_LieferlandDA_nurPostversand</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Verkaufskanäle:</strong> AT, DE</li>
+<li><strong>Warenkorb-Regel:</strong> GE_Promo_MBW50_LieferlandDA_nurPostversand</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Versandkosten</li>
+<li><strong>Art:</strong> Absolut = 5,95 EUR</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben → sollte nicht funktionieren</li>
+<li>Warenkorb auf über 50 EUR erhöhen</li>
+<li>Promotion-Code erneut eingeben</li>
+<li>Prüfen, dass Versandkosten auf 0 reduziert werden</li>
+<li>MBW-Grenze testen (49,99 EUR vs 50,00 EUR)</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Promotion funktioniert nur ab 50 EUR Warenwert</li>
+<li>Versandkosten werden auf 0 gesetzt</li>
+<li>Rabatt von 5,95 EUR wird angewendet</li>
+<li>Unter MBW: Fehlermeldung oder keine Anwendung</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bf906150a7042ba5d46f77b009b98/base">Shopware-Regel</a></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beb1f40bf726da2d9e3c10c0c2e5e/conditions">Promotion Template</a></li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Versandkostenfreie Postlieferung ab Mindestbestellwert 50 CHF für CH</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = CH</li>
+<li>Verwendete Versandart = Postversand Schweiz</li>
+<li>Summe = >50 CHF (Mindestbestellwert)</li>
+<li>Shopware-Regel: <strong>GE_Promo_MBW50_LieferlandCH_nurPostversand</strong></li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Verkaufskanäle:</strong> CH</li>
+<li><strong>Warenkorb-Regel:</strong> GE_Promo_MBW50_LieferlandCH_nurPostversand</li>
+<li><strong>Rabatt: Anwenden auf:</strong> Versandkosten</li>
+<li><strong>Art:</strong> Absolut = 6,95 CHF</li>
+<li><strong>Testschritte:</strong></li>
+<li>Analog zu TC-PROMO-SHIP-005, aber mit CHF und CH-spezifischen Werten</li>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Promotion funktioniert nur ab 50 CHF Warenwert</li>
+<li>Rabatt von 6,95 CHF wird angewendet</li>
+<li><strong>Referenzen:</strong></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0c9ba2724d8f118c3f01db846d/base">Shopware-Regel</a></li>
+<li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec13f89e7197b69879ce36d3da5c/base">Promotion Template</a></li>
+</ul>
+<h4 id="produktkategorien-promotions">Produktkategorien-Promotions</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-CAT-001</td>
+<td>Promo auf Produktkategorie via advertising_material_id</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-AUTO-001</td>
+<td>Automatisierte Promo auf Werbemittel ID 70</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<strong>Detaillierte Testbeschreibungen:</strong>
+
+<strong>TC-PROMO-AUTO-001: Automatisierte Promo auf Werbemittel ID 70</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Vorlage für Promohuelse (automatisierte Promo) - prüft automatische Rabattanwendung auf Produkte mit Werbemittel ID 70</li>
+<li><strong>Bedingung:</strong> Nur Produkte mit Werbemittel ID 70, keine Shopware-Regel notwendig</li>
+<li><strong>Promo-Konfiguration:</strong></li>
+<li><strong>Aktionscodetyp:</strong> kein Code erforderlich (automatisch)</li>
+<li><strong>Rabattkonfiguration für Odoo:</strong> je Kampagne IDs und Rabattart</li>
+<li><strong>Odoo Product Tag:</strong> Odoo Product Tag Advertising Material IDs - Automatic Promotion</li>
+<li><strong>Verkaufskanäle:</strong> AT, DE, CH</li>
+<li><strong>Warenkorb-Regel:</strong> nicht notwendig</li>
+<li><strong>Anwenden auf:</strong> Warenkorb</li>
+<li><strong>Nur auf ausgewählte Produkte:</strong> true</li>
+<li><strong>Anwenden auf:</strong> ausgewählte Produkte</li>
+<li><strong>Art:</strong> Prozentual</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Zum Warenkorb navigieren</li>
+<li>Prüfen, dass automatische Promotion angewendet wurde (kein Code-Eingabe erforderlich)</li>
+<li>Prozentuale Rabatt-Berechnung validieren</li>
+<li>Test in allen Verkaufskanälen (AT, DE, CH) durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Promotion wird automatisch ohne Code angewendet</li>
+<li>Rabatt wird nur auf Produkte mit Werbemittel ID 70 angewendet</li>
+<li>Rabatt ist prozentual und wird korrekt berechnet</li>
+<li>Funktioniert in allen DACH-Verkaufskanälen</li>
+<li><strong>Referenz:</strong> <a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019be5f25363722483455ea500fee356/base">Shopware Promotion Template</a></li>
+</ul>
+<h4 id="mindestbestellwert-promotions">Mindestbestellwert-Promotions</h4>
+</ol>
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-MOV-001</td>
+<td>EUR-Rabatt ab Mindestbestellwert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-MOV-002</td>
+<td>MBW nur auf Warenkorb angewendet</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="mengenrabatt-promotions">Mengenrabatt-Promotions</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-QTY-001</td>
+<td>% auf teuerstes Produkt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-QTY-002</td>
+<td>Mengenrabatt nur auf 1 Produkt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-QTY-003</td>
+<td>3x gleiches Produkt - nur 1x rabattiert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="aktionspreis-promotions">Aktionspreis-Promotions</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-SALE-001</td>
+<td>Rabatt auf Lieblingsprodukt (Aktionspreis)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SALE-002</td>
+<td>Promo mit Produkt-ID via advertising_material_id</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SALE-003</td>
+<td>Promo mit leerer Promo-ID nicht möglich</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-SALE-004</td>
+<td>SALE-Anzeige bei Aktionspreis korrekt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="mitarbeiterrabatt">Mitarbeiterrabatt</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-EMP-001</td>
+<td>Mitarbeiterrabatt nur auf Basispreis</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-EMP-002</td>
+<td>Mitarbeiterrabatt nicht auf Aktionspreis</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="bundle-promotions">Bundle-Promotions</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-BUNDLE-001</td>
+<td>Nimm 5 zahl 4</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-BUNDLE-002</td>
+<td>Produkt A + Gratisprodukt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-BUNDLE-003</td>
+<td>Kissen + Schonbezug gratis</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-BUNDLE-004</td>
+<td>Pro Kissen ein Schonbezug gratis</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="promo-kombinationen">Promo-Kombinationen</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PROMO-COMBO-001</td>
+<td>Zwei Promotions kombinierbar</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-COMBO-002</td>
+<td>20% Kleidung + 5% Alles</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-PROMO-COMBO-003</td>
+<td>Aufeinander aufbauende Promos</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
 </tbody></table></div>
 <hr>
 
-<h3 id="📊-data-validation-tests">📊 Data Validation Tests</h3>
+<h3 id="data-validation-tests">📊 Data Validation Tests</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 1/10 implementiert
-<strong>Beschreibung:</strong> Preise, Versandkosten, MwSt., Verfügbarkeit
-<strong>Dauer:</strong> 5-15 Min
+<strong>Tests:</strong> 0/15 implementiert
+<strong>Beschreibung:</strong> Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten, Filterbarkeit
+<strong>Dauer:</strong> 15-30 Min
 <strong>Ausführung:</strong> Täglich (Monitoring), vor Deployments
 
+<h4 id="produktdaten-validierung">Produktdaten-Validierung</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-DATA-001</td>
+<td>Stichprobe: Produkte haben Produkttyp</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-002</td>
+<td>Stichprobe: Produkte über Grundfarbe findbar</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-003</td>
+<td>Produkttyp nicht leer bei allen Produkten</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-004</td>
+<td>Grundfarbe Filter funktioniert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-005</td>
+<td>Produkttyp Filter funktioniert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="preis-validierung">Preis-Validierung</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-DATA-006</td>
+<td>Preise korrekt angezeigt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-007</td>
+<td>MwSt. korrekt berechnet</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-008</td>
+<td>Aktionspreise korrekt dargestellt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="versandkosten-validierung">Versandkosten-Validierung</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-DATA-009</td>
+<td>Versandkosten korrekt berechnet (Post)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-010</td>
+<td>Versandkosten korrekt berechnet (Spedition)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="verfuegbarkeits-validierung">Verfügbarkeits-Validierung</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-DATA-011</td>
+<td>Verfügbarkeitsstatus korrekt angezeigt</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-012</td>
+<td>Nicht verfügbare Produkte nicht bestellbar</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<h4 id="cross-country-daten-konsistenz">Cross-Country Daten-Konsistenz</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-DATA-013</td>
+<td>Produkte in allen Ländern verfügbar</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-014</td>
+<td>Produktdaten konsistent über Länder</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+<tr>
+<td>TC-DATA-015</td>
+<td>Stichprobe: Produktbilder vorhanden</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
 <hr>
 
-<h3 id="🔄-regression-tests">🔄 Regression Tests</h3>
+<h3 id="regression-tests">🔄 Regression Tests</h3>
 
 <strong>Priorität:</strong> P2
 <strong>Tests:</strong> 3/15-20 implementiert
@@ -1703,7 +2545,7 @@
 
 <hr>
 
-<h3 id="⚡-load-tests">⚡ Load Tests</h3>
+<h3 id="load-tests">⚡ Load Tests</h3>
 
 <strong>Priorität:</strong> P2
 <strong>Tests:</strong> 3/5 implementiert
@@ -1799,14 +2641,14 @@
 <td>phase_6</td>
 <td>Phase 6 - Promotions</td>
 <td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>8</td>
+<td>47</td>
 <td>60%</td>
 </tr>
 <tr>
 <td>phase_7</td>
 <td>Phase 7 - Data Validation</td>
 <td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>9</td>
+<td>15</td>
 <td>70%</td>
 </tr>
 <tr>
@@ -1830,7 +2672,7 @@
 
 <p>Die folgenden Testdaten werden für die automatisierten Tests verwendet.</p>
 
-<h3 id="👤-registrierte-testkunden">👤 Registrierte Testkunden</h3>
+<h3 id="registrierte-testkunden">👤 Registrierte Testkunden</h3>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -1858,7 +2700,7 @@
 <td>309348</td>
 </tr>
 </tbody></table></div>
-<h3 id="📍-gast-adresspool">📍 Gast-Adresspool</h3>
+<h3 id="gast-adresspool">📍 Gast-Adresspool</h3>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -1942,7 +2784,7 @@
 <td>6003</td>
 </tr>
 </tbody></table></div>
-<h3 id="📦-testprodukte">📦 Testprodukte</h3>
+<h3 id="testprodukte">📦 Testprodukte</h3>
 
 <strong>Postversand (kleine/leichte Artikel):</strong>
 
@@ -1951,31 +2793,37 @@
 <th>Produkt</th>
 <th>Kategorie</th>
 <th>Produkt-ID</th>
+<th>Verwendung</th>
 </tr></thead><tbody>
 <tr>
 <td>Kurzarmshirt Bio-Baumwolle</td>
 <td>Textil</td>
 <td>ge-p-862990</td>
+<td>-</td>
 </tr>
 <tr>
 <td>Blusenshirt Bio-Leinen</td>
 <td>Textil</td>
 <td>ge-p-863190</td>
+<td>-</td>
 </tr>
 <tr>
 <td>Duftkissen Lavendel</td>
 <td>Accessoires</td>
 <td>ge-p-49415</td>
+<td>Gutschein-Checkout-Tests (TC-PROMO-CHK-002)</td>
 </tr>
 <tr>
 <td>Augen-Entspannungskissen mit Amaranth</td>
 <td>Accessoires</td>
 <td>ge-p-74157</td>
+<td>-</td>
 </tr>
 <tr>
 <td>Bademantel Raute</td>
 <td>Textil</td>
 <td>ge-p-410933</td>
+<td>-</td>
 </tr>
 </tbody></table></div>
 <strong>Speditionsversand (große/schwere Artikel):</strong>
@@ -1985,24 +2833,28 @@
 <th>Produkt</th>
 <th>Kategorie</th>
 <th>Produkt-ID</th>
+<th>Verwendung</th>
 </tr></thead><tbody>
 <tr>
 <td>Kleiderständer Jukai Pur</td>
 <td>Möbel</td>
 <td>ge-p-693645</td>
+<td>-</td>
 </tr>
 <tr>
 <td>Polsterbett Almeno</td>
 <td>Möbel/Betten</td>
 <td>ge-p-693278</td>
+<td>Gutschein-Checkout-Tests (TC-PROMO-CHK-001)</td>
 </tr>
 <tr>
 <td>Kleiderschrank (Spedition)</td>
 <td>Möbel/Schränke</td>
 <td>TBD-schrank-produkt</td>
+<td>-</td>
 </tr>
 </tbody></table></div>
-<h3 id="🏷️-spezielle-testprodukte">🏷️ Spezielle Testprodukte</h3>
+<h3 id="spezielle-testprodukte">🏷️ Spezielle Testprodukte</h3>
 
 <strong>Nicht-rabattierbare Artikel:</strong>
 
@@ -2018,7 +2870,379 @@
 <td>Dieser Artikel darf keinen Rabatt erhalten</td>
 </tr>
 </tbody></table></div>
-<h3 id="💳-zahlungsarten-(staging)">💳 Zahlungsarten (Staging)</h3>
+<strong>Produkte mit Aktionspreis:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Artikel-ID</th>
+<th>Name</th>
+<th>Basispreis</th>
+<th>Aktionspreis</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TBD</td>
+<td>Testprodukt Aktionspreis 1</td>
+<td>TBD</td>
+<td>TBD</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Testprodukt Aktionspreis 2</td>
+<td>TBD</td>
+<td>TBD</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<strong>Bundle-Produkte:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Artikel-ID</th>
+<th>Name</th>
+<th>Bundle-Typ</th>
+<th>Gratisprodukt</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TBD</td>
+<td>Kissen (mit Schonbezug gratis)</td>
+<td>A + B gratis</td>
+<td>Schonbezug</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Nimm 5 zahl 4 Testprodukt</td>
+<td>Mengenrabatt</td>
+<td>-</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<strong>Produkte mit advertising_material_id:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Artikel-ID</th>
+<th>Name</th>
+<th>advertising_material_id</th>
+<th>Kategorie</th>
+<th>Verwendung</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TBD</td>
+<td>Testprodukt Werbemittel</td>
+<td>70</td>
+<td>Promo-Werbemittel</td>
+<td>TC-PROMO-AUTO-001 (Automatisierte Promo)</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Testprodukt Kategorie 1</td>
+<td>TBD</td>
+<td>TBD</td>
+<td>Allgemeine Kategorietests</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Testprodukt Kategorie 2</td>
+<td>TBD</td>
+<td>TBD</td>
+<td>Allgemeine Kategorietests</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<strong>Produkte für Data Validation Tests:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Artikel-ID</th>
+<th>Name</th>
+<th>Produkttyp</th>
+<th>Grundfarbe</th>
+<th>Verwendung</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>ge-p-862990</td>
+<td>Kurzarmshirt Bio-Baumwolle</td>
+<td>Shirt</td>
+<td>Weiß/Beige</td>
+<td>Stichprobe Produkttyp & Farbe</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> Vorhanden</td>
+</tr>
+<tr>
+<td>ge-p-863190</td>
+<td>Blusenshirt Bio-Leinen</td>
+<td>Shirt</td>
+<td>Blau</td>
+<td>Stichprobe Produkttyp & Farbe</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> Vorhanden</td>
+</tr>
+<tr>
+<td>ge-p-410933</td>
+<td>Bademantel Raute</td>
+<td>Bademantel</td>
+<td>Grau</td>
+<td>Stichprobe Produkttyp & Farbe</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> Vorhanden</td>
+</tr>
+<tr>
+<td>ge-p-49415</td>
+<td>Duftkissen Lavendel</td>
+<td>Kissen</td>
+<td>Lila</td>
+<td>Stichprobe Produkttyp & Farbe</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> Vorhanden</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Produkt ohne Produkttyp</td>
+<td>-</td>
+<td>-</td>
+<td>Negativtest</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Produkt ohne Grundfarbe</td>
+<td>TBD</td>
+<td>-</td>
+<td>Negativtest</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<h3 id="gutscheine-rabattcodes">🎟️ Gutscheine & Rabattcodes</h3>
+
+<strong>Kaufgutscheine (für Sicherheitstests & Checkout-Flows):</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Artikel-ID</th>
+<th>Wert</th>
+<th>Typ</th>
+<th>HC Code</th>
+<th>Verwendung</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>736675</td>
+<td>50 EUR</td>
+<td>Einkaufsgutschein</td>
+<td>6609</td>
+<td>Checkout-Flow Tests</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> Vorhanden</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>100 EUR</td>
+<td>Einkaufsgutschein</td>
+<td>6609</td>
+<td>Checkout-Flow Tests</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>10 EUR</td>
+<td>Kaufgutschein</td>
+<td>6609</td>
+<td>Sicherheitstests</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>25 EUR</td>
+<td>Kaufgutschein</td>
+<td>6609</td>
+<td>Sicherheitstests</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<strong>Wertgutscheine:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Code</th>
+<th>Wert</th>
+<th>Typ</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TBD</td>
+<td>25 EUR</td>
+<td>Wertgutschein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>50 EUR</td>
+<td>Wertgutschein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<strong>Rabattcodes:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Code</th>
+<th>Rabatt</th>
+<th>Typ</th>
+<th>Bedingungen</th>
+<th>Verwendung</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>TBD</td>
+<td>10%</td>
+<td>Warenkorb</td>
+<td>MBW 50 EUR</td>
+<td>Allgemein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>15 EUR</td>
+<td>Warenkorb</td>
+<td>MBW 100 EUR</td>
+<td>Allgemein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>20%</td>
+<td>Warenkorb</td>
+<td>Ausschluss nicht-rabattierbar + Gutscheine, 1x global, 5x pro Kunde</td>
+<td>TC-PROMO-CART-PERCENT-001</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Versandkostenfrei (5,95 EUR)</td>
+<td>Versand Post</td>
+<td>Nur Post DE/AT, 1x global, 5x pro Kunde</td>
+<td>TC-PROMO-SHIP-001</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Versandkostenfrei (6,95 CHF)</td>
+<td>Versand Post</td>
+<td>Nur Post CH, 1x global, 5x pro Kunde</td>
+<td>TC-PROMO-SHIP-002</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Versandkostenfrei</td>
+<td>Versand Spedi</td>
+<td>Nur Spedi DE/AT</td>
+<td>TC-PROMO-SHIP-003</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Versandkostenfrei</td>
+<td>Versand Spedi</td>
+<td>Nur Spedi CH</td>
+<td>TC-PROMO-SHIP-004</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Versandkostenfrei (5,95 EUR)</td>
+<td>Versand Post</td>
+<td>MBW 50 EUR, Post DE/AT</td>
+<td>TC-PROMO-SHIP-005</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Versandkostenfrei (6,95 CHF)</td>
+<td>Versand Post</td>
+<td>MBW 50 CHF, Post CH</td>
+<td>TC-PROMO-SHIP-006</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>20%</td>
+<td>Produktkategorie</td>
+<td>Via advertising_material_id</td>
+<td>Allgemein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>% Rabatt</td>
+<td>Teuerstes Produkt</td>
+<td>Nur 1 Produkt rabattiert</td>
+<td>Allgemein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>20%</td>
+<td>Kleidung</td>
+<td>Kombinierbar</td>
+<td>Allgemein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>5%</td>
+<td>Alles</td>
+<td>Kombinierbar</td>
+<td>Allgemein</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>SOMMER20</td>
+<td>20%</td>
+<td>Warenkorb</td>
+<td>Gutschein-Checkout-Test</td>
+<td>TC-PROMO-CHK-003</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<h3 id="mitarbeiter-accounts">👥 Mitarbeiter-Accounts</h3>
+
+<strong>Test-Mitarbeiter mit Rabatt:</strong>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Land</th>
+<th>Name</th>
+<th>E-Mail</th>
+<th>Rabatt</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>AT</td>
+<td>Mitarbeiter AT</td>
+<td>TBD</td>
+<td>Nur Basispreis</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>DE</td>
+<td>Mitarbeiter DE</td>
+<td>TBD</td>
+<td>Nur Basispreis</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+<tr>
+<td>CH</td>
+<td>Mitarbeiter CH</td>
+<td>TBD</td>
+<td>Nur Basispreis</td>
+<td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
+</tr>
+</tbody></table></div>
+<h3 id="zahlungsarten-staging">💳 Zahlungsarten (Staging)</h3>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -2046,7 +3270,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 22.01.2026 um 08:59 Uhr</p>
+            <p>Generiert am 26.01.2026 um 17:34 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

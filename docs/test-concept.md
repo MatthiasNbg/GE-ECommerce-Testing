@@ -9,8 +9,8 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **171 Testfällen** in 10 Kategorien. 
-Der aktuelle Implementierungsstand liegt bei **~78%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **215 Testfällen** in 10 Kategorien.
+Der aktuelle Implementierungsstand liegt bei **~65%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 5/5) implementiert
@@ -42,8 +42,8 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
 | 👤 **Feature Tests - Account** | 8 | ✅ 8/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
-| 🎟️ **Feature Tests - Promotions** | 8 | ⚠️ 1/8 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei |
-| 📊 **Data Validation Tests** | 10 | ⚠️ 1/10 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit |
+| 🎟️ **Feature Tests - Promotions** | 47 | ⚠️ 0/47 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
+| 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
@@ -53,19 +53,20 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 
 ## Inhaltsverzeichnis
 
-1. [Testfall-Übersicht](#testfall-übersicht) - Alle Tests auf einen Blick
+1. [Testfall-Übersicht](#testfall-uebersicht) - Alle Tests auf einen Blick
 2. [Test-Kategorien](#test-kategorien) - Was wird getestet?
-3. [Smoke Tests](#smoke) - (5 Tests)
-4. [Critical Path Tests](#critical-path) - (8 Tests)
-5. [Feature Tests - Warenkorb](#cart) - (8 Tests)
-6. [Feature Tests - Suche](#search) - (9 Tests)
-7. [Feature Tests - Account](#account) - (8 Tests)
-8. [Feature Tests - Versandarten](#shipping) - (98 Tests)
-9. [Feature Tests - Promotions](#promotions) - (8 Tests)
-10. [Data Validation Tests](#data-validation) - (10 Tests)
-11. [Regression Tests](#regression) - (15-20 Tests)
-12. [Load Tests](#load) - (5 Tests)
-13. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
+3. [Smoke Tests](#smoke-tests) - (5 Tests)
+4. [Critical Path Tests](#critical-path-tests) - (8 Tests)
+5. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (8 Tests)
+6. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
+7. [Feature Tests - Account](#feature-tests-account) - (8 Tests)
+8. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
+9. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
+10. [Data Validation Tests](#data-validation-tests) - (15 Tests)
+11. [Regression Tests](#regression-tests) - (15-20 Tests)
+12. [Load Tests](#load-tests) - (5 Tests)
+13. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
+14. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
 
 ---
 
@@ -73,11 +74,11 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 171 Tests
+**Gesamt:** 215 Tests
 - ✅ Implementiert: 134
-- ❌ Fehlend: 37
+- ❌ Fehlend: 81
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 78%
+- **Abdeckung:** 65%
 
 ---
 
@@ -300,24 +301,428 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 ### 🎟️ Feature Tests - Promotions
 
 **Priorität:** P2
-**Tests:** 0/8 implementiert
-**Beschreibung:** Rabattcodes, Mindestbestellwert, Versandkostenfrei
-**Dauer:** 10-20 Min
+**Tests:** 0/47 implementiert
+**Beschreibung:** Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Mengenrabatte, Promo-Kombinationen, Gutschein-Checkout-Flows, Automatisierte Promotions, Warenkorb-Rabatte
+**Dauer:** 60-120 Min
 **Ausführung:** In CI/CD, vor Feature-Release
+
+#### Warenkorb-Promotions
 
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
 | TC-PROMO-001 | Nicht-rabattierbarer Artikel (639046) | P1 | ○ | AT, DE, CH |
+| TC-PROMO-002 | Ausschluss Kauf rabattierter Artikel | P1 | ○ | AT, DE, CH |
+| TC-PROMO-003 | Ausschluss Kaufgutscheine mit Rabatten | P1 | ○ | AT, DE, CH |
+| TC-PROMO-004 | Kein Rabatt auf Wertgutschein | P1 | ○ | AT, DE, CH |
+| TC-PROMO-CART-PERCENT-001 | Prozentuale Aktion auf Warenkorb mit Ausschlüssen | P1 | ○ | AT, DE, CH |
+
+**Detaillierte Testbeschreibungen:**
+
+**TC-PROMO-CART-PERCENT-001: Prozentuale Aktion auf Warenkorb mit Ausschlüssen**
+- **Beschreibung:** Vorlage für %-Aktionen auf Warenkorb - prüft prozentuale Rabatte auf den gesamten Warenkorb mit Produktausschlüssen
+- **Bedingung:**
+  - Ausschließen von folgenden Produkten:
+    - nicht_rabattierbar (von Odoo je Variante) = true
+    - Einkaufsgutscheine
+  - Shopware-Regel: **[GE-Template-Warenkorb]**
+- **Promo-Konfiguration:**
+  - **Name (FE):** Promohülse
+  - **Interner Name:** [je nach Kampagne]
+  - **Gültig ab und bis:** [je nach Kampagne]
+  - **Gesamtnutzung:** 1
+  - **Nutzung je Kunde:** 5
+  - **Aktiv:** true
+  - **Aktionscodetyp:** je Kampagne
+  - **Rabattkonfiguration für Odoo:** je Kampagne IDs und Rabattart
+  - **Verkaufskanäle:** AT, DE, CH
+  - **Warenkorb-Regel:** [GE-Template-Warenkorb]
+  - **Rabatt: Anwenden auf:** Warenkorb
+  - **Art:** Prozentual
+- **Testschritte:**
+  1. Warenkorb mit verschiedenen Produkten befüllen (normale Produkte, nicht-rabattierbare Produkte, Gutscheine)
+  2. Promotion-Code eingeben
+  3. Prüfen, dass Rabatt nur auf rabattierbare Produkte angewendet wird
+  4. Verifizieren, dass nicht-rabattierbare Produkte ausgeschlossen werden
+  5. Verifizieren, dass Einkaufsgutscheine ausgeschlossen werden
+  6. Prozentuale Rabatt-Berechnung validieren
+  7. Nutzungslimits prüfen (1x global, 5x pro Kunde)
+  8. Test in allen Verkaufskanälen (AT, DE, CH) durchführen
+- **Erwartetes Verhalten:**
+  - Promotion wird mit gültigem Code angewendet
+  - Rabatt wird nur auf rabattierbare Produkte angewendet
+  - Nicht-rabattierbare Produkte (nicht_rabattierbar = true) werden ausgeschlossen
+  - Einkaufsgutscheine werden vom Rabatt ausgeschlossen
+  - Prozentuale Berechnung ist korrekt
+  - Nutzungslimits werden eingehalten
+  - Funktioniert in allen DACH-Verkaufskanälen
+- **Referenzen:**
+  - [Shopware-Regel Template](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019beaf9d194714dbe77b182ea9a1a02/base)
+  - [Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beaf618b376a9b82416a15d3fc0c8/base)
+
+#### Gutschein-Sicherheit (Brute-Force Tests)
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-SEC-001 | Ausnutzungsmöglichkeiten Kaufgutscheine | P0 | ○ | AT, DE, CH |
+| TC-PROMO-SEC-002 | Gutschein-Kombination für kostenlosen Warenkorb | P0 | ○ | AT, DE, CH |
+| TC-PROMO-SEC-003 | Gutscheine zum Erreichen von MBW | P1 | ○ | AT, DE, CH |
+| TC-PROMO-SEC-004 | Alle Gutschein-Kombinationen (Brute-Force) | P1 | ○ | AT, DE, CH |
+
+#### Gutschein-Checkout-Flows
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-CHK-001 | Gutschein zu regulärem Warenkorb blockiert | P0 | ○ | AT, DE, CH |
+| TC-PROMO-CHK-002 | Reguläres Produkt zu Gutschein-Warenkorb blockiert | P0 | ○ | AT, DE, CH |
+| TC-PROMO-CHK-003 | Promotion auf Gutschein blockiert | P0 | ○ | AT, DE, CH |
+| TC-PROMO-CHK-004 | Gemischter Warenkorb im Checkout blockiert | P0 | ○ | AT, DE, CH |
+| TC-PROMO-CHK-005 | Mehrere Gutscheine erlaubt | P1 | ○ | AT, DE, CH |
+
+**Detaillierte Testbeschreibungen:**
+
+**TC-PROMO-CHK-001: Gutschein zu regulärem Warenkorb blockiert**
+- **Ausgangssituation:** Warenkorb enthält reguläres Produkt (z.B. Bett "Somnia")
+- **Aktion:** User versucht Gutschein (Artikel 736675, HC Code 6609) hinzuzufügen
+- **Event:** BeforeLineItemAddedEvent wird gefeuert
+- **Erwartetes Verhalten:**
+  - Event->stopPropagation() wird aufgerufen
+  - Fehlermeldung: "Einkaufsgutscheine können nur separat gekauft werden. Bitte entfernen Sie zunächst die Produkte im Warenkorb, um die Einkaufsgutscheine kaufen zu können."
+  - Gutschein wird NICHT hinzugefügt
+  - User bleibt auf PDP oder wird zu Cart geleitet
+
+**TC-PROMO-CHK-002: Reguläres Produkt zu Gutschein-Warenkorb blockiert**
+- **Ausgangssituation:** Warenkorb enthält Einkaufsgutschein 50€ (Artikel 736675)
+- **Aktion:** User versucht reguläres Produkt (z.B. Kissen) hinzuzufügen
+- **Event:** BeforeLineItemAddedEvent wird gefeuert
+- **Erwartetes Verhalten:**
+  - Event->stopPropagation() wird aufgerufen
+  - Fehlermeldung: "Einkaufsgutscheine können nur separat gekauft werden. Bitte schließen Sie den Kauf ab oder entfernen Sie die Einkaufsgutscheine von Ihrem Warenkorb."
+  - Produkt wird NICHT hinzugefügt
+  - User sieht Fehlermeldung im Frontend
+
+**TC-PROMO-CHK-003: Promotion auf Gutschein blockiert**
+- **Ausgangssituation:** Warenkorb enthält Einkaufsgutschein 100€
+- **Aktion:** User gibt Promotion-Code "SOMMER20" im Gutscheinfeld ein
+- **Event:** checkout.promotion.added wird gefeuert
+- **Erwartetes Verhalten:**
+  - Promotion wird aus cart.lineItems entfernt
+  - Fehlermeldung: "Rabattcodes können nicht auf Einkaufsgutscheine angewendet werden."
+  - Promotion-Code wird nicht angewendet
+  - Warenkorb zeigt vollen Gutschein-Preis
+  - **Alternative:** Button zum Anwenden von Codes wird bei Gutscheinen direkt ausgeblendet (bessere UX)
+
+**TC-PROMO-CHK-004: Gemischter Warenkorb im Checkout blockiert**
+- **Ausgangssituation:** User hat durch API/Manipulation gemischten Warenkorb (Gutschein + reguläres Produkt)
+- **Aktion:** User klickt "Zur Kasse"
+- **Event:** CartVerifyPersistEvent wird gefeuert
+- **Erwartetes Verhalten:**
+  - CartValidator prüft kompletten Warenkorb
+  - Findet: Gutschein UND reguläres Produkt
+  - Fügt BlockingError hinzu mit blockOrder() = true
+  - Checkout wird verhindert
+  - User wird zu Warenkorb zurückgeleitet
+  - Fehlermeldung wird angezeigt
+  - User MUSS Warenkorb bereinigen (Sicherheitsnetz)
+
+**TC-PROMO-CHK-005: Mehrere Gutscheine erlaubt**
+- **Ausgangssituation:** Warenkorb enthält Gutschein 50€
+- **Aktion:** User fügt Gutschein 100€ hinzu
+- **Event:** BeforeLineItemAddedEvent wird gefeuert
+- **Erwartetes Verhalten:**
+  - Prüfung: Neues Item ist Gutschein + Warenkorb enthält nur Gutscheine
+  - Gutschein wird erfolgreich hinzugefügt
+  - Warenkorb zeigt beide Gutscheine (50€ + 100€)
+  - Checkout ist möglich
+  - Gesamtpreis: 150€
+
+#### Versandkostenfrei-Promotions
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-SHIP-001 | Versandkostenfrei nur Post (DE/AT) | P1 | ○ | AT, DE |
+| TC-PROMO-SHIP-002 | Versandkostenfrei nur Post (CH) | P1 | ○ | CH |
+| TC-PROMO-SHIP-003 | Versandkostenfrei nur Spedi (DE/AT) | P1 | ○ | AT, DE |
+| TC-PROMO-SHIP-004 | Versandkostenfrei nur Spedi (CH) | P1 | ○ | CH |
+| TC-PROMO-SHIP-005 | Versandkostenfrei Post ab MBW EUR 50 (DE/AT) | P1 | ○ | AT, DE |
+| TC-PROMO-SHIP-006 | Versandkostenfrei Post ab MBW CHF 50 (CH) | P1 | ○ | CH |
+
+**Detaillierte Testbeschreibungen:**
+
+**TC-PROMO-SHIP-001: Versandkostenfrei nur Post (DE/AT)**
+- **Beschreibung:** Versandkostenfreie Lieferung nur für Postartikel in DE/AT ohne Mindestbestellwert
+- **Bedingungen:**
+  - Land = DE, AT
+  - Verwendete Versandart = Postversand DE, Postversand AT
+  - Shopware-Regel: **GE_Promo_Lieferland-DA_nurPostversand**
+- **Promo-Konfiguration:**
+  - **Name (FE):** Promohülse
+  - **Gültig ab und bis:** [je nach Kampagne]
+  - **Gesamtnutzung:** 1
+  - **Nutzung je Kunde:** 5
+  - **Aktiv:** true
+  - **Aktionscodetyp:** je Kampagne
+  - **Rabattkonfiguration für Odoo:** je Kampagne IDs und Rabattart
+  - **Verkaufskanäle:** AT, DE
+  - **Warenkorb-Regel:** GE_Promo_Lieferland-DA_nurPostversand
+  - **Rabatt: Anwenden auf:** Versandkosten
+  - **Art:** Absolut = 5,95 EUR
+- **Testschritte:**
+  1. Warenkorb mit Postartikeln befüllen (für DE oder AT)
+  2. Promotion-Code eingeben
+  3. Prüfen, dass Versandkosten auf 0 reduziert werden
+  4. Verifizieren, dass Rabatt absolut 5,95 EUR beträgt
+  5. Prüfen, dass nur Postversand-Methode betroffen ist
+  6. Nutzungslimits testen (1x global, 5x pro Kunde)
+- **Erwartetes Verhalten:**
+  - Versandkosten werden auf 0 gesetzt
+  - Rabatt von 5,95 EUR wird auf Versandkosten angewendet
+  - Funktioniert nur für Postversand DE/AT
+  - Speditionsversand ist nicht betroffen
+- **Referenzen:**
+  - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/01976f6aee8279dd97dd90c31a120032/base)
+  - [Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec0a3baf723185fbbdfa46d3e7ad/base)
+
+**TC-PROMO-SHIP-002: Versandkostenfrei nur Post (CH)**
+- **Beschreibung:** Versandkostenfreie Lieferung nur für Postartikel in CH ohne Mindestbestellwert
+- **Bedingungen:**
+  - Land = CH
+  - Verwendete Versandart = Postversand Schweiz
+  - Shopware-Regel: **GE_Promo_LieferlandCH_nurPostversand**
+- **Promo-Konfiguration:**
+  - **Verkaufskanäle:** CH
+  - **Warenkorb-Regel:** GE_Promo_LieferlandCH_nurPostversand
+  - **Rabatt: Anwenden auf:** Versandkosten
+  - **Art:** Absolut = 6,95 CHF
+  - Weitere Konfiguration wie TC-PROMO-SHIP-001
+- **Erwartetes Verhalten:**
+  - Rabatt von 6,95 CHF wird auf Versandkosten angewendet
+  - Funktioniert nur für Postversand CH
+- **Referenzen:**
+  - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/0197e57bfea470c9bf7964360934c5e7/base)
+  - [Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec1280c9709b8190c555644401f0/base)
+
+**TC-PROMO-SHIP-003: Versandkostenfrei nur Spedi (DE/AT)**
+- **Beschreibung:** Versandkostenfreie Lieferung nur für Speditionsartikel in DE/AT
+- **Bedingungen:**
+  - Land = DE, AT
+  - Verwendete Versandart = Spedi-Versand AT und DE
+  - Shopware-Regel: **GE_Promo_MBW50_LieferlandDA_nurSpedi**
+- **Promo-Konfiguration:**
+  - **Verkaufskanäle:** AT, DE
+  - **Warenkorb-Regel:** GE_Promo_MBW50_LieferlandDA_nurSpedi
+  - **Rabatt: Anwenden auf:** Versandkosten
+  - **Art:** Absolut
+- **Testschritte:**
+  1. Warenkorb mit Speditionsartikeln befüllen
+  2. Promotion-Code eingeben
+  3. Prüfen, dass Versandkosten auf 0 reduziert werden
+  4. Verifizieren, dass nur Speditionsversand betroffen ist
+  5. Prüfen, dass Postversand nicht betroffen ist
+- **Erwartetes Verhalten:**
+  - Versandkosten für Spedition werden auf 0 gesetzt
+  - Funktioniert nur für Speditionsversand
+  - Postversand ist nicht betroffen
+- **Referenzen:**
+  - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019974fd6455701b9c6772d9f544f234/base)
+
+**TC-PROMO-SHIP-004: Versandkostenfrei nur Spedi (CH)**
+- **Beschreibung:** Versandkostenfreie Lieferung nur für Speditionsartikel in CH
+- **Bedingungen:**
+  - Land = CH
+  - Verwendete Versandart = Spedition Schweiz
+  - Shopware-Regel: **GE_Promo_MBW50_LieferlandCH_nurSpedi**
+- **Promo-Konfiguration:**
+  - **Verkaufskanäle:** CH
+  - **Warenkorb-Regel:** GE_Promo_MBW50_LieferlandCH_nurSpedi
+  - **Rabatt: Anwenden auf:** Versandkosten
+  - **Art:** Absolut
+- **Erwartetes Verhalten:**
+  - Versandkosten für Spedition CH werden auf 0 gesetzt
+  - Funktioniert nur für Speditionsversand CH
+- **Referenzen:**
+  - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0fb87c716489912f1af4a421e9/base)
+
+**TC-PROMO-SHIP-005: Versandkostenfrei Post ab MBW EUR 50 (DE/AT)**
+- **Beschreibung:** Versandkostenfreie Postlieferung ab Mindestbestellwert 50 EUR für DE/AT
+- **Bedingungen:**
+  - Land = DE, AT
+  - Verwendete Versandart = Postversand DE, Postversand AT
+  - Summe = >50 EUR (Mindestbestellwert)
+  - Shopware-Regel: **GE_Promo_MBW50_LieferlandDA_nurPostversand**
+- **Promo-Konfiguration:**
+  - **Verkaufskanäle:** AT, DE
+  - **Warenkorb-Regel:** GE_Promo_MBW50_LieferlandDA_nurPostversand
+  - **Rabatt: Anwenden auf:** Versandkosten
+  - **Art:** Absolut = 5,95 EUR
+- **Testschritte:**
+  1. Warenkorb mit Postartikeln befüllen (unter 50 EUR)
+  2. Promotion-Code eingeben → sollte nicht funktionieren
+  3. Warenkorb auf über 50 EUR erhöhen
+  4. Promotion-Code erneut eingeben
+  5. Prüfen, dass Versandkosten auf 0 reduziert werden
+  6. MBW-Grenze testen (49,99 EUR vs 50,00 EUR)
+- **Erwartetes Verhalten:**
+  - Promotion funktioniert nur ab 50 EUR Warenwert
+  - Versandkosten werden auf 0 gesetzt
+  - Rabatt von 5,95 EUR wird angewendet
+  - Unter MBW: Fehlermeldung oder keine Anwendung
+- **Referenzen:**
+  - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bf906150a7042ba5d46f77b009b98/base)
+  - [Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beb1f40bf726da2d9e3c10c0c2e5e/conditions)
+
+**TC-PROMO-SHIP-006: Versandkostenfrei Post ab MBW CHF 50 (CH)**
+- **Beschreibung:** Versandkostenfreie Postlieferung ab Mindestbestellwert 50 CHF für CH
+- **Bedingungen:**
+  - Land = CH
+  - Verwendete Versandart = Postversand Schweiz
+  - Summe = >50 CHF (Mindestbestellwert)
+  - Shopware-Regel: **GE_Promo_MBW50_LieferlandCH_nurPostversand**
+- **Promo-Konfiguration:**
+  - **Verkaufskanäle:** CH
+  - **Warenkorb-Regel:** GE_Promo_MBW50_LieferlandCH_nurPostversand
+  - **Rabatt: Anwenden auf:** Versandkosten
+  - **Art:** Absolut = 6,95 CHF
+- **Testschritte:**
+  - Analog zu TC-PROMO-SHIP-005, aber mit CHF und CH-spezifischen Werten
+- **Erwartetes Verhalten:**
+  - Promotion funktioniert nur ab 50 CHF Warenwert
+  - Rabatt von 6,95 CHF wird angewendet
+- **Referenzen:**
+  - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0c9ba2724d8f118c3f01db846d/base)
+  - [Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec13f89e7197b69879ce36d3da5c/base)
+
+#### Produktkategorien-Promotions
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-CAT-001 | Promo auf Produktkategorie via advertising_material_id | P1 | ○ | AT, DE, CH |
+| TC-PROMO-AUTO-001 | Automatisierte Promo auf Werbemittel ID 70 | P1 | ○ | AT, DE, CH |
+
+**Detaillierte Testbeschreibungen:**
+
+**TC-PROMO-AUTO-001: Automatisierte Promo auf Werbemittel ID 70**
+- **Beschreibung:** Vorlage für Promohuelse (automatisierte Promo) - prüft automatische Rabattanwendung auf Produkte mit Werbemittel ID 70
+- **Bedingung:** Nur Produkte mit Werbemittel ID 70, keine Shopware-Regel notwendig
+- **Promo-Konfiguration:**
+  - **Aktionscodetyp:** kein Code erforderlich (automatisch)
+  - **Rabattkonfiguration für Odoo:** je Kampagne IDs und Rabattart
+  - **Odoo Product Tag:** Odoo Product Tag Advertising Material IDs - Automatic Promotion
+  - **Verkaufskanäle:** AT, DE, CH
+  - **Warenkorb-Regel:** nicht notwendig
+  - **Anwenden auf:** Warenkorb
+  - **Nur auf ausgewählte Produkte:** true
+  - **Anwenden auf:** ausgewählte Produkte
+  - **Art:** Prozentual
+- **Testschritte:**
+  1. Produkt mit advertising_material_id = 70 zum Warenkorb hinzufügen
+  2. Zum Warenkorb navigieren
+  3. Prüfen, dass automatische Promotion angewendet wurde (kein Code-Eingabe erforderlich)
+  4. Prozentuale Rabatt-Berechnung validieren
+  5. Test in allen Verkaufskanälen (AT, DE, CH) durchführen
+- **Erwartetes Verhalten:**
+  - Promotion wird automatisch ohne Code angewendet
+  - Rabatt wird nur auf Produkte mit Werbemittel ID 70 angewendet
+  - Rabatt ist prozentual und wird korrekt berechnet
+  - Funktioniert in allen DACH-Verkaufskanälen
+- **Referenz:** [Shopware Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019be5f25363722483455ea500fee356/base)
+
+#### Mindestbestellwert-Promotions
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-MOV-001 | EUR-Rabatt ab Mindestbestellwert | P1 | ○ | AT, DE, CH |
+| TC-PROMO-MOV-002 | MBW nur auf Warenkorb angewendet | P1 | ○ | AT, DE, CH |
+
+#### Mengenrabatt-Promotions
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-QTY-001 | % auf teuerstes Produkt | P1 | ○ | AT, DE, CH |
+| TC-PROMO-QTY-002 | Mengenrabatt nur auf 1 Produkt | P1 | ○ | AT, DE, CH |
+| TC-PROMO-QTY-003 | 3x gleiches Produkt - nur 1x rabattiert | P1 | ○ | AT, DE, CH |
+
+#### Aktionspreis-Promotions
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-SALE-001 | Rabatt auf Lieblingsprodukt (Aktionspreis) | P1 | ○ | AT, DE, CH |
+| TC-PROMO-SALE-002 | Promo mit Produkt-ID via advertising_material_id | P1 | ○ | AT, DE, CH |
+| TC-PROMO-SALE-003 | Promo mit leerer Promo-ID nicht möglich | P1 | ○ | AT, DE, CH |
+| TC-PROMO-SALE-004 | SALE-Anzeige bei Aktionspreis korrekt | P1 | ○ | AT, DE, CH |
+
+#### Mitarbeiterrabatt
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-EMP-001 | Mitarbeiterrabatt nur auf Basispreis | P1 | ○ | AT, DE, CH |
+| TC-PROMO-EMP-002 | Mitarbeiterrabatt nicht auf Aktionspreis | P1 | ○ | AT, DE, CH |
+
+#### Bundle-Promotions
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-BUNDLE-001 | Nimm 5 zahl 4 | P1 | ○ | AT, DE, CH |
+| TC-PROMO-BUNDLE-002 | Produkt A + Gratisprodukt | P1 | ○ | AT, DE, CH |
+| TC-PROMO-BUNDLE-003 | Kissen + Schonbezug gratis | P1 | ○ | AT, DE, CH |
+| TC-PROMO-BUNDLE-004 | Pro Kissen ein Schonbezug gratis | P1 | ○ | AT, DE, CH |
+
+#### Promo-Kombinationen
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-PROMO-COMBO-001 | Zwei Promotions kombinierbar | P1 | ○ | AT, DE, CH |
+| TC-PROMO-COMBO-002 | 20% Kleidung + 5% Alles | P1 | ○ | AT, DE, CH |
+| TC-PROMO-COMBO-003 | Aufeinander aufbauende Promos | P1 | ○ | AT, DE, CH |
 
 ---
 
 ### 📊 Data Validation Tests
 
 **Priorität:** P1
-**Tests:** 1/10 implementiert
-**Beschreibung:** Preise, Versandkosten, MwSt., Verfügbarkeit
-**Dauer:** 5-15 Min
+**Tests:** 0/15 implementiert
+**Beschreibung:** Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten, Filterbarkeit
+**Dauer:** 15-30 Min
 **Ausführung:** Täglich (Monitoring), vor Deployments
+
+#### Produktdaten-Validierung
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-DATA-001 | Stichprobe: Produkte haben Produkttyp | P1 | ○ | AT, DE, CH |
+| TC-DATA-002 | Stichprobe: Produkte über Grundfarbe findbar | P1 | ○ | AT, DE, CH |
+| TC-DATA-003 | Produkttyp nicht leer bei allen Produkten | P1 | ○ | AT, DE, CH |
+| TC-DATA-004 | Grundfarbe Filter funktioniert | P1 | ○ | AT, DE, CH |
+| TC-DATA-005 | Produkttyp Filter funktioniert | P1 | ○ | AT, DE, CH |
+
+#### Preis-Validierung
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-DATA-006 | Preise korrekt angezeigt | P1 | ○ | AT, DE, CH |
+| TC-DATA-007 | MwSt. korrekt berechnet | P1 | ○ | AT, DE, CH |
+| TC-DATA-008 | Aktionspreise korrekt dargestellt | P1 | ○ | AT, DE, CH |
+
+#### Versandkosten-Validierung
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-DATA-009 | Versandkosten korrekt berechnet (Post) | P1 | ○ | AT, DE, CH |
+| TC-DATA-010 | Versandkosten korrekt berechnet (Spedition) | P1 | ○ | AT, DE, CH |
+
+#### Verfügbarkeits-Validierung
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-DATA-011 | Verfügbarkeitsstatus korrekt angezeigt | P1 | ○ | AT, DE, CH |
+| TC-DATA-012 | Nicht verfügbare Produkte nicht bestellbar | P1 | ○ | AT, DE, CH |
+
+#### Cross-Country Daten-Konsistenz
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-DATA-013 | Produkte in allen Ländern verfügbar | P2 | ○ | AT, DE, CH |
+| TC-DATA-014 | Produktdaten konsistent über Länder | P2 | ○ | AT, DE, CH |
+| TC-DATA-015 | Stichprobe: Produktbilder vorhanden | P1 | ○ | AT, DE, CH |
 
 ---
 
@@ -357,8 +762,8 @@ Der aktuelle Implementierungsstand liegt bei **~78%**.
 | phase_3 | Phase 3 - Account | ✅ | 8 | -% |
 | phase_4 | Phase 4 - Suche | ✅ | 9 | -% |
 | phase_5 | Phase 5 - Versandarten | ✅ | 98 | -% |
-| phase_6 | Phase 6 - Promotions | ⏳ | 8 | 60% |
-| phase_7 | Phase 7 - Data Validation | ⏳ | 9 | 70% |
+| phase_6 | Phase 6 - Promotions | ⏳ | 47 | 60% |
+| phase_7 | Phase 7 - Data Validation | ⏳ | 15 | 70% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
 | phase_9 | Phase 9 - Load Tests | ⏳ | 5 | 90% |
 
@@ -400,21 +805,21 @@ Die folgenden Testdaten werden für die automatisierten Tests verwendet.
 
 **Postversand (kleine/leichte Artikel):**
 
-| Produkt | Kategorie | Produkt-ID |
-|---------|-----------|------------|
-| Kurzarmshirt Bio-Baumwolle | Textil | ge-p-862990 |
-| Blusenshirt Bio-Leinen | Textil | ge-p-863190 |
-| Duftkissen Lavendel | Accessoires | ge-p-49415 |
-| Augen-Entspannungskissen mit Amaranth | Accessoires | ge-p-74157 |
-| Bademantel Raute | Textil | ge-p-410933 |
+| Produkt | Kategorie | Produkt-ID | Verwendung |
+|---------|-----------|------------|------------|
+| Kurzarmshirt Bio-Baumwolle | Textil | ge-p-862990 | - |
+| Blusenshirt Bio-Leinen | Textil | ge-p-863190 | - |
+| Duftkissen Lavendel | Accessoires | ge-p-49415 | Gutschein-Checkout-Tests (TC-PROMO-CHK-002) |
+| Augen-Entspannungskissen mit Amaranth | Accessoires | ge-p-74157 | - |
+| Bademantel Raute | Textil | ge-p-410933 | - |
 
 **Speditionsversand (große/schwere Artikel):**
 
-| Produkt | Kategorie | Produkt-ID |
-|---------|-----------|------------|
-| Kleiderständer Jukai Pur | Möbel | ge-p-693645 |
-| Polsterbett Almeno | Möbel/Betten | ge-p-693278 |
-| Kleiderschrank (Spedition) | Möbel/Schränke | TBD-schrank-produkt |
+| Produkt | Kategorie | Produkt-ID | Verwendung |
+|---------|-----------|------------|------------|
+| Kleiderständer Jukai Pur | Möbel | ge-p-693645 | - |
+| Polsterbett Almeno | Möbel/Betten | ge-p-693278 | Gutschein-Checkout-Tests (TC-PROMO-CHK-001) |
+| Kleiderschrank (Spedition) | Möbel/Schränke | TBD-schrank-produkt | - |
 
 ### 🏷️ Spezielle Testprodukte
 
@@ -423,6 +828,86 @@ Die folgenden Testdaten werden für die automatisierten Tests verwendet.
 | Artikel-ID | Name | Beschreibung |
 |------------|------|--------------|
 | 639046 | Nicht-rabattierbarer Artikel | Dieser Artikel darf keinen Rabatt erhalten |
+
+**Produkte mit Aktionspreis:**
+
+| Artikel-ID | Name | Basispreis | Aktionspreis | Status |
+|------------|------|------------|--------------|--------|
+| TBD | Testprodukt Aktionspreis 1 | TBD | TBD | ❌ Fehlend |
+| TBD | Testprodukt Aktionspreis 2 | TBD | TBD | ❌ Fehlend |
+
+**Bundle-Produkte:**
+
+| Artikel-ID | Name | Bundle-Typ | Gratisprodukt | Status |
+|------------|------|------------|---------------|--------|
+| TBD | Kissen (mit Schonbezug gratis) | A + B gratis | Schonbezug | ❌ Fehlend |
+| TBD | Nimm 5 zahl 4 Testprodukt | Mengenrabatt | - | ❌ Fehlend |
+
+**Produkte mit advertising_material_id:**
+
+| Artikel-ID | Name | advertising_material_id | Kategorie | Verwendung | Status |
+|------------|------|------------------------|-----------|------------|--------|
+| TBD | Testprodukt Werbemittel | 70 | Promo-Werbemittel | TC-PROMO-AUTO-001 (Automatisierte Promo) | ❌ Fehlend |
+| TBD | Testprodukt Kategorie 1 | TBD | TBD | Allgemeine Kategorietests | ❌ Fehlend |
+| TBD | Testprodukt Kategorie 2 | TBD | TBD | Allgemeine Kategorietests | ❌ Fehlend |
+
+**Produkte für Data Validation Tests:**
+
+| Artikel-ID | Name | Produkttyp | Grundfarbe | Verwendung | Status |
+|------------|------|------------|-----------|------------|--------|
+| ge-p-862990 | Kurzarmshirt Bio-Baumwolle | Shirt | Weiß/Beige | Stichprobe Produkttyp & Farbe | ✅ Vorhanden |
+| ge-p-863190 | Blusenshirt Bio-Leinen | Shirt | Blau | Stichprobe Produkttyp & Farbe | ✅ Vorhanden |
+| ge-p-410933 | Bademantel Raute | Bademantel | Grau | Stichprobe Produkttyp & Farbe | ✅ Vorhanden |
+| ge-p-49415 | Duftkissen Lavendel | Kissen | Lila | Stichprobe Produkttyp & Farbe | ✅ Vorhanden |
+| TBD | Produkt ohne Produkttyp | - | - | Negativtest | ❌ Fehlend |
+| TBD | Produkt ohne Grundfarbe | TBD | - | Negativtest | ❌ Fehlend |
+
+### 🎟️ Gutscheine & Rabattcodes
+
+**Kaufgutscheine (für Sicherheitstests & Checkout-Flows):**
+
+| Artikel-ID | Wert | Typ | HC Code | Verwendung | Status |
+|------------|------|-----|---------|------------|--------|
+| 736675 | 50 EUR | Einkaufsgutschein | 6609 | Checkout-Flow Tests | ✅ Vorhanden |
+| TBD | 100 EUR | Einkaufsgutschein | 6609 | Checkout-Flow Tests | ❌ Fehlend |
+| TBD | 10 EUR | Kaufgutschein | 6609 | Sicherheitstests | ❌ Fehlend |
+| TBD | 25 EUR | Kaufgutschein | 6609 | Sicherheitstests | ❌ Fehlend |
+
+**Wertgutscheine:**
+
+| Code | Wert | Typ | Status |
+|------|------|-----|--------|
+| TBD | 25 EUR | Wertgutschein | ❌ Fehlend |
+| TBD | 50 EUR | Wertgutschein | ❌ Fehlend |
+
+**Rabattcodes:**
+
+| Code | Rabatt | Typ | Bedingungen | Verwendung | Status |
+|------|--------|-----|-------------|------------|--------|
+| TBD | 10% | Warenkorb | MBW 50 EUR | Allgemein | ❌ Fehlend |
+| TBD | 15 EUR | Warenkorb | MBW 100 EUR | Allgemein | ❌ Fehlend |
+| TBD | 20% | Warenkorb | Ausschluss nicht-rabattierbar + Gutscheine, 1x global, 5x pro Kunde | TC-PROMO-CART-PERCENT-001 | ❌ Fehlend |
+| TBD | Versandkostenfrei (5,95 EUR) | Versand Post | Nur Post DE/AT, 1x global, 5x pro Kunde | TC-PROMO-SHIP-001 | ❌ Fehlend |
+| TBD | Versandkostenfrei (6,95 CHF) | Versand Post | Nur Post CH, 1x global, 5x pro Kunde | TC-PROMO-SHIP-002 | ❌ Fehlend |
+| TBD | Versandkostenfrei | Versand Spedi | Nur Spedi DE/AT | TC-PROMO-SHIP-003 | ❌ Fehlend |
+| TBD | Versandkostenfrei | Versand Spedi | Nur Spedi CH | TC-PROMO-SHIP-004 | ❌ Fehlend |
+| TBD | Versandkostenfrei (5,95 EUR) | Versand Post | MBW 50 EUR, Post DE/AT | TC-PROMO-SHIP-005 | ❌ Fehlend |
+| TBD | Versandkostenfrei (6,95 CHF) | Versand Post | MBW 50 CHF, Post CH | TC-PROMO-SHIP-006 | ❌ Fehlend |
+| TBD | 20% | Produktkategorie | Via advertising_material_id | Allgemein | ❌ Fehlend |
+| TBD | % Rabatt | Teuerstes Produkt | Nur 1 Produkt rabattiert | Allgemein | ❌ Fehlend |
+| TBD | 20% | Kleidung | Kombinierbar | Allgemein | ❌ Fehlend |
+| TBD | 5% | Alles | Kombinierbar | Allgemein | ❌ Fehlend |
+| SOMMER20 | 20% | Warenkorb | Gutschein-Checkout-Test | TC-PROMO-CHK-003 | ❌ Fehlend |
+
+### 👥 Mitarbeiter-Accounts
+
+**Test-Mitarbeiter mit Rabatt:**
+
+| Land | Name | E-Mail | Rabatt | Status |
+|------|------|--------|--------|--------|
+| AT | Mitarbeiter AT | TBD | Nur Basispreis | ❌ Fehlend |
+| DE | Mitarbeiter DE | TBD | Nur Basispreis | ❌ Fehlend |
+| CH | Mitarbeiter CH | TBD | Nur Basispreis | ❌ Fehlend |
 
 ### 💳 Zahlungsarten (Staging)
 

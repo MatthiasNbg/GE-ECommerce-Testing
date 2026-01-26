@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-Lauf Zusammenfassung - Grüne Erde E-Commerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-color: #2c5f2d;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --error-color: #dc3545;
+            --info-color: #17a2b8;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            font-size: 24px;
+        }
+
+        .back-to-top:hover {
+            background: #1a3a1b;
+            transform: translateY(-5px);
+        }
+
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            scroll-margin-top: 20px;
+        }
+
+        h3 {
+            color: #495057;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            scroll-margin-top: 20px;
+        }
+
+        h4 {
+            color: #495057;
+            font-size: 1.25em;
+            margin: 25px 0 10px 0;
+            scroll-margin-top: 20px;
+        }
+
+        h5 {
+            color: #6c757d;
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #1a3a1b;
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 0 2px;
+            white-space: nowrap;
+        }
+
+        .badge-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning-color);
+            color: #333;
+        }
+
+        .badge-error {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .badge-info {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .badge-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.success {
+            border-left-color: var(--success-color);
+        }
+
+        .stat-card.error {
+            border-left-color: var(--error-color);
+        }
+
+        .stat-card.warning {
+            border-left-color: var(--warning-color);
+        }
+
+        .stat-card.info {
+            border-left-color: var(--info-color);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .test-table thead {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .test-table th,
+        .test-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        .test-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .test-table tbody tr:hover {
+            background: #e9ecef;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left-color: var(--success-color);
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left-color: var(--warning-color);
+            color: #856404;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            border-left-color: var(--error-color);
+            color: #721c24;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left-color: var(--info-color);
+            color: #0c5460;
+        }
+
+        .metadata {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        .metadata strong {
+            color: var(--primary-color);
+        }
+
+        .test-list {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .test-list li {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .priority-high {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+
+        .priority-medium {
+            color: var(--warning-color);
+            font-weight: bold;
+        }
+
+        .priority-low {
+            color: var(--info-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Test-Lauf Zusammenfassung</h1>
+            <p style="font-size: 1.2em; color: #6c757d;">Grüne Erde E-Commerce Testing</p>
+        </header>
+
+        <div class="metadata">
+            <p><strong>Datum:</strong> 26. Januar 2026</p>
+            <p><strong>Umgebung:</strong> Staging (grueneerde.scalecommerce.cloud)</p>
+            <p><strong>Browser:</strong> Chromium</p>
+            <p><strong>Gesamtzahl gesammelte Tests:</strong> 261</p>
+            <p><strong>Status:</strong> <span class="badge badge-warning">Abgebrochen nach partieller Ausführung</span></p>
+        </div>
+
+        <h2 id="zusammenfassung">Zusammenfassung</h2>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">32</div>
+                <div class="stat-label">Ausgeführte Tests (12%)</div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-number" style="color: var(--success-color);">23</div>
+                <div class="stat-label">Tests bestanden</div>
+            </div>
+            <div class="stat-card error">
+                <div class="stat-number" style="color: var(--error-color);">7</div>
+                <div class="stat-label">Tests fehlgeschlagen</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-number" style="color: var(--warning-color);">43</div>
+                <div class="stat-label">Tests übersprungen</div>
+            </div>
+            <div class="stat-card info">
+                <div class="stat-number" style="color: var(--info-color);">~188</div>
+                <div class="stat-label">Tests nicht ausgeführt</div>
+            </div>
+        </div>
+
+        <h2 id="bestandene-tests">Bestandene Tests (23)</h2>
+
+        <div class="alert alert-success">
+            <strong>Erfolgsquote: 100%</strong> bei allen ausgeführten funktionalen Tests (Warenkorb & Datenvalidierung)
+        </div>
+
+        <h3 id="warenkorb-tests">Warenkorb-Tests (8/8) - 100% Erfolg</h3>
+        <ol class="test-list">
+            <li>test_add_product_shows_in_cart - Produkt erscheint im Warenkorb</li>
+            <li>test_cart_counter_updates - Warenkorb-Zähler aktualisiert sich</li>
+            <li>test_update_quantity_changes_total - Mengenänderung aktualisiert Summe</li>
+            <li>test_remove_product_updates_cart - Produktentfernung aktualisiert Warenkorb</li>
+            <li>test_empty_cart_shows_message - Leerer Warenkorb zeigt Nachricht</li>
+            <li>test_cart_persists_between_pages - Warenkorb bleibt zwischen Seiten bestehen</li>
+            <li>test_add_multiple_products - Mehrere Produkte hinzufügen</li>
+            <li>test_price_calculation_correct - Preisberechnung korrekt</li>
+        </ol>
+
+        <h3 id="datenvalidierungs-tests">Datenvalidierungs-Tests (15/15) - 100% Erfolg</h3>
+        <ol class="test-list">
+            <li>test_product_price_pdp_equals_cart[49415] - Preiskonsistenz Duftkissen Lavendel (12.9 EUR)</li>
+            <li>test_product_price_pdp_equals_cart[74157] - Preiskonsistenz Augen-Entspannungskissen (19.9 EUR)</li>
+            <li>test_subtotal_calculation - Zwischensummen-Berechnung korrekt</li>
+            <li>test_vat_calculation_at - MwSt.-Berechnung AT (20%)</li>
+            <li>test_shipping_cost_post - Versandkosten Post-Versand (5.95 EUR)</li>
+            <li>test_shipping_cost_spedition - Versandkosten Spedition (5.95 EUR)</li>
+            <li>test_total_calculation - Gesamtsummen-Berechnung korrekt</li>
+            <li>test_availability_displayed[49415] - Verfügbarkeitsanzeige Duftkissen</li>
+            <li>test_availability_displayed[693278] - Verfügbarkeitsanzeige Polsterbett Almeno</li>
+            <li>test_currency_consistent - Währungskonsistenz (EUR-Symbole)</li>
+            <li>test_sku_displayed[49415] - Artikelnummer 49415 angezeigt</li>
+            <li>test_sku_displayed[693278] - Artikelnummer 693278 angezeigt</li>
+            <li>test_price_matches_expected[49415] - Preisvalidierung 12.9 EUR</li>
+            <li>test_price_matches_expected[74157] - Preisvalidierung 19.9 EUR</li>
+            <li>test_price_matches_expected[693645] - Preisvalidierung 358.0 EUR</li>
+        </ol>
+
+        <h2 id="fehlgeschlagene-tests">Fehlgeschlagene Tests (7)</h2>
+
+        <div class="alert alert-error">
+            <strong>Kritische Blocker identifiziert:</strong> Payment-Tests und Performance-Tests schlagen fehl
+        </div>
+
+        <h3 id="payment-tests">Payment-Tests (4 FAILED)</h3>
+        <p><strong>Problem:</strong> Alle Zahlungsarten-Tests schlagen fehl</p>
+        <ol class="test-list">
+            <li><strong>test_payment_discovery</strong> - Zahlungsarten-Discovery fehlgeschlagen</li>
+            <li><strong>test_payment_methods_available[AT]</strong> - Erwartete: ['Vorkasse', 'Rechnung']</li>
+            <li><strong>test_payment_methods_available[DE]</strong> - Erwartete: ['Vorkasse', 'Rechnung']</li>
+            <li><strong>test_payment_methods_available[CH]</strong> - Erwartete: ['Vorkasse', 'Rechnung']</li>
+        </ol>
+
+        <h4>Mögliche Ursachen:</h4>
+        <ul>
+            <li>Checkout-Seite nicht erreichbar oder umstrukturiert</li>
+            <li>Zahlungsarten-Selektoren haben sich geändert</li>
+            <li>Session/Cookie-Probleme beim Checkout-Zugriff</li>
+            <li>Länder-spezifische Routing-Probleme</li>
+        </ul>
+
+        <h3 id="performance-tests">Performance-Tests (3 FAILED)</h3>
+        <p><strong>Problem:</strong> Alle Performance-Tests schlagen fehl</p>
+        <ol class="test-list">
+            <li><strong>test_staging_performance_150_orders</strong> - 150 Bestellungen Test</li>
+            <li><strong>test_staging_performance_quick</strong> - Quick Performance Test</li>
+            <li><strong>test_staging_performance_stress</strong> - Stress Test</li>
+        </ol>
+
+        <h4>Mögliche Ursachen:</h4>
+        <ul>
+            <li>Performance-Test-Konfiguration fehlt oder inkorrekt</li>
+            <li>Timeout-Einstellungen zu strikt</li>
+            <li>Testdaten (Kunden, Produkte) nicht verfügbar</li>
+            <li>Staging-Umgebung nicht für Performance-Tests konfiguriert</li>
+        </ul>
+
+        <h2 id="uebersprungene-tests">Übersprungene Tests (43)</h2>
+
+        <h3 id="pentest-suite">Pentest-Suite (43 SKIPPED)</h3>
+        <p>Alle Penetration-Tests wurden übersprungen:</p>
+        <ul>
+            <li><strong>Authentication Tests (8):</strong> Brute Force, Session Fixation, SQL Injection, etc.</li>
+            <li><strong>Authorization Tests (9):</strong> IDOR, Privilege Escalation, CORS, etc.</li>
+            <li><strong>Business Logic Tests (9):</strong> Price Manipulation, Coupon Brute Force, etc.</li>
+            <li><strong>Injection Attack Tests (6):</strong> SQL, XSS, Command Injection, etc.</li>
+            <li><strong>Session Security Tests (11):</strong> Cookie Security, CSRF, Session Timeout, etc.</li>
+        </ul>
+
+        <div class="alert alert-warning">
+            <strong>Grund:</strong> Tests sind als async def definiert, aber keine async-Framework-Integration aktiv<br>
+            <strong>Lösung:</strong> pytest-asyncio Plugin konfigurieren oder Tests synchron umschreiben
+        </div>
+
+        <h2 id="nicht-ausgefuehrte-tests">Nicht ausgeführte Tests (~188)</h2>
+
+        <p>Die Test-Ausführung wurde während der Regression-Tests abgebrochen:</p>
+        <ul>
+            <li><strong>Letzter gestarteter Test:</strong> test_critical_page_loads[chromium-Homepage]</li>
+            <li><strong>Abbruchgrund:</strong> Test hing/timeout</li>
+        </ul>
+
+        <p><strong>Nicht ausgeführte Test-Kategorien:</strong></p>
+        <ul class="test-list">
+            <li>Checkout-Tests</li>
+            <li>Homepage-Tests</li>
+            <li>Product Page Tests</li>
+            <li>Navigation Tests</li>
+            <li>Search Tests</li>
+            <li>Footer Tests</li>
+            <li>Filter Tests</li>
+            <li>Promotion Tests (neu hinzugefügt)</li>
+        </ul>
+
+        <h2 id="separate-testausfuehrung">Separate Test-Ausführung mit --maxfail=1</h2>
+
+        <p>Ein separater Test-Lauf mit Early-Exit zeigte:</p>
+        <ul>
+            <li><span class="badge badge-success">9 PASSED</span> Tests</li>
+            <li><span class="badge badge-error">1 FAILED</span>: test_product_price_pdp_equals_cart[chromium-74157]</li>
+        </ul>
+
+        <div class="alert alert-error">
+            <strong>Fehlerdetails:</strong><br>
+            <strong>Fehler:</strong> TimeoutError beim Laden der Produktseite<br>
+            <strong>URL:</strong> <code>https://grueneerde.scalecommerce.cloud/p/augen-entspannungskissen-mit-amaranth/ge-p-74157</code><br>
+            <strong>Timeout:</strong> 30000ms überschritten<br>
+            <strong>Status:</strong> Seite lädt nicht rechtzeitig
+        </div>
+
+        <h2 id="kritische-befunde">Kritische Befunde</h2>
+
+        <h3 class="priority-high">Hohe Priorität</h3>
+        <ol>
+            <li><strong>Payment-Seite nicht erreichbar</strong> - Blockiert alle Checkout-Tests</li>
+            <li><strong>Produktseiten-Timeouts</strong> - Mindestens 1 Produktseite lädt nicht (74157)</li>
+            <li><strong>Regression-Test hängt</strong> - Homepage-Test blockiert weitere Ausführung</li>
+        </ol>
+
+        <h3 class="priority-medium">Mittlere Priorität</h3>
+        <ol start="4">
+            <li><strong>Performance-Tests fehlkonfiguriert</strong> - Alle 3 Tests schlagen fehl</li>
+            <li><strong>Pentest-Suite inaktiv</strong> - 43 Security-Tests nicht ausführbar</li>
+        </ol>
+
+        <h3 class="priority-low">Niedrige Priorität</h3>
+        <ol start="6">
+            <li><strong>Warnings:</strong> PydanticDeprecatedSince20, PytestCollectionWarning für TestConfig-Klassen</li>
+        </ol>
+
+        <h2 id="test-coverage">Test-Coverage Status</h2>
+
+        <div class="table-wrapper">
+            <table class="test-table">
+                <thead>
+                    <tr>
+                        <th>Kategorie</th>
+                        <th>Implementiert</th>
+                        <th>Bestanden</th>
+                        <th>Fehlgeschlagen</th>
+                        <th>Übersprungen</th>
+                        <th>Nicht getestet</th>
+                        <th>Coverage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Smoke Tests</td>
+                        <td>15</td>
+                        <td><span class="badge badge-success">8</span></td>
+                        <td><span class="badge badge-error">0</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">7</span></td>
+                        <td>53%</td>
+                    </tr>
+                    <tr>
+                        <td>Cart Tests</td>
+                        <td>8</td>
+                        <td><span class="badge badge-success">8</span></td>
+                        <td><span class="badge badge-error">0</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">0</span></td>
+                        <td><strong>100%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Data Validation</td>
+                        <td>15</td>
+                        <td><span class="badge badge-success">15</span></td>
+                        <td><span class="badge badge-error">0</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">0</span></td>
+                        <td><strong>100%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Payment Tests</td>
+                        <td>4</td>
+                        <td><span class="badge badge-success">0</span></td>
+                        <td><span class="badge badge-error">4</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">0</span></td>
+                        <td><strong style="color: var(--error-color);">0%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td>3</td>
+                        <td><span class="badge badge-success">0</span></td>
+                        <td><span class="badge badge-error">3</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">0</span></td>
+                        <td><strong style="color: var(--error-color);">0%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Pentest</td>
+                        <td>43</td>
+                        <td><span class="badge badge-success">0</span></td>
+                        <td><span class="badge badge-error">0</span></td>
+                        <td><span class="badge badge-warning">43</span></td>
+                        <td><span class="badge badge-secondary">0</span></td>
+                        <td><strong style="color: var(--warning-color);">0%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Regression</td>
+                        <td>17</td>
+                        <td><span class="badge badge-success">0</span></td>
+                        <td><span class="badge badge-error">0</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">17</span></td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Andere</td>
+                        <td>~156</td>
+                        <td><span class="badge badge-success">0</span></td>
+                        <td><span class="badge badge-error">0</span></td>
+                        <td><span class="badge badge-warning">0</span></td>
+                        <td><span class="badge badge-secondary">~156</span></td>
+                        <td>0%</td>
+                    </tr>
+                    <tr style="background: #e9ecef; font-weight: bold;">
+                        <td><strong>GESAMT</strong></td>
+                        <td><strong>261</strong></td>
+                        <td><span class="badge badge-success">23</span></td>
+                        <td><span class="badge badge-error">7</span></td>
+                        <td><span class="badge badge-warning">43</span></td>
+                        <td><span class="badge badge-secondary">~188</span></td>
+                        <td><strong>8.8%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="empfehlungen">Empfehlungen</h2>
+
+        <h3 class="priority-high">Sofortmaßnahmen</h3>
+        <ol>
+            <li><strong>Payment-Tests debuggen:</strong> Checkout-Seite manuell prüfen, Selektoren validieren</li>
+            <li><strong>Produktseiten-Timeout erhöhen:</strong> Timeout von 30s auf 60s erhöhen für langsame Produkte</li>
+            <li><strong>Homepage-Test fixen:</strong> Regression-Test für Homepage-Load debuggen/timeout anpassen</li>
+        </ol>
+
+        <h3 class="priority-medium">Kurzfristig</h3>
+        <ol start="4">
+            <li><strong>Performance-Tests konfigurieren:</strong> Testdaten und Umgebung für Performance-Tests vorbereiten</li>
+            <li><strong>Pentest-Suite aktivieren:</strong> pytest-asyncio konfigurieren oder Tests zu sync umschreiben</li>
+            <li><strong>Vollständiger Test-Run:</strong> Nach Bugfixes kompletten Test-Run ohne Abbruch durchführen</li>
+        </ol>
+
+        <h3 class="priority-low">Mittelfristig</h3>
+        <ol start="7">
+            <li><strong>Warnings beheben:</strong> PydanticDeprecatedSince20 und TestConfig-Warnings eliminieren</li>
+            <li><strong>CI/CD Integration:</strong> Automatisierte Test-Runs in CI-Pipeline integrieren</li>
+            <li><strong>Allure Reports:</strong> Allure-Framework für bessere Test-Visualisierung aktivieren</li>
+        </ol>
+
+        <h2 id="naechste-schritte">Nächste Schritte</h2>
+
+        <ol>
+            <li>Checkout-Seite manuell im Browser öffnen und Zahlungsarten-Selektoren identifizieren</li>
+            <li>test_payment_methods_available.py anpassen mit korrekten Selektoren</li>
+            <li>Timeout-Einstellungen in pytest.ini erhöhen (30s → 60s für langsame Seiten)</li>
+            <li>Homepage-Regression-Test isoliert ausführen und debuggen</li>
+            <li>Nach Fixes: Vollständigen Test-Run ohne --maxfail durchführen</li>
+            <li>HTML- und Allure-Reports generieren</li>
+        </ol>
+
+        <h2 id="fazit">Fazit</h2>
+
+        <div class="alert alert-info">
+            <p><strong>Positive Erkenntnis:</strong> Alle erfolgreich ausgeführten funktionalen Tests (Warenkorb, Preise, Berechnungen) laufen fehlerfrei, was auf eine solide Basis-Implementierung hindeutet.</p>
+        </div>
+
+        <div class="alert alert-warning">
+            <p><strong>Handlungsbedarf:</strong> Die blockierenden Issues (Payment, Timeouts) müssen vor einem vollständigen Test-Run behoben werden.</p>
+        </div>
+
+        <p>Von 261 gesammelten Tests wurden nur 32 ausgeführt (12%). Die Core-Funktionalität (Warenkorb, Datenvalidierung) funktioniert einwandfrei (23/23 Tests bestanden). Kritische Blocker sind:</p>
+        <ul>
+            <li><strong style="color: var(--error-color);">Payment-Tests (0% Erfolgsrate)</strong></li>
+            <li><strong style="color: var(--error-color);">Performance-Tests (0% Erfolgsrate)</strong></li>
+            <li><strong style="color: var(--warning-color);">Pentest-Suite (komplett übersprungen)</strong></li>
+            <li><strong style="color: var(--warning-color);">Regression-Tests (Test hängt)</strong></li>
+        </ul>
+
+        <p style="margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--border-color); color: #6c757d; text-align: center;">
+            Generiert am 26. Januar 2026 | Grüne Erde E-Commerce Testing Framework
+        </p>
+    </div>
+
+    <a href="#" class="back-to-top">↑</a>
+</body>
+</html>
