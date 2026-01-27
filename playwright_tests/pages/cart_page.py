@@ -81,6 +81,18 @@ class CartPage(BasePage):
     CONTINUE_SHOPPING = "a:has-text('Weiter einkaufen'), a:has-text('Zurück zum Shop')"
 
     # =========================================================================
+    # Promotion / Rabattcode
+    # =========================================================================
+    PROMOTION_CODE_INPUT = "input[name='promotionCode'], #promotionCode, input[placeholder*='Gutschein'], input[placeholder*='Code']"
+    PROMOTION_CODE_SUBMIT = "button[type='submit']:has-text('Einlösen'), button:has-text('Gutschein einlösen'), .promotion-submit"
+    PROMOTION_COLLAPSE_TOGGLE = "[data-bs-toggle='collapse'][href='#promotionContainer'], button:has-text('Gutschein einlösen')"
+    PROMOTION_CONTAINER = "#promotionContainer, .promotion-container, .checkout-promotion"
+    PROMOTION_SUCCESS_MESSAGE = ".alert-success, .promotion-success"
+    PROMOTION_ERROR_MESSAGE = ".alert-danger, .promotion-error, .invalid-feedback"
+    PROMOTION_LINE_ITEM = ".line-item-promotion, .line-item:has-text('Rabatt'), .line-item:has-text('Promotion')"
+    PROMOTION_DISCOUNT_VALUE = ".line-item-promotion .line-item-total-price, .promotion-discount-value"
+
+    # =========================================================================
     # Product Page - Add to Cart
     # =========================================================================
     ADD_TO_CART_BUTTON = "button.btn-buy, [data-add-to-cart]"
@@ -336,6 +348,86 @@ class CartPage(BasePage):
         await self.close_cart_offcanvas()
 
         return True
+
+    # =========================================================================
+    # Promotion / Rabattcode
+    # =========================================================================
+
+    async def apply_promotion_code(self, code: str) -> bool:
+        """
+        Wendet einen Rabattcode/Gutscheincode an.
+
+        Args:
+            code: Der Promotion-Code
+
+        Returns:
+            True wenn erfolgreich angewendet
+        """
+        # Promotion-Container öffnen falls nötig
+        toggle = self.page.locator(self.PROMOTION_COLLAPSE_TOGGLE)
+        if await toggle.count() > 0:
+            try:
+                if await toggle.first.is_visible():
+                    await toggle.first.click()
+                    await self.page.wait_for_timeout(500)
+            except Exception:
+                pass
+
+        # Code-Eingabefeld finden
+        code_input = self.page.locator(self.PROMOTION_CODE_INPUT)
+        if await code_input.count() == 0:
+            return False
+
+        # Code eingeben
+        await code_input.first.fill(code)
+        await self.page.wait_for_timeout(300)
+
+        # Code absenden
+        submit_btn = self.page.locator(self.PROMOTION_CODE_SUBMIT)
+        if await submit_btn.count() > 0:
+            await submit_btn.first.click()
+        else:
+            # Fallback: Enter drücken
+            await code_input.first.press("Enter")
+
+        await self.page.wait_for_timeout(2000)  # Warten auf Server-Antwort
+
+        # Prüfe ob erfolgreich
+        success = self.page.locator(self.PROMOTION_SUCCESS_MESSAGE)
+        return await success.count() > 0
+
+    async def get_promotion_error(self) -> Optional[str]:
+        """Gibt die Fehlermeldung zurück, falls ein Promotion-Code abgelehnt wurde."""
+        error = self.page.locator(self.PROMOTION_ERROR_MESSAGE)
+        if await error.count() > 0:
+            return await error.first.text_content()
+        return None
+
+    async def has_promotion_applied(self) -> bool:
+        """Prüft ob eine Promotion/Rabatt im Warenkorb aktiv ist."""
+        promo_line = self.page.locator(self.PROMOTION_LINE_ITEM)
+        return await promo_line.count() > 0
+
+    async def get_promotion_discount(self) -> float:
+        """Gibt den Rabattbetrag der aktiven Promotion zurück."""
+        discount_el = self.page.locator(self.PROMOTION_DISCOUNT_VALUE)
+        if await discount_el.count() > 0:
+            text = await discount_el.first.text_content()
+            return await self._parse_price(text)
+        return 0.0
+
+    async def remove_promotion(self) -> bool:
+        """Entfernt eine aktive Promotion aus dem Warenkorb."""
+        promo_line = self.page.locator(self.PROMOTION_LINE_ITEM)
+        if await promo_line.count() == 0:
+            return False
+
+        remove_btn = promo_line.locator(self.CART_ITEM_REMOVE)
+        if await remove_btn.count() > 0:
+            await remove_btn.first.click()
+            await self.page.wait_for_timeout(2000)
+            return True
+        return False
 
     # =========================================================================
     # Checkout Navigation
