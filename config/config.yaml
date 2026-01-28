@@ -1,6 +1,31 @@
+# =============================================================================
+# SYSTEMÜBERSICHT - Grüne Erde E-Commerce
+# =============================================================================
+#
+# SHOPWARE:
+#   Staging:
+#     - Frontend: https://grueneerde-stage.scalecommerce.cloud/
+#     - Admin:    https://grueneerde-stage.scalecommerce.cloud/admin#/
+#   Produktiv:
+#     - Frontend: https://grueneerde.scalecommerce.cloud/
+#     - Admin:    https://grueneerde.scalecommerce.cloud/admin#/login/
+#
+# PIM (Pimcore):
+#   Staging:  https://www.stage-y77w3ti-ob4ojmskgxsxg.de-2.platformsh.site/admin/
+#   Produktiv: https://www.main-bvxea6i-ob4ojmskgxsxg.de-2.platformsh.site/admin/login
+#
+# ⚠️  WICHTIG: Auf PRODUKTIV dürfen KEINE Bestellungen oder Kunden angelegt werden!
+#     Alle Tests müssen auf Staging durchgeführt werden!
+#
+# =============================================================================
+
 profiles:
+  # ---------------------------------------------------------------------------
+  # STAGING - Testumgebung (alle Tests hier ausführen!)
+  # ---------------------------------------------------------------------------
   staging:
-    base_url: https://grueneerde.scalecommerce.cloud
+    base_url: https://grueneerde-stage.scalecommerce.cloud
+    admin_url: https://grueneerde-stage.scalecommerce.cloud/admin#/
     timeout: 30000
     parallel_workers: 5
     headless: true
@@ -23,12 +48,18 @@ profiles:
       CH:
       - Vorkasse
       - Rechnung
+
+  # ---------------------------------------------------------------------------
+  # PRODUKTIV - NUR LESENDE TESTS! KEINE Bestellungen/Kunden anlegen!
+  # ---------------------------------------------------------------------------
   production:
-    base_url: https://www.gruene-erde.com
+    base_url: https://grueneerde.scalecommerce.cloud
+    admin_url: https://grueneerde.scalecommerce.cloud/admin#/login/
     timeout: 45000
     parallel_workers: 2
     headless: true
     slow_mo: 0
+    # ⚠️  WARNUNG: Keine Checkout-Tests auf Produktiv ausführen!
   local:
     base_url: http://localhost:8000
     timeout: 15000

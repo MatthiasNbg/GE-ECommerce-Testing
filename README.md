@@ -2,6 +2,24 @@
 
 End-to-End Testing Framework für den Grüne Erde Shopware 6 Shop mit Fokus auf Massentests bei Bestellungen und Betriebstests zur Funktionalitätsprüfung.
 
+## Systemübersicht
+
+### Shopware
+
+| Umgebung | Frontend | Admin |
+|----------|----------|-------|
+| **Staging** | https://grueneerde-stage.scalecommerce.cloud/ | https://grueneerde-stage.scalecommerce.cloud/admin#/ |
+| **Produktiv** | https://grueneerde.scalecommerce.cloud/ | https://grueneerde.scalecommerce.cloud/admin#/login/ |
+
+### PIM (Pimcore)
+
+| Umgebung | URL |
+|----------|-----|
+| **Staging** | https://www.stage-y77w3ti-ob4ojmskgxsxg.de-2.platformsh.site/admin/ |
+| **Produktiv** | https://www.main-bvxea6i-ob4ojmskgxsxg.de-2.platformsh.site/admin/login |
+
+> ⚠️ **WICHTIG:** Auf **PRODUKTIV** dürfen **KEINE Bestellungen oder Kunden** angelegt werden! Alle Tests müssen auf Staging durchgeführt werden!
+
 ## Projektübersicht
 
 Dieses Projekt implementiert automatisierte Oberflächentests für unseren Shopware 6 Shop. Der gewählte Ansatz kombiniert die Performance und Flexibilität von Playwright mit der Orchestrierungsfähigkeit von Robot Framework.
