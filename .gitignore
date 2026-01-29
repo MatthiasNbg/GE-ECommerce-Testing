@@ -30,6 +30,9 @@ config/.env
 test-results/
 playwright-report/
 
+# Large data files
+produkte.csv
+
 # OS
 .DS_Store
 Thumbs.db
