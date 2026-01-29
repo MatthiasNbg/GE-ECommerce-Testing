@@ -315,6 +315,85 @@ def test_search_no_results_for_invalid_article(page: Page, base_url: str):
     )
 
 
+@pytest.mark.smoke
+def test_search_wildrose_excludes_brushes(page: Page, base_url: str):
+    """
+    Testet, dass bei der Suche nach "wildrose" keine Bürsten in den
+    Suchergebnissen erscheinen.
+
+    Die Suche soll relevante Ergebnisse liefern - Wildrose-Produkte (z.B. Kosmetik,
+    Öle, Cremes) aber keine irrelevanten Produkte wie Bürsten.
+
+    Schritte:
+    1. Startseite laden
+    2. Nach "wildrose" suchen
+    3. Suchergebnisseite prüfen
+    4. Sicherstellen, dass keine Bürsten in den Ergebnissen sind
+    """
+    # Startseite laden
+    page.goto(base_url)
+    page.wait_for_load_state("domcontentloaded")
+    page.wait_for_timeout(1000)
+
+    # Cookie-Banner akzeptieren
+    accept_cookie_banner(page)
+
+    # Such-Toggle klicken
+    search_toggle = page.locator("button.search-toggle-btn.js-search-toggle-btn")
+    search_toggle.click()
+    page.wait_for_timeout(500)
+
+    # "wildrose" eingeben
+    search_input = page.locator("input#header-main-search-input")
+    expect(search_input).to_be_visible()
+    search_input.fill("wildrose")
+
+    # Enter drücken - zur Suchergebnisseite
+    search_input.press("Enter")
+    page.wait_for_load_state("domcontentloaded")
+    page.wait_for_timeout(2000)
+
+    # Prüfen dass wir auf der Suchergebnisseite sind
+    assert "search" in page.url, f"Nicht auf Suchergebnisseite: {page.url}"
+
+    # Alle Produktnamen auf der Suchergebnisseite sammeln
+    product_names = page.locator(
+        ".product-box .product-name, .product-item .product-name, "
+        ".cms-listing-col .product-name, .product-name"
+    )
+
+    product_count = product_names.count()
+
+    # Wenn keine Ergebnisse gefunden wurden, ist der Test bestanden
+    # (keine Bürsten bedeutet keine Bürsten)
+    if product_count == 0:
+        print("   Keine Suchergebnisse für 'wildrose' gefunden")
+        return
+
+    # Alle Produktnamen durchgehen und auf "Bürste" prüfen
+    brush_products_found = []
+    brush_keywords = ["bürste", "buerste", "brush", "pinsel"]
+
+    for i in range(product_count):
+        try:
+            name = product_names.nth(i).inner_text().strip().lower()
+            for keyword in brush_keywords:
+                if keyword in name:
+                    brush_products_found.append(product_names.nth(i).inner_text().strip())
+                    break
+        except Exception:
+            continue
+
+    # Test schlägt fehl wenn Bürsten gefunden wurden
+    assert len(brush_products_found) == 0, (
+        f"SUCHRELEVANZ-FEHLER: Bei Suche nach 'wildrose' wurden {len(brush_products_found)} "
+        f"Bürsten-Produkte gefunden, obwohl diese nicht relevant sind:\n"
+        + "\n".join(f"  - {name}" for name in brush_products_found)
+    )
+
+    print(f"   [OK] {product_count} Suchergebnisse für 'wildrose', keine Bürsten gefunden")
+
+
 # =============================================================================
 # Nosto-spezifische Tests
 # =============================================================================
