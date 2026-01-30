@@ -188,23 +188,53 @@ def test_search_results_page_shows_correct_product(
     expect(search_input).to_be_visible()
     search_input.fill(article_number)
 
-    # Enter drücken - zur Suchergebnisseite
+    # Enter drücken - zur Suchergebnisseite oder Produktdetailseite
     search_input.press("Enter")
     page.wait_for_load_state("domcontentloaded")
-    page.wait_for_timeout(2000)
+    page.wait_for_timeout(3000)
 
-    # Prüfen dass wir auf der Suchergebnisseite sind
-    assert "search" in page.url, f"Nicht auf Suchergebnisseite: {page.url}"
+    # Prüfen wo wir gelandet sind: Produktdetailseite oder Suchergebnisseite
+    expected_product_id = expected_url_path.split("/")[-1]  # z.B. "ge-p-862990"
 
-    # Erstes Suchergebnis prüfen
+    # Fall 1: Direkt auf Produktdetailseite gelandet (Redirect bei eindeutiger Artikelnummer)
+    sku_element = page.locator("span.product-detail-ordernumber")
+    if sku_element.count() > 0 and sku_element.first.is_visible(timeout=2000):
+        found_sku = sku_element.inner_text().strip()
+        assert found_sku == article_number, (
+            f"PRODUKTSEITEN-FEHLER für Artikelnummer {article_number}: "
+            f"Direkt auf Produktdetailseite gelandet, aber falsche Artikelnummer. "
+            f"Erwartet: {article_number}, Gefunden: {found_sku}"
+        )
+        print(
+            f"   [OK] Artikelnummer {article_number}: "
+            f"Direkt auf Produktdetailseite weitergeleitet (SKU: {found_sku})"
+        )
+        return
+
+    # Fall 2: Auf Suchergebnisseite gelandet
+    # Fall 2a: "Keine Produkte gefunden" (= Produkt offline)
+    no_products_selectors = [
+        "text=Keine Produkte gefunden",
+        "text=keine Produkte gefunden",
+        "text=Keine Ergebnisse",
+        "text=keine Ergebnisse",
+        "text=Es wurden keine Produkte gefunden",
+    ]
+    for selector in no_products_selectors:
+        no_products_msg = page.locator(selector)
+        if no_products_msg.count() > 0 and no_products_msg.first.is_visible(timeout=1000):
+            pytest.fail(
+                f"PRODUKT OFFLINE: Artikelnummer {article_number} "
+                f"({expected_url_path}) ist nicht mehr im Shop verfügbar. "
+                f"Die Suchergebnisseite zeigt 'Keine Produkte gefunden'. "
+                f"Bitte prüfen ob das Produkt im PIM deaktiviert oder ausverkauft ist."
+            )
+
+    # Fall 2b: Suchergebnisse vorhanden - erstes Ergebnis prüfen
     first_result = page.locator(".product-box a.product-name, .product-item a, .cms-listing-col a.product-name").first
     expect(first_result).to_be_visible(timeout=5000)
 
-    # URL des ersten Ergebnisses prüfen
     first_result_href = first_result.get_attribute("href")
-
-    # Erwartete Produkt-ID muss in der URL enthalten sein
-    expected_product_id = expected_url_path.split("/")[-1]
 
     assert expected_product_id in first_result_href, (
         f"SUCHERGEBNIS-FEHLER für Artikelnummer {article_number}: "
@@ -243,23 +273,60 @@ def test_search_results_page_click_navigates_to_product(
     expect(search_input).to_be_visible()
     search_input.fill(article_number)
 
-    # Enter drücken
+    # Enter drücken - zur Suchergebnisseite oder Produktdetailseite
     search_input.press("Enter")
     page.wait_for_load_state("domcontentloaded")
-    page.wait_for_timeout(2000)
+    page.wait_for_timeout(3000)
 
-    # Erstes Suchergebnis anklicken
+    # Prüfen wo wir gelandet sind
+    expected_product_id = expected_url_path.split("/")[-1]
+
+    # Fall 1: Direkt auf Produktdetailseite gelandet (Redirect bei eindeutiger Artikelnummer)
+    sku_element = page.locator("span.product-detail-ordernumber")
+    if sku_element.count() > 0 and sku_element.first.is_visible(timeout=2000):
+        found_sku = sku_element.inner_text().strip()
+        assert found_sku == article_number, (
+            f"PRODUKTSEITEN-FEHLER für Artikelnummer {article_number}: "
+            f"Direkt auf Produktdetailseite gelandet, aber falsche Artikelnummer. "
+            f"Erwartet: {article_number}, Gefunden: {found_sku}"
+        )
+        product_title = page.locator("h1.product-title, h1.product-detail-name, h1")
+        expect(product_title).to_be_visible()
+        print(
+            f"   [OK] Artikelnummer {article_number}: "
+            f"Direkt auf Produktdetailseite weitergeleitet (SKU: {found_sku})"
+        )
+        return
+
+    # Fall 2a: "Keine Produkte gefunden" (= Produkt offline)
+    no_products_selectors = [
+        "text=Keine Produkte gefunden",
+        "text=keine Produkte gefunden",
+        "text=Keine Ergebnisse",
+        "text=keine Ergebnisse",
+        "text=Es wurden keine Produkte gefunden",
+    ]
+    for selector in no_products_selectors:
+        no_products_msg = page.locator(selector)
+        if no_products_msg.count() > 0 and no_products_msg.first.is_visible(timeout=1000):
+            pytest.fail(
+                f"PRODUKT OFFLINE: Artikelnummer {article_number} "
+                f"({expected_url_path}) ist nicht mehr im Shop verfügbar. "
+                f"Die Suchergebnisseite zeigt 'Keine Produkte gefunden'. "
+                f"Bitte prüfen ob das Produkt im PIM deaktiviert oder ausverkauft ist."
+            )
+
+    # Fall 2b: Erstes Suchergebnis anklicken
     first_result = page.locator(".product-box a.product-name, .product-item a, .cms-listing-col a.product-name").first
     expect(first_result).to_be_visible(timeout=5000)
     first_result.click()
 
     # Auf Produktseite warten
     page.wait_for_load_state("domcontentloaded")
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     # URL prüfen
     current_url = page.url
-    expected_product_id = expected_url_path.split("/")[-1]
 
     assert expected_product_id in current_url, (
         f"SUCHERGEBNIS-NAVIGATION für Artikelnummer {article_number}: "
@@ -268,7 +335,7 @@ def test_search_results_page_click_navigates_to_product(
     )
 
     # Produktseite-Elemente prüfen
-    product_title = page.locator("h1.product-detail-name, h1")
+    product_title = page.locator("h1.product-title, h1.product-detail-name, h1")
     expect(product_title).to_be_visible()
 
 
