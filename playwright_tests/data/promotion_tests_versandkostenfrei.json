@@ -1,0 +1,611 @@
+[
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-001",
+    "name": "Versandkostenfrei nur Post (DE/AT)",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Versandkostenfreie Lieferung nur für Postartikel in DE/AT ohne Mindestbestellwert. Land = DE, AT; Verwendete Versandart = Postversand DE, Postversand AT; Shopware-Regel: GE_Promo_Lieferland-DA_nurPostversand.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = DE oder AT",
+      "Verwendete Versandart = Postversand DE oder Postversand AT",
+      "Shopware-Regel GE_Promo_Lieferland-DA_nurPostversand ist aktiv",
+      "Promotion ist aktiv und gültig"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "shipping",
+      "discount_value": 5.95,
+      "currency": "EUR",
+      "min_order_value": null,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE_Promo_Lieferland-DA_nurPostversand",
+      "channels": [
+        "AT",
+        "DE"
+      ]
+    },
+    "test_data": {
+      "products": [],
+      "promo_codes": [],
+      "amounts": {
+        "shipping_discount": 5.95
+      }
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Postartikeln befüllen (für DE oder AT)",
+        "expected": "Postartikel sind im Warenkorb, Versandkosten werden angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Code wird akzeptiert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Versandkosten auf 0 reduziert werden",
+        "expected": "Versandkosten zeigen 0,00 EUR an"
+      },
+      {
+        "step": 4,
+        "action": "Verifizieren, dass Rabatt absolut 5,95 EUR beträgt",
+        "expected": "Rabatt von 5,95 EUR wird auf Versandkosten angewendet"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass nur Postversand-Methode betroffen ist",
+        "expected": "Speditionsversand ist nicht betroffen"
+      },
+      {
+        "step": 6,
+        "action": "Nutzungslimits testen (1x global, 5x pro Kunde)",
+        "expected": "Nutzungslimits werden eingehalten"
+      }
+    ],
+    "postconditions": [
+      "Funktioniert nur für Postversand DE/AT"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/01976f6aee8279dd97dd90c31a120032/base"
+      },
+      {
+        "label": "Promotion Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec0a3baf723185fbbdfa46d3e7ad/base"
+      }
+    ],
+    "tags": [
+      "versandkostenfrei",
+      "postversand",
+      "DE",
+      "AT",
+      "keine-MBW"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-002",
+    "name": "Versandkostenfrei nur Post (CH)",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Versandkostenfreie Lieferung nur für Postartikel in CH ohne Mindestbestellwert. Land = CH; Verwendete Versandart = Postversand Schweiz; Shopware-Regel: GE_Promo_LieferlandCH_nurPostversand.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = CH",
+      "Verwendete Versandart = Postversand Schweiz",
+      "Shopware-Regel GE_Promo_LieferlandCH_nurPostversand ist aktiv",
+      "Promotion ist aktiv und gültig"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "shipping",
+      "discount_value": 6.95,
+      "currency": "CHF",
+      "min_order_value": null,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE_Promo_LieferlandCH_nurPostversand",
+      "channels": [
+        "CH"
+      ]
+    },
+    "test_data": {
+      "products": [],
+      "promo_codes": [],
+      "amounts": {
+        "shipping_discount": 6.95
+      }
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Postartikeln befüllen (für CH)",
+        "expected": "Postartikel sind im Warenkorb, Versandkosten werden angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Code wird akzeptiert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Versandkosten auf 0 reduziert werden",
+        "expected": "Versandkosten zeigen 0,00 CHF an"
+      },
+      {
+        "step": 4,
+        "action": "Verifizieren, dass Rabatt absolut 6,95 CHF beträgt",
+        "expected": "Rabatt von 6,95 CHF wird auf Versandkosten angewendet"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass nur Postversand-Methode betroffen ist",
+        "expected": "Speditionsversand ist nicht betroffen"
+      },
+      {
+        "step": 6,
+        "action": "Nutzungslimits testen (1x global, 5x pro Kunde)",
+        "expected": "Nutzungslimits werden eingehalten"
+      }
+    ],
+    "postconditions": [
+      "Funktioniert nur für Postversand CH"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/0197e57bfea470c9bf7964360934c5e7/base"
+      },
+      {
+        "label": "Promotion Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec1280c9709b8190c555644401f0/base"
+      }
+    ],
+    "tags": [
+      "versandkostenfrei",
+      "postversand",
+      "CH",
+      "keine-MBW"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-003",
+    "name": "Versandkostenfrei nur Spedi (DE/AT)",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Versandkostenfreie Lieferung nur für Speditionsartikel in DE/AT. Land = DE, AT; Verwendete Versandart = Spedi-Versand AT und DE; Shopware-Regel: GE_Promo_MBW50_LieferlandDA_nurSpedi.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = DE oder AT",
+      "Verwendete Versandart = Spedi-Versand AT oder DE",
+      "Shopware-Regel GE_Promo_MBW50_LieferlandDA_nurSpedi ist aktiv",
+      "Promotion ist aktiv und gültig"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "shipping",
+      "discount_value": null,
+      "currency": "EUR",
+      "min_order_value": null,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE_Promo_MBW50_LieferlandDA_nurSpedi",
+      "channels": [
+        "AT",
+        "DE"
+      ]
+    },
+    "test_data": {
+      "products": [],
+      "promo_codes": [],
+      "amounts": {}
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Speditionsartikeln befüllen",
+        "expected": "Speditionsartikel sind im Warenkorb, Versandkosten werden angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Code wird akzeptiert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Versandkosten auf 0 reduziert werden",
+        "expected": "Versandkosten zeigen 0,00 EUR an"
+      },
+      {
+        "step": 4,
+        "action": "Verifizieren, dass nur Speditionsversand betroffen ist",
+        "expected": "Nur Speditionsversand-Kosten werden reduziert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Postversand nicht betroffen ist",
+        "expected": "Postversand-Kosten bleiben unverändert"
+      }
+    ],
+    "postconditions": [
+      "Funktioniert nur für Speditionsversand"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019974fd6455701b9c6772d9f544f234/base"
+      }
+    ],
+    "tags": [
+      "versandkostenfrei",
+      "spedition",
+      "DE",
+      "AT"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-004",
+    "name": "Versandkostenfrei nur Spedi (CH)",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Versandkostenfreie Lieferung nur für Speditionsartikel in CH. Land = CH; Verwendete Versandart = Spedition Schweiz; Shopware-Regel: GE_Promo_MBW50_LieferlandCH_nurSpedi.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = CH",
+      "Verwendete Versandart = Spedition Schweiz",
+      "Shopware-Regel GE_Promo_MBW50_LieferlandCH_nurSpedi ist aktiv",
+      "Promotion ist aktiv und gültig"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "shipping",
+      "discount_value": null,
+      "currency": "CHF",
+      "min_order_value": null,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE_Promo_MBW50_LieferlandCH_nurSpedi",
+      "channels": [
+        "CH"
+      ]
+    },
+    "test_data": {
+      "products": [],
+      "promo_codes": [],
+      "amounts": {}
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Speditionsartikeln befüllen (für CH)",
+        "expected": "Speditionsartikel sind im Warenkorb, Versandkosten werden angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Code wird akzeptiert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Versandkosten auf 0 reduziert werden",
+        "expected": "Versandkosten zeigen 0,00 CHF an"
+      },
+      {
+        "step": 4,
+        "action": "Verifizieren, dass nur Speditionsversand CH betroffen ist",
+        "expected": "Nur Speditionsversand-Kosten werden reduziert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Postversand nicht betroffen ist",
+        "expected": "Postversand-Kosten bleiben unverändert"
+      }
+    ],
+    "postconditions": [
+      "Funktioniert nur für Speditionsversand CH"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0fb87c716489912f1af4a421e9/base"
+      }
+    ],
+    "tags": [
+      "versandkostenfrei",
+      "spedition",
+      "CH"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-005",
+    "name": "Versandkostenfrei Post ab MBW EUR 50 (DE/AT)",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Versandkostenfreie Postlieferung ab Mindestbestellwert 50 EUR für DE/AT. Land = DE, AT; Verwendete Versandart = Postversand DE, Postversand AT; Summe > 50 EUR (Mindestbestellwert); Shopware-Regel: GE_Promo_MBW50_LieferlandDA_nurPostversand.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = DE oder AT",
+      "Verwendete Versandart = Postversand DE oder Postversand AT",
+      "Warenwert >= 50 EUR (Mindestbestellwert)",
+      "Shopware-Regel GE_Promo_MBW50_LieferlandDA_nurPostversand ist aktiv",
+      "Promotion ist aktiv und gültig"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "shipping",
+      "discount_value": 5.95,
+      "currency": "EUR",
+      "min_order_value": 50,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE_Promo_MBW50_LieferlandDA_nurPostversand",
+      "channels": [
+        "AT",
+        "DE"
+      ]
+    },
+    "test_data": {
+      "products": [],
+      "promo_codes": [],
+      "amounts": {
+        "shipping_discount": 5.95,
+        "min_order_value": 50
+      }
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Postartikeln befüllen (unter 50 EUR)",
+        "expected": "Postartikel sind im Warenkorb, Warenwert unter 50 EUR"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Code wird nicht akzeptiert oder Promotion wird nicht angewendet (Mindestbestellwert nicht erreicht)"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb auf über 50 EUR erhöhen",
+        "expected": "Warenwert übersteigt 50 EUR"
+      },
+      {
+        "step": 4,
+        "action": "Promotion-Code erneut eingeben",
+        "expected": "Code wird akzeptiert und Promotion wird angewendet"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Versandkosten auf 0 reduziert werden",
+        "expected": "Versandkosten zeigen 0,00 EUR an"
+      },
+      {
+        "step": 6,
+        "action": "MBW-Grenze testen (49,99 EUR vs 50,00 EUR)",
+        "expected": "Bei 49,99 EUR wird Promotion nicht angewendet, bei 50,00 EUR wird sie angewendet"
+      }
+    ],
+    "postconditions": [
+      "Promotion funktioniert nur ab 50 EUR Warenwert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bf906150a7042ba5d46f77b009b98/base"
+      },
+      {
+        "label": "Promotion Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beb1f40bf726da2d9e3c10c0c2e5e/conditions"
+      }
+    ],
+    "tags": [
+      "versandkostenfrei",
+      "postversand",
+      "DE",
+      "AT",
+      "MBW",
+      "mindestbestellwert"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-006",
+    "name": "Versandkostenfrei Post ab MBW CHF 50 (CH)",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Versandkostenfreie Postlieferung ab Mindestbestellwert 50 CHF für CH. Land = CH; Verwendete Versandart = Postversand Schweiz; Summe > 50 CHF (Mindestbestellwert); Shopware-Regel: GE_Promo_MBW50_LieferlandCH_nurPostversand.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = CH",
+      "Verwendete Versandart = Postversand Schweiz",
+      "Warenwert >= 50 CHF (Mindestbestellwert)",
+      "Shopware-Regel GE_Promo_MBW50_LieferlandCH_nurPostversand ist aktiv",
+      "Promotion ist aktiv und gültig"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "shipping",
+      "discount_value": 6.95,
+      "currency": "CHF",
+      "min_order_value": 50,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE_Promo_MBW50_LieferlandCH_nurPostversand",
+      "channels": [
+        "CH"
+      ]
+    },
+    "test_data": {
+      "products": [],
+      "promo_codes": [],
+      "amounts": {
+        "shipping_discount": 6.95,
+        "min_order_value": 50
+      }
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Postartikeln befüllen (unter 50 CHF)",
+        "expected": "Postartikel sind im Warenkorb, Warenwert unter 50 CHF"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Code wird nicht akzeptiert oder Promotion wird nicht angewendet (Mindestbestellwert nicht erreicht)"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb auf über 50 CHF erhöhen",
+        "expected": "Warenwert übersteigt 50 CHF"
+      },
+      {
+        "step": 4,
+        "action": "Promotion-Code erneut eingeben",
+        "expected": "Code wird akzeptiert und Promotion wird angewendet"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Versandkosten auf 0 reduziert werden",
+        "expected": "Versandkosten zeigen 0,00 CHF an"
+      },
+      {
+        "step": 6,
+        "action": "MBW-Grenze testen (49,99 CHF vs 50,00 CHF)",
+        "expected": "Bei 49,99 CHF wird Promotion nicht angewendet, bei 50,00 CHF wird sie angewendet"
+      }
+    ],
+    "postconditions": [
+      "Promotion funktioniert nur ab 50 CHF Warenwert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0c9ba2724d8f118c3f01db846d/base"
+      },
+      {
+        "label": "Promotion Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec13f89e7197b69879ce36d3da5c/base"
+      }
+    ],
+    "tags": [
+      "versandkostenfrei",
+      "postversand",
+      "CH",
+      "MBW",
+      "mindestbestellwert"
+    ]
+  }
+]

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grueneerde.com/schemas/testcase/v2",
+  "title": "GE E-Commerce Testfall v2",
+  "description": "Schema v2 für Testfälle im Grüne Erde E-Commerce Testing Framework. Kompatibel mit Testpanda-Import und API-Austausch.",
+  "type": "object",
+  "required": ["schema_version", "test_id", "name", "category", "priority", "channels", "description", "preconditions", "steps", "author", "last_modified"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "2.0",
+      "description": "Schema-Version des Testfall-Formats"
+    },
+    "test_id": {
+      "type": "string",
+      "pattern": "^TC-[A-Z]+-[A-Z0-9-]+$",
+      "description": "Eindeutige Test-ID im Format TC-{KATEGORIE}-{NR}, z.B. TC-SMOKE-001, TC-SHIP-AT-POST-001, TC-PROMO-CART-PERCENT-001"
+    },
+    "name": {
+      "type": "string",
+      "description": "Kurzer, beschreibender Testname"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "smoke",
+        "critical-path",
+        "warenkorb",
+        "suche",
+        "account",
+        "versandarten",
+        "warenkorb-promotions",
+        "gutschein-sicherheit",
+        "gutschein-checkout-flows",
+        "versandkostenfrei",
+        "produktkategorien",
+        "mindestbestellwert",
+        "mengenrabatt",
+        "aktionspreis",
+        "mitarbeiterrabatt",
+        "bundle",
+        "promo-kombinationen",
+        "data-validation",
+        "performance"
+      ],
+      "description": "Funktionale Testkategorie"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2"],
+      "description": "Testpriorität: P0=Kritisch, P1=Hoch, P2=Mittel"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["defined", "implemented", "passing", "failing", "skipped"],
+      "default": "defined",
+      "description": "Aktueller Implementierungsstatus"
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["AT", "DE", "CH"]
+      },
+      "minItems": 1,
+      "description": "Verkaufskanäle, in denen der Test ausgeführt wird"
+    },
+    "author": {
+      "type": "string",
+      "description": "Wer hat den Testfall erstellt/zuletzt geändert"
+    },
+    "last_modified": {
+      "type": "string",
+      "format": "date",
+      "description": "Letztes Änderungsdatum im Format YYYY-MM-DD"
+    },
+    "description": {
+      "type": "string",
+      "description": "Ausführliche Beschreibung des Testfalls"
+    },
+    "preconditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Vorbedingungen, die vor Testausführung erfüllt sein müssen"
+    },
+    "promo_config": {
+      "type": "object",
+      "description": "Shopware Promotion-Konfiguration für diesen Testfall",
+      "properties": {
+        "name_frontend": { "type": "string" },
+        "code_type": {
+          "type": "string",
+          "enum": ["manual_code", "automatic", "campaign_specific"]
+        },
+        "discount_type": {
+          "type": "string",
+          "enum": ["percentage", "absolute", "free_shipping"]
+        },
+        "discount_target": {
+          "type": "string",
+          "enum": ["cart", "shipping", "selected_products", "most_expensive"]
+        },
+        "discount_value": { "type": ["number", "null"] },
+        "currency": {
+          "type": "string",
+          "enum": ["EUR", "CHF"]
+        },
+        "min_order_value": { "type": ["number", "null"] },
+        "usage_total": { "type": ["integer", "null"] },
+        "usage_per_customer": { "type": ["integer", "null"] },
+        "shopware_rule": { "type": ["string", "null"] },
+        "channels": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "test_data": {
+      "type": "object",
+      "description": "Spezifische Testdaten – product_ref als Referenz statt eingebetteter Objekte",
+      "properties": {
+        "product_ref": {
+          "type": ["string", "null"],
+          "description": "Logische Produktreferenz (z.B. 'simple_product_post', 'spedition_product')"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ref": { "type": "string", "description": "Logische Referenz statt konkreter ID" },
+              "id": { "type": "string" },
+              "path": { "type": "string" },
+              "type": {
+                "type": "string",
+                "enum": ["post", "spedition", "gutschein", "wertgutschein", "accessoire"]
+              },
+              "not_discountable": { "type": "boolean" },
+              "has_sale_price": { "type": "boolean" }
+            }
+          }
+        },
+        "promo_codes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "amounts": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "action", "expected"],
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "action": {
+            "type": "string",
+            "description": "Auszuführende Aktion"
+          },
+          "expected": {
+            "type": "string",
+            "description": "Erwartetes Ergebnis dieses Schritts"
+          },
+          "selector_hint": {
+            "type": "string",
+            "description": "Logischer Selektor-Hint (z.B. 'product.detail_page')"
+          }
+        }
+      },
+      "minItems": 1,
+      "description": "Geordnete Testschritte mit Erwartungen"
+    },
+    "postconditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Zustand nach Testausführung"
+    },
+    "cleanup": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Aufräumaktionen nach Testausführung"
+    },
+    "automation": {
+      "type": "object",
+      "description": "Mapping zu konkreten Test-Implementierungen",
+      "properties": {
+        "playwright": {
+          "type": ["string", "null"],
+          "description": "Pfad zur Playwright-Testdatei"
+        },
+        "cypress": {
+          "type": ["string", "null"],
+          "description": "Pfad zur Cypress-Testdatei"
+        },
+        "manual": {
+          "type": "boolean",
+          "description": "Ob manueller Test möglich ist"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        }
+      },
+      "description": "Referenzen zu Shopware-Regeln, Promotion-Templates etc."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Freie Tags für Filterung und Gruppierung"
+    }
+  },
+  "additionalProperties": false
+}

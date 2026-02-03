@@ -1,0 +1,1463 @@
+[
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CAT-001",
+    "name": "Promo auf Produktkategorie via advertising_material_id",
+    "category": "produktkategorien",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass eine Promotion nur auf Produkte einer bestimmten Kategorie angewendet wird, identifiziert über advertising_material_id",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Promotion mit Produktfilter auf bestimmte advertising_material_id",
+      "Produkte mit und ohne passende advertising_material_id vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt mit passender advertising_material_id zum Warenkorb hinzufügen",
+        "expected": "Rabatt wird nur auf Produkte mit passender advertising_material_id angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Produkt OHNE passende advertising_material_id zum Warenkorb hinzufügen",
+        "expected": "Produkte ohne passende ID bleiben unrabattiert"
+      },
+      {
+        "step": 3,
+        "action": "Promotion-Code eingeben",
+        "expected": "Prozentuale oder absolute Berechnung ist korrekt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Rabatt nur auf das Produkt mit passender ID angewendet wird",
+        "expected": "Funktioniert in allen DACH-Verkaufskanälen"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass das andere Produkt zum vollen Preis bleibt",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "Test in allen Verkaufskanälen (AT, DE, CH) durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Prozentuale oder absolute Berechnung ist korrekt",
+      "Funktioniert in allen DACH-Verkaufskanälen"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktkategorie",
+      "advertising_material_id",
+      "promotion",
+      "kategorie-filter"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-AUTO-001",
+    "name": "Automatisierte Promo auf Werbemittel ID 70",
+    "category": "produktkategorien",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Vorlage für Promohülse (automatisierte Promo) – prüft automatische Rabattanwendung auf Produkte mit Werbemittel ID 70",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Nur Produkte mit Werbemittel ID 70",
+      "Keine Shopware-Regel notwendig"
+    ],
+    "promo_config": {
+      "code_type": "automatic",
+      "discount_type": "percentage",
+      "discount_target": "selected_products",
+      "channels": [
+        "AT",
+        "DE",
+        "CH"
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt mit advertising_material_id = 70 zum Warenkorb hinzufügen",
+        "expected": "Promotion wird automatisch ohne Code angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Zum Warenkorb navigieren",
+        "expected": "Rabatt wird nur auf Produkte mit Werbemittel ID 70 angewendet"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass automatische Promotion angewendet wurde (kein Code-Eingabe erforderlich)",
+        "expected": "Rabatt ist prozentual und wird korrekt berechnet"
+      },
+      {
+        "step": 4,
+        "action": "Prozentuale Rabatt-Berechnung validieren",
+        "expected": "Funktioniert in allen DACH-Verkaufskanälen"
+      },
+      {
+        "step": 5,
+        "action": "Test in allen Verkaufskanälen (AT, DE, CH) durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Funktioniert in allen DACH-Verkaufskanälen"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware Promotion Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019be5f25363722483455ea500fee356/base"
+      }
+    ],
+    "tags": [
+      "produktkategorie",
+      "automatisch",
+      "werbemittel",
+      "advertising_material_id",
+      "promotion",
+      "kein-code"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-MOV-001",
+    "name": "EUR-Rabatt ab Mindestbestellwert",
+    "category": "mindestbestellwert",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft absolute EUR-Rabatte, die erst ab einem bestimmten Mindestbestellwert (MBW) greifen",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit absolutem EUR-Rabatt (z.B. 10 EUR Rabatt)",
+      "Mindestbestellwert-Bedingung (z.B. ab 50 EUR)",
+      "Shopware-Regel mit MBW-Bedingung"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit Produkten unter MBW befüllen (z.B. 40 EUR)",
+        "expected": "Unter MBW: Promotion wird abgelehnt mit Hinweis auf MBW"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Promotion wird abgelehnt"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb auf über MBW erhöhen (z.B. 55 EUR)",
+        "expected": "Ab MBW: Promotion wird akzeptiert"
+      },
+      {
+        "step": 4,
+        "action": "Promotion-Code erneut eingeben",
+        "expected": "Promotion wird akzeptiert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass absoluter Rabatt korrekt abgezogen wird",
+        "expected": "Absoluter Rabatt wird korrekt abgezogen (Endsumme = Warenwert - Rabatt + Versand)"
+      },
+      {
+        "step": 6,
+        "action": "MBW-Grenzwert testen (exakt MBW-Betrag)",
+        "expected": "MBW wird nur auf Produktwert berechnet (ohne Versandkosten)"
+      },
+      {
+        "step": 7,
+        "action": "Test in AT, DE, CH durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Unter MBW: Promotion wird abgelehnt mit Hinweis auf MBW",
+      "Ab MBW: Promotion wird akzeptiert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mindestbestellwert",
+      "mbw",
+      "absolut",
+      "eur-rabatt",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-MOV-002",
+    "name": "MBW nur auf Warenkorb angewendet",
+    "category": "mindestbestellwert",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass der Mindestbestellwert nur auf den Warenkorb-Produktwert berechnet wird, nicht auf Versandkosten oder Gutscheine",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit MBW-Bedingung",
+      "Warenkorb mit Produkten + Versandkosten"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkte knapp unter MBW in den Warenkorb legen",
+        "expected": "MBW wird ausschließlich aus Produktpreisen berechnet"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, dass Versandkosten NICHT zum MBW gezählt werden",
+        "expected": "Versandkosten, Gutschein-Guthaben und Rabatte fließen nicht in MBW-Berechnung ein"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Einlösegutscheine NICHT den Warenwert für MBW reduzieren",
+        "expected": "Korrekte Berechnung auch bei gemischtem Warenkorb (Post + Spedition)"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass nur Netto-Produktwerte für MBW zählen",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 5,
+        "action": "Produkt hinzufügen, bis MBW erreicht",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 6,
+        "action": "Promotion-Code eingeben",
+        "expected": "Promotion wird akzeptiert"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mindestbestellwert",
+      "mbw",
+      "warenkorb",
+      "versandkosten-ausschluss",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-QTY-001",
+    "name": "% auf teuerstes Produkt",
+    "category": "mengenrabatt",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft prozentuale Promotion, die nur auf das teuerste Produkt im Warenkorb angewendet wird",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit Rabatt-Anwendung auf \"teuersten Artikel\"",
+      "Warenkorb mit mehreren Produkten unterschiedlicher Preise"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mehrere Produkte mit unterschiedlichen Preisen zum Warenkorb hinzufügen (z.B. 30€, 50€, 80€)",
+        "expected": "Rabatt wird nur auf das teuerste Produkt angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Bei gleich teuren Produkten: Rabatt auf eines davon"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Rabatt nur auf das teuerste Produkt (80€) angewendet wird",
+        "expected": "Prozentuale Berechnung ist korrekt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass die günstigeren Produkte zum vollen Preis bleiben",
+        "expected": "Andere Produkte bleiben unverändert"
+      },
+      {
+        "step": 5,
+        "action": "Prozentuale Berechnung validieren (z.B. 20% von 80€ = 16€ Rabatt)",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "Gesamtsumme validieren",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Prozentuale Berechnung ist korrekt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mengenrabatt",
+      "teuerstes-produkt",
+      "prozentual",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-QTY-002",
+    "name": "Mengenrabatt nur auf 1 Produkt",
+    "category": "mengenrabatt",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass ein Mengenrabatt (z.B. \"ab 3 Stück 10% Rabatt\") nur auf das qualifizierte Produkt angewendet wird, nicht auf den gesamten Warenkorb",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit Mengenbedingung (z.B. ab 3 Stück)",
+      "Warenkorb mit qualifiziertem Produkt (ausreichende Menge) + weitere Produkte"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt A 3x zum Warenkorb hinzufügen (qualifiziert für Mengenrabatt)",
+        "expected": "Mengenrabatt wird nur auf das qualifizierte Produkt angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Produkt B 1x hinzufügen (nicht qualifiziert)",
+        "expected": "Andere Produkte im Warenkorb bleiben unrabattiert"
+      },
+      {
+        "step": 3,
+        "action": "Promotion-Code eingeben (oder automatische Promotion)",
+        "expected": "Bei Unterschreitung der Mindestmenge entfällt der Rabatt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Rabatt nur auf Produkt A angewendet wird",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Produkt B zum vollen Preis bleibt",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "Menge von Produkt A auf 2 reduzieren",
+        "expected": "Rabatt entfällt"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mengenrabatt",
+      "mengenbedingung",
+      "einzelprodukt",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-QTY-003",
+    "name": "3x gleiches Produkt - nur 1x rabattiert",
+    "category": "mengenrabatt",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft \"Nimm 3, zahl 2\"-Logik: Bei 3 gleichen Produkten wird nur 1 Stück rabattiert (kostenlos)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit Regel \"bei 3 gleichen Produkten ist das günstigste/ein Stück gratis\"",
+      "Gleiches Produkt 3x im Warenkorb"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Gleiches Produkt 3x zum Warenkorb hinzufügen",
+        "expected": "Bei 3 Stück: Genau 1 Stück wird rabattiert"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben (oder automatische Promotion)",
+        "expected": "Gesamtpreis = Menge - Gratisartikel × Einzelpreis"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass genau 1 Stück als 100% rabattiert angezeigt wird",
+        "expected": "Rabatt wird als separater Nachlass im Warenkorb angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass die anderen 2 Stück zum vollen Preis bleiben",
+        "expected": "Staffelung bei höherer Menge (falls konfiguriert)"
+      },
+      {
+        "step": 5,
+        "action": "Gesamtsumme validieren (= 2x Einzelpreis)",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "4. Stück hinzufügen",
+        "expected": "Weiterhin nur 1x rabattiert"
+      },
+      {
+        "step": 7,
+        "action": "6 Stück testen",
+        "expected": "Prüfen ob 2x rabattiert (je nach Promo-Logik)"
+      }
+    ],
+    "postconditions": [
+      "Rabatt wird als separater Nachlass im Warenkorb angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mengenrabatt",
+      "nimm3-zahl2",
+      "gratisartikel",
+      "staffelung",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SALE-001",
+    "name": "Rabatt auf Lieblingsprodukt (Aktionspreis)",
+    "category": "aktionspreis",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft die \"Lieblingsprodukt\"-Promotion, bei der ein prozentualer Rabatt auf ein einzelnes, vom Kunden gewähltes Produkt angewendet wird (z.B. Code \"Liebling20\" für 20% auf teuerstes Produkt)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Promotion-Code: Liebling20 (oder je nach Kampagne)",
+      "Rabatt: Prozentual auf teuerstes Produkt",
+      "Aktive Kampagne mit gültigem Zeitraum"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mehrere Produkte zum Warenkorb hinzufügen",
+        "expected": "20% Rabatt wird auf das teuerste Produkt angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code \"Liebling20\" eingeben",
+        "expected": "Originalpreis wird durchgestrichen angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Rabatt auf das teuerste Produkt angewendet wird",
+        "expected": "Aktionspreis wird korrekt berechnet"
+      },
+      {
+        "step": 4,
+        "action": "Aktionspreis-Berechnung validieren (20% von Einzelpreis)",
+        "expected": "Andere Produkte bleiben unverändert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass durchgestrichener Originalpreis angezeigt wird",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "Test in allen Verkaufskanälen (AT, DE, CH) durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Originalpreis wird durchgestrichen angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "aktionspreis",
+      "lieblingsprodukt",
+      "prozentual",
+      "teuerstes-produkt",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SALE-002",
+    "name": "Promo mit Produkt-ID via advertising_material_id",
+    "category": "aktionspreis",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass eine Promotion über die advertising_material_id gezielt auf bestimmte Produkte angewendet wird",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Promotion mit Produktfilter über advertising_material_id",
+      "Produkte mit und ohne passende advertising_material_id"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt mit passender advertising_material_id zum Warenkorb hinzufügen",
+        "expected": "Rabatt wird nur auf Produkte mit passender advertising_material_id angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Produkt ohne passende ID hinzufügen",
+        "expected": "Andere Produkte bleiben unverändert"
+      },
+      {
+        "step": 3,
+        "action": "Promotion-Code eingeben",
+        "expected": "Filterung über advertising_material_id funktioniert korrekt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Rabatt nur auf Produkt mit passender ID angewendet wird",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 5,
+        "action": "Rabattberechnung validieren",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Filterung über advertising_material_id funktioniert korrekt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "aktionspreis",
+      "advertising_material_id",
+      "produktfilter",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SALE-003",
+    "name": "Promo mit leerer Promo-ID nicht möglich",
+    "category": "aktionspreis",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass eine Promotion mit leerer oder fehlender advertising_material_id nicht angewendet werden kann (Schutz vor Fehlkonfiguration)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Promotion ohne advertising_material_id oder mit leerer ID",
+      "Beliebige Produkte im Warenkorb"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Promotion mit leerer ID wird nicht angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Promotion ohne gültige advertising_material_id versuchen anzuwenden",
+        "expected": "Fehlermeldung oder stille Ablehnung"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass keine Fehlkonfiguration zu unbeabsichtigten Rabatten führt",
+        "expected": "Kein unbeabsichtigter Rabatt auf alle Produkte"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "aktionspreis",
+      "fehlkonfiguration",
+      "leere-id",
+      "sicherheit",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SALE-004",
+    "name": "SALE-Anzeige bei Aktionspreis korrekt",
+    "category": "aktionspreis",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft die korrekte Frontend-Darstellung von SALE/Aktionspreisen (durchgestrichener Originalpreis, SALE-Badge, Rabatt-Prozent)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produkt mit aktivem Aktionspreis (SALE)",
+      "Aktionspreis in Shopware konfiguriert"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktseite mit Aktionspreis aufrufen",
+        "expected": "Originalpreis wird durchgestrichen angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, dass Originalpreis durchgestrichen angezeigt wird",
+        "expected": "Aktionspreis ist hervorgehoben (andere Farbe/Größe)"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Aktionspreis prominent angezeigt wird",
+        "expected": "SALE-Badge ist auf PDP und in Listings sichtbar"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass SALE-Badge/Label vorhanden ist",
+        "expected": "Preise sind in Warenkorb und Checkout konsistent"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Preise in Listing/Kategorie-Übersicht korrekt angezeigt werden",
+        "expected": "Währungsformatierung ist je Verkaufskanal korrekt (EUR/CHF)"
+      },
+      {
+        "step": 6,
+        "action": "Prüfen, dass Aktionspreis im Warenkorb und Checkout korrekt übernommen wird",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 7,
+        "action": "Test in allen Verkaufskanälen (AT: EUR, DE: EUR, CH: CHF) durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Originalpreis wird durchgestrichen angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "aktionspreis",
+      "sale-badge",
+      "frontend",
+      "preisanzeige",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-EMP-001",
+    "name": "Mitarbeiterrabatt nur auf Basispreis",
+    "category": "mitarbeiterrabatt",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass der Mitarbeiterrabatt auf den regulären Basispreis berechnet wird, nicht auf bereits reduzierte Preise",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Eingeloggter Mitarbeiter-Account (spezielle Kundengruppe)",
+      "Automatische Mitarbeiter-Promotion aktiv",
+      "Produkte mit regulärem Preis im Warenkorb"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mit Mitarbeiter-Account einloggen",
+        "expected": "Mitarbeiterrabatt wird automatisch auf Basispreis angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Reguläres Produkt (ohne Aktionspreis) zum Warenkorb hinzufügen",
+        "expected": "Rabatt-Prozentsatz ist je Kategorie korrekt"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Mitarbeiterrabatt automatisch angewendet wird",
+        "expected": "Anzeige im Warenkorb: Originalpreis + Mitarbeiterrabatt-Zeile"
+      },
+      {
+        "step": 4,
+        "action": "Rabatt-Berechnung validieren (% vom Basispreis)",
+        "expected": "Kein manueller Code erforderlich"
+      },
+      {
+        "step": 5,
+        "action": "Verschiedene Produktkategorien testen (Kleidung, Kosmetik, Möbel)",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      },
+      {
+        "step": 6,
+        "action": "Test in AT, DE und CH durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mitarbeiterrabatt",
+      "basispreis",
+      "automatisch",
+      "kundengruppe",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-EMP-002",
+    "name": "Mitarbeiterrabatt nicht auf Aktionspreis",
+    "category": "mitarbeiterrabatt",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass der Mitarbeiterrabatt NICHT auf bereits reduzierte Aktionspreise (SALE) angewendet wird – keine Doppelrabattierung",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Eingeloggter Mitarbeiter-Account",
+      "Produkt mit aktivem Aktionspreis (SALE)"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mit Mitarbeiter-Account einloggen",
+        "expected": "Kein Mitarbeiterrabatt auf Aktionspreise (keine Doppelrabattierung)"
+      },
+      {
+        "step": 2,
+        "action": "Produkt mit Aktionspreis zum Warenkorb hinzufügen",
+        "expected": "Produkt wird zum Aktionspreis berechnet"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass KEIN zusätzlicher Mitarbeiterrabatt auf den Aktionspreis angewendet wird",
+        "expected": "Bei gemischtem Warenkorb: Mitarbeiterrabatt nur auf reguläre Produkte"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, ob der Aktionspreis oder der Mitarbeiterrabatt günstiger ist",
+        "expected": "Alternativ: Der günstigere Preis (Aktionspreis vs. Mitarbeiterrabatt) wird angewendet"
+      },
+      {
+        "step": 5,
+        "action": "Gemischter Warenkorb: Aktionspreis-Produkt + reguläres Produkt",
+        "expected": "Mitarbeiterrabatt nur auf reguläres Produkt"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mitarbeiterrabatt",
+      "aktionspreis",
+      "doppelrabatt",
+      "ausschluss",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-BUNDLE-001",
+    "name": "Nimm 5 zahl 4",
+    "category": "bundle",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft die \"Nimm 5, zahl 4\"-Aktion – bei 5 gleichen Produkten wird das günstigste kostenlos",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit Regel \"5 kaufen, 4 bezahlen\"",
+      "Mindestmenge: 5 gleiche Produkte",
+      "Automatisch oder per Code"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "5x gleiches Produkt zum Warenkorb hinzufügen",
+        "expected": "Bei 5 Stück: 1 Stück wird als 100% rabattiert angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, dass automatisch 1 Stück als Gratis markiert wird (oder Code eingeben)",
+        "expected": "Gesamtpreis = 4 × Einzelpreis"
+      },
+      {
+        "step": 3,
+        "action": "Gesamtpreis validieren (= 4x Einzelpreis)",
+        "expected": "Unter 5 Stück: Kein Rabatt"
+      },
+      {
+        "step": 4,
+        "action": "Mit 4 Stück testen",
+        "expected": "Kein Rabatt"
+      },
+      {
+        "step": 5,
+        "action": "Mit 6 Stück testen",
+        "expected": "Weiterhin nur 1x gratis (oder 2x bei 10 Stück)"
+      },
+      {
+        "step": 6,
+        "action": "Rabatt-Anzeige im Warenkorb prüfen",
+        "expected": "Rabatt wird als separate Promotion-Zeile angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Bei 5 Stück: 1 Stück wird als 100% rabattiert angezeigt",
+      "Rabatt wird als separate Promotion-Zeile angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "bundle",
+      "nimm5-zahl4",
+      "mengen-aktion",
+      "gratisartikel",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-BUNDLE-002",
+    "name": "Produkt A + Gratisprodukt",
+    "category": "bundle",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft Bundle-Promotion, bei der beim Kauf von Produkt A ein bestimmtes Gratisprodukt automatisch hinzugefügt wird",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion: Beim Kauf von Produkt A → Produkt B gratis",
+      "Produkte A und B müssen konfiguriert sein"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt A zum Warenkorb hinzufügen",
+        "expected": "Gratisprodukt wird automatisch zum Warenkorb hinzugefügt"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, ob Gratisprodukt B automatisch hinzugefügt wird (oder Code eingeben)",
+        "expected": "Gratisprodukt wird mit 0 EUR/CHF angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Gratisprodukt mit Preis 0 angezeigt wird",
+        "expected": "Entfernung von Produkt A entfernt auch das Gratisprodukt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Gratisprodukt nicht einzeln entfernt werden kann (optional)",
+        "expected": "Gesamtpreis = nur Preis von Produkt A"
+      },
+      {
+        "step": 5,
+        "action": "Produkt A entfernen",
+        "expected": "Gratisprodukt wird ebenfalls entfernt"
+      },
+      {
+        "step": 6,
+        "action": "Gesamtpreis validieren",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Gratisprodukt wird mit 0 EUR/CHF angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "bundle",
+      "gratisprodukt",
+      "automatisch",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-BUNDLE-003",
+    "name": "Kissen + Schonbezug gratis",
+    "category": "bundle",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft spezifische Bundle-Aktion: Beim Kauf eines Kissens wird ein passender Schonbezug gratis hinzugefügt",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion: Kissen-Kauf → Schonbezug gratis",
+      "Kissen und Schonbezug als Bundle konfiguriert"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Kissen zum Warenkorb hinzufügen",
+        "expected": "Passender Schonbezug wird automatisch gratis hinzugefügt"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, ob Schonbezug automatisch als Gratisartikel erscheint",
+        "expected": "Schonbezug mit Preis 0 im Warenkorb"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Schonbezug mit 0 EUR/CHF angezeigt wird",
+        "expected": "Korrekte Zuordnung Kissen → Schonbezug"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass nur der passende Schonbezug hinzugefügt wird",
+        "expected": "Entfernung des Kissens entfernt auch den Schonbezug"
+      },
+      {
+        "step": 5,
+        "action": "Anderes Kissen testen",
+        "expected": "Anderer Schonbezug wird hinzugefügt"
+      },
+      {
+        "step": 6,
+        "action": "Kissen entfernen",
+        "expected": "Schonbezug wird ebenfalls entfernt"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "bundle",
+      "kissen",
+      "schonbezug",
+      "gratisartikel",
+      "zuordnung",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-BUNDLE-004",
+    "name": "Pro Kissen ein Schonbezug gratis",
+    "category": "bundle",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft die Mengenstaffelung bei Bundle-Aktionen: Pro gekauftem Kissen wird jeweils ein Schonbezug gratis hinzugefügt",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion: Pro Kissen 1x Schonbezug gratis (Mengenstaffelung)",
+      "Mehrere Kissen im Warenkorb"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "1x Kissen zum Warenkorb hinzufügen",
+        "expected": "1x Schonbezug gratis"
+      },
+      {
+        "step": 2,
+        "action": "2x Kissen hinzufügen",
+        "expected": "2x Schonbezug gratis"
+      },
+      {
+        "step": 3,
+        "action": "3x Kissen hinzufügen",
+        "expected": "3x Schonbezug gratis"
+      },
+      {
+        "step": 4,
+        "action": "Kissen-Menge reduzieren",
+        "expected": "Schonbezug-Menge passt sich an"
+      },
+      {
+        "step": 5,
+        "action": "Gesamtpreis validieren (nur Kissen-Preise, keine Schonbezug-Kosten)",
+        "expected": "Anzahl Gratis-Schonbezüge = Anzahl Kissen"
+      },
+      {
+        "step": 6,
+        "action": "Verschiedene Kissen-Varianten testen",
+        "expected": "Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)"
+      }
+    ],
+    "postconditions": [
+      "Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)",
+      "Gesamtpreis enthält nur Kissen-Preise"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "bundle",
+      "kissen",
+      "schonbezug",
+      "mengenstaffelung",
+      "gratisartikel",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-COMBO-001",
+    "name": "Zwei Promotions kombinierbar",
+    "category": "promo-kombinationen",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, ob zwei unabhängige Promotions gleichzeitig auf denselben Warenkorb angewendet werden können",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Zwei aktive, kombinierbare Promotions",
+      "Shopware-Promotion-Einstellung: \"Kombination erlaubt\" = true"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkte zum Warenkorb hinzufügen",
+        "expected": "Beide Promotions werden gleichzeitig angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Ersten Promotion-Code eingeben",
+        "expected": "Wird akzeptiert"
+      },
+      {
+        "step": 3,
+        "action": "Zweiten Promotion-Code eingeben",
+        "expected": "Wird akzeptiert"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass beide Rabatte im Warenkorb angezeigt werden",
+        "expected": "Beide Rabatte erscheinen als separate Zeilen"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass beide Rabatte korrekt berechnet werden",
+        "expected": "Gesamtpreis ist korrekt (beide Rabatte berücksichtigt)"
+      },
+      {
+        "step": 6,
+        "action": "Gesamtpreis validieren (beide Rabatte abgezogen)",
+        "expected": "Reihenfolge der Eingabe hat keinen Einfluss auf Ergebnis"
+      },
+      {
+        "step": 7,
+        "action": "Reihenfolge umkehren und erneut testen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Gesamtpreis ist korrekt (beide Rabatte berücksichtigt)"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Alle Promotion-Codes entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "promo-kombination",
+      "zwei-codes",
+      "kombinierbar",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-COMBO-002",
+    "name": "20% Kleidung + 5% Alles",
+    "category": "promo-kombinationen",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft die Kombination einer kategoriespezifischen Promotion (20% auf Kleidung) mit einer allgemeinen Promotion (5% auf alles)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion 1: 20% auf Kleidung (automatisch oder per Code)",
+      "Promotion 2: 5% auf gesamten Warenkorb",
+      "Warenkorb mit Kleidung + Nicht-Kleidung"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Kleidungsprodukt zum Warenkorb hinzufügen",
+        "expected": "Kleidung erhält beide Rabatte (20% + 5%)"
+      },
+      {
+        "step": 2,
+        "action": "Nicht-Kleidungsprodukt hinzufügen (z.B. Kosmetik)",
+        "expected": "Nicht-Kleidung erhält nur 5%"
+      },
+      {
+        "step": 3,
+        "action": "Beide Promotions aktivieren",
+        "expected": "Berechnung ist je nach Shopware-Konfiguration additiv oder sequenziell"
+      },
+      {
+        "step": 4,
+        "action": "Kleidungsprodukt: Prüfen ob 20% + 5% = 25% oder sequenziell (20% dann 5% auf Rest)",
+        "expected": "Gesamtpreis ist korrekt berechnet"
+      },
+      {
+        "step": 5,
+        "action": "Nicht-Kleidungsprodukt: Nur 5% Rabatt",
+        "expected": "Aktion erfolgreich ausgefuehrt"
+      },
+      {
+        "step": 6,
+        "action": "Rabattberechnung validieren (additiv vs. sequenziell)",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 7,
+        "action": "Gesamtpreis prüfen",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Gesamtpreis ist korrekt berechnet"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Alle Promotion-Codes entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "promo-kombination",
+      "kategorie-spezifisch",
+      "kleidung",
+      "additiv",
+      "sequenziell",
+      "promotion"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-COMBO-003",
+    "name": "Aufeinander aufbauende Promos",
+    "category": "promo-kombinationen",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft sequenziell aufbauende Promotions, bei denen der zweite Rabatt auf den bereits reduzierten Preis angewendet wird (Kaskade)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Zwei Promotions mit definierter Reihenfolge/Priorität",
+      "Shopware-Promotion-Priorität konfiguriert"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen (z.B. 100 EUR)",
+        "expected": "Promotions werden in definierter Reihenfolge angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Erste Promotion aktivieren (z.B. 20%)",
+        "expected": "Preis reduziert auf 80 EUR"
+      },
+      {
+        "step": 3,
+        "action": "Zweite Promotion aktivieren (z.B. 10% auf reduzierten Preis)",
+        "expected": "Preis reduziert auf 72 EUR"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, ob Reihenfolge der Anwendung korrekt ist",
+        "expected": "Zweiter Rabatt wird auf bereits reduzierten Preis berechnet (sequenziell)"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass der zweite Rabatt auf den bereits reduzierten Preis berechnet wird",
+        "expected": "Reihenfolge basiert auf Shopware-Promotion-Priorität"
+      },
+      {
+        "step": 6,
+        "action": "Gesamtpreis validieren: 100 × 0,80 × 0,90 = 72 EUR (sequenziell) vs. 100 × 0,70 = 70 EUR (additiv)",
+        "expected": "Gesamtpreis entspricht der sequenziellen Berechnung"
+      },
+      {
+        "step": 7,
+        "action": "Shopware-Promotion-Priorität variieren und Auswirkung testen",
+        "expected": "Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Alle Promotion-Codes entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "promo-kombination",
+      "sequenziell",
+      "kaskade",
+      "prioritaet",
+      "promotion"
+    ]
+  }
+]

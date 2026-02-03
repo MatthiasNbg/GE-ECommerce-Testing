@@ -1,0 +1,615 @@
+[
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SEC-001",
+    "name": "Ausnutzungsmöglichkeiten Kaufgutscheine",
+    "category": "gutschein-sicherheit",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft potenzielle Ausnutzungsmöglichkeiten beim Kauf von Einkaufsgutscheinen (z.B. Rabatt auf Gutschein anwenden, dann vollen Wert einlösen)",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Einkaufsgutscheine verfügbar (verschiedene Nennwerte)",
+      "Verschiedene aktive Promotions vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Einkaufsgutschein zum Warenkorb hinzufügen",
+        "expected": "Keine Promotion kann auf Gutschein-Kauf angewendet werden"
+      },
+      {
+        "step": 2,
+        "action": "Versuchen, Promotion-Code auf Gutschein-Kauf anzuwenden",
+        "expected": "Gutscheine können nicht unter Nennwert erworben werden"
+      },
+      {
+        "step": 3,
+        "action": "Versuchen, automatische Promotions auf Gutschein anzuwenden",
+        "expected": "System verhindert Arbitrage-Möglichkeiten"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, ob rabattiert gekaufter Gutschein vollen Nennwert behält",
+        "expected": "Alle Schutzmechanismen greifen unabhängig vom Gutschein-Nennwert"
+      },
+      {
+        "step": 5,
+        "action": "Verschiedene Gutschein-Nennwerte testen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Keine Promotion kann auf Gutschein-Kauf angewendet werden"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "sicherheit",
+      "arbitrage",
+      "kaufgutschein"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SEC-002",
+    "name": "Gutschein-Kombination für kostenlosen Warenkorb",
+    "category": "gutschein-sicherheit",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, ob durch Kombination von Einlösegutscheinen und Promotions ein kostenloser Warenkorb erreicht werden kann",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Einlösegutschein mit Guthaben vorhanden",
+      "Aktive Warenkorb-Promotion"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Günstiges Produkt zum Warenkorb hinzufügen",
+        "expected": "Warenkorb kann maximal auf 0 EUR reduziert werden"
+      },
+      {
+        "step": 2,
+        "action": "Einlösegutschein eingeben (Guthaben > Warenwert)",
+        "expected": "Kein negativer Warenkorbwert möglich"
+      },
+      {
+        "step": 3,
+        "action": "Zusätzlich Promotion-Code eingeben",
+        "expected": "Überschüssiges Guthaben bleibt auf dem Gutschein"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Endsumme nicht negativ wird",
+        "expected": "Promotion und Gutschein werden korrekt verrechnet"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass kein Guthaben über den Warenwert hinaus erstattet wird",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Warenkorb kann maximal auf 0 EUR reduziert werden",
+      "Überschüssiges Guthaben bleibt auf dem Gutschein"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "sicherheit",
+      "kostenloser-warenkorb",
+      "einlösegutschein"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SEC-003",
+    "name": "Gutscheine zum Erreichen von MBW",
+    "category": "gutschein-sicherheit",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, ob Einlösegutscheine fälschlicherweise zum Mindestbestellwert (MBW) gezählt werden",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Promotion mit Mindestbestellwert-Bedingung",
+      "Warenkorb unter MBW",
+      "Einlösegutschein verfügbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkte unter MBW-Grenze zum Warenkorb hinzufügen",
+        "expected": "Gutschein-Guthaben wird NICHT zum Warenwert für MBW-Berechnung addiert"
+      },
+      {
+        "step": 2,
+        "action": "Einlösegutschein eingeben",
+        "expected": "MBW wird nur aus tatsächlichen Produktpreisen berechnet"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, ob MBW-Promotion nun verfügbar ist",
+        "expected": "Promotion wird weiterhin abgelehnt, wenn Produktwert unter MBW liegt"
+      },
+      {
+        "step": 4,
+        "action": "MBW-Code eingeben",
+        "expected": "Code wird verarbeitet"
+      },
+      {
+        "step": 5,
+        "action": "Validieren, dass Gutschein-Guthaben NICHT zum MBW gezählt wird",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "sicherheit",
+      "mindestbestellwert",
+      "mbw",
+      "einlösegutschein"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SEC-004",
+    "name": "Alle Gutschein-Kombinationen (Brute-Force)",
+    "category": "gutschein-sicherheit",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Systematischer Test aller möglichen Gutschein-Promotion-Kombinationen",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Alle verfügbaren Gutschein-Typen (Einkaufsgutschein, Einlösegutschein, Wertgutschein)",
+      "Alle verfügbaren Promotion-Typen (prozentual, absolut, Versandkostenfrei, automatisch)"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Matrix aufbauen: Gutschein-Typen x Promotion-Typen",
+        "expected": "Keine Kombination führt zu negativem Warenwert"
+      },
+      {
+        "step": 2,
+        "action": "Jede Kombination einzeln testen",
+        "expected": "Alle Ausschlussregeln greifen konsistent"
+      },
+      {
+        "step": 3,
+        "action": "Mehrfach-Kombinationen testen (2+ Gutscheine + Promotion)",
+        "expected": "Reihenfolge der Eingabe hat keinen Einfluss auf das Ergebnis"
+      },
+      {
+        "step": 4,
+        "action": "Reihenfolge variieren (erst Gutschein, dann Promotion und umgekehrt)",
+        "expected": "Fehlermeldungen sind eindeutig und korrekt"
+      },
+      {
+        "step": 5,
+        "action": "Ergebnisse dokumentieren",
+        "expected": "Aktion erfolgreich ausgefuehrt"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "sicherheit",
+      "brute-force",
+      "kombinationen",
+      "matrix-test"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CHK-001",
+    "name": "Gutschein zu regulärem Warenkorb blockiert",
+    "category": "gutschein-checkout-flows",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass ein Gutschein nicht zu einem Warenkorb mit regulären Produkten hinzugefügt werden kann. Shopware Event: BeforeLineItemAddedEvent wird gefeuert, Event->stopPropagation() wird aufgerufen.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Warenkorb enthält reguläres Produkt (z.B. Bett \"Somnia\")"
+    ],
+    "test_data": {
+      "products": [
+        {
+          "id": "736675",
+          "type": "gutschein",
+          "ref": "gutschein_736675"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Reguläres Produkt zum Warenkorb hinzufügen (z.B. Bett \"Somnia\")",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Versuchen, Gutschein (Artikel 736675, HC Code 6609) zum Warenkorb hinzuzufügen",
+        "expected": "BeforeLineItemAddedEvent wird gefeuert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Gutschein NICHT hinzugefügt wurde",
+        "expected": "Warenkorb enthält nur das reguläre Produkt"
+      },
+      {
+        "step": 4,
+        "action": "Fehlermeldung prüfen",
+        "expected": "Fehlermeldung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "User bleibt auf PDP oder wird zu Cart geleitet"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "checkout",
+      "BeforeLineItemAddedEvent",
+      "stopPropagation",
+      "separation"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CHK-002",
+    "name": "Reguläres Produkt zu Gutschein-Warenkorb blockiert",
+    "category": "gutschein-checkout-flows",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass ein reguläres Produkt nicht zu einem Warenkorb mit Einkaufsgutscheinen hinzugefügt werden kann. Shopware Event: BeforeLineItemAddedEvent wird gefeuert, Event->stopPropagation() wird aufgerufen.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Warenkorb enthält Einkaufsgutschein 50€ (Artikel 736675)"
+    ],
+    "test_data": {
+      "products": [
+        {
+          "id": "736675",
+          "type": "gutschein",
+          "ref": "gutschein_736675"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Einkaufsgutschein 50€ (Artikel 736675) zum Warenkorb hinzufügen",
+        "expected": "Gutschein ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Versuchen, reguläres Produkt (z.B. Kissen) zum Warenkorb hinzuzufügen",
+        "expected": "BeforeLineItemAddedEvent wird gefeuert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass reguläres Produkt NICHT hinzugefügt wurde",
+        "expected": "Warenkorb enthält nur den Gutschein"
+      },
+      {
+        "step": 4,
+        "action": "Fehlermeldung prüfen",
+        "expected": "Fehlermeldung wird angezeigt"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "checkout",
+      "BeforeLineItemAddedEvent",
+      "stopPropagation",
+      "separation"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CHK-003",
+    "name": "Promotion auf Gutschein blockiert",
+    "category": "gutschein-checkout-flows",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass Promotion-Codes nicht auf Einkaufsgutscheine im Warenkorb angewendet werden können. Shopware Event: checkout.promotion.added wird gefeuert, Promotion wird aus cart.lineItems entfernt.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Warenkorb enthält Einkaufsgutschein 100€"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Einkaufsgutschein 100€ zum Warenkorb hinzufügen",
+        "expected": "Gutschein ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code \"SOMMER20\" im Gutscheinfeld eingeben",
+        "expected": "checkout.promotion.added Event wird gefeuert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Promotion nicht angewendet wurde",
+        "expected": "Promotion wird aus cart.lineItems entfernt"
+      },
+      {
+        "step": 4,
+        "action": "Fehlermeldung und Warenkorb-Preis prüfen",
+        "expected": "Voller Gutschein-Preis wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Warenkorb zeigt vollen Gutschein-Preis"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "checkout",
+      "checkout.promotion.added",
+      "promotion-blockiert",
+      "rabattcode"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CHK-004",
+    "name": "Gemischter Warenkorb im Checkout blockiert",
+    "category": "gutschein-checkout-flows",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass ein gemischter Warenkorb (Gutschein + reguläres Produkt, z.B. durch API/Manipulation) beim Checkout blockiert wird. Shopware Event: CartVerifyPersistEvent wird gefeuert, CartValidator prüft Warenkorb und fügt BlockingError mit blockOrder() = true hinzu.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "User hat durch API/Manipulation gemischten Warenkorb (Gutschein + reguläres Produkt)"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Gemischten Warenkorb herstellen (Gutschein + reguläres Produkt, z.B. per API)",
+        "expected": "Warenkorb enthält beide Artikel"
+      },
+      {
+        "step": 2,
+        "action": "\"Zur Kasse\" klicken",
+        "expected": "CartVerifyPersistEvent wird gefeuert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Checkout blockiert wird",
+        "expected": "CartValidator findet Gutschein UND reguläres Produkt"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass User zur Warenkorbseite zurückgeleitet wird",
+        "expected": "Fehlermeldung wird angezeigt"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass User Warenkorb bereinigen muss",
+        "expected": "Checkout bleibt blockiert bis Warenkorb bereinigt"
+      }
+    ],
+    "postconditions": [
+      "Fehlermeldung wird angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "checkout",
+      "CartVerifyPersistEvent",
+      "CartValidator",
+      "BlockingError",
+      "blockOrder",
+      "sicherheitsnetz"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CHK-005",
+    "name": "Mehrere Gutscheine erlaubt",
+    "category": "gutschein-checkout-flows",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass mehrere Einkaufsgutscheine gleichzeitig im Warenkorb erlaubt sind. Shopware Event: BeforeLineItemAddedEvent wird gefeuert, Prüfung ergibt dass neues Item Gutschein ist und Warenkorb nur Gutscheine enthält.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Warenkorb enthält Gutschein 50€"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Gutschein 50€ zum Warenkorb hinzufügen",
+        "expected": "Gutschein ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Gutschein 100€ zum Warenkorb hinzufügen",
+        "expected": "BeforeLineItemAddedEvent wird gefeuert"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass beide Gutscheine im Warenkorb sind",
+        "expected": "Warenkorb zeigt beide Gutscheine (50€ + 100€)"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Checkout möglich ist",
+        "expected": "Checkout-Button ist aktiv"
+      },
+      {
+        "step": 5,
+        "action": "Gesamtpreis prüfen",
+        "expected": "Gesamtpreis: 150€"
+      }
+    ],
+    "postconditions": [
+      "Prüfung: Neues Item ist Gutschein + Warenkorb enthält nur Gutscheine",
+      "Warenkorb zeigt beide Gutscheine (50€ + 100€)"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Gutschein-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "checkout",
+      "BeforeLineItemAddedEvent",
+      "mehrere-gutscheine",
+      "positiv-test"
+    ]
+  }
+]

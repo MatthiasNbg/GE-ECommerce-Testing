@@ -1,0 +1,1072 @@
+[
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-001",
+    "name": "Stichprobe: Produkte haben Produkttyp",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Stichprobenartige Validierung, dass Produkte im Shop einen Produkttyp zugewiesen haben. Produkte ohne Produkttyp sind in der Navigation und Filterung nicht korrekt auffindbar.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produktkatalog ist geladen"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting-Seite aufrufen (z.B. Kategorie Schlafen)",
+        "expected": "Produktlisting wird angezeigt mit Produkten"
+      },
+      {
+        "step": 2,
+        "action": "Stichprobe von 10 Produkten aus dem Listing auswählen und Produktdetailseiten aufrufen",
+        "expected": "Produktdetailseiten laden erfolgreich"
+      },
+      {
+        "step": 3,
+        "action": "Für jedes Produkt den Produkttyp in den Produkteigenschaften prüfen",
+        "expected": "Produkttyp-Feld ist befüllt und nicht leer"
+      },
+      {
+        "step": 4,
+        "action": "Validieren, dass der Produkttyp einem gültigen Typ entspricht (z.B. Matratze, Bettdecke, Kissen)",
+        "expected": "Produkttyp ist ein gültiger, bekannter Wert"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktdaten",
+      "produkttyp",
+      "stichprobe"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-002",
+    "name": "Stichprobe: Produkte über Grundfarbe findbar",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung, dass Produkte mit zugewiesener Grundfarbe über den Farbfilter im Listing auffindbar sind. Stichprobenartige Prüfung mehrerer Produkte und Farben.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produkte mit Grundfarbe sind im Katalog vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting-Seite mit Farbfilter aufrufen",
+        "expected": "Listing-Seite wird mit verfügbaren Farbfiltern angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Grundfarbe-Filter aktivieren (z.B. 'Weiß')",
+        "expected": "Produktlisting filtert auf Produkte mit Grundfarbe Weiß"
+      },
+      {
+        "step": 3,
+        "action": "Stichprobe von 5 gefilterten Produkten auswählen und Detailseiten prüfen",
+        "expected": "Produkte auf der Detailseite zeigen die entsprechende Grundfarbe"
+      },
+      {
+        "step": 4,
+        "action": "Vorgang mit weiterer Grundfarbe wiederholen (z.B. 'Natur')",
+        "expected": "Auch bei zweiter Farbe werden korrekte Produkte gefiltert"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktdaten",
+      "grundfarbe",
+      "filter",
+      "stichprobe"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-003",
+    "name": "Produkttyp nicht leer bei allen Produkten",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Systematische Prüfung, dass kein Produkt im gesamten Katalog ein leeres Produkttyp-Feld hat. Im Gegensatz zur Stichprobe (TC-DATA-001) wird hier der gesamte Katalog überprüft.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Zugriff auf vollständigen Produktkatalog möglich"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Alle Produktkategorien im Shop systematisch durchgehen",
+        "expected": "Alle Kategorien sind erreichbar und listen Produkte"
+      },
+      {
+        "step": 2,
+        "action": "Für jede Kategorie alle Produkte im Listing erfassen",
+        "expected": "Produktliste pro Kategorie wird vollständig geladen"
+      },
+      {
+        "step": 3,
+        "action": "Produkttyp-Eigenschaft jedes Produkts validieren",
+        "expected": "Produkttyp ist bei jedem Produkt vorhanden und nicht leer"
+      },
+      {
+        "step": 4,
+        "action": "Produkte ohne Produkttyp in Fehlerliste erfassen und protokollieren",
+        "expected": "Fehlerliste ist leer (keine Produkte ohne Produkttyp)"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktdaten",
+      "produkttyp",
+      "vollständig",
+      "katalog"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-004",
+    "name": "Grundfarbe Filter funktioniert",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung der korrekten Funktionsweise des Grundfarbe-Filters im Produktlisting. Der Filter muss alle Produkte mit der gewählten Farbe anzeigen und keine Produkte ohne diese Farbe.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produktlisting mit Farbfilter ist verfügbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting-Seite mit verfügbaren Filtern aufrufen",
+        "expected": "Filter-Sidebar wird mit Grundfarbe-Optionen angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Alle verfügbaren Grundfarbe-Optionen im Filter identifizieren",
+        "expected": "Liste der verfügbaren Farben wird angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Nacheinander verschiedene Grundfarben auswählen und Ergebnisse prüfen",
+        "expected": "Listing wird nach Auswahl gefiltert, Produktanzahl aktualisiert sich"
+      },
+      {
+        "step": 4,
+        "action": "Validieren, dass gefilterte Produkte die gewählte Grundfarbe besitzen",
+        "expected": "Alle angezeigten Produkte haben die selektierte Grundfarbe"
+      },
+      {
+        "step": 5,
+        "action": "Filter zurücksetzen und prüfen, dass alle Produkte wieder angezeigt werden",
+        "expected": "Ungefilterte Gesamtansicht wird wiederhergestellt"
+      }
+    ],
+    "postconditions": [
+      "Grundfarbe-Filter zeigt nur Produkte mit der gewählten Farbe an"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktdaten",
+      "grundfarbe",
+      "filter",
+      "funktionstest"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-005",
+    "name": "Produkttyp Filter funktioniert",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung der korrekten Funktionsweise des Produkttyp-Filters im Produktlisting. Der Filter muss nach Produkttyp filtern und korrekte Ergebnisse liefern.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produktlisting mit Produkttyp-Filter ist verfügbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting-Seite mit verfügbaren Filtern aufrufen",
+        "expected": "Filter-Sidebar wird mit Produkttyp-Optionen angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Alle verfügbaren Produkttyp-Optionen im Filter identifizieren",
+        "expected": "Liste der verfügbaren Produkttypen wird angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Produkttyp auswählen (z.B. 'Matratze') und Ergebnisse prüfen",
+        "expected": "Listing wird gefiltert und zeigt nur Produkte des gewählten Typs"
+      },
+      {
+        "step": 4,
+        "action": "Stichprobe der gefilterten Produkte auf Detailseite prüfen",
+        "expected": "Produktdetailseiten bestätigen den korrekten Produkttyp"
+      },
+      {
+        "step": 5,
+        "action": "Filter zurücksetzen und Gesamtlisting validieren",
+        "expected": "Alle Produkte werden wieder angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Produkttyp-Filter zeigt nur Produkte des gewählten Typs an"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktdaten",
+      "produkttyp",
+      "filter",
+      "funktionstest"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-006",
+    "name": "Preise korrekt angezeigt",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung, dass Produktpreise im Listing und auf der Detailseite korrekt angezeigt werden. Preise müssen im korrekten Format und mit der richtigen Währung dargestellt sein.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produkte mit bekannten Preisen sind im Katalog"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting-Seite aufrufen und Preise im Listing erfassen",
+        "expected": "Preise werden im Listing für alle Produkte angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Preisformat validieren (z.B. EUR mit Komma-Dezimaltrenner, CHF für CH-Shop)",
+        "expected": "Preise entsprechen dem landesspezifischen Format"
+      },
+      {
+        "step": 3,
+        "action": "Stichprobe von Produkten auf der Detailseite aufrufen",
+        "expected": "Produktdetailseiten laden mit Preisanzeige"
+      },
+      {
+        "step": 4,
+        "action": "Preis auf Detailseite mit Preis im Listing vergleichen",
+        "expected": "Preise stimmen zwischen Listing und Detailseite überein"
+      },
+      {
+        "step": 5,
+        "action": "Währungssymbol und -format pro Länder-Shop prüfen",
+        "expected": "AT/DE zeigen EUR, CH zeigt CHF"
+      }
+    ],
+    "postconditions": [
+      "Kein Produkt zeigt 0,00 oder einen leeren Preis an"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "preis",
+      "validierung",
+      "währung",
+      "format"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-007",
+    "name": "MwSt. korrekt berechnet",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung der korrekten Mehrwertsteuerberechnung. AT und DE verwenden 20% bzw. 19% MwSt., CH verwendet den reduzierten Schweizer Satz. Die MwSt. muss im Warenkorb und Checkout korrekt ausgewiesen sein.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produkte mit bekannten Bruttopreisen sind verfügbar",
+      "MwSt.-Sätze: AT 20%, DE 19%, CH 8.1%"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt mit bekanntem Preis in den Warenkorb legen",
+        "expected": "Produkt wird im Warenkorb angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb aufrufen und MwSt.-Ausweisung prüfen",
+        "expected": "MwSt.-Betrag wird separat ausgewiesen"
+      },
+      {
+        "step": 3,
+        "action": "MwSt.-Betrag manuell berechnen und mit angezeigtem Wert vergleichen",
+        "expected": "Berechneter und angezeigter MwSt.-Betrag stimmen überein"
+      },
+      {
+        "step": 4,
+        "action": "Checkout-Zusammenfassung aufrufen und MwSt. erneut validieren",
+        "expected": "MwSt. im Checkout entspricht dem Warenkorbwert"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "preis",
+      "mwst",
+      "steuer",
+      "berechnung"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-008",
+    "name": "Aktionspreise korrekt dargestellt",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung der korrekten Darstellung von Aktionspreisen (reduzierte Preise). Der Originalpreis muss durchgestrichen und der Aktionspreis hervorgehoben angezeigt werden.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produkte mit Aktionspreisen sind im Katalog vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt mit Aktionspreis im Listing identifizieren",
+        "expected": "Produkt mit reduziertem Preis wird im Listing angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, dass Originalpreis durchgestrichen dargestellt wird",
+        "expected": "Originalpreis ist sichtbar und durchgestrichen"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Aktionspreis hervorgehoben dargestellt wird",
+        "expected": "Aktionspreis ist farblich oder typographisch hervorgehoben"
+      },
+      {
+        "step": 4,
+        "action": "Produktdetailseite aufrufen und Aktionspreisdarstellung validieren",
+        "expected": "Aktionspreis-Darstellung ist auf Detailseite konsistent mit Listing"
+      },
+      {
+        "step": 5,
+        "action": "Produkt in den Warenkorb legen und Aktionspreis im Warenkorb prüfen",
+        "expected": "Warenkorb verwendet den Aktionspreis, nicht den Originalpreis"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "preis",
+      "aktionspreis",
+      "darstellung",
+      "sale"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-009",
+    "name": "Versandkosten korrekt berechnet (Post)",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung der korrekten Berechnung von Versandkosten für Postversand. Die Versandkosten müssen abhängig vom Bestellwert und Lieferland korrekt berechnet werden.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Postversand-fähige Produkte sind im Katalog",
+      "Versandkostentabelle ist bekannt"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Postversand-Produkt in den Warenkorb legen",
+        "expected": "Produkt wird im Warenkorb angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Zum Checkout navigieren und Lieferadresse eingeben",
+        "expected": "Versandart Post wird als Option angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Versandkosten im Checkout prüfen",
+        "expected": "Versandkosten werden angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Angezeigte Versandkosten mit erwarteten Kosten aus der Versandkostentabelle vergleichen",
+        "expected": "Versandkosten stimmen mit der Versandkostentabelle überein"
+      },
+      {
+        "step": 5,
+        "action": "Bestellwert über Freigrenze erhöhen und Versandkosten erneut prüfen",
+        "expected": "Versandkosten entfallen bei Überschreiten der Freigrenze"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "versandkosten",
+      "post",
+      "berechnung",
+      "freigrenze"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-010",
+    "name": "Versandkosten korrekt berechnet (Spedition)",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung der korrekten Berechnung von Versandkosten für Speditionsversand. Speditionsartikel haben andere Versandkosten als Postversand-Artikel.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Speditionsversand-Produkte sind im Katalog (z.B. Möbel)",
+      "Speditions-Versandkostentabelle ist bekannt"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Speditionsprodukt (z.B. Bett oder Schrank) in den Warenkorb legen",
+        "expected": "Speditionsprodukt wird im Warenkorb angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Zum Checkout navigieren und Lieferadresse eingeben",
+        "expected": "Versandart Spedition wird angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Speditions-Versandkosten im Checkout prüfen",
+        "expected": "Speditions-Versandkosten werden korrekt angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Angezeigte Speditionskosten mit Versandkostentabelle vergleichen",
+        "expected": "Speditionskosten stimmen mit der Tabelle überein"
+      },
+      {
+        "step": 5,
+        "action": "Speditionsfreigrenze testen (falls vorhanden)",
+        "expected": "Freigrenze für Spedition wird korrekt angewendet"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "versandkosten",
+      "spedition",
+      "berechnung",
+      "freigrenze"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-011",
+    "name": "Verfügbarkeitsstatus korrekt angezeigt",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung, dass der Verfügbarkeitsstatus von Produkten korrekt angezeigt wird. Produkte müssen ihren Status (verfügbar, begrenzt verfügbar, nicht verfügbar) korrekt darstellen.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produkte mit verschiedenen Verfügbarkeitsstatus sind vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting aufrufen und Verfügbarkeitsstatus im Listing prüfen",
+        "expected": "Verfügbarkeitsinformationen werden im Listing angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Produktdetailseite eines verfügbaren Produkts aufrufen",
+        "expected": "Produkt zeigt Status 'Verfügbar' oder Lieferzeit an"
+      },
+      {
+        "step": 3,
+        "action": "Produktdetailseite eines nicht verfügbaren Produkts aufrufen (falls vorhanden)",
+        "expected": "Produkt zeigt Status 'Nicht verfügbar' oder 'Ausverkauft' an"
+      },
+      {
+        "step": 4,
+        "action": "Verfügbarkeitsstatus zwischen Listing und Detailseite vergleichen",
+        "expected": "Status ist konsistent zwischen Listing und Detailseite"
+      }
+    ],
+    "postconditions": [
+      "Verfügbarkeitsstatus wird korrekt und deutlich angezeigt"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "verfügbarkeit",
+      "status",
+      "anzeige"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-012",
+    "name": "Nicht verfügbare Produkte nicht bestellbar",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Validierung, dass nicht verfügbare Produkte nicht in den Warenkorb gelegt und bestellt werden können. Der Warenkorb-Button muss deaktiviert oder nicht sichtbar sein.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Mindestens ein nicht verfügbares Produkt ist im Katalog identifiziert"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Nicht verfügbares Produkt im Shop identifizieren und Detailseite aufrufen",
+        "expected": "Produktdetailseite zeigt 'Nicht verfügbar' Status"
+      },
+      {
+        "step": 2,
+        "action": "Prüfen, ob der 'In den Warenkorb'-Button deaktiviert oder nicht vorhanden ist",
+        "expected": "Button ist deaktiviert, ausgegraut oder nicht sichtbar"
+      },
+      {
+        "step": 3,
+        "action": "Versuchen, das Produkt über direkten API-Aufruf in den Warenkorb zu legen",
+        "expected": "API lehnt das Hinzufügen ab oder gibt Fehlermeldung zurück"
+      },
+      {
+        "step": 4,
+        "action": "Warenkorb prüfen, dass das nicht verfügbare Produkt nicht enthalten ist",
+        "expected": "Warenkorb enthält das nicht verfügbare Produkt nicht"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "verfügbarkeit",
+      "warenkorb",
+      "bestellsperre"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-013",
+    "name": "Produkte in allen Ländern verfügbar",
+    "category": "data-validation",
+    "priority": "P2",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Cross-Country-Validierung, dass Produkte in allen drei Länder-Shops (AT, DE, CH) verfügbar sind. Produkte sollten konsistent in allen Shops gelistet sein, sofern keine länderspezifische Einschränkung besteht.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Alle drei Länder-Shops (AT, DE, CH) sind erreichbar",
+      "Referenzliste von Produkten ist vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Referenzprodukt-Liste definieren (Stichprobe von 20 Produkten)",
+        "expected": "Referenzliste mit Produkt-URLs oder IDs steht bereit"
+      },
+      {
+        "step": 2,
+        "action": "Jedes Produkt im AT-Shop aufrufen und Verfügbarkeit prüfen",
+        "expected": "Produkte sind im AT-Shop verfügbar"
+      },
+      {
+        "step": 3,
+        "action": "Gleiche Produkte im DE-Shop aufrufen und Verfügbarkeit prüfen",
+        "expected": "Produkte sind im DE-Shop verfügbar"
+      },
+      {
+        "step": 4,
+        "action": "Gleiche Produkte im CH-Shop aufrufen und Verfügbarkeit prüfen",
+        "expected": "Produkte sind im CH-Shop verfügbar"
+      },
+      {
+        "step": 5,
+        "action": "Verfügbarkeitsunterschiede zwischen Ländern protokollieren",
+        "expected": "Keine unerwarteten Unterschiede in der Verfügbarkeit"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "cross-country",
+      "verfügbarkeit",
+      "konsistenz"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-014",
+    "name": "Produktdaten konsistent über Länder",
+    "category": "data-validation",
+    "priority": "P2",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Cross-Country-Validierung, dass Produktdaten (Name, Beschreibung, Bilder, Eigenschaften) konsistent über alle Länder-Shops hinweg sind. Nur Preise und Währungen dürfen sich unterscheiden.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Alle drei Länder-Shops (AT, DE, CH) sind erreichbar",
+      "Referenzliste von Produkten ist vorhanden"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Stichprobe von 10 Produkten in allen drei Länder-Shops aufrufen",
+        "expected": "Produktdetailseiten laden in allen Shops"
+      },
+      {
+        "step": 2,
+        "action": "Produktnamen zwischen den Shops vergleichen",
+        "expected": "Produktnamen sind identisch in allen Shops"
+      },
+      {
+        "step": 3,
+        "action": "Produktbeschreibungen zwischen den Shops vergleichen",
+        "expected": "Beschreibungen sind identisch (ggf. sprachliche Anpassungen bei CH)"
+      },
+      {
+        "step": 4,
+        "action": "Produkteigenschaften (Material, Farbe, Maße) vergleichen",
+        "expected": "Eigenschaften sind konsistent über alle Shops"
+      },
+      {
+        "step": 5,
+        "action": "Produktbilder zwischen den Shops vergleichen",
+        "expected": "Gleiche Bilder werden in allen Shops verwendet"
+      }
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "cross-country",
+      "produktdaten",
+      "konsistenz"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-DATA-015",
+    "name": "Stichprobe: Produktbilder vorhanden",
+    "category": "data-validation",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Stichprobenartige Validierung, dass alle Produkte mindestens ein Produktbild haben. Fehlende Bilder oder Platzhalterbilder werden als Fehler gewertet.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Produktkatalog ist geladen"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktlisting-Seite aufrufen und Bilder im Listing prüfen",
+        "expected": "Alle Produkte im Listing haben ein sichtbares Produktbild"
+      },
+      {
+        "step": 2,
+        "action": "Stichprobe von 20 Produkten auf Detailseite aufrufen",
+        "expected": "Produktdetailseiten laden mit Bildern"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass kein Platzhalterbild angezeigt wird",
+        "expected": "Kein Produkt zeigt ein generisches Platzhalterbild"
+      },
+      {
+        "step": 4,
+        "action": "Bildqualität und -auflösung visuell prüfen",
+        "expected": "Bilder haben eine ausreichende Auflösung und sind nicht verzerrt"
+      },
+      {
+        "step": 5,
+        "action": "HTTP-Status der Bild-URLs prüfen (keine 404-Fehler)",
+        "expected": "Alle Bild-URLs liefern HTTP 200 zurück"
+      }
+    ],
+    "postconditions": [
+      "Keine Platzhalterbilder werden angezeigt"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "produktdaten",
+      "bilder",
+      "stichprobe",
+      "qualität"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PERF-001",
+    "name": "Performance-Test 150 Bestellungen",
+    "category": "performance",
+    "priority": "P2",
+    "status": "implemented",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Performance-Test mit 150 simultanen Bestellungen zur Validierung der Systemstabilität unter Last. Der Test simuliert ein realistisches Bestellaufkommen und misst Response-Zeiten, Fehlerquoten und Durchsatz.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Staging-Umgebung ist verfügbar und stabil",
+      "Testprodukte sind im Katalog vorhanden",
+      "Load-Test-Framework ist konfiguriert",
+      "Monitoring-Tools sind aktiv"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Load-Test-Konfiguration mit 150 parallelen Bestellungen vorbereiten",
+        "expected": "Konfiguration ist geladen mit 150 virtuellen Benutzern"
+      },
+      {
+        "step": 2,
+        "action": "Performance-Test starten und 150 Bestellungen simultan ausführen",
+        "expected": "Alle 150 Bestellprozesse werden gestartet"
+      },
+      {
+        "step": 3,
+        "action": "Response-Zeiten pro Bestellschritt messen (Warenkorb, Checkout, Bestätigung)",
+        "expected": "Response-Zeiten werden für jeden Schritt protokolliert"
+      },
+      {
+        "step": 4,
+        "action": "Fehlerquote und fehlgeschlagene Bestellungen erfassen",
+        "expected": "Fehlerquote liegt unter dem definierten Schwellwert"
+      },
+      {
+        "step": 5,
+        "action": "Durchsatz (Bestellungen pro Minute) berechnen und validieren",
+        "expected": "Durchsatz entspricht den Performance-Anforderungen"
+      },
+      {
+        "step": 6,
+        "action": "Ergebnisse in Performance-Report zusammenfassen",
+        "expected": "Report mit Response-Zeiten, Fehlerquote und Durchsatz wird erstellt"
+      }
+    ],
+    "postconditions": [
+      "System bleibt stabil während des gesamten Testlaufs"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_performance.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "performance",
+      "load-test",
+      "bestellungen",
+      "150"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PERF-002",
+    "name": "Performance Quick-Test",
+    "category": "performance",
+    "priority": "P2",
+    "status": "implemented",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Schneller Performance-Test mit reduzierter Last zur täglichen Validierung der Grundperformance. Ideal für schnelle Checks vor Deployments oder als Teil der CI/CD-Pipeline.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Staging-Umgebung ist verfügbar",
+      "Load-Test-Framework ist konfiguriert",
+      "Testprodukte sind verfügbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Quick-Test-Konfiguration laden (reduzierte Benutzerzahl, kürzere Laufzeit)",
+        "expected": "Konfiguration mit 10-20 virtuellen Benutzern ist geladen"
+      },
+      {
+        "step": 2,
+        "action": "Performance Quick-Test ausführen",
+        "expected": "Test läuft durch und sammelt Performance-Daten"
+      },
+      {
+        "step": 3,
+        "action": "Response-Zeiten für Hauptseiten messen (Startseite, Listing, Detailseite, Warenkorb)",
+        "expected": "Response-Zeiten werden für alle Hauptseiten erfasst"
+      },
+      {
+        "step": 4,
+        "action": "Ergebnisse gegen definierte Schwellwerte validieren",
+        "expected": "Alle Response-Zeiten liegen innerhalb der Schwellwerte"
+      },
+      {
+        "step": 5,
+        "action": "Quick-Report generieren mit Pass/Fail-Status",
+        "expected": "Report zeigt Gesamtstatus und Einzelergebnisse"
+      }
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_performance.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "performance",
+      "quick-test",
+      "daily",
+      "ci-cd"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PERF-003",
+    "name": "Performance Stress-Test",
+    "category": "performance",
+    "priority": "P2",
+    "status": "implemented",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Stress-Test zur Ermittlung der maximalen Belastbarkeit des Systems. Die Last wird schrittweise erhöht, bis Performance-Degradation oder Fehler auftreten, um die Systemgrenzen zu identifizieren.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Staging-Umgebung ist verfügbar und isoliert",
+      "Load-Test-Framework ist konfiguriert",
+      "Monitoring und Alerting sind aktiv",
+      "Testlauf ist mit dem Operations-Team abgestimmt"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Stress-Test-Konfiguration mit schrittweiser Laststeigerung vorbereiten (Ramp-Up)",
+        "expected": "Konfiguration mit Ramp-Up-Profil ist geladen (z.B. 10 → 50 → 100 → 200 → 500 User)"
+      },
+      {
+        "step": 2,
+        "action": "Stress-Test starten und Last schrittweise erhöhen",
+        "expected": "Last wird gemäß Ramp-Up-Profil erhöht"
+      },
+      {
+        "step": 3,
+        "action": "Response-Zeiten und Fehlerquoten pro Laststufe messen",
+        "expected": "Performance-Daten werden pro Laststufe erfasst"
+      },
+      {
+        "step": 4,
+        "action": "Punkt der Performance-Degradation identifizieren",
+        "expected": "Laststufe bei der Response-Zeiten signifikant steigen wird erkannt"
+      },
+      {
+        "step": 5,
+        "action": "Maximale Belastbarkeit (Breaking Point) ermitteln",
+        "expected": "Breaking Point wird dokumentiert (User-Anzahl, Response-Zeit, Fehlerquote)"
+      },
+      {
+        "step": 6,
+        "action": "System-Recovery nach Lastabnahme validieren",
+        "expected": "System kehrt nach Lastabnahme zu normaler Performance zurück"
+      },
+      {
+        "step": 7,
+        "action": "Stress-Test-Report mit allen Laststufen und Metriken erstellen",
+        "expected": "Detaillierter Report mit Grafiken und Schwellwert-Analyse"
+      }
+    ],
+    "postconditions": [
+      "System bleibt bis mindestens 200 gleichzeitige Benutzer stabil"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_performance.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "performance",
+      "stress-test",
+      "kapazität",
+      "breaking-point"
+    ]
+  }
+]

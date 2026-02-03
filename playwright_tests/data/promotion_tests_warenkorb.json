@@ -1,0 +1,437 @@
+[
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-001",
+    "name": "Nicht-rabattierbarer Artikel (639046)",
+    "category": "warenkorb-promotions",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass Artikel mit nicht_rabattierbar = true von prozentualen und absoluten Warenkorb-Promotions ausgeschlossen werden",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Produkt mit Odoo-Eigenschaft nicht_rabattierbar = true (Variante 639046)",
+      "Aktive Warenkorb-Promotion (prozentual oder absolut)"
+    ],
+    "test_data": {
+      "products": [
+        {
+          "id": "639046",
+          "type": "post",
+          "not_discountable": true,
+          "ref": "nicht_rabattierbarer_artikel"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Nicht-rabattierbares Produkt (639046) zum Warenkorb hinzufügen",
+        "expected": "Nicht-rabattierbarer Artikel bleibt zum vollen Preis im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Optional: Weiteres rabattierbares Produkt hinzufügen",
+        "expected": "Rabatt wird nur auf rabattierbare Artikel angewendet"
+      },
+      {
+        "step": 3,
+        "action": "Promotion-Code eingeben",
+        "expected": "Gesamtsumme = voller Preis nicht-rabattierbar + rabattierter Preis der übrigen Artikel"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Rabatt NICHT auf das nicht-rabattierbare Produkt angewendet wird",
+        "expected": "Keine Fehlermeldung – Promotion wird akzeptiert, aber nicht auf ausgeschlossene Produkte angewendet"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Rabatt korrekt nur auf rabattierbare Produkte berechnet wird",
+        "expected": "Anzeige ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "Gesamtsumme validieren",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Nicht-rabattierbarer Artikel bleibt zum vollen Preis im Warenkorb",
+      "Keine Fehlermeldung – Promotion wird akzeptiert, aber nicht auf ausgeschlossene Produkte angewendet"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "nicht-rabattierbar",
+      "warenkorb",
+      "promotion",
+      "ausschluss",
+      "639046"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-002",
+    "name": "Ausschluss Kauf rabattierter Artikel",
+    "category": "warenkorb-promotions",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass bereits reduzierte Artikel (Aktionspreis/SALE) von zusätzlichen Promotions ausgeschlossen werden",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Produkt mit Aktionspreis (SALE-Preis aktiv)",
+      "Aktive Warenkorb-Promotion mit Ausschluss von Aktionspreisen"
+    ],
+    "test_data": {
+      "products": [
+        {
+          "id": "sale-product",
+          "type": "post",
+          "has_sale_price": true,
+          "ref": "sale_product"
+        },
+        {
+          "id": "regular-product",
+          "type": "post",
+          "has_sale_price": false,
+          "ref": "regular_product"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt mit Aktionspreis zum Warenkorb hinzufügen",
+        "expected": "Artikel mit Aktionspreis werden vom Promotion-Rabatt ausgeschlossen"
+      },
+      {
+        "step": 2,
+        "action": "Reguläres Produkt (ohne Aktionspreis) zum Warenkorb hinzufügen",
+        "expected": "Rabatt wird nur auf reguläre Artikel angewendet"
+      },
+      {
+        "step": 3,
+        "action": "Promotion-Code eingeben",
+        "expected": "Doppelrabattierung wird verhindert"
+      },
+      {
+        "step": 4,
+        "action": "Prüfen, dass Rabatt nur auf das reguläre Produkt angewendet wird",
+        "expected": "Aktionspreis bleibt unverändert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass das SALE-Produkt zum Aktionspreis bleibt",
+        "expected": "Anzeige ist korrekt"
+      }
+    ],
+    "postconditions": [
+      "Aktionspreis bleibt unverändert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "sale",
+      "aktionspreis",
+      "doppelrabatt",
+      "warenkorb",
+      "promotion",
+      "ausschluss"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-003",
+    "name": "Ausschluss Kaufgutscheine mit Rabatten",
+    "category": "warenkorb-promotions",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass Einkaufsgutscheine im Warenkorb von Promotion-Rabatten ausgeschlossen werden",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Einkaufsgutschein im Warenkorb (z.B. 50€ Gutschein, HC Code 6609)",
+      "Aktive Warenkorb-Promotion",
+      "Shopware-Regel: [GE-Template-Warenkorb] mit Gutschein-Ausschluss"
+    ],
+    "test_data": {
+      "products": [
+        {
+          "id": "6609",
+          "type": "gutschein",
+          "not_discountable": true,
+          "ref": "gutschein_6609"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Einkaufsgutschein zum Warenkorb hinzufügen",
+        "expected": "Einkaufsgutscheine werden vom Promotion-Rabatt ausgeschlossen"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Gutscheinpreis bleibt beim Nennwert (z.B. 50€)"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Rabatt NICHT auf den Gutschein angewendet wird",
+        "expected": "Promotion wird ggf. auf andere rabattierbare Artikel angewendet"
+      },
+      {
+        "step": 4,
+        "action": "Gutscheinpreis bleibt unverändert",
+        "expected": "Kein Rabatt auf den Gutschein selbst"
+      }
+    ],
+    "postconditions": [
+      "Gutscheinpreis bleibt beim Nennwert (z.B. 50€)"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "einkaufsgutschein",
+      "warenkorb",
+      "promotion",
+      "ausschluss"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-004",
+    "name": "Kein Rabatt auf Wertgutschein",
+    "category": "warenkorb-promotions",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Prüft, dass Wertgutscheine (Geschenkgutscheine) grundsätzlich von allen Rabattaktionen ausgeschlossen sind",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Wertgutschein im Warenkorb",
+      "Beliebige aktive Promotion (prozentual, absolut, automatisch)"
+    ],
+    "test_data": {
+      "products": [
+        {
+          "id": "wertgutschein",
+          "type": "wertgutschein",
+          "not_discountable": true,
+          "ref": "wertgutschein_wertgutschein"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Wertgutschein zum Warenkorb hinzufügen",
+        "expected": "Wertgutscheine sind von ALLEN Rabattaktionen ausgeschlossen"
+      },
+      {
+        "step": 2,
+        "action": "Verschiedene Promotion-Codes eingeben (prozentual, absolut)",
+        "expected": "Kein Rabatt wird angewendet, weder manuell noch automatisch"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass kein Rabatt auf den Wertgutschein angewendet wird",
+        "expected": "Gutschein-Nennwert bleibt unverändert"
+      },
+      {
+        "step": 4,
+        "action": "Automatische Promotions prüfen – ebenfalls kein Rabatt",
+        "expected": "Promotion-Code kann eingegeben werden, aber Rabatt greift nicht auf den Gutschein"
+      }
+    ],
+    "postconditions": [
+      "Gutschein-Nennwert bleibt unverändert",
+      "Promotion-Code kann eingegeben werden, aber Rabatt greift nicht auf den Gutschein"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "wertgutschein",
+      "geschenkgutschein",
+      "warenkorb",
+      "promotion",
+      "ausschluss"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-CART-PERCENT-001",
+    "name": "Prozentuale Aktion auf Warenkorb mit Ausschlüssen",
+    "category": "warenkorb-promotions",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Vorlage für %-Aktionen auf Warenkorb - prüft prozentuale Rabatte auf den gesamten Warenkorb mit Produktausschlüssen",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Ausschließen von Produkten mit nicht_rabattierbar (von Odoo je Variante) = true",
+      "Ausschließen von Einkaufsgutscheinen",
+      "Shopware-Regel: [GE-Template-Warenkorb]"
+    ],
+    "promo_config": {
+      "name_frontend": "Promohülse",
+      "code_type": "campaign_specific",
+      "discount_type": "percentage",
+      "discount_target": "cart",
+      "discount_value": null,
+      "currency": "EUR",
+      "min_order_value": null,
+      "usage_total": 1,
+      "usage_per_customer": 5,
+      "shopware_rule": "GE-Template-Warenkorb",
+      "channels": [
+        "AT",
+        "DE",
+        "CH"
+      ]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb mit verschiedenen Produkten befüllen (normale Produkte, nicht-rabattierbare Produkte, Gutscheine)",
+        "expected": "Promotion wird mit gültigem Code angewendet"
+      },
+      {
+        "step": 2,
+        "action": "Promotion-Code eingeben",
+        "expected": "Rabatt wird nur auf rabattierbare Produkte angewendet"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass Rabatt nur auf rabattierbare Produkte angewendet wird",
+        "expected": "Nicht-rabattierbare Produkte (nicht_rabattierbar = true) werden ausgeschlossen"
+      },
+      {
+        "step": 4,
+        "action": "Verifizieren, dass nicht-rabattierbare Produkte ausgeschlossen werden",
+        "expected": "Einkaufsgutscheine werden vom Rabatt ausgeschlossen"
+      },
+      {
+        "step": 5,
+        "action": "Verifizieren, dass Einkaufsgutscheine ausgeschlossen werden",
+        "expected": "Prozentuale Berechnung ist korrekt"
+      },
+      {
+        "step": 6,
+        "action": "Prozentuale Rabatt-Berechnung validieren",
+        "expected": "Nutzungslimits werden eingehalten"
+      },
+      {
+        "step": 7,
+        "action": "Nutzungslimits prüfen (1x global, 5x pro Kunde)",
+        "expected": "Funktioniert in allen DACH-Verkaufskanälen"
+      },
+      {
+        "step": 8,
+        "action": "Test in allen Verkaufskanälen (AT, DE, CH) durchführen",
+        "expected": "Ergebnis ist konsistent in allen Kanaelen"
+      }
+    ],
+    "postconditions": [
+      "Prozentuale Berechnung ist korrekt",
+      "Funktioniert in allen DACH-Verkaufskanälen"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [
+      {
+        "label": "Shopware-Regel Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019beaf9d194714dbe77b182ea9a1a02/base"
+      },
+      {
+        "label": "Promotion Template",
+        "url": "https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beaf618b376a9b82416a15d3fc0c8/base"
+      }
+    ],
+    "tags": [
+      "prozentual",
+      "warenkorb",
+      "promotion",
+      "template",
+      "ausschluss",
+      "nutzungslimit",
+      "DACH"
+    ]
+  }
+]

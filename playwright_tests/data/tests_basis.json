@@ -1,0 +1,2174 @@
+[
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SMOKE-001",
+    "name": "Homepage lädt erfolgreich",
+    "category": "smoke",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Homepage des Shops korrekt und ohne Fehler geladen wird.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Homepage-URL im Browser aufrufen",
+        "expected": "Seite beginnt zu laden"
+      },
+      {
+        "step": 2,
+        "action": "Warten bis die Seite vollständig geladen ist",
+        "expected": "Keine HTTP-Fehler (4xx/5xx) im Netzwerk-Tab"
+      },
+      {
+        "step": 3,
+        "action": "Seitentitel und Hauptelemente prüfen",
+        "expected": "Logo, Navigation und Footer sind sichtbar"
+      }
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_smoke.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "smoke",
+      "homepage"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SMOKE-002",
+    "name": "Produktseite lädt erfolgreich",
+    "category": "smoke",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob eine Produktdetailseite korrekt geladen wird und alle wesentlichen Elemente angezeigt werden.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktdetailseite eines bekannten Produkts aufrufen",
+        "expected": "Seite beginnt zu laden"
+      },
+      {
+        "step": 2,
+        "action": "Warten bis die Seite vollständig geladen ist",
+        "expected": "Keine HTTP-Fehler"
+      },
+      {
+        "step": 3,
+        "action": "Produktname, Preis und Bild prüfen",
+        "expected": "Produktname, Preis und mindestens ein Produktbild sind sichtbar"
+      },
+      {
+        "step": 4,
+        "action": "Warenkorb-Button prüfen",
+        "expected": "In den Warenkorb-Button ist sichtbar und klickbar"
+      }
+    ],
+    "postconditions": [
+      "Produktname wird angezeigt",
+      "Preis wird korrekt angezeigt",
+      "Mindestens ein Produktbild ist sichtbar"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_smoke.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "smoke",
+      "produktseite"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SMOKE-003",
+    "name": "Produkt zum Warenkorb hinzufügen",
+    "category": "smoke",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein Produkt erfolgreich zum Warenkorb hinzugefügt werden kann.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktdetailseite aufrufen",
+        "expected": "Produktseite ist geladen"
+      },
+      {
+        "step": 2,
+        "action": "Auf 'In den Warenkorb' Button klicken",
+        "expected": "Produkt wird zum Warenkorb hinzugefügt"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb-Bestätigung prüfen",
+        "expected": "Bestätigungsmeldung oder Offcanvas-Warenkorb erscheint"
+      },
+      {
+        "step": 4,
+        "action": "Warenkorb-Zähler im Header prüfen",
+        "expected": "Zähler zeigt mindestens 1 an"
+      }
+    ],
+    "postconditions": [
+      "Bestätigung wird angezeigt",
+      "Warenkorb-Zähler aktualisiert sich"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_smoke.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "smoke",
+      "warenkorb"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SMOKE-004",
+    "name": "Checkout-Seite erreichbar",
+    "category": "smoke",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Checkout-Seite nach Hinzufügen eines Produkts erreichbar ist.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Checkout-Formular prüfen",
+        "expected": "Adress- und Zahlungsfelder sind sichtbar"
+      }
+    ],
+    "postconditions": [
+      "Checkout-Seite ist erreichbar",
+      "Checkout-Formular wird korrekt angezeigt",
+      "Keine Fehlermeldungen beim Laden"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_smoke.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "smoke",
+      "checkout"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SMOKE-005",
+    "name": "Suche funktioniert",
+    "category": "smoke",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Suchfunktion grundsätzlich funktioniert und Ergebnisse liefert.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suchfeld im Header anklicken",
+        "expected": "Suchfeld ist aktiv"
+      },
+      {
+        "step": 2,
+        "action": "Einen bekannten Suchbegriff eingeben",
+        "expected": "Suchvorschläge erscheinen"
+      },
+      {
+        "step": 3,
+        "action": "Suche absenden (Enter drücken)",
+        "expected": "Suchergebnisseite wird geladen"
+      },
+      {
+        "step": 4,
+        "action": "Suchergebnisse prüfen",
+        "expected": "Mindestens ein Suchergebnis wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Suchergebnisseite zeigt Produkte an"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_smoke.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "smoke",
+      "suche"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-001",
+    "name": "Gast-Checkout vollständig (AT)",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft den vollständigen Gast-Checkout-Prozess für den österreichischen Kanal von Produktauswahl bis Bestellbestätigung.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Persönliche Daten als Gast eingeben",
+        "expected": "Formularfelder akzeptieren die Eingabe"
+      },
+      {
+        "step": 4,
+        "action": "Lieferadresse in Österreich eingeben",
+        "expected": "Adresse wird akzeptiert"
+      },
+      {
+        "step": 5,
+        "action": "Versandart auswählen",
+        "expected": "Verfügbare Versandarten werden angezeigt"
+      },
+      {
+        "step": 6,
+        "action": "Zahlungsart auswählen",
+        "expected": "Verfügbare Zahlungsarten für AT werden angezeigt"
+      },
+      {
+        "step": 7,
+        "action": "Bestellung abschließen",
+        "expected": "Bestellbestätigung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Gast-Checkout kann vollständig durchlaufen werden",
+      "Bestellbestätigung mit Bestellnummer wird angezeigt",
+      "Alle Preise werden in EUR angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "checkout",
+      "gast",
+      "AT"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-002",
+    "name": "Gast-Checkout vollständig (DE)",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "DE"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft den vollständigen Gast-Checkout-Prozess für den deutschen Kanal von Produktauswahl bis Bestellbestätigung.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Persönliche Daten als Gast eingeben",
+        "expected": "Formularfelder akzeptieren die Eingabe"
+      },
+      {
+        "step": 4,
+        "action": "Lieferadresse in Deutschland eingeben",
+        "expected": "Adresse wird akzeptiert"
+      },
+      {
+        "step": 5,
+        "action": "Versandart auswählen",
+        "expected": "Verfügbare Versandarten werden angezeigt"
+      },
+      {
+        "step": 6,
+        "action": "Zahlungsart auswählen",
+        "expected": "Verfügbare Zahlungsarten für DE werden angezeigt"
+      },
+      {
+        "step": 7,
+        "action": "Bestellung abschließen",
+        "expected": "Bestellbestätigung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Gast-Checkout kann vollständig durchlaufen werden",
+      "Bestellbestätigung mit Bestellnummer wird angezeigt",
+      "Alle Preise werden in EUR angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "checkout",
+      "gast",
+      "DE"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-003",
+    "name": "Gast-Checkout vollständig (CH)",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft den vollständigen Gast-Checkout-Prozess für den Schweizer Kanal von Produktauswahl bis Bestellbestätigung.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Persönliche Daten als Gast eingeben",
+        "expected": "Formularfelder akzeptieren die Eingabe"
+      },
+      {
+        "step": 4,
+        "action": "Lieferadresse in der Schweiz eingeben",
+        "expected": "Adresse wird akzeptiert"
+      },
+      {
+        "step": 5,
+        "action": "Versandart auswählen",
+        "expected": "Verfügbare Versandarten werden angezeigt"
+      },
+      {
+        "step": 6,
+        "action": "Zahlungsart auswählen",
+        "expected": "Verfügbare Zahlungsarten für CH werden angezeigt"
+      },
+      {
+        "step": 7,
+        "action": "Bestellung abschließen",
+        "expected": "Bestellbestätigung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Gast-Checkout kann vollständig durchlaufen werden",
+      "Bestellbestätigung mit Bestellnummer wird angezeigt",
+      "Alle Preise werden in CHF angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "checkout",
+      "gast",
+      "CH"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-004",
+    "name": "Registrierter User Checkout",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft den vollständigen Checkout-Prozess für einen registrierten und eingeloggten Benutzer.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Bestehender Kundenaccount mit gespeicherter Adresse"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mit bestehendem Account einloggen",
+        "expected": "Login erfolgreich, Dashboard wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 3,
+        "action": "Zur Checkout-Seite navigieren",
+        "expected": "Checkout-Seite mit vorausgefüllten Daten wird geladen"
+      },
+      {
+        "step": 4,
+        "action": "Gespeicherte Lieferadresse prüfen",
+        "expected": "Adresse ist vorausgewählt"
+      },
+      {
+        "step": 5,
+        "action": "Zahlungsart auswählen",
+        "expected": "Zahlungsarten werden angezeigt"
+      },
+      {
+        "step": 6,
+        "action": "Bestellung abschließen",
+        "expected": "Bestellbestätigung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Checkout mit gespeicherter Adresse funktioniert",
+      "Bestellbestätigung mit Bestellnummer wird angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "checkout",
+      "registriert",
+      "AT"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-005",
+    "name": "Zahlungsarten verfügbar (AT)",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob alle für Österreich konfigurierten Zahlungsarten im Checkout angezeigt werden.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren und Adressdaten für AT eingeben",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Zahlungsarten-Bereich prüfen",
+        "expected": "Alle für AT konfigurierten Zahlungsarten sind sichtbar"
+      },
+      {
+        "step": 4,
+        "action": "Jede Zahlungsart auswählen",
+        "expected": "Zahlungsarten sind auswählbar ohne Fehler"
+      }
+    ],
+    "postconditions": [
+      "Alle für AT konfigurierten Zahlungsarten werden angezeigt",
+      "Keine Fehlermeldungen bei der Auswahl"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_critical_path.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "zahlungsarten",
+      "AT"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-006",
+    "name": "Zahlungsarten verfügbar (DE)",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "DE"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob alle für Deutschland konfigurierten Zahlungsarten im Checkout angezeigt werden.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren und Adressdaten für DE eingeben",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Zahlungsarten-Bereich prüfen",
+        "expected": "Alle für DE konfigurierten Zahlungsarten sind sichtbar"
+      },
+      {
+        "step": 4,
+        "action": "Jede Zahlungsart auswählen",
+        "expected": "Zahlungsarten sind auswählbar ohne Fehler"
+      }
+    ],
+    "postconditions": [
+      "Alle für DE konfigurierten Zahlungsarten werden angezeigt",
+      "Keine Fehlermeldungen bei der Auswahl"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_critical_path.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "zahlungsarten",
+      "DE"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-007",
+    "name": "Zahlungsarten verfügbar (CH)",
+    "category": "critical-path",
+    "priority": "P0",
+    "status": "implemented",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob alle für die Schweiz konfigurierten Zahlungsarten im Checkout angezeigt werden.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zur Checkout-Seite navigieren und Adressdaten für CH eingeben",
+        "expected": "Checkout-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Zahlungsarten-Bereich prüfen",
+        "expected": "Alle für CH konfigurierten Zahlungsarten sind sichtbar"
+      },
+      {
+        "step": 4,
+        "action": "Jede Zahlungsart auswählen",
+        "expected": "Zahlungsarten sind auswählbar ohne Fehler"
+      }
+    ],
+    "postconditions": [
+      "Alle für CH konfigurierten Zahlungsarten werden angezeigt",
+      "Keine Fehlermeldungen bei der Auswahl"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_critical_path.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "zahlungsarten",
+      "CH"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CRITICAL-008",
+    "name": "Warenkorb-Persistenz",
+    "category": "critical-path",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob der Warenkorb nach Schließen und erneutem Öffnen des Browsers erhalten bleibt.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb-Inhalt notieren (Produkt, Menge, Preis)",
+        "expected": "Warenkorb-Daten sind erfasst"
+      },
+      {
+        "step": 3,
+        "action": "Browser-Session schließen und neu öffnen",
+        "expected": "Neue Session wird gestartet"
+      },
+      {
+        "step": 4,
+        "action": "Shop erneut aufrufen und Warenkorb prüfen",
+        "expected": "Warenkorb enthält die zuvor hinzugefügten Produkte"
+      }
+    ],
+    "postconditions": [
+      "Warenkorb bleibt nach Session-Wechsel erhalten",
+      "Warenkorb-Zähler zeigt korrekte Anzahl"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "critical-path",
+      "warenkorb",
+      "persistenz"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-001",
+    "name": "Produkt zum Warenkorb hinzufügen",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein einzelnes Produkt erfolgreich zum Warenkorb hinzugefügt werden kann und korrekt angezeigt wird.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produktdetailseite aufrufen",
+        "expected": "Produktseite ist geladen"
+      },
+      {
+        "step": 2,
+        "action": "Auf 'In den Warenkorb' klicken",
+        "expected": "Produkt wird hinzugefügt"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb öffnen",
+        "expected": "Warenkorb zeigt das hinzugefügte Produkt"
+      },
+      {
+        "step": 4,
+        "action": "Produktname und Preis im Warenkorb prüfen",
+        "expected": "Name und Preis stimmen mit der Produktseite überein"
+      }
+    ],
+    "postconditions": [
+      "Produkt wird im Warenkorb angezeigt",
+      "Produktname und Preis sind korrekt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "hinzufügen"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-002",
+    "name": "Warenkorb-Zähler aktualisiert sich",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob der Warenkorb-Zähler im Header sich korrekt aktualisiert, wenn Produkte hinzugefügt werden.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Warenkorb-Zähler im Header prüfen (sollte 0 oder leer sein)",
+        "expected": "Zähler zeigt 0 oder ist nicht sichtbar"
+      },
+      {
+        "step": 2,
+        "action": "Ein Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt wird hinzugefügt"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb-Zähler erneut prüfen",
+        "expected": "Zähler zeigt 1"
+      },
+      {
+        "step": 4,
+        "action": "Weiteres Produkt hinzufügen",
+        "expected": "Produkt wird hinzugefügt"
+      },
+      {
+        "step": 5,
+        "action": "Warenkorb-Zähler erneut prüfen",
+        "expected": "Zähler zeigt 2"
+      }
+    ],
+    "postconditions": [
+      "Warenkorb-Zähler aktualisiert sich nach jedem Hinzufügen",
+      "Zähler zeigt die korrekte Anzahl der Produkte"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "zähler"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-003",
+    "name": "Menge ändern aktualisiert Gesamtpreis",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob eine Mengenänderung im Warenkorb den Gesamtpreis korrekt aktualisiert.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb öffnen und Einzelpreis notieren",
+        "expected": "Einzelpreis ist sichtbar"
+      },
+      {
+        "step": 3,
+        "action": "Menge auf 2 erhöhen",
+        "expected": "Menge wird aktualisiert"
+      },
+      {
+        "step": 4,
+        "action": "Gesamtpreis prüfen",
+        "expected": "Gesamtpreis ist doppelter Einzelpreis"
+      }
+    ],
+    "postconditions": [
+      "Gesamtpreis aktualisiert sich bei Mengenänderung",
+      "Zwischensumme wird ebenfalls aktualisiert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "menge",
+      "preis"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-004",
+    "name": "Produkt entfernen aktualisiert Warenkorb",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob das Entfernen eines Produkts den Warenkorb korrekt aktualisiert.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Zwei Produkte zum Warenkorb hinzufügen",
+        "expected": "Beide Produkte sind im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb öffnen",
+        "expected": "Beide Produkte werden angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Erstes Produkt entfernen (Löschen-Button klicken)",
+        "expected": "Produkt wird aus dem Warenkorb entfernt"
+      },
+      {
+        "step": 4,
+        "action": "Warenkorb-Inhalt und Gesamtpreis prüfen",
+        "expected": "Nur noch ein Produkt im Warenkorb, Preis wurde aktualisiert"
+      }
+    ],
+    "postconditions": [
+      "Gesamtpreis wird aktualisiert",
+      "Warenkorb-Zähler wird aktualisiert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "entfernen"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-005",
+    "name": "Leerer Warenkorb zeigt Meldung",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein leerer Warenkorb eine passende Meldung anzeigt.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Sicherstellen, dass der Warenkorb leer ist",
+        "expected": "Warenkorb enthält keine Produkte"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb-Seite aufrufen",
+        "expected": "Warenkorb-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Meldung für leeren Warenkorb prüfen",
+        "expected": "Hinweismeldung wird angezeigt (z.B. 'Ihr Warenkorb ist leer')"
+      }
+    ],
+    "postconditions": [
+      "Leerer Warenkorb zeigt eine passende Hinweismeldung"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "leer"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-006",
+    "name": "Warenkorb bleibt zwischen Seiten erhalten",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob der Warenkorb-Inhalt beim Navigieren zwischen verschiedenen Seiten erhalten bleibt.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Produkt zum Warenkorb hinzufügen",
+        "expected": "Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zu einer anderen Kategorie-Seite navigieren",
+        "expected": "Kategorie-Seite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Warenkorb-Zähler prüfen",
+        "expected": "Zähler zeigt noch die korrekte Anzahl"
+      },
+      {
+        "step": 4,
+        "action": "Zur Homepage navigieren und Warenkorb öffnen",
+        "expected": "Produkt ist noch im Warenkorb"
+      }
+    ],
+    "postconditions": [
+      "Warenkorb-Inhalt bleibt bei Navigation erhalten"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "persistenz",
+      "navigation"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-007",
+    "name": "Mehrere Produkte hinzufügen",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob mehrere verschiedene Produkte zum Warenkorb hinzugefügt werden können.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Erstes Produkt zum Warenkorb hinzufügen",
+        "expected": "Erstes Produkt ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Zweites Produkt zum Warenkorb hinzufügen",
+        "expected": "Zweites Produkt wird hinzugefügt"
+      },
+      {
+        "step": 3,
+        "action": "Drittes Produkt zum Warenkorb hinzufügen",
+        "expected": "Drittes Produkt wird hinzugefügt"
+      },
+      {
+        "step": 4,
+        "action": "Warenkorb öffnen und alle Produkte prüfen",
+        "expected": "Alle drei Produkte werden mit korrekten Preisen angezeigt"
+      },
+      {
+        "step": 5,
+        "action": "Gesamtpreis prüfen",
+        "expected": "Gesamtpreis ist die Summe aller Einzelpreise"
+      }
+    ],
+    "postconditions": [
+      "Alle Produkte werden im Warenkorb angezeigt"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "mehrere-produkte"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-CART-008",
+    "name": "Preisberechnung korrekt",
+    "category": "warenkorb",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Preisberechnung im Warenkorb korrekt ist (Einzelpreis x Menge = Zeilenpreis, Summe aller Zeilen = Gesamtpreis).",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mehrere Produkte mit unterschiedlichen Mengen zum Warenkorb hinzufügen",
+        "expected": "Produkte sind im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb öffnen",
+        "expected": "Warenkorb wird angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Einzelpreise und Mengen prüfen",
+        "expected": "Einzelpreise stimmen mit Produktseiten überein"
+      },
+      {
+        "step": 4,
+        "action": "Zeilenpreise prüfen (Einzelpreis x Menge)",
+        "expected": "Zeilenpreise sind korrekt berechnet"
+      },
+      {
+        "step": 5,
+        "action": "Gesamtpreis prüfen (Summe aller Zeilenpreise)",
+        "expected": "Gesamtpreis ist die korrekte Summe"
+      }
+    ],
+    "postconditions": [
+      "Zeilenpreise sind korrekt (Einzelpreis x Menge)"
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_cart.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "warenkorb",
+      "preisberechnung"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-001",
+    "name": "Autocomplete zeigt korrektes Produkt",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Autocomplete-Funktion bei der Suche das korrekte Produkt vorschlägt.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suchfeld im Header anklicken",
+        "expected": "Suchfeld ist aktiv"
+      },
+      {
+        "step": 2,
+        "action": "Bekannten Produktnamen eingeben (mindestens 3 Zeichen)",
+        "expected": "Autocomplete-Dropdown erscheint"
+      },
+      {
+        "step": 3,
+        "action": "Autocomplete-Vorschläge prüfen",
+        "expected": "Das gesuchte Produkt erscheint in den Vorschlägen"
+      }
+    ],
+    "postconditions": [
+      "Autocomplete-Dropdown wird angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "autocomplete"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-002",
+    "name": "Autocomplete-Klick navigiert zu Produkt",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein Klick auf einen Autocomplete-Vorschlag zur korrekten Produktseite navigiert.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suchbegriff eingeben und auf Autocomplete-Vorschlag warten",
+        "expected": "Autocomplete-Dropdown erscheint"
+      },
+      {
+        "step": 2,
+        "action": "Auf einen Produktvorschlag im Dropdown klicken",
+        "expected": "Navigation zur Produktseite wird gestartet"
+      },
+      {
+        "step": 3,
+        "action": "Produktdetailseite prüfen",
+        "expected": "Korrekte Produktseite wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Die angezeigte Produktseite entspricht dem ausgewählten Vorschlag"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "autocomplete",
+      "navigation"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-003",
+    "name": "Suchergebnisseite zeigt korrektes Produkt",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Suchergebnisseite nach Absenden der Suche das korrekte Produkt anzeigt.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Bekannten Produktnamen in das Suchfeld eingeben",
+        "expected": "Suchbegriff ist eingegeben"
+      },
+      {
+        "step": 2,
+        "action": "Suche absenden (Enter drücken)",
+        "expected": "Suchergebnisseite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Suchergebnisse prüfen",
+        "expected": "Das gesuchte Produkt wird in den Ergebnissen angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Suchergebnisseite wird geladen",
+      "Produktname und Preis werden angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "suchergebnisse"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-004",
+    "name": "Suchergebnis-Klick navigiert zu Produkt",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein Klick auf ein Suchergebnis zur korrekten Produktdetailseite navigiert.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suche nach einem bekannten Produkt durchführen",
+        "expected": "Suchergebnisseite mit Ergebnissen wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Auf ein Suchergebnis klicken",
+        "expected": "Navigation zur Produktseite wird gestartet"
+      },
+      {
+        "step": 3,
+        "action": "Produktdetailseite prüfen",
+        "expected": "Korrekte Produktseite wird angezeigt mit Name und Preis"
+      }
+    ],
+    "postconditions": [
+      "Die angezeigte Produktseite entspricht dem angeklickten Ergebnis"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "suchergebnisse",
+      "navigation"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-005",
+    "name": "Keine Ergebnisse bei ungültigem Artikel",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob bei einem ungültigen oder nicht existierenden Suchbegriff eine passende Meldung angezeigt wird.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Einen ungültigen oder nicht existierenden Suchbegriff eingeben (z.B. 'xyzabc123')",
+        "expected": "Suchbegriff ist eingegeben"
+      },
+      {
+        "step": 2,
+        "action": "Suche absenden",
+        "expected": "Suchergebnisseite wird geladen"
+      },
+      {
+        "step": 3,
+        "action": "Ergebnisseite prüfen",
+        "expected": "Keine Ergebnisse gefunden-Meldung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Keine Suchergebnisse werden angezeigt",
+      "Eine passende Hinweismeldung wird gezeigt (z.B. 'Keine Ergebnisse gefunden')"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "keine-ergebnisse"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-006",
+    "name": "Suchvorschläge erscheinen bei Eingabe",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob bei der Texteingabe im Suchfeld Suchvorschläge erscheinen.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suchfeld anklicken",
+        "expected": "Suchfeld ist aktiv"
+      },
+      {
+        "step": 2,
+        "action": "Langsam einen Suchbegriff eingeben (Buchstabe für Buchstabe)",
+        "expected": "Nach wenigen Zeichen erscheinen Suchvorschläge"
+      },
+      {
+        "step": 3,
+        "action": "Suchvorschläge-Dropdown prüfen",
+        "expected": "Dropdown mit Vorschlägen ist sichtbar"
+      }
+    ],
+    "postconditions": [
+      "Vorschläge werden nach wenigen Zeichen angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "suchvorschläge"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-007",
+    "name": "Suchvorschläge zeigen Kategorien",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Suchvorschläge auch Kategorien anzeigen, nicht nur Produkte.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Einen generischen Suchbegriff eingeben (z.B. 'Bett' oder 'Decke')",
+        "expected": "Suchvorschläge erscheinen"
+      },
+      {
+        "step": 2,
+        "action": "Suchvorschläge-Dropdown prüfen",
+        "expected": "Neben Produkten werden auch Kategorien angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Kategorie-Vorschlag prüfen",
+        "expected": "Kategorie-Link ist sichtbar und unterscheidet sich visuell von Produktvorschlägen"
+      }
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "suchvorschläge",
+      "kategorien"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-008",
+    "name": "Autocomplete zeigt Produktbilder",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Autocomplete-Vorschläge Produktbilder enthalten.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suchbegriff eingeben und auf Autocomplete warten",
+        "expected": "Autocomplete-Dropdown erscheint"
+      },
+      {
+        "step": 2,
+        "action": "Produktvorschläge im Dropdown prüfen",
+        "expected": "Jeder Produktvorschlag enthält ein Produktbild"
+      },
+      {
+        "step": 3,
+        "action": "Bildladung prüfen",
+        "expected": "Bilder werden korrekt geladen (keine Platzhalter oder Fehler)"
+      }
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "autocomplete",
+      "bilder"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-SEARCH-009",
+    "name": "Autocomplete Produktinfo vollständig",
+    "category": "suche",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob die Autocomplete-Vorschläge vollständige Produktinformationen anzeigen (Name, Preis, Bild).",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Suchbegriff eingeben und auf Autocomplete warten",
+        "expected": "Autocomplete-Dropdown erscheint"
+      },
+      {
+        "step": 2,
+        "action": "Produktname im Vorschlag prüfen",
+        "expected": "Produktname ist sichtbar"
+      },
+      {
+        "step": 3,
+        "action": "Preis im Vorschlag prüfen",
+        "expected": "Preis ist sichtbar"
+      },
+      {
+        "step": 4,
+        "action": "Produktbild im Vorschlag prüfen",
+        "expected": "Produktbild ist sichtbar"
+      }
+    ],
+    "postconditions": [
+      "Preis wird im Autocomplete angezeigt",
+      "Produktbild wird im Autocomplete angezeigt",
+      "Alle Informationen sind korrekt und vollständig"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_search.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "suche",
+      "autocomplete",
+      "produktinfo"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-001",
+    "name": "Registrierung erfolgreich",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob eine neue Kundenregistrierung erfolgreich durchgeführt werden kann.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Registrierungsseite aufrufen",
+        "expected": "Registrierungsformular wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Gültige persönliche Daten eingeben (Anrede, Vorname, Nachname)",
+        "expected": "Felder akzeptieren die Eingabe"
+      },
+      {
+        "step": 3,
+        "action": "Gültige E-Mail-Adresse eingeben",
+        "expected": "E-Mail wird akzeptiert"
+      },
+      {
+        "step": 4,
+        "action": "Sicheres Passwort eingeben",
+        "expected": "Passwort wird akzeptiert"
+      },
+      {
+        "step": 5,
+        "action": "Registrierung absenden",
+        "expected": "Registrierung ist erfolgreich"
+      },
+      {
+        "step": 6,
+        "action": "Bestätigung prüfen",
+        "expected": "Willkommensmeldung oder Account-Dashboard wird angezeigt"
+      }
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "registrierung"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-002",
+    "name": "Registrierung mit existierender Email schlägt fehl",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob eine Registrierung mit einer bereits registrierten E-Mail-Adresse korrekt abgelehnt wird.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Registrierungsseite aufrufen",
+        "expected": "Registrierungsformular wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Gültige Daten eingeben, aber eine bereits registrierte E-Mail verwenden",
+        "expected": "Felder akzeptieren die Eingabe"
+      },
+      {
+        "step": 3,
+        "action": "Registrierung absenden",
+        "expected": "Fehlermeldung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Registrierung wird abgelehnt",
+      "Passende Fehlermeldung wird angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "registrierung",
+      "validierung"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-003",
+    "name": "Registrierung mit ungültiger Email zeigt Fehler",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob eine Registrierung mit einer ungültigen E-Mail-Adresse eine Fehlermeldung anzeigt.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Registrierungsseite aufrufen",
+        "expected": "Registrierungsformular wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Ungültige E-Mail-Adresse eingeben (z.B. 'test@', 'test.de', '@domain.com')",
+        "expected": "Eingabe wird angenommen"
+      },
+      {
+        "step": 3,
+        "action": "Registrierung absenden",
+        "expected": "Validierungsfehler wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Fehlermeldung wird beim E-Mail-Feld angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "registrierung",
+      "validierung",
+      "email"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-004",
+    "name": "Schwaches Passwort wird abgelehnt",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein schwaches Passwort bei der Registrierung abgelehnt wird.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Registrierungsseite aufrufen",
+        "expected": "Registrierungsformular wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Gültige Daten eingeben, aber ein schwaches Passwort verwenden (z.B. '123')",
+        "expected": "Eingabe wird angenommen"
+      },
+      {
+        "step": 3,
+        "action": "Registrierung absenden",
+        "expected": "Fehlermeldung zum Passwort wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Schwaches Passwort wird abgelehnt",
+      "Fehlermeldung mit Passwort-Anforderungen wird angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "registrierung",
+      "validierung",
+      "passwort"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-005",
+    "name": "Login erfolgreich",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein Login mit gültigen Zugangsdaten erfolgreich durchgeführt werden kann.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Bestehender Kundenaccount mit bekannten Zugangsdaten"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Login-Seite aufrufen",
+        "expected": "Login-Formular wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Gültige E-Mail-Adresse eingeben",
+        "expected": "E-Mail wird eingegeben"
+      },
+      {
+        "step": 3,
+        "action": "Korrektes Passwort eingeben",
+        "expected": "Passwort wird eingegeben"
+      },
+      {
+        "step": 4,
+        "action": "Login absenden",
+        "expected": "Login ist erfolgreich"
+      },
+      {
+        "step": 5,
+        "action": "Account-Dashboard prüfen",
+        "expected": "Benutzer ist eingeloggt, Dashboard oder Account-Seite wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Benutzername oder Anrede wird im Header angezeigt"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "login"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-006",
+    "name": "Login mit falschen Daten schlägt fehl",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein Login mit falschen Zugangsdaten korrekt abgelehnt wird.",
+    "preconditions": [
+      "Shop ist erreichbar"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Login-Seite aufrufen",
+        "expected": "Login-Formular wird angezeigt"
+      },
+      {
+        "step": 2,
+        "action": "Gültige E-Mail-Adresse eingeben",
+        "expected": "E-Mail wird eingegeben"
+      },
+      {
+        "step": 3,
+        "action": "Falsches Passwort eingeben",
+        "expected": "Passwort wird eingegeben"
+      },
+      {
+        "step": 4,
+        "action": "Login absenden",
+        "expected": "Fehlermeldung wird angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Login wird abgelehnt",
+      "Fehlermeldung wird angezeigt",
+      "Benutzer bleibt auf der Login-Seite"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "login",
+      "validierung"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-007",
+    "name": "Profil anzeigen und bearbeiten",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein eingeloggter Benutzer sein Profil anzeigen und bearbeiten kann.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Bestehender Kundenaccount mit bekannten Zugangsdaten"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mit bestehendem Account einloggen",
+        "expected": "Login erfolgreich"
+      },
+      {
+        "step": 2,
+        "action": "Zur Profil-Seite navigieren",
+        "expected": "Profilseite mit persönlichen Daten wird angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Persönliche Daten prüfen (Name, E-Mail)",
+        "expected": "Daten werden korrekt angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Einen Wert ändern (z.B. Vorname)",
+        "expected": "Änderung wird in das Feld eingetragen"
+      },
+      {
+        "step": 5,
+        "action": "Änderung speichern",
+        "expected": "Erfolgsmeldung wird angezeigt"
+      },
+      {
+        "step": 6,
+        "action": "Seite neu laden und geänderten Wert prüfen",
+        "expected": "Änderung wurde gespeichert"
+      }
+    ],
+    "postconditions": [
+      "Profilseite zeigt aktuelle persönliche Daten"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "profil",
+      "bearbeiten"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-ACCOUNT-008",
+    "name": "Adressverwaltung",
+    "category": "account",
+    "priority": "P1",
+    "status": "implemented",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-03",
+    "description": "Überprüft, ob ein eingeloggter Benutzer seine Adressen verwalten kann (anzeigen, hinzufügen, bearbeiten, löschen).",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Bestehender Kundenaccount mit bekannten Zugangsdaten"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Mit bestehendem Account einloggen",
+        "expected": "Login erfolgreich"
+      },
+      {
+        "step": 2,
+        "action": "Zur Adressverwaltung navigieren",
+        "expected": "Adressübersicht wird angezeigt"
+      },
+      {
+        "step": 3,
+        "action": "Neue Adresse hinzufügen",
+        "expected": "Adressformular wird angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Gültige Adressdaten eingeben und speichern",
+        "expected": "Adresse wird gespeichert"
+      },
+      {
+        "step": 5,
+        "action": "Gespeicherte Adresse in der Übersicht prüfen",
+        "expected": "Neue Adresse erscheint in der Liste"
+      }
+    ],
+    "postconditions": [
+      "Adressübersicht zeigt alle gespeicherten Adressen",
+      "Neue Adresse kann hinzugefügt werden"
+    ],
+    "automation": {
+      "playwright": "playwright_tests/tests/test_account.py",
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "account",
+      "adressen",
+      "verwaltung"
+    ]
+  }
+]
