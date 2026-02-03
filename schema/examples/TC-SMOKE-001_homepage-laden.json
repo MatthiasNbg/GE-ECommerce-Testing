@@ -1,0 +1,59 @@
+{
+  "test_id": "TC-SMOKE-001",
+  "name": "Homepage lädt erfolgreich",
+  "category": "smoke",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "DNS korrekt aufgelöst"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen (base_url)",
+      "expected": "Seite lädt ohne HTTP-Fehler"
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren (falls vorhanden)",
+      "expected": "Banner wird geschlossen",
+      "selector_hint": ".cookie-permission-container .btn-primary"
+    },
+    {
+      "step": 3,
+      "action": "Seitentitel prüfen",
+      "expected": "Seite hat einen nicht-leeren Titel"
+    },
+    {
+      "step": 4,
+      "action": "Auf kritische Fehlerelemente prüfen",
+      "expected": "Keine .alert-danger oder .error-500 Elemente sichtbar",
+      "selector_hint": ".alert-danger, .error-500"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_smoke.py",
+    "function_name": "test_homepage_loads",
+    "tags": ["smoke"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2025-01-15",
+    "last_modified": "2025-05-20",
+    "version": "1.0"
+  }
+}

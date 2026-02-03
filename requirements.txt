@@ -27,5 +27,8 @@ isort==5.13.2
 ruff==0.7.1
 mypy==1.13.0
 
+# Schema-Validierung
+jsonschema[format]>=4.20.0
+
 # Type Stubs
 types-requests>=2.32.0
