@@ -15,6 +15,7 @@
       "step": 1,
       "action": "Warenkorb-Seite aufrufen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}],
       "expected": "Seite wird geladen"
     },
     {

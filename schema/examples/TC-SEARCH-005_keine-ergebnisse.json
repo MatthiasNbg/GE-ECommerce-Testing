@@ -18,18 +18,21 @@
       "step": 1,
       "action": "Suchfeld öffnen",
       "expected": "Suchfeld wird sichtbar",
-      "selector_hint": "button.search-toggle-btn"
+      "selector_hint": "button.search-toggle-btn",
+      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}]
     },
     {
       "step": 2,
       "action": "Ungültige Artikelnummer eingeben",
       "expected": "Artikelnummer wird im Suchfeld angezeigt",
-      "selector_hint": "input#header-main-search-input"
+      "selector_hint": "input#header-main-search-input",
+      "inputs": [{"action": "fill", "selector": "input#header-main-search-input", "value": "xyznonexistent123"}]
     },
     {
       "step": 3,
       "action": "Suche absenden",
-      "expected": "Suchergebnisseite wird geladen"
+      "expected": "Suchergebnisseite wird geladen",
+      "inputs": [{"action": "click", "selector": "input#header-main-search-input"}]
     },
     {
       "step": 4,

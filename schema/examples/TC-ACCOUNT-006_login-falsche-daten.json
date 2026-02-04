@@ -21,22 +21,26 @@
     {
       "step": 1,
       "action": "Login-Seite aufrufen",
-      "expected": "Login-Formular wird angezeigt"
+      "expected": "Login-Formular wird angezeigt",
+      "inputs": [{"action": "navigate", "value": "/account/login"}]
     },
     {
       "step": 2,
       "action": "Falsche E-Mail eingeben",
-      "expected": "Falsche E-Mail-Adresse ist im Formular eingetragen"
+      "expected": "Falsche E-Mail-Adresse ist im Formular eingetragen",
+      "inputs": [{"action": "fill", "selector": "#loginMail", "value": "nicht-existierend@example.com"}]
     },
     {
       "step": 3,
       "action": "Falsches Passwort eingeben",
-      "expected": "Falsches Passwort ist im Formular eingetragen"
+      "expected": "Falsches Passwort ist im Formular eingetragen",
+      "inputs": [{"action": "fill", "selector": "#loginPassword", "value": "FalschesPasswort123!"}]
     },
     {
       "step": 4,
       "action": "Login absenden",
-      "expected": "Login-Formular wird abgeschickt"
+      "expected": "Login-Formular wird abgeschickt",
+      "inputs": [{"action": "click", "selector": "button:has-text('Anmelden')"}]
     },
     {
       "step": 5,

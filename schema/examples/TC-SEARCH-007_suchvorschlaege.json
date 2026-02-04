@@ -18,19 +18,22 @@
       "step": 1,
       "action": "Suchfeld aktivieren",
       "expected": "Suchfeld wird sichtbar und fokussiert",
-      "selector_hint": "button.search-toggle-btn"
+      "selector_hint": "button.search-toggle-btn",
+      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}]
     },
     {
       "step": 2,
       "action": "\"be\" eingeben",
       "expected": "Text wird im Suchfeld angezeigt",
-      "selector_hint": "input#header-main-search-input"
+      "selector_hint": "input#header-main-search-input",
+      "inputs": [{"action": "fill", "selector": "input#header-main-search-input", "value": "be"}]
     },
     {
       "step": 3,
       "action": "Auf Suggest-Container warten",
       "expected": "Suchvorschläge-Container wird sichtbar",
-      "selector_hint": ".search-suggest, .ns-autocomplete"
+      "selector_hint": ".search-suggest, .ns-autocomplete",
+      "inputs": [{"action": "wait", "selector": ".search-suggest, .ns-autocomplete"}]
     }
   ],
   "test_data": {

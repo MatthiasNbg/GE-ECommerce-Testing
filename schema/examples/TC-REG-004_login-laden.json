@@ -15,6 +15,7 @@
       "step": 1,
       "action": "Login-Seite aufrufen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/account/login"}],
       "expected": "Seite wird geladen"
     },
     {

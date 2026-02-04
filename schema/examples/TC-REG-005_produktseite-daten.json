@@ -15,6 +15,7 @@
       "step": 1,
       "action": "Produktseite aufrufen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/p/duftkissen-lavendel/ge-p-49415"}],
       "expected": "Seite wird geladen"
     },
     {

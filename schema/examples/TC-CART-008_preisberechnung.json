@@ -21,12 +21,14 @@
       "step": 1,
       "action": "Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt wird zum Warenkorb hinzugefügt",
-      "selector_hint": ".btn-buy, [data-add-to-cart]"
+      "selector_hint": ".btn-buy, [data-add-to-cart]",
+      "inputs": [{"action": "navigate", "value": "/p/bademantel-raute-fuer-damen-und-herren/ge-p-410933"}, {"action": "click", "selector": "button.btn-buy"}]
     },
     {
       "step": 2,
       "action": "Warenkorb öffnen",
-      "expected": "Warenkorb-Seite wird angezeigt mit dem Produkt"
+      "expected": "Warenkorb-Seite wird angezeigt mit dem Produkt",
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
     },
     {
       "step": 3,
@@ -38,7 +40,8 @@
       "step": 4,
       "action": "Menge auf 3 ändern",
       "expected": "Mengenfeld wird auf 3 gesetzt und Warenkorb aktualisiert sich",
-      "selector_hint": "input[name='quantity']"
+      "selector_hint": "input[name='quantity']",
+      "inputs": [{"action": "fill", "selector": "input[name='quantity']", "value": "3"}]
     },
     {
       "step": 5,

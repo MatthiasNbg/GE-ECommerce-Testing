@@ -23,7 +23,10 @@
     {
       "step": 1,
       "action": "150 Bestellungen parallel starten (15 Worker)",
-      "expected": "Schritt erfolgreich ausgefuehrt"
+      "expected": "Schritt erfolgreich ausgefuehrt",
+      "inputs": [
+        {"action": "navigate", "value": "/"}
+      ]
     },
     {
       "step": 2,

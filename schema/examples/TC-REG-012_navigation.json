@@ -15,6 +15,7 @@
       "step": 1,
       "action": "Startseite aufrufen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/"}],
       "expected": "Startseite wird geladen"
     },
     {

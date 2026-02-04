@@ -15,6 +15,10 @@
       "step": 1,
       "action": "Suchseite mit Suchbegriff aufrufen",
       "selector": null,
+      "inputs": [
+        {"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"},
+        {"action": "fill", "selector": "input#header-main-search-input", "value": "test"}
+      ],
       "expected": "Suchseite wird geladen"
     },
     {

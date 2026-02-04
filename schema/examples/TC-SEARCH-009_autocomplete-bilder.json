@@ -18,18 +18,21 @@
       "step": 1,
       "action": "Suchfeld öffnen",
       "expected": "Suchfeld wird sichtbar",
-      "selector_hint": "button.search-toggle-btn"
+      "selector_hint": "button.search-toggle-btn",
+      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}]
     },
     {
       "step": 2,
       "action": "Artikelnummer eingeben",
       "expected": "Artikelnummer wird im Suchfeld angezeigt",
-      "selector_hint": "input#header-main-search-input"
+      "selector_hint": "input#header-main-search-input",
+      "inputs": [{"action": "fill", "selector": "input#header-main-search-input", "value": "862990"}]
     },
     {
       "step": 3,
       "action": "Autocomplete prüfen",
-      "expected": "Autocomplete-Dropdown erscheint mit Vorschlägen"
+      "expected": "Autocomplete-Dropdown erscheint mit Vorschlägen",
+      "inputs": [{"action": "wait", "selector": ".search-suggest-product-link"}]
     },
     {
       "step": 4,

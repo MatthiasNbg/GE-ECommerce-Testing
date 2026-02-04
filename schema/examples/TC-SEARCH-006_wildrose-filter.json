@@ -18,12 +18,14 @@
       "step": 1,
       "action": "Suchfeld öffnen und \"wildrose\" eingeben",
       "expected": "Suchbegriff wird im Feld angezeigt",
-      "selector_hint": "input#header-main-search-input"
+      "selector_hint": "input#header-main-search-input",
+      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}, {"action": "fill", "selector": "input#header-main-search-input", "value": "wildrose"}]
     },
     {
       "step": 2,
       "action": "Suche absenden",
-      "expected": "Suchergebnisseite wird geladen"
+      "expected": "Suchergebnisseite wird geladen",
+      "inputs": [{"action": "click", "selector": "input#header-main-search-input"}]
     },
     {
       "step": 3,

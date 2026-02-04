@@ -15,18 +15,24 @@
       "step": 1,
       "action": "Produkt hinzufügen",
       "selector": ".btn-buy",
+      "inputs": [
+        {"action": "navigate", "value": "/p/duftkissen-lavendel/ge-p-49415"},
+        {"action": "click", "selector": "button.btn-buy"}
+      ],
       "expected": "Produkt wird dem Warenkorb hinzugefügt"
     },
     {
       "step": 2,
       "action": "Warenkorb öffnen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}],
       "expected": "Warenkorb-Seite wird geladen"
     },
     {
       "step": 3,
       "action": "Zur Kasse klicken",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/checkout/register"}],
       "expected": "Checkout-Seite wird geladen"
     },
     {

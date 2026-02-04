@@ -22,7 +22,8 @@
     {
       "step": 1,
       "action": "Jede Zahlungsart mit 10 Bestellungen testen",
-      "expected": "Schritt erfolgreich ausgefuehrt"
+      "expected": "Schritt erfolgreich ausgefuehrt",
+      "inputs": [{"action": "navigate", "value": "/"}]
     },
     {
       "step": 2,

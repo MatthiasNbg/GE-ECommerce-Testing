@@ -21,18 +21,21 @@
       "step": 2,
       "action": "Homepage laden",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/"}],
       "expected": "Homepage wird geladen"
     },
     {
       "step": 3,
       "action": "Produktseite laden",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/p/duftkissen-lavendel/ge-p-49415"}],
       "expected": "Produktseite wird geladen"
     },
     {
       "step": 4,
       "action": "Warenkorb laden",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}],
       "expected": "Warenkorb wird geladen"
     },
     {

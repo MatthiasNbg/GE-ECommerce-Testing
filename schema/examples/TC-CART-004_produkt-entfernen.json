@@ -21,18 +21,21 @@
       "step": 1,
       "action": "Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt wird zum Warenkorb hinzugefügt",
-      "selector_hint": ".btn-buy, [data-add-to-cart]"
+      "selector_hint": ".btn-buy, [data-add-to-cart]",
+      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
     },
     {
       "step": 2,
       "action": "Warenkorb öffnen",
-      "expected": "Warenkorb-Seite wird angezeigt mit dem Produkt"
+      "expected": "Warenkorb-Seite wird angezeigt mit dem Produkt",
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
     },
     {
       "step": 3,
       "action": "Produkt entfernen über Entfernen-Button",
       "expected": "Produkt wird aus dem Warenkorb entfernt",
-      "selector_hint": "button.line-item-remove-button"
+      "selector_hint": "button.line-item-remove-button",
+      "inputs": [{"action": "click", "selector": ".line-item-remove"}]
     },
     {
       "step": 4,

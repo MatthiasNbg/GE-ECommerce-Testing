@@ -17,7 +17,8 @@
       "step": 1,
       "action": "Warenkorb-Seite aufrufen",
       "expected": "Seite lädt ohne HTTP-Fehler",
-      "selector_hint": "/checkout/cart"
+      "selector_hint": "/checkout/cart",
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
     },
     {
       "step": 2,

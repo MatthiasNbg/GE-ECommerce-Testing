@@ -65,7 +65,20 @@
           "step": { "type": "integer", "minimum": 1 },
           "action": { "type": "string" },
           "expected": { "type": "string" },
-          "selector_hint": { "type": "string" }
+          "selector_hint": { "type": "string" },
+          "description": { "type": "string" },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["action"],
+              "properties": {
+                "action": { "enum": ["navigate", "fill", "select", "check", "uncheck", "click", "wait"] },
+                "selector": { "type": "string" },
+                "value": {}
+              }
+            }
+          }
         }
       },
       "minItems": 1

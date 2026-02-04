@@ -20,13 +20,15 @@
     {
       "step": 1,
       "action": "Warenkorb öffnen",
-      "expected": "Warenkorb-Seite wird angezeigt"
+      "expected": "Warenkorb-Seite wird angezeigt",
+      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
     },
     {
       "step": 2,
       "action": "Alle Produkte aus dem Warenkorb entfernen",
       "expected": "Warenkorb ist leer",
-      "selector_hint": "button.line-item-remove-button"
+      "selector_hint": "button.line-item-remove-button",
+      "inputs": [{"action": "click", "selector": ".line-item-remove"}]
     },
     {
       "step": 3,

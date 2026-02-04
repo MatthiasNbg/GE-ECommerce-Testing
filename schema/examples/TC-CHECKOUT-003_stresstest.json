@@ -23,7 +23,8 @@
     {
       "step": 1,
       "action": "200 Bestellungen mit 20 Workern parallel ausfuehren",
-      "expected": "Schritt erfolgreich ausgefuehrt"
+      "expected": "Schritt erfolgreich ausgefuehrt",
+      "inputs": [{"action": "navigate", "value": "/"}]
     },
     {
       "step": 2,

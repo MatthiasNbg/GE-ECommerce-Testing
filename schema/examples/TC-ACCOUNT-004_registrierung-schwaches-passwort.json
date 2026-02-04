@@ -20,17 +20,20 @@
     {
       "step": 1,
       "action": "Registrierungsseite aufrufen",
-      "expected": "Registrierungsformular wird angezeigt"
+      "expected": "Registrierungsformular wird angezeigt",
+      "inputs": [{"action": "navigate", "value": "/account/login"}]
     },
     {
       "step": 2,
       "action": "Gültige Daten mit schwachem Passwort eingeben",
-      "expected": "Formulardaten inkl. schwachem Passwort sind eingetragen"
+      "expected": "Formulardaten inkl. schwachem Passwort sind eingetragen",
+      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#personalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#personalMail", "value": "test@example.com"}, {"action": "fill", "selector": "#personalPassword", "value": "1234"}, {"action": "fill", "selector": "#personalPasswordConfirmation", "value": "1234"}, {"action": "fill", "selector": "#billingAddressAddressStreet", "value": "Teststrasse 1"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "4020"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Linz"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "AT"}]
     },
     {
       "step": 3,
       "action": "Formular absenden",
-      "expected": "Formular wird abgeschickt"
+      "expected": "Formular wird abgeschickt",
+      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}, {"action": "click", "selector": "button:has-text('Registrieren')"}]
     },
     {
       "step": 4,

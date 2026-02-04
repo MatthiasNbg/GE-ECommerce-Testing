@@ -22,17 +22,20 @@
     {
       "step": 1,
       "action": "Zur Profilseite navigieren",
-      "expected": "Profilseite wird angezeigt"
+      "expected": "Profilseite wird angezeigt",
+      "inputs": [{"action": "navigate", "value": "/account/profile"}]
     },
     {
       "step": 2,
       "action": "Vorname ändern",
-      "expected": "Neuer Vorname ist im Formular eingetragen"
+      "expected": "Neuer Vorname ist im Formular eingetragen",
+      "inputs": [{"action": "fill", "selector": "#personalFirstName", "value": "TestGeaendert"}]
     },
     {
       "step": 3,
       "action": "Änderung speichern",
-      "expected": "Profiländerung wird gespeichert und Bestätigung angezeigt"
+      "expected": "Profiländerung wird gespeichert und Bestätigung angezeigt",
+      "inputs": [{"action": "click", "selector": "button:has-text('Profil speichern')"}]
     },
     {
       "step": 4,

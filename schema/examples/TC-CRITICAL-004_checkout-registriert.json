@@ -19,27 +19,32 @@
     {
       "step": 1,
       "action": "Produkt zum Warenkorb hinzufügen",
-      "expected": "Produkt ist im Warenkorb sichtbar"
+      "expected": "Produkt ist im Warenkorb sichtbar",
+      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
     },
     {
       "step": 2,
       "action": "Einloggen mit Testaccount",
-      "expected": "Benutzer ist erfolgreich eingeloggt"
+      "expected": "Benutzer ist erfolgreich eingeloggt",
+      "inputs": [{"action": "fill", "selector": "#loginMail", "value": "test@example.com"}, {"action": "fill", "selector": "#loginPassword", "value": "TestPasswort123!"}, {"action": "click", "selector": "button:has-text('Anmelden')"}]
     },
     {
       "step": 3,
       "action": "Zahlungsart wählen",
-      "expected": "Zahlungsart ist ausgewählt"
+      "expected": "Zahlungsart ist ausgewählt",
+      "inputs": [{"action": "click", "selector": ".payment-method:has-text('Rechnung')"}]
     },
     {
       "step": 4,
       "action": "AGB akzeptieren",
-      "expected": "AGB-Checkbox ist aktiviert"
+      "expected": "AGB-Checkbox ist aktiviert",
+      "inputs": [{"action": "check", "selector": "#tos"}]
     },
     {
       "step": 5,
       "action": "Bestellung absenden",
-      "expected": "Bestellung wird erfolgreich verarbeitet"
+      "expected": "Bestellung wird erfolgreich verarbeitet",
+      "inputs": [{"action": "click", "selector": "button:has-text('Zahlungspflichtig bestellen')"}]
     },
     {
       "step": 6,

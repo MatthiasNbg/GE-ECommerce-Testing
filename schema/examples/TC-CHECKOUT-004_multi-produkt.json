@@ -23,7 +23,8 @@
     {
       "step": 1,
       "action": "50 Bestellungen mit 1-5 Produkten pro Bestellung ausfuehren",
-      "expected": "Schritt erfolgreich ausgefuehrt"
+      "expected": "Schritt erfolgreich ausgefuehrt",
+      "inputs": [{"action": "navigate", "value": "/"}]
     },
     {
       "step": 2,

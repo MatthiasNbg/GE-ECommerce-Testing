@@ -22,17 +22,20 @@
     {
       "step": 1,
       "action": "Adressverwaltung aufrufen",
-      "expected": "Adressverwaltungsseite wird angezeigt"
+      "expected": "Adressverwaltungsseite wird angezeigt",
+      "inputs": [{"action": "navigate", "value": "/account/address"}]
     },
     {
       "step": 2,
       "action": "Neue Adresse hinzufügen (5020 Salzburg)",
-      "expected": "Adressformular wird geöffnet und Daten eingetragen"
+      "expected": "Adressformular wird geöffnet und Daten eingetragen",
+      "inputs": [{"action": "click", "selector": "a:has-text('Neue Adresse hinzufügen')"}, {"action": "select", "selector": "#addresspersonalSalutation", "value": "mr"}, {"action": "fill", "selector": "#addresspersonalFirstName", "value": "Test"}, {"action": "fill", "selector": "#addresspersonalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#addressAddressStreet", "value": "Salzburger Strasse 1"}, {"action": "fill", "selector": "#addressAddressZipcode", "value": "5020"}, {"action": "fill", "selector": "#addressAddressCity", "value": "Salzburg"}, {"action": "select", "selector": "#addressAddressCountry", "value": "AT"}]
     },
     {
       "step": 3,
       "action": "Speichern",
-      "expected": "Neue Adresse wird gespeichert"
+      "expected": "Neue Adresse wird gespeichert",
+      "inputs": [{"action": "click", "selector": "button:has-text('Adresse speichern')"}]
     },
     {
       "step": 4,

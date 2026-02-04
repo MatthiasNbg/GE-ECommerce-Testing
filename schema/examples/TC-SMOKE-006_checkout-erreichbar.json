@@ -17,7 +17,8 @@
       "step": 1,
       "action": "Checkout-Seite aufrufen",
       "expected": "Seite lädt ohne HTTP-Fehler",
-      "selector_hint": "/checkout/confirm"
+      "selector_hint": "/checkout/confirm",
+      "inputs": [{"action": "navigate", "value": "/checkout/register"}]
     },
     {
       "step": 2,

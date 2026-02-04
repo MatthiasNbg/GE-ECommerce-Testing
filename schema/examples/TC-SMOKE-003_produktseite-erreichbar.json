@@ -17,7 +17,8 @@
     {
       "step": 1,
       "action": "Produktseite aufrufen",
-      "expected": "Seite lädt ohne HTTP-Fehler"
+      "expected": "Seite lädt ohne HTTP-Fehler",
+      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}]
     },
     {
       "step": 2,

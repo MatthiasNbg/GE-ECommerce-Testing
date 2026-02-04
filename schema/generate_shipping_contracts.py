@@ -50,31 +50,55 @@ def create_contract(test_id: str, country: str, carrier: str, plz: str, city: st
                 "step": 1,
                 "action": "Speditionsprodukt zum Warenkorb hinzufuegen (Polsterbett Almeno, ge-p-693278)",
                 "expected": "Produkt ist im Warenkorb",
-                "selector_hint": "button.btn-buy"
+                "selector_hint": "button.btn-buy",
+                "inputs": [
+                    {"action": "navigate", "value": "/p/polsterbett-almeno/ge-p-693278"},
+                    {"action": "click", "selector": "button.btn-buy"}
+                ]
             },
             {
                 "step": 2,
                 "action": "Zur Kasse navigieren",
                 "expected": "Checkout-Seite wird geladen",
-                "selector_hint": "a:has-text('Zur Kasse')"
+                "selector_hint": "a:has-text('Zur Kasse')",
+                "inputs": [
+                    {"action": "click", "selector": "a:has-text('Zur Kasse')"}
+                ]
             },
             {
                 "step": 3,
                 "action": "Gast-Checkout starten",
                 "expected": "Gast-Checkout-Formular wird angezeigt",
-                "selector_hint": "button:has-text('Als Gast bestellen')"
+                "selector_hint": "button:has-text('Als Gast bestellen')",
+                "inputs": [
+                    {"action": "click", "selector": "button:has-text('Als Gast bestellen')"}
+                ]
             },
             {
                 "step": 4,
                 "action": f"Adresse mit PLZ {plz} ({city}, {country}) eingeben",
                 "expected": "Adressformular ist ausgefuellt",
-                "selector_hint": "#billingAddressAddressZipcode"
+                "selector_hint": "#billingAddressAddressZipcode",
+                "inputs": [
+                    {"action": "select", "selector": "#personalSalutation", "value": "mr"},
+                    {"action": "fill", "selector": "#billingAddress-personalFirstName", "value": "Test"},
+                    {"action": "fill", "selector": "#billingAddress-personalLastName", "value": "Kunde"},
+                    {"action": "fill", "selector": "#personalMail", "value": "test@example.com"},
+                    {"action": "fill", "selector": "#billingAddress-AddressStreet", "value": "Teststrasse 1"},
+                    {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": plz},
+                    {"action": "fill", "selector": "#billingAddressAddressCity", "value": city},
+                    {"action": "select", "selector": "#billingAddressAddressCountry", "value": country}
+                ]
             },
             {
                 "step": 5,
                 "action": "Datenschutz akzeptieren und zur Confirm-Seite navigieren",
                 "expected": "Confirm-Seite wird geladen",
-                "selector_hint": "#acceptedDataProtection"
+                "selector_hint": "#acceptedDataProtection",
+                "inputs": [
+                    {"action": "check", "selector": "#acceptedDataProtection"},
+                    {"action": "click", "selector": "button:has-text('Weiter')"}
+                ]
             },
             {
                 "step": 6,

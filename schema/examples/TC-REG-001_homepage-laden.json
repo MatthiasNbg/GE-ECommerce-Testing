@@ -15,6 +15,7 @@
       "step": 1,
       "action": "Homepage aufrufen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/"}],
       "expected": "Seite wird geladen"
     },
     {

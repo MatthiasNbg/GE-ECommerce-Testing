@@ -15,6 +15,7 @@
       "step": 1,
       "action": "Suchseite aufrufen",
       "selector": null,
+      "inputs": [{"action": "navigate", "value": "/search?search=test"}],
       "expected": "Seite wird geladen"
     },
     {
