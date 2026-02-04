@@ -1,8 +1,8 @@
 # Test-Konzept: Grüne Erde E-Commerce Shop
 
 **Projekt:** GE-ECommerce-Testing
-**Datum:** 2026-01-22
-**Version:** 1.0
+**Datum:** 2026-02-04
+**Version:** 1.06
 **Status:** Entwurf zur Abstimmung
 
 ---
