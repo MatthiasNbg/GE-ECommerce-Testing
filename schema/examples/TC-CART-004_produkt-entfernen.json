@@ -1,0 +1,66 @@
+{
+  "test_id": "TC-CART-004",
+  "name": "Produkt aus dem Warenkorb entfernen",
+  "category": "regression",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar und auf Lager"
+  ],
+  "postconditions": [
+    "Produkt wurde aus dem Warenkorb entfernt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt wird zum Warenkorb hinzugefügt",
+      "selector_hint": ".btn-buy, [data-add-to-cart]"
+    },
+    {
+      "step": 2,
+      "action": "Warenkorb öffnen",
+      "expected": "Warenkorb-Seite wird angezeigt mit dem Produkt"
+    },
+    {
+      "step": 3,
+      "action": "Produkt entfernen über Entfernen-Button",
+      "expected": "Produkt wird aus dem Warenkorb entfernt",
+      "selector_hint": "button.line-item-remove-button"
+    },
+    {
+      "step": 4,
+      "action": "Artikelanzahl im Warenkorb prüfen",
+      "expected": "Warenkorb enthält ein Produkt weniger als zuvor"
+    }
+  ],
+  "test_data": {
+    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+    "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart.py",
+    "function_name": "test_remove_product_updates_cart",
+    "tags": ["regression", "cart", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

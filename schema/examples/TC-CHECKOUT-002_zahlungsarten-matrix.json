@@ -1,0 +1,58 @@
+{
+  "test_id": "TC-CHECKOUT-002",
+  "name": "Massentest Zahlungsarten-Matrix",
+  "category": "e2e",
+  "priority": "P2",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukte sind verfuegbar",
+    "Alle Zahlungsarten sind konfiguriert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Jede Zahlungsart mit 10 Bestellungen testen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Erfolgsrate pro Zahlungsmethode pruefen (mindestens 90%)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "orders_per_method": 10,
+    "min_success_rate": 90
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_checkout_mass.py",
+    "function_name": "test_mass_orders_payment_matrix",
+    "tags": [
+      "massentest"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 600,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

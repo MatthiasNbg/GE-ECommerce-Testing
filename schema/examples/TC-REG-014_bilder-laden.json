@@ -1,0 +1,55 @@
+{
+  "test_id": "TC-REG-014",
+  "name": "Bilder laden korrekt",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen",
+      "selector": null,
+      "expected": "Produktseite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "Produktbilder prüfen",
+      "selector": ".gallery-slider-image img",
+      "expected": "Produktbilder sind vorhanden"
+    },
+    {
+      "step": 3,
+      "action": "Bild-src-Attribut prüfen",
+      "selector": null,
+      "expected": "Bilder haben gültige src-Attribute"
+    }
+  ],
+  "test_data": {
+    "product_id": "49415"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_images_load",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

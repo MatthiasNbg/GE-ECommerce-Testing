@@ -1,0 +1,70 @@
+{
+  "test_id": "TC-REG-005",
+  "name": "Produktseite mit Daten laden",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen",
+      "selector": null,
+      "expected": "Seite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "Produktname prüfen",
+      "selector": "h1.product-detail-name",
+      "expected": "Produktname wird angezeigt"
+    },
+    {
+      "step": 3,
+      "action": "Preis prüfen",
+      "selector": ".product-detail-price",
+      "expected": "Preis wird korrekt angezeigt"
+    },
+    {
+      "step": 4,
+      "action": "Warenkorb-Button prüfen",
+      "selector": ".btn-buy",
+      "expected": "Warenkorb-Button ist vorhanden"
+    },
+    {
+      "step": 5,
+      "action": "Artikelnummer prüfen",
+      "selector": "span.product-detail-ordernumber",
+      "expected": "Artikelnummer wird angezeigt"
+    }
+  ],
+  "test_data": {
+    "product_id": "49415",
+    "product_path": "p/duftkissen-lavendel/ge-p-49415",
+    "expected_price": 12.90
+  },
+  "postconditions": ["Alle Produktdaten werden korrekt angezeigt"],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_product_page_loads_with_data",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

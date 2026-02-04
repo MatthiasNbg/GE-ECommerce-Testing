@@ -1,0 +1,65 @@
+{
+  "test_id": "TC-SMOKE-002",
+  "name": "Suche funktioniert",
+  "category": "smoke",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Suchindex ist aktuell"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Suchfeld öffnen",
+      "expected": "Suchfeld wird sichtbar",
+      "selector_hint": "button.search-toggle-btn"
+    },
+    {
+      "step": 2,
+      "action": "Suchbegriff eingeben",
+      "expected": "Suchbegriff wird im Feld angezeigt",
+      "selector_hint": "input#header-main-search-input"
+    },
+    {
+      "step": 3,
+      "action": "Enter drücken",
+      "expected": "Suchergebnisseite wird geladen"
+    },
+    {
+      "step": 4,
+      "action": "Suchergebnisse prüfen",
+      "expected": "Mindestens ein Produkt wird angezeigt",
+      "selector_hint": ".product-box"
+    },
+    {
+      "step": 5,
+      "action": "Erstes Produkt anklicken",
+      "expected": "Produktdetailseite wird geladen"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_smoke.py",
+    "function_name": "test_search_works",
+    "tags": ["smoke"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

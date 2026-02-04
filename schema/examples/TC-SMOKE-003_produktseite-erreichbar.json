@@ -1,0 +1,60 @@
+{
+  "test_id": "TC-SMOKE-003",
+  "name": "Produktseite erreichbar",
+  "category": "smoke",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Mindestens ein Produkt ist veröffentlicht"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen",
+      "expected": "Seite lädt ohne HTTP-Fehler"
+    },
+    {
+      "step": 2,
+      "action": "Produktname prüfen",
+      "expected": "Produktname wird als Überschrift angezeigt",
+      "selector_hint": "h1"
+    },
+    {
+      "step": 3,
+      "action": "Produktpreis prüfen",
+      "expected": "Preis wird angezeigt",
+      "selector_hint": ".product-detail-price"
+    },
+    {
+      "step": 4,
+      "action": "Warenkorb-Button prüfen",
+      "expected": "In den Warenkorb-Button ist sichtbar",
+      "selector_hint": ".btn-buy"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_smoke.py",
+    "function_name": "test_product_page_accessible",
+    "tags": ["smoke"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

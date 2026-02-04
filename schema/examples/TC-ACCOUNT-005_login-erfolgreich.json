@@ -1,0 +1,67 @@
+{
+  "test_id": "TC-ACCOUNT-005",
+  "name": "Login erfolgreich durchführen (parametrisiert)",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Registrierungsseite ist erreichbar",
+    "Bestehender Kundenaccount mit bekannten Zugangsdaten"
+  ],
+  "postconditions": [
+    "Benutzer ist eingeloggt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen",
+      "expected": "Login-Formular wird angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "E-Mail eingeben",
+      "expected": "E-Mail-Adresse ist im Formular eingetragen"
+    },
+    {
+      "step": 3,
+      "action": "Passwort eingeben",
+      "expected": "Passwort ist im Formular eingetragen"
+    },
+    {
+      "step": 4,
+      "action": "Login absenden",
+      "expected": "Login-Formular wird abgeschickt"
+    },
+    {
+      "step": 5,
+      "action": "Erfolgreichen Login prüfen (Dashboard/Account-Seite)",
+      "expected": "Benutzer wird auf die Account-Übersicht weitergeleitet"
+    }
+  ],
+  "test_data": {},
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_login_success",
+    "tags": ["account", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "test_id": "TC-PROMO-INVALID-001",
+  "name": "Ungueltiger Promotion-Code wird abgelehnt",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt in den Warenkorb hinzufuegen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Ungueltigen Code eingeben (UNGUELTIG123)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Fehlermeldung pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "invalid_code": "UNGUELTIG123"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_invalid_code_rejected",
+    "tags": [
+      "promotions"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

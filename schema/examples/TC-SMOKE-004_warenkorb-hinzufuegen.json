@@ -1,0 +1,54 @@
+{
+  "test_id": "TC-SMOKE-004",
+  "name": "Warenkorb hinzufügen",
+  "category": "smoke",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Mindestens ein Produkt ist kaufbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen",
+      "expected": "Seite lädt ohne HTTP-Fehler"
+    },
+    {
+      "step": 2,
+      "action": "In den Warenkorb klicken",
+      "expected": "Produkt wird zum Warenkorb hinzugefügt",
+      "selector_hint": ".btn-buy"
+    },
+    {
+      "step": 3,
+      "action": "Warenkorb-Feedback prüfen",
+      "expected": "Warenkorb-Zähler wird aktualisiert und Offcanvas-Warenkorb wird angezeigt",
+      "selector_hint": ".header-cart-total, .offcanvas-cart"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_smoke.py",
+    "function_name": "test_add_to_cart",
+    "tags": ["smoke"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

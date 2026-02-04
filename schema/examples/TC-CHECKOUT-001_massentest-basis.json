@@ -1,0 +1,59 @@
+{
+  "test_id": "TC-CHECKOUT-001",
+  "name": "Massentest Checkout Basis",
+  "category": "e2e",
+  "priority": "P2",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukte sind verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Mehrere Bestellungen mit 5 Workern parallel ausfuehren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Erfolgsrate pruefen (mindestens 95%)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "workers": 5,
+    "min_success_rate": 95
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_checkout_mass.py",
+    "function_name": "test_mass_orders_basic",
+    "tags": [
+      "massentest"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 300,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

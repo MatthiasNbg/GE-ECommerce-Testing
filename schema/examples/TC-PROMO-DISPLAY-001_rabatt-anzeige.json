@@ -1,0 +1,69 @@
+{
+  "test_id": "TC-PROMO-DISPLAY-001",
+  "name": "Rabatt-Anzeige in Bestellzusammenfassung",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt ist verfuegbar",
+    "Promotion-Code TEST20 ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt in den Warenkorb hinzufuegen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Code TEST20 eingeben",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Bestellzusammenfassung pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 4,
+      "action": "Rabatt als separate Zeile pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "promo_code": "TEST20"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_display_in_order_summary",
+    "tags": [
+      "promotions"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

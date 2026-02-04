@@ -1,0 +1,65 @@
+{
+  "test_id": "TC-REG-015",
+  "name": "Keine kritischen JS-Fehler",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Console-Listener aktivieren",
+      "selector": null,
+      "expected": "Console-Listener ist aktiv"
+    },
+    {
+      "step": 2,
+      "action": "Homepage laden",
+      "selector": null,
+      "expected": "Homepage wird geladen"
+    },
+    {
+      "step": 3,
+      "action": "Produktseite laden",
+      "selector": null,
+      "expected": "Produktseite wird geladen"
+    },
+    {
+      "step": 4,
+      "action": "Warenkorb laden",
+      "selector": null,
+      "expected": "Warenkorb wird geladen"
+    },
+    {
+      "step": 5,
+      "action": "Auf kritische JS-Fehler prüfen",
+      "selector": null,
+      "expected": "Keine TypeError, ReferenceError oder undefined Fehler gefunden"
+    }
+  ],
+  "postconditions": ["Keine kritischen JavaScript-Fehler auf Kernseiten"],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_no_critical_js_errors",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

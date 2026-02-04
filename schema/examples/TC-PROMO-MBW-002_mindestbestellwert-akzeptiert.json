@@ -1,0 +1,65 @@
+{
+  "test_id": "TC-PROMO-MBW-002",
+  "name": "Promotion-Code ueber Mindestbestellwert akzeptiert",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkte mit Gesamtwert ueber 50 EUR sind verfuegbar",
+    "Promotion-Code MBW50TEST ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Mehrere Produkte hinzufuegen (Gesamtwert ueber 50 EUR)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Code MBW50TEST eingeben",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Rabatt pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "promo_code": "MBW50TEST",
+    "min_order_value": 50
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_minimum_order_value_accepted",
+    "tags": [
+      "promotions"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

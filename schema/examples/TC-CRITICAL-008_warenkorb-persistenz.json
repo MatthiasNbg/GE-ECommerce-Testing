@@ -1,0 +1,71 @@
+{
+  "test_id": "TC-CRITICAL-008",
+  "name": "Warenkorb-Persistenz nach Navigation",
+  "category": "critical-path",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt ist im Warenkorb sichtbar"
+    },
+    {
+      "step": 2,
+      "action": "Warenkorb-Anzahl prüfen",
+      "expected": "Warenkorb zeigt korrekte Artikelanzahl"
+    },
+    {
+      "step": 3,
+      "action": "Zur Startseite navigieren",
+      "expected": "Startseite wird angezeigt"
+    },
+    {
+      "step": 4,
+      "action": "Kategorie besuchen (/wohnen/)",
+      "expected": "Kategorieseite wird angezeigt"
+    },
+    {
+      "step": 5,
+      "action": "Zurück zum Warenkorb navigieren",
+      "expected": "Warenkorb-Seite wird angezeigt"
+    },
+    {
+      "step": 6,
+      "action": "Gleiche Artikelanzahl prüfen",
+      "expected": "Warenkorb enthält dieselbe Anzahl wie zuvor"
+    }
+  ],
+  "postconditions": [
+    "Warenkorb-Inhalt bleibt nach Navigation erhalten"
+  ],
+  "test_data": {},
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_critical_path.py",
+    "function_name": "test_cart_persistence",
+    "tags": ["critical", "cart"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

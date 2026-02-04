@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.matthias-sax.de/TestHubPro911/test-contract.schema.json",
+  "title": "Test-Contract Schema",
+  "description": "Schema für Test-Contract-Dateien im GE E-Commerce Testing Framework",
+  "type": "object",
+  "required": ["test_id", "name", "category", "priority", "schema_version", "scope", "preconditions", "steps", "automation", "orchestration", "meta"],
+  "properties": {
+    "test_id": {
+      "type": "string",
+      "pattern": "^TC-[A-Z]+-[A-Z0-9-]+$",
+      "description": "Eindeutige Test-ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Kurzer, beschreibender Testname"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["smoke", "regression", "critical-path", "feature", "performance", "security", "data-validation", "e2e"],
+      "description": "Testkategorie"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2", "P3"],
+      "description": "Testpriorität"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Schema-Version"
+    },
+    "scope": {
+      "type": "object",
+      "required": ["channels", "environments", "shop_system"],
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["AT", "DE", "CH"] },
+          "minItems": 1
+        },
+        "environments": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["staging", "production", "development"] },
+          "minItems": 1
+        },
+        "shop_system": {
+          "type": "string"
+        }
+      }
+    },
+    "preconditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "postconditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "action", "expected"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 1 },
+          "action": { "type": "string" },
+          "expected": { "type": "string" },
+          "selector_hint": { "type": "string" }
+        }
+      },
+      "minItems": 1
+    },
+    "test_data": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "automation": {
+      "type": "object",
+      "required": ["status", "framework", "repo", "spec_file", "function_name", "tags"],
+      "properties": {
+        "status": { "type": "string", "enum": ["automated", "manual", "pending"] },
+        "framework": { "type": "string" },
+        "repo": { "type": "string" },
+        "spec_file": { "type": "string" },
+        "function_name": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "orchestration": {
+      "type": "object",
+      "required": ["parallel_safe", "timeout_seconds"],
+      "properties": {
+        "parallel_safe": { "type": "boolean" },
+        "timeout_seconds": { "type": "integer", "minimum": 1 },
+        "retry_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["author", "created", "version"],
+      "properties": {
+        "author": { "type": "string" },
+        "created": { "type": "string" },
+        "last_modified": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

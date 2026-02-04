@@ -1,0 +1,58 @@
+{
+  "test_id": "TC-REG-008",
+  "name": "Warenkorb-Berechnung korrekt",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt hinzufügen",
+      "selector": ".btn-buy",
+      "expected": "Produkt wird dem Warenkorb hinzugefügt"
+    },
+    {
+      "step": 2,
+      "action": "Warenkorb öffnen",
+      "selector": null,
+      "expected": "Warenkorb-Seite wird geladen"
+    },
+    {
+      "step": 3,
+      "action": "Zwischensumme prüfen",
+      "selector": ".checkout-aside-summary-value",
+      "expected": "Zwischensumme wird korrekt angezeigt"
+    },
+    {
+      "step": 4,
+      "action": "Gesamtsumme prüfen",
+      "selector": ".summary-total",
+      "expected": "Gesamtsumme wird korrekt angezeigt"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_cart_calculation_correct",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

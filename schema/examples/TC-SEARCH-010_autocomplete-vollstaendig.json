@@ -1,0 +1,68 @@
+{
+  "test_id": "TC-SEARCH-010",
+  "name": "Autocomplete zeigt vollständige Produktinformationen",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Suchfunktion ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Suchfeld öffnen",
+      "expected": "Suchfeld wird sichtbar",
+      "selector_hint": "button.search-toggle-btn"
+    },
+    {
+      "step": 2,
+      "action": "Artikelnummer eingeben",
+      "expected": "Artikelnummer wird im Suchfeld angezeigt",
+      "selector_hint": "input#header-main-search-input"
+    },
+    {
+      "step": 3,
+      "action": "Produktname prüfen",
+      "expected": "Produktvorschlag zeigt den Produktnamen an"
+    },
+    {
+      "step": 4,
+      "action": "Produktbild prüfen",
+      "expected": "Produktvorschlag enthält ein Produktbild",
+      "selector_hint": ".search-suggest-product img"
+    },
+    {
+      "step": 5,
+      "action": "Preis prüfen (optional)",
+      "expected": "Produktvorschlag zeigt einen Preis an, falls verfügbar"
+    }
+  ],
+  "test_data": {
+    "article_number": "862990"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_search.py",
+    "function_name": "test_search_autocomplete_product_info_complete",
+    "tags": ["search", "nosto"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

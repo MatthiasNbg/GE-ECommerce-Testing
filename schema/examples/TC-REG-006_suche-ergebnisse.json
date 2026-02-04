@@ -1,0 +1,49 @@
+{
+  "test_id": "TC-REG-006",
+  "name": "Suche liefert Ergebnisse",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Suchseite mit Suchbegriff aufrufen",
+      "selector": null,
+      "expected": "Suchseite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "Ergebnisse prüfen",
+      "selector": ".product-box",
+      "expected": "Mindestens ein Suchergebnis wird angezeigt"
+    }
+  ],
+  "test_data": {
+    "search_terms": ["Bett", "Kissen", "49415"]
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_search_returns_results",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

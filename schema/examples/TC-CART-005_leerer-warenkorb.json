@@ -1,0 +1,61 @@
+{
+  "test_id": "TC-CART-005",
+  "name": "Leerer Warenkorb zeigt Hinweismeldung",
+  "category": "regression",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar und auf Lager"
+  ],
+  "postconditions": [
+    "Leerer Warenkorb zeigt Hinweismeldung"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Warenkorb öffnen",
+      "expected": "Warenkorb-Seite wird angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "Alle Produkte aus dem Warenkorb entfernen",
+      "expected": "Warenkorb ist leer",
+      "selector_hint": "button.line-item-remove-button"
+    },
+    {
+      "step": 3,
+      "action": "Leerer-Warenkorb-Meldung prüfen",
+      "expected": "Hinweismeldung für leeren Warenkorb wird angezeigt",
+      "selector_hint": ".cart-empty"
+    }
+  ],
+  "test_data": {
+    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+    "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart.py",
+    "function_name": "test_empty_cart_shows_message",
+    "tags": ["regression", "cart", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

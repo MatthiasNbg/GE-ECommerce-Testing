@@ -1,0 +1,84 @@
+{
+  "test_id": "TC-ACCOUNT-001",
+  "name": "Registrierung erfolgreich durchführen",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Registrierungsseite ist erreichbar"
+  ],
+  "postconditions": [
+    "Neuer Account ist angelegt",
+    "Benutzer ist eingeloggt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Registrierungsseite aufrufen",
+      "expected": "Registrierungsformular wird angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "Eindeutige E-Mail generieren",
+      "expected": "Einzigartige E-Mail-Adresse steht zur Verfügung"
+    },
+    {
+      "step": 3,
+      "action": "Formulardaten eingeben (Anrede, Vorname, Nachname)",
+      "expected": "Persönliche Daten sind im Formular eingetragen"
+    },
+    {
+      "step": 4,
+      "action": "E-Mail und Passwort eingeben",
+      "expected": "Zugangsdaten sind im Formular eingetragen"
+    },
+    {
+      "step": 5,
+      "action": "Adresse eingeben (4020 Linz AT)",
+      "expected": "Adressdaten sind im Formular eingetragen"
+    },
+    {
+      "step": 6,
+      "action": "Formular absenden",
+      "expected": "Registrierungsformular wird abgeschickt"
+    },
+    {
+      "step": 7,
+      "action": "Erfolgreiche Registrierung prüfen",
+      "expected": "Benutzer wird auf Account-Seite weitergeleitet oder Bestätigung wird angezeigt"
+    }
+  ],
+  "test_data": {
+    "password": "TestPasswort123!",
+    "address": {
+      "zip": "4020",
+      "city": "Linz",
+      "country": "AT"
+    }
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_registration_success",
+    "tags": ["account", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

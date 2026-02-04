@@ -1,0 +1,111 @@
+{
+  "test_id": "TC-CHECKOUT-005",
+  "name": "Einzelner Gast-Checkout vollstaendig durchfuehren",
+  "category": "e2e",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt laden",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "In den Warenkorb legen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Zum Warenkorb navigieren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 4,
+      "action": "Zur Kasse navigieren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 5,
+      "action": "Gast-Checkout starten",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 6,
+      "action": "Adresse eingeben (4020 Linz)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 7,
+      "action": "Datenschutz akzeptieren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 8,
+      "action": "Rechnung als Zahlungsart waehlen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 9,
+      "action": "AGB akzeptieren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 10,
+      "action": "Bestellen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 11,
+      "action": "Bestellnummer pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "address": {
+      "street": "Teststrasse 123",
+      "zip": "4020",
+      "city": "Linz",
+      "country": "AT"
+    },
+    "payment": "Rechnung"
+  },
+  "postconditions": [
+    "Bestellnummer wurde erhalten"
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_single_checkout.py",
+    "function_name": "test_single_guest_checkout",
+    "tags": [
+      "checkout",
+      "debug"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

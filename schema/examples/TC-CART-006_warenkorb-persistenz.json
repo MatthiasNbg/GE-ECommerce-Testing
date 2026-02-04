@@ -1,0 +1,73 @@
+{
+  "test_id": "TC-CART-006",
+  "name": "Warenkorb-Inhalt bleibt bei Seitenwechsel erhalten",
+  "category": "regression",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar und auf Lager"
+  ],
+  "postconditions": [
+    "Warenkorb-Inhalt bleibt bei Seitenwechsel erhalten"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt wird zum Warenkorb hinzugefügt",
+      "selector_hint": ".btn-buy, [data-add-to-cart]"
+    },
+    {
+      "step": 2,
+      "action": "Zur Startseite navigieren",
+      "expected": "Startseite wird geladen"
+    },
+    {
+      "step": 3,
+      "action": "Anderes Produkt besuchen",
+      "expected": "Zweite Produktseite wird geladen"
+    },
+    {
+      "step": 4,
+      "action": "Zurück zum Warenkorb navigieren",
+      "expected": "Warenkorb-Seite wird angezeigt"
+    },
+    {
+      "step": 5,
+      "action": "Prüfen ob ursprüngliches Produkt noch vorhanden ist",
+      "expected": "Produkt ist weiterhin im Warenkorb sichtbar",
+      "selector_hint": ".line-item-label"
+    }
+  ],
+  "test_data": {
+    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+    "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+    "second_product_path": "p/duftkissen-lavendel/ge-p-49415",
+    "second_product_name": "Duftkissen Lavendel"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart.py",
+    "function_name": "test_cart_persists_between_pages",
+    "tags": ["regression", "cart", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

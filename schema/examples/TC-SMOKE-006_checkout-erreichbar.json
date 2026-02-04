@@ -1,0 +1,47 @@
+{
+  "test_id": "TC-SMOKE-006",
+  "name": "Checkout erreichbar",
+  "category": "smoke",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Checkout-Seite aufrufen",
+      "expected": "Seite lädt ohne HTTP-Fehler",
+      "selector_hint": "/checkout/confirm"
+    },
+    {
+      "step": 2,
+      "action": "URL prüfen",
+      "expected": "URL enthält checkout/cart/login (Redirect auf Login ohne Anmeldung)"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_smoke.py",
+    "function_name": "test_checkout_accessible",
+    "tags": ["smoke"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

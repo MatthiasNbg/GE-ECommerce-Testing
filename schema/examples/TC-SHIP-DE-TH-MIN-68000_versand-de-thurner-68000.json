@@ -1,0 +1,93 @@
+{
+  "test_id": "TC-SHIP-DE-TH-MIN-68000",
+  "name": "Versandart Thurner DE fuer PLZ 68000 (Mannheim) - Minimum Grenzwert",
+  "category": "e2e",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "DE"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Speditionsprodukt (Polsterbett Almeno) ist verfuegbar und auf Lager",
+    "Warenkorb ist leer"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Speditionsprodukt zum Warenkorb hinzufuegen (Polsterbett Almeno, ge-p-693278)",
+      "expected": "Produkt ist im Warenkorb",
+      "selector_hint": "button.btn-buy"
+    },
+    {
+      "step": 2,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Seite wird geladen",
+      "selector_hint": "a:has-text('Zur Kasse')"
+    },
+    {
+      "step": 3,
+      "action": "Gast-Checkout starten",
+      "expected": "Gast-Checkout-Formular wird angezeigt",
+      "selector_hint": "button:has-text('Als Gast bestellen')"
+    },
+    {
+      "step": 4,
+      "action": "Adresse mit PLZ 68000 (Mannheim, DE) eingeben",
+      "expected": "Adressformular ist ausgefuellt",
+      "selector_hint": "#billingAddressAddressZipcode"
+    },
+    {
+      "step": 5,
+      "action": "Datenschutz akzeptieren und zur Confirm-Seite navigieren",
+      "expected": "Confirm-Seite wird geladen",
+      "selector_hint": "#acceptedDataProtection"
+    },
+    {
+      "step": 6,
+      "action": "Angezeigte Versandart pruefen",
+      "expected": "'Spedition Thurner' wird als Versandart angezeigt oder ist in den verfuegbaren Versandarten enthalten",
+      "selector_hint": "input[name='shippingMethodId']"
+    }
+  ],
+  "test_data": {
+    "product_path": "p/polsterbett-almeno/ge-p-693278",
+    "country": "DE",
+    "carrier": "Thurner DE",
+    "plz": "68000",
+    "city": "Mannheim",
+    "expected_label": "Spedition Thurner",
+    "grenzwert": "minimum"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_shipping_plz.py",
+    "function_name": "test_shipping_method_for_plz",
+    "tags": [
+      "shipping",
+      "e2e",
+      "spedition",
+      "de",
+      "thurner"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "test_id": "TC-REG-001",
+  "name": "Homepage laden",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Homepage aufrufen",
+      "selector": null,
+      "expected": "Seite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "Seitenstatus prüfen",
+      "selector": null,
+      "expected": "HTTP 200"
+    },
+    {
+      "step": 3,
+      "action": "Inhalt prüfen",
+      "selector": null,
+      "expected": "Seite enthält 'Grüne Erde'"
+    }
+  ],
+  "test_data": {
+    "page": "/",
+    "expected_content": "Grüne Erde"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_critical_page_loads[/]",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

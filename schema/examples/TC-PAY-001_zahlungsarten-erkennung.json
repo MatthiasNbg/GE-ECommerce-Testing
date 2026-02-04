@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-PAY-001",
+  "name": "Zahlungsarten automatisch erkennen (Discovery)",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Fuer jedes Land: Produkt in den Warenkorb hinzufuegen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Gast-Checkout starten",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Adresse eingeben",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 4,
+      "action": "Zahlungsseite aufrufen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 5,
+      "action": "Zahlungsarten erkennen (.payment-method-label strong)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 6,
+      "action": "Konfiguration aktualisieren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {},
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_payment_discovery.py",
+    "function_name": "test_discover_payment_methods",
+    "tags": [
+      "discovery",
+      "payment"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 180,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "test_id": "TC-DATA-010",
+  "name": "Produktpreise stimmen mit Erwartungswerten ueberein",
+  "category": "data-validation",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukte sind verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Angezeigten Preis mit Erwartungswert vergleichen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "products": [
+      {
+        "id": "49415",
+        "price": 12.9
+      },
+      {
+        "id": "74157",
+        "price": 19.9
+      },
+      {
+        "id": "693645",
+        "price": 358.0
+      }
+    ]
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_data_validation.py",
+    "function_name": "test_price_matches_expected",
+    "tags": [
+      "data-validation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

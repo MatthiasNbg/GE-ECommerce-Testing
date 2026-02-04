@@ -1,0 +1,58 @@
+{
+  "test_id": "TC-SEARCH-007",
+  "name": "Suchvorschläge erscheinen bei Texteingabe",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Suchfunktion ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Suchfeld aktivieren",
+      "expected": "Suchfeld wird sichtbar und fokussiert",
+      "selector_hint": "button.search-toggle-btn"
+    },
+    {
+      "step": 2,
+      "action": "\"be\" eingeben",
+      "expected": "Text wird im Suchfeld angezeigt",
+      "selector_hint": "input#header-main-search-input"
+    },
+    {
+      "step": 3,
+      "action": "Auf Suggest-Container warten",
+      "expected": "Suchvorschläge-Container wird sichtbar",
+      "selector_hint": ".search-suggest, .ns-autocomplete"
+    }
+  ],
+  "test_data": {
+    "search_term": "be"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_search.py",
+    "function_name": "test_search_suggest_appears_on_input",
+    "tags": ["search", "nosto"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

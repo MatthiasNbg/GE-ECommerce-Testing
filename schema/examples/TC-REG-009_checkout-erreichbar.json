@@ -1,0 +1,58 @@
+{
+  "test_id": "TC-REG-009",
+  "name": "Checkout erreichbar",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt hinzufügen",
+      "selector": ".btn-buy",
+      "expected": "Produkt wird dem Warenkorb hinzugefügt"
+    },
+    {
+      "step": 2,
+      "action": "Warenkorb öffnen",
+      "selector": null,
+      "expected": "Warenkorb-Seite wird geladen"
+    },
+    {
+      "step": 3,
+      "action": "Zur Kasse klicken",
+      "selector": null,
+      "expected": "Checkout-Seite wird geladen"
+    },
+    {
+      "step": 4,
+      "action": "URL enthält /checkout prüfen",
+      "selector": null,
+      "expected": "URL enthält /checkout"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_checkout_accessible",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

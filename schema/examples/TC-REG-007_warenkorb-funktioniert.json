@@ -1,0 +1,61 @@
+{
+  "test_id": "TC-REG-007",
+  "name": "Warenkorb funktioniert",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite öffnen",
+      "selector": null,
+      "expected": "Produktseite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "In den Warenkorb klicken",
+      "selector": ".btn-buy",
+      "expected": "Produkt wird dem Warenkorb hinzugefügt"
+    },
+    {
+      "step": 3,
+      "action": "Zum Warenkorb navigieren",
+      "selector": null,
+      "expected": "Warenkorb-Seite wird geladen"
+    },
+    {
+      "step": 4,
+      "action": "Produkt im Warenkorb prüfen",
+      "selector": null,
+      "expected": "Produkt ist im Warenkorb vorhanden"
+    }
+  ],
+  "test_data": {
+    "product_id": "49415"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_add_to_cart_works",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

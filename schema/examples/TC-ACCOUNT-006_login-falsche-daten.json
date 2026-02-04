@@ -1,0 +1,70 @@
+{
+  "test_id": "TC-ACCOUNT-006",
+  "name": "Login mit falschen Zugangsdaten schlägt fehl",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Registrierungsseite ist erreichbar"
+  ],
+  "postconditions": [
+    "Benutzer bleibt auf der Login-Seite",
+    "Fehlermeldung wird angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen",
+      "expected": "Login-Formular wird angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "Falsche E-Mail eingeben",
+      "expected": "Falsche E-Mail-Adresse ist im Formular eingetragen"
+    },
+    {
+      "step": 3,
+      "action": "Falsches Passwort eingeben",
+      "expected": "Falsches Passwort ist im Formular eingetragen"
+    },
+    {
+      "step": 4,
+      "action": "Login absenden",
+      "expected": "Login-Formular wird abgeschickt"
+    },
+    {
+      "step": 5,
+      "action": "Fehlermeldung prüfen",
+      "expected": "Fehlermeldung wird angezeigt, dass die Zugangsdaten falsch sind"
+    }
+  ],
+  "test_data": {
+    "email": "nicht-existierend@example.com",
+    "password": "FalschesPasswort123!"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_login_wrong_credentials_fails",
+    "tags": ["account", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

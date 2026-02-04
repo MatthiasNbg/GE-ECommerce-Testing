@@ -1,0 +1,96 @@
+{
+  "test_id": "TC-CRITICAL-003",
+  "name": "Gast-Checkout komplett (CH)",
+  "category": "critical-path",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["CH"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar",
+    "Gast-Checkout ist aktiviert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt ist im Warenkorb sichtbar"
+    },
+    {
+      "step": 2,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Seite wird angezeigt"
+    },
+    {
+      "step": 3,
+      "action": "Gast-Checkout starten",
+      "expected": "Gast-Formular wird angezeigt"
+    },
+    {
+      "step": 4,
+      "action": "Adressdaten eingeben (Teststraße 123, 8001 Zürich, CH)",
+      "expected": "Adressdaten werden akzeptiert"
+    },
+    {
+      "step": 5,
+      "action": "Datenschutz akzeptieren",
+      "expected": "Datenschutz-Checkbox ist aktiviert"
+    },
+    {
+      "step": 6,
+      "action": "Zahlungsart Vorkasse wählen",
+      "expected": "Vorkasse ist als Zahlungsart ausgewählt"
+    },
+    {
+      "step": 7,
+      "action": "AGB akzeptieren",
+      "expected": "AGB-Checkbox ist aktiviert"
+    },
+    {
+      "step": 8,
+      "action": "Bestellung absenden",
+      "expected": "Bestellung wird erfolgreich verarbeitet"
+    },
+    {
+      "step": 9,
+      "action": "Bestellbestätigung prüfen",
+      "expected": "Bestellbestätigungsseite wird angezeigt mit Bestellnummer"
+    }
+  ],
+  "postconditions": [
+    "Bestellnummer wird angezeigt",
+    "Bestellbestätigung enthält korrekte Daten"
+  ],
+  "test_data": {
+    "address": {
+      "street": "Teststraße 123",
+      "zip": "8001",
+      "city": "Zürich",
+      "country": "CH"
+    },
+    "payment_method": "prepayment"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_critical_path.py",
+    "function_name": "test_guest_checkout_complete[CH]",
+    "tags": ["critical", "checkout"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

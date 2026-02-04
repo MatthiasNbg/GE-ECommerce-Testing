@@ -1,0 +1,63 @@
+{
+  "test_id": "TC-ACCOUNT-003",
+  "name": "Registrierung mit ungültiger E-Mail zeigt Fehler",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Registrierungsseite ist erreichbar"
+  ],
+  "postconditions": [
+    "Kein Account wurde angelegt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Registrierungsseite aufrufen",
+      "expected": "Registrierungsformular wird angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "Ungültige E-Mail eingeben",
+      "expected": "Ungültige E-Mail-Adresse ist im Formular eingetragen"
+    },
+    {
+      "step": 3,
+      "action": "Formular absenden",
+      "expected": "Formular wird abgeschickt"
+    },
+    {
+      "step": 4,
+      "action": "Validierungsfehler prüfen",
+      "expected": "Validierungsfehlermeldung für ungültige E-Mail wird angezeigt"
+    }
+  ],
+  "test_data": {
+    "invalid_email": "ungueltige-email-ohne-at"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_registration_invalid_email_shows_error",
+    "tags": ["account", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

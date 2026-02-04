@@ -1,0 +1,58 @@
+{
+  "test_id": "TC-REG-012",
+  "name": "Navigation funktioniert",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "selector": null,
+      "expected": "Startseite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "Navigation prüfen",
+      "selector": "nav, .main-navigation",
+      "expected": "Navigation ist vorhanden"
+    },
+    {
+      "step": 3,
+      "action": "Mindestens 3 Links prüfen",
+      "selector": null,
+      "expected": "Mindestens 3 Navigationslinks sind vorhanden"
+    },
+    {
+      "step": 4,
+      "action": "Logo prüfen",
+      "selector": ".logo",
+      "expected": "Logo ist vorhanden"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_navigation_works",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

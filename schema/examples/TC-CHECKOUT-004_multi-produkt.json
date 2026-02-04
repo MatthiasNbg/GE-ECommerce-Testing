@@ -1,0 +1,60 @@
+{
+  "test_id": "TC-CHECKOUT-004",
+  "name": "Massentest Multi-Produkt Bestellungen",
+  "category": "e2e",
+  "priority": "P2",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Mehrere Testprodukte sind verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "50 Bestellungen mit 1-5 Produkten pro Bestellung ausfuehren",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Erfolgsrate pruefen (mindestens 70%)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "order_count": 50,
+    "products_per_order": "1-5",
+    "min_success_rate": 70
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_checkout_mass.py",
+    "function_name": "test_mass_orders_multi_product_50",
+    "tags": [
+      "massentest"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 600,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

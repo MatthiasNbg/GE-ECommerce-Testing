@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-CRITICAL-004",
+  "name": "Checkout mit registriertem Benutzer",
+  "category": "critical-path",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar",
+    "Gast-Checkout ist aktiviert",
+    "Bestehender Kundenaccount mit Zugangsdaten"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt ist im Warenkorb sichtbar"
+    },
+    {
+      "step": 2,
+      "action": "Einloggen mit Testaccount",
+      "expected": "Benutzer ist erfolgreich eingeloggt"
+    },
+    {
+      "step": 3,
+      "action": "Zahlungsart wählen",
+      "expected": "Zahlungsart ist ausgewählt"
+    },
+    {
+      "step": 4,
+      "action": "AGB akzeptieren",
+      "expected": "AGB-Checkbox ist aktiviert"
+    },
+    {
+      "step": 5,
+      "action": "Bestellung absenden",
+      "expected": "Bestellung wird erfolgreich verarbeitet"
+    },
+    {
+      "step": 6,
+      "action": "Bestellbestätigung prüfen",
+      "expected": "Bestellbestätigungsseite wird angezeigt mit Bestellnummer"
+    }
+  ],
+  "postconditions": [
+    "Bestellnummer wird angezeigt",
+    "Bestellbestätigung enthält korrekte Daten"
+  ],
+  "test_data": {
+    "user_type": "registered",
+    "payment_method": "invoice"
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_critical_path.py",
+    "function_name": "test_registered_user_checkout",
+    "tags": ["critical", "checkout"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

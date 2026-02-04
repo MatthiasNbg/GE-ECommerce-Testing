@@ -1,0 +1,69 @@
+{
+  "test_id": "TC-ACCOUNT-008",
+  "name": "Adressverwaltung - Neue Adresse hinzufügen",
+  "category": "feature",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT"],
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Registrierungsseite ist erreichbar",
+    "Bestehender Kundenaccount",
+    "Benutzer ist eingeloggt"
+  ],
+  "postconditions": [
+    "Neue Adresse ist in der Adressliste sichtbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Adressverwaltung aufrufen",
+      "expected": "Adressverwaltungsseite wird angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "Neue Adresse hinzufügen (5020 Salzburg)",
+      "expected": "Adressformular wird geöffnet und Daten eingetragen"
+    },
+    {
+      "step": 3,
+      "action": "Speichern",
+      "expected": "Neue Adresse wird gespeichert"
+    },
+    {
+      "step": 4,
+      "action": "Adresse in Liste prüfen",
+      "expected": "Neue Adresse erscheint in der Adressliste"
+    }
+  ],
+  "test_data": {
+    "new_address": {
+      "zip": "5020",
+      "city": "Salzburg",
+      "country": "AT"
+    }
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_address_management",
+    "tags": ["account", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

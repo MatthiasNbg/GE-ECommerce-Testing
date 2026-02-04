@@ -1,0 +1,52 @@
+{
+  "test_id": "TC-REG-013",
+  "name": "Footer vorhanden",
+  "category": "regression",
+  "priority": "P1",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": ["AT", "DE", "CH"],
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": ["Shop ist erreichbar"],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "selector": null,
+      "expected": "Startseite wird geladen"
+    },
+    {
+      "step": 2,
+      "action": "Footer prüfen",
+      "selector": "footer",
+      "expected": "Footer ist vorhanden"
+    },
+    {
+      "step": 3,
+      "action": "Pflichtlinks prüfen",
+      "selector": null,
+      "expected": "Links zu Impressum, Datenschutz, AGB und Kontakt sind vorhanden"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_regression.py",
+    "function_name": "test_footer_present",
+    "tags": ["regression"]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

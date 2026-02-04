@@ -1,0 +1,72 @@
+{
+  "test_id": "TC-PAY-002",
+  "name": "Konfigurierte Zahlungsarten sind verfuegbar",
+  "category": "feature",
+  "priority": "P0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfuegbar",
+    "Zahlungsarten-Konfiguration ist vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Fuer jedes Land: Produkt in den Warenkorb hinzufuegen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Gast-Checkout starten",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Adresse eingeben",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 4,
+      "action": "Zahlungsseite pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 5,
+      "action": "Konfigurierte Zahlungsarten auf Vorhandensein pruefen",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {},
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_payment_methods_available.py",
+    "function_name": "test_payment_methods_available",
+    "tags": [
+      "payment"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 180,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "test_id": "TC-PERF-003",
+  "name": "Performance-Stresstest: 300 Bestellungen",
+  "category": "performance",
+  "priority": "P2",
+  "schema_version": "1.0.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Staging-Umgebung ist stabil"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "300 Bestellungen parallel starten (25 Worker)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 2,
+      "action": "Erfolgsrate pruefen (mindestens 85%)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    },
+    {
+      "step": 3,
+      "action": "Gesamtdauer pruefen (maximal 20 Minuten)",
+      "expected": "Schritt erfolgreich ausgefuehrt"
+    }
+  ],
+  "test_data": {
+    "order_count": 300,
+    "workers": 25,
+    "min_success_rate": 85
+  },
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_performance.py",
+    "function_name": "test_staging_performance_stress",
+    "tags": [
+      "performance"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 1200,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-03",
+    "version": "1.0"
+  }
+}
