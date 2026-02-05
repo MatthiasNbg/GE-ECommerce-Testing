@@ -1368,7 +1368,6 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 |---------|------|-----------|--------|--------|
 | TC-PROMO-COMBO-001 | Zwei Promotions kombinierbar | P1 | ○ | AT, DE, CH |
 | TC-PROMO-COMBO-002 | 20% Kleidung + 5% Alles | P1 | ○ | AT, DE, CH |
-| TC-PROMO-COMBO-003 | Aufeinander aufbauende Promos | P1 | ○ | AT, DE, CH |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1410,26 +1409,6 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Nicht-Kleidung erhält nur 5%
   - Berechnung ist je nach Shopware-Konfiguration additiv oder sequenziell
   - Gesamtpreis ist korrekt berechnet
-
-**TC-PROMO-COMBO-003: Aufeinander aufbauende Promos**
-- **Beschreibung:** Prüft sequenziell aufbauende Promotions, bei denen der zweite Rabatt auf den bereits reduzierten Preis angewendet wird (Kaskade)
-- **Bedingung:**
-  - Zwei Promotions mit definierter Reihenfolge/Priorität
-  - Shopware-Promotion-Priorität konfiguriert
-- **Testschritte:**
-  1. Produkt zum Warenkorb hinzufügen (z.B. 100 EUR)
-  2. Erste Promotion aktivieren (z.B. 20% → 80 EUR)
-  3. Zweite Promotion aktivieren (z.B. 10% auf reduzierten Preis → 72 EUR)
-  4. Prüfen, ob Reihenfolge der Anwendung korrekt ist
-  5. Prüfen, dass der zweite Rabatt auf den bereits reduzierten Preis berechnet wird
-  6. Gesamtpreis validieren: 100 × 0,80 × 0,90 = 72 EUR (sequenziell) vs. 100 × 0,70 = 70 EUR (additiv)
-  7. Shopware-Promotion-Priorität variieren und Auswirkung testen
-- **Erwartetes Verhalten:**
-  - Promotions werden in definierter Reihenfolge angewendet
-  - Zweiter Rabatt wird auf bereits reduzierten Preis berechnet (sequenziell)
-  - Reihenfolge basiert auf Shopware-Promotion-Priorität
-  - Gesamtpreis entspricht der sequenziellen Berechnung
-  - Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt
 
 ---
 

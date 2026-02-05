@@ -174,6 +174,16 @@
             color: #333;
         }
 
+        .badge-env-staging {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .badge-env-both {
+            background: #20c997;
+            color: white;
+        }
+
         .table-wrapper {
             overflow-x: auto;
             margin: 20px 0;
@@ -486,8 +496,8 @@
             <h1 id="test-konzept-gruene-erde-e-commerce-shop">Test-Konzept: Grüne Erde E-Commerce Shop</h1>
 
 <strong>Projekt:</strong> GE-ECommerce-Testing
-<strong>Datum:</strong> 2026-02-04
-<strong>Version:</strong> 1.06
+<strong>Datum:</strong> 2026-02-05
+<strong>Version:</strong> 1.07
 <strong>Status:</strong> Entwurf zur Abstimmung
 
 <hr>
@@ -526,6 +536,7 @@
 <thead><tr>
 <th>Funktionsbereich</th>
 <th>Tests</th>
+<th>Umgebung</th>
 <th>Status</th>
 <th>Priorität</th>
 <th>Was wird geprüft?</th>
@@ -533,6 +544,7 @@
 <tr>
 <td>🏠 **Smoke Tests**</td>
 <td>5</td>
+<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 5/5</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
 <td>Homepage, Produktseiten, Navigation</td>
@@ -540,6 +552,7 @@
 <tr>
 <td>🛒 **Critical Path Tests**</td>
 <td>8</td>
+<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
 <td>Gast-Checkout, Registrierter Checkout, Zahlungsarten</td>
@@ -547,6 +560,7 @@
 <tr>
 <td>🛍️ **Feature Tests - Warenkorb**</td>
 <td>8</td>
+<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produkte hinzufügen, Mengen ändern, Preis-Berechnung</td>
@@ -554,6 +568,7 @@
 <tr>
 <td>🔍 **Feature Tests - Suche**</td>
 <td>9</td>
+<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 9/9</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produktsuche, Filter, Autocomplete, Kategorien</td>
@@ -561,6 +576,7 @@
 <tr>
 <td>👤 **Feature Tests - Account**</td>
 <td>8</td>
+<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Registrierung, Login, Profil, Adressen</td>
@@ -568,6 +584,7 @@
 <tr>
 <td>📦 **Feature Tests - Versandarten**</td>
 <td>98</td>
+<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 98/98</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Post, Spedition, PLZ-Bereiche, Logistikpartner</td>
@@ -575,6 +592,7 @@
 <tr>
 <td>🎟️ **Feature Tests - Promotions**</td>
 <td>47</td>
+<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 0/47</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows</td>
@@ -582,6 +600,7 @@
 <tr>
 <td>📊 **Data Validation Tests**</td>
 <td>15</td>
+<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 0/15</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten</td>
@@ -589,6 +608,7 @@
 <tr>
 <td>🔄 **Regression Tests**</td>
 <td>15</td>
+<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 3/15</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Regression-Tests nach Änderungen</td>
@@ -596,12 +616,15 @@
 <tr>
 <td>⚡ **Load Tests**</td>
 <td>5</td>
+<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 3/5</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Load-Tests, Response-Zeiten, Race Conditions</td>
 </tr>
 </tbody></table></div>
-<strong>Legende:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Implementiert | <span class="badge badge-defined">○ Definiert</span> Definiert | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
+<strong>Legende Status:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Implementiert | <span class="badge badge-defined">○ Definiert</span> Definiert | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
+
+<strong>Legende Umgebung:</strong> <span class="badge badge-env-staging">Nur Staging</span> Tests geben Bestellungen auf - nur auf Staging erlaubt | <span class="badge badge-env-both">Staging + Prod</span> Sichere Tests ohne Bestellungen
 
 <hr>
 
@@ -2758,13 +2781,6 @@
 <tr>
 <td>TC-PROMO-COMBO-002</td>
 <td>20% Kleidung + 5% Alles</td>
-<td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
-<td>AT, DE, CH</td>
-</tr>
-<tr>
-<td>TC-PROMO-COMBO-003</td>
-<td>Aufeinander aufbauende Promos</td>
 <td>P1</td>
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
