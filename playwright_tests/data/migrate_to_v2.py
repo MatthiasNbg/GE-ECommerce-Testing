@@ -23,7 +23,14 @@ AUTHOR = "claude"
 LAST_MODIFIED = "2026-02-03"
 
 # Mapping: test_id prefix → playwright test file
+# WICHTIG: Spezifischere Mappings (längere Prefixe) müssen ZUERST stehen!
+# Die Reihenfolge ist wichtig, da get_playwright_path() das erste Match verwendet.
 PLAYWRIGHT_MAPPING = {
+    # Spezifische Mappings für Zahlungsarten-Tests (TC-CRITICAL-005/006/007)
+    "TC-CRITICAL-005": "playwright_tests/tests/test_payment_methods_available.py",
+    "TC-CRITICAL-006": "playwright_tests/tests/test_payment_methods_available.py",
+    "TC-CRITICAL-007": "playwright_tests/tests/test_payment_methods_available.py",
+    # Allgemeine Mappings (Fallbacks)
     "TC-SMOKE": "playwright_tests/tests/test_smoke.py",
     "TC-CRITICAL": "playwright_tests/tests/test_critical_path.py",
     "TC-CART": "playwright_tests/tests/test_cart.py",

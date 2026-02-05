@@ -57,7 +57,7 @@
     }
   ],
   "automation": {
-    "status": "automated",
+    "status": "planned",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_data_validation.py",

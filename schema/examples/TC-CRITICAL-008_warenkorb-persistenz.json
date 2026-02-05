@@ -84,7 +84,7 @@
     "Warenkorb-Inhalt bleibt nach Navigation erhalten"
   ],
   "automation": {
-    "status": "automated",
+    "status": "planned",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_critical_path.py",
