@@ -3,7 +3,7 @@
   "name": "Performance-Stresstest: 300 Bestellungen",
   "category": "performance",
   "priority": "P2",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -25,7 +25,10 @@
       "action": "300 Bestellungen parallel starten (25 Worker)",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/"}
+        {
+          "action": "navigate",
+          "value": "/"
+        }
       ]
     },
     {
@@ -39,11 +42,15 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "order_count": 300,
-    "workers": 25,
-    "min_success_rate": 85
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "order_count": 300,
+      "workers": 25,
+      "min_success_rate": 85
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

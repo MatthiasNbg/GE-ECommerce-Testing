@@ -3,10 +3,16 @@
   "name": "Warenkorb-Persistenz nach Navigation",
   "category": "critical-path",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -18,7 +24,16 @@
       "step": 1,
       "action": "Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt ist im Warenkorb sichtbar",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
@@ -29,19 +44,34 @@
       "step": 3,
       "action": "Zur Startseite navigieren",
       "expected": "Startseite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "Kategorie besuchen (/wohnen/)",
       "expected": "Kategorieseite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/wohnen/"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/wohnen/"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Zurück zum Warenkorb navigieren",
       "expected": "Warenkorb-Seite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
     },
     {
       "step": 6,
@@ -52,14 +82,16 @@
   "postconditions": [
     "Warenkorb-Inhalt bleibt nach Navigation erhalten"
   ],
-  "test_data": {},
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_critical_path.py",
     "function_name": "test_cart_persistence",
-    "tags": ["critical", "cart"]
+    "tags": [
+      "critical",
+      "cart"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

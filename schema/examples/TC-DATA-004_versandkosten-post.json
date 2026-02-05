@@ -3,7 +3,7 @@
   "name": "Versandkosten fuer Postartikel pruefen",
   "category": "data-validation",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -25,8 +25,14 @@
       "action": "Postartikel in den Warenkorb hinzufuegen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"},
-        {"action": "click", "selector": "button.btn-buy"}
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
       ]
     },
     {
@@ -34,14 +40,25 @@
       "action": "Versandkosten pruefen (max. 20 EUR)",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/checkout/cart"}
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
       ]
     }
   ],
-  "test_data": {
-    "product_id": "49415",
-    "max_shipping": 20
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "id": "49415"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "max_shipping": 20
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

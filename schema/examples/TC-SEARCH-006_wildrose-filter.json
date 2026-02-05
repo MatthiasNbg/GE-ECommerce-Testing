@@ -3,10 +3,17 @@
   "name": "Wildrose-Suche schliesst Bürsten-Produkte aus",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,13 +26,28 @@
       "action": "Suchfeld öffnen und \"wildrose\" eingeben",
       "expected": "Suchbegriff wird im Feld angezeigt",
       "selector_hint": "input#header-main-search-input",
-      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}, {"action": "fill", "selector": "input#header-main-search-input", "value": "wildrose"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.search-toggle-btn.js-search-toggle-btn"
+        },
+        {
+          "action": "fill",
+          "selector": "input#header-main-search-input",
+          "value": "wildrose"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Suche absenden",
       "expected": "Suchergebnisseite wird geladen",
-      "inputs": [{"action": "click", "selector": "input#header-main-search-input"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input#header-main-search-input"
+        }
+      ]
     },
     {
       "step": 3,
@@ -38,17 +60,29 @@
       "expected": "Kein Produktname enthält Begriffe wie bürste, buerste, brush oder pinsel"
     }
   ],
-  "test_data": {
-    "search_term": "wildrose",
-    "excluded_terms": ["bürste", "buerste", "brush", "pinsel"]
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "search_term": "wildrose",
+      "excluded_terms": [
+        "bürste",
+        "buerste",
+        "brush",
+        "pinsel"
+      ]
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_search.py",
     "function_name": "test_search_wildrose_excludes_brushes",
-    "tags": ["smoke", "search"]
+    "tags": [
+      "smoke",
+      "search"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

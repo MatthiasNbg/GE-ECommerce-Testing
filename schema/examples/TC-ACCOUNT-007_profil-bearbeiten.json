@@ -3,10 +3,14 @@
   "name": "Profil anzeigen und bearbeiten",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT"],
-    "environments": ["staging"],
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -23,19 +27,35 @@
       "step": 1,
       "action": "Zur Profilseite navigieren",
       "expected": "Profilseite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/account/profile"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/profile"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Vorname ändern",
       "expected": "Neuer Vorname ist im Formular eingetragen",
-      "inputs": [{"action": "fill", "selector": "#personalFirstName", "value": "TestGeaendert"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#personalFirstName",
+          "value": "TestGeaendert"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Änderung speichern",
       "expected": "Profiländerung wird gespeichert und Bestätigung angezeigt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Profil speichern')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Profil speichern')"
+        }
+      ]
     },
     {
       "step": 4,
@@ -43,14 +63,16 @@
       "expected": "Screenshot der aktualisierten Profilseite wird gespeichert"
     }
   ],
-  "test_data": {},
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_account.py",
     "function_name": "test_profile_view_and_edit",
-    "tags": ["account", "feature"]
+    "tags": [
+      "account",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

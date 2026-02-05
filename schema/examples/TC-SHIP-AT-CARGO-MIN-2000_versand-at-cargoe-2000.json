@@ -3,7 +3,7 @@
   "name": "Versandart Cargoe AT fuer PLZ 2000 (Stockerau) - Minimum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "AT",
-    "carrier": "Cargoe AT",
-    "plz": "2000",
-    "city": "Stockerau",
-    "expected_label": "Spedition Cargoe",
-    "grenzwert": "minimum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "cargoe_at_at",
+      "plz": "2000",
+      "carrier": "Cargoe AT",
+      "country": "AT",
+      "city": "Stockerau",
+      "expected_label": "Spedition Cargoe",
+      "grenzwert": "minimum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

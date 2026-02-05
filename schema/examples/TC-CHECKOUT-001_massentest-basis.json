@@ -3,7 +3,7 @@
   "name": "Massentest Checkout Basis",
   "category": "e2e",
   "priority": "P2",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -24,7 +24,12 @@
       "step": 1,
       "action": "Mehrere Bestellungen mit 5 Workern parallel ausfuehren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "navigate", "value": "/"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
     },
     {
       "step": 2,
@@ -32,10 +37,14 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "workers": 5,
-    "min_success_rate": 95
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "workers": 5,
+      "min_success_rate": 95
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

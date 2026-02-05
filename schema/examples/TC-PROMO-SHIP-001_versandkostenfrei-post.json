@@ -3,7 +3,7 @@
   "name": "Versandkostenfrei fuer Postartikel mit Code",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -25,8 +25,14 @@
       "action": "Postartikel in den Warenkorb hinzufuegen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"},
-        {"action": "click", "selector": "button.btn-buy"}
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
       ]
     },
     {
@@ -34,8 +40,15 @@
       "action": "Code VERSANDFREI eingeben",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "fill", "selector": "input[name='promotionCode']", "value": "VERSANDFREI"},
-        {"action": "click", "selector": "button:has-text('Einloesen')"}
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value": "VERSANDFREI"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Einloesen')"
+        }
       ]
     },
     {
@@ -44,10 +57,14 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "promo_code": "VERSANDFREI",
-    "product_type": "post"
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "promo_code": "VERSANDFREI",
+      "product_type": "post"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

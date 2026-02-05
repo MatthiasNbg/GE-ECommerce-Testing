@@ -3,26 +3,45 @@
   "name": "Warenkorb funktioniert",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
-  "preconditions": ["Shop ist erreichbar"],
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
   "steps": [
     {
       "step": 1,
       "action": "Produktseite öffnen",
       "selector": null,
-      "inputs": [{"action": "navigate", "value": "/p/duftkissen-lavendel/ge-p-49415"}],
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        }
+      ],
       "expected": "Produktseite wird geladen"
     },
     {
       "step": 2,
       "action": "In den Warenkorb klicken",
       "selector": ".btn-buy",
-      "inputs": [{"action": "click", "selector": "button.btn-buy"}],
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ],
       "expected": "Produkt wird dem Warenkorb hinzugefügt"
     },
     {
@@ -38,16 +57,22 @@
       "expected": "Produkt ist im Warenkorb vorhanden"
     }
   ],
-  "test_data": {
-    "product_id": "49415"
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "id": "49415"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_regression.py",
     "function_name": "test_add_to_cart_works",
-    "tags": ["regression"]
+    "tags": [
+      "regression"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

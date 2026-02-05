@@ -36,13 +36,19 @@
         "DE"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 5.95
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -74,9 +80,6 @@
         "action": "Nutzungslimits testen (1x global, 5x pro Kunde)",
         "expected": "Nutzungslimits werden eingehalten"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Postversand DE/AT"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -140,13 +143,19 @@
         "CH"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 6.95
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -178,9 +187,6 @@
         "action": "Nutzungslimits testen (1x global, 5x pro Kunde)",
         "expected": "Nutzungslimits werden eingehalten"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Postversand CH"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -245,11 +251,15 @@
         "DE"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {}
-    },
+    "test_data": [
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": [],
+        "amounts": {}
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -276,9 +286,6 @@
         "action": "Prüfen, dass Postversand nicht betroffen ist",
         "expected": "Postversand-Kosten bleiben unverändert"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Speditionsversand"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -337,11 +344,15 @@
         "CH"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {}
-    },
+    "test_data": [
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": [],
+        "amounts": {}
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -368,9 +379,6 @@
         "action": "Prüfen, dass Postversand nicht betroffen ist",
         "expected": "Postversand-Kosten bleiben unverändert"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Speditionsversand CH"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -431,14 +439,20 @@
         "DE"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 5.95,
         "min_order_value": 50
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -470,9 +484,6 @@
         "action": "MBW-Grenze testen (49,99 EUR vs 50,00 EUR)",
         "expected": "Bei 49,99 EUR wird Promotion nicht angewendet, bei 50,00 EUR wird sie angewendet"
       }
-    ],
-    "postconditions": [
-      "Promotion funktioniert nur ab 50 EUR Warenwert"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -538,14 +549,20 @@
         "CH"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 6.95,
         "min_order_value": 50
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -577,9 +594,6 @@
         "action": "MBW-Grenze testen (49,99 CHF vs 50,00 CHF)",
         "expected": "Bei 49,99 CHF wird Promotion nicht angewendet, bei 50,00 CHF wird sie angewendet"
       }
-    ],
-    "postconditions": [
-      "Promotion funktioniert nur ab 50 CHF Warenwert"
     ],
     "cleanup": [
       "Warenkorb leeren",

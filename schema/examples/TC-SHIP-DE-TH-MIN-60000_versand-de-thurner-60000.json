@@ -3,7 +3,7 @@
   "name": "Versandart Thurner DE fuer PLZ 60000 (Frankfurt) - Minimum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "DE"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "DE",
-    "carrier": "Thurner DE",
-    "plz": "60000",
-    "city": "Frankfurt",
-    "expected_label": "Spedition Thurner",
-    "grenzwert": "minimum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "thurner_de_de",
+      "plz": "60000",
+      "carrier": "Thurner DE",
+      "country": "DE",
+      "city": "Frankfurt",
+      "expected_label": "Spedition Thurner",
+      "grenzwert": "minimum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

@@ -3,7 +3,7 @@
   "name": "Produktpreise stimmen mit Erwartungswerten ueberein",
   "category": "data-validation",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -25,7 +25,10 @@
       "action": "Produktseite aufrufen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
       ]
     },
     {
@@ -34,22 +37,26 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "products": [
-      {
-        "id": "49415",
-        "price": 12.9
-      },
-      {
-        "id": "74157",
-        "price": 19.9
-      },
-      {
-        "id": "693645",
-        "price": 358.0
-      }
-    ]
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "49415",
+      "id": "49415",
+      "price": 12.9
+    },
+    {
+      "type": "product",
+      "name": "74157",
+      "id": "74157",
+      "price": 19.9
+    },
+    {
+      "type": "product",
+      "name": "693645",
+      "id": "693645",
+      "price": 358.0
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

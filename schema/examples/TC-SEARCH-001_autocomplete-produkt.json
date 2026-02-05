@@ -3,10 +3,17 @@
   "name": "Autocomplete zeigt korrektes Produkt bei Artikelnummer-Eingabe",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,20 +26,36 @@
       "action": "Suchfeld öffnen",
       "expected": "Suchfeld wird sichtbar",
       "selector_hint": "button.search-toggle-btn",
-      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.search-toggle-btn.js-search-toggle-btn"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Artikelnummer eingeben",
       "expected": "Artikelnummer wird im Suchfeld angezeigt",
       "selector_hint": "input#header-main-search-input",
-      "inputs": [{"action": "fill", "selector": "input#header-main-search-input", "value": "862990"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input#header-main-search-input",
+          "value": "862990"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Auf Autocomplete warten",
       "expected": "Autocomplete-Dropdown erscheint mit Vorschlägen",
-      "inputs": [{"action": "wait", "selector": ".search-suggest-product-link"}]
+      "inputs": [
+        {
+          "action": "wait",
+          "selector": ".search-suggest-product-link"
+        }
+      ]
     },
     {
       "step": 4,
@@ -41,16 +64,31 @@
       "selector_hint": ".search-suggest-product-link"
     }
   ],
-  "test_data": {
-    "article_numbers": ["862990", "863190", "693645", "693278", "49415", "74157", "410933"]
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "article_numbers": [
+        "862990",
+        "863190",
+        "693645",
+        "693278",
+        "49415",
+        "74157",
+        "410933"
+      ]
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_search.py",
     "function_name": "test_search_autocomplete_shows_correct_product",
-    "tags": ["smoke", "search"]
+    "tags": [
+      "smoke",
+      "search"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

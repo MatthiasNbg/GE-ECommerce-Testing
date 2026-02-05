@@ -3,19 +3,33 @@
   "name": "Navigation funktioniert",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
-  "preconditions": ["Shop ist erreichbar"],
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
   "steps": [
     {
       "step": 1,
       "action": "Startseite aufrufen",
       "selector": null,
-      "inputs": [{"action": "navigate", "value": "/"}],
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ],
       "expected": "Startseite wird geladen"
     },
     {
@@ -43,7 +57,9 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_regression.py",
     "function_name": "test_navigation_works",
-    "tags": ["regression"]
+    "tags": [
+      "regression"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

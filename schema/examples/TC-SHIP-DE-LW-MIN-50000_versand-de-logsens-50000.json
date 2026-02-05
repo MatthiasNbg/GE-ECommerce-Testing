@@ -3,7 +3,7 @@
   "name": "Versandart Logsens West fuer PLZ 50000 (Koeln) - Minimum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "DE"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "DE",
-    "carrier": "Logsens West",
-    "plz": "50000",
-    "city": "Koeln",
-    "expected_label": "Spedition Logsens",
-    "grenzwert": "minimum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "logsens_west_de",
+      "plz": "50000",
+      "carrier": "Logsens West",
+      "country": "DE",
+      "city": "Koeln",
+      "expected_label": "Spedition Logsens",
+      "grenzwert": "minimum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

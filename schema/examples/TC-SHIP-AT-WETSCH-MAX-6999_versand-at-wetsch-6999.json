@@ -3,7 +3,7 @@
   "name": "Versandart Wetsch AT fuer PLZ 6999 (Bregenz) - Maximum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "AT",
-    "carrier": "Wetsch AT",
-    "plz": "6999",
-    "city": "Bregenz",
-    "expected_label": "Spedition Wetsch",
-    "grenzwert": "maximum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "wetsch_at_at",
+      "plz": "6999",
+      "carrier": "Wetsch AT",
+      "country": "AT",
+      "city": "Bregenz",
+      "expected_label": "Spedition Wetsch",
+      "grenzwert": "maximum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

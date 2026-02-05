@@ -3,7 +3,7 @@
   "name": "Einzelner Gast-Checkout vollstaendig durchfuehren",
   "category": "e2e",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT"
@@ -22,61 +22,147 @@
       "step": 1,
       "action": "Produkt laden",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "In den Warenkorb legen",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Zum Warenkorb navigieren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "Zur Kasse navigieren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "click", "selector": "a:has-text('Zur Kasse')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Gast-Checkout starten",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Als Gast bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Als Gast bestellen')"
+        }
+      ]
     },
     {
       "step": 6,
       "action": "Adresse eingeben (4020 Linz)",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#billingAddress-personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#billingAddress-personalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#personalMail", "value": "test@example.com"}, {"action": "fill", "selector": "#billingAddress-AddressStreet", "value": "Teststrasse 123"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "4020"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Linz"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "AT"}]
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#personalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalLastName",
+          "value": "Kunde"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-AddressStreet",
+          "value": "Teststrasse 123"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        },
+        {
+          "action": "select",
+          "selector": "#billingAddressAddressCountry",
+          "value": "AT"
+        }
+      ]
     },
     {
       "step": 7,
       "action": "Datenschutz akzeptieren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        }
+      ]
     },
     {
       "step": 8,
       "action": "Rechnung als Zahlungsart waehlen",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "click", "selector": ".payment-method:has-text('Rechnung')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".payment-method:has-text('Rechnung')"
+        }
+      ]
     },
     {
       "step": 9,
       "action": "AGB akzeptieren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "check", "selector": "#tos"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
     },
     {
       "step": 10,
       "action": "Bestellen",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Zahlungspflichtig bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
     },
     {
       "step": 11,
@@ -84,15 +170,21 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "address": {
+  "test_data": [
+    {
+      "type": "address",
+      "name": "default",
       "street": "Teststrasse 123",
       "zip": "4020",
       "city": "Linz",
       "country": "AT"
     },
-    "payment": "Rechnung"
-  },
+    {
+      "type": "payment",
+      "name": "default",
+      "method": "Rechnung"
+    }
+  ],
   "postconditions": [
     "Bestellnummer wurde erhalten"
   ],

@@ -3,7 +3,7 @@
   "name": "Waehrung EUR durchgaengig konsistent",
   "category": "data-validation",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -25,7 +25,10 @@
       "action": "Produktseite pruefen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
       ]
     },
     {
@@ -33,8 +36,14 @@
       "action": "Warenkorb pruefen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "click", "selector": "button.btn-buy"},
-        {"action": "navigate", "value": "/checkout/cart"}
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        },
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
       ]
     },
     {
@@ -43,7 +52,6 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {},
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

@@ -3,7 +3,7 @@
   "name": "Preis auf Produktdetailseite stimmt mit Warenkorb ueberein",
   "category": "data-validation",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -25,7 +25,10 @@
       "action": "Produktseite aufrufen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
       ]
     },
     {
@@ -38,7 +41,10 @@
       "action": "Produkt in den Warenkorb legen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "click", "selector": "button.btn-buy"}
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
       ]
     },
     {
@@ -46,16 +52,25 @@
       "action": "Preis im Warenkorb vergleichen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/checkout/cart"}
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
       ]
     }
   ],
-  "test_data": {
-    "product_ids": [
-      "49415",
-      "74157"
-    ]
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "product_49415",
+      "id": "49415"
+    },
+    {
+      "type": "product",
+      "name": "product_74157",
+      "id": "74157"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

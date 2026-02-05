@@ -75,7 +75,11 @@
               "properties": {
                 "action": { "enum": ["navigate", "fill", "select", "check", "uncheck", "click", "wait"] },
                 "selector": { "type": "string" },
-                "value": {}
+                "value": {},
+                "value_ref": {
+                  "type": "string",
+                  "pattern": "^[a-z_][a-z0-9_]*:[a-z_][a-z0-9_]*\\.[a-z_][a-z0-9_]*$"
+                }
               }
             }
           }
@@ -84,8 +88,12 @@
       "minItems": 1
     },
     "test_data": {
-      "type": "object",
-      "additionalProperties": true
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "name"],
+        "additionalProperties": true
+      }
     },
     "automation": {
       "type": "object",

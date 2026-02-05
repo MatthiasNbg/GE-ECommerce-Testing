@@ -3,7 +3,7 @@
   "name": "Versandart Fink AT fuer PLZ 8000 (Graz) - Minimum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "AT",
-    "carrier": "Fink AT",
-    "plz": "8000",
-    "city": "Graz",
-    "expected_label": "Spedition Fink",
-    "grenzwert": "minimum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "fink_at_at",
+      "plz": "8000",
+      "carrier": "Fink AT",
+      "country": "AT",
+      "city": "Graz",
+      "expected_label": "Spedition Fink",
+      "grenzwert": "minimum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

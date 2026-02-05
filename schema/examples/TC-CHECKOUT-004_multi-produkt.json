@@ -3,7 +3,7 @@
   "name": "Massentest Multi-Produkt Bestellungen",
   "category": "e2e",
   "priority": "P2",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -24,7 +24,12 @@
       "step": 1,
       "action": "50 Bestellungen mit 1-5 Produkten pro Bestellung ausfuehren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "navigate", "value": "/"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
     },
     {
       "step": 2,
@@ -32,11 +37,15 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "order_count": 50,
-    "products_per_order": "1-5",
-    "min_success_rate": 70
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "order_count": 50,
+      "products_per_order": "1-5",
+      "min_success_rate": 70
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

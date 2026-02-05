@@ -3,7 +3,7 @@
   "name": "Produkt zum Warenkorb hinzufügen und prüfen",
   "category": "regression",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": ["AT", "DE", "CH"],
     "environments": ["staging", "production"],
@@ -44,10 +44,14 @@
       "selector_hint": ".offcanvas-cart .line-item-label"
     }
   ],
-  "test_data": {
-    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-    "product_name": "Kurzarmshirt aus Bio-Baumwolle"
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

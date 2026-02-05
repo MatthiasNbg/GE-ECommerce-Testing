@@ -3,7 +3,7 @@
   "name": "Zahlungsarten automatisch erkennen (Discovery)",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -24,25 +24,89 @@
       "step": 1,
       "action": "Fuer jedes Land: Produkt in den Warenkorb hinzufuegen",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Gast-Checkout starten",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Als Gast bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Als Gast bestellen')"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Adresse eingeben",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#billingAddress-personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#billingAddress-personalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#personalMail", "value": "test@example.com"}, {"action": "fill", "selector": "#billingAddress-AddressStreet", "value": "Teststrasse 123"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "4020"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Linz"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "AT"}]
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#personalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalLastName",
+          "value": "Kunde"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-AddressStreet",
+          "value": "Teststrasse 123"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        },
+        {
+          "action": "select",
+          "selector": "#billingAddressAddressCountry",
+          "value": "AT"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "Zahlungsseite aufrufen",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}, {"action": "click", "selector": "button:has-text('Weiter')"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Weiter')"
+        }
+      ]
     },
     {
       "step": 5,
@@ -55,7 +119,6 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {},
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

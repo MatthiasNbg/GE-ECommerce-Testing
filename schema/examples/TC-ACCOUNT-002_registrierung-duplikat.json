@@ -3,10 +3,14 @@
   "name": "Registrierung mit doppelter E-Mail schlägt fehl",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT"],
-    "environments": ["staging"],
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -22,19 +26,84 @@
       "step": 1,
       "action": "Registrierungsseite aufrufen",
       "expected": "Registrierungsformular wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/account/login"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Bereits registrierte E-Mail eingeben",
       "expected": "E-Mail-Adresse ist im Formular eingetragen",
-      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#personalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#personalMail", "value": "duplicate@example.com"}, {"action": "fill", "selector": "#personalPassword", "value": "TestPasswort123!"}, {"action": "fill", "selector": "#personalPasswordConfirmation", "value": "TestPasswort123!"}, {"action": "fill", "selector": "#billingAddressAddressStreet", "value": "Teststrasse 1"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "4020"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Linz"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "AT"}]
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#personalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalLastName",
+          "value": "Kunde"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "duplicate@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalPassword",
+          "value": "TestPasswort123!"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalPasswordConfirmation",
+          "value": "TestPasswort123!"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressStreet",
+          "value": "Teststrasse 1"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        },
+        {
+          "action": "select",
+          "selector": "#billingAddressAddressCountry",
+          "value": "AT"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Formular absenden",
       "expected": "Formular wird abgeschickt",
-      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}, {"action": "click", "selector": "button:has-text('Registrieren')"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Registrieren')"
+        }
+      ]
     },
     {
       "step": 4,
@@ -42,14 +111,16 @@
       "expected": "Fehlermeldung wird angezeigt, dass E-Mail bereits registriert ist"
     }
   ],
-  "test_data": {},
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_account.py",
     "function_name": "test_registration_duplicate_email_fails",
-    "tags": ["account", "feature"]
+    "tags": [
+      "account",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

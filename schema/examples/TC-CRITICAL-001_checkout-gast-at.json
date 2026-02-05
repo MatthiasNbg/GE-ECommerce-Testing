@@ -3,10 +3,14 @@
   "name": "Gast-Checkout komplett (AT)",
   "category": "critical-path",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT"],
-    "environments": ["staging"],
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,49 +23,129 @@
       "step": 1,
       "action": "Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt ist im Warenkorb sichtbar",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Zur Kasse navigieren",
       "expected": "Checkout-Seite wird angezeigt",
-      "inputs": [{"action": "click", "selector": "a:has-text('Zur Kasse')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Gast-Checkout starten",
       "expected": "Gast-Formular wird angezeigt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Als Gast bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Als Gast bestellen')"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "Adressdaten eingeben (Teststraße 123, 4020 Linz, AT)",
       "expected": "Adressdaten werden akzeptiert",
-      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#billingAddress-personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#billingAddress-personalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#personalMail", "value": "test@example.com"}, {"action": "fill", "selector": "#billingAddress-AddressStreet", "value": "Teststrasse 123"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "4020"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Linz"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "AT"}]
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#personalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalLastName",
+          "value": "Kunde"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-AddressStreet",
+          "value": "Teststrasse 123"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        },
+        {
+          "action": "select",
+          "selector": "#billingAddressAddressCountry",
+          "value": "AT"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Datenschutz akzeptieren",
       "expected": "Datenschutz-Checkbox ist aktiviert",
-      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        }
+      ]
     },
     {
       "step": 6,
       "action": "Zahlungsart Rechnung wählen",
       "expected": "Rechnung ist als Zahlungsart ausgewählt",
-      "inputs": [{"action": "click", "selector": ".payment-method:has-text('Rechnung')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".payment-method:has-text('Rechnung')"
+        }
+      ]
     },
     {
       "step": 7,
       "action": "AGB akzeptieren",
       "expected": "AGB-Checkbox ist aktiviert",
-      "inputs": [{"action": "check", "selector": "#tos"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
     },
     {
       "step": 8,
       "action": "Bestellung absenden",
       "expected": "Bestellung wird erfolgreich verarbeitet",
-      "inputs": [{"action": "click", "selector": "button:has-text('Zahlungspflichtig bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
     },
     {
       "step": 9,
@@ -73,22 +157,31 @@
     "Bestellnummer wird angezeigt",
     "Bestellbestätigung enthält korrekte Daten"
   ],
-  "test_data": {
-    "address": {
+  "test_data": [
+    {
+      "type": "address",
+      "name": "default",
       "street": "Teststraße 123",
       "zip": "4020",
       "city": "Linz",
       "country": "AT"
     },
-    "payment_method": "invoice"
-  },
+    {
+      "type": "payment",
+      "name": "default",
+      "method": "invoice"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_critical_path.py",
     "function_name": "test_guest_checkout_complete[AT]",
-    "tags": ["critical", "checkout"]
+    "tags": [
+      "critical",
+      "checkout"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

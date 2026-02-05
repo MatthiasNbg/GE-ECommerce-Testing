@@ -3,7 +3,7 @@
   "name": "Versandart Logsens Ost fuer PLZ 99999 (Nordhausen) - Maximum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "DE"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "DE",
-    "carrier": "Logsens Ost",
-    "plz": "99999",
-    "city": "Nordhausen",
-    "expected_label": "Spedition Logsens",
-    "grenzwert": "maximum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "logsens_ost_de",
+      "plz": "99999",
+      "carrier": "Logsens Ost",
+      "country": "DE",
+      "city": "Nordhausen",
+      "expected_label": "Spedition Logsens",
+      "grenzwert": "maximum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

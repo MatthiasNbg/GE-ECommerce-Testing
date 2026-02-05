@@ -3,10 +3,17 @@
   "name": "Keine Ergebnisse bei ungültiger Artikelnummer",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,20 +26,36 @@
       "action": "Suchfeld öffnen",
       "expected": "Suchfeld wird sichtbar",
       "selector_hint": "button.search-toggle-btn",
-      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.search-toggle-btn.js-search-toggle-btn"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Ungültige Artikelnummer eingeben",
       "expected": "Artikelnummer wird im Suchfeld angezeigt",
       "selector_hint": "input#header-main-search-input",
-      "inputs": [{"action": "fill", "selector": "input#header-main-search-input", "value": "xyznonexistent123"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input#header-main-search-input",
+          "value": "xyznonexistent123"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Suche absenden",
       "expected": "Suchergebnisseite wird geladen",
-      "inputs": [{"action": "click", "selector": "input#header-main-search-input"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input#header-main-search-input"
+        }
+      ]
     },
     {
       "step": 4,
@@ -40,16 +63,23 @@
       "expected": "Seite zeigt eine Meldung an, dass keine Ergebnisse gefunden wurden"
     }
   ],
-  "test_data": {
-    "invalid_article": "99999999"
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "invalid_article": "99999999"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_search.py",
     "function_name": "test_search_no_results_for_invalid_article",
-    "tags": ["smoke", "search"]
+    "tags": [
+      "smoke",
+      "search"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

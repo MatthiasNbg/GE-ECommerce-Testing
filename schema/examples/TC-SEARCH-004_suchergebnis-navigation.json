@@ -3,10 +3,17 @@
   "name": "Klick auf Suchergebnis navigiert zur Produktseite",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,20 +26,40 @@
       "action": "Suchfeld öffnen und Artikelnummer eingeben",
       "expected": "Suchbegriff wird im Feld angezeigt",
       "selector_hint": "input#header-main-search-input",
-      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}, {"action": "fill", "selector": "input#header-main-search-input", "value": "862990"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.search-toggle-btn.js-search-toggle-btn"
+        },
+        {
+          "action": "fill",
+          "selector": "input#header-main-search-input",
+          "value": "862990"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Suche absenden",
       "expected": "Suchergebnisseite wird geladen",
-      "inputs": [{"action": "click", "selector": "input#header-main-search-input"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input#header-main-search-input"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Erstes Ergebnis anklicken",
       "expected": "Produktdetailseite wird geladen",
       "selector_hint": ".product-box a",
-      "inputs": [{"action": "click", "selector": ".product-box a"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".product-box a"
+        }
+      ]
     },
     {
       "step": 4,
@@ -40,19 +67,32 @@
       "expected": "URL enthält den erwarteten Produktpfad"
     }
   ],
-  "test_data": {
-    "articles": [
-      {"article_number": "862990", "expected_url_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"},
-      {"article_number": "863190", "expected_url_path": "p/blusenshirt-aus-bio-leinen/ge-p-863190"}
-    ]
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "articles": [
+        {
+          "article_number": "862990",
+          "expected_url_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "article_number": "863190",
+          "expected_url_path": "p/blusenshirt-aus-bio-leinen/ge-p-863190"
+        }
+      ]
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_search.py",
     "function_name": "test_search_results_page_click_navigates_to_product",
-    "tags": ["smoke", "search"]
+    "tags": [
+      "smoke",
+      "search"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

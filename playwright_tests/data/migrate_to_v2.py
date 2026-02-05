@@ -170,43 +170,90 @@ def generate_postconditions(test: dict) -> list[str]:
     return postconditions[-3:] if len(postconditions) > 3 else postconditions
 
 
-def migrate_test_data(test: dict) -> dict | None:
-    """Restructure test_data with product_ref references."""
+def migrate_test_data(test: dict) -> list | None:
+    """Restructure test_data as typed array with type/name fields."""
     test_data = test.get("test_data")
     if not test_data:
         return None
 
-    new_data = {}
+    result = []
+    handled_keys = set()
 
-    # Handle products - add ref field, keep structure
+    # 1. Products array → [{type: "product", name: ref||type_id, ...}]
     products = test_data.get("products", [])
     if products:
-        new_products = []
+        handled_keys.add("products")
         for p in products:
-            new_p = dict(p)
+            item = {"type": "product"}
+            # Determine name: prefer ref, then type_id, then "default"
+            ref = p.get("ref", "")
             pid = p.get("id", "")
-            if pid in PRODUCT_REF_MAP:
-                new_p["ref"] = PRODUCT_REF_MAP[pid]
+            ptype = p.get("type", "")
+            if ref:
+                item["name"] = ref
+            elif ptype and pid:
+                item["name"] = f"{ptype}_{pid}"
             elif pid:
-                # Generate a ref from the id
-                ptype = p.get("type", "product")
-                new_p["ref"] = f"{ptype}_{pid}"
-            new_products.append(new_p)
-        new_data["products"] = new_products
-    elif not any(k in test_data for k in ["plz", "carrier", "carrier_code"]):
-        # For simple tests without products array, add product_ref
-        category = test.get("category", "")
-        if category in ("smoke", "critical-path", "warenkorb"):
-            new_data["product_ref"] = "simple_product_post"
+                item["name"] = pid
+            else:
+                item["name"] = "default"
+            # Copy all other properties
+            for k, v in p.items():
+                if k not in ("ref",):  # ref becomes name
+                    item[k] = v
+            result.append(item)
 
-    # Copy other test_data fields (promo_codes, amounts, plz data, etc.)
-    for key in test_data:
-        if key == "products" and "products" in new_data:
-            continue
-        if key not in new_data:
-            new_data[key] = test_data[key]
+    # 2. Simple product_ref → [{type: "product", name: "default", product_ref: ...}]
+    product_ref = test_data.get("product_ref")
+    if product_ref and not products:
+        handled_keys.add("product_ref")
+        result.append({
+            "type": "product",
+            "name": "default",
+            "product_ref": product_ref
+        })
 
-    return new_data if new_data else None
+    # 3. Shipping (plz-based) → [{type: "shipping", name: carrier_code_channel, ...}]
+    if any(k in test_data for k in ["plz", "carrier", "carrier_code"]):
+        carrier_code = test_data.get("carrier_code", "unknown")
+        channel = test_data.get("channel", test.get("channels", ["AT"])[0] if test.get("channels") else "AT")
+        item = {
+            "type": "shipping",
+            "name": f"{carrier_code}_{channel}".lower()
+        }
+        for k in ["plz", "carrier", "carrier_code", "expected_carrier", "expected_cost", "channel"]:
+            if k in test_data:
+                item[k] = test_data[k]
+                handled_keys.add(k)
+        result.append(item)
+
+    # 4. promo_codes[] → [{type: "promo", name: code.lower(), code: ...}]
+    promo_codes = test_data.get("promo_codes", [])
+    if promo_codes:
+        handled_keys.add("promo_codes")
+        for code in promo_codes:
+            result.append({
+                "type": "promo",
+                "name": code.lower().replace("-", "_"),
+                "code": code
+            })
+
+    # 5. amounts{} → [{type: "amounts", name: "default", ...amounts}]
+    amounts = test_data.get("amounts")
+    if amounts and isinstance(amounts, dict):
+        handled_keys.add("amounts")
+        item = {"type": "amounts", "name": "default"}
+        item.update(amounts)
+        result.append(item)
+
+    # 6. Remaining keys → [{type: "extra", name: "default", ...remaining}]
+    remaining = {k: v for k, v in test_data.items() if k not in handled_keys}
+    if remaining:
+        item = {"type": "extra", "name": "default"}
+        item.update(remaining)
+        result.append(item)
+
+    return result if result else None
 
 
 def ensure_preconditions(test: dict) -> list[str]:
@@ -342,6 +389,20 @@ def validate_against_schema(tests: list[dict], schema: dict) -> list[str]:
         # Check preconditions is present and non-empty
         if not test.get("preconditions"):
             errors.append(f"{tid}: preconditions is empty or missing")
+
+        # Check test_data is a list with typed items
+        test_data = test.get("test_data")
+        if test_data is not None:
+            if not isinstance(test_data, list):
+                errors.append(f"{tid}: test_data must be a list, got {type(test_data).__name__}")
+            else:
+                for i, item in enumerate(test_data):
+                    if not isinstance(item, dict):
+                        errors.append(f"{tid}: test_data[{i}] must be an object")
+                    elif "type" not in item:
+                        errors.append(f"{tid}: test_data[{i}] missing required field 'type'")
+                    elif "name" not in item:
+                        errors.append(f"{tid}: test_data[{i}] missing required field 'name'")
 
     return errors
 

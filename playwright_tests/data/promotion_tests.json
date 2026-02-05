@@ -20,16 +20,14 @@
       "Produkt mit Odoo-Eigenschaft nicht_rabattierbar = true (Variante 639046)",
       "Aktive Warenkorb-Promotion (prozentual oder absolut)"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "639046",
-          "type": "post",
-          "not_discountable": true,
-          "ref": "nicht_rabattierbarer_artikel"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "post",
+        "name": "nicht_rabattierbarer_artikel",
+        "id": "639046",
+        "not_discountable": true
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -61,10 +59,6 @@
         "action": "Gesamtsumme validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Nicht-rabattierbarer Artikel bleibt zum vollen Preis im Warenkorb",
-      "Keine Fehlermeldung – Promotion wird akzeptiert, aber nicht auf ausgeschlossene Produkte angewendet"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -105,22 +99,20 @@
       "Produkt mit Aktionspreis (SALE-Preis aktiv)",
       "Aktive Warenkorb-Promotion mit Ausschluss von Aktionspreisen"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "sale-product",
-          "type": "post",
-          "has_sale_price": true,
-          "ref": "sale_product"
-        },
-        {
-          "id": "regular-product",
-          "type": "post",
-          "has_sale_price": false,
-          "ref": "regular_product"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "post",
+        "name": "sale_product",
+        "id": "sale-product",
+        "has_sale_price": true
+      },
+      {
+        "type": "post",
+        "name": "regular_product",
+        "id": "regular-product",
+        "has_sale_price": false
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -147,9 +139,6 @@
         "action": "Prüfen, dass das SALE-Produkt zum Aktionspreis bleibt",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Aktionspreis bleibt unverändert"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -192,16 +181,14 @@
       "Aktive Warenkorb-Promotion",
       "Shopware-Regel: [GE-Template-Warenkorb] mit Gutschein-Ausschluss"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "6609",
-          "type": "gutschein",
-          "not_discountable": true,
-          "ref": "gutschein_6609"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "gutschein",
+        "name": "gutschein_6609",
+        "id": "6609",
+        "not_discountable": true
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -223,9 +210,6 @@
         "action": "Gutscheinpreis bleibt unverändert",
         "expected": "Kein Rabatt auf den Gutschein selbst"
       }
-    ],
-    "postconditions": [
-      "Gutscheinpreis bleibt beim Nennwert (z.B. 50€)"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -266,16 +250,14 @@
       "Wertgutschein im Warenkorb",
       "Beliebige aktive Promotion (prozentual, absolut, automatisch)"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "wertgutschein",
-          "type": "wertgutschein",
-          "not_discountable": true,
-          "ref": "wertgutschein_wertgutschein"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "wertgutschein",
+        "name": "wertgutschein_wertgutschein",
+        "id": "wertgutschein",
+        "not_discountable": true
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -297,10 +279,6 @@
         "action": "Automatische Promotions prüfen – ebenfalls kein Rabatt",
         "expected": "Promotion-Code kann eingegeben werden, aber Rabatt greift nicht auf den Gutschein"
       }
-    ],
-    "postconditions": [
-      "Gutschein-Nennwert bleibt unverändert",
-      "Promotion-Code kann eingegeben werden, aber Rabatt greift nicht auf den Gutschein"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -401,10 +379,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Prozentuale Berechnung ist korrekt",
-      "Funktioniert in allen DACH-Verkaufskanälen"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Promotion-Code entfernen"
@@ -482,9 +456,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Keine Promotion kann auf Gutschein-Kauf angewendet werden"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Gutschein-Code entfernen"
@@ -549,10 +520,6 @@
         "action": "Prüfen, dass kein Guthaben über den Warenwert hinaus erstattet wird",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Warenkorb kann maximal auf 0 EUR reduziert werden",
-      "Überschüssiges Guthaben bleibt auf dem Gutschein"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -724,15 +691,13 @@
       "Warenkorb ist leer",
       "Warenkorb enthält reguläres Produkt (z.B. Bett \"Somnia\")"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "736675",
-          "type": "gutschein",
-          "ref": "gutschein_736675"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "gutschein",
+        "name": "gutschein_736675",
+        "id": "736675"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -754,9 +719,6 @@
         "action": "Fehlermeldung prüfen",
         "expected": "Fehlermeldung wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "User bleibt auf PDP oder wird zu Cart geleitet"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -796,15 +758,13 @@
       "Warenkorb ist leer",
       "Warenkorb enthält Einkaufsgutschein 50€ (Artikel 736675)"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "736675",
-          "type": "gutschein",
-          "ref": "gutschein_736675"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "gutschein",
+        "name": "gutschein_736675",
+        "id": "736675"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -887,9 +847,6 @@
         "expected": "Voller Gutschein-Preis wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Warenkorb zeigt vollen Gutschein-Preis"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Gutschein-Code entfernen"
@@ -954,9 +911,6 @@
         "action": "Prüfen, dass User Warenkorb bereinigen muss",
         "expected": "Checkout bleibt blockiert bis Warenkorb bereinigt"
       }
-    ],
-    "postconditions": [
-      "Fehlermeldung wird angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1025,10 +979,6 @@
         "expected": "Gesamtpreis: 150€"
       }
     ],
-    "postconditions": [
-      "Prüfung: Neues Item ist Gutschein + Warenkorb enthält nur Gutscheine",
-      "Warenkorb zeigt beide Gutscheine (50€ + 100€)"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Gutschein-Code entfernen"
@@ -1084,13 +1034,19 @@
         "DE"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 5.95
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -1122,9 +1078,6 @@
         "action": "Nutzungslimits testen (1x global, 5x pro Kunde)",
         "expected": "Nutzungslimits werden eingehalten"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Postversand DE/AT"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1188,13 +1141,19 @@
         "CH"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 6.95
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -1226,9 +1185,6 @@
         "action": "Nutzungslimits testen (1x global, 5x pro Kunde)",
         "expected": "Nutzungslimits werden eingehalten"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Postversand CH"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1293,11 +1249,15 @@
         "DE"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {}
-    },
+    "test_data": [
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": [],
+        "amounts": {}
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1324,9 +1284,6 @@
         "action": "Prüfen, dass Postversand nicht betroffen ist",
         "expected": "Postversand-Kosten bleiben unverändert"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Speditionsversand"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1385,11 +1342,15 @@
         "CH"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {}
-    },
+    "test_data": [
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": [],
+        "amounts": {}
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1416,9 +1377,6 @@
         "action": "Prüfen, dass Postversand nicht betroffen ist",
         "expected": "Postversand-Kosten bleiben unverändert"
       }
-    ],
-    "postconditions": [
-      "Funktioniert nur für Speditionsversand CH"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1479,14 +1437,20 @@
         "DE"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 5.95,
         "min_order_value": 50
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -1518,9 +1482,6 @@
         "action": "MBW-Grenze testen (49,99 EUR vs 50,00 EUR)",
         "expected": "Bei 49,99 EUR wird Promotion nicht angewendet, bei 50,00 EUR wird sie angewendet"
       }
-    ],
-    "postconditions": [
-      "Promotion funktioniert nur ab 50 EUR Warenwert"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1586,14 +1547,20 @@
         "CH"
       ]
     },
-    "test_data": {
-      "products": [],
-      "promo_codes": [],
-      "amounts": {
+    "test_data": [
+      {
+        "type": "amounts",
+        "name": "default",
         "shipping_discount": 6.95,
         "min_order_value": 50
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "products": [],
+        "promo_codes": []
       }
-    },
+    ],
     "steps": [
       {
         "step": 1,
@@ -1625,9 +1592,6 @@
         "action": "MBW-Grenze testen (49,99 CHF vs 50,00 CHF)",
         "expected": "Bei 49,99 CHF wird Promotion nicht angewendet, bei 50,00 CHF wird sie angewendet"
       }
-    ],
-    "postconditions": [
-      "Promotion funktioniert nur ab 50 CHF Warenwert"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1708,10 +1672,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Prozentuale oder absolute Berechnung ist korrekt",
-      "Funktioniert in allen DACH-Verkaufskanälen"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -1784,9 +1744,6 @@
         "action": "Test in allen Verkaufskanälen (AT, DE, CH) durchführen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Funktioniert in allen DACH-Verkaufskanälen"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1869,10 +1826,6 @@
         "action": "Test in AT, DE, CH durchführen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Unter MBW: Promotion wird abgelehnt mit Hinweis auf MBW",
-      "Ab MBW: Promotion wird akzeptiert"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -2015,9 +1968,6 @@
         "action": "Gesamtsumme validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Prozentuale Berechnung ist korrekt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2162,9 +2112,6 @@
         "expected": "Prüfen ob 2x rabattiert (je nach Promo-Logik)"
       }
     ],
-    "postconditions": [
-      "Rabatt wird als separater Nachlass im Warenkorb angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -2235,9 +2182,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Originalpreis wird durchgestrichen angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -2301,9 +2245,6 @@
         "action": "Rabattberechnung validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Filterung über advertising_material_id funktioniert korrekt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2431,9 +2372,6 @@
         "action": "Test in allen Verkaufskanälen (AT: EUR, DE: EUR, CH: CHF) durchführen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Originalpreis wird durchgestrichen angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2640,10 +2578,6 @@
         "expected": "Rabatt wird als separate Promotion-Zeile angezeigt"
       }
     ],
-    "postconditions": [
-      "Bei 5 Stück: 1 Stück wird als 100% rabattiert angezeigt",
-      "Rabatt wird als separate Promotion-Zeile angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -2713,9 +2647,6 @@
         "action": "Gesamtpreis validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Gratisprodukt wird mit 0 EUR/CHF angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2857,10 +2788,6 @@
         "expected": "Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)"
       }
     ],
-    "postconditions": [
-      "Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)",
-      "Gesamtpreis enthält nur Kissen-Preise"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -2936,9 +2863,6 @@
         "action": "Reihenfolge umkehren und erneut testen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Gesamtpreis ist korrekt (beide Rabatte berücksichtigt)"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -3016,9 +2940,6 @@
         "expected": "Anzeige ist korrekt"
       }
     ],
-    "postconditions": [
-      "Gesamtpreis ist korrekt berechnet"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Alle Promotion-Codes entfernen"
@@ -3095,9 +3016,6 @@
         "action": "Shopware-Promotion-Priorität variieren und Auswirkung testen",
         "expected": "Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt"
       }
-    ],
-    "postconditions": [
-      "Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren",

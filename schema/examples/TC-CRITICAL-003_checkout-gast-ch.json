@@ -3,10 +3,14 @@
   "name": "Gast-Checkout komplett (CH)",
   "category": "critical-path",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["CH"],
-    "environments": ["staging"],
+    "channels": [
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,49 +23,129 @@
       "step": 1,
       "action": "Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt ist im Warenkorb sichtbar",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Zur Kasse navigieren",
       "expected": "Checkout-Seite wird angezeigt",
-      "inputs": [{"action": "click", "selector": "a:has-text('Zur Kasse')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Gast-Checkout starten",
       "expected": "Gast-Formular wird angezeigt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Als Gast bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Als Gast bestellen')"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "Adressdaten eingeben (Teststraße 123, 8001 Zürich, CH)",
       "expected": "Adressdaten werden akzeptiert",
-      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#billingAddress-personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#billingAddress-personalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#personalMail", "value": "test@example.com"}, {"action": "fill", "selector": "#billingAddress-AddressStreet", "value": "Teststrasse 123"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "8001"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Zuerich"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "CH"}]
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#personalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalLastName",
+          "value": "Kunde"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-AddressStreet",
+          "value": "Teststrasse 123"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "8001"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Zuerich"
+        },
+        {
+          "action": "select",
+          "selector": "#billingAddressAddressCountry",
+          "value": "CH"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Datenschutz akzeptieren",
       "expected": "Datenschutz-Checkbox ist aktiviert",
-      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        }
+      ]
     },
     {
       "step": 6,
       "action": "Zahlungsart Vorkasse wählen",
       "expected": "Vorkasse ist als Zahlungsart ausgewählt",
-      "inputs": [{"action": "click", "selector": ".payment-method:has-text('Vorkasse')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".payment-method:has-text('Vorkasse')"
+        }
+      ]
     },
     {
       "step": 7,
       "action": "AGB akzeptieren",
       "expected": "AGB-Checkbox ist aktiviert",
-      "inputs": [{"action": "check", "selector": "#tos"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
     },
     {
       "step": 8,
       "action": "Bestellung absenden",
       "expected": "Bestellung wird erfolgreich verarbeitet",
-      "inputs": [{"action": "click", "selector": "button:has-text('Zahlungspflichtig bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
     },
     {
       "step": 9,
@@ -73,22 +157,31 @@
     "Bestellnummer wird angezeigt",
     "Bestellbestätigung enthält korrekte Daten"
   ],
-  "test_data": {
-    "address": {
+  "test_data": [
+    {
+      "type": "address",
+      "name": "default",
       "street": "Teststraße 123",
       "zip": "8001",
       "city": "Zürich",
       "country": "CH"
     },
-    "payment_method": "prepayment"
-  },
+    {
+      "type": "payment",
+      "name": "default",
+      "method": "prepayment"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_critical_path.py",
     "function_name": "test_guest_checkout_complete[CH]",
-    "tags": ["critical", "checkout"]
+    "tags": [
+      "critical",
+      "checkout"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

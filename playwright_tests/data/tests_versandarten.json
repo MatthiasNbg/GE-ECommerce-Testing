@@ -17,14 +17,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "0000",
-      "plz_min": "0000",
-      "plz_max": "9999",
-      "carrier": "Post AT",
-      "carrier_code": "POST",
-      "expected_label": "Postversand"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "post_at",
+        "plz": "0000",
+        "carrier": "Post AT",
+        "carrier_code": "POST"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "0000",
+        "plz_max": "9999",
+        "expected_label": "Postversand"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -46,10 +54,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Post AT wird angezeigt mit Label Postversand"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Post AT\" wird fuer PLZ 0000 angezeigt",
-      "Versandart-Label enthaelt \"Postversand\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -83,14 +87,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "9999",
-      "plz_min": "0000",
-      "plz_max": "9999",
-      "carrier": "Post AT",
-      "carrier_code": "POST",
-      "expected_label": "Postversand"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "post_at",
+        "plz": "9999",
+        "carrier": "Post AT",
+        "carrier_code": "POST"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "0000",
+        "plz_max": "9999",
+        "expected_label": "Postversand"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -112,10 +124,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Post AT wird angezeigt mit Label Postversand"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Post AT\" wird fuer PLZ 9999 angezeigt",
-      "Versandart-Label enthaelt \"Postversand\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -149,14 +157,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "6000",
-      "plz_min": "6000",
-      "plz_max": "6999",
-      "carrier": "Wetsch AT",
-      "carrier_code": "WETSCH",
-      "expected_label": "Spedition Wetsch"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "wetsch_at",
+        "plz": "6000",
+        "carrier": "Wetsch AT",
+        "carrier_code": "WETSCH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "6000",
+        "plz_max": "6999",
+        "expected_label": "Spedition Wetsch"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -178,10 +194,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Wetsch AT wird angezeigt mit Label Spedition Wetsch"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Wetsch AT\" wird fuer PLZ 6000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Wetsch\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -216,14 +228,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "6999",
-      "plz_min": "6000",
-      "plz_max": "6999",
-      "carrier": "Wetsch AT",
-      "carrier_code": "WETSCH",
-      "expected_label": "Spedition Wetsch"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "wetsch_at",
+        "plz": "6999",
+        "carrier": "Wetsch AT",
+        "carrier_code": "WETSCH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "6000",
+        "plz_max": "6999",
+        "expected_label": "Spedition Wetsch"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -245,10 +265,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Wetsch AT wird angezeigt mit Label Spedition Wetsch"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Wetsch AT\" wird fuer PLZ 6999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Wetsch\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -283,14 +299,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "1000",
-      "plz_min": "1000",
-      "plz_max": "1199",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "1000",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1000",
+        "plz_max": "1199",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -312,10 +336,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 1000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -350,14 +370,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "1199",
-      "plz_min": "1000",
-      "plz_max": "1199",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "1199",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1000",
+        "plz_max": "1199",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -379,10 +407,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 1199 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -417,14 +441,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3000",
-      "plz_min": "3000",
-      "plz_max": "3399",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "3000",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3000",
+        "plz_max": "3399",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -446,10 +478,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 3000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -484,14 +512,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3399",
-      "plz_min": "3000",
-      "plz_max": "3399",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "3399",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3000",
+        "plz_max": "3399",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -513,10 +549,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 3399 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -551,14 +583,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3600",
-      "plz_min": "3600",
-      "plz_max": "3699",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "3600",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3600",
+        "plz_max": "3699",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -580,10 +620,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 3600 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -618,14 +654,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3699",
-      "plz_min": "3600",
-      "plz_max": "3699",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "3699",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3600",
+        "plz_max": "3699",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -647,10 +691,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 3699 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -685,14 +725,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "4000",
-      "plz_min": "4000",
-      "plz_max": "4699",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "4000",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "4000",
+        "plz_max": "4699",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -714,10 +762,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 4000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -752,14 +796,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "4699",
-      "plz_min": "4000",
-      "plz_max": "4699",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "4699",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "4000",
+        "plz_max": "4699",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -781,10 +833,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 4699 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -819,14 +867,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "8000",
-      "plz_min": "8000",
-      "plz_max": "9999",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "8000",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "8000",
+        "plz_max": "9999",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -848,10 +904,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 8000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -886,14 +938,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "9999",
-      "plz_min": "8000",
-      "plz_max": "9999",
-      "carrier": "Fink AT",
-      "carrier_code": "FINK",
-      "expected_label": "Spedition Fink"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "fink_at",
+        "plz": "9999",
+        "carrier": "Fink AT",
+        "carrier_code": "FINK"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "8000",
+        "plz_max": "9999",
+        "expected_label": "Spedition Fink"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -915,10 +975,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Fink AT wird angezeigt mit Label Spedition Fink"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Fink AT\" wird fuer PLZ 9999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Fink\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -953,14 +1009,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "1200",
-      "plz_min": "1200",
-      "plz_max": "1399",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "1200",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1200",
+        "plz_max": "1399",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -982,10 +1046,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 1200 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1020,14 +1080,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "1399",
-      "plz_min": "1200",
-      "plz_max": "1399",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "1399",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1200",
+        "plz_max": "1399",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1049,10 +1117,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 1399 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1087,14 +1151,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "2000",
-      "plz_min": "2000",
-      "plz_max": "2999",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "2000",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "2000",
+        "plz_max": "2999",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1116,10 +1188,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 2000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1154,14 +1222,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "2999",
-      "plz_min": "2000",
-      "plz_max": "2999",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "2999",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "2000",
+        "plz_max": "2999",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1183,10 +1259,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 2999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1221,14 +1293,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3400",
-      "plz_min": "3400",
-      "plz_max": "3599",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "3400",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3400",
+        "plz_max": "3599",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1250,10 +1330,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 3400 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1288,14 +1364,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3599",
-      "plz_min": "3400",
-      "plz_max": "3599",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "3599",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3400",
+        "plz_max": "3599",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1317,10 +1401,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 3599 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1355,14 +1435,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3700",
-      "plz_min": "3700",
-      "plz_max": "3999",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "3700",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3700",
+        "plz_max": "3999",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1384,10 +1472,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 3700 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1422,14 +1506,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "3999",
-      "plz_min": "3700",
-      "plz_max": "3999",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "3999",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "3700",
+        "plz_max": "3999",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1451,10 +1543,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 3999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1489,14 +1577,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "7000",
-      "plz_min": "7000",
-      "plz_max": "7999",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "7000",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "7000",
+        "plz_max": "7999",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1518,10 +1614,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 7000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1556,14 +1648,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "7999",
-      "plz_min": "7000",
-      "plz_max": "7999",
-      "carrier": "Cargoe AT",
-      "carrier_code": "CARGO",
-      "expected_label": "Spedition Cargoe"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "cargo_at",
+        "plz": "7999",
+        "carrier": "Cargoe AT",
+        "carrier_code": "CARGO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "7000",
+        "plz_max": "7999",
+        "expected_label": "Spedition Cargoe"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1585,10 +1685,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Cargoe AT wird angezeigt mit Label Spedition Cargoe"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Cargoe AT\" wird fuer PLZ 7999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Cargoe\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1623,14 +1719,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "4700",
-      "plz_min": "4700",
-      "plz_max": "5799",
-      "carrier": "Thurner AT",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_at",
+        "plz": "4700",
+        "carrier": "Thurner AT",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "4700",
+        "plz_max": "5799",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1652,10 +1756,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner AT wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner AT\" wird fuer PLZ 4700 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1690,14 +1790,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Oesterreich"
     ],
-    "test_data": {
-      "plz": "5799",
-      "plz_min": "4700",
-      "plz_max": "5799",
-      "carrier": "Thurner AT",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_at",
+        "plz": "5799",
+        "carrier": "Thurner AT",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "4700",
+        "plz_max": "5799",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1719,10 +1827,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner AT wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner AT\" wird fuer PLZ 5799 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1757,14 +1861,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "00000",
-      "plz_min": "00000",
-      "plz_max": "99999",
-      "carrier": "Post DE",
-      "carrier_code": "POST",
-      "expected_label": "Postversand"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "post_de",
+        "plz": "00000",
+        "carrier": "Post DE",
+        "carrier_code": "POST"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "00000",
+        "plz_max": "99999",
+        "expected_label": "Postversand"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1786,10 +1898,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Post DE wird angezeigt mit Label Postversand"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Post DE\" wird fuer PLZ 00000 angezeigt",
-      "Versandart-Label enthaelt \"Postversand\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1823,14 +1931,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "99999",
-      "plz_min": "00000",
-      "plz_max": "99999",
-      "carrier": "Post DE",
-      "carrier_code": "POST",
-      "expected_label": "Postversand"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "post_de",
+        "plz": "99999",
+        "carrier": "Post DE",
+        "carrier_code": "POST"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "00000",
+        "plz_max": "99999",
+        "expected_label": "Postversand"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1852,10 +1968,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Post DE wird angezeigt mit Label Postversand"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Post DE\" wird fuer PLZ 99999 angezeigt",
-      "Versandart-Label enthaelt \"Postversand\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1889,14 +2001,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "19000",
-      "plz_min": "19000",
-      "plz_max": "29999",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "19000",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "19000",
+        "plz_max": "29999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1918,10 +2038,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 19000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1958,14 +2074,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "29999",
-      "plz_min": "19000",
-      "plz_max": "29999",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "29999",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "19000",
+        "plz_max": "29999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -1987,10 +2111,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 29999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2027,14 +2147,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "30000",
-      "plz_min": "30000",
-      "plz_max": "32999",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "30000",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "30000",
+        "plz_max": "32999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2056,10 +2184,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 30000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2096,14 +2220,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "32999",
-      "plz_min": "30000",
-      "plz_max": "32999",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "32999",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "30000",
+        "plz_max": "32999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2125,10 +2257,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 32999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2165,14 +2293,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "34000",
-      "plz_min": "34000",
-      "plz_max": "37139",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "34000",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "34000",
+        "plz_max": "37139",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2194,10 +2330,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 34000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2234,14 +2366,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "37139",
-      "plz_min": "34000",
-      "plz_max": "37139",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "37139",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "34000",
+        "plz_max": "37139",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2263,10 +2403,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 37139 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2303,14 +2439,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "37140",
-      "plz_min": "37140",
-      "plz_max": "37199",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "37140",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "37140",
+        "plz_max": "37199",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2332,10 +2476,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 37140 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2372,14 +2512,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "37199",
-      "plz_min": "37140",
-      "plz_max": "37199",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "37199",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "37140",
+        "plz_max": "37199",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2401,10 +2549,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 37199 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2441,14 +2585,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "37200",
-      "plz_min": "37200",
-      "plz_max": "37399",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "37200",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "37200",
+        "plz_max": "37399",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2470,10 +2622,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 37200 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2510,14 +2658,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "37399",
-      "plz_min": "37200",
-      "plz_max": "37399",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "37399",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "37200",
+        "plz_max": "37399",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2539,10 +2695,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 37399 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2579,14 +2731,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "37400",
-      "plz_min": "37400",
-      "plz_max": "39174",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "37400",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "37400",
+        "plz_max": "39174",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2608,10 +2768,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 37400 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2648,14 +2804,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39174",
-      "plz_min": "37400",
-      "plz_max": "39174",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "39174",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "37400",
+        "plz_max": "39174",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2677,10 +2841,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 39174 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2717,14 +2877,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39326",
-      "plz_min": "39326",
-      "plz_max": "39499",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "39326",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "39326",
+        "plz_max": "39499",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2746,10 +2914,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 39326 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2786,14 +2950,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39499",
-      "plz_min": "39326",
-      "plz_max": "39499",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "39499",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "39326",
+        "plz_max": "39499",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2815,10 +2987,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 39499 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2855,14 +3023,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39500",
-      "plz_min": "39500",
-      "plz_max": "39699",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "39500",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "39500",
+        "plz_max": "39699",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2884,10 +3060,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 39500 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2924,14 +3096,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39699",
-      "plz_min": "39500",
-      "plz_max": "39699",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "39699",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "39500",
+        "plz_max": "39699",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -2953,10 +3133,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 39699 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -2993,14 +3169,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "49000",
-      "plz_min": "49000",
-      "plz_max": "49999",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "49000",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "49000",
+        "plz_max": "49999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3022,10 +3206,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 49000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3062,14 +3242,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "49999",
-      "plz_min": "49000",
-      "plz_max": "49999",
-      "carrier": "Logsens Nord",
-      "carrier_code": "LN",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ln_de",
+        "plz": "49999",
+        "carrier": "Logsens Nord",
+        "carrier_code": "LN"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "49000",
+        "plz_max": "49999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3091,10 +3279,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Nord wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Nord\" wird fuer PLZ 49999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3131,14 +3315,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "00000",
-      "plz_min": "00000",
-      "plz_max": "09999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "00000",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "00000",
+        "plz_max": "09999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3160,10 +3352,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 00000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3200,14 +3388,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "09999",
-      "plz_min": "00000",
-      "plz_max": "09999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "09999",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "00000",
+        "plz_max": "09999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3229,10 +3425,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 09999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3269,14 +3461,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "10000",
-      "plz_min": "10000",
-      "plz_max": "15999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "10000",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "10000",
+        "plz_max": "15999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3298,10 +3498,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 10000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3338,14 +3534,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "15999",
-      "plz_min": "10000",
-      "plz_max": "15999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "15999",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "10000",
+        "plz_max": "15999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3367,10 +3571,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 15999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3407,14 +3607,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "16000",
-      "plz_min": "16000",
-      "plz_max": "18999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "16000",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "16000",
+        "plz_max": "18999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3436,10 +3644,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 16000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3476,14 +3680,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "18999",
-      "plz_min": "16000",
-      "plz_max": "18999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "18999",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "16000",
+        "plz_max": "18999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3505,10 +3717,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 18999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3545,14 +3753,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39175",
-      "plz_min": "39175",
-      "plz_max": "39319",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "39175",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "39175",
+        "plz_max": "39319",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3574,10 +3790,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 39175 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3614,14 +3826,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "39319",
-      "plz_min": "39175",
-      "plz_max": "39319",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "39319",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "39175",
+        "plz_max": "39319",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3643,10 +3863,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 39319 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3683,14 +3899,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "95000",
-      "plz_min": "95000",
-      "plz_max": "96999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "95000",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "95000",
+        "plz_max": "96999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3712,10 +3936,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 95000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3752,14 +3972,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "96999",
-      "plz_min": "95000",
-      "plz_max": "96999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "96999",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "95000",
+        "plz_max": "96999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3781,10 +4009,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 96999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3821,14 +4045,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "98000",
-      "plz_min": "98000",
-      "plz_max": "99999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "98000",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "98000",
+        "plz_max": "99999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3850,10 +4082,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 98000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3890,14 +4118,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "99999",
-      "plz_min": "98000",
-      "plz_max": "99999",
-      "carrier": "Logsens Ost",
-      "carrier_code": "LO",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lo_de",
+        "plz": "99999",
+        "carrier": "Logsens Ost",
+        "carrier_code": "LO"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "98000",
+        "plz_max": "99999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3919,10 +4155,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Ost wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Ost\" wird fuer PLZ 99999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -3959,14 +4191,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "54000",
-      "plz_min": "54000",
-      "plz_max": "54999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "54000",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "54000",
+        "plz_max": "54999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -3988,10 +4228,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 54000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4028,14 +4264,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "54999",
-      "plz_min": "54000",
-      "plz_max": "54999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "54999",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "54000",
+        "plz_max": "54999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4057,10 +4301,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 54999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4097,14 +4337,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "56000",
-      "plz_min": "56000",
-      "plz_max": "56999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "56000",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "56000",
+        "plz_max": "56999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4126,10 +4374,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 56000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4166,14 +4410,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "56999",
-      "plz_min": "56000",
-      "plz_max": "56999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "56999",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "56000",
+        "plz_max": "56999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4195,10 +4447,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 56999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4235,14 +4483,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "66000",
-      "plz_min": "66000",
-      "plz_max": "67999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "66000",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "66000",
+        "plz_max": "67999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4264,10 +4520,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 66000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4304,14 +4556,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "67999",
-      "plz_min": "66000",
-      "plz_max": "67999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "67999",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "66000",
+        "plz_max": "67999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4333,10 +4593,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 67999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4373,14 +4629,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "72000",
-      "plz_min": "72000",
-      "plz_max": "72999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "72000",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "72000",
+        "plz_max": "72999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4402,10 +4666,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 72000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4442,14 +4702,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "72999",
-      "plz_min": "72000",
-      "plz_max": "72999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "72999",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "72000",
+        "plz_max": "72999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4471,10 +4739,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 72999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4511,14 +4775,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "75000",
-      "plz_min": "75000",
-      "plz_max": "79999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "75000",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "75000",
+        "plz_max": "79999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4540,10 +4812,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 75000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4580,14 +4848,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "79999",
-      "plz_min": "75000",
-      "plz_max": "79999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "79999",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "75000",
+        "plz_max": "79999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4609,10 +4885,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 79999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4649,14 +4921,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "80000",
-      "plz_min": "80000",
-      "plz_max": "89999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "80000",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "80000",
+        "plz_max": "89999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4678,10 +4958,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 80000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4718,14 +4994,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "89999",
-      "plz_min": "80000",
-      "plz_max": "89999",
-      "carrier": "Logsens Sued",
-      "carrier_code": "LS",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "ls_de",
+        "plz": "89999",
+        "carrier": "Logsens Sued",
+        "carrier_code": "LS"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "80000",
+        "plz_max": "89999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4747,10 +5031,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens Sued wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens Sued\" wird fuer PLZ 89999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4787,14 +5067,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "33000",
-      "plz_min": "33000",
-      "plz_max": "33999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "33000",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "33000",
+        "plz_max": "33999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4816,10 +5104,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 33000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4856,14 +5140,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "33999",
-      "plz_min": "33000",
-      "plz_max": "33999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "33999",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "33000",
+        "plz_max": "33999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4885,10 +5177,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 33999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4925,14 +5213,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "41000",
-      "plz_min": "41000",
-      "plz_max": "41999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "41000",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "41000",
+        "plz_max": "41999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -4954,10 +5250,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 41000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -4994,14 +5286,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "41999",
-      "plz_min": "41000",
-      "plz_max": "41999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "41999",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "41000",
+        "plz_max": "41999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5023,10 +5323,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 41999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5063,14 +5359,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "42000",
-      "plz_min": "42000",
-      "plz_max": "48999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "42000",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "42000",
+        "plz_max": "48999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5092,10 +5396,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 42000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5132,14 +5432,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "48999",
-      "plz_min": "42000",
-      "plz_max": "48999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "48999",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "42000",
+        "plz_max": "48999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5161,10 +5469,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 48999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5201,14 +5505,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "50000",
-      "plz_min": "50000",
-      "plz_max": "53999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "50000",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "50000",
+        "plz_max": "53999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5230,10 +5542,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 50000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5270,14 +5578,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "53999",
-      "plz_min": "50000",
-      "plz_max": "53999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "53999",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "50000",
+        "plz_max": "53999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5299,10 +5615,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 53999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5339,14 +5651,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "57000",
-      "plz_min": "57000",
-      "plz_max": "57999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "57000",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "57000",
+        "plz_max": "57999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5368,10 +5688,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 57000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5408,14 +5724,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "57999",
-      "plz_min": "57000",
-      "plz_max": "57999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "57999",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "57000",
+        "plz_max": "57999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5437,10 +5761,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 57999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5477,14 +5797,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "58000",
-      "plz_min": "58000",
-      "plz_max": "59999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "58000",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "58000",
+        "plz_max": "59999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5506,10 +5834,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 58000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5546,14 +5870,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "59999",
-      "plz_min": "58000",
-      "plz_max": "59999",
-      "carrier": "Logsens West",
-      "carrier_code": "LW",
-      "expected_label": "Spedition Logsens"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "lw_de",
+        "plz": "59999",
+        "carrier": "Logsens West",
+        "carrier_code": "LW"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "58000",
+        "plz_max": "59999",
+        "expected_label": "Spedition Logsens"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5575,10 +5907,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Logsens West wird angezeigt mit Label Spedition Logsens"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Logsens West\" wird fuer PLZ 59999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Logsens\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5615,14 +5943,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "55000",
-      "plz_min": "55000",
-      "plz_max": "55999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "55000",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "55000",
+        "plz_max": "55999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5644,10 +5980,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 55000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5682,14 +6014,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "55999",
-      "plz_min": "55000",
-      "plz_max": "55999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "55999",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "55000",
+        "plz_max": "55999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5711,10 +6051,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 55999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5749,14 +6085,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "60000",
-      "plz_min": "60000",
-      "plz_max": "65999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "60000",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "60000",
+        "plz_max": "65999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5778,10 +6122,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 60000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5816,14 +6156,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "65999",
-      "plz_min": "60000",
-      "plz_max": "65999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "65999",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "60000",
+        "plz_max": "65999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5845,10 +6193,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 65999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5883,14 +6227,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "68000",
-      "plz_min": "68000",
-      "plz_max": "71999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "68000",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "68000",
+        "plz_max": "71999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5912,10 +6264,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 68000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -5950,14 +6298,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "71999",
-      "plz_min": "68000",
-      "plz_max": "71999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "71999",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "68000",
+        "plz_max": "71999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -5979,10 +6335,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 71999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6017,14 +6369,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "73000",
-      "plz_min": "73000",
-      "plz_max": "74999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "73000",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "73000",
+        "plz_max": "74999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6046,10 +6406,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 73000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6084,14 +6440,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "74999",
-      "plz_min": "73000",
-      "plz_max": "74999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "74999",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "73000",
+        "plz_max": "74999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6113,10 +6477,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 74999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6151,14 +6511,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "90000",
-      "plz_min": "90000",
-      "plz_max": "94999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "90000",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "90000",
+        "plz_max": "94999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6180,10 +6548,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 90000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6218,14 +6582,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "94999",
-      "plz_min": "90000",
-      "plz_max": "94999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "94999",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "90000",
+        "plz_max": "94999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6247,10 +6619,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 94999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6285,14 +6653,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "97000",
-      "plz_min": "97000",
-      "plz_max": "97999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "97000",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "97000",
+        "plz_max": "97999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6314,10 +6690,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 97000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6352,14 +6724,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Deutschland"
     ],
-    "test_data": {
-      "plz": "97999",
-      "plz_min": "97000",
-      "plz_max": "97999",
-      "carrier": "Thurner DE",
-      "carrier_code": "TH",
-      "expected_label": "Spedition Thurner"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "th_de",
+        "plz": "97999",
+        "carrier": "Thurner DE",
+        "carrier_code": "TH"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "97000",
+        "plz_max": "97999",
+        "expected_label": "Spedition Thurner"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6381,10 +6761,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Thurner DE wird angezeigt mit Label Spedition Thurner"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Thurner DE\" wird fuer PLZ 97999 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Thurner\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6419,14 +6795,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Schweiz"
     ],
-    "test_data": {
-      "plz": "1000",
-      "plz_min": "1000",
-      "plz_max": "9658",
-      "carrier": "Post CH",
-      "carrier_code": "POST",
-      "expected_label": "Postversand"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "post_ch",
+        "plz": "1000",
+        "carrier": "Post CH",
+        "carrier_code": "POST"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1000",
+        "plz_max": "9658",
+        "expected_label": "Postversand"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6448,10 +6832,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Post CH wird angezeigt mit Label Postversand"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Post CH\" wird fuer PLZ 1000 angezeigt",
-      "Versandart-Label enthaelt \"Postversand\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6485,14 +6865,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Schweiz"
     ],
-    "test_data": {
-      "plz": "9658",
-      "plz_min": "1000",
-      "plz_max": "9658",
-      "carrier": "Post CH",
-      "carrier_code": "POST",
-      "expected_label": "Postversand"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "post_ch",
+        "plz": "9658",
+        "carrier": "Post CH",
+        "carrier_code": "POST"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1000",
+        "plz_max": "9658",
+        "expected_label": "Postversand"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6514,10 +6902,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Post CH wird angezeigt mit Label Postversand"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Post CH\" wird fuer PLZ 9658 angezeigt",
-      "Versandart-Label enthaelt \"Postversand\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6551,14 +6935,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Schweiz"
     ],
-    "test_data": {
-      "plz": "1000",
-      "plz_min": "1000",
-      "plz_max": "9658",
-      "carrier": "Kuoni CH",
-      "carrier_code": "KUONI",
-      "expected_label": "Spedition Kuoni"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "kuoni_ch",
+        "plz": "1000",
+        "carrier": "Kuoni CH",
+        "carrier_code": "KUONI"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1000",
+        "plz_max": "9658",
+        "expected_label": "Spedition Kuoni"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6580,10 +6972,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Kuoni CH wird angezeigt mit Label Spedition Kuoni"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Kuoni CH\" wird fuer PLZ 1000 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Kuoni\""
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -6618,14 +7006,22 @@
       "Speditionsprodukt im Warenkorb",
       "Lieferadresse in Schweiz"
     ],
-    "test_data": {
-      "plz": "9658",
-      "plz_min": "1000",
-      "plz_max": "9658",
-      "carrier": "Kuoni CH",
-      "carrier_code": "KUONI",
-      "expected_label": "Spedition Kuoni"
-    },
+    "test_data": [
+      {
+        "type": "shipping",
+        "name": "kuoni_ch",
+        "plz": "9658",
+        "carrier": "Kuoni CH",
+        "carrier_code": "KUONI"
+      },
+      {
+        "type": "extra",
+        "name": "default",
+        "plz_min": "1000",
+        "plz_max": "9658",
+        "expected_label": "Spedition Kuoni"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -6647,10 +7043,6 @@
         "action": "Versandart-Anzeige pruefen",
         "expected": "Versandpartner Kuoni CH wird angezeigt mit Label Spedition Kuoni"
       }
-    ],
-    "postconditions": [
-      "Versandpartner \"Kuoni CH\" wird fuer PLZ 9658 angezeigt",
-      "Versandart-Label enthaelt \"Spedition Kuoni\""
     ],
     "cleanup": [
       "Warenkorb leeren"

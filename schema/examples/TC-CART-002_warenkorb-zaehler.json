@@ -3,10 +3,17 @@
   "name": "Warenkorb-Zaehler aktualisiert sich nach Hinzufuegen",
   "category": "regression",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -21,20 +28,35 @@
       "step": 1,
       "action": "Produktseite aufrufen (test_product_url)",
       "expected": "Produktseite lädt korrekt",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Cookie-Banner akzeptieren",
       "expected": "Banner wird geschlossen",
-      "inputs": [{"action": "click", "selector": "button#accept"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "'In den Warenkorb' Button klicken",
       "expected": "Produkt wird zum Warenkorb hinzugefügt",
       "selector_hint": ".btn-buy, [data-add-to-cart]",
-      "inputs": [{"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 4,
@@ -43,17 +65,25 @@
       "selector_hint": ".header-cart-total, .cart-quantity"
     }
   ],
-  "test_data": {
-    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-    "product_name": "Kurzarmshirt aus Bio-Baumwolle"
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_cart.py",
     "function_name": "test_cart_counter_updates",
-    "tags": ["regression", "cart", "feature"]
+    "tags": [
+      "regression",
+      "cart",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

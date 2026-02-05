@@ -3,7 +3,7 @@
   "name": "MwSt-Berechnung fuer AT (20%) pruefen",
   "category": "data-validation",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT"
@@ -23,8 +23,14 @@
       "action": "Produkt in den Warenkorb hinzufuegen",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"},
-        {"action": "click", "selector": "button.btn-buy"}
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
       ]
     },
     {
@@ -32,13 +38,20 @@
       "action": "MwSt-Hinweis pruefen (20% AT)",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
-        {"action": "navigate", "value": "/checkout/cart"}
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
       ]
     }
   ],
-  "test_data": {
-    "vat_rate": 20
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "vat_rate": 20
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

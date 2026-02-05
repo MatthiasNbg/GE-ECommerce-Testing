@@ -3,10 +3,14 @@
   "name": "Checkout mit registriertem Benutzer",
   "category": "critical-path",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT"],
-    "environments": ["staging"],
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -20,31 +24,70 @@
       "step": 1,
       "action": "Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt ist im Warenkorb sichtbar",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Einloggen mit Testaccount",
       "expected": "Benutzer ist erfolgreich eingeloggt",
-      "inputs": [{"action": "fill", "selector": "#loginMail", "value": "test@example.com"}, {"action": "fill", "selector": "#loginPassword", "value": "TestPasswort123!"}, {"action": "click", "selector": "button:has-text('Anmelden')"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value": "TestPasswort123!"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Zahlungsart wählen",
       "expected": "Zahlungsart ist ausgewählt",
-      "inputs": [{"action": "click", "selector": ".payment-method:has-text('Rechnung')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".payment-method:has-text('Rechnung')"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "AGB akzeptieren",
       "expected": "AGB-Checkbox ist aktiviert",
-      "inputs": [{"action": "check", "selector": "#tos"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Bestellung absenden",
       "expected": "Bestellung wird erfolgreich verarbeitet",
-      "inputs": [{"action": "click", "selector": "button:has-text('Zahlungspflichtig bestellen')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
     },
     {
       "step": 6,
@@ -56,17 +99,28 @@
     "Bestellnummer wird angezeigt",
     "Bestellbestätigung enthält korrekte Daten"
   ],
-  "test_data": {
-    "user_type": "registered",
-    "payment_method": "invoice"
-  },
+  "test_data": [
+    {
+      "type": "payment",
+      "name": "default",
+      "method": "invoice"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "user_type": "registered"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_critical_path.py",
     "function_name": "test_registered_user_checkout",
-    "tags": ["critical", "checkout"]
+    "tags": [
+      "critical",
+      "checkout"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

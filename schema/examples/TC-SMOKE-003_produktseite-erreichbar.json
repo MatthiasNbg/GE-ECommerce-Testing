@@ -3,10 +3,17 @@
   "name": "Produktseite erreichbar",
   "category": "smoke",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -18,7 +25,12 @@
       "step": 1,
       "action": "Produktseite aufrufen",
       "expected": "Seite lädt ohne HTTP-Fehler",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
     },
     {
       "step": 2,
@@ -45,7 +57,9 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_smoke.py",
     "function_name": "test_product_page_accessible",
-    "tags": ["smoke"]
+    "tags": [
+      "smoke"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

@@ -116,40 +116,17 @@
       }
     },
     "test_data": {
-      "type": "object",
-      "description": "Spezifische Testdaten – product_ref als Referenz statt eingebetteter Objekte",
-      "properties": {
-        "product_ref": {
-          "type": ["string", "null"],
-          "description": "Logische Produktreferenz (z.B. 'simple_product_post', 'spedition_product')"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "name"],
+        "properties": {
+          "type": { "type": "string", "description": "Art der Testdaten (z.B. product, shipping, address, promo, sync_config)" },
+          "name": { "type": "string", "description": "Eindeutiger Name innerhalb des Typs (z.B. default, nicht_rabattierbar, post_at)" }
         },
-        "products": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "ref": { "type": "string", "description": "Logische Referenz statt konkreter ID" },
-              "id": { "type": "string" },
-              "path": { "type": "string" },
-              "type": {
-                "type": "string",
-                "enum": ["post", "spedition", "gutschein", "wertgutschein", "accessoire"]
-              },
-              "not_discountable": { "type": "boolean" },
-              "has_sale_price": { "type": "boolean" }
-            }
-          }
-        },
-        "promo_codes": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "amounts": {
-          "type": "object",
-          "additionalProperties": { "type": "number" }
-        }
+        "additionalProperties": true
       },
-      "additionalProperties": true
+      "description": "Typisierte Testdaten-Objekte"
     },
     "steps": {
       "type": "array",

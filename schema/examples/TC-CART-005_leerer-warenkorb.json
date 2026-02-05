@@ -3,10 +3,17 @@
   "name": "Leerer Warenkorb zeigt Hinweismeldung",
   "category": "regression",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -21,14 +28,24 @@
       "step": 1,
       "action": "Warenkorb öffnen",
       "expected": "Warenkorb-Seite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Alle Produkte aus dem Warenkorb entfernen",
       "expected": "Warenkorb ist leer",
       "selector_hint": "button.line-item-remove-button",
-      "inputs": [{"action": "click", "selector": ".line-item-remove"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".line-item-remove"
+        }
+      ]
     },
     {
       "step": 3,
@@ -37,17 +54,25 @@
       "selector_hint": ".cart-empty"
     }
   ],
-  "test_data": {
-    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-    "product_name": "Kurzarmshirt aus Bio-Baumwolle"
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_cart.py",
     "function_name": "test_empty_cart_shows_message",
-    "tags": ["regression", "cart", "feature"]
+    "tags": [
+      "regression",
+      "cart",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

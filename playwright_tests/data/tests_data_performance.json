@@ -206,9 +206,6 @@
         "expected": "Ungefilterte Gesamtansicht wird wiederhergestellt"
       }
     ],
-    "postconditions": [
-      "Grundfarbe-Filter zeigt nur Produkte mit der gewählten Farbe an"
-    ],
     "automation": {
       "playwright": null,
       "cypress": null,
@@ -268,9 +265,6 @@
         "expected": "Alle Produkte werden wieder angezeigt"
       }
     ],
-    "postconditions": [
-      "Produkttyp-Filter zeigt nur Produkte des gewählten Typs an"
-    ],
     "automation": {
       "playwright": null,
       "cypress": null,
@@ -329,9 +323,6 @@
         "action": "Währungssymbol und -format pro Länder-Shop prüfen",
         "expected": "AT/DE zeigen EUR, CH zeigt CHF"
       }
-    ],
-    "postconditions": [
-      "Kein Produkt zeigt 0,00 oder einen leeren Preis an"
     ],
     "automation": {
       "playwright": null,
@@ -621,9 +612,6 @@
         "expected": "Status ist konsistent zwischen Listing und Detailseite"
       }
     ],
-    "postconditions": [
-      "Verfügbarkeitsstatus wird korrekt und deutlich angezeigt"
-    ],
     "automation": {
       "playwright": null,
       "cypress": null,
@@ -853,9 +841,6 @@
         "expected": "Alle Bild-URLs liefern HTTP 200 zurück"
       }
     ],
-    "postconditions": [
-      "Keine Platzhalterbilder werden angezeigt"
-    ],
     "automation": {
       "playwright": null,
       "cypress": null,
@@ -920,9 +905,6 @@
         "action": "Ergebnisse in Performance-Report zusammenfassen",
         "expected": "Report mit Response-Zeiten, Fehlerquote und Durchsatz wird erstellt"
       }
-    ],
-    "postconditions": [
-      "System bleibt stabil während des gesamten Testlaufs"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_performance.py",
@@ -1052,9 +1034,6 @@
         "action": "Stress-Test-Report mit allen Laststufen und Metriken erstellen",
         "expected": "Detaillierter Report mit Grafiken und Schwellwert-Analyse"
       }
-    ],
-    "postconditions": [
-      "System bleibt bis mindestens 200 gleichzeitige Benutzer stabil"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_performance.py",

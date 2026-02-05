@@ -3,10 +3,14 @@
   "name": "Adressverwaltung - Neue Adresse hinzufügen",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT"],
-    "environments": ["staging"],
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -23,19 +27,69 @@
       "step": 1,
       "action": "Adressverwaltung aufrufen",
       "expected": "Adressverwaltungsseite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/account/address"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/address"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Neue Adresse hinzufügen (5020 Salzburg)",
       "expected": "Adressformular wird geöffnet und Daten eingetragen",
-      "inputs": [{"action": "click", "selector": "a:has-text('Neue Adresse hinzufügen')"}, {"action": "select", "selector": "#addresspersonalSalutation", "value": "mr"}, {"action": "fill", "selector": "#addresspersonalFirstName", "value": "Test"}, {"action": "fill", "selector": "#addresspersonalLastName", "value": "Kunde"}, {"action": "fill", "selector": "#addressAddressStreet", "value": "Salzburger Strasse 1"}, {"action": "fill", "selector": "#addressAddressZipcode", "value": "5020"}, {"action": "fill", "selector": "#addressAddressCity", "value": "Salzburg"}, {"action": "select", "selector": "#addressAddressCountry", "value": "AT"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Neue Adresse hinzufügen')"
+        },
+        {
+          "action": "select",
+          "selector": "#addresspersonalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#addresspersonalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#addresspersonalLastName",
+          "value": "Kunde"
+        },
+        {
+          "action": "fill",
+          "selector": "#addressAddressStreet",
+          "value": "Salzburger Strasse 1"
+        },
+        {
+          "action": "fill",
+          "selector": "#addressAddressZipcode",
+          "value": "5020"
+        },
+        {
+          "action": "fill",
+          "selector": "#addressAddressCity",
+          "value": "Salzburg"
+        },
+        {
+          "action": "select",
+          "selector": "#addressAddressCountry",
+          "value": "AT"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Speichern",
       "expected": "Neue Adresse wird gespeichert",
-      "inputs": [{"action": "click", "selector": "button:has-text('Adresse speichern')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Adresse speichern')"
+        }
+      ]
     },
     {
       "step": 4,
@@ -43,20 +97,25 @@
       "expected": "Neue Adresse erscheint in der Adressliste"
     }
   ],
-  "test_data": {
-    "new_address": {
+  "test_data": [
+    {
+      "type": "address",
+      "name": "new",
       "zip": "5020",
       "city": "Salzburg",
       "country": "AT"
     }
-  },
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_account.py",
     "function_name": "test_address_management",
-    "tags": ["account", "feature"]
+    "tags": [
+      "account",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

@@ -3,10 +3,14 @@
   "name": "Registrierung erfolgreich durchführen",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT"],
-    "environments": ["staging"],
+    "channels": [
+      "AT"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -22,7 +26,12 @@
       "step": 1,
       "action": "Registrierungsseite aufrufen",
       "expected": "Registrierungsformular wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/account/login"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
     },
     {
       "step": 2,
@@ -33,25 +42,87 @@
       "step": 3,
       "action": "Formulardaten eingeben (Anrede, Vorname, Nachname)",
       "expected": "Persönliche Daten sind im Formular eingetragen",
-      "inputs": [{"action": "select", "selector": "#personalSalutation", "value": "mr"}, {"action": "fill", "selector": "#personalFirstName", "value": "Test"}, {"action": "fill", "selector": "#personalLastName", "value": "Kunde"}]
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#personalSalutation",
+          "value": "mr"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalFirstName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalLastName",
+          "value": "Kunde"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "E-Mail und Passwort eingeben",
       "expected": "Zugangsdaten sind im Formular eingetragen",
-      "inputs": [{"action": "fill", "selector": "#personalMail", "value": "test@example.com"}, {"action": "fill", "selector": "#personalPassword", "value": "TestPasswort123!"}, {"action": "fill", "selector": "#personalPasswordConfirmation", "value": "TestPasswort123!"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalPassword",
+          "value": "TestPasswort123!"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalPasswordConfirmation",
+          "value": "TestPasswort123!"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Adresse eingeben (4020 Linz AT)",
       "expected": "Adressdaten sind im Formular eingetragen",
-      "inputs": [{"action": "fill", "selector": "#billingAddressAddressStreet", "value": "Teststrasse 1"}, {"action": "fill", "selector": "#billingAddressAddressZipcode", "value": "4020"}, {"action": "fill", "selector": "#billingAddressAddressCity", "value": "Linz"}, {"action": "select", "selector": "#billingAddressAddressCountry", "value": "AT"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressStreet",
+          "value": "Teststrasse 1"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        },
+        {
+          "action": "select",
+          "selector": "#billingAddressAddressCountry",
+          "value": "AT"
+        }
+      ]
     },
     {
       "step": 6,
       "action": "Formular absenden",
       "expected": "Registrierungsformular wird abgeschickt",
-      "inputs": [{"action": "check", "selector": "#acceptedDataProtection"}, {"action": "click", "selector": "button:has-text('Registrieren')"}]
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Registrieren')"
+        }
+      ]
     },
     {
       "step": 7,
@@ -59,21 +130,30 @@
       "expected": "Benutzer wird auf Account-Seite weitergeleitet oder Bestätigung wird angezeigt"
     }
   ],
-  "test_data": {
-    "password": "TestPasswort123!",
-    "address": {
+  "test_data": [
+    {
+      "type": "address",
+      "name": "default",
       "zip": "4020",
       "city": "Linz",
       "country": "AT"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "password": "TestPasswort123!"
     }
-  },
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_account.py",
     "function_name": "test_registration_success",
-    "tags": ["account", "feature"]
+    "tags": [
+      "account",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

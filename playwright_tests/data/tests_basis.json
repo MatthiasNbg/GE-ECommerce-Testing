@@ -85,11 +85,6 @@
         "expected": "In den Warenkorb-Button ist sichtbar und klickbar"
       }
     ],
-    "postconditions": [
-      "Produktname wird angezeigt",
-      "Preis wird korrekt angezeigt",
-      "Mindestens ein Produktbild ist sichtbar"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_smoke.py",
       "cypress": null,
@@ -141,10 +136,6 @@
         "expected": "Zähler zeigt mindestens 1 an"
       }
     ],
-    "postconditions": [
-      "Bestätigung wird angezeigt",
-      "Warenkorb-Zähler aktualisiert sich"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_smoke.py",
       "cypress": null,
@@ -190,11 +181,6 @@
         "action": "Checkout-Formular prüfen",
         "expected": "Adress- und Zahlungsfelder sind sichtbar"
       }
-    ],
-    "postconditions": [
-      "Checkout-Seite ist erreichbar",
-      "Checkout-Formular wird korrekt angezeigt",
-      "Keine Fehlermeldungen beim Laden"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_smoke.py",
@@ -246,9 +232,6 @@
         "action": "Suchergebnisse prüfen",
         "expected": "Mindestens ein Suchergebnis wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "Suchergebnisseite zeigt Produkte an"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_smoke.py",
@@ -313,11 +296,6 @@
         "action": "Bestellung abschließen",
         "expected": "Bestellbestätigung wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "Gast-Checkout kann vollständig durchlaufen werden",
-      "Bestellbestätigung mit Bestellnummer wird angezeigt",
-      "Alle Preise werden in EUR angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -388,11 +366,6 @@
         "expected": "Bestellbestätigung wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Gast-Checkout kann vollständig durchlaufen werden",
-      "Bestellbestätigung mit Bestellnummer wird angezeigt",
-      "Alle Preise werden in EUR angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -462,11 +435,6 @@
         "expected": "Bestellbestätigung wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Gast-Checkout kann vollständig durchlaufen werden",
-      "Bestellbestätigung mit Bestellnummer wird angezeigt",
-      "Alle Preise werden in CHF angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -532,10 +500,6 @@
         "expected": "Bestellbestätigung wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Checkout mit gespeicherter Adresse funktioniert",
-      "Bestellbestätigung mit Bestellnummer wird angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -590,10 +554,6 @@
         "expected": "Zahlungsarten sind auswählbar ohne Fehler"
       }
     ],
-    "postconditions": [
-      "Alle für AT konfigurierten Zahlungsarten werden angezeigt",
-      "Keine Fehlermeldungen bei der Auswahl"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -647,10 +607,6 @@
         "expected": "Zahlungsarten sind auswählbar ohne Fehler"
       }
     ],
-    "postconditions": [
-      "Alle für DE konfigurierten Zahlungsarten werden angezeigt",
-      "Keine Fehlermeldungen bei der Auswahl"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -703,10 +659,6 @@
         "action": "Jede Zahlungsart auswählen",
         "expected": "Zahlungsarten sind auswählbar ohne Fehler"
       }
-    ],
-    "postconditions": [
-      "Alle für CH konfigurierten Zahlungsarten werden angezeigt",
-      "Keine Fehlermeldungen bei der Auswahl"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -763,10 +715,6 @@
         "expected": "Warenkorb enthält die zuvor hinzugefügten Produkte"
       }
     ],
-    "postconditions": [
-      "Warenkorb bleibt nach Session-Wechsel erhalten",
-      "Warenkorb-Zähler zeigt korrekte Anzahl"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -822,10 +770,6 @@
         "action": "Produktname und Preis im Warenkorb prüfen",
         "expected": "Name und Preis stimmen mit der Produktseite überein"
       }
-    ],
-    "postconditions": [
-      "Produkt wird im Warenkorb angezeigt",
-      "Produktname und Preis sind korrekt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -887,10 +831,6 @@
         "expected": "Zähler zeigt 2"
       }
     ],
-    "postconditions": [
-      "Warenkorb-Zähler aktualisiert sich nach jedem Hinzufügen",
-      "Zähler zeigt die korrekte Anzahl der Produkte"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -945,10 +885,6 @@
         "action": "Gesamtpreis prüfen",
         "expected": "Gesamtpreis ist doppelter Einzelpreis"
       }
-    ],
-    "postconditions": [
-      "Gesamtpreis aktualisiert sich bei Mengenänderung",
-      "Zwischensumme wird ebenfalls aktualisiert"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1006,10 +942,6 @@
         "expected": "Nur noch ein Produkt im Warenkorb, Preis wurde aktualisiert"
       }
     ],
-    "postconditions": [
-      "Gesamtpreis wird aktualisiert",
-      "Warenkorb-Zähler wird aktualisiert"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -1059,9 +991,6 @@
         "action": "Meldung für leeren Warenkorb prüfen",
         "expected": "Hinweismeldung wird angezeigt (z.B. 'Ihr Warenkorb ist leer')"
       }
-    ],
-    "postconditions": [
-      "Leerer Warenkorb zeigt eine passende Hinweismeldung"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1117,9 +1046,6 @@
         "action": "Zur Homepage navigieren und Warenkorb öffnen",
         "expected": "Produkt ist noch im Warenkorb"
       }
-    ],
-    "postconditions": [
-      "Warenkorb-Inhalt bleibt bei Navigation erhalten"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1182,9 +1108,6 @@
         "expected": "Gesamtpreis ist die Summe aller Einzelpreise"
       }
     ],
-    "postconditions": [
-      "Alle Produkte werden im Warenkorb angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -1245,9 +1168,6 @@
         "expected": "Gesamtpreis ist die korrekte Summe"
       }
     ],
-    "postconditions": [
-      "Zeilenpreise sind korrekt (Einzelpreis x Menge)"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -1297,9 +1217,6 @@
         "expected": "Das gesuchte Produkt erscheint in den Vorschlägen"
       }
     ],
-    "postconditions": [
-      "Autocomplete-Dropdown wird angezeigt"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
       "cypress": null,
@@ -1345,9 +1262,6 @@
         "action": "Produktdetailseite prüfen",
         "expected": "Korrekte Produktseite wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "Die angezeigte Produktseite entspricht dem ausgewählten Vorschlag"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
@@ -1396,10 +1310,6 @@
         "expected": "Das gesuchte Produkt wird in den Ergebnissen angezeigt"
       }
     ],
-    "postconditions": [
-      "Suchergebnisseite wird geladen",
-      "Produktname und Preis werden angezeigt"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
       "cypress": null,
@@ -1445,9 +1355,6 @@
         "action": "Produktdetailseite prüfen",
         "expected": "Korrekte Produktseite wird angezeigt mit Name und Preis"
       }
-    ],
-    "postconditions": [
-      "Die angezeigte Produktseite entspricht dem angeklickten Ergebnis"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
@@ -1496,10 +1403,6 @@
         "expected": "Keine Ergebnisse gefunden-Meldung wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Keine Suchergebnisse werden angezeigt",
-      "Eine passende Hinweismeldung wird gezeigt (z.B. 'Keine Ergebnisse gefunden')"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
       "cypress": null,
@@ -1545,9 +1448,6 @@
         "action": "Suchvorschläge-Dropdown prüfen",
         "expected": "Dropdown mit Vorschlägen ist sichtbar"
       }
-    ],
-    "postconditions": [
-      "Vorschläge werden nach wenigen Zeichen angezeigt"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
@@ -1694,11 +1594,6 @@
         "expected": "Produktbild ist sichtbar"
       }
     ],
-    "postconditions": [
-      "Preis wird im Autocomplete angezeigt",
-      "Produktbild wird im Autocomplete angezeigt",
-      "Alle Informationen sind korrekt und vollständig"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_search.py",
       "cypress": null,
@@ -1807,10 +1702,6 @@
         "expected": "Fehlermeldung wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Registrierung wird abgelehnt",
-      "Passende Fehlermeldung wird angezeigt"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",
       "cypress": null,
@@ -1857,9 +1748,6 @@
         "action": "Registrierung absenden",
         "expected": "Validierungsfehler wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "Fehlermeldung wird beim E-Mail-Feld angezeigt"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",
@@ -1908,10 +1796,6 @@
         "action": "Registrierung absenden",
         "expected": "Fehlermeldung zum Passwort wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "Schwaches Passwort wird abgelehnt",
-      "Fehlermeldung mit Passwort-Anforderungen wird angezeigt"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",
@@ -1972,9 +1856,6 @@
         "expected": "Benutzer ist eingeloggt, Dashboard oder Account-Seite wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Benutzername oder Anrede wird im Header angezeigt"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",
       "cypress": null,
@@ -2025,11 +1906,6 @@
         "action": "Login absenden",
         "expected": "Fehlermeldung wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "Login wird abgelehnt",
-      "Fehlermeldung wird angezeigt",
-      "Benutzer bleibt auf der Login-Seite"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",
@@ -2094,9 +1970,6 @@
         "expected": "Änderung wurde gespeichert"
       }
     ],
-    "postconditions": [
-      "Profilseite zeigt aktuelle persönliche Daten"
-    ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",
       "cypress": null,
@@ -2154,10 +2027,6 @@
         "action": "Gespeicherte Adresse in der Übersicht prüfen",
         "expected": "Neue Adresse erscheint in der Liste"
       }
-    ],
-    "postconditions": [
-      "Adressübersicht zeigt alle gespeicherten Adressen",
-      "Neue Adresse kann hinzugefügt werden"
     ],
     "automation": {
       "playwright": "playwright_tests/tests/test_account.py",

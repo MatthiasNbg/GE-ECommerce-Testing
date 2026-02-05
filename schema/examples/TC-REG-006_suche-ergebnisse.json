@@ -3,21 +3,37 @@
   "name": "Suche liefert Ergebnisse",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
-  "preconditions": ["Shop ist erreichbar"],
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
   "steps": [
     {
       "step": 1,
       "action": "Suchseite mit Suchbegriff aufrufen",
       "selector": null,
       "inputs": [
-        {"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"},
-        {"action": "fill", "selector": "input#header-main-search-input", "value": "test"}
+        {
+          "action": "click",
+          "selector": "button.search-toggle-btn.js-search-toggle-btn"
+        },
+        {
+          "action": "fill",
+          "selector": "input#header-main-search-input",
+          "value": "test"
+        }
       ],
       "expected": "Suchseite wird geladen"
     },
@@ -28,16 +44,26 @@
       "expected": "Mindestens ein Suchergebnis wird angezeigt"
     }
   ],
-  "test_data": {
-    "search_terms": ["Bett", "Kissen", "49415"]
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "search_terms": [
+        "Bett",
+        "Kissen",
+        "49415"
+      ]
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_regression.py",
     "function_name": "test_search_returns_results",
-    "tags": ["regression"]
+    "tags": [
+      "regression"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

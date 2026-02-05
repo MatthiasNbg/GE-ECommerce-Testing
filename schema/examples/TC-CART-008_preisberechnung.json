@@ -3,10 +3,17 @@
   "name": "Preisberechnung im Warenkorb korrekt (Einzelpreis x Menge)",
   "category": "regression",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -14,7 +21,7 @@
     "Testprodukt ist verfügbar und auf Lager"
   ],
   "postconditions": [
-    "Gesamtpreis entspricht Einzelpreis \u00d7 Menge (\u00b11% Toleranz)"
+    "Gesamtpreis entspricht Einzelpreis × Menge (±1% Toleranz)"
   ],
   "steps": [
     {
@@ -22,13 +29,27 @@
       "action": "Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
       "expected": "Produkt wird zum Warenkorb hinzugefügt",
       "selector_hint": ".btn-buy, [data-add-to-cart]",
-      "inputs": [{"action": "navigate", "value": "/p/bademantel-raute-fuer-damen-und-herren/ge-p-410933"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/bademantel-raute-fuer-damen-und-herren/ge-p-410933"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Warenkorb öffnen",
       "expected": "Warenkorb-Seite wird angezeigt mit dem Produkt",
-      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
     },
     {
       "step": 3,
@@ -41,28 +62,46 @@
       "action": "Menge auf 3 ändern",
       "expected": "Mengenfeld wird auf 3 gesetzt und Warenkorb aktualisiert sich",
       "selector_hint": "input[name='quantity']",
-      "inputs": [{"action": "fill", "selector": "input[name='quantity']", "value": "3"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='quantity']",
+          "value": "3"
+        }
+      ]
     },
     {
       "step": 5,
       "action": "Gesamtpreis des Line-Items prüfen (Einzelpreis x 3)",
-      "expected": "Gesamtpreis entspricht Einzelpreis \u00d7 3 mit maximal 1% Abweichung",
+      "expected": "Gesamtpreis entspricht Einzelpreis × 3 mit maximal 1% Abweichung",
       "selector_hint": ".line-item-total-price"
     }
   ],
-  "test_data": {
-    "product_path": "p/bademantel-raute-fuer-damen-und-herren/ge-p-410933",
-    "product_name": "Bademantel Raute für Damen und Herren",
-    "new_quantity": 3,
-    "price_tolerance_percent": 1
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "path": "p/bademantel-raute-fuer-damen-und-herren/ge-p-410933",
+      "product_name": "Bademantel Raute für Damen und Herren"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "new_quantity": 3,
+      "price_tolerance_percent": 1
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_cart.py",
     "function_name": "test_price_calculation_correct",
-    "tags": ["regression", "cart", "feature"]
+    "tags": [
+      "regression",
+      "cart",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

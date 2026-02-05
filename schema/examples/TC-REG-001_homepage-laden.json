@@ -3,19 +3,33 @@
   "name": "Homepage laden",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
-  "preconditions": ["Shop ist erreichbar"],
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
   "steps": [
     {
       "step": 1,
       "action": "Homepage aufrufen",
       "selector": null,
-      "inputs": [{"action": "navigate", "value": "/"}],
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ],
       "expected": "Seite wird geladen"
     },
     {
@@ -31,17 +45,23 @@
       "expected": "Seite enthält 'Grüne Erde'"
     }
   ],
-  "test_data": {
-    "page": "/",
-    "expected_content": "Grüne Erde"
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "page": "/",
+      "expected_content": "Grüne Erde"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_regression.py",
     "function_name": "test_critical_page_loads[/]",
-    "tags": ["regression"]
+    "tags": [
+      "regression"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

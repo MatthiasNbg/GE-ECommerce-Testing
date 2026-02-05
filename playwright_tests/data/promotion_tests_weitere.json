@@ -51,10 +51,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Prozentuale oder absolute Berechnung ist korrekt",
-      "Funktioniert in allen DACH-Verkaufskanälen"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -127,9 +123,6 @@
         "action": "Test in allen Verkaufskanälen (AT, DE, CH) durchführen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Funktioniert in allen DACH-Verkaufskanälen"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -212,10 +205,6 @@
         "action": "Test in AT, DE, CH durchführen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Unter MBW: Promotion wird abgelehnt mit Hinweis auf MBW",
-      "Ab MBW: Promotion wird akzeptiert"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -358,9 +347,6 @@
         "action": "Gesamtsumme validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Prozentuale Berechnung ist korrekt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -505,9 +491,6 @@
         "expected": "Prüfen ob 2x rabattiert (je nach Promo-Logik)"
       }
     ],
-    "postconditions": [
-      "Rabatt wird als separater Nachlass im Warenkorb angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -578,9 +561,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Originalpreis wird durchgestrichen angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -644,9 +624,6 @@
         "action": "Rabattberechnung validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Filterung über advertising_material_id funktioniert korrekt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -774,9 +751,6 @@
         "action": "Test in allen Verkaufskanälen (AT: EUR, DE: EUR, CH: CHF) durchführen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Originalpreis wird durchgestrichen angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -983,10 +957,6 @@
         "expected": "Rabatt wird als separate Promotion-Zeile angezeigt"
       }
     ],
-    "postconditions": [
-      "Bei 5 Stück: 1 Stück wird als 100% rabattiert angezeigt",
-      "Rabatt wird als separate Promotion-Zeile angezeigt"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -1056,9 +1026,6 @@
         "action": "Gesamtpreis validieren",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Gratisprodukt wird mit 0 EUR/CHF angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren"
@@ -1200,10 +1167,6 @@
         "expected": "Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)"
       }
     ],
-    "postconditions": [
-      "Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)",
-      "Gesamtpreis enthält nur Kissen-Preise"
-    ],
     "cleanup": [
       "Warenkorb leeren"
     ],
@@ -1279,9 +1242,6 @@
         "action": "Reihenfolge umkehren und erneut testen",
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
-    ],
-    "postconditions": [
-      "Gesamtpreis ist korrekt (beide Rabatte berücksichtigt)"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -1359,9 +1319,6 @@
         "expected": "Anzeige ist korrekt"
       }
     ],
-    "postconditions": [
-      "Gesamtpreis ist korrekt berechnet"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Alle Promotion-Codes entfernen"
@@ -1438,9 +1395,6 @@
         "action": "Shopware-Promotion-Priorität variieren und Auswirkung testen",
         "expected": "Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt"
       }
-    ],
-    "postconditions": [
-      "Beide Rabatte werden als separate Zeilen im Warenkorb angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren",

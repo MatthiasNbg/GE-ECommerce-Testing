@@ -47,9 +47,6 @@
         "expected": "Ergebnis ist konsistent in allen Kanaelen"
       }
     ],
-    "postconditions": [
-      "Keine Promotion kann auf Gutschein-Kauf angewendet werden"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Gutschein-Code entfernen"
@@ -114,10 +111,6 @@
         "action": "Prüfen, dass kein Guthaben über den Warenwert hinaus erstattet wird",
         "expected": "Anzeige ist korrekt"
       }
-    ],
-    "postconditions": [
-      "Warenkorb kann maximal auf 0 EUR reduziert werden",
-      "Überschüssiges Guthaben bleibt auf dem Gutschein"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -289,15 +282,13 @@
       "Warenkorb ist leer",
       "Warenkorb enthält reguläres Produkt (z.B. Bett \"Somnia\")"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "736675",
-          "type": "gutschein",
-          "ref": "gutschein_736675"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "gutschein",
+        "name": "gutschein_736675",
+        "id": "736675"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -319,9 +310,6 @@
         "action": "Fehlermeldung prüfen",
         "expected": "Fehlermeldung wird angezeigt"
       }
-    ],
-    "postconditions": [
-      "User bleibt auf PDP oder wird zu Cart geleitet"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -361,15 +349,13 @@
       "Warenkorb ist leer",
       "Warenkorb enthält Einkaufsgutschein 50€ (Artikel 736675)"
     ],
-    "test_data": {
-      "products": [
-        {
-          "id": "736675",
-          "type": "gutschein",
-          "ref": "gutschein_736675"
-        }
-      ]
-    },
+    "test_data": [
+      {
+        "type": "gutschein",
+        "name": "gutschein_736675",
+        "id": "736675"
+      }
+    ],
     "steps": [
       {
         "step": 1,
@@ -452,9 +438,6 @@
         "expected": "Voller Gutschein-Preis wird angezeigt"
       }
     ],
-    "postconditions": [
-      "Warenkorb zeigt vollen Gutschein-Preis"
-    ],
     "cleanup": [
       "Warenkorb leeren",
       "Gutschein-Code entfernen"
@@ -519,9 +502,6 @@
         "action": "Prüfen, dass User Warenkorb bereinigen muss",
         "expected": "Checkout bleibt blockiert bis Warenkorb bereinigt"
       }
-    ],
-    "postconditions": [
-      "Fehlermeldung wird angezeigt"
     ],
     "cleanup": [
       "Warenkorb leeren",
@@ -589,10 +569,6 @@
         "action": "Gesamtpreis prüfen",
         "expected": "Gesamtpreis: 150€"
       }
-    ],
-    "postconditions": [
-      "Prüfung: Neues Item ist Gutschein + Warenkorb enthält nur Gutscheine",
-      "Warenkorb zeigt beide Gutscheine (50€ + 100€)"
     ],
     "cleanup": [
       "Warenkorb leeren",

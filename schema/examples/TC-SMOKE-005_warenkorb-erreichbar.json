@@ -3,10 +3,17 @@
   "name": "Warenkorb erreichbar",
   "category": "smoke",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -18,7 +25,12 @@
       "action": "Warenkorb-Seite aufrufen",
       "expected": "Seite lädt ohne HTTP-Fehler",
       "selector_hint": "/checkout/cart",
-      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
     },
     {
       "step": 2,
@@ -33,7 +45,9 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_smoke.py",
     "function_name": "test_cart_accessible",
-    "tags": ["smoke"]
+    "tags": [
+      "smoke"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

@@ -3,7 +3,7 @@
   "name": "Massentest Checkout Stresstest",
   "category": "e2e",
   "priority": "P2",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "AT",
@@ -24,7 +24,12 @@
       "step": 1,
       "action": "200 Bestellungen mit 20 Workern parallel ausfuehren",
       "expected": "Schritt erfolgreich ausgefuehrt",
-      "inputs": [{"action": "navigate", "value": "/"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
     },
     {
       "step": 2,
@@ -32,11 +37,15 @@
       "expected": "Schritt erfolgreich ausgefuehrt"
     }
   ],
-  "test_data": {
-    "order_count": 200,
-    "workers": 20,
-    "min_success_rate": 90
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "order_count": 200,
+      "workers": 20,
+      "min_success_rate": 90
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

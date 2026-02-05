@@ -3,7 +3,7 @@
   "name": "Versandart Logsens Sued fuer PLZ 54999 (Bitburg) - Maximum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
     "channels": [
       "DE"
@@ -130,15 +130,19 @@
       "selector_hint": "input[name='shippingMethodId']"
     }
   ],
-  "test_data": {
-    "product_path": "p/polsterbett-almeno/ge-p-693278",
-    "country": "DE",
-    "carrier": "Logsens Sued",
-    "plz": "54999",
-    "city": "Bitburg",
-    "expected_label": "Spedition Logsens",
-    "grenzwert": "maximum"
-  },
+  "test_data": [
+    {
+      "type": "shipping",
+      "name": "logsens_sued_de",
+      "plz": "54999",
+      "carrier": "Logsens Sued",
+      "country": "DE",
+      "city": "Bitburg",
+      "expected_label": "Spedition Logsens",
+      "grenzwert": "maximum",
+      "product_path": "p/polsterbett-almeno/ge-p-693278"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",

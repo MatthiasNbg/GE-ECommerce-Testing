@@ -3,10 +3,17 @@
   "name": "Suche funktioniert",
   "category": "smoke",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -19,20 +26,36 @@
       "action": "Suchfeld öffnen",
       "expected": "Suchfeld wird sichtbar",
       "selector_hint": "button.search-toggle-btn",
-      "inputs": [{"action": "click", "selector": "button.search-toggle-btn.js-search-toggle-btn"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.search-toggle-btn.js-search-toggle-btn"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Suchbegriff eingeben",
       "expected": "Suchbegriff wird im Feld angezeigt",
       "selector_hint": "input#header-main-search-input",
-      "inputs": [{"action": "fill", "selector": "input#header-main-search-input", "value": "Baumwolle"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input#header-main-search-input",
+          "value": "Baumwolle"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Enter drücken",
       "expected": "Suchergebnisseite wird geladen",
-      "inputs": [{"action": "click", "selector": "input#header-main-search-input"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input#header-main-search-input"
+        }
+      ]
     },
     {
       "step": 4,
@@ -44,7 +67,12 @@
       "step": 5,
       "action": "Erstes Produkt anklicken",
       "expected": "Produktdetailseite wird geladen",
-      "inputs": [{"action": "click", "selector": ".product-box a.product-name"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".product-box a.product-name"
+        }
+      ]
     }
   ],
   "automation": {
@@ -53,7 +81,9 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_smoke.py",
     "function_name": "test_search_works",
-    "tags": ["smoke"]
+    "tags": [
+      "smoke"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

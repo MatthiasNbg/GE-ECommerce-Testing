@@ -3,10 +3,17 @@
   "name": "Mehrere Produkte zum Warenkorb hinzufügen",
   "category": "regression",
   "priority": "P0",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -22,20 +29,43 @@
       "action": "Erste Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
       "expected": "Erstes Produkt wird zum Warenkorb hinzugefügt",
       "selector_hint": ".btn-buy, [data-add-to-cart]",
-      "inputs": [{"action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Zweite Produktseite aufrufen und Produkt zum Warenkorb hinzufügen",
       "expected": "Zweites Produkt wird zum Warenkorb hinzugefügt",
       "selector_hint": ".btn-buy, [data-add-to-cart]",
-      "inputs": [{"action": "navigate", "value": "/p/duftkissen-lavendel/ge-p-49415"}, {"action": "click", "selector": "button.btn-buy"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Warenkorb öffnen",
       "expected": "Warenkorb-Seite wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/checkout/cart"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
     },
     {
       "step": 4,
@@ -44,19 +74,31 @@
       "selector_hint": ".line-item"
     }
   ],
-  "test_data": {
-    "product_path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-    "product_name": "Kurzarmshirt aus Bio-Baumwolle",
-    "second_product_path": "p/duftkissen-lavendel/ge-p-49415",
-    "second_product_name": "Duftkissen Lavendel"
-  },
+  "test_data": [
+    {
+      "type": "product",
+      "name": "default",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "second_product_path": "p/duftkissen-lavendel/ge-p-49415",
+      "second_product_name": "Duftkissen Lavendel"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_cart.py",
     "function_name": "test_add_multiple_products",
-    "tags": ["regression", "cart", "feature"]
+    "tags": [
+      "regression",
+      "cart",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

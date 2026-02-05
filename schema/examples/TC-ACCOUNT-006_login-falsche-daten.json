@@ -3,10 +3,16 @@
   "name": "Login mit falschen Zugangsdaten schlägt fehl",
   "category": "feature",
   "priority": "P1",
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -22,25 +28,47 @@
       "step": 1,
       "action": "Login-Seite aufrufen",
       "expected": "Login-Formular wird angezeigt",
-      "inputs": [{"action": "navigate", "value": "/account/login"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Falsche E-Mail eingeben",
       "expected": "Falsche E-Mail-Adresse ist im Formular eingetragen",
-      "inputs": [{"action": "fill", "selector": "#loginMail", "value": "nicht-existierend@example.com"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value": "nicht-existierend@example.com"
+        }
+      ]
     },
     {
       "step": 3,
       "action": "Falsches Passwort eingeben",
       "expected": "Falsches Passwort ist im Formular eingetragen",
-      "inputs": [{"action": "fill", "selector": "#loginPassword", "value": "FalschesPasswort123!"}]
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value": "FalschesPasswort123!"
+        }
+      ]
     },
     {
       "step": 4,
       "action": "Login absenden",
       "expected": "Login-Formular wird abgeschickt",
-      "inputs": [{"action": "click", "selector": "button:has-text('Anmelden')"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
+      ]
     },
     {
       "step": 5,
@@ -48,17 +76,24 @@
       "expected": "Fehlermeldung wird angezeigt, dass die Zugangsdaten falsch sind"
     }
   ],
-  "test_data": {
-    "email": "nicht-existierend@example.com",
-    "password": "FalschesPasswort123!"
-  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "default",
+      "email": "nicht-existierend@example.com",
+      "password": "FalschesPasswort123!"
+    }
+  ],
   "automation": {
     "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_account.py",
     "function_name": "test_login_wrong_credentials_fails",
-    "tags": ["account", "feature"]
+    "tags": [
+      "account",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,
