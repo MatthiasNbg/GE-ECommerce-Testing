@@ -3080,5 +3080,124 @@
       "sequenziell",
       "promotion"
     ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-MOV-003",
+    "name": "CHF-Rabatt ab Mindestbestellwert (Schweiz)",
+    "category": "mindestbestellwert",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-05",
+    "description": "Prueft absolute CHF-Rabatte, die erst ab einem bestimmten Mindestbestellwert (MBW) greifen. Spezifisch fuer den Schweizer Kanal mit CHF-Waehrung.",
+    "preconditions": [
+      "Shop ist erreichbar (CH-Kanal)",
+      "Warenkorb ist leer",
+      "Promotion mit absolutem CHF-Rabatt (z.B. 10 CHF Rabatt)",
+      "Mindestbestellwert-Bedingung in CHF (z.B. ab 50 CHF)",
+      "Shopware-Regel mit MBW-Bedingung fuer CHF"
+    ],
+    "promo_config": {
+      "name_frontend": "CHF Rabatt ab Mindestbestellwert",
+      "code_type": "manual_code",
+      "discount_type": "absolute",
+      "discount_target": "cart",
+      "discount_value": 10,
+      "currency": "CHF",
+      "min_order_value": 50,
+      "usage_total": null,
+      "usage_per_customer": null,
+      "shopware_rule": "Warenkorb >= 50 CHF",
+      "channels": [
+        "CH"
+      ]
+    },
+    "test_data": [
+      {
+        "type": "promo",
+        "name": "chf_mbw_rabatt",
+        "code": "CHF10AB50",
+        "discount_value": 10,
+        "min_order_value": 50,
+        "currency": "CHF"
+      },
+      {
+        "type": "amounts",
+        "name": "default",
+        "below_mbw": 40,
+        "above_mbw": 55,
+        "exact_mbw": 50,
+        "currency": "CHF"
+      }
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "CH-Kanal aufrufen und Waehrung CHF pruefen",
+        "expected": "Shop zeigt CHF als Waehrung an"
+      },
+      {
+        "step": 2,
+        "action": "Warenkorb mit Produkten unter MBW befuellen (z.B. 40 CHF)",
+        "expected": "Warenkorb zeigt Summe in CHF"
+      },
+      {
+        "step": 3,
+        "action": "Promotion-Code eingeben",
+        "expected": "Unter MBW: Promotion wird abgelehnt mit Hinweis auf MBW (50 CHF)"
+      },
+      {
+        "step": 4,
+        "action": "Warenkorb auf ueber MBW erhoehen (z.B. 55 CHF)",
+        "expected": "Warenkorbsumme ueber 50 CHF"
+      },
+      {
+        "step": 5,
+        "action": "Promotion-Code erneut eingeben",
+        "expected": "Ab MBW: Promotion wird akzeptiert"
+      },
+      {
+        "step": 6,
+        "action": "Pruefen, dass absoluter CHF-Rabatt korrekt abgezogen wird",
+        "expected": "Rabatt von 10 CHF wird korrekt abgezogen (Endsumme = 55 CHF - 10 CHF + Versand)"
+      },
+      {
+        "step": 7,
+        "action": "MBW-Grenzwert testen (exakt 50 CHF)",
+        "expected": "Bei exakt 50 CHF wird Promotion akzeptiert (>= Bedingung)"
+      },
+      {
+        "step": 8,
+        "action": "Waehrungsanzeige im Warenkorb und Checkout pruefen",
+        "expected": "Alle Betraege (Rabatt, Summe, Versand) werden in CHF angezeigt"
+      }
+    ],
+    "postconditions": [
+      "Rabatt wird korrekt in CHF berechnet und angezeigt",
+      "MBW-Berechnung basiert auf CHF-Warenwert"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Promotion-Code entfernen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "mindestbestellwert",
+      "mbw",
+      "absolut",
+      "chf-rabatt",
+      "promotion",
+      "schweiz",
+      "waehrung"
+    ]
   }
 ]

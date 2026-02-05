@@ -1,0 +1,169 @@
+{
+  "test_id": "TC-PROMO-MOV-003",
+  "name": "CHF-Rabatt ab Mindestbestellwert (Schweiz)",
+  "category": "e2e",
+  "priority": "P1",
+  "schema_version": "2.1.0",
+  "scope": {
+    "channels": [
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar (CH-Kanal)",
+    "Warenkorb ist leer",
+    "Promotion mit CHF-Rabatt aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "CH-Kanal aufrufen",
+      "expected": "Shop zeigt CHF als Waehrung",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "https://www.grueneerde.ch"
+        }
+      ],
+      "assert": [
+        {
+          "type": "page_contains_text",
+          "values": [
+            "CHF"
+          ],
+          "message": "Waehrung muss CHF sein"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produkt unter MBW in Warenkorb",
+      "expected": "Warenkorb zeigt Summe unter 50 CHF",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Promotion-Code eingeben",
+      "expected": "Promotion wird abgelehnt (unter MBW)",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        },
+        {
+          "action": "fill",
+          "selector": "#promotionCode",
+          "value_ref": "promo:chf_mbw_rabatt.code"
+        },
+        {
+          "action": "click",
+          "selector": "button.promotion-submit"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".alert-warning, .promotion-error",
+          "message": "Hinweis auf MBW muss erscheinen"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Warenkorb auf ueber 50 CHF erhoehen",
+      "expected": "Warenkorbsumme ueber MBW"
+    },
+    {
+      "step": 5,
+      "action": "Promotion-Code erneut eingeben",
+      "expected": "Promotion wird akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#promotionCode",
+          "value_ref": "promo:chf_mbw_rabatt.code"
+        },
+        {
+          "action": "click",
+          "selector": "button.promotion-submit"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".promotion-discount",
+          "message": "Rabatt muss angezeigt werden"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "CHF-Rabatt pruefen",
+      "expected": "10 CHF Rabatt korrekt abgezogen",
+      "assert": [
+        {
+          "type": "element_contains_text",
+          "selector": ".promotion-discount-value",
+          "expected": "10",
+          "message": "Rabattwert muss 10 CHF sein"
+        }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "promo",
+      "name": "chf_mbw_rabatt",
+      "code": "CHF10AB50",
+      "discount_value": 10,
+      "min_order_value": 50,
+      "currency": "CHF"
+    },
+    {
+      "type": "amounts",
+      "name": "default",
+      "below_mbw": 40,
+      "above_mbw": 55,
+      "exact_mbw": 50,
+      "currency": "CHF"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_chf_discount_min_order_value",
+    "tags": [
+      "promotion",
+      "mbw",
+      "chf",
+      "schweiz"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 90,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-05",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}
