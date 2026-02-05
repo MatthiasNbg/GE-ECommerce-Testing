@@ -3,7 +3,8 @@
   "name": "Produkt aus dem Warenkorb entfernen",
   "category": "regression",
   "priority": "P0",
-  "schema_version": "2.1.0",
+  "functional_area": "Feature Warenkorb",
+  "schema_version": "2.2.0",
   "scope": {
     "channels": [
       "AT",

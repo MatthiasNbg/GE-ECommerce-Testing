@@ -3,7 +3,8 @@
   "name": "Versandart Logsens West fuer PLZ 53999 (Bonn) - Maximum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "2.1.0",
+  "functional_area": "Feature Versandarten",
+  "schema_version": "2.2.0",
   "scope": {
     "channels": [
       "DE"
