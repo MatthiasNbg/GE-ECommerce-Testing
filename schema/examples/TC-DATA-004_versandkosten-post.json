@@ -1,9 +1,9 @@
 {
   "test_id": "TC-DATA-004",
   "name": "Versandkosten fuer Postartikel pruefen",
-  "category": "data-validation",
+  "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",

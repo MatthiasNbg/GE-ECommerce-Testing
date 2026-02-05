@@ -1,131 +1,530 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.matthias-sax.de/TestHubPro911/test-contract.schema.json",
-  "title": "Test-Contract Schema",
-  "description": "Schema für Test-Contract-Dateien im GE E-Commerce Testing Framework",
+  "title": "Unified Test Contract",
+  "description": "Austauschformat zwischen TestHubPro911, GE-ECommerce-Testing und Testpanda4711.",
   "type": "object",
-  "required": ["test_id", "name", "category", "priority", "schema_version", "scope", "preconditions", "steps", "automation", "orchestration", "meta"],
+  "required": ["test_id", "name", "category", "priority", "schema_version", "scope", "steps"],
+  "additionalProperties": false,
   "properties": {
     "test_id": {
       "type": "string",
-      "pattern": "^TC-[A-Z]+-[A-Z0-9-]+$",
-      "description": "Eindeutige Test-ID"
+      "pattern": "^TC-[A-Z][A-Z0-9]*(-[A-Z][A-Z0-9]*){0,3}-\\d{3,}$",
+      "description": "Eindeutige Test-ID, z.B. TC-SMOKE-001 oder TC-SHIP-AT-FINK-001"
     },
     "name": {
       "type": "string",
-      "description": "Kurzer, beschreibender Testname"
+      "minLength": 3,
+      "maxLength": 200,
+      "description": "Menschenlesbarer Testname"
     },
     "category": {
       "type": "string",
-      "enum": ["smoke", "regression", "critical-path", "feature", "performance", "security", "data-validation", "e2e"],
+      "enum": ["smoke", "regression", "e2e", "integration", "performance"],
       "description": "Testkategorie"
     },
     "priority": {
       "type": "string",
       "enum": ["P0", "P1", "P2", "P3"],
-      "description": "Testpriorität"
+      "description": "Priorität (P0=kritisch, P3=niedrig)"
     },
     "schema_version": {
       "type": "string",
-      "description": "Schema-Version"
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version dieses Schemas (semver, z.B. 1.0.0)"
     },
     "scope": {
       "type": "object",
-      "required": ["channels", "environments", "shop_system"],
+      "required": ["channels"],
+      "additionalProperties": false,
       "properties": {
         "channels": {
           "type": "array",
-          "items": { "type": "string", "enum": ["AT", "DE", "CH"] },
-          "minItems": 1
+          "items": {
+            "type": "string",
+            "enum": ["AT", "DE", "CH"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Sales-Channels / Länder"
         },
         "environments": {
           "type": "array",
-          "items": { "type": "string", "enum": ["staging", "production", "development"] },
-          "minItems": 1
+          "items": {
+            "type": "string",
+            "enum": ["staging", "production", "development"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Zielumgebungen"
         },
         "shop_system": {
-          "type": "string"
+          "type": "string",
+          "description": "Shop-System (z.B. Shopware 6)"
         }
       }
     },
     "preconditions": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["check", "description"],
+            "additionalProperties": false,
+            "properties": {
+              "check": {
+                "type": "string",
+                "description": "Eindeutiger Bezeichner der Vorbedingung"
+              },
+              "description": {
+                "type": "string",
+                "description": "Menschenlesbare Beschreibung"
+              },
+              "verify": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": ["http_status", "element_visible", "element_not_visible", "api_call"],
+                    "description": "Art der Verifikation"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "URL für die Prüfung (kann Platzhalter enthalten)"
+                  },
+                  "selector": {
+                    "type": "string",
+                    "description": "CSS-Selektor für element_visible/element_not_visible"
+                  },
+                  "expected": {
+                    "description": "Erwarteter Wert (z.B. HTTP-Status 200, true/false)"
+                  }
+                },
+                "description": "Automatisierte Verifikation der Vorbedingung"
+              }
+            }
+          }
+        ]
+      },
+      "description": "Vorbedingungen für den Test (String oder Objekt mit optionaler Verifikation)"
     },
     "postconditions": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["check", "description"],
+            "additionalProperties": false,
+            "properties": {
+              "check": {
+                "type": "string",
+                "description": "Eindeutiger Bezeichner der Nachbedingung"
+              },
+              "description": {
+                "type": "string",
+                "description": "Menschenlesbare Beschreibung"
+              },
+              "verify": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["captured_value_not_empty", "page_contains_text", "element_visible", "element_contains_text", "url_contains"],
+                    "description": "Art der Verifikation"
+                  },
+                  "capture_ref": {
+                    "type": "string",
+                    "description": "Referenz auf einen capture-Wert"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Liste von erwarteten Werten/Texten"
+                  },
+                  "selector": {
+                    "type": "string",
+                    "description": "CSS-Selektor"
+                  },
+                  "expected": {
+                    "type": "string",
+                    "description": "Erwarteter Wert"
+                  }
+                },
+                "description": "Automatisierte Verifikation der Nachbedingung"
+              }
+            }
+          }
+        ]
+      },
+      "description": "Erwarteter Zustand nach dem Test (String oder Objekt mit optionaler Verifikation)"
+    },
+    "cleanup": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Aufräumschritte nach dem Test"
     },
     "steps": {
       "type": "array",
       "items": {
         "type": "object",
         "required": ["step", "action", "expected"],
+        "additionalProperties": false,
         "properties": {
-          "step": { "type": "integer", "minimum": 1 },
-          "action": { "type": "string" },
-          "expected": { "type": "string" },
-          "selector_hint": { "type": "string" },
-          "description": { "type": "string" },
+          "step": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Schrittnummer"
+          },
+          "action": {
+            "type": "string",
+            "description": "Durchzuführende Aktion (Kurzform)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Ausführliche Beschreibung des Schritts für manuelle Tester (wo klicken, was beachten, Kontext)"
+          },
+          "expected": {
+            "type": "string",
+            "description": "Erwartetes Ergebnis"
+          },
+          "selector_hint": {
+            "type": "string",
+            "description": "Selektor-Hinweis für Automatisierung — CSS-Selektor, data-testid oder Text-Selektor (z.B. '.btn-buy', '#tos', 'button:has-text(\"Bestellen\")')"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "URLs zu Screenshots oder Bildern die den Schritt illustrieren"
+          },
           "inputs": {
             "type": "array",
             "items": {
               "type": "object",
               "required": ["action"],
+              "additionalProperties": false,
               "properties": {
-                "action": { "enum": ["navigate", "fill", "select", "check", "uncheck", "click", "wait"] },
-                "selector": { "type": "string" },
-                "value": {},
+                "action": {
+                  "type": "string",
+                  "enum": ["navigate", "fill", "select", "check", "uncheck", "click", "wait"],
+                  "description": "Art der Interaktion"
+                },
+                "selector": {
+                  "type": "string",
+                  "description": "CSS-Selektor, data-testid oder Text-Selektor des Zielelements (nicht bei navigate/wait)"
+                },
+                "value": {
+                  "type": ["string", "number", "boolean"],
+                  "description": "Einzugebender Wert (bei fill, select) oder URL-Pfad (bei navigate) oder Millisekunden (bei wait)"
+                },
                 "value_ref": {
                   "type": "string",
-                  "pattern": "^[a-z_][a-z0-9_]*:[a-z_][a-z0-9_]*\\.[a-z_][a-z0-9_]*$"
+                  "pattern": "^[a-z_][a-z0-9_]*:[a-z_][a-z0-9_]*\\.[a-z_][a-z0-9_]*$",
+                  "description": "Referenz auf test_data im Format type:name.key (z.B. address:billing.street)"
                 }
               }
-            }
+            },
+            "description": "Maschinell ausführbare Interaktionen in diesem Schritt"
+          },
+          "wait_for": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["selector_visible", "selector_hidden", "url_contains", "selector_attribute", "form_valid"],
+                "description": "Art der Wait-Bedingung"
+              },
+              "selector": {
+                "type": "string",
+                "description": "CSS-Selektor für element-basierte Waits"
+              },
+              "value": {
+                "type": "string",
+                "description": "Erwarteter Wert (z.B. URL-Fragment, Attributwert)"
+              },
+              "attribute": {
+                "type": "string",
+                "description": "Attributname für selector_attribute"
+              },
+              "timeout_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 5000,
+                "description": "Timeout in Millisekunden (default: 5000)"
+              },
+              "description": {
+                "type": "string",
+                "description": "Menschenlesbare Beschreibung des erwarteten Zustands"
+              }
+            },
+            "description": "Explizite Wait-Strategie vor Assertions"
+          },
+          "assert": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "message"],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "element_visible",
+                    "element_hidden",
+                    "element_contains_text",
+                    "element_matches_regex",
+                    "element_selected",
+                    "checkbox_checked",
+                    "field_value",
+                    "url_contains",
+                    "no_validation_errors",
+                    "page_contains_text"
+                  ],
+                  "description": "Art der Assertion"
+                },
+                "selector": {
+                  "type": "string",
+                  "description": "CSS-Selektor des zu prüfenden Elements"
+                },
+                "expected": {
+                  "type": "string",
+                  "description": "Erwarteter Wert (kann Platzhalter enthalten)"
+                },
+                "pattern": {
+                  "type": "string",
+                  "description": "Regex-Pattern für element_matches_regex"
+                },
+                "scope": {
+                  "type": "string",
+                  "description": "CSS-Selektor des Bereichs für no_validation_errors"
+                },
+                "values": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Liste erwarteter Texte für page_contains_text"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Fehlermeldung bei fehlgeschlagener Assertion"
+                }
+              }
+            },
+            "description": "Maschinell prüfbare Assertions (zusätzlich zu expected)"
+          },
+          "capture": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "selector", "extract"],
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z_][a-z0-9_]*$",
+                  "description": "Eindeutiger Name für den extrahierten Wert"
+                },
+                "selector": {
+                  "type": "string",
+                  "description": "CSS-Selektor des Elements"
+                },
+                "extract": {
+                  "type": "string",
+                  "enum": ["text_content", "attribute", "input_value"],
+                  "description": "Art der Extraktion"
+                },
+                "attribute_name": {
+                  "type": "string",
+                  "description": "Attributname für extract=attribute"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Beschreibung des extrahierten Werts"
+                }
+              }
+            },
+            "description": "Werte aus der UI extrahieren für spätere Verwendung"
+          },
+          "reference_screenshots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["url", "caption"],
+              "additionalProperties": false,
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "URL zum Referenz-Screenshot"
+                },
+                "caption": {
+                  "type": "string",
+                  "description": "Beschreibung des Screenshots"
+                },
+                "timing": {
+                  "type": "string",
+                  "enum": ["before", "after"],
+                  "default": "after",
+                  "description": "Zeitpunkt: vor oder nach Step-Ausführung"
+                }
+              }
+            },
+            "description": "Referenz-Screenshots zur Dokumentation (manuell gepflegt)"
           }
         }
       },
-      "minItems": 1
+      "minItems": 1,
+      "description": "Testschritte"
     },
     "test_data": {
       "type": "array",
       "items": {
         "type": "object",
         "required": ["type", "name"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Art der Testdaten (empfohlen: product, address, login, payment, promocode)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Eindeutiger Name innerhalb des Typs (z.B. billing, shipping, main, default)"
+          }
+        },
         "additionalProperties": true
-      }
+      },
+      "description": "Typisierte Testdaten-Objekte"
     },
     "automation": {
       "type": "object",
-      "required": ["status", "framework", "repo", "spec_file", "function_name", "tags"],
+      "additionalProperties": false,
       "properties": {
-        "status": { "type": "string", "enum": ["automated", "manual", "pending"] },
-        "framework": { "type": "string" },
-        "repo": { "type": "string" },
-        "spec_file": { "type": "string" },
-        "function_name": { "type": "string" },
-        "tags": { "type": "array", "items": { "type": "string" } }
+        "status": {
+          "type": "string",
+          "enum": ["manual", "planned", "in_progress", "automated", "deprecated"],
+          "description": "Automatisierungsstatus"
+        },
+        "framework": {
+          "type": "string",
+          "description": "Test-Framework (z.B. Playwright, pytest)"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository-Name"
+        },
+        "spec_file": {
+          "type": "string",
+          "description": "Pfad zur Spec-/Testdatei"
+        },
+        "function_name": {
+          "type": "string",
+          "description": "Name der Testfunktion"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true,
+          "description": "Tags / Marker für Testfilterung"
+        }
       }
     },
     "orchestration": {
       "type": "object",
-      "required": ["parallel_safe", "timeout_seconds"],
+      "additionalProperties": true,
       "properties": {
-        "parallel_safe": { "type": "boolean" },
-        "timeout_seconds": { "type": "integer", "minimum": 1 },
-        "retry_count": { "type": "integer", "minimum": 0 }
+        "parallel_safe": {
+          "type": "boolean",
+          "description": "Kann parallel zu anderen Tests laufen"
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximale Laufzeit in Sekunden"
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Anzahl Wiederholungsversuche"
+        },
+        "worker_requirements": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "browser": {
+              "type": "string",
+              "enum": ["chromium", "firefox", "webkit"],
+              "description": "Browser-Engine"
+            },
+            "viewport": {
+              "type": "string",
+              "enum": ["desktop", "tablet", "mobile"],
+              "description": "Viewport-Kategorie"
+            }
+          },
+          "description": "Anforderungen an den Worker"
+        }
       }
+    },
+    "screenshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "on_failure": {
+          "type": "boolean",
+          "default": true,
+          "description": "Screenshot bei jedem fehlgeschlagenen Step"
+        },
+        "on_step": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "description": "Liste der Step-Nummern, die immer einen Screenshot erzeugen"
+        },
+        "output_dir": {
+          "type": "string",
+          "description": "Ausgabepfad mit Platzhaltern (z.B. reports/screenshots/${test_id})"
+        }
+      },
+      "description": "Screenshot-Strategie für automatisierte Tests"
     },
     "meta": {
       "type": "object",
-      "required": ["author", "created", "version"],
+      "additionalProperties": true,
       "properties": {
-        "author": { "type": "string" },
-        "created": { "type": "string" },
-        "last_modified": { "type": "string" },
-        "version": { "type": "string" }
+        "author": {
+          "type": "string",
+          "description": "Autor des Testfalls"
+        },
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Erstellungsdatum (ISO 8601)"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date",
+          "description": "Letztes Änderungsdatum (ISO 8601)"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version des Testfalls"
+        },
+        "testpanda_scenario_id": {
+          "type": "integer",
+          "description": "Testpanda Szenario-ID (INT UNSIGNED)"
+        },
+        "testpanda_variant_id": {
+          "type": "integer",
+          "description": "Testpanda Varianten-ID (INT UNSIGNED)"
+        }
       }
     }
-  },
-  "additionalProperties": false
+  }
 }

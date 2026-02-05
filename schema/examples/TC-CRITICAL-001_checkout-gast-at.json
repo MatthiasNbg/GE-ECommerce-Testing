@@ -1,9 +1,9 @@
 {
   "test_id": "TC-CRITICAL-001",
   "name": "Gast-Checkout komplett (AT)",
-  "category": "critical-path",
+  "category": "e2e",
   "priority": "P0",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT"

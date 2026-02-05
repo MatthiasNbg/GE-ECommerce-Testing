@@ -3,7 +3,7 @@
   "name": "Keine kritischen JS-Fehler",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,13 +23,11 @@
     {
       "step": 1,
       "action": "Console-Listener aktivieren",
-      "selector": null,
       "expected": "Console-Listener ist aktiv"
     },
     {
       "step": 2,
       "action": "Homepage laden",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -41,7 +39,6 @@
     {
       "step": 3,
       "action": "Produktseite laden",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -53,7 +50,6 @@
     {
       "step": 4,
       "action": "Warenkorb laden",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -65,7 +61,6 @@
     {
       "step": 5,
       "action": "Auf kritische JS-Fehler prüfen",
-      "selector": null,
       "expected": "Keine TypeError, ReferenceError oder undefined Fehler gefunden"
     }
   ],

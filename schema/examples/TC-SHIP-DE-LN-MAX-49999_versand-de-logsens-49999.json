@@ -3,7 +3,7 @@
   "name": "Versandart Logsens Nord fuer PLZ 49999 (Lingen) - Maximum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "DE"

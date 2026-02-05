@@ -1,9 +1,9 @@
 {
   "test_id": "TC-PROMO-MBW-001",
   "name": "Promotion-Code unter Mindestbestellwert abgelehnt",
-  "category": "feature",
+  "category": "e2e",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",

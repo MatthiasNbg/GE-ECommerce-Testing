@@ -3,7 +3,7 @@
   "name": "Versandart Cargoe AT fuer PLZ 7999 (Oberwart) - Maximum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT"

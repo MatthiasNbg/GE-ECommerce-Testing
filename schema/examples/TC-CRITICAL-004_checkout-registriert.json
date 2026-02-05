@@ -1,9 +1,9 @@
 {
   "test_id": "TC-CRITICAL-004",
   "name": "Checkout mit registriertem Benutzer",
-  "category": "critical-path",
+  "category": "e2e",
   "priority": "P0",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT"

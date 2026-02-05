@@ -3,7 +3,7 @@
   "name": "Produktseite erreichbar",
   "category": "smoke",
   "priority": "P0",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",

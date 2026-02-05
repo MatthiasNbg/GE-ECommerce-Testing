@@ -3,7 +3,7 @@
   "name": "Produktseite mit Daten laden",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Produktseite aufrufen",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -35,26 +34,26 @@
     {
       "step": 2,
       "action": "Produktname prüfen",
-      "selector": "h1.product-detail-name",
-      "expected": "Produktname wird angezeigt"
+      "expected": "Produktname wird angezeigt",
+      "selector_hint": "h1.product-detail-name"
     },
     {
       "step": 3,
       "action": "Preis prüfen",
-      "selector": ".product-detail-price",
-      "expected": "Preis wird korrekt angezeigt"
+      "expected": "Preis wird korrekt angezeigt",
+      "selector_hint": ".product-detail-price"
     },
     {
       "step": 4,
       "action": "Warenkorb-Button prüfen",
-      "selector": ".btn-buy",
-      "expected": "Warenkorb-Button ist vorhanden"
+      "expected": "Warenkorb-Button ist vorhanden",
+      "selector_hint": ".btn-buy"
     },
     {
       "step": 5,
       "action": "Artikelnummer prüfen",
-      "selector": "span.product-detail-ordernumber",
-      "expected": "Artikelnummer wird angezeigt"
+      "expected": "Artikelnummer wird angezeigt",
+      "selector_hint": "span.product-detail-ordernumber"
     }
   ],
   "test_data": [

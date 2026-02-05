@@ -3,7 +3,7 @@
   "name": "Versandart Thurner DE fuer PLZ 73000 (Goeppingen) - Minimum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "DE"

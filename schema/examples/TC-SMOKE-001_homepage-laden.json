@@ -3,10 +3,17 @@
   "name": "Homepage lädt erfolgreich",
   "category": "smoke",
   "priority": "P0",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
-    "channels": ["AT", "DE", "CH"],
-    "environments": ["staging", "production"],
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -18,14 +25,24 @@
       "step": 1,
       "action": "Startseite aufrufen (base_url)",
       "expected": "Seite lädt ohne HTTP-Fehler",
-      "inputs": [{"action": "navigate", "value": "/"}]
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
     },
     {
       "step": 2,
       "action": "Cookie-Banner akzeptieren (falls vorhanden)",
       "expected": "Banner wird geschlossen",
       "selector_hint": ".cookie-permission-container .btn-primary",
-      "inputs": [{"action": "click", "selector": "button#accept"}]
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
     },
     {
       "step": 3,
@@ -45,7 +62,9 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_smoke.py",
     "function_name": "test_homepage_loads",
-    "tags": ["smoke"]
+    "tags": [
+      "smoke"
+    ]
   },
   "orchestration": {
     "parallel_safe": true,

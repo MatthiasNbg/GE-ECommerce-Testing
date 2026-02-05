@@ -3,7 +3,7 @@
   "name": "Versandart Wetsch AT fuer PLZ 6000 (Innsbruck) - Minimum Grenzwert",
   "category": "e2e",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT"

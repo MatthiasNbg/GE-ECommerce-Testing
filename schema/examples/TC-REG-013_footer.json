@@ -3,7 +3,7 @@
   "name": "Footer vorhanden",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Startseite aufrufen",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -35,13 +34,12 @@
     {
       "step": 2,
       "action": "Footer prüfen",
-      "selector": "footer",
-      "expected": "Footer ist vorhanden"
+      "expected": "Footer ist vorhanden",
+      "selector_hint": "footer"
     },
     {
       "step": 3,
       "action": "Pflichtlinks prüfen",
-      "selector": null,
       "expected": "Links zu Impressum, Datenschutz, AGB und Kontakt sind vorhanden"
     }
   ],

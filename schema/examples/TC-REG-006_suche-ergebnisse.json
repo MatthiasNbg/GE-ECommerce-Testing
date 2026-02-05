@@ -3,7 +3,7 @@
   "name": "Suche liefert Ergebnisse",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Suchseite mit Suchbegriff aufrufen",
-      "selector": null,
       "inputs": [
         {
           "action": "click",
@@ -40,8 +39,8 @@
     {
       "step": 2,
       "action": "Ergebnisse prüfen",
-      "selector": ".product-box",
-      "expected": "Mindestens ein Suchergebnis wird angezeigt"
+      "expected": "Mindestens ein Suchergebnis wird angezeigt",
+      "selector_hint": ".product-box"
     }
   ],
   "test_data": [

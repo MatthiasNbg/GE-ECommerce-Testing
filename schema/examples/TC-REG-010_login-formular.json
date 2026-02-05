@@ -3,7 +3,7 @@
   "name": "Login-Formular funktional",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Login-Seite aufrufen",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -35,20 +34,20 @@
     {
       "step": 2,
       "action": "E-Mail-Feld prüfen",
-      "selector": "input[type='email']",
-      "expected": "E-Mail-Feld ist vorhanden"
+      "expected": "E-Mail-Feld ist vorhanden",
+      "selector_hint": "input[type='email']"
     },
     {
       "step": 3,
       "action": "Passwort-Feld prüfen",
-      "selector": "input[type='password']",
-      "expected": "Passwort-Feld ist vorhanden"
+      "expected": "Passwort-Feld ist vorhanden",
+      "selector_hint": "input[type='password']"
     },
     {
       "step": 4,
       "action": "Submit-Button prüfen",
-      "selector": "button[type='submit']",
-      "expected": "Submit-Button ist vorhanden"
+      "expected": "Submit-Button ist vorhanden",
+      "selector_hint": "button[type='submit']"
     }
   ],
   "postconditions": [

@@ -3,7 +3,7 @@
   "name": "Checkout erreichbar",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Produkt hinzufügen",
-      "selector": ".btn-buy",
       "inputs": [
         {
           "action": "navigate",
@@ -34,12 +33,12 @@
           "selector": "button.btn-buy"
         }
       ],
-      "expected": "Produkt wird dem Warenkorb hinzugefügt"
+      "expected": "Produkt wird dem Warenkorb hinzugefügt",
+      "selector_hint": ".btn-buy"
     },
     {
       "step": 2,
       "action": "Warenkorb öffnen",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -51,7 +50,6 @@
     {
       "step": 3,
       "action": "Zur Kasse klicken",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -63,7 +61,6 @@
     {
       "step": 4,
       "action": "URL enthält /checkout prüfen",
-      "selector": null,
       "expected": "URL enthält /checkout"
     }
   ],

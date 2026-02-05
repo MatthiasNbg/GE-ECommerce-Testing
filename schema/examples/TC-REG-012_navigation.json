@@ -3,7 +3,7 @@
   "name": "Navigation funktioniert",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Startseite aufrufen",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -35,20 +34,19 @@
     {
       "step": 2,
       "action": "Navigation prüfen",
-      "selector": "nav, .main-navigation",
-      "expected": "Navigation ist vorhanden"
+      "expected": "Navigation ist vorhanden",
+      "selector_hint": "nav, .main-navigation"
     },
     {
       "step": 3,
       "action": "Mindestens 3 Links prüfen",
-      "selector": null,
       "expected": "Mindestens 3 Navigationslinks sind vorhanden"
     },
     {
       "step": 4,
       "action": "Logo prüfen",
-      "selector": ".logo",
-      "expected": "Logo ist vorhanden"
+      "expected": "Logo ist vorhanden",
+      "selector_hint": ".logo"
     }
   ],
   "automation": {

@@ -1,15 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://grueneerde.com/schemas/testcase/v2",
-  "title": "GE E-Commerce Testfall v2",
-  "description": "Schema v2 für Testfälle im Grüne Erde E-Commerce Testing Framework. Kompatibel mit Testpanda-Import und API-Austausch.",
+  "$id": "https://grueneerde.com/schemas/testcase/v2.1",
+  "title": "GE E-Commerce Testfall v2.1",
+  "description": "Schema v2.1 für Testfälle im Grüne Erde E-Commerce Testing Framework. Kompatibel mit TestHubPro911 v2.1.0, Testpanda-Import und API-Austausch.",
   "type": "object",
   "required": ["schema_version", "test_id", "name", "category", "priority", "channels", "description", "preconditions", "steps", "author", "last_modified"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "2.0",
-      "description": "Schema-Version des Testfall-Formats"
+      "pattern": "^2\\.(0|1)\\.?\\d*$",
+      "description": "Schema-Version des Testfall-Formats (2.0, 2.1.0, etc.)"
     },
     "test_id": {
       "type": "string",
@@ -80,8 +80,30 @@
     },
     "preconditions": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Vorbedingungen, die vor Testausführung erfüllt sein müssen"
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["check", "description"],
+            "properties": {
+              "check": { "type": "string", "description": "Eindeutiger Bezeichner der Vorbedingung" },
+              "description": { "type": "string", "description": "Menschenlesbare Beschreibung" },
+              "verify": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "action": { "type": "string", "enum": ["http_status", "element_visible", "element_not_visible", "api_call"] },
+                  "url": { "type": "string" },
+                  "selector": { "type": "string" },
+                  "expected": {}
+                }
+              }
+            }
+          }
+        ]
+      },
+      "description": "Vorbedingungen (String oder Objekt mit optionaler Verifikation)"
     },
     "promo_config": {
       "type": "object",
@@ -121,8 +143,8 @@
         "type": "object",
         "required": ["type", "name"],
         "properties": {
-          "type": { "type": "string", "description": "Art der Testdaten (z.B. product, shipping, address, promo, sync_config)" },
-          "name": { "type": "string", "description": "Eindeutiger Name innerhalb des Typs (z.B. default, nicht_rabattierbar, post_at)" }
+          "type": { "type": "string", "description": "Art der Testdaten (z.B. product, shipping, address, promo, amounts)" },
+          "name": { "type": "string", "description": "Eindeutiger Name innerhalb des Typs (z.B. default, billing, shipping)" }
         },
         "additionalProperties": true
       },
@@ -136,11 +158,16 @@
         "properties": {
           "step": {
             "type": "integer",
-            "minimum": 1
+            "minimum": 1,
+            "description": "Schrittnummer"
           },
           "action": {
             "type": "string",
-            "description": "Auszuführende Aktion"
+            "description": "Auszuführende Aktion (Kurzform)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Ausführliche Beschreibung des Schritts für manuelle Tester"
           },
           "expected": {
             "type": "string",
@@ -148,7 +175,87 @@
           },
           "selector_hint": {
             "type": "string",
-            "description": "Logischer Selektor-Hint (z.B. 'product.detail_page')"
+            "description": "Selektor-Hinweis für Automatisierung"
+          },
+          "attachments": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" },
+            "description": "URLs zu Screenshots oder Bildern"
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["action"],
+              "properties": {
+                "action": { "type": "string", "enum": ["navigate", "fill", "select", "check", "uncheck", "click", "wait"] },
+                "selector": { "type": "string" },
+                "value": { "type": ["string", "number", "boolean"] },
+                "value_ref": {
+                  "type": "string",
+                  "pattern": "^[a-z_][a-z0-9_]*:[a-z_][a-z0-9_]*\\.[a-z_][a-z0-9_]*$",
+                  "description": "Referenz auf test_data (z.B. address:billing.street)"
+                }
+              }
+            },
+            "description": "Maschinell ausführbare Interaktionen"
+          },
+          "wait_for": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["selector_visible", "selector_hidden", "url_contains", "selector_attribute", "form_valid"] },
+              "selector": { "type": "string" },
+              "value": { "type": "string" },
+              "attribute": { "type": "string" },
+              "timeout_ms": { "type": "integer", "default": 5000 },
+              "description": { "type": "string" }
+            },
+            "description": "Explizite Wait-Strategie vor Assertions"
+          },
+          "assert": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "message"],
+              "properties": {
+                "type": { "type": "string", "enum": ["element_visible", "element_hidden", "element_contains_text", "element_matches_regex", "element_selected", "checkbox_checked", "field_value", "url_contains", "no_validation_errors", "page_contains_text"] },
+                "selector": { "type": "string" },
+                "expected": { "type": "string" },
+                "pattern": { "type": "string" },
+                "scope": { "type": "string" },
+                "values": { "type": "array", "items": { "type": "string" } },
+                "message": { "type": "string", "description": "Fehlermeldung bei fehlgeschlagener Assertion" }
+              }
+            },
+            "description": "Maschinell prüfbare Assertions"
+          },
+          "capture": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "selector", "extract"],
+              "properties": {
+                "name": { "type": "string", "pattern": "^[a-z_][a-z0-9_]*$" },
+                "selector": { "type": "string" },
+                "extract": { "type": "string", "enum": ["text_content", "attribute", "input_value"] },
+                "attribute_name": { "type": "string" },
+                "description": { "type": "string" }
+              }
+            },
+            "description": "Werte aus UI extrahieren für spätere Verwendung"
+          },
+          "reference_screenshots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["url", "caption"],
+              "properties": {
+                "url": { "type": "string", "format": "uri" },
+                "caption": { "type": "string" },
+                "timing": { "type": "string", "enum": ["before", "after"], "default": "after" }
+              }
+            },
+            "description": "Referenz-Screenshots zur Dokumentation"
           }
         }
       },
@@ -157,13 +264,45 @@
     },
     "postconditions": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Zustand nach Testausführung"
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["check", "description"],
+            "properties": {
+              "check": { "type": "string" },
+              "description": { "type": "string" },
+              "verify": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "type": { "type": "string", "enum": ["captured_value_not_empty", "page_contains_text", "element_visible", "element_contains_text", "url_contains"] },
+                  "capture_ref": { "type": "string" },
+                  "values": { "type": "array", "items": { "type": "string" } },
+                  "selector": { "type": "string" },
+                  "expected": { "type": "string" }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "description": "Erwarteter Zustand nach dem Test (String oder Objekt mit Verifikation)"
     },
     "cleanup": {
       "type": "array",
       "items": { "type": "string" },
       "description": "Aufräumaktionen nach Testausführung"
+    },
+    "screenshots": {
+      "type": "object",
+      "properties": {
+        "on_failure": { "type": "boolean", "default": true, "description": "Screenshot bei fehlgeschlagenem Step" },
+        "on_step": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "description": "Step-Nummern für Screenshots" },
+        "output_dir": { "type": "string", "description": "Ausgabepfad mit Platzhaltern" }
+      },
+      "description": "Screenshot-Strategie für automatisierte Tests"
     },
     "automation": {
       "type": "object",

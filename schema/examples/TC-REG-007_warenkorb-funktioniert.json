@@ -3,7 +3,7 @@
   "name": "Warenkorb funktioniert",
   "category": "regression",
   "priority": "P1",
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "scope": {
     "channels": [
       "AT",
@@ -23,7 +23,6 @@
     {
       "step": 1,
       "action": "Produktseite öffnen",
-      "selector": null,
       "inputs": [
         {
           "action": "navigate",
@@ -35,25 +34,23 @@
     {
       "step": 2,
       "action": "In den Warenkorb klicken",
-      "selector": ".btn-buy",
       "inputs": [
         {
           "action": "click",
           "selector": "button.btn-buy"
         }
       ],
-      "expected": "Produkt wird dem Warenkorb hinzugefügt"
+      "expected": "Produkt wird dem Warenkorb hinzugefügt",
+      "selector_hint": ".btn-buy"
     },
     {
       "step": 3,
       "action": "Zum Warenkorb navigieren",
-      "selector": null,
       "expected": "Warenkorb-Seite wird geladen"
     },
     {
       "step": 4,
       "action": "Produkt im Warenkorb prüfen",
-      "selector": null,
       "expected": "Produkt ist im Warenkorb vorhanden"
     }
   ],
