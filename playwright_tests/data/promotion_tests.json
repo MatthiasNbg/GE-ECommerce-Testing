@@ -999,6 +999,128 @@
   },
   {
     "schema_version": "2.0",
+    "test_id": "TC-PROMO-SEC-005",
+    "name": "Freundeskreis Bonusgutschein darf keine Wertgutscheine kaufen",
+    "category": "gutschein-sicherheit",
+    "priority": "P0",
+    "status": "defined",
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-05",
+    "description": "Prueft, dass Freundeskreis-Mitglieder mit ihren Bonusgutscheinen keine Wertgutscheine (Einkaufsgutscheine) kaufen koennen. Freundeskreis-Mitglieder erhalten regelmaessig Bonusgutscheine als Treuebelohnung. Diese duerfen nicht fuer den Erwerb von Wertgutscheinen verwendet werden, um Missbrauch zu verhindern.",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Warenkorb ist leer",
+      "Testbenutzer ist Freundeskreis-Mitglied (Flag aktiv)",
+      "Freundeskreis-Bonusgutschein ist dem Konto zugewiesen",
+      "Wertgutscheine (verschiedene Nennwerte) sind im Shop verfuegbar"
+    ],
+    "promo_config": {
+      "name_frontend": "Freundeskreis Bonusgutschein",
+      "code_type": "campaign_specific",
+      "discount_type": "absolute",
+      "discount_target": "cart",
+      "discount_value": null,
+      "currency": "EUR",
+      "min_order_value": null,
+      "usage_total": 1,
+      "usage_per_customer": 1,
+      "shopware_rule": "Freundeskreis-Mitglied UND Warenkorb enthaelt keinen Wertgutschein",
+      "channels": [
+        "AT",
+        "DE",
+        "CH"
+      ]
+    },
+    "test_data": [
+      {
+        "type": "promo",
+        "name": "freundeskreis_bonus",
+        "code": "FK-BONUS-TESTCODE",
+        "description": "Freundeskreis Bonusgutschein"
+      },
+      {
+        "type": "product",
+        "name": "wertgutschein_50",
+        "product_type": "wertgutschein",
+        "value": 50,
+        "path": "p/wertgutschein-50-eur/ge-p-XXXXX"
+      },
+      {
+        "type": "product",
+        "name": "wertgutschein_100",
+        "product_type": "wertgutschein",
+        "value": 100,
+        "path": "p/wertgutschein-100-eur/ge-p-XXXXX"
+      }
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Als Freundeskreis-Mitglied einloggen",
+        "expected": "Login erfolgreich, Freundeskreis-Status ist aktiv"
+      },
+      {
+        "step": 2,
+        "action": "Wertgutschein (z.B. 50 EUR) zum Warenkorb hinzufuegen",
+        "expected": "Wertgutschein ist im Warenkorb"
+      },
+      {
+        "step": 3,
+        "action": "Freundeskreis-Bonusgutschein-Code eingeben",
+        "expected": "Bonusgutschein wird NICHT akzeptiert / Fehlermeldung wird angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Fehlermeldung pruefen",
+        "expected": "Klare Meldung: Bonusgutscheine koennen nicht fuer Wertgutscheine verwendet werden"
+      },
+      {
+        "step": 5,
+        "action": "Wertgutschein aus Warenkorb entfernen, regulaeres Produkt hinzufuegen",
+        "expected": "Regulaeres Produkt im Warenkorb"
+      },
+      {
+        "step": 6,
+        "action": "Freundeskreis-Bonusgutschein-Code erneut eingeben",
+        "expected": "Bonusgutschein wird akzeptiert und Rabatt wird angewendet"
+      },
+      {
+        "step": 7,
+        "action": "Verschiedene Wertgutschein-Nennwerte testen (25, 50, 100, 200 EUR)",
+        "expected": "Bonusgutschein wird bei keinem Wertgutschein-Nennwert akzeptiert"
+      }
+    ],
+    "postconditions": [
+      "Freundeskreis-Bonusgutschein bleibt gueltig (nicht verbraucht)",
+      "Wertgutschein-Kauf ohne Bonusgutschein ist weiterhin moeglich"
+    ],
+    "cleanup": [
+      "Warenkorb leeren",
+      "Bonusgutschein-Code entfernen",
+      "Ausloggen"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "gutschein",
+      "sicherheit",
+      "freundeskreis",
+      "bonusgutschein",
+      "wertgutschein",
+      "einschraenkung"
+    ]
+  },
+  {
+    "schema_version": "2.0",
     "test_id": "TC-PROMO-SHIP-001",
     "name": "Versandkostenfrei nur Post (DE/AT)",
     "category": "versandkostenfrei",

@@ -1,0 +1,210 @@
+{
+  "test_id": "TC-PROMO-SEC-005",
+  "name": "Freundeskreis Bonusgutschein darf keine Wertgutscheine kaufen",
+  "category": "regression",
+  "priority": "P0",
+  "schema_version": "2.1.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testbenutzer ist Freundeskreis-Mitglied",
+    "Freundeskreis-Bonusgutschein ist verfuegbar",
+    "Wertgutscheine sind im Shop verfuegbar"
+  ],
+  "postconditions": [
+    "Bonusgutschein bleibt gueltig wenn abgelehnt",
+    "Wertgutschein-Kauf ohne Bonusgutschein moeglich"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Als Freundeskreis-Mitglied einloggen",
+      "expected": "Login erfolgreich, Freundeskreis-Status aktiv",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value_ref": "login:freundeskreis.email"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value_ref": "login:freundeskreis.password"
+        },
+        {
+          "action": "click",
+          "selector": "button[type=\"submit\"]"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Wertgutschein zum Warenkorb hinzufuegen",
+      "expected": "Wertgutschein ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value_ref": "product:wertgutschein_50.path"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ],
+      "wait_for": {
+        "type": "selector_visible",
+        "selector": ".offcanvas-cart",
+        "timeout_ms": 5000
+      }
+    },
+    {
+      "step": 3,
+      "action": "Freundeskreis-Bonusgutschein-Code eingeben",
+      "expected": "Bonusgutschein wird NICHT akzeptiert",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        },
+        {
+          "action": "fill",
+          "selector": "#promotionCode",
+          "value_ref": "promo:freundeskreis_bonus.code"
+        },
+        {
+          "action": "click",
+          "selector": "button.promotion-submit"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".alert-danger, .promotion-error",
+          "message": "Fehlermeldung muss angezeigt werden"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Fehlermeldung pruefen",
+      "expected": "Klare Hinweismeldung zur Einschraenkung",
+      "assert": [
+        {
+          "type": "page_contains_text",
+          "values": [
+            "Bonusgutschein",
+            "Wertgutschein",
+            "nicht"
+          ],
+          "message": "Fehlermeldung muss Grund fuer Ablehnung erklaeren"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Wertgutschein entfernen, regulaeres Produkt hinzufuegen",
+      "expected": "Regulaeres Produkt im Warenkorb",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".line-item-remove"
+        },
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Bonusgutschein erneut eingeben",
+      "expected": "Bonusgutschein wird jetzt akzeptiert",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        },
+        {
+          "action": "fill",
+          "selector": "#promotionCode",
+          "value_ref": "promo:freundeskreis_bonus.code"
+        },
+        {
+          "action": "click",
+          "selector": "button.promotion-submit"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".promotion-discount, .cart-discount",
+          "message": "Rabatt muss angezeigt werden"
+        }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "login",
+      "name": "freundeskreis",
+      "email": "freundeskreis-test@grueneerde.at",
+      "password": "TestPasswort123!"
+    },
+    {
+      "type": "promo",
+      "name": "freundeskreis_bonus",
+      "code": "FK-BONUS-TESTCODE",
+      "description": "Freundeskreis Bonusgutschein"
+    },
+    {
+      "type": "product",
+      "name": "wertgutschein_50",
+      "product_type": "wertgutschein",
+      "value": 50,
+      "path": "/p/wertgutschein-50-eur/ge-p-XXXXX"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_freundeskreis_bonus_no_wertgutschein",
+    "tags": [
+      "security",
+      "freundeskreis",
+      "bonusgutschein",
+      "wertgutschein"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 90,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-05",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}
