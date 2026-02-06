@@ -40,14 +40,15 @@ profiles:
       AT:
       - Vorkasse
       - Rechnung
-      # - Kreditkarte  # TODO: Kreditkarte-Test noch nicht stabil
+      - Kreditkarte
       DE:
       - Vorkasse
       - Rechnung
-      # - Kreditkarte  # TODO: Kreditkarte-Test noch nicht stabil
+      - Kreditkarte
       CH:
       - Vorkasse
-      - Rechnung
+      - Kreditkarte
+      # CH hat KEINE Rechnung als Zahlungsart
 
   # ---------------------------------------------------------------------------
   # PRODUKTIV - NUR LESENDE TESTS! KEINE Bestellungen/Kunden anlegen!
@@ -235,6 +236,38 @@ payment_method_aliases:
   prepayment: Vorkasse
   credit_card: Kreditkarte
   invoice: Rechnung
+  cash_on_pickup: Zahlung bei Abholung
+
+# =============================================================================
+# Kreditkarten-Testdaten (GlobalPayments)
+# =============================================================================
+# Testdaten fuer GlobalPayments Sandbox/Staging
+# Quelle: GlobalPayments Developer Documentation
+#
+credit_card_test_data:
+  # Erfolgreiche Testkarten
+  visa:
+    number: "4111111111111111"
+    expiry: "12/27"
+    cvv: "123"
+    holder: "Test Kunde"
+  mastercard:
+    number: "5425230000004415"
+    expiry: "12/27"
+    cvv: "123"
+    holder: "Test Kunde"
+  # Karte fuer 3D-Secure Tests (falls benoetigt)
+  visa_3ds:
+    number: "4012001038443335"
+    expiry: "12/27"
+    cvv: "123"
+    holder: "Test Kunde"
+  # Karte die abgelehnt wird (fuer Negativtests)
+  declined:
+    number: "4000120000001154"
+    expiry: "12/27"
+    cvv: "123"
+    holder: "Test Kunde"
 
 # =============================================================================
 # Spezielle Testprodukte

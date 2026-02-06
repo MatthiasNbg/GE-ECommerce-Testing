@@ -383,9 +383,26 @@ async def _fill_credit_card(page, config):
     """
     Fuellt Kreditkartendaten im GlobalPayments iFrame aus.
 
-    TODO: Selektoren muessen an das tatsaechliche GlobalPayments-Widget
+    Liest Testdaten aus config.yaml (credit_card_test_data.visa).
+
+    TODO: iFrame-Selektoren muessen an das tatsaechliche GlobalPayments-Widget
     auf dem Staging angepasst werden. Die Selektoren hier sind Platzhalter.
     """
+    # Kreditkarten-Testdaten aus Config laden
+    cc_data = getattr(config, 'credit_card_test_data', None)
+    if cc_data and isinstance(cc_data, dict):
+        visa = cc_data.get('visa', {})
+        card_number = visa.get('number', '4111111111111111')
+        card_expiry = visa.get('expiry', '12/27')
+        card_cvv = visa.get('cvv', '123')
+        card_holder = visa.get('holder', 'Test Kunde')
+    else:
+        # Fallback auf Standard-Testkarte
+        card_number = '4111111111111111'
+        card_expiry = '12/27'
+        card_cvv = '123'
+        card_holder = 'Test Kunde'
+
     # GlobalPayments nutzt typischerweise iFrames fuer PCI-Compliance.
     # Die genauen Selektoren haengen vom Widget ab.
     #
@@ -402,29 +419,41 @@ async def _fill_credit_card(page, config):
 
         # Versuch iFrame zu finden
         # Typische Selektoren: iframe[name*='GlobalPayments'], iframe[src*='globalpayments']
-        iframe_locator = page.frame_locator("iframe[name*='GlobalPayments'], iframe[src*='globalpayments'], iframe[id*='credit-card']")
+        iframe_locator = page.frame_locator(
+            "iframe[name*='GlobalPayments'], "
+            "iframe[src*='globalpayments'], "
+            "iframe[id*='credit-card']"
+        )
 
         # Kartennummer
-        card_number_input = iframe_locator.locator("input[name='cardNumber'], input[id*='cardNumber'], #credit-card-number")
+        card_number_input = iframe_locator.locator(
+            "input[name='cardNumber'], input[id*='cardNumber'], #credit-card-number"
+        )
         if await card_number_input.count() > 0:
-            await card_number_input.fill("4111111111111111")  # Standard-Testkarte
+            await card_number_input.fill(card_number)
 
         # Ablaufdatum
-        expiry_input = iframe_locator.locator("input[name='cardExpiration'], input[id*='expiry'], #credit-card-expiration")
+        expiry_input = iframe_locator.locator(
+            "input[name='cardExpiration'], input[id*='expiry'], #credit-card-expiration"
+        )
         if await expiry_input.count() > 0:
-            await expiry_input.fill("12/27")
+            await expiry_input.fill(card_expiry)
 
         # CVV
-        cvv_input = iframe_locator.locator("input[name='cardCvv'], input[id*='cvv'], #credit-card-cvv")
+        cvv_input = iframe_locator.locator(
+            "input[name='cardCvv'], input[id*='cvv'], #credit-card-cvv"
+        )
         if await cvv_input.count() > 0:
-            await cvv_input.fill("123")
+            await cvv_input.fill(card_cvv)
 
         # Karteninhaber (falls vorhanden)
-        name_input = iframe_locator.locator("input[name='cardHolderName'], input[id*='name']")
+        name_input = iframe_locator.locator(
+            "input[name='cardHolderName'], input[id*='name']"
+        )
         if await name_input.count() > 0:
-            await name_input.fill("Test Kunde")
+            await name_input.fill(card_holder)
 
-        print("   Kreditkartendaten eingegeben")
+        print(f"   Kreditkartendaten eingegeben (Visa ...{card_number[-4:]})")
 
     except Exception as e:
         print(f"   WARNUNG: Kreditkarten-iFrame konnte nicht befuellt werden: {e}")
