@@ -125,11 +125,13 @@ class AccountPage(BasePage):
     PROFILE_SAVE_BUTTON = "button:has-text('Speichern')"
     PROFILE_SUCCESS_MESSAGE = ".alert-success"
 
-    # E-Mail ändern (Profil-Seite)
+    # E-Mail ändern (Profil-Seite, in Bootstrap-Collapse)
+    PROFILE_EMAIL_CHANGE_TOGGLE = "a.account-profile-change[href='#profile-email-form']"
+    PROFILE_EMAIL_COLLAPSE = "#profile-email-form"
     PROFILE_EDIT_EMAIL = "#personalMail"
     PROFILE_EDIT_EMAIL_CONFIRM = "#personalMailConfirmation"
     PROFILE_EDIT_EMAIL_PASSWORD = "#personalMailPasswordCurrent"
-    PROFILE_EMAIL_SAVE = "form:has(#personalMail) button:has-text('Speichern')"
+    PROFILE_EMAIL_SAVE = "#profileMailForm button[type='submit']"
 
     # =========================================================================
     # ADRESS-VERWALTUNG Selektoren
@@ -480,6 +482,9 @@ class AccountPage(BasePage):
         """
         Ändert die E-Mail-Adresse im Profil.
 
+        Das E-Mail-Formular ist in einem Bootstrap-Collapse versteckt und muss
+        zuerst über den "E-Mail-Adresse ändern"-Link aufgeklappt werden.
+
         Args:
             new_email: Neue E-Mail-Adresse
             current_password: Aktuelles Passwort zur Bestätigung
@@ -487,17 +492,20 @@ class AccountPage(BasePage):
         Returns:
             True wenn erfolgreich, False bei Fehler
         """
+        # Collapse aufklappen falls nötig
+        email_form = self.page.locator(self.PROFILE_EMAIL_COLLAPSE)
+        if not await email_form.is_visible():
+            toggle = self.page.locator(self.PROFILE_EMAIL_CHANGE_TOGGLE)
+            await toggle.click()
+            await email_form.wait_for(state="visible", timeout=3000)
+
         await self.fill(self.PROFILE_EDIT_EMAIL, new_email)
         await self.fill(self.PROFILE_EDIT_EMAIL_CONFIRM, new_email)
         await self.fill(self.PROFILE_EDIT_EMAIL_PASSWORD, current_password)
 
         # Speichern-Button des E-Mail-Formulars klicken
         save_btn = self.page.locator(self.PROFILE_EMAIL_SAVE)
-        if await save_btn.count() > 0:
-            await save_btn.first.click()
-        else:
-            # Fallback: generischer Speichern-Button
-            await self.page.locator(self.PROFILE_SAVE_BUTTON).first.click()
+        await save_btn.click()
 
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(1000)

@@ -1,0 +1,165 @@
+{
+  "test_id": "TC-ACCOUNT-011",
+  "name": "E-Mail auf bestehende Adresse ändern wird abgelehnt",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Account",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "AT-Kunde (ge-at-1@matthias-sax.de) existiert und ist eingeloggt",
+    "DE-Kunde (ge-de-1@matthias-sax.de) existiert als separater Account"
+  ],
+  "postconditions": [
+    "E-Mail-Adresse des AT-Kunden bleibt unverändert",
+    "Fehlermeldung wird angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen",
+      "expected": "Login-Formular wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Als AT-Kunde einloggen",
+      "expected": "Login erfolgreich, Weiterleitung zum Account-Dashboard",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value": "ge-at-1@matthias-sax.de"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value": "scharnsteinAT"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zur Profil-Bearbeitungsseite navigieren",
+      "expected": "Profil-Seite mit E-Mail-Änderungsformular wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/profile"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "E-Mail-Änderungsformular aufklappen",
+      "expected": "E-Mail-Formular wird sichtbar (Bootstrap-Collapse)",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a.account-profile-change[href='#profile-email-form']"
+        },
+        {
+          "action": "wait",
+          "selector": "#profile-email-form"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "E-Mail auf bereits registrierte Adresse ändern",
+      "expected": "E-Mail-Felder und Passwort-Feld sind ausgefüllt",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "ge-de-1@matthias-sax.de"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMailConfirmation",
+          "value": "ge-de-1@matthias-sax.de"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMailPasswordCurrent",
+          "value": "scharnsteinAT"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "E-Mail-Änderung absenden",
+      "expected": "Formular wird abgeschickt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "#profileMailForm button[type='submit']"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Fehlermeldung prüfen",
+      "expected": "Fehlermeldung wird angezeigt (z.B. 'E-Mail-Adresse bereits vergeben')"
+    },
+    {
+      "step": 8,
+      "action": "URL prüfen",
+      "expected": "Benutzer bleibt auf der Profil-Seite (/account/profile)"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "extra",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
+    },
+    {
+      "type": "extra",
+      "name": "de_customer_email",
+      "email": "ge-de-1@matthias-sax.de"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_email_change_to_existing_email",
+    "tags": [
+      "account",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

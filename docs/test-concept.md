@@ -9,13 +9,13 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **262 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **263 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 6/6) implementiert
 - ⚠️ Critical Path (8/8) implementiert
-- ⚠️ Feature-Tests (128/176 implementiert)
+- ⚠️ Feature-Tests (129/177 implementiert)
 - ⚠️ Weitere Kategorien (Newsletter, PDP, Listing, Navigation, Tech) definiert
 
 **Prioritäten:**
@@ -32,7 +32,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:149:262:57 -->
+<!-- PROGRESS_BAR:150:263:57 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
@@ -42,7 +42,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 🏬 **E2E Tests - Click & Collect** | 1 | ○ 0/1 | 🟠 P1 | Bestellung mit Abholung im Shop (4 Varianten) |
 | 🛍️ **Feature Tests - Warenkorb** | 8 | ✅ 8/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
-| 👤 **Feature Tests - Account** | 10 | ⚠️ 8/10 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
+| 👤 **Feature Tests - Account** | 11 | ⚠️ 9/11 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
 | ❤️ **Feature Tests - Merkliste** | 5 | ✅ 5/5 | 🟠 P1 | Hinzufügen, Entfernen, in Warenkorb legen |
 | 🎁 **Feature Tests - Einkaufsgutschein** | 5 | ○ 0/5 | 🟠 P1 | Gutschein/reguläres Produkt Trennung, Promo-Blockierung |
 | 🏷️ **Feature Tests - PDP** | 5 | ○ 0/5 | 🟠 P1 | Produktbilder, Varianten, Beschreibung, Verfügbarkeit |
@@ -71,7 +71,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (1 Test, 4 Varianten)
 7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (8 Tests)
 8. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
-9. [Feature Tests - Account](#feature-tests-account) - (10 Tests)
+9. [Feature Tests - Account](#feature-tests-account) - (11 Tests)
 10. [Feature Tests - Merkliste/Wishlist](#feature-tests-merklistewishlist) - (5 Tests)
 11. [Feature Tests - Einkaufsgutschein/Warenkorb](#feature-tests-einkaufsgutscheinwarenkorb) - (5 Tests)
 12. [Feature Tests - Produktdetailseite (PDP)](#feature-tests-produktdetailseite-pdp) - (5 Tests)
@@ -94,8 +94,8 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 262 Tests
-- ✅ Implementiert: 149
+**Gesamt:** 263 Tests
+- ✅ Implementiert: 150
 - ❌ Fehlend: 113
 - ⚠️ Teilweise: 0
 - **Abdeckung:** 57%
@@ -408,8 +408,8 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 ### 👤 Feature Tests - Account
 
 **Priorität:** P1
-**Tests:** 8/10 implementiert
-**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie
+**Tests:** 9/11 implementiert
+**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung
 **Dauer:** 10-20 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
@@ -425,11 +425,12 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 | TC-ACCOUNT-008 | Adressverwaltung | P1 | ✅ | AT, DE, CH | 1 |
 | TC-ACCOUNT-009 | Passwort vergessen | P0 | ○ | AT, DE, CH | 1 |
 | TC-ACCOUNT-010 | Bestellhistorie einsehen | P1 | ○ | AT, DE, CH | 1 |
+| TC-ACCOUNT-011 | E-Mail auf bestehende Adresse ändern wird abgelehnt | P1 | ✅ | AT | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
-Die 8 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, Login und Profilverwaltung. Die Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH) und sind in zwei funktionale Gruppen unterteilt.
+Die 9 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, Login und Profilverwaltung. Die Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH) und sind in zwei funktionale Gruppen unterteilt.
 
 #### Registrierung (4 Tests)
 
@@ -476,9 +477,16 @@ Die 8 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
 - **Schritte:** Adressverwaltung aufrufen → Übersicht prüfen → neue Adresse hinzufügen → speichern → in der Liste prüfen
 - **Erwartet:** Adressübersicht zeigt alle Adressen, Hinzufügen/Bearbeiten/Löschen funktioniert
 
+#### E-Mail-Verwaltung (1 Test)
+
+**TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern wird abgelehnt**
+- **Vorbedingung:** AT-Kunde eingeloggt, DE-Kunde existiert als separater Account
+- **Schritte:** Profil-Seite aufrufen → E-Mail auf bereits registrierte DE-Kunden-Adresse ändern → Passwort bestätigen → absenden
+- **Erwartet:** Fehlermeldung erscheint, E-Mail bleibt unverändert, Benutzer bleibt auf Profil-Seite
+
 **Automation:**
 - **Playwright-Testdatei:** `playwright_tests/tests/test_account.py`
-- **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-ACCOUNT-001 bis TC-ACCOUNT-008)
+- **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011)
 - **Hinweis:** Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen
 
 </details>
@@ -1867,7 +1875,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | phase_0 | Phase 0 - Basis-Setup | ✅ | 8 | -% |
 | phase_1 | Phase 1 - Critical Path | ✅ | 8 | 15% |
 | phase_2 | Phase 2 - Warenkorb | ✅ | 8 | -% |
-| phase_3 | Phase 3 - Account | ⚠️ | 10 | -% |
+| phase_3 | Phase 3 - Account | ⚠️ | 11 | -% |
 | phase_4 | Phase 4 - Suche | ✅ | 9 | -% |
 | phase_5 | Phase 5 - Versandarten | ✅ | 98 | -% |
 | phase_5a | Phase 5a - Merkliste | ✅ | 5 | -% |

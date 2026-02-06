@@ -36,7 +36,7 @@ Beispiele:
 | TC-CRITICAL-* | Kritischer Pfad | TC-CRITICAL-009 |
 | TC-REG-* | Regression | TC-REG-016 |
 | TC-SEARCH-* | Suche | TC-SEARCH-011 |
-| TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-013 |
+| TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-012 |
 | TC-PROMO-* | Promotions/Gutscheine | Kontextabhaengig |
 | TC-DATA-* | Datenvalidierung | TC-DATA-011 |
 | TC-PERF-* | Performance | TC-PERF-004 |
@@ -112,5 +112,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 225 Dateien, 0 fehlerhaft, Exit-Code 0.
+Erwartetes Ergebnis: 226 Dateien, 0 fehlerhaft, Exit-Code 0.
 (33 neue Contracts: 5 NAV + 5 PDP + 4 LISTING + 2 NEWSLETTER + 2 ACCOUNT + 5 CONTENT + 10 TECH)
