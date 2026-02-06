@@ -1,0 +1,154 @@
+{
+  "test_id": "TC-E2E-CC-001",
+  "name": "Click & Collect - Abholung im Shop",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "E2E Tests - Click & Collect",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Click & Collect ist fuer AT und DE aktiviert",
+    "Abholorte sind konfiguriert (Wien, Linz, Muenchen, Berlin)",
+    "Zahlungsart 'Zahlung bei Abholung' ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Account vorbereiten (Neuregistrierung oder Login)",
+      "expected": "Benutzer ist eingeloggt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produkt zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/confirm"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Versandart Click & Collect auswaehlen",
+      "expected": "Click & Collect ist als Versandart ausgewaehlt"
+    },
+    {
+      "step": 5,
+      "action": "PLZ eingeben und Abholort aus Ergebnisliste waehlen",
+      "expected": "Abholort ist ausgewaehlt und wird angezeigt"
+    },
+    {
+      "step": 6,
+      "action": "Zahlungsart 'Zahlung bei Abholung' auswaehlen",
+      "expected": "Zahlung bei Abholung ist als Zahlungsart ausgewaehlt"
+    },
+    {
+      "step": 7,
+      "action": "AGB akzeptieren",
+      "expected": "AGB-Checkbox ist aktiviert",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Bestellung absenden",
+      "expected": "Bestellung wird erfolgreich verarbeitet",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "action": "Bestellbestaetigung pruefen",
+      "expected": "Bestellbestaetigungsseite wird angezeigt mit Bestellnummer und Abholort"
+    }
+  ],
+  "postconditions": [
+    "Bestellnummer wird angezeigt",
+    "Abholort wird in der Bestaetigung angezeigt",
+    "Zahlungsart zeigt 'Zahlung bei Abholung'"
+  ],
+  "test_data": [
+    {
+      "type": "variants",
+      "name": "matrix",
+      "description": "4 Varianten: Land x Abholort",
+      "total_variants": 4,
+      "parameters": {
+        "variants": [
+          {"country": "AT", "plz": "1010", "city": "Wien", "product": "post"},
+          {"country": "AT", "plz": "4020", "city": "Linz", "product": "spedition"},
+          {"country": "DE", "plz": "80331", "city": "Muenchen", "product": "post"},
+          {"country": "DE", "plz": "10115", "city": "Berlin", "product": "post"}
+        ]
+      }
+    },
+    {
+      "type": "product",
+      "name": "post_product",
+      "product_id": "ge-p-862990",
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+    },
+    {
+      "type": "product",
+      "name": "spedition_product",
+      "product_id": "ge-p-693278",
+      "description": "Polsterbett Almeno (Speditionsversand)"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_e2e_click_collect.py",
+    "function_name": "test_e2e_click_collect",
+    "tags": [
+      "e2e",
+      "click_collect"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **215 Testfällen** in 10 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **217 Testfällen** in 12 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~65%**.
 
 **Aktuelle Situation:**
@@ -38,6 +38,8 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 |------------------|-------|--------|-----------|-------------------|
 | 🏠 **Smoke Tests** | 5 | ✅ 5/5 | 🔴 P0 | Homepage, Produktseiten, Navigation |
 | 🛒 **Critical Path Tests** | 8 | ✅ 8/8 | 🔴 P0 | Gast-Checkout, Registrierter Checkout, Zahlungsarten |
+| 🔄 **E2E Tests - Checkout** | 1 | ○ 0/1 | 🔴 P0 | Kompletter Checkout mit allen Zahlungs-/Versandarten (24 Varianten) |
+| 🏬 **E2E Tests - Click & Collect** | 1 | ○ 0/1 | 🟠 P1 | Bestellung mit Abholung im Shop (4 Varianten) |
 | 🛍️ **Feature Tests - Warenkorb** | 8 | ✅ 8/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
 | 👤 **Feature Tests - Account** | 8 | ✅ 8/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
@@ -57,16 +59,18 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 2. [Test-Kategorien](#test-kategorien) - Was wird getestet?
 3. [Smoke Tests](#smoke-tests) - (5 Tests)
 4. [Critical Path Tests](#critical-path-tests) - (8 Tests)
-5. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (8 Tests)
-6. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
-7. [Feature Tests - Account](#feature-tests-account) - (8 Tests)
-8. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
-9. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
-10. [Data Validation Tests](#data-validation-tests) - (15 Tests)
-11. [Regression Tests](#regression-tests) - (15-20 Tests)
-12. [Load Tests](#load-tests) - (5 Tests)
-13. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
-14. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
+5. [E2E Tests - Checkout](#e2e-tests-kompletter-checkout) - (1 Test, 24 Varianten)
+6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (1 Test, 4 Varianten)
+7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (8 Tests)
+8. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
+9. [Feature Tests - Account](#feature-tests-account) - (8 Tests)
+10. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
+11. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
+12. [Data Validation Tests](#data-validation-tests) - (15 Tests)
+13. [Regression Tests](#regression-tests) - (15-20 Tests)
+14. [Load Tests](#load-tests) - (5 Tests)
+15. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
+16. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
 
 ---
 
@@ -74,7 +78,7 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 215 Tests
+**Gesamt:** 217 Tests
 - ✅ Implementiert: 134
 - ❌ Fehlend: 81
 - ⚠️ Teilweise: 0
@@ -92,13 +96,13 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 **Dauer:** < 5 Min
 **Ausführung:** Bei jedem Build, vor jedem Deployment
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-SMOKE-001 | Homepage lädt erfolgreich | P0 | ✅ | AT, DE, CH |
-| TC-SMOKE-002 | Produktseite lädt erfolgreich | P0 | ✅ | AT, DE, CH |
-| TC-SMOKE-003 | Produkt zum Warenkorb hinzufügen | P0 | ✅ | AT, DE, CH |
-| TC-SMOKE-004 | Checkout-Seite erreichbar | P0 | ✅ | AT, DE, CH |
-| TC-SMOKE-005 | Suche funktioniert | P0 | ✅ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-SMOKE-001 | Homepage lädt erfolgreich | P0 | ✅ | AT, DE, CH | 1 |
+| TC-SMOKE-002 | Produktseite lädt erfolgreich | P0 | ✅ | AT, DE, CH | 1 |
+| TC-SMOKE-003 | Produkt zum Warenkorb hinzufügen | P0 | ✅ | AT, DE, CH | 1 |
+| TC-SMOKE-004 | Checkout-Seite erreichbar | P0 | ✅ | AT, DE, CH | 1 |
+| TC-SMOKE-005 | Suche funktioniert | P0 | ✅ | AT, DE, CH | 1 |
 
 ---
 
@@ -110,16 +114,130 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 **Dauer:** 10-30 Min
 **Ausführung:** Vor jedem Deployment (Staging + Production)
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-CRITICAL-001 | Gast-Checkout vollständig (AT) | P0 | ○ | AT |
-| TC-CRITICAL-002 | Gast-Checkout vollständig (DE) | P0 | ○ | DE |
-| TC-CRITICAL-003 | Gast-Checkout vollständig (CH) | P0 | ○ | CH |
-| TC-CRITICAL-004 | Registrierter User Checkout | P0 | ○ | AT |
-| TC-CRITICAL-005 | Zahlungsarten verfügbar (AT) | P0 | ✅ | AT |
-| TC-CRITICAL-006 | Zahlungsarten verfügbar (DE) | P0 | ✅ | DE |
-| TC-CRITICAL-007 | Zahlungsarten verfügbar (CH) | P0 | ✅ | CH |
-| TC-CRITICAL-008 | Warenkorb-Persistenz | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CRITICAL-001 | Gast-Checkout vollständig (AT) | P0 | ○ | AT | 1 |
+| TC-CRITICAL-002 | Gast-Checkout vollständig (DE) | P0 | ○ | DE | 1 |
+| TC-CRITICAL-003 | Gast-Checkout vollständig (CH) | P0 | ○ | CH | 1 |
+| TC-CRITICAL-004 | Registrierter User Checkout | P0 | ○ | AT | 1 |
+| TC-CRITICAL-005 | Zahlungsarten verfügbar (AT) | P0 | ✅ | AT | 1 |
+| TC-CRITICAL-006 | Zahlungsarten verfügbar (DE) | P0 | ✅ | DE | 1 |
+| TC-CRITICAL-007 | Zahlungsarten verfügbar (CH) | P0 | ✅ | CH | 1 |
+| TC-CRITICAL-008 | Warenkorb-Persistenz | P1 | ○ | AT, DE, CH | 1 |
+
+---
+### 🔄 E2E Tests - Kompletter Checkout
+
+**Priorität:** P0
+**Tests:** 1 Testfall, 24 Varianten
+**Beschreibung:** Vollständiger Checkout mit Neuregistrierung/Login, allen Zahlungs- und Versandarten
+**Dauer:** 30-60 Min (alle Varianten)
+**Ausführung:** Vor jedem Release auf Staging
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-E2E-001 | E2E Checkout komplett (Neuregistrierung + Login, alle Zahlungs-/Versandarten) | P0 | ○ | AT, DE, CH | 24 |
+
+<details>
+<summary><strong>Varianten-Matrix (24 Ausprägungen)</strong></summary>
+
+Der Testfall wird mit folgenden Parametern kombiniert:
+
+**Länder × Zahlungsarten:**
+- AT: Vorkasse, Rechnung, Kreditkarte (3)
+- DE: Vorkasse, Rechnung, Kreditkarte (3)
+- CH: Vorkasse, Kreditkarte (2) — keine Rechnung in CH
+
+**Versandarten:** Post, Spedition, Gemischt (3)
+
+**Account-Typ:** Abwechselnd Neuregistrierung und bestehender Account
+
+| # | Land | Zahlungsart | Versandart | Account |
+|---|------|------------|------------|---------|
+| 1 | AT | Vorkasse | Post | Neu |
+| 2 | AT | Vorkasse | Spedition | Neu |
+| 3 | AT | Vorkasse | Gemischt | Neu |
+| 4 | AT | Rechnung | Post | Bestehend |
+| 5 | AT | Rechnung | Spedition | Bestehend |
+| 6 | AT | Rechnung | Gemischt | Bestehend |
+| 7 | AT | Kreditkarte | Post | Neu |
+| 8 | AT | Kreditkarte | Spedition | Bestehend |
+| 9 | AT | Kreditkarte | Gemischt | Neu |
+| 10 | DE | Vorkasse | Post | Bestehend |
+| 11 | DE | Vorkasse | Spedition | Neu |
+| 12 | DE | Vorkasse | Gemischt | Bestehend |
+| 13 | DE | Rechnung | Post | Neu |
+| 14 | DE | Rechnung | Spedition | Neu |
+| 15 | DE | Rechnung | Gemischt | Bestehend |
+| 16 | DE | Kreditkarte | Post | Bestehend |
+| 17 | DE | Kreditkarte | Spedition | Neu |
+| 18 | DE | Kreditkarte | Gemischt | Neu |
+| 19 | CH | Vorkasse | Post | Neu |
+| 20 | CH | Vorkasse | Spedition | Bestehend |
+| 21 | CH | Vorkasse | Gemischt | Neu |
+| 22 | CH | Kreditkarte | Post | Bestehend |
+| 23 | CH | Kreditkarte | Spedition | Neu |
+| 24 | CH | Kreditkarte | Gemischt | Bestehend |
+
+**Testflow pro Variante:**
+1. Account anlegen (Neuregistrierung) oder Login (bestehender Account)
+2. Post-Produkt und/oder Speditions-Produkt in den Warenkorb
+3. Zur Kasse gehen
+4. Zahlungsart auswählen
+5. AGB akzeptieren
+6. Bestellung absenden
+7. Bestätigungsseite + Bestellnummer prüfen
+
+**Kreditkarte:** GlobalPayments, Testdaten in config.yaml hinterlegt.
+
+**Automation:**
+- **Playwright-Testdatei:** `playwright_tests/tests/test_e2e_checkout.py`
+- **Page Objects:** `checkout_page.py`, `account_page.py`, `cart_page.py`
+- **Parametrisierung:** pytest.mark.parametrize mit Varianten-Matrix
+
+</details>
+
+---
+
+### 🏬 E2E Tests - Click & Collect
+
+**Priorität:** P1
+**Tests:** 1 Testfall, 4 Varianten
+**Beschreibung:** Bestellung mit Abholung im Shop (Click & Collect)
+**Dauer:** 10-15 Min (alle Varianten)
+**Ausführung:** Vor jedem Release auf Staging
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-E2E-CC-001 | Click & Collect - Abholung im Shop | P1 | ○ | AT, DE | 4 |
+
+<details>
+<summary><strong>Varianten-Matrix (4 Ausprägungen)</strong></summary>
+
+| # | Land | Abholort-PLZ | Produkt |
+|---|------|-------------|---------|
+| 1 | AT | Wien (1010) | Post-Produkt |
+| 2 | AT | Linz (4020) | Speditions-Produkt |
+| 3 | DE | München (80331) | Post-Produkt |
+| 4 | DE | Berlin (10115) | Post-Produkt |
+
+**Hinweis:** Schweiz hat kein Click & Collect.
+
+**Testflow:**
+1. Neuregistrierung oder Login
+2. Produkt in den Warenkorb
+3. Zur Kasse
+4. Versandart: Click & Collect auswählen
+5. PLZ eingeben → Abholort aus Ergebnisliste wählen
+6. Zahlungsart: Zahlung bei Abholung
+7. Bestellung absenden
+8. Bestätigung prüfen
+
+**Automation:**
+- **Playwright-Testdatei:** `playwright_tests/tests/test_e2e_click_collect.py`
+- **Page Objects:** `checkout_page.py` (erweitert um Click & Collect Methoden)
+
+</details>
 
 ---
 
@@ -131,16 +249,16 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 **Dauer:** 5-15 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-CART-001 | Produkt zum Warenkorb hinzufügen | P1 | ✅ | AT, DE, CH |
-| TC-CART-002 | Warenkorb-Zähler aktualisiert sich | P1 | ✅ | AT, DE, CH |
-| TC-CART-003 | Menge ändern aktualisiert Gesamtpreis | P1 | ✅ | AT, DE, CH |
-| TC-CART-004 | Produkt entfernen aktualisiert Warenkorb | P1 | ✅ | AT, DE, CH |
-| TC-CART-005 | Leerer Warenkorb zeigt Meldung | P1 | ✅ | AT, DE, CH |
-| TC-CART-006 | Warenkorb bleibt zwischen Seiten erhalten | P1 | ✅ | AT, DE, CH |
-| TC-CART-007 | Mehrere Produkte hinzufügen | P1 | ✅ | AT, DE, CH |
-| TC-CART-008 | Preisberechnung korrekt | P1 | ✅ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CART-001 | Produkt zum Warenkorb hinzufügen | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-002 | Warenkorb-Zähler aktualisiert sich | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-003 | Menge ändern aktualisiert Gesamtpreis | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-004 | Produkt entfernen aktualisiert Warenkorb | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-005 | Leerer Warenkorb zeigt Meldung | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-006 | Warenkorb bleibt zwischen Seiten erhalten | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-007 | Mehrere Produkte hinzufügen | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-008 | Preisberechnung korrekt | P1 | ✅ | AT, DE, CH | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -202,17 +320,17 @@ Die 8 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzu
 **Dauer:** 5-15 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-SEARCH-001 | Autocomplete zeigt korrektes Produkt | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-002 | Autocomplete-Klick navigiert zu Produkt | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-003 | Suchergebnisseite zeigt korrektes Produkt | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-004 | Suchergebnis-Klick navigiert zu Produkt | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-005 | Keine Ergebnisse bei ungültigem Artikel | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-006 | Suchvorschläge erscheinen bei Eingabe | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-007 | Suchvorschläge zeigen Kategorien | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-008 | Autocomplete zeigt Produktbilder | P1 | ✅ | AT, DE, CH |
-| TC-SEARCH-009 | Autocomplete Produktinfo vollständig | P1 | ✅ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-SEARCH-001 | Autocomplete zeigt korrektes Produkt | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-002 | Autocomplete-Klick navigiert zu Produkt | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-003 | Suchergebnisseite zeigt korrektes Produkt | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-004 | Suchergebnis-Klick navigiert zu Produkt | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-005 | Keine Ergebnisse bei ungültigem Artikel | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-006 | Suchvorschläge erscheinen bei Eingabe | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-007 | Suchvorschläge zeigen Kategorien | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-008 | Autocomplete zeigt Produktbilder | P1 | ✅ | AT, DE, CH | 1 |
+| TC-SEARCH-009 | Autocomplete Produktinfo vollständig | P1 | ✅ | AT, DE, CH | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -278,16 +396,16 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 **Dauer:** 10-20 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-ACCOUNT-001 | Registrierung erfolgreich | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-002 | Registrierung mit existierender Email schlägt fehl | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-003 | Registrierung mit ungültiger Email zeigt Fehler | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-004 | Schwaches Passwort wird abgelehnt | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-005 | Login erfolgreich | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-006 | Login mit falschen Daten schlägt fehl | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-007 | Profil anzeigen und bearbeiten | P1 | ✅ | AT, DE, CH |
-| TC-ACCOUNT-008 | Adressverwaltung | P1 | ✅ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-ACCOUNT-001 | Registrierung erfolgreich | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-002 | Registrierung mit existierender Email schlägt fehl | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-003 | Registrierung mit ungültiger Email zeigt Fehler | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-004 | Schwaches Passwort wird abgelehnt | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-005 | Login erfolgreich | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-006 | Login mit falschen Daten schlägt fehl | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-007 | Profil anzeigen und bearbeiten | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-008 | Adressverwaltung | P1 | ✅ | AT, DE, CH | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -356,106 +474,106 @@ Die 8 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
 **Dauer:** 30-60 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-SHIP-AT-POST-001 | Post AT - PLZ 0000-9999 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-POST-002 | Post AT - PLZ 0000-9999 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-WETSCH-001 | Wetsch AT - PLZ 6000-6999 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-WETSCH-002 | Wetsch AT - PLZ 6000-6999 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-001 | Fink AT - PLZ 1000-1199 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-002 | Fink AT - PLZ 1000-1199 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-003 | Fink AT - PLZ 3000-3399 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-004 | Fink AT - PLZ 3000-3399 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-005 | Fink AT - PLZ 3600-3699 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-006 | Fink AT - PLZ 3600-3699 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-007 | Fink AT - PLZ 4000-4699 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-008 | Fink AT - PLZ 4000-4699 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-009 | Fink AT - PLZ 8000-9999 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-FINK-010 | Fink AT - PLZ 8000-9999 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-001 | Cargoe AT - PLZ 1200-1399 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-002 | Cargoe AT - PLZ 1200-1399 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-003 | Cargoe AT - PLZ 2000-2999 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-004 | Cargoe AT - PLZ 2000-2999 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-005 | Cargoe AT - PLZ 3400-3599 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-006 | Cargoe AT - PLZ 3400-3599 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-007 | Cargoe AT - PLZ 3700-3999 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-008 | Cargoe AT - PLZ 3700-3999 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-009 | Cargoe AT - PLZ 7000-7999 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-CARGO-010 | Cargoe AT - PLZ 7000-7999 Max | P1 | ✅ | AT |
-| TC-SHIP-AT-TH-001 | Thurner AT - PLZ 4700-5799 Min | P1 | ✅ | AT |
-| TC-SHIP-AT-TH-002 | Thurner AT - PLZ 4700-5799 Max | P1 | ✅ | AT |
-| TC-SHIP-DE-POST-001 | Post DE - PLZ 00000-99999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-POST-002 | Post DE - PLZ 00000-99999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-001 | Logsens Nord - PLZ 19000-29999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-002 | Logsens Nord - PLZ 19000-29999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-003 | Logsens Nord - PLZ 30000-32999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-004 | Logsens Nord - PLZ 30000-32999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-005 | Logsens Nord - PLZ 34000-37139 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-006 | Logsens Nord - PLZ 34000-37139 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-007 | Logsens Nord - PLZ 37140-37199 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-008 | Logsens Nord - PLZ 37140-37199 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-009 | Logsens Nord - PLZ 37200-37399 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-010 | Logsens Nord - PLZ 37200-37399 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-011 | Logsens Nord - PLZ 37400-39174 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-012 | Logsens Nord - PLZ 37400-39174 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-013 | Logsens Nord - PLZ 39326-39499 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-014 | Logsens Nord - PLZ 39326-39499 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-015 | Logsens Nord - PLZ 39500-39699 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-016 | Logsens Nord - PLZ 39500-39699 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-017 | Logsens Nord - PLZ 49000-49999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LN-018 | Logsens Nord - PLZ 49000-49999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-001 | Logsens Ost - PLZ 00000-09999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-002 | Logsens Ost - PLZ 00000-09999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-003 | Logsens Ost - PLZ 10000-15999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-004 | Logsens Ost - PLZ 10000-15999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-005 | Logsens Ost - PLZ 16000-18999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-006 | Logsens Ost - PLZ 16000-18999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-007 | Logsens Ost - PLZ 39175-39319 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-008 | Logsens Ost - PLZ 39175-39319 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-009 | Logsens Ost - PLZ 95000-96999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-010 | Logsens Ost - PLZ 95000-96999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-011 | Logsens Ost - PLZ 98000-99999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LO-012 | Logsens Ost - PLZ 98000-99999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-001 | Logsens Süd - PLZ 54000-54999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-002 | Logsens Süd - PLZ 54000-54999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-003 | Logsens Süd - PLZ 56000-56999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-004 | Logsens Süd - PLZ 56000-56999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-005 | Logsens Süd - PLZ 66000-67999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-006 | Logsens Süd - PLZ 66000-67999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-007 | Logsens Süd - PLZ 72000-72999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-008 | Logsens Süd - PLZ 72000-72999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-009 | Logsens Süd - PLZ 75000-79999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-010 | Logsens Süd - PLZ 75000-79999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-011 | Logsens Süd - PLZ 80000-89999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LS-012 | Logsens Süd - PLZ 80000-89999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-001 | Logsens West - PLZ 33000-33999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-002 | Logsens West - PLZ 33000-33999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-003 | Logsens West - PLZ 41000-41999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-004 | Logsens West - PLZ 41000-41999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-005 | Logsens West - PLZ 42000-48999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-006 | Logsens West - PLZ 42000-48999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-007 | Logsens West - PLZ 50000-53999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-008 | Logsens West - PLZ 50000-53999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-009 | Logsens West - PLZ 57000-57999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-010 | Logsens West - PLZ 57000-57999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-011 | Logsens West - PLZ 58000-59999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-LW-012 | Logsens West - PLZ 58000-59999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-001 | Thurner DE - PLZ 55000-55999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-002 | Thurner DE - PLZ 55000-55999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-003 | Thurner DE - PLZ 60000-65999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-004 | Thurner DE - PLZ 60000-65999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-005 | Thurner DE - PLZ 68000-71999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-006 | Thurner DE - PLZ 68000-71999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-007 | Thurner DE - PLZ 73000-74999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-008 | Thurner DE - PLZ 73000-74999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-009 | Thurner DE - PLZ 90000-94999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-010 | Thurner DE - PLZ 90000-94999 Max | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-011 | Thurner DE - PLZ 97000-97999 Min | P1 | ✅ | DE |
-| TC-SHIP-DE-TH-012 | Thurner DE - PLZ 97000-97999 Max | P1 | ✅ | DE |
-| TC-SHIP-CH-001 | Post CH - PLZ Min (1000) | P1 | ✅ | CH |
-| TC-SHIP-CH-002 | Post CH - PLZ Max (9658) | P1 | ✅ | CH |
-| TC-SHIP-CH-003 | Spedition Kuoni CH - PLZ Min (1000) | P1 | ✅ | CH |
-| TC-SHIP-CH-004 | Spedition Kuoni CH - PLZ Max (9658) | P1 | ✅ | CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-SHIP-AT-POST-001 | Post AT - PLZ 0000-9999 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-POST-002 | Post AT - PLZ 0000-9999 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-WETSCH-001 | Wetsch AT - PLZ 6000-6999 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-WETSCH-002 | Wetsch AT - PLZ 6000-6999 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-001 | Fink AT - PLZ 1000-1199 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-002 | Fink AT - PLZ 1000-1199 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-003 | Fink AT - PLZ 3000-3399 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-004 | Fink AT - PLZ 3000-3399 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-005 | Fink AT - PLZ 3600-3699 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-006 | Fink AT - PLZ 3600-3699 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-007 | Fink AT - PLZ 4000-4699 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-008 | Fink AT - PLZ 4000-4699 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-009 | Fink AT - PLZ 8000-9999 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-FINK-010 | Fink AT - PLZ 8000-9999 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-001 | Cargoe AT - PLZ 1200-1399 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-002 | Cargoe AT - PLZ 1200-1399 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-003 | Cargoe AT - PLZ 2000-2999 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-004 | Cargoe AT - PLZ 2000-2999 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-005 | Cargoe AT - PLZ 3400-3599 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-006 | Cargoe AT - PLZ 3400-3599 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-007 | Cargoe AT - PLZ 3700-3999 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-008 | Cargoe AT - PLZ 3700-3999 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-009 | Cargoe AT - PLZ 7000-7999 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-CARGO-010 | Cargoe AT - PLZ 7000-7999 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-TH-001 | Thurner AT - PLZ 4700-5799 Min | P1 | ✅ | AT | 1 |
+| TC-SHIP-AT-TH-002 | Thurner AT - PLZ 4700-5799 Max | P1 | ✅ | AT | 1 |
+| TC-SHIP-DE-POST-001 | Post DE - PLZ 00000-99999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-POST-002 | Post DE - PLZ 00000-99999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-001 | Logsens Nord - PLZ 19000-29999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-002 | Logsens Nord - PLZ 19000-29999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-003 | Logsens Nord - PLZ 30000-32999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-004 | Logsens Nord - PLZ 30000-32999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-005 | Logsens Nord - PLZ 34000-37139 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-006 | Logsens Nord - PLZ 34000-37139 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-007 | Logsens Nord - PLZ 37140-37199 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-008 | Logsens Nord - PLZ 37140-37199 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-009 | Logsens Nord - PLZ 37200-37399 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-010 | Logsens Nord - PLZ 37200-37399 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-011 | Logsens Nord - PLZ 37400-39174 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-012 | Logsens Nord - PLZ 37400-39174 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-013 | Logsens Nord - PLZ 39326-39499 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-014 | Logsens Nord - PLZ 39326-39499 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-015 | Logsens Nord - PLZ 39500-39699 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-016 | Logsens Nord - PLZ 39500-39699 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-017 | Logsens Nord - PLZ 49000-49999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LN-018 | Logsens Nord - PLZ 49000-49999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-001 | Logsens Ost - PLZ 00000-09999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-002 | Logsens Ost - PLZ 00000-09999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-003 | Logsens Ost - PLZ 10000-15999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-004 | Logsens Ost - PLZ 10000-15999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-005 | Logsens Ost - PLZ 16000-18999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-006 | Logsens Ost - PLZ 16000-18999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-007 | Logsens Ost - PLZ 39175-39319 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-008 | Logsens Ost - PLZ 39175-39319 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-009 | Logsens Ost - PLZ 95000-96999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-010 | Logsens Ost - PLZ 95000-96999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-011 | Logsens Ost - PLZ 98000-99999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LO-012 | Logsens Ost - PLZ 98000-99999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-001 | Logsens Süd - PLZ 54000-54999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-002 | Logsens Süd - PLZ 54000-54999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-003 | Logsens Süd - PLZ 56000-56999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-004 | Logsens Süd - PLZ 56000-56999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-005 | Logsens Süd - PLZ 66000-67999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-006 | Logsens Süd - PLZ 66000-67999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-007 | Logsens Süd - PLZ 72000-72999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-008 | Logsens Süd - PLZ 72000-72999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-009 | Logsens Süd - PLZ 75000-79999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-010 | Logsens Süd - PLZ 75000-79999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-011 | Logsens Süd - PLZ 80000-89999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LS-012 | Logsens Süd - PLZ 80000-89999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-001 | Logsens West - PLZ 33000-33999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-002 | Logsens West - PLZ 33000-33999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-003 | Logsens West - PLZ 41000-41999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-004 | Logsens West - PLZ 41000-41999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-005 | Logsens West - PLZ 42000-48999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-006 | Logsens West - PLZ 42000-48999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-007 | Logsens West - PLZ 50000-53999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-008 | Logsens West - PLZ 50000-53999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-009 | Logsens West - PLZ 57000-57999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-010 | Logsens West - PLZ 57000-57999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-011 | Logsens West - PLZ 58000-59999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-LW-012 | Logsens West - PLZ 58000-59999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-001 | Thurner DE - PLZ 55000-55999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-002 | Thurner DE - PLZ 55000-55999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-003 | Thurner DE - PLZ 60000-65999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-004 | Thurner DE - PLZ 60000-65999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-005 | Thurner DE - PLZ 68000-71999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-006 | Thurner DE - PLZ 68000-71999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-007 | Thurner DE - PLZ 73000-74999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-008 | Thurner DE - PLZ 73000-74999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-009 | Thurner DE - PLZ 90000-94999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-010 | Thurner DE - PLZ 90000-94999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-011 | Thurner DE - PLZ 97000-97999 Min | P1 | ✅ | DE | 1 |
+| TC-SHIP-DE-TH-012 | Thurner DE - PLZ 97000-97999 Max | P1 | ✅ | DE | 1 |
+| TC-SHIP-CH-001 | Post CH - PLZ Min (1000) | P1 | ✅ | CH | 1 |
+| TC-SHIP-CH-002 | Post CH - PLZ Max (9658) | P1 | ✅ | CH | 1 |
+| TC-SHIP-CH-003 | Spedition Kuoni CH - PLZ Min (1000) | P1 | ✅ | CH | 1 |
+| TC-SHIP-CH-004 | Spedition Kuoni CH - PLZ Max (9658) | P1 | ✅ | CH | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -569,13 +687,13 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Warenkorb-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-001 | Nicht-rabattierbarer Artikel (639046) | P1 | ○ | AT, DE, CH |
-| TC-PROMO-002 | Ausschluss Kauf rabattierter Artikel | P1 | ○ | AT, DE, CH |
-| TC-PROMO-003 | Ausschluss Kaufgutscheine mit Rabatten | P1 | ○ | AT, DE, CH |
-| TC-PROMO-004 | Kein Rabatt auf Wertgutschein | P1 | ○ | AT, DE, CH |
-| TC-PROMO-CART-PERCENT-001 | Prozentuale Aktion auf Warenkorb mit Ausschlüssen | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-001 | Nicht-rabattierbarer Artikel (639046) | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-002 | Ausschluss Kauf rabattierter Artikel | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-003 | Ausschluss Kaufgutscheine mit Rabatten | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-004 | Kein Rabatt auf Wertgutschein | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CART-PERCENT-001 | Prozentuale Aktion auf Warenkorb mit Ausschlüssen | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -690,12 +808,12 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Gutschein-Sicherheit (Brute-Force Tests)
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-SEC-001 | Ausnutzungsmöglichkeiten Kaufgutscheine | P0 | ○ | AT, DE, CH |
-| TC-PROMO-SEC-002 | Gutschein-Kombination für kostenlosen Warenkorb | P0 | ○ | AT, DE, CH |
-| TC-PROMO-SEC-003 | Gutscheine zum Erreichen von MBW | P1 | ○ | AT, DE, CH |
-| TC-PROMO-SEC-004 | Alle Gutschein-Kombinationen (Brute-Force) | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-SEC-001 | Ausnutzungsmöglichkeiten Kaufgutscheine | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-SEC-002 | Gutschein-Kombination für kostenlosen Warenkorb | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-SEC-003 | Gutscheine zum Erreichen von MBW | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-SEC-004 | Alle Gutschein-Kombinationen (Brute-Force) | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -769,13 +887,13 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Gutschein-Checkout-Flows
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-CHK-001 | Gutschein zu regulärem Warenkorb blockiert | P0 | ○ | AT, DE, CH |
-| TC-PROMO-CHK-002 | Reguläres Produkt zu Gutschein-Warenkorb blockiert | P0 | ○ | AT, DE, CH |
-| TC-PROMO-CHK-003 | Promotion auf Gutschein blockiert | P0 | ○ | AT, DE, CH |
-| TC-PROMO-CHK-004 | Gemischter Warenkorb im Checkout blockiert | P0 | ○ | AT, DE, CH |
-| TC-PROMO-CHK-005 | Mehrere Gutscheine erlaubt | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-CHK-001 | Gutschein zu regulärem Warenkorb blockiert | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CHK-002 | Reguläres Produkt zu Gutschein-Warenkorb blockiert | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CHK-003 | Promotion auf Gutschein blockiert | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CHK-004 | Gemischter Warenkorb im Checkout blockiert | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CHK-005 | Mehrere Gutscheine erlaubt | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -836,17 +954,17 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Versandkostenfrei-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-SHIP-001 | Versandkostenfrei nur Post (DE/AT) | P1 | ○ | AT, DE |
-| TC-PROMO-SHIP-002 | Versandkostenfrei nur Post (CH) | P1 | ○ | CH |
-| TC-PROMO-SHIP-003 | Versandkostenfrei nur Spedi (DE/AT) | P1 | ○ | AT, DE |
-| TC-PROMO-SHIP-004 | Versandkostenfrei nur Spedi (CH) | P1 | ○ | CH |
-| TC-PROMO-SHIP-005 | Versandkostenfrei Post ab MBW EUR 50 (DE/AT) | P1 | ○ | AT, DE |
-| TC-PROMO-SHIP-006 | Versandkostenfrei Post ab MBW CHF 50 (CH) | P1 | ○ | CH |
-| TC-PROMO-SHIP-007 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE | P1 | ○ | DE |
-| TC-PROMO-SHIP-008 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT | P1 | ○ | AT |
-| TC-PROMO-SHIP-009 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH | P1 | ○ | CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-SHIP-001 | Versandkostenfrei nur Post (DE/AT) | P1 | ○ | AT, DE | 1 |
+| TC-PROMO-SHIP-002 | Versandkostenfrei nur Post (CH) | P1 | ○ | CH | 1 |
+| TC-PROMO-SHIP-003 | Versandkostenfrei nur Spedi (DE/AT) | P1 | ○ | AT, DE | 1 |
+| TC-PROMO-SHIP-004 | Versandkostenfrei nur Spedi (CH) | P1 | ○ | CH | 1 |
+| TC-PROMO-SHIP-005 | Versandkostenfrei Post ab MBW EUR 50 (DE/AT) | P1 | ○ | AT, DE | 1 |
+| TC-PROMO-SHIP-006 | Versandkostenfrei Post ab MBW CHF 50 (CH) | P1 | ○ | CH | 1 |
+| TC-PROMO-SHIP-007 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE | P1 | ○ | DE | 1 |
+| TC-PROMO-SHIP-008 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT | P1 | ○ | AT | 1 |
+| TC-PROMO-SHIP-009 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH | P1 | ○ | CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1056,10 +1174,10 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Produktkategorien-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-CAT-001 | Promo auf Produktkategorie via advertising_material_id | P1 | ○ | AT, DE, CH |
-| TC-PROMO-AUTO-001 | Automatisierte Promo auf Werbemittel ID 70 | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-CAT-001 | Promo auf Produktkategorie via advertising_material_id | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-AUTO-001 | Automatisierte Promo auf Werbemittel ID 70 | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1109,10 +1227,10 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Mindestbestellwert-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-MOV-001 | EUR-Rabatt ab Mindestbestellwert | P1 | ○ | AT, DE, CH |
-| TC-PROMO-MOV-002 | MBW nur auf Warenkorb angewendet | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-MOV-001 | EUR-Rabatt ab Mindestbestellwert | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-MOV-002 | MBW nur auf Warenkorb angewendet | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1155,9 +1273,9 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Mengenrabatt-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-QTY-001 | % auf teuerstes Produkt | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-QTY-001 | % auf teuerstes Produkt | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1181,12 +1299,12 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Aktionspreis-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-SALE-001 | Rabatt auf Lieblingsprodukt (Aktionspreis) | P1 | ○ | AT, DE, CH |
-| TC-PROMO-SALE-002 | Promo mit Produkt-ID via advertising_material_id | P1 | ○ | AT, DE, CH |
-| TC-PROMO-SALE-003 | Promo mit leerer Promo-ID nicht möglich | P1 | ○ | AT, DE, CH |
-| TC-PROMO-SALE-004 | SALE-Anzeige bei Aktionspreis korrekt | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-SALE-001 | Rabatt auf Lieblingsprodukt (Aktionspreis) | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-SALE-002 | Promo mit Produkt-ID via advertising_material_id | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-SALE-003 | Promo mit leerer Promo-ID nicht möglich | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-SALE-004 | SALE-Anzeige bei Aktionspreis korrekt | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1261,10 +1379,10 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Mitarbeiterrabatt
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-EMP-001 | Mitarbeiterrabatt nur auf Basispreis | P1 | ○ | AT, DE, CH |
-| TC-PROMO-EMP-002 | Mitarbeiterrabatt nicht auf Aktionspreis | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-EMP-001 | Mitarbeiterrabatt nur auf Basispreis | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-EMP-002 | Mitarbeiterrabatt nicht auf Aktionspreis | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1306,11 +1424,11 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Bundle-Promotions
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-BUNDLE-001 | Nimm 3 zahl 2 | P1 | ○ | AT, DE, CH |
-| TC-PROMO-BUNDLE-003 | Kissen + Schonbezug gratis | P1 | ○ | AT, DE, CH |
-| TC-PROMO-BUNDLE-004 | Pro Kissen ein Schonbezug gratis bei allen im Artikel | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-BUNDLE-001 | Nimm 3 zahl 2 | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-BUNDLE-003 | Kissen + Schonbezug gratis | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-BUNDLE-004 | Pro Kissen ein Schonbezug gratis bei allen im Artikel | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1371,10 +1489,10 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Promo-Kombinationen
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PROMO-COMBO-001 | Zwei Promotions kombinierbar | P1 | ○ | AT, DE, CH |
-| TC-PROMO-COMBO-002 | 20% Kleidung + 5% Alles | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PROMO-COMBO-001 | Zwei Promotions kombinierbar | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-COMBO-002 | 20% Kleidung + 5% Alles | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1429,43 +1547,43 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Produktdaten-Validierung
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-DATA-001 | Stichprobe: Produkte haben Produkttyp | P1 | ○ | AT, DE, CH |
-| TC-DATA-002 | Stichprobe: Produkte über Grundfarbe findbar | P1 | ○ | AT, DE, CH |
-| TC-DATA-003 | Produkttyp nicht leer bei allen Produkten | P1 | ○ | AT, DE, CH |
-| TC-DATA-004 | Grundfarbe Filter funktioniert | P1 | ○ | AT, DE, CH |
-| TC-DATA-005 | Produkttyp Filter funktioniert | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-DATA-001 | Stichprobe: Produkte haben Produkttyp | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-002 | Stichprobe: Produkte über Grundfarbe findbar | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-003 | Produkttyp nicht leer bei allen Produkten | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-004 | Grundfarbe Filter funktioniert | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-005 | Produkttyp Filter funktioniert | P1 | ○ | AT, DE, CH | 1 |
 
 #### Preis-Validierung
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-DATA-006 | Preise korrekt angezeigt | P1 | ○ | AT, DE, CH |
-| TC-DATA-007 | MwSt. korrekt berechnet | P1 | ○ | AT, DE, CH |
-| TC-DATA-008 | Aktionspreise korrekt dargestellt | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-DATA-006 | Preise korrekt angezeigt | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-007 | MwSt. korrekt berechnet | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-008 | Aktionspreise korrekt dargestellt | P1 | ○ | AT, DE, CH | 1 |
 
 #### Versandkosten-Validierung
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-DATA-009 | Versandkosten korrekt berechnet (Post) | P1 | ○ | AT, DE, CH |
-| TC-DATA-010 | Versandkosten korrekt berechnet (Spedition) | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-DATA-009 | Versandkosten korrekt berechnet (Post) | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-010 | Versandkosten korrekt berechnet (Spedition) | P1 | ○ | AT, DE, CH | 1 |
 
 #### Verfügbarkeits-Validierung
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-DATA-011 | Verfügbarkeitsstatus korrekt angezeigt | P1 | ○ | AT, DE, CH |
-| TC-DATA-012 | Nicht verfügbare Produkte nicht bestellbar | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-DATA-011 | Verfügbarkeitsstatus korrekt angezeigt | P1 | ○ | AT, DE, CH | 1 |
+| TC-DATA-012 | Nicht verfügbare Produkte nicht bestellbar | P1 | ○ | AT, DE, CH | 1 |
 
 #### Cross-Country Daten-Konsistenz
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-DATA-013 | Produkte in allen Ländern verfügbar | P2 | ○ | AT, DE, CH |
-| TC-DATA-014 | Produktdaten konsistent über Länder | P2 | ○ | AT, DE, CH |
-| TC-DATA-015 | Stichprobe: Produktbilder vorhanden | P1 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-DATA-013 | Produkte in allen Ländern verfügbar | P2 | ○ | AT, DE, CH | 1 |
+| TC-DATA-014 | Produktdaten konsistent über Länder | P2 | ○ | AT, DE, CH | 1 |
+| TC-DATA-015 | Stichprobe: Produktbilder vorhanden | P1 | ○ | AT, DE, CH | 1 |
 
 ---
 
@@ -1479,9 +1597,9 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 #### Produkt-Kategorie-Zuordnung
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-CONTENT-001 | Bett Almeno wird in Kategorie Möbel angezeigt | P2 | ○ | AT, DE, CH |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CONTENT-001 | Bett Almeno wird in Kategorie Möbel angezeigt | P2 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1521,11 +1639,11 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 **Dauer:** 30 Min - 4 Std
 **Ausführung:** Vor Releases, bei Performance-Änderungen
 
-| Test-ID | Name | Priorität | Status | Länder |
-|---------|------|-----------|--------|--------|
-| TC-PERF-001 | Performance-Test 150 Bestellungen | P2 | ✅ | AT |
-| TC-PERF-002 | Performance Quick-Test | P2 | ✅ | AT |
-| TC-PERF-003 | Performance Stress-Test | P2 | ✅ | AT |
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PERF-001 | Performance-Test 150 Bestellungen | P2 | ✅ | AT | 1 |
+| TC-PERF-002 | Performance Quick-Test | P2 | ✅ | AT | 1 |
+| TC-PERF-003 | Performance Stress-Test | P2 | ✅ | AT | 1 |
 
 ---
 
@@ -1756,9 +1874,9 @@ Rabattcodes werden im Warenkorb oder Checkout eingegeben und aktivieren eine Sho
 
 | Land | Verfügbare Zahlungsarten |
 |------|--------------------------|
-| AT | Vorkasse, Rechnung |
-| DE | Vorkasse, Rechnung |
-| CH | Vorkasse, Rechnung |
+| AT | Vorkasse, Rechnung, Kreditkarte |
+| DE | Vorkasse, Rechnung, Kreditkarte |
+| CH | Vorkasse, Kreditkarte |
 
 ---
 

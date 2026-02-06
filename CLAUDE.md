@@ -43,6 +43,9 @@ Beispiele:
 | TC-PAY-* | Zahlung | TC-PAY-003 |
 | TC-SHIP-* | Versand/Spedition | Via generate_shipping_contracts.py |
 | TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-003 |
+| TC-E2E-* | E2E Checkout | TC-E2E-002 |
+| TC-E2E-CC-* | Click & Collect | TC-E2E-CC-002 |
+| TC-WISH-* | Merkliste/Wishlist | TC-WISH-006 |
 
 ### Schema-Referenz
 
@@ -104,4 +107,4 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 185 Dateien, 0 fehlerhaft, Exit-Code 0.
+Erwartetes Ergebnis: 217 Dateien, 0 fehlerhaft, Exit-Code 0.

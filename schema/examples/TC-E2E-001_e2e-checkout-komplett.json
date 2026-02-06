@@ -1,0 +1,175 @@
+{
+  "test_id": "TC-E2E-001",
+  "name": "E2E Checkout komplett (Neuregistrierung + Login, alle Zahlungs-/Versandarten)",
+  "category": "e2e",
+  "priority": "P0",
+  "functional_area": "E2E Tests - Checkout",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukte (Post + Spedition) sind verfuegbar",
+    "Registrierung ist aktiviert",
+    "Bestehende Testaccounts sind aktiv (ge-at-1@matthias-sax.de, ge-de-1@matthias-sax.de, ge-ch-1@matthias-sax.de)",
+    "GlobalPayments Kreditkarten-Gateway ist auf Staging konfiguriert",
+    "Kreditkarten-Testdaten sind in config.yaml hinterlegt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Account vorbereiten (Neuregistrierung oder Login)",
+      "expected": "Benutzer ist eingeloggt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produkt(e) zum Warenkorb hinzufuegen (Post und/oder Spedition)",
+      "expected": "Warenkorb enthaelt die korrekten Produkte",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/confirm"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Zahlungsart auswaehlen (Vorkasse / Rechnung / Kreditkarte)",
+      "expected": "Gewaehlte Zahlungsart ist aktiv",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input[name='paymentMethodId']"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Bei Kreditkarte: Kartendaten im GlobalPayments iFrame eingeben",
+      "expected": "Kreditkartendaten werden akzeptiert"
+    },
+    {
+      "step": 6,
+      "action": "AGB akzeptieren",
+      "expected": "AGB-Checkbox ist aktiviert",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Bestellung absenden",
+      "expected": "Bestellung wird erfolgreich verarbeitet",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Bestellbestaetigung pruefen",
+      "expected": "Bestellbestaetigungsseite wird angezeigt mit Bestellnummer"
+    }
+  ],
+  "postconditions": [
+    "Bestellnummer wird angezeigt",
+    "Bestellbestaetigung enthaelt korrekte Daten",
+    "Bestellung ist im Shop-Backend sichtbar"
+  ],
+  "test_data": [
+    {
+      "type": "variants",
+      "name": "matrix",
+      "description": "24 Varianten: Land x Zahlungsart x Versandart x Account-Typ",
+      "total_variants": 24,
+      "parameters": {
+        "countries": ["AT", "DE", "CH"],
+        "payment_methods": {
+          "AT": ["prepayment", "invoice", "credit_card"],
+          "DE": ["prepayment", "invoice", "credit_card"],
+          "CH": ["prepayment", "credit_card"]
+        },
+        "shipping_types": ["post", "spedition", "mixed"],
+        "account_types": ["new_registration", "existing_account"]
+      }
+    },
+    {
+      "type": "product",
+      "name": "post_product",
+      "product_id": "ge-p-862990",
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+    },
+    {
+      "type": "product",
+      "name": "spedition_product",
+      "product_id": "ge-p-693278",
+      "description": "Polsterbett Almeno (Speditionsversand)"
+    },
+    {
+      "type": "account",
+      "name": "existing_AT",
+      "email": "ge-at-1@matthias-sax.de"
+    },
+    {
+      "type": "account",
+      "name": "existing_DE",
+      "email": "ge-de-1@matthias-sax.de"
+    },
+    {
+      "type": "account",
+      "name": "existing_CH",
+      "email": "ge-ch-1@matthias-sax.de"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_e2e_checkout.py",
+    "function_name": "test_e2e_checkout",
+    "tags": [
+      "e2e",
+      "checkout",
+      "critical"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 180,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
