@@ -145,6 +145,7 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "performance: Performance-Tests (150+ Bestellungen)")
     config.addinivalue_line("markers", "slow: Langsame Tests (explizit anfordern)")
     config.addinivalue_line("markers", "discovery: Discovery-Tests für automatische Ermittlung")
+    config.addinivalue_line("markers", "wishlist: Merkliste/Wishlist-Tests")
 
 
 # =============================================================================

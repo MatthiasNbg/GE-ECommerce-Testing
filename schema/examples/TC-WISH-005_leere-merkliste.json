@@ -1,0 +1,76 @@
+{
+  "test_id": "TC-WISH-005",
+  "name": "Leere Merkliste zeigt Hinweis",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Merkliste/Wishlist",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "AT-Testkunde ist vorhanden und kann sich einloggen",
+    "Merkliste ist leer"
+  ],
+  "postconditions": [
+    "Merklisten-Seite zeigt Leer-Hinweis oder keine Produkte"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen und einloggen",
+      "expected": "Login erfolgreich",
+      "inputs": [
+        { "action": "navigate", "value": "/account/login" },
+        { "action": "fill", "selector": "#loginMail", "value": "ge-at-1@matthias-sax.de" },
+        { "action": "fill", "selector": "#loginPassword", "value": "scharnsteinAT" },
+        { "action": "click", "selector": "button:has-text('Anmelden')" }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Merkliste leeren (falls noetig)",
+      "expected": "Merkliste ist leer"
+    },
+    {
+      "step": 3,
+      "action": "Merklisten-Seite aufrufen",
+      "expected": "Seite zeigt Leer-Hinweis oder keine Produktliste",
+      "inputs": [
+        { "action": "navigate", "value": "/wishlist" }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "login",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_wishlist.py",
+    "function_name": "test_empty_wishlist_shows_message",
+    "tags": ["regression", "wishlist", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "test_id": "TC-WISH-001",
+  "name": "Produkt zur Merkliste hinzufuegen",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Merkliste/Wishlist",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "AT-Testkunde ist vorhanden und kann sich einloggen",
+    "Testprodukt ist verfuegbar und auf Lager",
+    "Merkliste ist leer"
+  ],
+  "postconditions": [
+    "Produkt ist auf der Merkliste sichtbar",
+    "Herz-Button zeigt aktiven Zustand"
+  ],
+  "cleanup": [
+    "Merkliste leeren"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen",
+      "expected": "Login-Formular wird angezeigt",
+      "inputs": [
+        { "action": "navigate", "value": "/account/login" }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        { "action": "click", "selector": "button#accept" }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Mit AT-Testkunde einloggen",
+      "expected": "Login erfolgreich, Weiterleitung zum Account",
+      "inputs": [
+        { "action": "fill", "selector": "#loginMail", "value": "ge-at-1@matthias-sax.de" },
+        { "action": "fill", "selector": "#loginPassword", "value": "scharnsteinAT" },
+        { "action": "click", "selector": "button:has-text('Anmelden')" }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Produktseite aufrufen",
+      "expected": "Produktseite laedt korrekt",
+      "inputs": [
+        { "action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990" }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Herz-Button klicken (zur Merkliste hinzufuegen)",
+      "expected": "Herz-Button wird aktiv (product-wishlist-added)",
+      "selector_hint": "[data-add-to-wishlist]",
+      "inputs": [
+        { "action": "click", "selector": "[data-add-to-wishlist]" }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Merklisten-Seite aufrufen",
+      "expected": "Merklisten-Seite zeigt das hinzugefuegte Produkt",
+      "inputs": [
+        { "action": "navigate", "value": "/wishlist" }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "login",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de"
+    },
+    {
+      "type": "product",
+      "name": "default",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_wishlist.py",
+    "function_name": "test_add_product_to_wishlist",
+    "tags": ["regression", "wishlist", "feature"]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
