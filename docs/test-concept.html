@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>266 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>267 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -546,8 +546,8 @@
 </tr>
 <tr>
 <td>🏷️ **Feature Tests - PDP**</td>
-<td>6</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 1/6</td>
+<td>7</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 2/7</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Bewertungen</td>
 </tr>
@@ -640,7 +640,7 @@
 <li><a href="#feature-tests-account">Feature Tests - Account</a> - (11 Tests)</li>
 <li><a href="#feature-tests-merklistewishlist">Feature Tests - Merkliste/Wishlist</a> - (5 Tests)</li>
 <li><a href="#feature-tests-einkaufsgutscheinwarenkorb">Feature Tests - Einkaufsgutschein/Warenkorb</a> - (5 Tests)</li>
-<li><a href="#feature-tests-produktdetailseite-pdp">Feature Tests - Produktdetailseite (PDP)</a> - (6 Tests)</li>
+<li><a href="#feature-tests-produktdetailseite-pdp">Feature Tests - Produktdetailseite (PDP)</a> - (7 Tests)</li>
 <li><a href="#feature-tests-produktlisting">Feature Tests - Produktlisting</a> - (4 Tests)</li>
 <li><a href="#feature-tests-navigation">Feature Tests - Navigation</a> - (5 Tests)</li>
 <li><a href="#feature-tests-versandarten">Feature Tests - Versandarten</a> - (98 Tests)</li>
@@ -660,7 +660,7 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 266 Tests
+<strong>Gesamt:</strong> 267 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 151</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 113</li>
@@ -1818,8 +1818,8 @@
 <h3 id="feature-tests-produktdetailseite-pdp">🏷️ Feature Tests - Produktdetailseite (PDP)</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 1/6 implementiert
-<strong>Beschreibung:</strong> Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Hotspots, Bewertungen
+<strong>Tests:</strong> 2/7 implementiert
+<strong>Beschreibung:</strong> Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Hotspots, Bewertungen, Varianten-Preis/Lagerbestand
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
@@ -1878,6 +1878,14 @@
 <td>P2</td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PDP-007</td>
+<td>Varianten ändern Preis und Lagerbestand</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 </tbody></table></div>
@@ -5562,7 +5570,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 14:44 Uhr</p>
+            <p>Generiert am 06.02.2026 um 15:23 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

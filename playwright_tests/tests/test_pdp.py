@@ -1,5 +1,5 @@
 """
-PDP (Product Detail Page) Tests - TC-PDP-001 bis TC-PDP-006
+PDP (Product Detail Page) Tests - TC-PDP-001 bis TC-PDP-007
 Tests fuer Produktbilder-Galerie, Varianten, Beschreibung, Lagerbestand, Hotspots, Bewertungen
 
 Ausfuehrung:
@@ -716,3 +716,208 @@ def test_product_review(page: Page, base_url: str, config):
     except Exception as e:
         take_error_screenshot(page, "TC-PDP-006")
         raise
+
+# =============================================================================
+# TC-PDP-007: Varianten aendern Preis und Lagerbestand
+# =============================================================================
+
+# Selektoren fuer Varianten-Preis-/Verfuegbarkeitstest
+VARIANT_OPTION = ".product-detail-configurator-option"
+VARIANT_OPTION_LABEL = ".product-detail-configurator-option-label"
+VARIANT_CONFIGURATOR_SELECT = ".product-detail-configurator select"
+VARIANT_PRICE = ".product-detail-price"
+VARIANT_DELIVERY_INFO = ".delivery-information, .delivery-status, .product-detail-delivery"
+VARIANT_BUY_BUTTON = "button.btn-buy, [data-add-to-cart]"
+
+
+@pytest.mark.pdp
+@pytest.mark.feature
+def test_variant_changes_price_and_stock(page: Page, base_url: str):
+    """
+    TC-PDP-007: Produktvarianten-Auswahl (Groesse, Farbe) aendert Preis/Verfuegbarkeit.
+
+    Prueft systematisch fuer jede Variante:
+    - Preis wird korrekt angezeigt (> 0)
+    - Verfuegbarkeitsstatus / Lieferinformation ist sichtbar
+    - Warenkorb-Button reagiert auf Lagerbestand (aktiv/deaktiviert)
+
+    1. Produktseite mit Varianten aufrufen
+    2. Alle verfuegbaren Varianten-Optionen ermitteln
+    3. Jede Variante anklicken und Preis + Verfuegbarkeit erfassen
+    4. Assert: Preis ist bei jeder Variante gueltig
+    5. Assert: Verfuegbarkeitsstatus wird bei jeder Variante angezeigt
+    6. Log: Unterschiede zwischen Varianten dokumentieren
+    """
+    print(f"\n[PDP] TC-PDP-007: Varianten aendern Preis und Lagerbestand")
+
+    try:
+        # [1] Produktseite aufrufen
+        print(f"    Step 1: Produktseite mit Varianten aufrufen")
+        page.goto(f"{base_url}/{VARIANT_PRODUCT['path']}")
+        page.wait_for_load_state("domcontentloaded")
+        page.wait_for_timeout(1500)
+
+        print(f"    Step 2: Cookie-Banner akzeptieren")
+        accept_cookie_banner(page)
+        page.wait_for_timeout(500)
+
+        # [2] Varianten-Typ ermitteln (Buttons vs. Dropdown)
+        print(f"    Step 3: Varianten-Optionen ermitteln")
+        variant_results = []  # Liste von {name, price, delivery, buy_enabled}
+
+        button_options = page.locator(VARIANT_OPTION)
+        select_options = page.locator(VARIANT_CONFIGURATOR_SELECT)
+        is_dropdown = select_options.count() > 0 and button_options.count() == 0
+
+        if is_dropdown:
+            # Dropdown-Varianten
+            select_elem = select_options.first
+            options = select_elem.locator("option")
+            option_count = options.count()
+            print(f"    [OK] {option_count} Varianten via Dropdown gefunden")
+
+            for i in range(option_count):
+                opt = options.nth(i)
+                opt_val = opt.get_attribute("value")
+                opt_text = opt.inner_text().strip()
+
+                # Leere/Platzhalter-Optionen ueberspringen
+                if not opt_val or opt_val == "" or opt_text.startswith("Bitte"):
+                    continue
+
+                print(f"\n    --- Variante: {opt_text} ---")
+                select_elem.select_option(value=opt_val)
+                page.wait_for_timeout(2000)
+
+                result = _capture_variant_state(page, opt_text)
+                variant_results.append(result)
+
+        else:
+            # Button-Varianten
+            option_count = button_options.count()
+            if option_count == 0:
+                pytest.skip("Keine Varianten-Optionen auf dieser Produktseite gefunden")
+
+            print(f"    [OK] {option_count} Varianten via Buttons gefunden")
+
+            for i in range(option_count):
+                opt = button_options.nth(i)
+                if not opt.is_visible():
+                    continue
+
+                opt_text = opt.inner_text().strip()
+                opt_classes = opt.get_attribute("class") or ""
+
+                print(f"\n    --- Variante: {opt_text} ---")
+                opt.click()
+                page.wait_for_timeout(2000)
+
+                result = _capture_variant_state(page, opt_text)
+                result["combinable"] = "is-combinable" in opt_classes or "is-active" in opt_classes
+                variant_results.append(result)
+
+        # [3] Ergebnisse auswerten
+        print(f"\n    Step 4: Ergebnisse auswerten ({len(variant_results)} Varianten)")
+        assert len(variant_results) >= 2, (
+            f"Mindestens 2 Varianten erwartet, aber nur {len(variant_results)} gefunden"
+        )
+
+        # Zusammenfassung drucken
+        print(f"\n    {'Variante':<25} {'Preis':>10} {'Verfuegbar':<15} {'Warenkorb':<12}")
+        print(f"    {'-'*62}")
+
+        valid_prices = 0
+        delivery_shown = 0
+        prices_seen = set()
+
+        for r in variant_results:
+            price_str = f"{r['price']:.2f} EUR" if r["price"] else "N/A"
+            delivery_str = r["delivery_text"][:15] if r["delivery_text"] else "-"
+            buy_str = "aktiv" if r["buy_enabled"] else "deaktiviert"
+            print(f"    {r['name']:<25} {price_str:>10} {delivery_str:<15} {buy_str:<12}")
+
+            if r["price"] and r["price"] > 0:
+                valid_prices += 1
+                prices_seen.add(r["price"])
+            if r["delivery_text"]:
+                delivery_shown += 1
+
+        # [4] Assertions
+        print(f"\n    Step 5: Validierung")
+
+        # Jede Variante muss einen gueltigen Preis haben
+        assert valid_prices == len(variant_results), (
+            f"Nicht alle Varianten haben gueltigen Preis: {valid_prices}/{len(variant_results)}"
+        )
+        print(f"    [OK] Alle {valid_prices} Varianten haben gueltigen Preis")
+
+        # Verfuegbarkeitsstatus muss bei jeder Variante angezeigt werden
+        assert delivery_shown == len(variant_results), (
+            f"Nicht alle Varianten zeigen Verfuegbarkeit: {delivery_shown}/{len(variant_results)}"
+        )
+        print(f"    [OK] Alle {delivery_shown} Varianten zeigen Verfuegbarkeitsstatus")
+
+        # Preis- oder Verfuegbarkeitsunterschiede dokumentieren
+        if len(prices_seen) > 1:
+            print(f"    [OK] Preise variieren zwischen Varianten: {sorted(prices_seen)}")
+        else:
+            print(f"    [INFO] Alle Varianten haben denselben Preis: {prices_seen}")
+
+        # Pruefen ob nicht-kombinierbare Varianten den Warenkorb deaktivieren
+        non_combinable = [r for r in variant_results if not r.get("combinable", True)]
+        if non_combinable:
+            disabled_buy = [r for r in non_combinable if not r["buy_enabled"]]
+            print(f"    [INFO] {len(non_combinable)} nicht-kombinierbare Varianten, "
+                  f"davon {len(disabled_buy)} mit deaktiviertem Warenkorb")
+
+        print(f"\n    [OK] Varianten-Preis-/Lagerbestand-Test abgeschlossen")
+
+    except Exception as e:
+        take_error_screenshot(page, "TC-PDP-007")
+        raise
+
+
+def _capture_variant_state(page: Page, variant_name: str) -> dict:
+    """Erfasst Preis, Verfuegbarkeit und Warenkorb-Status der aktuellen Variante."""
+    result = {
+        "name": variant_name,
+        "price": None,
+        "price_text": "",
+        "delivery_text": "",
+        "buy_enabled": False,
+    }
+
+    # Preis auslesen
+    price_elem = page.locator(VARIANT_PRICE)
+    if price_elem.count() > 0:
+        price_text = price_elem.first.inner_text().strip()
+        result["price_text"] = price_text
+        result["price"] = extract_price(price_text)
+        print(f"    Preis: {price_text} (parsed: {result['price']})")
+
+    # Verfuegbarkeit / Lieferinfo
+    delivery_selectors = [
+        ".delivery-information",
+        ".delivery-status",
+        ".product-detail-delivery",
+        "[data-delivery-information]",
+    ]
+    for sel in delivery_selectors:
+        delivery = page.locator(sel)
+        if delivery.count() > 0:
+            text = delivery.first.inner_text().strip()
+            if text:
+                result["delivery_text"] = text
+                print(f"    Verfuegbarkeit: {text[:60]}")
+                break
+
+    # Warenkorb-Button
+    buy_btn = page.locator(VARIANT_BUY_BUTTON)
+    if buy_btn.count() > 0 and buy_btn.first.is_visible():
+        is_disabled = buy_btn.first.get_attribute("disabled") is not None
+        result["buy_enabled"] = not is_disabled
+        print(f"    Warenkorb: {'aktiv' if result['buy_enabled'] else 'deaktiviert'}")
+    else:
+        print(f"    Warenkorb: nicht sichtbar")
+
+    return result

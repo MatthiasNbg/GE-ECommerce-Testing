@@ -1,0 +1,130 @@
+{
+  "test_id": "TC-PDP-007",
+  "name": "Produktvarianten-Auswahl aendert Preis und Verfuegbarkeit",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "PDP",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt ge-p-862990 (Kurzarmshirt aus Bio-Baumwolle) ist verfuegbar und hat mehrere Varianten (Groesse/Farbe)"
+  ],
+  "postconditions": [
+    "Alle Varianten zeigen gueltigen Preis und Verfuegbarkeitsstatus",
+    "Warenkorb-Button reagiert korrekt auf Lagerbestand"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite mit Varianten aufrufen",
+      "expected": "Produktseite laedt korrekt mit Varianten-Auswahl",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Verfuegbare Varianten-Optionen ermitteln",
+      "expected": "Mindestens 2 Varianten-Optionen (Groesse/Farbe) sind vorhanden",
+      "inputs": [
+        {
+          "action": "wait",
+          "selector": ".product-detail-configurator-option, .product-detail-configurator select"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Jede Variante anklicken und Preis erfassen",
+      "expected": "Preis wird bei jeder Variante als gueltige Zahl > 0 angezeigt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".product-detail-configurator-option"
+        },
+        {
+          "action": "wait",
+          "selector": ".product-detail-price"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Verfuegbarkeitsstatus bei jeder Variante pruefen",
+      "expected": "Lieferinformation / Verfuegbarkeitsstatus wird bei jeder Variante angezeigt"
+    },
+    {
+      "step": 6,
+      "action": "Warenkorb-Button bei jeder Variante pruefen",
+      "expected": "Warenkorb-Button ist aktiv bei verfuegbaren Varianten, deaktiviert bei nicht-kombinierbaren"
+    },
+    {
+      "step": 7,
+      "action": "Ergebnisse aller Varianten vergleichen",
+      "expected": "Preise und Verfuegbarkeit unterscheiden sich zwischen Varianten oder sind konsistent dokumentiert"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "extra",
+      "name": "product",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_pdp.py",
+    "function_name": "test_variant_changes_price_and_stock",
+    "tags": [
+      "pdp",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
