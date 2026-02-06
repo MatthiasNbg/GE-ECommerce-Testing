@@ -95,8 +95,8 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 ### Gesamtübersicht
 
 **Gesamt:** 267 Tests
-- ✅ Implementiert: 151
-- ❌ Fehlend: 113
+- ✅ Implementiert: 152
+- ❌ Fehlend: 112
 - ⚠️ Teilweise: 0
 - **Abdeckung:** 57%
 
@@ -1056,7 +1056,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 |---------|------|-----------|--------|--------|-----------|
 | TC-PROMO-CHK-001 | Gutschein zu regulärem Warenkorb blockiert | P0 | ○ | AT, DE, CH | 1 |
 | TC-PROMO-CHK-002 | Reguläres Produkt zu Gutschein-Warenkorb blockiert | P0 | ○ | AT, DE, CH | 1 |
-| TC-PROMO-CHK-003 | Promotion auf Gutschein blockiert | P0 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CHK-003 | Promotion auf Gutschein blockiert | P0 | ✅ | AT, DE, CH | 1 |
 | TC-PROMO-CHK-004 | Gemischter Warenkorb im Checkout blockiert | P0 | ○ | AT, DE, CH | 1 |
 | TC-PROMO-CHK-005 | Mehrere Gutscheine erlaubt | P1 | ○ | AT, DE, CH | 1 |
 
@@ -1092,6 +1092,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Promotion-Code wird nicht angewendet
   - Warenkorb zeigt vollen Gutschein-Preis
   - **Alternative:** Button zum Anwenden von Codes wird bei Gutscheinen direkt ausgeblendet (bessere UX)
+- **Automation:** `test_promo_blocked_on_gift_voucher_checkout` in `test_promotions.py`
 
 **TC-PROMO-CHK-004: Gemischter Warenkorb im Checkout blockiert**
 - **Ausgangssituation:** User hat durch API/Manipulation gemischten Warenkorb (Gutschein + reguläres Produkt)

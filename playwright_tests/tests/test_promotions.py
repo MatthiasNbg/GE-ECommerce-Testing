@@ -37,6 +37,19 @@ TEST_PROMO_CODES = {
     "free_shipping_spedi": "SPEDIFREI",  # Versandkostenfrei Spedition
     "min_order_50": "MBW50TEST",  # Mindestbestellwert 50 EUR
     "invalid": "UNGUELTIG123",  # Ungültiger Code
+    # Mitarbeiterrabatt-Codes (Staging)
+    "employee_50_cosmetics": "MA-KOSMETIK50",  # 50% auf Kosmetik (via Werbemittel-ID)
+    "employee_20_all": "MA-ALLES20",  # 20% auf Alles
+}
+
+# Testprodukte für Mitarbeiterrabatt
+EMPLOYEE_DISCOUNT_PRODUCTS = {
+    # Kosmetik-Produkt (hat passende advertising_material_id für 50%-Promo)
+    "cosmetics": "p/lippenbalsam-mit-bio-bienenwachs/ge-p-60780",
+    # Reguläres Produkt (kein Aktionspreis, kein Kosmetik)
+    "regular": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+    # Produkt mit Aktionspreis/SALE (sale flag = JA) - kein Mitarbeiterrabatt
+    "sale_item": "p/sale-produkt/ge-p-SALE",  # TODO: Echtes SALE-Produkt einsetzen
 }
 
 
@@ -406,3 +419,355 @@ def test_promo_display_in_order_summary(page: Page, base_url: str):
         ".line-item-promotion"
     )
     expect(discount_display.first).to_be_visible(timeout=5000)
+
+
+@pytest.mark.promotions
+def test_promo_blocked_on_gift_voucher_checkout(page: Page, base_url: str):
+    """
+    TC-PROMO-CHK-003: Promotion auf Gutschein blockiert (Checkout-Flow).
+
+    Prüft, dass keine Promotions auf Einkaufsgutscheine angewendet werden können.
+    Testet den gesamten Flow: Warenkorb → Promo-Versuch → Checkout → kein Rabatt.
+    """
+    # Gutschein-Artikelnummer
+    gift_voucher_number = "736675"
+
+    # 1. Warenkorb-Seite aufrufen
+    navigate_to_cart(page, base_url)
+    accept_cookie_banner(page)
+
+    # 2. Gutschein per Artikelnummer hinzufügen
+    number_input = page.locator("#addProductInput")
+    expect(number_input).to_be_visible(timeout=5000)
+    number_input.fill(gift_voucher_number)
+
+    submit_btn = page.locator("#addProductButton")
+    expect(submit_btn).to_be_visible(timeout=5000)
+    submit_btn.click()
+    page.wait_for_timeout(3000)
+
+    # 3. Prüfen: Mindestens 1 Produkt im Warenkorb
+    items = page.locator(".line-item")
+    assert items.count() >= 1, "Gutschein wurde nicht zum Warenkorb hinzugefügt"
+
+    # 4. Promo-Code-Handling prüfen
+    promo_input = page.locator(
+        "input[name='promotionCode'], "
+        "#promotionCode, "
+        "input[placeholder*='Gutschein'], "
+        "input[placeholder*='Code']"
+    )
+
+    # Falls Container eingeklappt ist, aufklappen
+    toggle = page.locator(
+        "[data-bs-toggle='collapse'][href='#promotionContainer'], "
+        "button:has-text('Gutschein einlösen')"
+    )
+    if toggle.count() > 0:
+        try:
+            if toggle.first.is_visible():
+                toggle.first.click()
+                page.wait_for_timeout(500)
+        except Exception:
+            pass
+
+    promo_visible = promo_input.count() > 0 and promo_input.first.is_visible()
+
+    if not promo_visible:
+        # Fall A: Promo-Input ist ausgeblendet (gute UX bei Gutscheinen)
+        pass
+    else:
+        # Fall B: Promo-Input ist sichtbar → Code eingeben
+        promo_input.first.fill("TESTCODE123")
+        page.wait_for_timeout(300)
+
+        promo_submit = page.locator(
+            "button[type='submit']:has-text('Einlösen'), "
+            "button:has-text('Gutschein einlösen'), "
+            ".promotion-submit"
+        )
+        if promo_submit.count() > 0:
+            promo_submit.first.click()
+        else:
+            promo_input.first.press("Enter")
+        page.wait_for_timeout(2000)
+
+        # Kein Promotion-Rabatt sollte angewendet worden sein
+        assert not has_promotion_discount(page), \
+            "Promotion-Rabatt wurde auf Gutschein angewendet - sollte blockiert sein"
+
+    # 5. Zur Kasse navigieren
+    checkout_btn = page.locator("a:has-text('Zur Kasse'), button:has-text('Zur Kasse')")
+    if checkout_btn.count() > 0:
+        checkout_btn.first.click()
+        page.wait_for_load_state("domcontentloaded")
+        page.wait_for_timeout(3000)
+
+    # 6. Auf Checkout-Seite: Kein Promotion-Rabatt in der Bestellzusammenfassung
+    assert not has_promotion_discount(page), \
+        "Promotion-Rabatt ist in der Checkout-Bestellzusammenfassung sichtbar - sollte blockiert sein"
+
+
+# =============================================================================
+# Hilfsfunktionen Mitarbeiterrabatt
+# =============================================================================
+
+def _parse_price(text: str) -> float:
+    """Parst einen Preistext wie '€ 29,90' oder 'CHF 35.50' zu float."""
+    import re
+    cleaned = re.sub(r"[^\d,.]", "", text)
+    # Europäisches Format: Komma als Dezimaltrenner
+    if "," in cleaned and "." in cleaned:
+        cleaned = cleaned.replace(".", "").replace(",", ".")
+    elif "," in cleaned:
+        cleaned = cleaned.replace(",", ".")
+    try:
+        return float(cleaned)
+    except ValueError:
+        return 0.0
+
+
+def _get_line_item_prices(page: Page) -> list[dict]:
+    """Gibt alle Line-Items mit Name und Preis zurück."""
+    items = []
+    line_items = page.locator(".line-item")
+    count = line_items.count()
+    for i in range(count):
+        item = line_items.nth(i)
+        name_el = item.locator(".line-item-label, .line-item-details-name")
+        price_el = item.locator(
+            ".line-item-total-price, "
+            ".line-item-price .line-item-total-price-value"
+        )
+        name = name_el.first.text_content().strip() if name_el.count() > 0 else ""
+        price_text = price_el.first.text_content().strip() if price_el.count() > 0 else ""
+        # Promotion-Zeilen überspringen
+        if "promotion" in name.lower() or "rabatt" in name.lower():
+            continue
+        items.append({"name": name, "price_text": price_text, "price": _parse_price(price_text)})
+    return items
+
+
+def _get_discount_amount(page: Page) -> float:
+    """Gibt den Rabattbetrag (als positiven Wert) aus der Warenkorb-Zusammenfassung zurück."""
+    discount_line = page.locator(
+        ".line-item-promotion .line-item-total-price, "
+        ".line-item-promotion .line-item-total-price-value"
+    )
+    if discount_line.count() > 0:
+        text = discount_line.first.text_content().strip()
+        return abs(_parse_price(text))
+    return 0.0
+
+
+# =============================================================================
+# Mitarbeiterrabatt-Tests
+# =============================================================================
+
+@pytest.mark.promotions
+def test_employee_discount_50_cosmetics(page: Page, base_url: str):
+    """
+    TC-PROMO-EMP-003: Mitarbeiterrabatt 50% auf Kosmetik einzeln einloesen.
+
+    Prüft, dass der Mitarbeiterrabatt-Code für Kosmetik (50%) korrekt
+    auf ein Kosmetik-Produkt (via Werbemittel-ID) angewendet wird.
+    """
+    cosmetics_product = EMPLOYEE_DISCOUNT_PRODUCTS["cosmetics"]
+    promo_code = TEST_PROMO_CODES["employee_50_cosmetics"]
+
+    # 1. Kosmetik-Produkt zum Warenkorb hinzufügen
+    add_product_to_cart(page, base_url, cosmetics_product)
+    navigate_to_cart(page, base_url)
+
+    # 2. Preis vor Rabatt merken
+    total_before = get_cart_total(page)
+    price_before = _parse_price(total_before)
+    assert price_before > 0, f"Ungültiger Preis vor Rabatt: {total_before}"
+
+    # 3. Mitarbeiterrabatt-Code 50% Kosmetik einlösen
+    success = apply_promo_code(page, promo_code)
+
+    if not success:
+        pytest.skip(f"Promotion-Code {promo_code} ist nicht im System konfiguriert")
+
+    # 4. Rabatt prüfen
+    has_discount = has_promotion_discount(page)
+    assert has_discount, "Mitarbeiterrabatt-Zeile wird nicht im Warenkorb angezeigt"
+
+    # 5. Preisänderung prüfen
+    total_after = get_cart_total(page)
+    price_after = _parse_price(total_after)
+    assert price_after < price_before, (
+        f"Preis hat sich nach 50%-Kosmetik-Rabatt nicht verringert: "
+        f"vorher={total_before}, nachher={total_after}"
+    )
+
+    # 6. Rabatt sollte ca. 50% betragen (Toleranz für Rundung)
+    discount = _get_discount_amount(page)
+    expected_discount = price_before * 0.50
+    if discount > 0:
+        tolerance = expected_discount * 0.05  # 5% Toleranz
+        assert abs(discount - expected_discount) <= tolerance, (
+            f"Rabatt {discount:.2f} weicht von erwarteten 50% ({expected_discount:.2f}) ab"
+        )
+
+
+@pytest.mark.promotions
+def test_employee_discount_20_everything(page: Page, base_url: str):
+    """
+    TC-PROMO-EMP-004: Mitarbeiterrabatt 20% auf Alles einzeln einloesen.
+
+    Prüft, dass der Mitarbeiterrabatt-Code 20% auf ein reguläres Produkt
+    (nicht Kosmetik, kein Aktionspreis) angewendet wird.
+    """
+    regular_product = EMPLOYEE_DISCOUNT_PRODUCTS["regular"]
+    promo_code = TEST_PROMO_CODES["employee_20_all"]
+
+    # 1. Reguläres Produkt zum Warenkorb hinzufügen
+    add_product_to_cart(page, base_url, regular_product)
+    navigate_to_cart(page, base_url)
+
+    # 2. Preis vor Rabatt merken
+    total_before = get_cart_total(page)
+    price_before = _parse_price(total_before)
+    assert price_before > 0, f"Ungültiger Preis vor Rabatt: {total_before}"
+
+    # 3. Mitarbeiterrabatt-Code 20% auf Alles einlösen
+    success = apply_promo_code(page, promo_code)
+
+    if not success:
+        pytest.skip(f"Promotion-Code {promo_code} ist nicht im System konfiguriert")
+
+    # 4. Rabatt prüfen
+    has_discount = has_promotion_discount(page)
+    assert has_discount, "Mitarbeiterrabatt-Zeile wird nicht im Warenkorb angezeigt"
+
+    # 5. Preisänderung prüfen
+    total_after = get_cart_total(page)
+    price_after = _parse_price(total_after)
+    assert price_after < price_before, (
+        f"Preis hat sich nach 20%-Rabatt nicht verringert: "
+        f"vorher={total_before}, nachher={total_after}"
+    )
+
+    # 6. Rabatt sollte ca. 20% betragen
+    discount = _get_discount_amount(page)
+    expected_discount = price_before * 0.20
+    if discount > 0:
+        tolerance = expected_discount * 0.05
+        assert abs(discount - expected_discount) <= tolerance, (
+            f"Rabatt {discount:.2f} weicht von erwarteten 20% ({expected_discount:.2f}) ab"
+        )
+
+
+@pytest.mark.promotions
+def test_employee_discount_combined(page: Page, base_url: str):
+    """
+    TC-PROMO-EMP-005: Mitarbeiterrabatt 50% Kosmetik + 20% Alles gemeinsam einloesen.
+
+    Prüft, dass beide Mitarbeiterrabatt-Codes gleichzeitig auf einen
+    gemischten Warenkorb (Kosmetik + reguläres Produkt) angewendet werden.
+    Kosmetik erhält 50%, reguläres Produkt erhält 20%.
+    """
+    cosmetics_product = EMPLOYEE_DISCOUNT_PRODUCTS["cosmetics"]
+    regular_product = EMPLOYEE_DISCOUNT_PRODUCTS["regular"]
+    promo_50 = TEST_PROMO_CODES["employee_50_cosmetics"]
+    promo_20 = TEST_PROMO_CODES["employee_20_all"]
+
+    # 1. Beide Produkte zum Warenkorb hinzufügen
+    add_product_to_cart(page, base_url, cosmetics_product)
+    add_product_to_cart(page, base_url, regular_product)
+    navigate_to_cart(page, base_url)
+
+    # 2. Preise vor Rabatt erfassen
+    total_before = get_cart_total(page)
+    price_before = _parse_price(total_before)
+    assert price_before > 0, f"Ungültiger Gesamtpreis vor Rabatt: {total_before}"
+
+    items_before = _get_line_item_prices(page)
+    assert len(items_before) >= 2, (
+        f"Erwartet mindestens 2 Produkte im Warenkorb, gefunden: {len(items_before)}"
+    )
+
+    # 3. Ersten Code einlösen: 50% Kosmetik
+    success_50 = apply_promo_code(page, promo_50)
+    if not success_50:
+        pytest.skip(f"Promotion-Code {promo_50} ist nicht im System konfiguriert")
+
+    # 4. Zweiten Code einlösen: 20% auf Alles
+    success_20 = apply_promo_code(page, promo_20)
+    if not success_20:
+        pytest.skip(f"Promotion-Code {promo_20} ist nicht im System konfiguriert")
+
+    # 5. Mindestens ein Rabatt muss sichtbar sein
+    has_discount = has_promotion_discount(page)
+    assert has_discount, "Kein Mitarbeiterrabatt im Warenkorb sichtbar nach Eingabe beider Codes"
+
+    # 6. Gesamtpreis muss niedriger sein
+    total_after = get_cart_total(page)
+    price_after = _parse_price(total_after)
+    assert price_after < price_before, (
+        f"Gesamtpreis hat sich nach beiden Rabatten nicht verringert: "
+        f"vorher={total_before}, nachher={total_after}"
+    )
+
+
+@pytest.mark.promotions
+def test_employee_discount_not_on_sale(page: Page, base_url: str):
+    """
+    TC-PROMO-EMP-006: Mitarbeiterrabatt nicht auf Aktionspreis (sale flag = JA).
+
+    Prüft, dass der Mitarbeiterrabatt NICHT auf Produkte mit Aktionspreis
+    (SALE) angewendet wird. Keine Doppelrabattierung erlaubt.
+    """
+    sale_product = EMPLOYEE_DISCOUNT_PRODUCTS["sale_item"]
+    regular_product = EMPLOYEE_DISCOUNT_PRODUCTS["regular"]
+    promo_20 = TEST_PROMO_CODES["employee_20_all"]
+
+    # 1. SALE-Produkt und reguläres Produkt zum Warenkorb hinzufügen
+    add_product_to_cart(page, base_url, sale_product)
+    add_product_to_cart(page, base_url, regular_product)
+    navigate_to_cart(page, base_url)
+
+    # 2. Preise vor Rabatt erfassen
+    items_before = _get_line_item_prices(page)
+    assert len(items_before) >= 2, (
+        f"Erwartet mindestens 2 Produkte im Warenkorb, gefunden: {len(items_before)}"
+    )
+
+    total_before = get_cart_total(page)
+    price_before = _parse_price(total_before)
+
+    # 3. Mitarbeiterrabatt-Code 20% einlösen
+    success = apply_promo_code(page, promo_20)
+
+    if not success:
+        pytest.skip(f"Promotion-Code {promo_20} ist nicht im System konfiguriert")
+
+    # 4. Prüfen: Rabatt sichtbar (nur auf reguläres Produkt)
+    has_discount = has_promotion_discount(page)
+    assert has_discount, "Mitarbeiterrabatt wird nicht angezeigt"
+
+    # 5. Einzelpreise nach Rabatt erfassen
+    items_after = _get_line_item_prices(page)
+
+    # 6. Gesamtpreis muss niedriger sein (Rabatt auf reguläres Produkt)
+    total_after = get_cart_total(page)
+    price_after = _parse_price(total_after)
+    assert price_after < price_before, (
+        f"Gesamtpreis hat sich nach Mitarbeiterrabatt nicht verringert: "
+        f"vorher={total_before}, nachher={total_after}"
+    )
+
+    # 7. Rabatt darf nicht dem Rabatt auf den vollen Warenkorb entsprechen
+    # (wäre der Fall, wenn SALE-Produkt auch rabattiert wird)
+    discount = _get_discount_amount(page)
+    full_cart_20_discount = price_before * 0.20
+    if discount > 0 and full_cart_20_discount > 0:
+        # Wenn Rabatt deutlich kleiner als 20% vom Gesamtwarenkorb ist,
+        # wurde das SALE-Produkt korrekt ausgeschlossen
+        assert discount < full_cart_20_discount * 0.95, (
+            f"Rabatt ({discount:.2f}) entspricht ca. 20% des Gesamtwarenkorbs "
+            f"({full_cart_20_discount:.2f}) - SALE-Produkt wurde wahrscheinlich "
+            f"fälschlicherweise rabattiert"
+        )

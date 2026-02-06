@@ -1,0 +1,129 @@
+{
+  "test_id": "TC-PROMO-CHK-003",
+  "name": "Promotion auf Gutschein blockiert (Checkout-Flow)",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutschein (Artikel 736675) ist verfuegbar",
+    "Warenkorb ist leer"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Warenkorb-Seite aufrufen",
+      "expected": "Warenkorb-Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Gutschein per Artikelnummer hinzufuegen",
+      "expected": "Gutschein ist im Warenkorb sichtbar",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#addProductInput",
+          "value": "736675"
+        },
+        {
+          "action": "click",
+          "selector": "#addProductButton"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Promotion-Code eingeben",
+      "expected": "Promotion wird blockiert oder Eingabe ist ausgeblendet",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value": "TESTCODE123"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit']:has-text('Einloesen')"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Kein Rabatt im Warenkorb",
+      "expected": "Kein Promotion-Rabatt sichtbar (.line-item-promotion nicht vorhanden)"
+    },
+    {
+      "step": 5,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Pruefen: Kein Rabatt in Bestelluebersicht",
+      "expected": "Kein Promotion-Rabatt in der Checkout-Bestellzusammenfassung sichtbar"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "gift_voucher_article": "736675",
+      "promo_code": "TESTCODE123"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_blocked_on_gift_voucher_checkout",
+    "tags": [
+      "promotions",
+      "gift-voucher",
+      "checkout"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
