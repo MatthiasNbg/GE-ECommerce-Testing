@@ -45,10 +45,13 @@ class AccountPage(BasePage):
     # =========================================================================
 
     LOGIN_PATH = "/account/login"
-    REGISTER_PATH = "/account/register"
+    REGISTER_PATH = "/account/login"  # Registrierung ist auf Login-Seite als Collapse
     PROFILE_PATH = "/account"
     ADDRESS_PATH = "/account/address"
     ORDERS_PATH = "/account/order"
+
+    # Button um Registrierungsformular aufzuklappen
+    REGISTER_COLLAPSE_BUTTON = "button[data-bs-target='.register-collapse']:has-text('Jetzt registrieren')"
 
     # =========================================================================
     # LOGIN-SEITE Selektoren
@@ -185,9 +188,15 @@ class AccountPage(BasePage):
         await self.accept_cookies_if_visible()
 
     async def goto_register(self) -> None:
-        """Navigiert zur Registrierungs-Seite."""
+        """Navigiert zur Registrierungs-Seite und klappt das Formular auf."""
         await self.navigate(self.REGISTER_PATH)
         await self.accept_cookies_if_visible()
+
+        # Registrierungsformular aufklappen (ist als Collapse auf Login-Seite)
+        register_btn = self.page.locator(self.REGISTER_COLLAPSE_BUTTON)
+        if await register_btn.count() > 0 and await register_btn.is_visible():
+            await register_btn.click()
+            await self.page.wait_for_timeout(500)  # Warten auf Animation
 
     async def goto_profile(self) -> None:
         """Navigiert zur Profil-Übersicht."""
