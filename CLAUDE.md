@@ -42,7 +42,7 @@ Beispiele:
 | TC-PERF-* | Performance | TC-PERF-004 |
 | TC-PAY-* | Zahlung | TC-PAY-003 |
 | TC-SHIP-* | Versand/Spedition | Via generate_shipping_contracts.py |
-| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-002 |
+| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-003 |
 
 ### Schema-Referenz
 
@@ -104,4 +104,4 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 178 Dateien, 0 fehlerhaft, Exit-Code 0.
+Erwartetes Ergebnis: 185 Dateien, 0 fehlerhaft, Exit-Code 0.

@@ -1,0 +1,156 @@
+{
+  "test_id": "TC-CONTENT-002",
+  "name": "Beistelltisch Vassolo ist Post/Spedi-Produkt in Kategorie Moebel/Sofatische",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Feature Content",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt 'Beistelltisch Vassolo Durchmesser 42 cm' (Artikelnr. 21008) ist verfuegbar",
+    "Kategorie 'Moebel > Sofas & Couches > Sofatische' existiert",
+    "Produkt hat Versandart 'Post/Spedi' (kombinierter Post- und Speditionsversand)"
+  ],
+  "postconditions": [
+    "Produkt wird in korrekter Kategorie angezeigt",
+    "Breadcrumb zeigt korrekte Kategorie-Hierarchie",
+    "Versandart Post/Spedi ist korrekt zugeordnet"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite von Beistelltisch Vassolo aufrufen",
+      "expected": "Produktseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/beistelltisch-vassolo-durchmesser-42-cm/ge-p-21008"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Produktname pruefen",
+      "expected": "Produktname 'Beistelltisch Vassolo Durchmesser 42 cm' wird angezeigt",
+      "selector_hint": ".product-title-main",
+      "assert": [
+        {
+          "type": "element_contains_text",
+          "selector": ".product-title-main",
+          "expected": "Beistelltisch Vassolo",
+          "message": "Produktname muss 'Beistelltisch Vassolo' enthalten"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Breadcrumb-Navigation pruefen",
+      "expected": "Breadcrumb zeigt: Home > Moebel > Sofas & Couches > Sofatische",
+      "selector_hint": ".breadcrumb, nav[aria-label='breadcrumb']",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".breadcrumb",
+          "message": "Breadcrumb muss sichtbar sein"
+        },
+        {
+          "type": "element_contains_text",
+          "selector": ".breadcrumb",
+          "expected": "Moebel",
+          "message": "Breadcrumb muss 'Moebel' enthalten"
+        },
+        {
+          "type": "element_contains_text",
+          "selector": ".breadcrumb",
+          "expected": "Sofatische",
+          "message": "Breadcrumb muss 'Sofatische' enthalten"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Kategorie Sofatische aufrufen und Produkt in Listing pruefen",
+      "expected": "Beistelltisch Vassolo ist in der Kategorieliste sichtbar",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/moebel/sofas-couches/sofatische/"
+        }
+      ],
+      "selector_hint": ".product-listing, .cms-listing-col"
+    },
+    {
+      "step": 6,
+      "action": "Versandart-Zuordnung pruefen: Produkt ist als Post/Spedi klassifiziert",
+      "expected": "Produkt hat die kombinierte Versandart 'Post/Spedi' (sowohl Postversand als auch Speditionsversand moeglich)"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "product",
+      "name": "beistelltisch_vassolo",
+      "path": "/p/beistelltisch-vassolo-durchmesser-42-cm/ge-p-21008",
+      "product_name": "Beistelltisch Vassolo Durchmesser 42 cm",
+      "article_number": "21008",
+      "shipping_type": "Post/Spedi"
+    },
+    {
+      "type": "category",
+      "name": "sofatische",
+      "path": "/moebel/sofas-couches/sofatische/",
+      "category_name": "Sofatische",
+      "parent_categories": [
+        "Moebel",
+        "Sofas & Couches"
+      ]
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_content_category.py",
+    "function_name": "test_product_in_correct_category_vassolo_post_spedi",
+    "tags": [
+      "regression",
+      "content",
+      "category",
+      "product-placement",
+      "shipping-type",
+      "post-spedi"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
