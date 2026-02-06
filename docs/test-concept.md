@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **264 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **265 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -42,7 +42,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 🏬 **E2E Tests - Click & Collect** | 1 | ○ 0/1 | 🟠 P1 | Bestellung mit Abholung im Shop (4 Varianten) |
 | 🛍️ **Feature Tests - Warenkorb** | 9 | ✅ 9/9 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
-| 👤 **Feature Tests - Account** | 11 | ⚠️ 9/11 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
+| 👤 **Feature Tests - Account** | 12 | ⚠️ 10/12 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
 | ❤️ **Feature Tests - Merkliste** | 5 | ✅ 5/5 | 🟠 P1 | Hinzufügen, Entfernen, in Warenkorb legen |
 | 🎁 **Feature Tests - Einkaufsgutschein** | 5 | ○ 0/5 | 🟠 P1 | Gutschein/reguläres Produkt Trennung, Promo-Blockierung |
 | 🏷️ **Feature Tests - PDP** | 5 | ○ 0/5 | 🟠 P1 | Produktbilder, Varianten, Beschreibung, Verfügbarkeit |
@@ -94,7 +94,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 264 Tests
+**Gesamt:** 265 Tests
 - ✅ Implementiert: 151
 - ❌ Fehlend: 113
 - ⚠️ Teilweise: 0
@@ -413,8 +413,8 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 ### 👤 Feature Tests - Account
 
 **Priorität:** P1
-**Tests:** 9/11 implementiert
-**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung
+**Tests:** 10/12 implementiert
+**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung, Adresse im Checkout
 **Dauer:** 10-20 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
@@ -431,6 +431,7 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 | TC-ACCOUNT-009 | Passwort vergessen | P0 | ○ | AT, DE, CH | 1 |
 | TC-ACCOUNT-010 | Bestellhistorie einsehen | P1 | ○ | AT, DE, CH | 1 |
 | TC-ACCOUNT-011 | E-Mail auf bestehende Adresse ändern wird abgelehnt | P1 | ✅ | AT | 1 |
+| TC-ACCOUNT-012 | Adresse bearbeiten und im Checkout verifizieren | P1 | ✅ | AT | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -489,9 +490,16 @@ Die 9 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
 - **Schritte:** Profil-Seite aufrufen → E-Mail auf bereits registrierte DE-Kunden-Adresse ändern → Passwort bestätigen → absenden
 - **Erwartet:** Fehlermeldung erscheint, E-Mail bleibt unverändert, Benutzer bleibt auf Profil-Seite
 
+#### Adresse & Checkout (1 Test)
+
+**TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren**
+- **Vorbedingung:** AT-Kunde eingeloggt, mindestens eine Adresse vorhanden
+- **Schritte:** Adressverwaltung aufrufen → erste Adresse bearbeiten (Straße auf „Teststraße 99") → speichern → Adressliste prüfen → Produkt in Warenkorb → /checkout/confirm aufrufen → Adresse im Checkout prüfen → Cleanup (Straße zurücksetzen)
+- **Erwartet:** Geänderte Straße erscheint in der Adressliste und auf der Checkout-Confirm-Seite
+
 **Automation:**
 - **Playwright-Testdatei:** `playwright_tests/tests/test_account.py`
-- **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011)
+- **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011, TC-ACCOUNT-012)
 - **Hinweis:** Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen
 
 </details>

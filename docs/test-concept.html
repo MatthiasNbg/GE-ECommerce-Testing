@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>264 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>265 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -525,8 +525,8 @@
 </tr>
 <tr>
 <td>👤 **Feature Tests - Account**</td>
-<td>11</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 9/11</td>
+<td>12</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 10/12</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie</td>
 </tr>
@@ -660,7 +660,7 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 264 Tests
+<strong>Gesamt:</strong> 265 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 151</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 113</li>
@@ -1460,8 +1460,8 @@
 <h3 id="feature-tests-account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 9/11 implementiert
-<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung
+<strong>Tests:</strong> 10/12 implementiert
+<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung, Adresse im Checkout
 <strong>Dauer:</strong> 10-20 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
@@ -1562,6 +1562,14 @@
 <td>AT</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-ACCOUNT-012</td>
+<td>Adresse bearbeiten und im Checkout verifizieren</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -1629,10 +1637,18 @@
 <li><strong>Schritte:</strong> Profil-Seite aufrufen → E-Mail auf bereits registrierte DE-Kunden-Adresse ändern → Passwort bestätigen → absenden</li>
 <li><strong>Erwartet:</strong> Fehlermeldung erscheint, E-Mail bleibt unverändert, Benutzer bleibt auf Profil-Seite</li>
 </ul>
+<h4 id="adresse-checkout-1-test">Adresse & Checkout (1 Test)</h4>
+
+<strong>TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren</strong>
+<ul>
+<li><strong>Vorbedingung:</strong> AT-Kunde eingeloggt, mindestens eine Adresse vorhanden</li>
+<li><strong>Schritte:</strong> Adressverwaltung aufrufen → erste Adresse bearbeiten (Straße auf „Teststraße 99") → speichern → Adressliste prüfen → Produkt in Warenkorb → /checkout/confirm aufrufen → Adresse im Checkout prüfen → Cleanup (Straße zurücksetzen)</li>
+<li><strong>Erwartet:</strong> Geänderte Straße erscheint in der Adressliste und auf der Checkout-Confirm-Seite</li>
+</ul>
 <strong>Automation:</strong>
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_account.py</code></li>
-<li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011)</li>
+<li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011, TC-ACCOUNT-012)</li>
 <li><strong>Hinweis:</strong> Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen</li>
 </ul>
 </details>
@@ -5538,7 +5554,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 13:22 Uhr</p>
+            <p>Generiert am 06.02.2026 um 14:04 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
