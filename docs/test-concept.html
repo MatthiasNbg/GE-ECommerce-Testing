@@ -3395,6 +3395,55 @@
 </tbody></table></div>
 <hr>
 
+<h3 id="content-tests">📄 Content Tests</h3>
+
+<strong>Priorität:</strong> P2
+<strong>Tests:</strong> 1/5+ geplant
+<strong>Beschreibung:</strong> Prüfung der korrekten Kategorie-Zuordnung und Content-Darstellung
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> Nach Content-Updates, bei neuen Produkten
+
+<h4 id="produkt-kategorie-zuordnung">Produkt-Kategorie-Zuordnung</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CONTENT-001</td>
+<td>Bett Almeno wird in Kategorie Möbel angezeigt</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+</tr>
+</tbody></table></div>
+<strong>Detaillierte Testbeschreibungen:</strong>
+
+<strong>TC-CONTENT-001: Bett Almeno wird in Kategorie Möbel angezeigt</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass das Produkt "Bett Almeno" korrekt in der Kategorie "Möbel" angezeigt wird</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Produkt ist verfügbar und aktiv</li>
+<li>Kategorie "Möbel" existiert</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Prüfen, ob Produkt "Bett Almeno" in der Produktliste erscheint</li>
+<li>Produktseite aufrufen</li>
+<li>Breadcrumb-Navigation prüfen (muss "Möbel" enthalten)</li>
+<li>Kategorie-Zuordnung im Produkt verifizieren</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Produkt ist in der Kategorieliste sichtbar</li>
+<li>Breadcrumb zeigt korrekte Hierarchie: Home > Möbel > ...</li>
+<li>Produkt ist der richtigen Kategorie zugeordnet</li>
+</ul>
+</ol>
+
 <h3 id="regression-tests">🔄 Regression Tests</h3>
 
 <strong>Priorität:</strong> P2
@@ -4204,7 +4253,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 08:11 Uhr</p>
+            <p>Generiert am 06.02.2026 um 08:55 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

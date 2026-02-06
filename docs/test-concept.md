@@ -1469,6 +1469,40 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 ---
 
+### 📄 Content Tests
+
+**Priorität:** P2
+**Tests:** 1/5+ geplant
+**Beschreibung:** Prüfung der korrekten Kategorie-Zuordnung und Content-Darstellung
+**Dauer:** 5-15 Min
+**Ausführung:** Nach Content-Updates, bei neuen Produkten
+
+#### Produkt-Kategorie-Zuordnung
+
+| Test-ID | Name | Priorität | Status | Länder |
+|---------|------|-----------|--------|--------|
+| TC-CONTENT-001 | Bett Almeno wird in Kategorie Möbel angezeigt | P2 | ○ | AT, DE, CH |
+
+**Detaillierte Testbeschreibungen:**
+
+**TC-CONTENT-001: Bett Almeno wird in Kategorie Möbel angezeigt**
+- **Beschreibung:** Prüft, dass das Produkt "Bett Almeno" korrekt in der Kategorie "Möbel" angezeigt wird
+- **Bedingungen:**
+  - Produkt ist verfügbar und aktiv
+  - Kategorie "Möbel" existiert
+- **Testschritte:**
+  1. Kategorie /moebel/ aufrufen
+  2. Prüfen, ob Produkt "Bett Almeno" in der Produktliste erscheint
+  3. Produktseite aufrufen
+  4. Breadcrumb-Navigation prüfen (muss "Möbel" enthalten)
+  5. Kategorie-Zuordnung im Produkt verifizieren
+- **Erwartetes Verhalten:**
+  - Produkt ist in der Kategorieliste sichtbar
+  - Breadcrumb zeigt korrekte Hierarchie: Home > Möbel > ...
+  - Produkt ist der richtigen Kategorie zugeordnet
+
+---
+
 ### 🔄 Regression Tests
 
 **Priorität:** P2

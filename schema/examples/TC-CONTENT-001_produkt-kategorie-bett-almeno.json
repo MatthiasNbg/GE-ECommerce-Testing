@@ -1,0 +1,132 @@
+{
+  "test_id": "TC-CONTENT-001",
+  "name": "Bett Almeno wird in Kategorie Möbel angezeigt",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Feature Content",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt 'Bett Almeno' ist verfügbar",
+    "Kategorie 'Möbel' existiert"
+  ],
+  "postconditions": [
+    "Produkt wird in korrekter Kategorie angezeigt",
+    "Breadcrumb zeigt korrekte Kategorie-Hierarchie"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kategorie Möbel aufrufen",
+      "expected": "Kategorieseite lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/moebel/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Nach Produkt 'Almeno' suchen oder in Produktliste finden",
+      "expected": "Produkt 'Bett Almeno' ist in der Kategorieliste sichtbar",
+      "selector_hint": ".product-listing, .cms-listing-col"
+    },
+    {
+      "step": 4,
+      "action": "Produktseite von Bett Almeno aufrufen",
+      "expected": "Produktseite lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/bett-almeno/"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Breadcrumb-Navigation prüfen",
+      "expected": "Breadcrumb zeigt: Home > Möbel > [Unterkategorie] > Bett Almeno",
+      "selector_hint": ".breadcrumb, nav[aria-label='breadcrumb']",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".breadcrumb",
+          "message": "Breadcrumb muss sichtbar sein"
+        },
+        {
+          "type": "element_contains_text",
+          "selector": ".breadcrumb",
+          "expected": "Möbel",
+          "message": "Breadcrumb muss 'Möbel' enthalten"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Kategorie-Zuordnung im Produkt prüfen",
+      "expected": "Produkt ist der Kategorie 'Möbel' zugeordnet",
+      "selector_hint": ".product-detail-category, .product-category"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "product",
+      "name": "almeno_bett",
+      "path": "p/bett-almeno/",
+      "product_name": "Bett Almeno"
+    },
+    {
+      "type": "category",
+      "name": "moebel",
+      "path": "/moebel/",
+      "category_name": "Möbel"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_content_category.py",
+    "function_name": "test_product_in_correct_category_almeno",
+    "tags": [
+      "regression",
+      "content",
+      "category",
+      "product-placement"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 45,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

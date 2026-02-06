@@ -42,6 +42,7 @@ Beispiele:
 | TC-PERF-* | Performance | TC-PERF-004 |
 | TC-PAY-* | Zahlung | TC-PAY-003 |
 | TC-SHIP-* | Versand/Spedition | Via generate_shipping_contracts.py |
+| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-002 |
 
 ### Schema-Referenz
 
