@@ -1,0 +1,89 @@
+{
+  "test_id": "TC-CONTENT-007",
+  "name": "Online-Katalog aufrufbar",
+  "category": "regression",
+  "priority": "P3",
+  "functional_area": "Feature Content",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Online-Katalog ist im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Startseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Katalog-Link finden (Footer oder Navigation)",
+      "expected": "Katalog-Link ist sichtbar",
+      "selector_hint": "a:has-text('Katalog'), a[href*='katalog']",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": "a:has-text('Katalog'), a[href*='katalog']",
+          "message": "Katalog-Link muss sichtbar sein"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Katalog-Link klicken",
+      "expected": "Katalogseite laedt oder PDF wird geoeffnet",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Katalog'), a[href*='katalog']"
+        }
+      ]
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_content_extended.py",
+    "function_name": "test_online_catalog_accessible",
+    "tags": [
+      "content",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

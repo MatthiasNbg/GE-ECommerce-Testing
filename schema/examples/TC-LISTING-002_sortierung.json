@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-LISTING-002",
+  "name": "Sortierung funktioniert",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Listing",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Kategorie-Seite mit Produkten existiert",
+    "Sortier-Dropdown ist sichtbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kategorie-Seite aufrufen",
+      "expected": "Kategorie-Seite laedt korrekt mit Produkten",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/moebel/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Sortierung aendern (Preis aufsteigend)",
+      "expected": "Sortier-Dropdown wird aktualisiert",
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "select.sorting",
+          "value": "price-asc"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Produktreihenfolge pruefen",
+      "expected": "Produkte sind nach Preis aufsteigend sortiert"
+    },
+    {
+      "step": 4,
+      "action": "Erstes Produkt hat niedrigsten Preis",
+      "expected": "Erstes Produkt zeigt den niedrigsten Preis"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_listing.py",
+    "function_name": "test_product_sorting",
+    "tags": [
+      "listing",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

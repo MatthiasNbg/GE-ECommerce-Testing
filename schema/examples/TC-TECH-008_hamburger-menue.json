@@ -1,0 +1,92 @@
+{
+  "test_id": "TC-TECH-008",
+  "name": "Mobile Hamburger-Menue funktioniert",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Responsive/Navigation",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Viewport auf 375x812 (iPhone) gesetzt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Viewport auf 375x812 setzen und Startseite aufrufen",
+      "expected": "Seite laedt korrekt im mobilen Viewport",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Pruefen ob Hamburger-Menue-Icon sichtbar ist",
+      "expected": "Hamburger-Menue-Button ist sichtbar",
+      "selector_hint": ".menu-button, .nav-main-toggle-btn, button.navbar-toggler, .js-offcanvas-menu-trigger"
+    },
+    {
+      "step": 3,
+      "action": "Hamburger-Menue-Icon klicken",
+      "expected": "Menue oeffnet sich",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".menu-button, .nav-main-toggle-btn, button.navbar-toggler, .js-offcanvas-menu-trigger"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen ob Menue geoeffnet ist und Navigationselemente sichtbar sind",
+      "expected": "Menue-Overlay ist sichtbar mit Navigationspunkten",
+      "selector_hint": ".offcanvas-menu, .mobile-menu, .navigation-offcanvas"
+    },
+    {
+      "step": 5,
+      "action": "Menue schliessen",
+      "expected": "Menue wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".offcanvas-close, .btn-close, [data-bs-dismiss='offcanvas']"
+        }
+      ]
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_mobile_hamburger_menu",
+    "tags": [
+      "technical",
+      "responsive",
+      "navigation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1,
+    "worker_requirements": {
+      "viewport": "mobile"
+    }
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

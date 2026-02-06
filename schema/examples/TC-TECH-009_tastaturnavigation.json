@@ -1,0 +1,69 @@
+{
+  "test_id": "TC-TECH-009",
+  "name": "Tastaturnavigation auf Hauptseiten",
+  "category": "e2e",
+  "priority": "P3",
+  "functional_area": "Accessibility",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Cookie-Banner wurde akzeptiert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen"
+    },
+    {
+      "step": 3,
+      "action": "Tab-Taste mehrfach druecken um durch fokussierbare Elemente zu navigieren",
+      "expected": "Fokus-Indikatoren sind bei jedem fokussierten Element sichtbar"
+    },
+    {
+      "step": 4,
+      "action": "Enter-Taste auf fokussiertem Link druecken",
+      "expected": "Link wird aktiviert und Navigation erfolgt"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_keyboard_navigation",
+    "tags": [
+      "technical",
+      "accessibility"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

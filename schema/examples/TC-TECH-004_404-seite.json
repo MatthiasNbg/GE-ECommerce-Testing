@@ -1,0 +1,63 @@
+{
+  "test_id": "TC-TECH-004",
+  "name": "404-Seite bei ungueltiger URL",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Fehlerseiten",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Ungueltige URL aufrufen",
+      "expected": "Seite antwortet (kein Browser-Fehler)",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/diese-seite-gibt-es-nicht-12345"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Pruefen ob Fehlerseite angezeigt wird",
+      "expected": "Seite ist nicht leer, zeigt eine Fehlermeldung oder Hinweistext"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen ob Navigation zurueck zum Shop moeglich ist",
+      "expected": "Seite enthaelt Header-Navigation oder Link zur Startseite"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_404_error_page",
+    "tags": [
+      "technical",
+      "error"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

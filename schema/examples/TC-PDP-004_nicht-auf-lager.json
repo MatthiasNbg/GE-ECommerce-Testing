@@ -1,0 +1,104 @@
+{
+  "test_id": "TC-PDP-004",
+  "name": "Nicht-auf-Lager-Verhalten",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "PDP",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Ein nicht vorraetiges Produkt oder eine nicht vorreetige Variante ist bekannt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite mit nicht vorraetiger Variante aufrufen",
+      "expected": "Produktseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Nicht vorreetige Variante auswaehlen (falls Variantenprodukt)",
+      "expected": "Nicht vorreetige Variante ist ausgewaehlt",
+      "selector_hint": ".product-detail-configurator-option, .product-detail-configurator select"
+    },
+    {
+      "step": 4,
+      "action": "Warenkorb-Button pruefen",
+      "expected": "Warenkorb-Button ist deaktiviert oder ausgeblendet",
+      "selector_hint": "button.btn-buy, [data-add-to-cart]",
+      "assert": [
+        {
+          "type": "element_hidden",
+          "selector": "button.btn-buy:not([disabled])",
+          "message": "Warenkorb-Button muss deaktiviert oder ausgeblendet sein fuer nicht vorreetige Produkte"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Verfuegbarkeitsmeldung pruefen",
+      "expected": "Hinweismeldung zur Nichtverfuegbarkeit wird angezeigt",
+      "selector_hint": ".delivery-information, .delivery-status"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_pdp.py",
+    "function_name": "test_out_of_stock_behavior",
+    "tags": [
+      "pdp",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

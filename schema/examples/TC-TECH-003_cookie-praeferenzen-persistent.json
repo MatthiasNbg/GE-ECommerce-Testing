@@ -1,0 +1,82 @@
+{
+  "test_id": "TC-TECH-003",
+  "name": "Cookie-Praeferenzen persistent nach Reload",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Cookie/Consent",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Frischer Browser-Kontext ohne Cookies"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Neuen Browser-Kontext oeffnen und Startseite aufrufen",
+      "expected": "Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button[data-testid='uc-accept-all-button']"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Seite neu laden (reload)",
+      "expected": "Seite laedt erneut korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen ob Cookie-Banner NICHT erneut erscheint",
+      "expected": "Cookie-Banner ist nicht sichtbar (Praeferenzen wurden gespeichert)",
+      "selector_hint": "#usercentrics-cmp-ui"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_cookie_preferences_persist",
+    "tags": [
+      "technical",
+      "consent"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "test_id": "TC-ACCOUNT-009",
+  "name": "Passwort vergessen",
+  "category": "e2e",
+  "priority": "P0",
+  "functional_area": "Feature Account",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Login-Seite ist erreichbar",
+    "Bestehender Kundenaccount"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen",
+      "expected": "Login-Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Passwort vergessen Link klicken",
+      "expected": "Passwort-Wiederherstellungsseite wird angezeigt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a[href*='recover']"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "E-Mail eingeben",
+      "expected": "E-Mail wird ins Feld eingetragen",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "test@example.com"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Formular absenden",
+      "expected": "Formular wird abgeschickt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button[type='submit']"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Bestaetigungsmeldung pruefen",
+      "expected": "Bestaetigungsmeldung wird angezeigt"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account_extended.py",
+    "function_name": "test_password_reset_request",
+    "tags": [
+      "account",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

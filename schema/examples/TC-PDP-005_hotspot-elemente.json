@@ -1,0 +1,120 @@
+{
+  "test_id": "TC-PDP-005",
+  "name": "Hotspot-Elemente auf Bildern",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "PDP",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Eine Seite mit Hotspot-Bildern ist verfuegbar (z.B. Inspirationsseite oder Produktseite mit Hotspots)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Seite mit Hotspot-Bildern aufrufen",
+      "expected": "Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Hotspot-Bild suchen und pruefen",
+      "expected": "Mindestens ein Hotspot-Bild-Element ist auf der Seite vorhanden",
+      "selector_hint": ".cms-element-image-slider .hotspot, .image-hotspot",
+      "inputs": [
+        {
+          "action": "wait",
+          "selector": ".cms-element-image-slider .hotspot, .image-hotspot"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Hotspot-Marker auf Sichtbarkeit pruefen",
+      "expected": "Hotspot-Marker sind auf dem Bild sichtbar",
+      "selector_hint": ".cms-element-image-slider .hotspot, .image-hotspot",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".cms-element-image-slider .hotspot, .image-hotspot",
+          "message": "Hotspot-Marker muessen sichtbar sein"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Hotspot anklicken",
+      "expected": "Produktinformation oder Overlay wird angezeigt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".cms-element-image-slider .hotspot, .image-hotspot"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Hotspot-Produktinfo pruefen",
+      "expected": "Produktname und/oder Preis wird im Hotspot-Overlay angezeigt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_pdp.py",
+    "function_name": "test_hotspot_elements",
+    "tags": [
+      "pdp",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

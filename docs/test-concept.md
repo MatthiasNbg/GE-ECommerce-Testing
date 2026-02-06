@@ -9,14 +9,14 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **217 Testfällen** in 12 Kategorien.
-Der aktuelle Implementierungsstand liegt bei **~65%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **262 Testfällen** in 19 Kategorien.
+Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
-- ✅ Basis-Tests (Smoke: 5/5) implementiert
-- ⚠️ Critical Path (3/8) 
-(5/8 offen)
-- ⚠️ Feature-Tests (123/131 implementiert)
+- ✅ Basis-Tests (Smoke: 6/6) implementiert
+- ⚠️ Critical Path (8/8) implementiert
+- ⚠️ Feature-Tests (128/176 implementiert)
+- ⚠️ Weitere Kategorien (Newsletter, PDP, Listing, Navigation, Tech) definiert
 
 **Prioritäten:**
 1. **Kritische Business-Flows** (Gast-Checkout, Zahlungsarten) → Phase 1
@@ -32,20 +32,28 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:144:174:83 -->
+<!-- PROGRESS_BAR:149:262:57 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
-| 🏠 **Smoke Tests** | 5 | ✅ 5/5 | 🔴 P0 | Homepage, Produktseiten, Navigation |
+| 🏠 **Smoke Tests** | 6 | ✅ 6/6 | 🔴 P0 | Homepage, Produktseiten, Navigation, Checkout |
 | 🛒 **Critical Path Tests** | 8 | ✅ 8/8 | 🔴 P0 | Gast-Checkout, Registrierter Checkout, Zahlungsarten |
 | 🔄 **E2E Tests - Checkout** | 1 | ○ 0/1 | 🔴 P0 | Kompletter Checkout mit allen Zahlungs-/Versandarten (24 Varianten) |
 | 🏬 **E2E Tests - Click & Collect** | 1 | ○ 0/1 | 🟠 P1 | Bestellung mit Abholung im Shop (4 Varianten) |
 | 🛍️ **Feature Tests - Warenkorb** | 8 | ✅ 8/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
-| 👤 **Feature Tests - Account** | 8 | ✅ 8/8 | 🟠 P1 | Registrierung, Login, Profil, Adressen |
+| 👤 **Feature Tests - Account** | 10 | ⚠️ 8/10 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
+| ❤️ **Feature Tests - Merkliste** | 5 | ✅ 5/5 | 🟠 P1 | Hinzufügen, Entfernen, in Warenkorb legen |
+| 🎁 **Feature Tests - Einkaufsgutschein** | 5 | ○ 0/5 | 🟠 P1 | Gutschein/reguläres Produkt Trennung, Promo-Blockierung |
+| 🏷️ **Feature Tests - PDP** | 5 | ○ 0/5 | 🟠 P1 | Produktbilder, Varianten, Beschreibung, Verfügbarkeit |
+| 📋 **Feature Tests - Produktlisting** | 4 | ○ 0/4 | 🟠 P1 | Produktfilter, Sortierung, Pagination, SALE |
+| 🧭 **Feature Tests - Navigation** | 5 | ○ 0/5 | 🟠 P1 | Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 47 | ⚠️ 0/47 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
+| 📄 **Content Tests** | 7 | ○ 0/7 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel |
+| 📰 **Feature Tests - Newsletter** | 2 | ○ 0/2 | 🟡 P2 | Newsletter-Anmeldung, Validierung |
+| 🔧 **Technische Tests** | 10 | ○ 0/10 | 🟠 P1 | Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
@@ -57,20 +65,28 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 
 1. [Testfall-Übersicht](#testfall-uebersicht) - Alle Tests auf einen Blick
 2. [Test-Kategorien](#test-kategorien) - Was wird getestet?
-3. [Smoke Tests](#smoke-tests) - (5 Tests)
+3. [Smoke Tests](#smoke-tests) - (6 Tests)
 4. [Critical Path Tests](#critical-path-tests) - (8 Tests)
 5. [E2E Tests - Checkout](#e2e-tests-kompletter-checkout) - (1 Test, 24 Varianten)
 6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (1 Test, 4 Varianten)
 7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (8 Tests)
 8. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
-9. [Feature Tests - Account](#feature-tests-account) - (8 Tests)
-10. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
-11. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
-12. [Data Validation Tests](#data-validation-tests) - (15 Tests)
-13. [Regression Tests](#regression-tests) - (15-20 Tests)
-14. [Load Tests](#load-tests) - (5 Tests)
-15. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
-16. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
+9. [Feature Tests - Account](#feature-tests-account) - (10 Tests)
+10. [Feature Tests - Merkliste/Wishlist](#feature-tests-merklistewishlist) - (5 Tests)
+11. [Feature Tests - Einkaufsgutschein/Warenkorb](#feature-tests-einkaufsgutscheinwarenkorb) - (5 Tests)
+12. [Feature Tests - Produktdetailseite (PDP)](#feature-tests-produktdetailseite-pdp) - (5 Tests)
+13. [Feature Tests - Produktlisting](#feature-tests-produktlisting) - (4 Tests)
+14. [Feature Tests - Navigation](#feature-tests-navigation) - (5 Tests)
+15. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
+16. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
+17. [Data Validation Tests](#data-validation-tests) - (15 Tests)
+18. [Content Tests](#content-tests) - (7 Tests)
+19. [Feature Tests - Newsletter](#feature-tests-newsletter) - (2 Tests)
+20. [Technische Tests](#technische-tests) - (10 Tests)
+21. [Regression Tests](#regression-tests) - (15-20 Tests)
+22. [Load Tests](#load-tests) - (5 Tests)
+23. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
+24. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
 
 ---
 
@@ -78,11 +94,11 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 217 Tests
-- ✅ Implementiert: 134
-- ❌ Fehlend: 81
+**Gesamt:** 262 Tests
+- ✅ Implementiert: 149
+- ❌ Fehlend: 113
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 65%
+- **Abdeckung:** 57%
 
 ---
 
@@ -91,8 +107,8 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 ### 🏠 Smoke Tests
 
 **Priorität:** P0
-**Tests:** 5/5 implementiert
-**Beschreibung:** Homepage, Produktseiten, Navigation
+**Tests:** 6/6 implementiert
+**Beschreibung:** Homepage, Produktseiten, Navigation, Checkout
 **Dauer:** < 5 Min
 **Ausführung:** Bei jedem Build, vor jedem Deployment
 
@@ -103,6 +119,7 @@ Der aktuelle Implementierungsstand liegt bei **~65%**.
 | TC-SMOKE-003 | Produkt zum Warenkorb hinzufügen | P0 | ✅ | AT, DE, CH | 1 |
 | TC-SMOKE-004 | Checkout-Seite erreichbar | P0 | ✅ | AT, DE, CH | 1 |
 | TC-SMOKE-005 | Suche funktioniert | P0 | ✅ | AT, DE, CH | 1 |
+| TC-SMOKE-006 | Checkout erreichbar | P0 | ✅ | AT, DE, CH | 1 |
 
 ---
 
@@ -391,8 +408,8 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 ### 👤 Feature Tests - Account
 
 **Priorität:** P1
-**Tests:** 8/8 implementiert
-**Beschreibung:** Registrierung, Login, Profil, Adressen
+**Tests:** 8/10 implementiert
+**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie
 **Dauer:** 10-20 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
@@ -406,6 +423,8 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 | TC-ACCOUNT-006 | Login mit falschen Daten schlägt fehl | P1 | ✅ | AT, DE, CH | 1 |
 | TC-ACCOUNT-007 | Profil anzeigen und bearbeiten | P1 | ✅ | AT, DE, CH | 1 |
 | TC-ACCOUNT-008 | Adressverwaltung | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ACCOUNT-009 | Passwort vergessen | P0 | ○ | AT, DE, CH | 1 |
+| TC-ACCOUNT-010 | Bestellhistorie einsehen | P1 | ○ | AT, DE, CH | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -463,6 +482,129 @@ Die 8 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
 - **Hinweis:** Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen
 
 </details>
+
+---
+
+### ❤️ Feature Tests - Merkliste/Wishlist
+
+**Priorität:** P1
+**Tests:** 5/5 implementiert
+**Beschreibung:** Produkte zur Merkliste hinzufügen, entfernen, in den Warenkorb legen
+**Dauer:** 5-10 Min
+**Ausführung:** In CI/CD, vor Feature-Release
+**Voraussetzung:** Eingeloggter Benutzer (nur AT-Channel)
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-WISH-001 | Produkt zur Merkliste hinzufügen | P1 | ✅ | AT | 1 |
+| TC-WISH-002 | Mehrere Produkte zur Merkliste hinzufügen | P1 | ✅ | AT | 1 |
+| TC-WISH-003 | Produkt von der Merkliste entfernen | P1 | ✅ | AT | 1 |
+| TC-WISH-004 | Produkt aus Merkliste in den Warenkorb legen | P1 | ✅ | AT | 1 |
+| TC-WISH-005 | Leere Merkliste zeigt Hinweis | P2 | ✅ | AT | 1 |
+
+<details>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
+
+Die 5 Merklisten-Tests prüfen alle wesentlichen Funktionen der Shopware 6 Wishlist: Hinzufügen, Verwalten mehrerer Produkte, Entfernen, Transfer in den Warenkorb und Anzeige der leeren Merkliste. Alle Tests erfordern einen eingeloggten Benutzer und laufen nur im AT-Channel.
+
+**TC-WISH-001: Produkt zur Merkliste hinzufügen**
+- **Schritte:** Einloggen → Produktseite aufrufen → Herz-Button klicken → Merklisten-Seite aufrufen → Produkt prüfen
+- **Erwartet:** Herz-Button wird aktiv, Produkt ist auf der Merkliste sichtbar
+
+**TC-WISH-002: Mehrere Produkte zur Merkliste hinzufügen**
+- **Schritte:** Einloggen → 3 verschiedene Produkte nacheinander zur Merkliste hinzufügen → Merklisten-Seite aufrufen
+- **Erwartet:** Alle 3 Produkte sind auf der Merkliste sichtbar
+
+**TC-WISH-003: Produkt von der Merkliste entfernen**
+- **Schritte:** Einloggen → Produkt hinzufügen → Merklisten-Seite → Produkt entfernen (Form-Submit) → Seite neu laden
+- **Erwartet:** Merkliste ist leer nach dem Entfernen
+- **Hinweis:** Entfernen erfolgt via JavaScript Form-Submit (`.product-wishlist-form`), da der Remove-Button `height: 0` hat
+
+**TC-WISH-004: Produkt aus Merkliste in den Warenkorb legen**
+- **Schritte:** Einloggen → Produkt zur Merkliste → Merklisten-Seite → "In den Warenkorb" klicken → Warenkorb prüfen
+- **Erwartet:** Produkt ist im Warenkorb
+
+**TC-WISH-005: Leere Merkliste zeigt Hinweis**
+- **Schritte:** Einloggen → Merkliste leeren → Merklisten-Seite aufrufen
+- **Erwartet:** Keine Produkte vorhanden, ggf. Leer-Hinweis angezeigt
+
+**Automation:**
+- **Playwright-Testdatei:** `playwright_tests/tests/test_wishlist.py`
+- **Page Object:** `playwright_tests/pages/wishlist_page.py`
+- **Cleanup:** Merkliste wird vor und nach jedem Test geleert
+
+</details>
+
+---
+
+### 🎁 Feature Tests - Einkaufsgutschein/Warenkorb
+
+**Priorität:** P1
+**Tests:** 0/5 geplant
+**Beschreibung:** Validierung der Warenkorb-Regeln für Einkaufsgutscheine (Trennung von regulären Produkten)
+**Dauer:** 5-15 Min
+**Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CART-GIFT-001 | Reguläres Produkt kann nicht zu Gutschein-Warenkorb hinzugefügt werden | P1 | ○ | AT, DE, CH | 1 |
+| TC-CART-GIFT-002 | Bundle-Produkt kann nicht zu Gutschein-Warenkorb hinzugefügt werden | P2 | ○ | AT, DE, CH | 1 |
+| TC-CART-GIFT-003 | Einkaufsgutschein kann nicht zu regulärem Warenkorb hinzugefügt werden | P1 | ○ | AT, DE, CH | 1 |
+| TC-CART-GIFT-004 | Einkaufsgutschein im Warenkorb entfernt alle aktiven Promotions | P1 | ○ | AT, DE, CH | 1 |
+| TC-CART-GIFT-005 | Promocode wird abgelehnt wenn Einkaufsgutschein im Warenkorb ist | P1 | ○ | AT, DE, CH | 1 |
+
+---
+
+### 🏷️ Feature Tests - Produktdetailseite (PDP)
+
+**Priorität:** P1
+**Tests:** 0/5 geplant
+**Beschreibung:** Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Hotspots
+**Dauer:** 5-15 Min
+**Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-PDP-001 | Produktbilder-Galerie und Zoom | P1 | ○ | AT, DE, CH | 1 |
+| TC-PDP-002 | Varianten-Auswahl | P0 | ○ | AT, DE, CH | 1 |
+| TC-PDP-003 | Beschreibung und Details sichtbar | P2 | ○ | AT, DE, CH | 1 |
+| TC-PDP-004 | Nicht-auf-Lager-Verhalten | P1 | ○ | AT, DE, CH | 1 |
+| TC-PDP-005 | Hotspot-Elemente auf Bildern | P2 | ○ | AT, DE, CH | 1 |
+
+---
+
+### 📋 Feature Tests - Produktlisting
+
+**Priorität:** P1
+**Tests:** 0/4 geplant
+**Beschreibung:** Produktfilter, Sortierung, Pagination, SALE-Kategorie
+**Dauer:** 5-15 Min
+**Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-LISTING-001 | Produktfilter funktionieren | P1 | ○ | AT, DE, CH | 1 |
+| TC-LISTING-002 | Sortierung funktioniert | P1 | ○ | AT, DE, CH | 1 |
+| TC-LISTING-003 | Pagination | P2 | ○ | AT, DE, CH | 1 |
+| TC-LISTING-004 | SALE-Kategorie korrekt | P2 | ○ | AT, DE, CH | 1 |
+
+---
+
+### 🧭 Feature Tests - Navigation
+
+**Priorität:** P1
+**Tests:** 0/5 geplant
+**Beschreibung:** Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel, Währung
+**Dauer:** 5-10 Min
+**Ausführung:** In CI/CD, vor Feature-Release
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-NAV-001 | Hauptnavigation erreichbar | P1 | ○ | AT, DE, CH | 1 |
+| TC-NAV-002 | Mega-Menü Unterkategorien | P1 | ○ | AT, DE, CH | 1 |
+| TC-NAV-003 | Breadcrumb-Navigation | P2 | ○ | AT, DE, CH | 1 |
+| TC-NAV-004 | Länderwechsel AT/DE/CH | P1 | ○ | AT, DE, CH | 1 |
+| TC-NAV-005 | Währungsanpassung bei Länderwechsel | P1 | ○ | AT, DE, CH | 1 |
 
 ---
 
@@ -1590,8 +1732,8 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 ### 📄 Content Tests
 
 **Priorität:** P2
-**Tests:** 1/5+ geplant
-**Beschreibung:** Prüfung der korrekten Kategorie-Zuordnung und Content-Darstellung
+**Tests:** 0/7 geplant
+**Beschreibung:** Prüfung der korrekten Kategorie-Zuordnung, Content-Darstellung, Footer-Links und Trust-Elemente
 **Dauer:** 5-15 Min
 **Ausführung:** Nach Content-Updates, bei neuen Produkten
 
@@ -1600,6 +1742,22 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
 | TC-CONTENT-001 | Bett Almeno wird in Kategorie Möbel angezeigt | P2 | ○ | AT, DE, CH | 1 |
+| TC-CONTENT-002 | Beistelltisch Vassolo ist Post/Spedi-Produkt in Kategorie Möbel/Sofatische | P2 | ○ | AT, DE, CH | 1 |
+
+#### Footer & Trust-Elemente
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CONTENT-003 | Footer-Links erreichbar | P1 | ○ | AT, DE, CH | 1 |
+| TC-CONTENT-004 | Kontaktinformationen im Footer | P2 | ○ | AT, DE, CH | 1 |
+| TC-CONTENT-005 | Trust-Siegel angezeigt | P2 | ○ | AT, DE, CH | 1 |
+
+#### Spezialseiten
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CONTENT-006 | Matratzen-Berater erreichbar | P2 | ○ | AT, DE, CH | 1 |
+| TC-CONTENT-007 | Online-Katalog aufrufbar | P3 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1618,6 +1776,61 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Produkt ist in der Kategorieliste sichtbar
   - Breadcrumb zeigt korrekte Hierarchie: Home > Möbel > ...
   - Produkt ist der richtigen Kategorie zugeordnet
+
+---
+
+### 📰 Feature Tests - Newsletter
+
+**Priorität:** P2
+**Tests:** 0/2 geplant
+**Beschreibung:** Newsletter-Anmeldung und Validierung
+**Dauer:** 2-5 Min
+**Ausführung:** Nach Änderungen am Newsletter-Formular
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-NEWSLETTER-001 | Newsletter-Anmeldung mit gültiger E-Mail | P2 | ○ | AT, DE, CH | 1 |
+| TC-NEWSLETTER-002 | Newsletter-Anmeldung mit ungültiger E-Mail | P2 | ○ | AT, DE, CH | 1 |
+
+---
+
+### 🔧 Technische Tests
+
+**Priorität:** P1
+**Tests:** 0/10 geplant
+**Beschreibung:** Cookie-Banner, Fehlerseiten, Mobile Responsive, Barrierefreiheit
+**Dauer:** 10-20 Min
+**Ausführung:** In CI/CD, vor Deployments
+
+#### Cookie-Handling
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-TECH-001 | Cookie-Banner erscheint beim Erstbesuch | P0 | ○ | AT, DE, CH | 1 |
+| TC-TECH-002 | Cookie-Zustimmung funktioniert | P0 | ○ | AT, DE, CH | 1 |
+| TC-TECH-003 | Cookie-Präferenzen persistent nach Reload | P1 | ○ | AT, DE, CH | 1 |
+
+#### Fehlerseiten
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-TECH-004 | 404-Seite bei ungültiger URL | P1 | ○ | AT, DE, CH | 1 |
+| TC-TECH-005 | Fehlerseite bei Server-Fehler | P2 | ○ | AT, DE, CH | 1 |
+
+#### Mobile Responsive
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-TECH-006 | Homepage korrekt im mobilen Viewport | P1 | ○ | AT, DE, CH | 1 |
+| TC-TECH-007 | Checkout im mobilen Viewport | P1 | ○ | AT, DE, CH | 1 |
+| TC-TECH-008 | Mobile Hamburger-Menü funktioniert | P1 | ○ | AT, DE, CH | 1 |
+
+#### Barrierefreiheit
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-TECH-009 | Tastaturnavigation auf Hauptseiten | P3 | ○ | AT, DE, CH | 1 |
+| TC-TECH-010 | Alt-Texte auf Produktbildern vorhanden | P3 | ○ | AT, DE, CH | 1 |
 
 ---
 
@@ -1652,13 +1865,18 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | Phase | Name | Status | Tests | Abdeckung-Ziel |
 |-------|------|--------|-------|----------------|
 | phase_0 | Phase 0 - Basis-Setup | ✅ | 8 | -% |
-| phase_1 | Phase 1 - Critical Path | ⏳ | 5 | 15% |
+| phase_1 | Phase 1 - Critical Path | ✅ | 8 | 15% |
 | phase_2 | Phase 2 - Warenkorb | ✅ | 8 | -% |
-| phase_3 | Phase 3 - Account | ✅ | 8 | -% |
+| phase_3 | Phase 3 - Account | ⚠️ | 10 | -% |
 | phase_4 | Phase 4 - Suche | ✅ | 9 | -% |
 | phase_5 | Phase 5 - Versandarten | ✅ | 98 | -% |
+| phase_5a | Phase 5a - Merkliste | ✅ | 5 | -% |
+| phase_5b | Phase 5b - PDP, Listing, Navigation | ⏳ | 14 | -% |
+| phase_5c | Phase 5c - Einkaufsgutschein/Warenkorb | ⏳ | 5 | -% |
+| phase_5d | Phase 5d - Technische Tests | ⏳ | 10 | -% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 47 | 60% |
 | phase_7 | Phase 7 - Data Validation | ⏳ | 15 | 70% |
+| phase_7a | Phase 7a - Content & Newsletter | ⏳ | 9 | -% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
 | phase_9 | Phase 9 - Load Tests | ⏳ | 5 | 90% |
 

@@ -1,0 +1,119 @@
+{
+  "test_id": "TC-NAV-005",
+  "name": "Waehrungsanpassung bei Laenderwechsel",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Navigation",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist in AT/DE (EUR) und CH (CHF) verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite im AT-Shop aufrufen",
+      "expected": "Produktseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Waehrung auf Produktseite pruefen (AT/DE)",
+      "expected": "Preis wird in EUR angezeigt (Euro-Zeichen oder EUR sichtbar)",
+      "selector_hint": "meta[itemprop='priceCurrency'], .product-detail-price"
+    },
+    {
+      "step": 4,
+      "action": "Zum CH-Shop navigieren",
+      "expected": "CH-Shop wird geladen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".language-selector, .country-selector"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Gleiches Produkt im CH-Shop aufrufen",
+      "expected": "Produktseite im CH-Shop laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Waehrung auf Produktseite pruefen (CH)",
+      "expected": "Preis wird in CHF angezeigt (CHF oder Franken sichtbar)",
+      "selector_hint": "meta[itemprop='priceCurrency'], .product-detail-price"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "product",
+      "name": "duftkissen_lavendel",
+      "path": "p/duftkissen-lavendel/ge-p-49415",
+      "product_name": "Duftkissen Lavendel"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_navigation.py",
+    "function_name": "test_currency_adjustment",
+    "tags": [
+      "navigation",
+      "data_validation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

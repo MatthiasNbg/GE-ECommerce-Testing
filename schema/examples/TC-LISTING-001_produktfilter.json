@@ -1,0 +1,76 @@
+{
+  "test_id": "TC-LISTING-001",
+  "name": "Produktfilter funktionieren",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Listing",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Kategorie-Seite mit Produkten existiert",
+    "Filter-Panel ist sichtbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kategorie-Seite aufrufen",
+      "expected": "Kategorie-Seite laedt korrekt mit Produkten",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/moebel/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Filter anwenden (z.B. Preisbereich)",
+      "expected": "Filter wird aktiviert und Produkte werden aktualisiert",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".filter-panel-item"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Produktliste pruefen",
+      "expected": "Produkte werden nach Filter-Kriterien angezeigt"
+    },
+    {
+      "step": 4,
+      "action": "Filter-Indikator pruefen",
+      "expected": "Aktiver Filter wird als Indikator angezeigt"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_listing.py",
+    "function_name": "test_product_filters",
+    "tags": [
+      "listing",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

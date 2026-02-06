@@ -1,0 +1,107 @@
+{
+  "test_id": "TC-NAV-002",
+  "name": "Mega-Menue Unterkategorien",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Navigation",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Hauptnavigation ist sichtbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Homepage laedt ohne Fehler",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Maus ueber Hauptkategorie bewegen (Hover)",
+      "expected": "Mega-Menue mit Unterkategorien wird angezeigt",
+      "selector_hint": ".main-navigation-link, .nav-link.main-navigation-link"
+    },
+    {
+      "step": 4,
+      "action": "Unterkategorien im Mega-Menue pruefen",
+      "expected": "Mindestens eine Unterkategorie ist sichtbar",
+      "selector_hint": ".navigation-flyout, .navigation-flyout-content"
+    },
+    {
+      "step": 5,
+      "action": "Unterkategorie anklicken",
+      "expected": "Korrekte Kategorieseite wird geladen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".navigation-flyout-content a"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Kategorieseite validieren",
+      "expected": "Seite zeigt Produkte der gewaehlten Unterkategorie"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_navigation.py",
+    "function_name": "test_mega_menu_subcategories",
+    "tags": [
+      "navigation",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

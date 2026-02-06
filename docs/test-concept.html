@@ -446,16 +446,15 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>217 Testfällen</strong> in 12 Kategorien.</p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~65%</strong>.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>262 Testfällen</strong> in 19 Kategorien.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Basis-Tests (Smoke: 5/5) implementiert</li>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (3/8)</li>
-</ul>
-<ul>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (123/131 implementiert)</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Basis-Tests (Smoke: 6/6) implementiert</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (8/8) implementiert</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (128/176 implementiert)</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Weitere Kategorien (Newsletter, PDP, Listing, Navigation, Tech) definiert</li>
 </ul>
 <strong>Prioritäten:</strong>
 <ol>
@@ -472,7 +471,7 @@
 
 <h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
 
-<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>144</strong> von <strong>174</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 83%;"></div></div><div class="progress-percent">83%</div></div>
+<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>149</strong> von <strong>262</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 57%;"></div></div><div class="progress-percent">57%</div></div>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -484,10 +483,10 @@
 </tr></thead><tbody>
 <tr>
 <td>🏠 **Smoke Tests**</td>
-<td>5</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span> 5/5</td>
+<td>6</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 6/6</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
-<td>Homepage, Produktseiten, Navigation</td>
+<td>Homepage, Produktseiten, Navigation, Checkout</td>
 </tr>
 <tr>
 <td>🛒 **Critical Path Tests**</td>
@@ -526,10 +525,45 @@
 </tr>
 <tr>
 <td>👤 **Feature Tests - Account**</td>
-<td>8</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
+<td>10</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 8/10</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
-<td>Registrierung, Login, Profil, Adressen</td>
+<td>Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie</td>
+</tr>
+<tr>
+<td>❤️ **Feature Tests - Merkliste**</td>
+<td>5</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 5/5</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Hinzufügen, Entfernen, in Warenkorb legen</td>
+</tr>
+<tr>
+<td>🎁 **Feature Tests - Einkaufsgutschein**</td>
+<td>5</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/5</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Gutschein/reguläres Produkt Trennung, Promo-Blockierung</td>
+</tr>
+<tr>
+<td>🏷️ **Feature Tests - PDP**</td>
+<td>5</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/5</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Produktbilder, Varianten, Beschreibung, Verfügbarkeit</td>
+</tr>
+<tr>
+<td>📋 **Feature Tests - Produktlisting**</td>
+<td>4</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/4</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Produktfilter, Sortierung, Pagination, SALE</td>
+</tr>
+<tr>
+<td>🧭 **Feature Tests - Navigation**</td>
+<td>5</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/5</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel</td>
 </tr>
 <tr>
 <td>📦 **Feature Tests - Versandarten**</td>
@@ -551,6 +585,27 @@
 <td><span class="badge badge-warning">⚠ Teilweise</span> 0/15</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten</td>
+</tr>
+<tr>
+<td>📄 **Content Tests**</td>
+<td>7</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/7</td>
+<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
+<td>Kategorie-Zuordnung, Footer-Links, Trust-Siegel</td>
+</tr>
+<tr>
+<td>📰 **Feature Tests - Newsletter**</td>
+<td>2</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/2</td>
+<td><span class="badge badge-priority-p2">P2 Mittel</span></td>
+<td>Newsletter-Anmeldung, Validierung</td>
+</tr>
+<tr>
+<td>🔧 **Technische Tests**</td>
+<td>10</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/10</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit</td>
 </tr>
 <tr>
 <td>🔄 **Regression Tests**</td>
@@ -576,16 +631,24 @@
 <ol>
 <li><a href="#testfall-uebersicht">Testfall-Übersicht</a> - Alle Tests auf einen Blick</li>
 <li><a href="#test-kategorien">Test-Kategorien</a> - Was wird getestet?</li>
-<li><a href="#smoke-tests">Smoke Tests</a> - (5 Tests)</li>
+<li><a href="#smoke-tests">Smoke Tests</a> - (6 Tests)</li>
 <li><a href="#critical-path-tests">Critical Path Tests</a> - (8 Tests)</li>
 <li><a href="#e2e-tests-kompletter-checkout">E2E Tests - Checkout</a> - (1 Test, 24 Varianten)</li>
 <li><a href="#e2e-tests-click--collect">E2E Tests - Click & Collect</a> - (1 Test, 4 Varianten)</li>
 <li><a href="#feature-tests-warenkorb">Feature Tests - Warenkorb</a> - (8 Tests)</li>
 <li><a href="#feature-tests-suche">Feature Tests - Suche</a> - (9 Tests)</li>
-<li><a href="#feature-tests-account">Feature Tests - Account</a> - (8 Tests)</li>
+<li><a href="#feature-tests-account">Feature Tests - Account</a> - (10 Tests)</li>
+<li><a href="#feature-tests-merklistewishlist">Feature Tests - Merkliste/Wishlist</a> - (5 Tests)</li>
+<li><a href="#feature-tests-einkaufsgutscheinwarenkorb">Feature Tests - Einkaufsgutschein/Warenkorb</a> - (5 Tests)</li>
+<li><a href="#feature-tests-produktdetailseite-pdp">Feature Tests - Produktdetailseite (PDP)</a> - (5 Tests)</li>
+<li><a href="#feature-tests-produktlisting">Feature Tests - Produktlisting</a> - (4 Tests)</li>
+<li><a href="#feature-tests-navigation">Feature Tests - Navigation</a> - (5 Tests)</li>
 <li><a href="#feature-tests-versandarten">Feature Tests - Versandarten</a> - (98 Tests)</li>
 <li><a href="#feature-tests-promotions">Feature Tests - Promotions</a> - (47 Tests)</li>
 <li><a href="#data-validation-tests">Data Validation Tests</a> - (15 Tests)</li>
+<li><a href="#content-tests">Content Tests</a> - (7 Tests)</li>
+<li><a href="#feature-tests-newsletter">Feature Tests - Newsletter</a> - (2 Tests)</li>
+<li><a href="#technische-tests">Technische Tests</a> - (10 Tests)</li>
 <li><a href="#regression-tests">Regression Tests</a> - (15-20 Tests)</li>
 <li><a href="#load-tests">Load Tests</a> - (5 Tests)</li>
 <li><a href="#testdaten">Testdaten</a> - Testprodukte, Adressen, Gutscheine</li>
@@ -597,12 +660,12 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 217 Tests
+<strong>Gesamt:</strong> 262 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 134</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 81</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 149</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 113</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li><strong>Abdeckung:</strong> 65%</li>
+<li><strong>Abdeckung:</strong> 57%</li>
 </ul>
 <hr>
 
@@ -611,8 +674,8 @@
 <h3 id="smoke-tests">🏠 Smoke Tests</h3>
 
 <strong>Priorität:</strong> P0
-<strong>Tests:</strong> 5/5 implementiert
-<strong>Beschreibung:</strong> Homepage, Produktseiten, Navigation
+<strong>Tests:</strong> 6/6 implementiert
+<strong>Beschreibung:</strong> Homepage, Produktseiten, Navigation, Checkout
 <strong>Dauer:</strong> < 5 Min
 <strong>Ausführung:</strong> Bei jedem Build, vor jedem Deployment
 
@@ -660,6 +723,14 @@
 <tr>
 <td>TC-SMOKE-005</td>
 <td>Suche funktioniert</td>
+<td>P0</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-SMOKE-006</td>
+<td>Checkout erreichbar</td>
 <td>P0</td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
@@ -1376,8 +1447,8 @@
 <h3 id="feature-tests-account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 8/8 implementiert
-<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen
+<strong>Tests:</strong> 8/10 implementiert
+<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie
 <strong>Dauer:</strong> 10-20 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
@@ -1454,6 +1525,22 @@
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-ACCOUNT-009</td>
+<td>Passwort vergessen</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-010</td>
+<td>Bestellhistorie einsehen</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -1521,6 +1608,338 @@
 </ul>
 </details>
 
+<hr>
+
+<h3 id="feature-tests-merklistewishlist">❤️ Feature Tests - Merkliste/Wishlist</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 5/5 implementiert
+<strong>Beschreibung:</strong> Produkte zur Merkliste hinzufügen, entfernen, in den Warenkorb legen
+<strong>Dauer:</strong> 5-10 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+<strong>Voraussetzung:</strong> Eingeloggter Benutzer (nur AT-Channel)
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-WISH-001</td>
+<td>Produkt zur Merkliste hinzufügen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-WISH-002</td>
+<td>Mehrere Produkte zur Merkliste hinzufügen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-WISH-003</td>
+<td>Produkt von der Merkliste entfernen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-WISH-004</td>
+<td>Produkt aus Merkliste in den Warenkorb legen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-WISH-005</td>
+<td>Leere Merkliste zeigt Hinweis</td>
+<td>P2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<details>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
+
+<p>Die 5 Merklisten-Tests prüfen alle wesentlichen Funktionen der Shopware 6 Wishlist: Hinzufügen, Verwalten mehrerer Produkte, Entfernen, Transfer in den Warenkorb und Anzeige der leeren Merkliste. Alle Tests erfordern einen eingeloggten Benutzer und laufen nur im AT-Channel.</p>
+
+<strong>TC-WISH-001: Produkt zur Merkliste hinzufügen</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Produktseite aufrufen → Herz-Button klicken → Merklisten-Seite aufrufen → Produkt prüfen</li>
+<li><strong>Erwartet:</strong> Herz-Button wird aktiv, Produkt ist auf der Merkliste sichtbar</li>
+</ul>
+<strong>TC-WISH-002: Mehrere Produkte zur Merkliste hinzufügen</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → 3 verschiedene Produkte nacheinander zur Merkliste hinzufügen → Merklisten-Seite aufrufen</li>
+<li><strong>Erwartet:</strong> Alle 3 Produkte sind auf der Merkliste sichtbar</li>
+</ul>
+<strong>TC-WISH-003: Produkt von der Merkliste entfernen</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Produkt hinzufügen → Merklisten-Seite → Produkt entfernen (Form-Submit) → Seite neu laden</li>
+<li><strong>Erwartet:</strong> Merkliste ist leer nach dem Entfernen</li>
+<li><strong>Hinweis:</strong> Entfernen erfolgt via JavaScript Form-Submit (<code>.product-wishlist-form</code>), da der Remove-Button <code>height: 0</code> hat</li>
+</ul>
+<strong>TC-WISH-004: Produkt aus Merkliste in den Warenkorb legen</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Produkt zur Merkliste → Merklisten-Seite → "In den Warenkorb" klicken → Warenkorb prüfen</li>
+<li><strong>Erwartet:</strong> Produkt ist im Warenkorb</li>
+</ul>
+<strong>TC-WISH-005: Leere Merkliste zeigt Hinweis</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Merkliste leeren → Merklisten-Seite aufrufen</li>
+<li><strong>Erwartet:</strong> Keine Produkte vorhanden, ggf. Leer-Hinweis angezeigt</li>
+</ul>
+<strong>Automation:</strong>
+<ul>
+<li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_wishlist.py</code></li>
+<li><strong>Page Object:</strong> <code>playwright_tests/pages/wishlist_page.py</code></li>
+<li><strong>Cleanup:</strong> Merkliste wird vor und nach jedem Test geleert</li>
+</ul>
+</details>
+
+<hr>
+
+<h3 id="feature-tests-einkaufsgutscheinwarenkorb">🎁 Feature Tests - Einkaufsgutschein/Warenkorb</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/5 geplant
+<strong>Beschreibung:</strong> Validierung der Warenkorb-Regeln für Einkaufsgutscheine (Trennung von regulären Produkten)
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CART-GIFT-001</td>
+<td>Reguläres Produkt kann nicht zu Gutschein-Warenkorb hinzugefügt werden</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CART-GIFT-002</td>
+<td>Bundle-Produkt kann nicht zu Gutschein-Warenkorb hinzugefügt werden</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CART-GIFT-003</td>
+<td>Einkaufsgutschein kann nicht zu regulärem Warenkorb hinzugefügt werden</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CART-GIFT-004</td>
+<td>Einkaufsgutschein im Warenkorb entfernt alle aktiven Promotions</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CART-GIFT-005</td>
+<td>Promocode wird abgelehnt wenn Einkaufsgutschein im Warenkorb ist</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+<h3 id="feature-tests-produktdetailseite-pdp">🏷️ Feature Tests - Produktdetailseite (PDP)</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/5 geplant
+<strong>Beschreibung:</strong> Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Hotspots
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-PDP-001</td>
+<td>Produktbilder-Galerie und Zoom</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PDP-002</td>
+<td>Varianten-Auswahl</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PDP-003</td>
+<td>Beschreibung und Details sichtbar</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PDP-004</td>
+<td>Nicht-auf-Lager-Verhalten</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PDP-005</td>
+<td>Hotspot-Elemente auf Bildern</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+<h3 id="feature-tests-produktlisting">📋 Feature Tests - Produktlisting</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/4 geplant
+<strong>Beschreibung:</strong> Produktfilter, Sortierung, Pagination, SALE-Kategorie
+<strong>Dauer:</strong> 5-15 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-LISTING-001</td>
+<td>Produktfilter funktionieren</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-LISTING-002</td>
+<td>Sortierung funktioniert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-LISTING-003</td>
+<td>Pagination</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-LISTING-004</td>
+<td>SALE-Kategorie korrekt</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+<h3 id="feature-tests-navigation">🧭 Feature Tests - Navigation</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/5 geplant
+<strong>Beschreibung:</strong> Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel, Währung
+<strong>Dauer:</strong> 5-10 Min
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-NAV-001</td>
+<td>Hauptnavigation erreichbar</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NAV-002</td>
+<td>Mega-Menü Unterkategorien</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NAV-003</td>
+<td>Breadcrumb-Navigation</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NAV-004</td>
+<td>Länderwechsel AT/DE/CH</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NAV-005</td>
+<td>Währungsanpassung bei Länderwechsel</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
 <hr>
 
 <h3 id="feature-tests-versandarten">📦 Feature Tests - Versandarten</h3>
@@ -3948,8 +4367,8 @@
 <h3 id="content-tests">📄 Content Tests</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 1/5+ geplant
-<strong>Beschreibung:</strong> Prüfung der korrekten Kategorie-Zuordnung und Content-Darstellung
+<strong>Tests:</strong> 0/7 geplant
+<strong>Beschreibung:</strong> Prüfung der korrekten Kategorie-Zuordnung, Content-Darstellung, Footer-Links und Trust-Elemente
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> Nach Content-Updates, bei neuen Produkten
 
@@ -3968,6 +4387,78 @@
 <td>TC-CONTENT-001</td>
 <td>Bett Almeno wird in Kategorie Möbel angezeigt</td>
 <td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-002</td>
+<td>Beistelltisch Vassolo ist Post/Spedi-Produkt in Kategorie Möbel/Sofatische</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<h4 id="footer-trust-elemente">Footer & Trust-Elemente</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CONTENT-003</td>
+<td>Footer-Links erreichbar</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-004</td>
+<td>Kontaktinformationen im Footer</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-005</td>
+<td>Trust-Siegel angezeigt</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<h4 id="spezialseiten">Spezialseiten</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CONTENT-006</td>
+<td>Matratzen-Berater erreichbar</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-007</td>
+<td>Online-Katalog aufrufbar</td>
+<td>P3</td>
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
@@ -3995,6 +4486,180 @@
 <li>Produkt ist der richtigen Kategorie zugeordnet</li>
 </ul>
 </ol>
+
+<h3 id="feature-tests-newsletter">📰 Feature Tests - Newsletter</h3>
+
+<strong>Priorität:</strong> P2
+<strong>Tests:</strong> 0/2 geplant
+<strong>Beschreibung:</strong> Newsletter-Anmeldung und Validierung
+<strong>Dauer:</strong> 2-5 Min
+<strong>Ausführung:</strong> Nach Änderungen am Newsletter-Formular
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-NEWSLETTER-001</td>
+<td>Newsletter-Anmeldung mit gültiger E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-002</td>
+<td>Newsletter-Anmeldung mit ungültiger E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<hr>
+
+<h3 id="technische-tests">🔧 Technische Tests</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 0/10 geplant
+<strong>Beschreibung:</strong> Cookie-Banner, Fehlerseiten, Mobile Responsive, Barrierefreiheit
+<strong>Dauer:</strong> 10-20 Min
+<strong>Ausführung:</strong> In CI/CD, vor Deployments
+
+<h4 id="cookie-handling">Cookie-Handling</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-TECH-001</td>
+<td>Cookie-Banner erscheint beim Erstbesuch</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-TECH-002</td>
+<td>Cookie-Zustimmung funktioniert</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-TECH-003</td>
+<td>Cookie-Präferenzen persistent nach Reload</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<h4 id="fehlerseiten">Fehlerseiten</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-TECH-004</td>
+<td>404-Seite bei ungültiger URL</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-TECH-005</td>
+<td>Fehlerseite bei Server-Fehler</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<h4 id="mobile-responsive">Mobile Responsive</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-TECH-006</td>
+<td>Homepage korrekt im mobilen Viewport</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-TECH-007</td>
+<td>Checkout im mobilen Viewport</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-TECH-008</td>
+<td>Mobile Hamburger-Menü funktioniert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<h4 id="barrierefreiheit">Barrierefreiheit</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-TECH-009</td>
+<td>Tastaturnavigation auf Hauptseiten</td>
+<td>P3</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-TECH-010</td>
+<td>Alt-Texte auf Produktbildern vorhanden</td>
+<td>P3</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<hr>
 
 <h3 id="regression-tests">🔄 Regression Tests</h3>
 
@@ -4070,8 +4735,8 @@
 <tr>
 <td>phase_1</td>
 <td>Phase 1 - Critical Path</td>
-<td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>5</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>8</td>
 <td>15%</td>
 </tr>
 <tr>
@@ -4084,8 +4749,8 @@
 <tr>
 <td>phase_3</td>
 <td>Phase 3 - Account</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
-<td>8</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span></td>
+<td>10</td>
 <td>-%</td>
 </tr>
 <tr>
@@ -4103,6 +4768,34 @@
 <td>-%</td>
 </tr>
 <tr>
+<td>phase_5a</td>
+<td>Phase 5a - Merkliste</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>5</td>
+<td>-%</td>
+</tr>
+<tr>
+<td>phase_5b</td>
+<td>Phase 5b - PDP, Listing, Navigation</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>14</td>
+<td>-%</td>
+</tr>
+<tr>
+<td>phase_5c</td>
+<td>Phase 5c - Einkaufsgutschein/Warenkorb</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>5</td>
+<td>-%</td>
+</tr>
+<tr>
+<td>phase_5d</td>
+<td>Phase 5d - Technische Tests</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>10</td>
+<td>-%</td>
+</tr>
+<tr>
 <td>phase_6</td>
 <td>Phase 6 - Promotions</td>
 <td><span class="badge badge-pending">⏳ Offen</span></td>
@@ -4115,6 +4808,13 @@
 <td><span class="badge badge-pending">⏳ Offen</span></td>
 <td>15</td>
 <td>70%</td>
+</tr>
+<tr>
+<td>phase_7a</td>
+<td>Phase 7a - Content & Newsletter</td>
+<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>9</td>
+<td>-%</td>
 </tr>
 <tr>
 <td>phase_8</td>
@@ -4809,7 +5509,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 11:21 Uhr</p>
+            <p>Generiert am 06.02.2026 um 12:04 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

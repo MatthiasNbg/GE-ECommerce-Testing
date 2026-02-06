@@ -1,0 +1,122 @@
+{
+  "test_id": "TC-PDP-003",
+  "name": "Beschreibung und Details sichtbar",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "PDP",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt mit Beschreibung und Details ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite aufrufen",
+      "expected": "Produktseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Produktbeschreibung pruefen",
+      "expected": "Produktbeschreibung ist sichtbar und enthaelt Text",
+      "selector_hint": ".product-detail-description, .product-detail-tabs",
+      "inputs": [
+        {
+          "action": "wait",
+          "selector": ".product-detail-description, .product-detail-tabs"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".product-detail-description, .product-detail-tabs",
+          "message": "Produktbeschreibung muss sichtbar sein"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Material- und Pflegehinweise pruefen",
+      "expected": "Material- oder Pflegeinformationen sind vorhanden"
+    },
+    {
+      "step": 5,
+      "action": "Produktname in h1 pruefen",
+      "expected": "Produktname ist als Ueberschrift sichtbar",
+      "selector_hint": "h1.product-detail-name, .product-detail-name",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": "h1.product-detail-name, .product-detail-name",
+          "message": "Produktname muss als Ueberschrift sichtbar sein"
+        }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "product",
+      "name": "duftkissen_lavendel",
+      "path": "p/duftkissen-lavendel/ge-p-49415",
+      "product_name": "Duftkissen Lavendel"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_pdp.py",
+    "function_name": "test_product_description_visible",
+    "tags": [
+      "pdp",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

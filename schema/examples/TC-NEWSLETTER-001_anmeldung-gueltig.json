@@ -1,0 +1,87 @@
+{
+  "test_id": "TC-NEWSLETTER-001",
+  "name": "Newsletter-Anmeldung mit gueltiger E-Mail",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Feature Newsletter",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Newsletter-Formular ist im Footer sichtbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Startseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Newsletter-Formular im Footer finden",
+      "expected": "Newsletter-Formular ist sichtbar"
+    },
+    {
+      "step": 3,
+      "action": "Gueltige E-Mail eingeben",
+      "expected": "E-Mail wird ins Feld eingetragen",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[type='email']",
+          "value": "test-newsletter@example.com"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Formular absenden",
+      "expected": "Formular wird abgeschickt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button[type='submit']"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Erfolgsmeldung pruefen",
+      "expected": "Erfolgsmeldung wird angezeigt"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_newsletter.py",
+    "function_name": "test_newsletter_signup_valid_email",
+    "tags": [
+      "newsletter",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

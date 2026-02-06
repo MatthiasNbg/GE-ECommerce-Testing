@@ -1,0 +1,123 @@
+{
+  "test_id": "TC-NAV-004",
+  "name": "Laenderwechsel AT/DE/CH",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Navigation",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Alle drei Laendershops (AT, DE, CH) sind erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Homepage laedt ohne Fehler",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Laender-/Sprachauswahl finden",
+      "expected": "Laenderwechsel-Element ist sichtbar",
+      "selector_hint": ".language-selector, .country-selector, .js-language-select",
+      "inputs": [
+        {
+          "action": "wait",
+          "selector": ".language-selector, .country-selector, .js-language-select"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Zu DE-Shop wechseln",
+      "expected": "DE-Shop wird geladen, URL enthaelt DE-Domain oder DE-Pfad",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".language-selector, .country-selector"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "DE-Shop URL pruefen",
+      "expected": "URL enthaelt grueneerde.com (DE) oder entsprechenden Pfad"
+    },
+    {
+      "step": 6,
+      "action": "Zu CH-Shop wechseln",
+      "expected": "CH-Shop wird geladen, URL enthaelt CH-Domain oder CH-Pfad",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".language-selector, .country-selector"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "CH-Shop URL pruefen",
+      "expected": "URL enthaelt grueneerde.ch oder entsprechenden Pfad"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_navigation.py",
+    "function_name": "test_country_switch",
+    "tags": [
+      "navigation",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

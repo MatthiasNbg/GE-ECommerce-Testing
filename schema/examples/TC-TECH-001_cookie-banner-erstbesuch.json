@@ -1,0 +1,65 @@
+{
+  "test_id": "TC-TECH-001",
+  "name": "Cookie-Banner erscheint beim Erstbesuch",
+  "category": "e2e",
+  "priority": "P0",
+  "functional_area": "Cookie/Consent",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Frischer Browser-Kontext ohne Cookies"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Neuen Browser-Kontext ohne Cookies oeffnen",
+      "expected": "Frischer Browser-Kontext ist bereit"
+    },
+    {
+      "step": 2,
+      "action": "Startseite aufrufen",
+      "expected": "Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Usercentrics Cookie-Banner pruefen",
+      "expected": "Cookie-Banner (#usercentrics-cmp-ui) ist sichtbar",
+      "selector_hint": "#usercentrics-cmp-ui"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_cookie_banner_appears_on_first_visit",
+    "tags": [
+      "technical",
+      "consent"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

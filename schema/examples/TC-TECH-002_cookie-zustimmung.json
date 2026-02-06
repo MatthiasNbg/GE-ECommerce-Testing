@@ -1,0 +1,82 @@
+{
+  "test_id": "TC-TECH-002",
+  "name": "Cookie-Zustimmung funktioniert",
+  "category": "e2e",
+  "priority": "P0",
+  "functional_area": "Cookie/Consent",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Frischer Browser-Kontext ohne Cookies"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Neuen Browser-Kontext ohne Cookies oeffnen",
+      "expected": "Frischer Browser-Kontext ist bereit"
+    },
+    {
+      "step": 2,
+      "action": "Startseite aufrufen",
+      "expected": "Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Pruefen ob Cookie-Banner sichtbar ist",
+      "expected": "Cookie-Banner (#usercentrics-cmp-ui) ist sichtbar",
+      "selector_hint": "#usercentrics-cmp-ui"
+    },
+    {
+      "step": 4,
+      "action": "Alle akzeptieren Button klicken (Shadow DOM)",
+      "expected": "Button wird erfolgreich geklickt",
+      "selector_hint": "button[data-testid='uc-accept-all-button']",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button[data-testid='uc-accept-all-button']"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Pruefen ob Cookie-Banner verschwindet",
+      "expected": "Cookie-Banner ist nicht mehr sichtbar"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_cookie_consent_accept_works",
+    "tags": [
+      "technical",
+      "consent"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

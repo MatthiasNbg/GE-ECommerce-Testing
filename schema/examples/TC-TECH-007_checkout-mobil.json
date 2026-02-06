@@ -1,0 +1,91 @@
+{
+  "test_id": "TC-TECH-007",
+  "name": "Checkout im mobilen Viewport",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Responsive/Mobile",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Viewport auf 375x812 (iPhone) gesetzt",
+    "Mindestens ein Produkt verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Viewport auf 375x812 setzen und Produktseite aufrufen",
+      "expected": "Produktseite laedt korrekt im mobilen Viewport",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produkt zum Warenkorb hinzufuegen",
+      "expected": "Produkt wird zum Warenkorb hinzugefuegt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Warenkorb-Seite aufrufen",
+      "expected": "Warenkorbseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen ob Warenkorbseite im mobilen Viewport nutzbar ist",
+      "expected": "Warenkorb-Inhalt ist sichtbar und Seite ist scrollbar"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen ob Checkout-Button sichtbar ist",
+      "expected": "Zur Kasse Button ist sichtbar und klickbar",
+      "selector_hint": ".checkout-aside-action .btn-primary, a[href*='checkout/confirm']"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_checkout_mobile_viewport",
+    "tags": [
+      "technical",
+      "responsive"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 45,
+    "retry_count": 1,
+    "worker_requirements": {
+      "viewport": "mobile"
+    }
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

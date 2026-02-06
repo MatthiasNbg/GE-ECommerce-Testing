@@ -1,0 +1,69 @@
+{
+  "test_id": "TC-LISTING-004",
+  "name": "SALE-Kategorie korrekt",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Feature Listing",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "SALE-Kategorie existiert mit reduzierten Produkten"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "SALE-Seite aufrufen",
+      "expected": "SALE-Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/sale/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produkte angezeigt pruefen",
+      "expected": "Mindestens ein Produkt wird angezeigt"
+    },
+    {
+      "step": 3,
+      "action": "Streichpreis pruefen",
+      "expected": "Originalpreis und reduzierter Preis sind sichtbar"
+    },
+    {
+      "step": 4,
+      "action": "Reduzierte Preise pruefen",
+      "expected": "Reduzierter Preis ist niedriger als Originalpreis"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_listing.py",
+    "function_name": "test_sale_category",
+    "tags": [
+      "listing",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

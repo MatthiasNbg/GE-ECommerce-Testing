@@ -1,0 +1,58 @@
+{
+  "test_id": "TC-TECH-005",
+  "name": "Fehlerseite bei Server-Fehler",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Fehlerseiten",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Nicht-existenten API-Endpunkt aufrufen",
+      "expected": "Seite antwortet (kein unbehandelter Absturz)",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/api/v999/nonexistent-endpoint"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Pruefen ob benutzerfreundliche Fehlerseite angezeigt wird",
+      "expected": "Keine leere Seite, kein rohes JSON, kein Stack-Trace sichtbar"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_technical.py",
+    "function_name": "test_error_page_handling",
+    "tags": [
+      "technical",
+      "error"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

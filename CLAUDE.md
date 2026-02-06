@@ -107,4 +107,4 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 217 Dateien, 0 fehlerhaft, Exit-Code 0.
+Erwartetes Ergebnis: 225 Dateien, 0 fehlerhaft, Exit-Code 0.

@@ -1,0 +1,90 @@
+{
+  "test_id": "TC-ACCOUNT-010",
+  "name": "Bestellhistorie einsehen",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Account",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Bestehender Kundenaccount",
+    "Mindestens eine Bestellung vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login mit Test-Account",
+      "expected": "Login erfolgreich",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value": "test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value": "TestPasswort123!"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Bestellhistorie aufrufen",
+      "expected": "Bestelluebersicht wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/order"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Bestellliste pruefen",
+      "expected": "Bestellliste ist sichtbar mit mindestens einer Bestellung"
+    },
+    {
+      "step": 4,
+      "action": "Bestelldetails pruefen",
+      "expected": "Bestelldetails sind zugaenglich"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account_extended.py",
+    "function_name": "test_order_history",
+    "tags": [
+      "account",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
