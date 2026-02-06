@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **272 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **275 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -32,14 +32,14 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:150:263:57 -->
+<!-- PROGRESS_BAR:150:266:56 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
 | 🏠 **Smoke Tests** | 6 | ✅ 6/6 | 🔴 P0 | Homepage, Produktseiten, Navigation, Checkout |
 | 🛒 **Critical Path Tests** | 8 | ✅ 8/8 | 🔴 P0 | Gast-Checkout, Registrierter Checkout, Zahlungsarten |
-| 🔄 **E2E Tests - Checkout** | 1 | ○ 0/1 | 🔴 P0 | Kompletter Checkout mit allen Zahlungs-/Versandarten (24 Varianten) |
-| 🏬 **E2E Tests - Click & Collect** | 1 | ○ 0/1 | 🟠 P1 | Bestellung mit Abholung im Shop (4 Varianten) |
+| 🔄 **E2E Tests - Checkout** | 3 | ○ 0/3 | 🔴 P0 | Kompletter Checkout (24 Var.), Gast-Checkout (8 Var.), B2B (3 Var.) |
+| 🏬 **E2E Tests - Click & Collect** | 2 | ○ 0/2 | 🟠 P1 | Abholung im Shop (4 Var.), Spedition blockiert (2 Var.) |
 | 🛍️ **Feature Tests - Warenkorb** | 9 | ✅ 9/9 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
 | 👤 **Feature Tests - Account** | 12 | ⚠️ 10/12 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
@@ -67,8 +67,8 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 2. [Test-Kategorien](#test-kategorien) - Was wird getestet?
 3. [Smoke Tests](#smoke-tests) - (6 Tests)
 4. [Critical Path Tests](#critical-path-tests) - (8 Tests)
-5. [E2E Tests - Checkout](#e2e-tests-kompletter-checkout) - (1 Test, 24 Varianten)
-6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (1 Test, 4 Varianten)
+5. [E2E Tests - Checkout](#e2e-tests-kompletter-checkout) - (3 Tests, 35 Varianten)
+6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (2 Tests, 6 Varianten)
 7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (9 Tests)
 8. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
 9. [Feature Tests - Account](#feature-tests-account) - (11 Tests)
@@ -94,9 +94,9 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 267 Tests
-- ✅ Implementiert: 152
-- ❌ Fehlend: 112
+**Gesamt:** 270 Tests
+- ✅ Implementiert: 153
+- ❌ Fehlend: 111
 - ⚠️ Teilweise: 0
 - **Abdeckung:** 57%
 
@@ -146,14 +146,16 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 ### 🔄 E2E Tests - Kompletter Checkout
 
 **Priorität:** P0
-**Tests:** 1 Testfall, 24 Varianten
-**Beschreibung:** Vollständiger Checkout mit Neuregistrierung/Login, allen Zahlungs- und Versandarten
-**Dauer:** 30-60 Min (alle Varianten)
+**Tests:** 3 Testfälle, 35 Varianten
+**Beschreibung:** Vollständiger Checkout mit Neuregistrierung/Login, Gast-Checkout, B2B-Bestellung
+**Dauer:** 45-90 Min (alle Varianten)
 **Ausführung:** Vor jedem Release auf Staging
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
 | TC-E2E-001 | E2E Checkout komplett (Neuregistrierung + Login, alle Zahlungs-/Versandarten) | P0 | ○ | AT, DE, CH | 24 |
+| TC-E2E-002 | Gast-Checkout ohne Account-Erstellung | P0 | ○ | AT, DE, CH | 8 |
+| TC-E2E-003 | B2B-Bestellung als Geschäftskunde (Gast) | P1 | ○ | AT, DE, CH | 3 |
 
 <details>
 <summary><strong>Varianten-Matrix (24 Ausprägungen)</strong></summary>
@@ -214,19 +216,79 @@ Der Testfall wird mit folgenden Parametern kombiniert:
 
 </details>
 
+<details>
+<summary><strong>TC-E2E-002: Gast-Checkout (8 Ausprägungen)</strong></summary>
+
+Gast-Checkout ohne Account-Erstellung. Nutzt den Shopware-Gast-Checkout-Flow.
+
+| # | Land | Zahlungsart | Versandart |
+|---|------|------------|------------|
+| G-01 | AT | Vorkasse | Post |
+| G-02 | AT | Rechnung | Spedition |
+| G-03 | AT | Kreditkarte | Gemischt |
+| G-04 | DE | Vorkasse | Spedition |
+| G-05 | DE | Rechnung | Post |
+| G-06 | DE | Kreditkarte | Gemischt |
+| G-07 | CH | Vorkasse | Post |
+| G-08 | CH | Kreditkarte | Spedition |
+
+**Testflow pro Variante:**
+1. Produkt(e) zum Warenkorb (Post/Spedition/Beide)
+2. Warenkorb → "Zur Kasse"
+3. "Als Gast bestellen" wählen
+4. Adressdaten ausfüllen
+5. Datenschutz akzeptieren → "Weiter"
+6. Zahlungsart wählen
+7. AGB akzeptieren → "Zahlungspflichtig bestellen"
+8. Bestellbestätigung + Bestellnummer prüfen
+
+**Automation:**
+- **Playwright-Testdatei:** `playwright_tests/tests/test_e2e_checkout.py`
+- **Funktion:** `test_e2e_guest_checkout`
+
+</details>
+
+<details>
+<summary><strong>TC-E2E-003: B2B-Bestellung (3 Ausprägungen)</strong></summary>
+
+Geschäftskunde mit Firma + USt-ID als Gast-Checkout.
+
+| # | Land | Zahlungsart | Firma | USt-ID |
+|---|------|------------|-------|--------|
+| B2B-01 | AT | Vorkasse | Testfirma GmbH | ATU12345678 |
+| B2B-02 | DE | Rechnung | Testfirma GmbH | DE123456789 |
+| B2B-03 | CH | Vorkasse | Testfirma AG | CHE-123.456.789 |
+
+**Testflow pro Variante:**
+1. Post-Produkt zum Warenkorb
+2. "Zur Kasse" → "Als Gast bestellen"
+3. Kontotyp "Gewerblich" wählen
+4. Firma + USt-ID ausfüllen
+5. Persönliche Daten + Adresse
+6. Datenschutz → "Weiter"
+7. Zahlungsart + AGB → Bestellen
+8. Bestellbestätigung prüfen
+
+**Automation:**
+- **Playwright-Testdatei:** `playwright_tests/tests/test_e2e_checkout.py`
+- **Funktion:** `test_e2e_b2b_checkout`
+
+</details>
+
 ---
 
 ### 🏬 E2E Tests - Click & Collect
 
 **Priorität:** P1
-**Tests:** 1 Testfall, 4 Varianten
-**Beschreibung:** Bestellung mit Abholung im Shop (Click & Collect)
-**Dauer:** 10-15 Min (alle Varianten)
+**Tests:** 2 Testfälle, 6 Varianten
+**Beschreibung:** Bestellung mit Abholung im Shop (Click & Collect), Negativtest für Speditionsartikel
+**Dauer:** 15-25 Min (alle Varianten)
 **Ausführung:** Vor jedem Release auf Staging
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
 | TC-E2E-CC-001 | Click & Collect - Abholung im Shop | P1 | ○ | AT, DE | 4 |
+| TC-E2E-CC-002 | Click & Collect Negativtest - Speditionsartikel blockiert | P1 | ○ | AT, DE | 2 |
 
 <details>
 <summary><strong>Varianten-Matrix (4 Ausprägungen)</strong></summary>
@@ -253,6 +315,31 @@ Der Testfall wird mit folgenden Parametern kombiniert:
 **Automation:**
 - **Playwright-Testdatei:** `playwright_tests/tests/test_e2e_click_collect.py`
 - **Page Objects:** `checkout_page.py` (erweitert um Click & Collect Methoden)
+
+</details>
+
+<details>
+<summary><strong>TC-E2E-CC-002: Negativtest - Speditionsartikel blockiert (2 Ausprägungen)</strong></summary>
+
+Prüft, dass Speditionsartikel NICHT mit Click & Collect bestellt werden können.
+
+| # | Land | PLZ | Produkt |
+|---|------|-----|---------|
+| CC-NEG-1 | AT | 4020 (Linz) | Polsterbett (Spedition) |
+| CC-NEG-2 | DE | 80331 (München) | Polsterbett (Spedition) |
+
+**Testflow:**
+1. Neuregistrierung
+2. Speditions-Produkt (Polsterbett) in den Warenkorb
+3. Zur Kasse navigieren
+4. Prüfen: Versandart "Lieferung an den Store" ist NICHT verfügbar
+5. Falls doch auswählbar: Fehlermeldung erwarten
+
+**Hinweis:** Falls C&C für Speditionsartikel nicht blockiert ist, wird der Test übersprungen (pytest.skip).
+
+**Automation:**
+- **Playwright-Testdatei:** `playwright_tests/tests/test_e2e_click_collect.py`
+- **Funktion:** `test_click_collect_spedition_blocked`
 
 </details>
 
@@ -1358,7 +1445,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
-| TC-PROMO-CAT-001 | Promo auf Produktkategorie via advertising_material_id | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-CAT-001 | Promo auf Produktkategorie via advertising_material_id | P1 | ✅ | AT, DE, CH | 1 |
 | TC-PROMO-AUTO-001 | Automatisierte Promo auf Werbemittel ID 70 | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
@@ -1380,6 +1467,8 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Produkte ohne passende ID bleiben unrabattiert
   - Prozentuale oder absolute Berechnung ist korrekt
   - Funktioniert in allen DACH-Verkaufskanälen
+- **Automation:** `test_promo_category_clothing_applied` in `test_promotions.py`
+- **Hinweis:** Promo-Code und Kleidungs-Produkt sind Platzhalter (UPDATETHISCODE / UPDATETHIS) — müssen mit echten Staging-Daten befüllt werden
 
 **TC-PROMO-AUTO-001: Automatisierte Promo auf Werbemittel ID 70**
 - **Beschreibung:** Vorlage für Promohuelse (automatisierte Promo) - prüft automatische Rabattanwendung auf Produkte mit Werbemittel ID 70

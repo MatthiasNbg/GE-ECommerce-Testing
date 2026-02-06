@@ -1,0 +1,216 @@
+{
+  "test_id": "TC-E2E-003",
+  "name": "B2B-Bestellung als Geschaeftskunde (Gast)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "E2E Tests - Checkout",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Post-Produkt ist verfuegbar",
+    "Gast-Checkout ist aktiviert",
+    "Kontotyp 'Gewerblich' ist im Checkout verfuegbar",
+    "Felder fuer Firma und USt-ID werden bei 'Gewerblich' angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Post-Produkt zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Warenkorb oeffnen und 'Zur Kasse' klicken",
+      "expected": "Checkout-Register-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        },
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "'Als Gast bestellen' waehlen, Kontotyp 'Gewerblich' auswaehlen",
+      "expected": "Felder fuer Firma und USt-ID werden angezeigt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Als Gast bestellen')"
+        },
+        {
+          "action": "select",
+          "selector": "#-accountType",
+          "value": "Gewerblich"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Firma und USt-ID ausfuellen",
+      "expected": "Geschaeftskunden-Daten werden akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#billingAddresscompany",
+          "value": "Testfirma GmbH"
+        },
+        {
+          "action": "fill",
+          "selector": "#vatIds",
+          "value": "ATU12345678"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Persoenliche Daten und Adresse ausfuellen",
+      "expected": "Formulardaten werden akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalFirstName",
+          "value": "B2B"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalLastName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "b2b-test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-AddressStreet",
+          "value": "Teststrasse 123"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Datenschutz akzeptieren und 'Weiter' klicken",
+      "expected": "Navigation zur Checkout-Confirm-Seite",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Weiter')"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Zahlungsart auswaehlen und AGB akzeptieren",
+      "expected": "Zahlungsart aktiv, AGB-Checkbox aktiviert",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input[name='paymentMethodId']"
+        },
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Bestellung absenden",
+      "expected": "Bestellung wird erfolgreich verarbeitet",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "action": "Bestellbestaetigung pruefen",
+      "expected": "Bestellbestaetigungsseite wird angezeigt mit Bestellnummer"
+    }
+  ],
+  "postconditions": [
+    "Bestellnummer wird angezeigt",
+    "Bestellbestaetigung enthaelt korrekte Daten",
+    "Bestellung wurde als Geschaeftskunde aufgegeben"
+  ],
+  "test_data": [
+    {
+      "type": "variants",
+      "name": "matrix",
+      "description": "3 Varianten: B2B je 1x AT, DE, CH",
+      "total_variants": 3,
+      "parameters": {
+        "variants": [
+          {"id": "B2B-01", "country": "AT", "payment": "prepayment", "company": "Testfirma GmbH", "vat_id": "ATU12345678"},
+          {"id": "B2B-02", "country": "DE", "payment": "invoice", "company": "Testfirma GmbH", "vat_id": "DE123456789"},
+          {"id": "B2B-03", "country": "CH", "payment": "prepayment", "company": "Testfirma AG", "vat_id": "CHE-123.456.789"}
+        ]
+      }
+    },
+    {
+      "type": "product",
+      "name": "post_product",
+      "product_id": "ge-p-862990",
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_e2e_checkout.py",
+    "function_name": "test_e2e_b2b_checkout",
+    "tags": [
+      "e2e",
+      "checkout",
+      "b2b"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 180,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

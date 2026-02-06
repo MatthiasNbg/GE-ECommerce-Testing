@@ -1,0 +1,204 @@
+{
+  "test_id": "TC-E2E-002",
+  "name": "Gast-Checkout ohne Account-Erstellung",
+  "category": "e2e",
+  "priority": "P0",
+  "functional_area": "E2E Tests - Checkout",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukte (Post + Spedition) sind verfuegbar",
+    "Gast-Checkout ist aktiviert",
+    "GlobalPayments Kreditkarten-Gateway ist auf Staging konfiguriert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt(e) zum Warenkorb hinzufuegen (Post und/oder Spedition)",
+      "expected": "Warenkorb enthaelt die korrekten Produkte",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Warenkorb oeffnen und 'Zur Kasse' klicken",
+      "expected": "Checkout-Register-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        },
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "'Als Gast bestellen' waehlen und Adressdaten ausfuellen",
+      "expected": "Gastformular wird angezeigt, Daten werden akzeptiert",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Als Gast bestellen')"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalFirstName",
+          "value": "Gast"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-personalLastName",
+          "value": "Test"
+        },
+        {
+          "action": "fill",
+          "selector": "#personalMail",
+          "value": "gast-test@example.com"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddress-AddressStreet",
+          "value": "Teststrasse 123"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressZipcode",
+          "value": "4020"
+        },
+        {
+          "action": "fill",
+          "selector": "#billingAddressAddressCity",
+          "value": "Linz"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Datenschutz akzeptieren und 'Weiter' klicken",
+      "expected": "Navigation zur Checkout-Confirm-Seite",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedDataProtection"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Weiter')"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Zahlungsart auswaehlen (Vorkasse / Rechnung / Kreditkarte)",
+      "expected": "Gewaehlte Zahlungsart ist aktiv",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "input[name='paymentMethodId']"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "AGB akzeptieren",
+      "expected": "AGB-Checkbox ist aktiviert",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#tos"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Bestellung absenden",
+      "expected": "Bestellung wird erfolgreich verarbeitet",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Zahlungspflichtig bestellen')"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Bestellbestaetigung pruefen",
+      "expected": "Bestellbestaetigungsseite wird angezeigt mit Bestellnummer"
+    }
+  ],
+  "postconditions": [
+    "Bestellnummer wird angezeigt",
+    "Bestellbestaetigung enthaelt korrekte Daten",
+    "Kein Account wurde angelegt (Gast-Bestellung)"
+  ],
+  "test_data": [
+    {
+      "type": "variants",
+      "name": "matrix",
+      "description": "8 Varianten: Land x Zahlungsart x Versandart (Gast)",
+      "total_variants": 8,
+      "parameters": {
+        "variants": [
+          {"id": "G-01", "country": "AT", "payment": "prepayment", "shipping": "post"},
+          {"id": "G-02", "country": "AT", "payment": "invoice", "shipping": "spedition"},
+          {"id": "G-03", "country": "AT", "payment": "credit_card", "shipping": "mixed"},
+          {"id": "G-04", "country": "DE", "payment": "prepayment", "shipping": "spedition"},
+          {"id": "G-05", "country": "DE", "payment": "invoice", "shipping": "post"},
+          {"id": "G-06", "country": "DE", "payment": "credit_card", "shipping": "mixed"},
+          {"id": "G-07", "country": "CH", "payment": "prepayment", "shipping": "post"},
+          {"id": "G-08", "country": "CH", "payment": "credit_card", "shipping": "spedition"}
+        ]
+      }
+    },
+    {
+      "type": "product",
+      "name": "post_product",
+      "product_id": "ge-p-862990",
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+    },
+    {
+      "type": "product",
+      "name": "spedition_product",
+      "product_id": "ge-p-693278",
+      "description": "Polsterbett Almeno (Speditionsversand)"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_e2e_checkout.py",
+    "function_name": "test_e2e_guest_checkout",
+    "tags": [
+      "e2e",
+      "checkout",
+      "guest"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 180,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

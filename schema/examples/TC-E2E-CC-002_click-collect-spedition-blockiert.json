@@ -1,0 +1,109 @@
+{
+  "test_id": "TC-E2E-CC-002",
+  "name": "Click & Collect Negativtest - Speditionsartikel blockiert",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "E2E Tests - Click & Collect",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Click & Collect ist fuer AT und DE aktiviert",
+    "Speditions-Produkt (Polsterbett) ist verfuegbar",
+    "Registrierung ist aktiviert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Neuregistrierung oder Login",
+      "expected": "Benutzer ist eingeloggt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Speditions-Produkt (Polsterbett) zum Warenkorb hinzufuegen",
+      "expected": "Speditions-Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/polsterbett-almeno/ge-p-693278"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Confirm-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/confirm"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen ob Versandart 'Lieferung an den Store' verfuegbar ist",
+      "expected": "Versandart 'Lieferung an den Store' ist NICHT verfuegbar oder fuehrt zu Fehlermeldung"
+    }
+  ],
+  "postconditions": [
+    "Click & Collect ist fuer Speditionsartikel blockiert",
+    "Alternativ: Fehlermeldung wird angezeigt bei Auswahl"
+  ],
+  "test_data": [
+    {
+      "type": "variants",
+      "name": "matrix",
+      "description": "2 Varianten: Speditionsartikel in AT und DE",
+      "total_variants": 2,
+      "parameters": {
+        "variants": [
+          {"id": "CC-NEG-1", "country": "AT", "plz": "4020", "city": "Linz", "product": "spedition"},
+          {"id": "CC-NEG-2", "country": "DE", "plz": "80331", "city": "Muenchen", "product": "spedition"}
+        ]
+      }
+    },
+    {
+      "type": "product",
+      "name": "spedition_product",
+      "product_id": "ge-p-693278",
+      "description": "Polsterbett Almeno (Speditionsversand)"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_e2e_click_collect.py",
+    "function_name": "test_click_collect_spedition_blocked",
+    "tags": [
+      "e2e",
+      "click_collect",
+      "negative"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

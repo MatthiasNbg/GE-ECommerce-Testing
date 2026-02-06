@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>272 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>275 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -471,7 +471,7 @@
 
 <h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
 
-<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>150</strong> von <strong>263</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 57%;"></div></div><div class="progress-percent">57%</div></div>
+<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>150</strong> von <strong>266</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 56%;"></div></div><div class="progress-percent">56%</div></div>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -497,17 +497,17 @@
 </tr>
 <tr>
 <td>🔄 **E2E Tests - Checkout**</td>
-<td>1</td>
-<td><span class="badge badge-defined">○ Definiert</span> 0/1</td>
+<td>3</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/3</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
-<td>Kompletter Checkout mit allen Zahlungs-/Versandarten (24 Varianten)</td>
+<td>Kompletter Checkout (24 Var.), Gast-Checkout (8 Var.), B2B (3 Var.)</td>
 </tr>
 <tr>
 <td>🏬 **E2E Tests - Click & Collect**</td>
-<td>1</td>
-<td><span class="badge badge-defined">○ Definiert</span> 0/1</td>
+<td>2</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/2</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
-<td>Bestellung mit Abholung im Shop (4 Varianten)</td>
+<td>Abholung im Shop (4 Var.), Spedition blockiert (2 Var.)</td>
 </tr>
 <tr>
 <td>🛍️ **Feature Tests - Warenkorb**</td>
@@ -633,8 +633,8 @@
 <li><a href="#test-kategorien">Test-Kategorien</a> - Was wird getestet?</li>
 <li><a href="#smoke-tests">Smoke Tests</a> - (6 Tests)</li>
 <li><a href="#critical-path-tests">Critical Path Tests</a> - (8 Tests)</li>
-<li><a href="#e2e-tests-kompletter-checkout">E2E Tests - Checkout</a> - (1 Test, 24 Varianten)</li>
-<li><a href="#e2e-tests-click--collect">E2E Tests - Click & Collect</a> - (1 Test, 4 Varianten)</li>
+<li><a href="#e2e-tests-kompletter-checkout">E2E Tests - Checkout</a> - (3 Tests, 35 Varianten)</li>
+<li><a href="#e2e-tests-click--collect">E2E Tests - Click & Collect</a> - (2 Tests, 6 Varianten)</li>
 <li><a href="#feature-tests-warenkorb">Feature Tests - Warenkorb</a> - (9 Tests)</li>
 <li><a href="#feature-tests-suche">Feature Tests - Suche</a> - (9 Tests)</li>
 <li><a href="#feature-tests-account">Feature Tests - Account</a> - (11 Tests)</li>
@@ -660,10 +660,10 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 267 Tests
+<strong>Gesamt:</strong> 270 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 152</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 112</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 153</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 111</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
 <li><strong>Abdeckung:</strong> 57%</li>
 </ul>
@@ -825,9 +825,9 @@
 <h3 id="e2e-tests-kompletter-checkout">🔄 E2E Tests - Kompletter Checkout</h3>
 
 <strong>Priorität:</strong> P0
-<strong>Tests:</strong> 1 Testfall, 24 Varianten
-<strong>Beschreibung:</strong> Vollständiger Checkout mit Neuregistrierung/Login, allen Zahlungs- und Versandarten
-<strong>Dauer:</strong> 30-60 Min (alle Varianten)
+<strong>Tests:</strong> 3 Testfälle, 35 Varianten
+<strong>Beschreibung:</strong> Vollständiger Checkout mit Neuregistrierung/Login, Gast-Checkout, B2B-Bestellung
+<strong>Dauer:</strong> 45-90 Min (alle Varianten)
 <strong>Ausführung:</strong> Vor jedem Release auf Staging
 
 <div class="table-wrapper"><table class="test-table">
@@ -846,6 +846,22 @@
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
 <td>24</td>
+</tr>
+<tr>
+<td>TC-E2E-002</td>
+<td>Gast-Checkout ohne Account-Erstellung</td>
+<td>P0</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>8</td>
+</tr>
+<tr>
+<td>TC-E2E-003</td>
+<td>B2B-Bestellung als Geschäftskunde (Gast)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>3</td>
 </tr>
 </tbody></table></div>
 <details>
@@ -1060,14 +1076,146 @@
 </ul>
 </details>
 
+<details>
+<summary><strong>TC-E2E-002: Gast-Checkout (8 Ausprägungen)</strong></summary>
+
+<p>Gast-Checkout ohne Account-Erstellung. Nutzt den Shopware-Gast-Checkout-Flow.</p>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>#</th>
+<th>Land</th>
+<th>Zahlungsart</th>
+<th>Versandart</th>
+</tr></thead><tbody>
+<tr>
+<td>G-01</td>
+<td>AT</td>
+<td>Vorkasse</td>
+<td>Post</td>
+</tr>
+<tr>
+<td>G-02</td>
+<td>AT</td>
+<td>Rechnung</td>
+<td>Spedition</td>
+</tr>
+<tr>
+<td>G-03</td>
+<td>AT</td>
+<td>Kreditkarte</td>
+<td>Gemischt</td>
+</tr>
+<tr>
+<td>G-04</td>
+<td>DE</td>
+<td>Vorkasse</td>
+<td>Spedition</td>
+</tr>
+<tr>
+<td>G-05</td>
+<td>DE</td>
+<td>Rechnung</td>
+<td>Post</td>
+</tr>
+<tr>
+<td>G-06</td>
+<td>DE</td>
+<td>Kreditkarte</td>
+<td>Gemischt</td>
+</tr>
+<tr>
+<td>G-07</td>
+<td>CH</td>
+<td>Vorkasse</td>
+<td>Post</td>
+</tr>
+<tr>
+<td>G-08</td>
+<td>CH</td>
+<td>Kreditkarte</td>
+<td>Spedition</td>
+</tr>
+</tbody></table></div>
+<strong>Testflow pro Variante:</strong>
+<ol>
+<li>Produkt(e) zum Warenkorb (Post/Spedition/Beide)</li>
+<li>Warenkorb → "Zur Kasse"</li>
+<li>"Als Gast bestellen" wählen</li>
+<li>Adressdaten ausfüllen</li>
+<li>Datenschutz akzeptieren → "Weiter"</li>
+<li>Zahlungsart wählen</li>
+<li>AGB akzeptieren → "Zahlungspflichtig bestellen"</li>
+<li>Bestellbestätigung + Bestellnummer prüfen</li>
+</ol>
+<strong>Automation:</strong>
+<ul>
+<li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_e2e_checkout.py</code></li>
+<li><strong>Funktion:</strong> <code>test_e2e_guest_checkout</code></li>
+</ul>
+</details>
+
+<details>
+<summary><strong>TC-E2E-003: B2B-Bestellung (3 Ausprägungen)</strong></summary>
+
+<p>Geschäftskunde mit Firma + USt-ID als Gast-Checkout.</p>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>#</th>
+<th>Land</th>
+<th>Zahlungsart</th>
+<th>Firma</th>
+<th>USt-ID</th>
+</tr></thead><tbody>
+<tr>
+<td>B2B-01</td>
+<td>AT</td>
+<td>Vorkasse</td>
+<td>Testfirma GmbH</td>
+<td>ATU12345678</td>
+</tr>
+<tr>
+<td>B2B-02</td>
+<td>DE</td>
+<td>Rechnung</td>
+<td>Testfirma GmbH</td>
+<td>DE123456789</td>
+</tr>
+<tr>
+<td>B2B-03</td>
+<td>CH</td>
+<td>Vorkasse</td>
+<td>Testfirma AG</td>
+<td>CHE-123.456.789</td>
+</tr>
+</tbody></table></div>
+<strong>Testflow pro Variante:</strong>
+<ol>
+<li>Post-Produkt zum Warenkorb</li>
+<li>"Zur Kasse" → "Als Gast bestellen"</li>
+<li>Kontotyp "Gewerblich" wählen</li>
+<li>Firma + USt-ID ausfüllen</li>
+<li>Persönliche Daten + Adresse</li>
+<li>Datenschutz → "Weiter"</li>
+<li>Zahlungsart + AGB → Bestellen</li>
+<li>Bestellbestätigung prüfen</li>
+</ol>
+<strong>Automation:</strong>
+<ul>
+<li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_e2e_checkout.py</code></li>
+<li><strong>Funktion:</strong> <code>test_e2e_b2b_checkout</code></li>
+</ul>
+</details>
+
 <hr>
 
 <h3 id="e2e-tests-click-collect">🏬 E2E Tests - Click & Collect</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 1 Testfall, 4 Varianten
-<strong>Beschreibung:</strong> Bestellung mit Abholung im Shop (Click & Collect)
-<strong>Dauer:</strong> 10-15 Min (alle Varianten)
+<strong>Tests:</strong> 2 Testfälle, 6 Varianten
+<strong>Beschreibung:</strong> Bestellung mit Abholung im Shop (Click & Collect), Negativtest für Speditionsartikel
+<strong>Dauer:</strong> 15-25 Min (alle Varianten)
 <strong>Ausführung:</strong> Vor jedem Release auf Staging
 
 <div class="table-wrapper"><table class="test-table">
@@ -1086,6 +1234,14 @@
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE</td>
 <td>4</td>
+</tr>
+<tr>
+<td>TC-E2E-CC-002</td>
+<td>Click & Collect Negativtest - Speditionsartikel blockiert</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE</td>
+<td>2</td>
 </tr>
 </tbody></table></div>
 <details>
@@ -1140,6 +1296,48 @@
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_e2e_click_collect.py</code></li>
 <li><strong>Page Objects:</strong> <code>checkout_page.py</code> (erweitert um Click & Collect Methoden)</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>TC-E2E-CC-002: Negativtest - Speditionsartikel blockiert (2 Ausprägungen)</strong></summary>
+
+<p>Prüft, dass Speditionsartikel NICHT mit Click & Collect bestellt werden können.</p>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>#</th>
+<th>Land</th>
+<th>PLZ</th>
+<th>Produkt</th>
+</tr></thead><tbody>
+<tr>
+<td>CC-NEG-1</td>
+<td>AT</td>
+<td>4020 (Linz)</td>
+<td>Polsterbett (Spedition)</td>
+</tr>
+<tr>
+<td>CC-NEG-2</td>
+<td>DE</td>
+<td>80331 (München)</td>
+<td>Polsterbett (Spedition)</td>
+</tr>
+</tbody></table></div>
+<strong>Testflow:</strong>
+<ol>
+<li>Neuregistrierung</li>
+<li>Speditions-Produkt (Polsterbett) in den Warenkorb</li>
+<li>Zur Kasse navigieren</li>
+<li>Prüfen: Versandart "Lieferung an den Store" ist NICHT verfügbar</li>
+<li>Falls doch auswählbar: Fehlermeldung erwarten</li>
+</ol>
+<strong>Hinweis:</strong> Falls C&C für Speditionsartikel nicht blockiert ist, wird der Test übersprungen (pytest.skip).
+
+<strong>Automation:</strong>
+<ul>
+<li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_e2e_click_collect.py</code></li>
+<li><strong>Funktion:</strong> <code>test_click_collect_spedition_blocked</code></li>
 </ul>
 </details>
 
@@ -3703,7 +3901,7 @@
 <td>TC-PROMO-CAT-001</td>
 <td>Promo auf Produktkategorie via advertising_material_id</td>
 <td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
@@ -3738,6 +3936,8 @@
 <li>Produkte ohne passende ID bleiben unrabattiert</li>
 <li>Prozentuale oder absolute Berechnung ist korrekt</li>
 <li>Funktioniert in allen DACH-Verkaufskanälen</li>
+<li><strong>Automation:</strong> <code>test_promo_category_clothing_applied</code> in <code>test_promotions.py</code></li>
+<li><strong>Hinweis:</strong> Promo-Code und Kleidungs-Produkt sind Platzhalter (UPDATETHISCODE / UPDATETHIS) — müssen mit echten Staging-Daten befüllt werden</li>
 </ul>
 </ol>
 <ul>
@@ -5704,7 +5904,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 16:24 Uhr</p>
+            <p>Generiert am 06.02.2026 um 17:19 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
