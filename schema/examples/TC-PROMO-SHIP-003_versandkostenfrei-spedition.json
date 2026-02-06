@@ -4,12 +4,8 @@
   "category": "e2e",
   "priority": "P1",
   "functional_area": "Feature Promotion",
-  "schema_version": "2.2.0",
+  "schema_version": "3.0.0",
   "scope": {
-    "channels": [
-      "AT",
-      "DE"
-    ],
     "environments": [
       "staging"
     ],
@@ -59,6 +55,14 @@
     }
   ],
   "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
     {
       "type": "extra",
       "name": "default",

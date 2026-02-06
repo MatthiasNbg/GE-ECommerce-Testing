@@ -4,13 +4,8 @@
   "category": "regression",
   "priority": "P1",
   "functional_area": "Feature Warenkorb",
-  "schema_version": "2.2.0",
+  "schema_version": "3.0.0",
   "scope": {
-    "channels": [
-      "AT",
-      "DE",
-      "CH"
-    ],
     "environments": [
       "staging"
     ],
@@ -132,6 +127,18 @@
     }
   ],
   "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
     {
       "type": "product",
       "name": "gift_card",

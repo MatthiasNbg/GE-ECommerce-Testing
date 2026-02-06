@@ -1,0 +1,139 @@
+{
+  "test_id": "TC-CONTENT-003",
+  "name": "Footer-Links erreichbar",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Content",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Startseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zum Footer scrollen",
+      "expected": "Footer-Bereich ist sichtbar",
+      "selector_hint": "footer, .footer-main, .footer"
+    },
+    {
+      "step": 4,
+      "action": "Impressum-Link pruefen und klicken",
+      "expected": "Impressum-Link ist sichtbar, Seite laedt mit Inhalt (HTTP 200)",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Impressum')"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": "a:has-text('Impressum')",
+          "message": "Impressum-Link muss im Footer sichtbar sein"
+        },
+        {
+          "type": "url_contains",
+          "expected": "impressum",
+          "message": "URL muss impressum enthalten nach Klick"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Zurueck navigieren, Datenschutz-Link pruefen und klicken",
+      "expected": "Datenschutz-Link ist sichtbar, Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Datenschutz')"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": "a:has-text('Datenschutz')",
+          "message": "Datenschutz-Link muss im Footer sichtbar sein"
+        },
+        {
+          "type": "url_contains",
+          "expected": "datenschutz",
+          "message": "URL muss datenschutz enthalten nach Klick"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Zurueck navigieren, AGB-Link pruefen und klicken",
+      "expected": "AGB-Link ist sichtbar, Seite laedt korrekt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('AGB')"
+        }
+      ],
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": "a:has-text('AGB')",
+          "message": "AGB-Link muss im Footer sichtbar sein"
+        },
+        {
+          "type": "url_contains",
+          "expected": "agb",
+          "message": "URL muss agb enthalten nach Klick"
+        }
+      ]
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_content_extended.py",
+    "function_name": "test_footer_links_accessible",
+    "tags": [
+      "content",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

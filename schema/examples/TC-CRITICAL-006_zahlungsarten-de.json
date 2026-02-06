@@ -4,11 +4,8 @@
   "category": "e2e",
   "priority": "P0",
   "functional_area": "Feature Critical Path",
-  "schema_version": "2.2.0",
+  "schema_version": "3.0.0",
   "scope": {
-    "channels": [
-      "DE"
-    ],
     "environments": [
       "staging"
     ],
@@ -80,5 +77,11 @@
     "created": "2026-02-03",
     "last_modified": "2026-02-05",
     "version": "1.0"
-  }
+  },
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "DE"
+    }
+  ]
 }

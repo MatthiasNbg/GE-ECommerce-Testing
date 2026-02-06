@@ -4,7 +4,7 @@
   "title": "Unified Test Contract",
   "description": "Austauschformat zwischen TestHubPro911, GE-ECommerce-Testing und Testpanda4711.",
   "type": "object",
-  "required": ["test_id", "name", "category", "priority", "schema_version", "scope", "steps"],
+  "required": ["test_id", "name", "category", "priority", "schema_version", "steps"],
   "additionalProperties": false,
   "properties": {
     "test_id": {
@@ -23,6 +23,11 @@
       "enum": ["smoke", "regression", "e2e", "integration", "performance"],
       "description": "Testkategorie"
     },
+    "functional_area": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Funktionaler Bereich des Tests (z.B. cart, checkout, search, account, promotion, shipping, payment, produktberater)"
+    },
     "priority": {
       "type": "string",
       "enum": ["P0", "P1", "P2", "P3"],
@@ -35,19 +40,8 @@
     },
     "scope": {
       "type": "object",
-      "required": ["channels"],
       "additionalProperties": false,
       "properties": {
-        "channels": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": ["AT", "DE", "CH"]
-          },
-          "minItems": 1,
-          "uniqueItems": true,
-          "description": "Sales-Channels / Länder"
-        },
         "environments": {
           "type": "array",
           "items": {
@@ -392,7 +386,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Art der Testdaten (empfohlen: product, address, login, payment, promocode)"
+            "description": "Art der Testdaten (empfohlen: channel, product, address, login, payment, promocode)"
           },
           "name": {
             "type": "string",

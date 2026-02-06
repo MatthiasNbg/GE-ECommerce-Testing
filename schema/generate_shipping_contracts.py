@@ -26,17 +26,13 @@ def create_contract(test_id: str, country: str, carrier: str, plz: str, city: st
     is_min = "-MIN-" in test_id
     position = "Minimum" if is_min else "Maximum"
 
-    # Channel mapping
-    channels = [country]
-
     return {
         "test_id": test_id,
         "name": f"Versandart {carrier} fuer PLZ {plz} ({city}) - {position} Grenzwert",
         "category": "e2e",
         "priority": "P1",
-        "schema_version": "1.0.0",
+        "schema_version": "3.0.0",
         "scope": {
-            "channels": channels,
             "environments": ["staging"],
             "shop_system": "Shopware 6"
         },
@@ -107,15 +103,20 @@ def create_contract(test_id: str, country: str, carrier: str, plz: str, city: st
                 "selector_hint": "input[name='shippingMethodId']"
             }
         ],
-        "test_data": {
-            "product_path": "p/polsterbett-almeno/ge-p-693278",
-            "country": country,
-            "carrier": carrier,
-            "plz": plz,
-            "city": city,
-            "expected_label": expected_label,
-            "grenzwert": "minimum" if is_min else "maximum"
-        },
+        "test_data": [
+            {"type": "channel", "name": country},
+            {
+                "type": "shipping",
+                "name": f"{carrier.split()[0].lower()}_{country.lower()}_{country.lower()}",
+                "plz": plz,
+                "carrier": carrier,
+                "country": country,
+                "city": city,
+                "expected_label": expected_label,
+                "grenzwert": "minimum" if is_min else "maximum",
+                "product_path": "p/polsterbett-almeno/ge-p-693278"
+            }
+        ],
         "automation": {
             "status": "automated",
             "framework": "Playwright + pytest",

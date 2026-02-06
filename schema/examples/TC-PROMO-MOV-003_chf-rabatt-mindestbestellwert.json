@@ -4,11 +4,8 @@
   "category": "e2e",
   "priority": "P1",
   "functional_area": "Feature Promotion",
-  "schema_version": "2.2.0",
+  "schema_version": "3.0.0",
   "scope": {
-    "channels": [
-      "CH"
-    ],
     "environments": [
       "staging",
       "production"
@@ -126,6 +123,10 @@
     }
   ],
   "test_data": [
+    {
+      "type": "channel",
+      "name": "CH"
+    },
     {
       "type": "promo",
       "name": "chf_mbw_rabatt",

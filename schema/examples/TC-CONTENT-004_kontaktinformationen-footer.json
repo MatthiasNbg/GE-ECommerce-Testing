@@ -1,0 +1,100 @@
+{
+  "test_id": "TC-CONTENT-004",
+  "name": "Kontaktinformationen im Footer",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Feature Content",
+  "schema_version": "2.2.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen",
+      "expected": "Startseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zum Footer scrollen",
+      "expected": "Footer-Bereich ist sichtbar",
+      "selector_hint": "footer, .footer-main, .footer"
+    },
+    {
+      "step": 4,
+      "action": "Kontaktbereich im Footer pruefen",
+      "expected": "Kontaktinformationen (Telefon, E-Mail oder Adresse) sind sichtbar",
+      "selector_hint": ".footer-contact, .footer-service-hotline, .service-menu",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".footer-contact, .footer-service-hotline, .service-menu",
+          "message": "Kontaktbereich muss im Footer sichtbar sein"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Kontakt oder Service-Info pruefen",
+      "expected": "Kontakt oder Service-Informationen sind vorhanden",
+      "assert": [
+        {
+          "type": "page_contains_text",
+          "values": [
+            "Kontakt",
+            "Service",
+            "Telefon",
+            "Tel"
+          ],
+          "message": "Footer muss Kontakt- oder Service-Informationen enthalten"
+        }
+      ]
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_content_extended.py",
+    "function_name": "test_footer_contact_info",
+    "tags": [
+      "content",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
