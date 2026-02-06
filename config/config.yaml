@@ -247,8 +247,8 @@ payment_method_aliases:
 credit_card_test_data:
   # Erfolgreiche Testkarten
   visa:
-    number: "4111111111111111"
-    expiry: "12/27"
+    number: "4263970000005262"
+    expiry: "08/28"
     cvv: "123"
     holder: "Test Kunde"
   mastercard:
