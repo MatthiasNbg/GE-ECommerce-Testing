@@ -93,6 +93,12 @@ class CartPage(BasePage):
     PROMOTION_DISCOUNT_VALUE = ".line-item-promotion .line-item-total-price, .promotion-discount-value"
 
     # =========================================================================
+    # Produkt per Artikelnummer hinzufügen
+    # =========================================================================
+    PRODUCT_NUMBER_INPUT = "#addProductInput"
+    PRODUCT_NUMBER_SUBMIT = "#addProductButton"
+
+    # =========================================================================
     # Product Page - Add to Cart
     # =========================================================================
     ADD_TO_CART_BUTTON = "button.btn-buy, [data-add-to-cart]"
@@ -348,6 +354,42 @@ class CartPage(BasePage):
         await self.close_cart_offcanvas()
 
         return True
+
+    # =========================================================================
+    # Add to Cart by Article Number
+    # =========================================================================
+
+    async def add_product_by_number(self, product_number: str) -> bool:
+        """
+        Fügt ein Produkt per Artikelnummer zum Warenkorb hinzu.
+
+        Nutzt das Eingabefeld auf der Warenkorb-Seite (/checkout/cart).
+
+        Args:
+            product_number: Artikelnummer (z.B. "862990")
+
+        Returns:
+            True wenn erfolgreich
+        """
+        items_before = await self.get_cart_item_count()
+
+        number_input = self.page.locator(self.PRODUCT_NUMBER_INPUT)
+        if await number_input.count() == 0:
+            return False
+
+        await number_input.fill(product_number)
+        await self.page.wait_for_timeout(300)
+
+        submit_btn = self.page.locator(self.PRODUCT_NUMBER_SUBMIT)
+        if await submit_btn.count() > 0:
+            await submit_btn.click()
+        else:
+            await number_input.press("Enter")
+
+        await self.page.wait_for_timeout(3000)
+
+        items_after = await self.get_cart_item_count()
+        return items_after > items_before
 
     # =========================================================================
     # Promotion / Rabattcode

@@ -8,7 +8,7 @@ Testet alle Warenkorb-Operationen:
 - Preisberechnungen
 - Warenkorb-Persistenz
 
-Test-IDs: TC-CART-001 bis TC-CART-008
+Test-IDs: TC-CART-001 bis TC-CART-009
 Phase: 2 (Feature-Tests)
 Priorität: P1 (Hoch)
 """
@@ -417,3 +417,46 @@ def test_price_calculation_correct(page: Page, base_url: str):
         f"Einzelpreis: {unit_price}, Menge: 3, "
         f"Erwartet: {expected_total}, Tatsächlich: {total_price}"
     )
+
+
+# =============================================================================
+# TC-CART-009: Produkt per Artikelnummer hinzufügen
+# =============================================================================
+
+@pytest.mark.cart
+def test_add_product_by_article_number(page: Page, base_url: str):
+    """
+    TC-CART-009: Produkt per Artikelnummer im Warenkorb hinzufügen.
+
+    Schritte:
+    1. Warenkorb-Seite aufrufen
+    2. Artikelnummer in das Eingabefeld eingeben
+    3. Submit-Button klicken
+    4. Prüfen: Produkt ist im Warenkorb
+    """
+    article_number = "862990"
+
+    # Zur Warenkorb-Seite navigieren
+    navigate_to_cart(page, base_url)
+    accept_cookie_banner(page)
+
+    # Artikelnummer eingeben
+    number_input = page.locator("#addProductInput")
+    expect(number_input).to_be_visible(timeout=5000)
+    number_input.fill(article_number)
+
+    # Submit-Button klicken
+    submit_btn = page.locator("#addProductButton")
+    expect(submit_btn).to_be_visible(timeout=5000)
+    submit_btn.click()
+    page.wait_for_timeout(3000)
+
+    # Prüfen: Mindestens 1 Produkt im Warenkorb
+    item_count = get_cart_item_count(page)
+    assert item_count >= 1, f"Erwartet mindestens 1 Produkt, gefunden: {item_count}"
+
+    # Prüfen: Produktname ist sichtbar
+    product_name = page.locator(".line-item-label, .line-item-details-container a").first
+    expect(product_name).to_be_visible(timeout=5000)
+    name_text = product_name.text_content() or ""
+    assert len(name_text.strip()) > 0, "Produktname sollte nicht leer sein"

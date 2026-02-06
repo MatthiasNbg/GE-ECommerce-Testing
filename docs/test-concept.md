@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **263 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **264 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -40,7 +40,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 🛒 **Critical Path Tests** | 8 | ✅ 8/8 | 🔴 P0 | Gast-Checkout, Registrierter Checkout, Zahlungsarten |
 | 🔄 **E2E Tests - Checkout** | 1 | ○ 0/1 | 🔴 P0 | Kompletter Checkout mit allen Zahlungs-/Versandarten (24 Varianten) |
 | 🏬 **E2E Tests - Click & Collect** | 1 | ○ 0/1 | 🟠 P1 | Bestellung mit Abholung im Shop (4 Varianten) |
-| 🛍️ **Feature Tests - Warenkorb** | 8 | ✅ 8/8 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
+| 🛍️ **Feature Tests - Warenkorb** | 9 | ✅ 9/9 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
 | 👤 **Feature Tests - Account** | 11 | ⚠️ 9/11 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
 | ❤️ **Feature Tests - Merkliste** | 5 | ✅ 5/5 | 🟠 P1 | Hinzufügen, Entfernen, in Warenkorb legen |
@@ -69,7 +69,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 4. [Critical Path Tests](#critical-path-tests) - (8 Tests)
 5. [E2E Tests - Checkout](#e2e-tests-kompletter-checkout) - (1 Test, 24 Varianten)
 6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (1 Test, 4 Varianten)
-7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (8 Tests)
+7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (9 Tests)
 8. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
 9. [Feature Tests - Account](#feature-tests-account) - (11 Tests)
 10. [Feature Tests - Merkliste/Wishlist](#feature-tests-merklistewishlist) - (5 Tests)
@@ -94,8 +94,8 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 263 Tests
-- ✅ Implementiert: 150
+**Gesamt:** 264 Tests
+- ✅ Implementiert: 151
 - ❌ Fehlend: 113
 - ⚠️ Teilweise: 0
 - **Abdeckung:** 57%
@@ -261,8 +261,8 @@ Der Testfall wird mit folgenden Parametern kombiniert:
 ### 🛍️ Feature Tests - Warenkorb
 
 **Priorität:** P1
-**Tests:** 8/8 implementiert
-**Beschreibung:** Produkte hinzufügen, Mengen ändern, Preis-Berechnung
+**Tests:** 9/9 implementiert
+**Beschreibung:** Produkte hinzufügen, Mengen ändern, Preis-Berechnung, Artikelnummer
 **Dauer:** 5-15 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
@@ -276,13 +276,14 @@ Der Testfall wird mit folgenden Parametern kombiniert:
 | TC-CART-006 | Warenkorb bleibt zwischen Seiten erhalten | P1 | ✅ | AT, DE, CH | 1 |
 | TC-CART-007 | Mehrere Produkte hinzufügen | P1 | ✅ | AT, DE, CH | 1 |
 | TC-CART-008 | Preisberechnung korrekt | P1 | ✅ | AT, DE, CH | 1 |
+| TC-CART-009 | Produkt per Artikelnummer hinzufügen | P1 | ✅ | AT, DE, CH | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
-Die 8 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzufügen, Entfernen, Mengenänderung, Preisberechnung und Persistenz. Alle Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH).
+Die 9 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzufügen, Entfernen, Mengenänderung, Preisberechnung, Persistenz und Artikelnummer-Eingabe. Alle Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH).
 
-#### Produkte verwalten (4 Tests)
+#### Produkte verwalten (5 Tests)
 
 **TC-CART-001: Produkt zum Warenkorb hinzufügen**
 - **Schritte:** Produktdetailseite aufrufen → „In den Warenkorb" klicken → Warenkorb öffnen → Produktname und Preis prüfen
@@ -299,6 +300,10 @@ Die 8 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzu
 **TC-CART-007: Mehrere Produkte hinzufügen**
 - **Schritte:** Drei verschiedene Produkte nacheinander hinzufügen → Warenkorb öffnen → alle Produkte und Gesamtpreis prüfen
 - **Erwartet:** Alle drei Produkte mit korrekten Einzelpreisen, Gesamtpreis ist die Summe
+
+**TC-CART-009: Produkt per Artikelnummer hinzufügen**
+- **Schritte:** Warenkorb-Seite aufrufen → Artikelnummer (862990) in Eingabefeld eingeben → Submit-Button klicken → Produkt prüfen
+- **Erwartet:** Produkt wird per Artikelnummer zum Warenkorb hinzugefügt, Produktname ist sichtbar
 
 #### Preisberechnung (2 Tests)
 
@@ -322,7 +327,7 @@ Die 8 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzu
 
 **Automation:**
 - **Playwright-Testdatei:** `playwright_tests/tests/test_cart.py`
-- **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-CART-001 bis TC-CART-008)
+- **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-CART-001 bis TC-CART-009)
 - **Cleanup:** Warenkorb wird nach jedem Test geleert
 
 </details>
@@ -1874,7 +1879,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 |-------|------|--------|-------|----------------|
 | phase_0 | Phase 0 - Basis-Setup | ✅ | 8 | -% |
 | phase_1 | Phase 1 - Critical Path | ✅ | 8 | 15% |
-| phase_2 | Phase 2 - Warenkorb | ✅ | 8 | -% |
+| phase_2 | Phase 2 - Warenkorb | ✅ | 9 | -% |
 | phase_3 | Phase 3 - Account | ⚠️ | 11 | -% |
 | phase_4 | Phase 4 - Suche | ✅ | 9 | -% |
 | phase_5 | Phase 5 - Versandarten | ✅ | 98 | -% |

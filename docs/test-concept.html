@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>263 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>264 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -511,8 +511,8 @@
 </tr>
 <tr>
 <td>🛍️ **Feature Tests - Warenkorb**</td>
-<td>8</td>
-<td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
+<td>9</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 9/9</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produkte hinzufügen, Mengen ändern, Preis-Berechnung</td>
 </tr>
@@ -635,7 +635,7 @@
 <li><a href="#critical-path-tests">Critical Path Tests</a> - (8 Tests)</li>
 <li><a href="#e2e-tests-kompletter-checkout">E2E Tests - Checkout</a> - (1 Test, 24 Varianten)</li>
 <li><a href="#e2e-tests-click--collect">E2E Tests - Click & Collect</a> - (1 Test, 4 Varianten)</li>
-<li><a href="#feature-tests-warenkorb">Feature Tests - Warenkorb</a> - (8 Tests)</li>
+<li><a href="#feature-tests-warenkorb">Feature Tests - Warenkorb</a> - (9 Tests)</li>
 <li><a href="#feature-tests-suche">Feature Tests - Suche</a> - (9 Tests)</li>
 <li><a href="#feature-tests-account">Feature Tests - Account</a> - (11 Tests)</li>
 <li><a href="#feature-tests-merklistewishlist">Feature Tests - Merkliste/Wishlist</a> - (5 Tests)</li>
@@ -660,9 +660,9 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 263 Tests
+<strong>Gesamt:</strong> 264 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 150</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 151</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 113</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
 <li><strong>Abdeckung:</strong> 57%</li>
@@ -1148,8 +1148,8 @@
 <h3 id="feature-tests-warenkorb">🛍️ Feature Tests - Warenkorb</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 8/8 implementiert
-<strong>Beschreibung:</strong> Produkte hinzufügen, Mengen ändern, Preis-Berechnung
+<strong>Tests:</strong> 9/9 implementiert
+<strong>Beschreibung:</strong> Produkte hinzufügen, Mengen ändern, Preis-Berechnung, Artikelnummer
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
 
@@ -1226,13 +1226,21 @@
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-CART-009</td>
+<td>Produkt per Artikelnummer hinzufügen</td>
+<td>P1</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
-<p>Die 8 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzufügen, Entfernen, Mengenänderung, Preisberechnung und Persistenz. Alle Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH).</p>
+<p>Die 9 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzufügen, Entfernen, Mengenänderung, Preisberechnung, Persistenz und Artikelnummer-Eingabe. Alle Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH).</p>
 
-<h4 id="produkte-verwalten-4-tests">Produkte verwalten (4 Tests)</h4>
+<h4 id="produkte-verwalten-5-tests">Produkte verwalten (5 Tests)</h4>
 
 <strong>TC-CART-001: Produkt zum Warenkorb hinzufügen</strong>
 <ul>
@@ -1253,6 +1261,11 @@
 <ul>
 <li><strong>Schritte:</strong> Drei verschiedene Produkte nacheinander hinzufügen → Warenkorb öffnen → alle Produkte und Gesamtpreis prüfen</li>
 <li><strong>Erwartet:</strong> Alle drei Produkte mit korrekten Einzelpreisen, Gesamtpreis ist die Summe</li>
+</ul>
+<strong>TC-CART-009: Produkt per Artikelnummer hinzufügen</strong>
+<ul>
+<li><strong>Schritte:</strong> Warenkorb-Seite aufrufen → Artikelnummer (862990) in Eingabefeld eingeben → Submit-Button klicken → Produkt prüfen</li>
+<li><strong>Erwartet:</strong> Produkt wird per Artikelnummer zum Warenkorb hinzugefügt, Produktname ist sichtbar</li>
 </ul>
 <h4 id="preisberechnung-2-tests">Preisberechnung (2 Tests)</h4>
 
@@ -1281,7 +1294,7 @@
 <strong>Automation:</strong>
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_cart.py</code></li>
-<li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-CART-001 bis TC-CART-008)</li>
+<li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-CART-001 bis TC-CART-009)</li>
 <li><strong>Cleanup:</strong> Warenkorb wird nach jedem Test geleert</li>
 </ul>
 </details>
@@ -4759,7 +4772,7 @@
 <td>phase_2</td>
 <td>Phase 2 - Warenkorb</td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span></td>
-<td>8</td>
+<td>9</td>
 <td>-%</td>
 </tr>
 <tr>
@@ -5525,7 +5538,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 12:46 Uhr</p>
+            <p>Generiert am 06.02.2026 um 13:22 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

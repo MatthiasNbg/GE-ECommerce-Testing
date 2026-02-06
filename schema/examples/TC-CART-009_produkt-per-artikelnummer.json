@@ -1,0 +1,108 @@
+{
+  "test_id": "TC-CART-009",
+  "name": "Produkt per Artikelnummer im Warenkorb hinzufügen",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Warenkorb",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging",
+      "production"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt mit Artikelnummer 862990 ist verfügbar und auf Lager"
+  ],
+  "postconditions": [
+    "Produkt wurde per Artikelnummer zum Warenkorb hinzugefügt und ist sichtbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Warenkorb-Seite aufrufen",
+      "expected": "Warenkorb-Seite wird angezeigt mit Eingabefeld für Artikelnummer",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Artikelnummer in das Eingabefeld eingeben",
+      "expected": "Artikelnummer wird im Eingabefeld angezeigt",
+      "selector_hint": "#addProductInput",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#addProductInput",
+          "value": "862990"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Submit-Button klicken",
+      "expected": "Produkt wird zum Warenkorb hinzugefügt, Seite aktualisiert sich",
+      "selector_hint": "#addProductButton",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "#addProductButton"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Prüfen ob Produkt im Warenkorb angezeigt wird",
+      "expected": "Mindestens 1 Produkt im Warenkorb, Produktname ist sichtbar und nicht leer"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "product",
+      "name": "default",
+      "article_number": "862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart.py",
+    "function_name": "test_add_product_by_article_number",
+    "tags": [
+      "regression",
+      "cart",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 30,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
