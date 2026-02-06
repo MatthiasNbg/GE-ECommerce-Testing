@@ -204,28 +204,29 @@ async def test_e2e_click_collect(config, request, variant: ClickCollectVariant):
             await _select_click_and_collect(page, variant.plz)
 
             # =================================================================
-            # SCHRITT 5: Zahlungsart "Zahlung bei Abholung"
+            # SCHRITT 5: Zahlungsart "Zahlung bei Abholung" verifizieren
             # =================================================================
             print(f"\n[5] Zahlungsart: Zahlung bei Abholung...")
 
-            try:
-                # Versuche verschiedene Labels
-                for payment_label in ["Zahlung bei Abholung", "Barzahlung", "cash_on_pickup"]:
-                    try:
-                        await checkout.select_payment_method(payment_label)
-                        print(f"   Zahlungsart '{payment_label}' ausgewaehlt")
-                        break
-                    except ValueError:
-                        continue
-                else:
-                    # Fallback: Nimm die erste verfuegbare Zahlungsart
-                    methods = await checkout.get_available_payment_methods()
-                    print(f"   Verfuegbare Zahlungsarten: {methods}")
-                    if methods:
-                        await checkout.select_payment_method(methods[0])
-                        print(f"   Fallback: '{methods[0]}' ausgewaehlt")
-            except Exception as e:
-                print(f"   WARNUNG Zahlungsart: {e}")
+            # Nach Store-Auswahl ist "Zahlung bei Abholung" automatisch die
+            # einzige verfuegbare und bereits ausgewaehlte Zahlungsart.
+            payment_radio = page.locator("input[name='paymentMethodId']:checked")
+            if await payment_radio.count() > 0:
+                radio_id = await payment_radio.get_attribute("id") or ""
+                label = page.locator(f"label[for='{radio_id}']")
+                if await label.count() > 0:
+                    label_text = (await label.text_content() or "").strip()[:60]
+                    print(f"   Zahlungsart aktiv: {label_text}")
+                    assert "abholung" in label_text.lower(), (
+                        f"Erwartete 'Zahlung bei Abholung', aber gefunden: {label_text}"
+                    )
+            else:
+                # Fallback: Zahlungsart manuell auswaehlen
+                try:
+                    await checkout.select_payment_method("Zahlung bei Abholung")
+                    print("   Zahlungsart manuell ausgewaehlt")
+                except Exception:
+                    print("   WARNUNG: Konnte Zahlungsart nicht verifizieren")
 
             # =================================================================
             # SCHRITT 6: AGB und Bestellung
@@ -267,46 +268,27 @@ async def _select_click_and_collect(page, plz: str):
     """
     Waehlt Click & Collect als Versandart und sucht einen Abholort.
 
-    TODO: Die Selektoren muessen an das tatsaechliche Click & Collect Widget
-    auf dem Staging angepasst werden. Die Selektoren hier sind Platzhalter
-    basierend auf gaengigen Shopware 6 Patterns.
-
-    Typischer Flow:
-    1. Click & Collect als Versandart auswaehlen
-    2. PLZ-Suchfeld wird eingeblendet
-    3. PLZ eingeben
-    4. Ergebnisliste mit Abholorten erscheint
-    5. Ersten Abholort auswaehlen
+    Plugin: NetInventors Store Pickup (neti--store-pickup)
+    Flow auf Staging:
+    1. Radio "Lieferung an den Store" auswaehlen
+    2. "Abhol-Filiale aendern" Button klicken -> Offcanvas oeffnet sich
+    3. PLZ im Offcanvas eingeben + Suche klicken
+    4. Aus Ergebnisliste einen Store via JS-Click auswaehlen
+    5. Seite laedt neu, Zahlungsart wechselt automatisch auf "Zahlung bei Abholung"
     """
-    # Schritt 1: Click & Collect Versandart finden und klicken
-    # Verschiedene moegliche Selektoren/Labels
-    cc_selectors = [
-        ".shipping-method:has-text('Click & Collect')",
-        ".shipping-method:has-text('Abholung')",
-        ".shipping-method:has-text('Click and Collect')",
-        ".shipping-method:has-text('Store Pickup')",
-        "label:has-text('Click & Collect')",
-        "label:has-text('Abholung im Shop')",
-    ]
-
-    cc_selected = False
-    for selector in cc_selectors:
-        locator = page.locator(selector)
-        if await locator.count() > 0 and await locator.first.is_visible(timeout=2000):
-            # Radio-Button im Container klicken
-            radio = locator.first.locator("input[type='radio']")
-            if await radio.count() > 0:
-                await radio.first.click()
-            else:
-                await locator.first.click()
-            cc_selected = True
-            print(f"   Click & Collect ausgewaehlt via: {selector}")
-            break
-
-    if not cc_selected:
-        # Fallback: Alle Versand-Radio-Buttons durchsuchen
+    # Schritt 1: "Lieferung an den Store" Versandart auswaehlen
+    store_radio = page.locator(
+        "label:has-text('Lieferung an den Store') input[type='radio'], "
+        "input[name='shippingMethodId'][value='a37c78a6a0e649f7a5995c73ff002599']"
+    )
+    if await store_radio.count() > 0:
+        await store_radio.first.click()
+        print("   Versandart 'Lieferung an den Store' ausgewaehlt")
+    else:
+        # Fallback: Suche in allen Versandart-Labels
         radios = page.locator("input[name='shippingMethodId']")
         count = await radios.count()
+        cc_selected = False
         for i in range(count):
             radio = radios.nth(i)
             radio_id = await radio.get_attribute("id")
@@ -314,75 +296,84 @@ async def _select_click_and_collect(page, plz: str):
                 label = page.locator(f"label[for='{radio_id}']")
                 if await label.count() > 0:
                     label_text = (await label.text_content() or "").lower()
-                    if any(kw in label_text for kw in ["collect", "abholung", "abholen", "store pickup"]):
+                    if any(kw in label_text for kw in [
+                        "store", "lieferung an den store", "abholung", "pickup"
+                    ]):
                         await radio.click()
                         cc_selected = True
-                        print(f"   Click & Collect ausgewaehlt via Radio: {label_text.strip()}")
+                        print(f"   Click & Collect ausgewaehlt via Label: {label_text.strip()[:60]}")
                         break
+        assert cc_selected, "Click & Collect Versandart 'Lieferung an den Store' nicht gefunden"
 
-    assert cc_selected, "Click & Collect Versandart nicht gefunden"
+    # Warte auf AJAX-Reload (Zahlungsarten wechseln)
+    await page.wait_for_timeout(3000)
+    await page.wait_for_load_state("domcontentloaded")
 
-    await page.wait_for_timeout(1000)
+    # Schritt 2: "Abhol-Filiale aendern" Button klicken -> Offcanvas
+    change_btn = page.locator("a.neti--store-pickup--button[data-pickup='trigger-button']")
+    if await change_btn.count() == 0:
+        # Fallback
+        change_btn = page.locator("a:has-text('Abhol-Filiale')")
+    assert await change_btn.count() > 0, "Button 'Abhol-Filiale aendern' nicht gefunden"
+    await change_btn.first.click()
+    print("   Offcanvas 'Abhol-Filiale aendern' geoeffnet")
 
-    # Schritt 2: PLZ eingeben
-    # Typische Selektoren fuer PLZ-Suchfeld
-    plz_selectors = [
-        "input[name='zipcode']",
-        "input[placeholder*='PLZ']",
-        "input[placeholder*='Postleitzahl']",
-        ".click-collect-search input",
-        ".store-locator input[type='text']",
-        "#storeLocatorZip",
-    ]
+    # Warte auf Offcanvas
+    await page.wait_for_selector(
+        ".offcanvas.show.neti--store-pickup--off-canvas, .offcanvas.show",
+        timeout=10000
+    )
+    await page.wait_for_timeout(2000)
 
-    plz_filled = False
-    for selector in plz_selectors:
-        locator = page.locator(selector)
-        if await locator.count() > 0 and await locator.first.is_visible(timeout=2000):
-            await locator.first.fill(plz)
-            plz_filled = True
-            print(f"   PLZ '{plz}' eingegeben via: {selector}")
-            break
-
-    if plz_filled:
-        # Suche ausloesen (Enter oder Such-Button)
-        search_btn = page.locator(
-            "button:has-text('Suchen'), button:has-text('Finden'), "
-            ".store-locator-search button, .click-collect-search button"
+    # Schritt 3: PLZ eingeben und suchen
+    plz_field = page.locator(".offcanvas.show input[placeholder='PLZ / Standort']")
+    if await plz_field.count() == 0:
+        # Fallback
+        plz_field = page.locator(
+            ".offcanvas.show input[type='text']:visible, "
+            ".offcanvas.show input[type='search']:visible"
         )
-        if await search_btn.count() > 0 and await search_btn.first.is_visible(timeout=2000):
-            await search_btn.first.click()
-        else:
-            # Enter druecken
-            await page.keyboard.press("Enter")
+    assert await plz_field.count() > 0, "PLZ-Suchfeld im Offcanvas nicht gefunden"
 
-        await page.wait_for_timeout(2000)
+    await plz_field.first.fill(plz)
+    print(f"   PLZ '{plz}' eingegeben")
 
-        # Schritt 3: Ersten Abholort aus der Liste waehlen
-        location_selectors = [
-            ".store-result:first-child",
-            ".store-locator-result:first-child",
-            ".click-collect-result:first-child",
-            ".pickup-location:first-child",
-            ".store-list-item:first-child",
-        ]
+    # Such-Button klicken (button#button-search-pickup, .first wegen Duplikat)
+    search_btn = page.locator("button#button-search-pickup")
+    await search_btn.first.click()
+    print("   Suche gestartet")
 
-        for selector in location_selectors:
-            locator = page.locator(selector)
-            if await locator.count() > 0 and await locator.first.is_visible(timeout=3000):
-                # Radio oder Button im Ergebnis klicken
-                radio = locator.first.locator("input[type='radio']")
-                if await radio.count() > 0:
-                    await radio.first.click()
-                else:
-                    button = locator.first.locator("button, a")
-                    if await button.count() > 0:
-                        await button.first.click()
-                    else:
-                        await locator.first.click()
-                print(f"   Abholort ausgewaehlt via: {selector}")
-                break
-    else:
-        print("   WARNUNG: PLZ-Suchfeld nicht gefunden - Click & Collect moeglicherweise anders aufgebaut")
+    # Warte auf Ergebnisse
+    await page.wait_for_timeout(5000)
 
-    await page.wait_for_timeout(1000)
+    # Schritt 4: Ersten verfuegbaren Store auswaehlen via JS
+    # Hinweis: Index 0 der .store-pickup--search-result Elemente ist ein
+    # Vue.js Template (zeigt den bereits ausgewaehlten Store). Die echten
+    # Suchergebnisse beginnen ab Index 1. Daher klicken wir den ersten
+    # SICHTBAREN "Auswaehlen" Button.
+    selected_store = await page.evaluate("""() => {
+        const buttons = document.querySelectorAll(
+            '.store-pickup--search-result button.btn-secondary'
+        );
+        for (const btn of buttons) {
+            const text = btn.textContent.trim();
+            if (text === 'Auswählen' && btn.offsetParent !== null) {
+                const result = btn.closest('.store-pickup--search-result');
+                const nameEl = result?.querySelector('.store-address .h5');
+                const storeName = nameEl?.textContent?.trim() || 'Unbekannt';
+                btn.click();
+                return storeName;
+            }
+        }
+        return null;
+    }""")
+
+    assert selected_store, (
+        f"Kein Store mit 'Auswaehlen'-Button fuer PLZ {plz} gefunden. "
+        "Moeglicherweise keine Filiale in der Naehe."
+    )
+    print(f"   Store ausgewaehlt: {selected_store}")
+
+    # Warte auf Seiten-Reload nach Store-Auswahl
+    await page.wait_for_timeout(5000)
+    await page.wait_for_load_state("domcontentloaded")
