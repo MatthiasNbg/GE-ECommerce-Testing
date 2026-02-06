@@ -125,6 +125,12 @@ class AccountPage(BasePage):
     PROFILE_SAVE_BUTTON = "button:has-text('Speichern')"
     PROFILE_SUCCESS_MESSAGE = ".alert-success"
 
+    # E-Mail ändern (Profil-Seite)
+    PROFILE_EDIT_EMAIL = "#personalMail"
+    PROFILE_EDIT_EMAIL_CONFIRM = "#personalMailConfirmation"
+    PROFILE_EDIT_EMAIL_PASSWORD = "#personalMailPasswordCurrent"
+    PROFILE_EMAIL_SAVE = "form:has(#personalMail) button:has-text('Speichern')"
+
     # =========================================================================
     # ADRESS-VERWALTUNG Selektoren
     # =========================================================================
@@ -465,6 +471,36 @@ class AccountPage(BasePage):
             await save_btn.first.click()
             await self.page.wait_for_load_state("domcontentloaded")
             await self.page.wait_for_timeout(1000)
+
+        # Erfolgsmeldung prüfen
+        success = self.page.locator(self.PROFILE_SUCCESS_MESSAGE)
+        return await success.count() > 0 and await success.first.is_visible(timeout=3000)
+
+    async def change_email(self, new_email: str, current_password: str) -> bool:
+        """
+        Ändert die E-Mail-Adresse im Profil.
+
+        Args:
+            new_email: Neue E-Mail-Adresse
+            current_password: Aktuelles Passwort zur Bestätigung
+
+        Returns:
+            True wenn erfolgreich, False bei Fehler
+        """
+        await self.fill(self.PROFILE_EDIT_EMAIL, new_email)
+        await self.fill(self.PROFILE_EDIT_EMAIL_CONFIRM, new_email)
+        await self.fill(self.PROFILE_EDIT_EMAIL_PASSWORD, current_password)
+
+        # Speichern-Button des E-Mail-Formulars klicken
+        save_btn = self.page.locator(self.PROFILE_EMAIL_SAVE)
+        if await save_btn.count() > 0:
+            await save_btn.first.click()
+        else:
+            # Fallback: generischer Speichern-Button
+            await self.page.locator(self.PROFILE_SAVE_BUTTON).first.click()
+
+        await self.page.wait_for_load_state("domcontentloaded")
+        await self.page.wait_for_timeout(1000)
 
         # Erfolgsmeldung prüfen
         success = self.page.locator(self.PROFILE_SUCCESS_MESSAGE)

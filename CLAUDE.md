@@ -36,13 +36,18 @@ Beispiele:
 | TC-CRITICAL-* | Kritischer Pfad | TC-CRITICAL-009 |
 | TC-REG-* | Regression | TC-REG-016 |
 | TC-SEARCH-* | Suche | TC-SEARCH-011 |
-| TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-009 |
+| TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-013 |
 | TC-PROMO-* | Promotions/Gutscheine | Kontextabhaengig |
 | TC-DATA-* | Datenvalidierung | TC-DATA-011 |
 | TC-PERF-* | Performance | TC-PERF-004 |
 | TC-PAY-* | Zahlung | TC-PAY-003 |
 | TC-SHIP-* | Versand/Spedition | Via generate_shipping_contracts.py |
-| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-003 |
+| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-008 |
+| TC-NAV-* | Navigation/Menue/Laenderwechsel | TC-NAV-006 |
+| TC-PDP-* | Produktdetailseite | TC-PDP-006 |
+| TC-LISTING-* | Kategorie/Listing/Filter | TC-LISTING-005 |
+| TC-NEWSLETTER-* | Newsletter | TC-NEWSLETTER-003 |
+| TC-TECH-* | Technisch (Cookie/Responsive/A11y) | TC-TECH-011 |
 | TC-E2E-* | E2E Checkout | TC-E2E-002 |
 | TC-E2E-CC-* | Click & Collect | TC-E2E-CC-002 |
 | TC-WISH-* | Merkliste/Wishlist | TC-WISH-006 |
@@ -108,3 +113,4 @@ python schema/validate.py schema/examples/
 ```
 
 Erwartetes Ergebnis: 225 Dateien, 0 fehlerhaft, Exit-Code 0.
+(33 neue Contracts: 5 NAV + 5 PDP + 4 LISTING + 2 NEWSLETTER + 2 ACCOUNT + 5 CONTENT + 10 TECH)

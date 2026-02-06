@@ -10,6 +10,7 @@ Testet:
 - TC-ACC-006: Login mit falschen Daten fehlschlägt
 - TC-ACC-007: Profil anzeigen und bearbeiten
 - TC-ACC-008: Adressverwaltung
+- TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern wird abgelehnt
 """
 import os
 import pytest
@@ -690,6 +691,105 @@ async def test_address_management(config, request):
             await page.screenshot(path="debug_address_management.png")
 
             print("=== TC-ACC-008: BESTANDEN ===")
+
+        finally:
+            await context.close()
+            await browser.close()
+
+
+# =============================================================================
+# TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern wird abgelehnt
+# =============================================================================
+
+@pytest.mark.asyncio
+@pytest.mark.account
+@pytest.mark.feature
+async def test_email_change_to_existing_email(config, request):
+    """
+    TC-ACCOUNT-011: E-Mail-Änderung auf bereits registrierte Adresse wird abgelehnt.
+
+    1. Login als AT-Kunde
+    2. Navigiere zu /account/profile
+    3. E-Mail ändern auf ge-de-1@matthias-sax.de (bereits vergeben)
+    4. Assert: Fehlermeldung erscheint
+    5. Assert: URL bleibt auf Profil-Seite
+    """
+    print("\n=== TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern ===")
+
+    # AT-Kunde Login-Daten
+    email_at, password_at = get_test_customer_credentials(config, country="AT")
+    # DE-Kunde E-Mail (Ziel der Änderung)
+    customer_de = config.get_customer_by_country("DE")
+    if not customer_de:
+        pytest.skip("Kein DE-Kunde in config.yaml konfiguriert")
+    existing_email = customer_de.email
+
+    print(f"   AT-Kunde: {email_at}")
+    print(f"   Ziel-E-Mail (bereits vergeben): {existing_email}")
+
+    headed = request.config.getoption("--headed", default=False)
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(
+            headless=not headed,
+            slow_mo=200 if headed else 0
+        )
+
+        context_args = {"viewport": {"width": 1920, "height": 1080}}
+        if config.htaccess_user and config.htaccess_password:
+            context_args["http_credentials"] = {
+                "username": config.htaccess_user,
+                "password": config.htaccess_password,
+            }
+
+        context = await browser.new_context(**context_args)
+        page = await context.new_page()
+
+        try:
+            account = AccountPage(page, config.base_url)
+
+            # Login als AT-Kunde
+            print("[1] Login als AT-Kunde...")
+            await account.goto_login()
+            await accept_cookie_banner_async(page)
+            success = await account.login(email_at, password_at)
+            assert success, "Login als AT-Kunde fehlgeschlagen"
+
+            # Zur Profil-Bearbeitungsseite navigieren
+            print("[2] Navigiere zur Profil-Seite...")
+            await account.navigate("/account/profile")
+            await page.wait_for_timeout(1000)
+
+            # E-Mail auf bereits existierende Adresse ändern
+            print(f"[3] E-Mail ändern auf: {existing_email}")
+            change_success = await account.change_email(existing_email, password_at)
+
+            # Änderung sollte fehlschlagen
+            assert not change_success, "E-Mail-Änderung auf bestehende Adresse sollte abgelehnt werden"
+
+            # Fehlermeldung prüfen
+            print("[4] Prüfe Fehlermeldung...")
+            alert = page.locator(".alert-danger")
+            form_error = page.locator(".invalid-feedback")
+            has_alert = await alert.count() > 0 and await alert.first.is_visible(timeout=3000)
+            has_form_error = await form_error.count() > 0
+
+            error_text = None
+            if has_alert:
+                error_text = await alert.first.text_content()
+            elif has_form_error:
+                error_text = await form_error.first.text_content()
+
+            print(f"   Fehlermeldung: {error_text}")
+            assert has_alert or has_form_error, "Es sollte eine Fehlermeldung angezeigt werden"
+
+            # URL sollte auf Profil-Seite bleiben
+            print("[5] Prüfe URL...")
+            current_url = page.url
+            assert "/account/profile" in current_url or "/account" in current_url, \
+                f"Sollte auf Profil-Seite bleiben, ist aber auf: {current_url}"
+
+            print("=== TC-ACCOUNT-011: BESTANDEN ===")
 
         finally:
             await context.close()
