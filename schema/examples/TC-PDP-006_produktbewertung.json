@@ -1,0 +1,170 @@
+{
+  "test_id": "TC-PDP-006",
+  "name": "Produktbewertung abgeben und verifizieren",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "PDP",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar (Staging)",
+    "AT-Kunde (ge-at-1@matthias-sax.de) existiert und kann sich einloggen",
+    "Produkt ge-p-49415 (Duftkissen Lavendel) ist verfuegbar",
+    "Bewertungsfunktion ist im Shop aktiviert"
+  ],
+  "postconditions": [
+    "Bewertung wurde eingereicht (evtl. mit Admin-Freigabe)",
+    "Bewertungstext erscheint in der Bewertungsliste oder Erfolgsmeldung wurde angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen und als AT-Kunde einloggen",
+      "expected": "Login erfolgreich, Weiterleitung zum Account-Dashboard",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value": "ge-at-1@matthias-sax.de"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value": "scharnsteinAT"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produktseite aufrufen",
+      "expected": "Produktseite laedt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Bewertungs-Tab oeffnen",
+      "expected": "Bewertungs-Tab ist aktiv und Bewertungsformular sichtbar",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a[href='#review-tab-pane'], .product-detail-tabs .nav-link:has-text('Bewertungen')"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Sternebewertung setzen (5 Sterne)",
+      "expected": "5 Sterne sind ausgewaehlt",
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#reviewRating",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Bewertungstitel eingeben",
+      "expected": "Titel-Feld ist ausgefuellt",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#reviewTitle",
+          "value": "Tolles Produkt"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Bewertungstext eingeben",
+      "expected": "Textfeld ist ausgefuellt",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#reviewContent",
+          "value": "Ich liebe Gr\u00fcne Erde Produkte"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Bewertung absenden",
+      "expected": "Formular wird abgeschickt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".product-detail-review-form button[type='submit']"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Bewertung in der Bewertungsliste verifizieren",
+      "expected": "Bewertungstext 'Ich liebe Gruene Erde Produkte' erscheint in der Bewertungsliste oder Erfolgsmeldung wird angezeigt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "extra",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
+    },
+    {
+      "type": "extra",
+      "name": "review_text",
+      "value": "Ich liebe Gr\u00fcne Erde Produkte"
+    },
+    {
+      "type": "extra",
+      "name": "product",
+      "path": "p/duftkissen-lavendel/ge-p-49415"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_pdp.py",
+    "function_name": "test_product_review",
+    "tags": [
+      "pdp",
+      "feature",
+      "staging"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

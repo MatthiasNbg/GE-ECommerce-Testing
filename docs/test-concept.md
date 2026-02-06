@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **265 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **266 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -45,7 +45,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 👤 **Feature Tests - Account** | 12 | ⚠️ 10/12 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
 | ❤️ **Feature Tests - Merkliste** | 5 | ✅ 5/5 | 🟠 P1 | Hinzufügen, Entfernen, in Warenkorb legen |
 | 🎁 **Feature Tests - Einkaufsgutschein** | 5 | ○ 0/5 | 🟠 P1 | Gutschein/reguläres Produkt Trennung, Promo-Blockierung |
-| 🏷️ **Feature Tests - PDP** | 5 | ○ 0/5 | 🟠 P1 | Produktbilder, Varianten, Beschreibung, Verfügbarkeit |
+| 🏷️ **Feature Tests - PDP** | 6 | ⚠️ 1/6 | 🟠 P1 | Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Bewertungen |
 | 📋 **Feature Tests - Produktlisting** | 4 | ○ 0/4 | 🟠 P1 | Produktfilter, Sortierung, Pagination, SALE |
 | 🧭 **Feature Tests - Navigation** | 5 | ○ 0/5 | 🟠 P1 | Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
@@ -74,7 +74,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 9. [Feature Tests - Account](#feature-tests-account) - (11 Tests)
 10. [Feature Tests - Merkliste/Wishlist](#feature-tests-merklistewishlist) - (5 Tests)
 11. [Feature Tests - Einkaufsgutschein/Warenkorb](#feature-tests-einkaufsgutscheinwarenkorb) - (5 Tests)
-12. [Feature Tests - Produktdetailseite (PDP)](#feature-tests-produktdetailseite-pdp) - (5 Tests)
+12. [Feature Tests - Produktdetailseite (PDP)](#feature-tests-produktdetailseite-pdp) - (6 Tests)
 13. [Feature Tests - Produktlisting](#feature-tests-produktlisting) - (4 Tests)
 14. [Feature Tests - Navigation](#feature-tests-navigation) - (5 Tests)
 15. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
@@ -94,7 +94,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 265 Tests
+**Gesamt:** 266 Tests
 - ✅ Implementiert: 151
 - ❌ Fehlend: 113
 - ⚠️ Teilweise: 0
@@ -579,8 +579,8 @@ Die 5 Merklisten-Tests prüfen alle wesentlichen Funktionen der Shopware 6 Wishl
 ### 🏷️ Feature Tests - Produktdetailseite (PDP)
 
 **Priorität:** P1
-**Tests:** 0/5 geplant
-**Beschreibung:** Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Hotspots
+**Tests:** 1/6 implementiert
+**Beschreibung:** Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Hotspots, Bewertungen
 **Dauer:** 5-15 Min
 **Ausführung:** In CI/CD, vor Feature-Release
 
@@ -591,6 +591,7 @@ Die 5 Merklisten-Tests prüfen alle wesentlichen Funktionen der Shopware 6 Wishl
 | TC-PDP-003 | Beschreibung und Details sichtbar | P2 | ○ | AT, DE, CH | 1 |
 | TC-PDP-004 | Nicht-auf-Lager-Verhalten | P1 | ○ | AT, DE, CH | 1 |
 | TC-PDP-005 | Hotspot-Elemente auf Bildern | P2 | ○ | AT, DE, CH | 1 |
+| TC-PDP-006 | Produktbewertung abgeben [Staging] | P2 | ✅ | AT | 1 |
 
 ---
 

@@ -1,6 +1,6 @@
 """
-PDP (Product Detail Page) Tests - TC-PDP-001 bis TC-PDP-005
-Tests fuer Produktbilder-Galerie, Varianten, Beschreibung, Lagerbestand, Hotspots
+PDP (Product Detail Page) Tests - TC-PDP-001 bis TC-PDP-006
+Tests fuer Produktbilder-Galerie, Varianten, Beschreibung, Lagerbestand, Hotspots, Bewertungen
 
 Ausfuehrung:
     pytest playwright_tests/tests/test_pdp.py -v
@@ -539,4 +539,180 @@ def test_hotspot_elements(page: Page, base_url: str):
 
     except Exception as e:
         take_error_screenshot(page, "TC-PDP-005")
+        raise
+
+# =============================================================================
+# TC-PDP-006: Produktbewertung abgeben [Staging only]
+# =============================================================================
+
+# Shopware 6 Review-Selektoren
+REVIEW_TAB_LINK = "a[href='#review-tab-pane'], .product-detail-tabs .nav-link:has-text('Bewertungen')"
+REVIEW_TAB_PANE = "#review-tab-pane"
+REVIEW_FORM = ".product-detail-review-form"
+REVIEW_RATING_SELECT = "#reviewRating"
+REVIEW_TITLE_INPUT = "#reviewTitle"
+REVIEW_CONTENT_TEXTAREA = "#reviewContent"
+REVIEW_SUBMIT_BUTTON = ".product-detail-review-form button[type='submit']"
+REVIEW_LIST = ".product-detail-review-list"
+REVIEW_ITEM_CONTENT = ".product-detail-review-list .product-review-content"
+REVIEW_LOGIN_HINT = ".product-detail-review-login"
+
+
+@pytest.mark.pdp
+@pytest.mark.feature
+def test_product_review(page: Page, base_url: str, config):
+    """
+    TC-PDP-006: Produktbewertung abgeben und im Bewertungs-Tab verifizieren.
+
+    NUR auf Staging ausfuehren - schreibt echte Daten (Bewertung).
+
+    1. Staging-Check
+    2. Login als AT-Kunde
+    3. Produktseite aufrufen
+    4. Bewertungs-Tab oeffnen
+    5. Bewertung abgeben (5 Sterne, Text)
+    6. Pruefen: Bewertung erscheint in der Liste
+    """
+    print(f"\n[PDP] TC-PDP-006: Produktbewertung abgeben [Staging]")
+
+    # Staging-Only Guard
+    if config.test_profile != "staging":
+        pytest.skip("TC-PDP-006 darf nur auf Staging ausgefuehrt werden")
+
+    review_text = "Ich liebe Grüne Erde Produkte"
+
+    # Login-Daten holen
+    customer = config.get_customer_by_country("AT")
+    if not customer:
+        pytest.skip("Kein AT-Kunde in config.yaml konfiguriert")
+    email = customer.email
+    password = config.get_customer_password(customer)
+    if not password:
+        pytest.skip("Kein Passwort fuer AT-Kunde konfiguriert")
+
+    try:
+        # [1] Login
+        print(f"    Step 1: Login als AT-Kunde ({email})")
+        page.goto(f"{base_url}/account/login")
+        page.wait_for_load_state("domcontentloaded")
+        page.wait_for_timeout(1000)
+        accept_cookie_banner(page)
+
+        page.fill("#loginMail", email)
+        page.fill("#loginPassword", password)
+        page.locator("button:has-text('Anmelden')").first.click()
+        page.wait_for_load_state("domcontentloaded")
+        page.wait_for_timeout(1500)
+
+        assert "account/login" not in page.url, "Login fehlgeschlagen"
+        print(f"    [OK] Login erfolgreich")
+
+        # [2] Produktseite aufrufen
+        print(f"    Step 2: Produktseite aufrufen")
+        page.goto(f"{base_url}/{TEST_PRODUCT['path']}")
+        page.wait_for_load_state("domcontentloaded")
+        page.wait_for_timeout(1500)
+
+        # [3] Bewertungs-Tab oeffnen
+        print(f"    Step 3: Bewertungs-Tab oeffnen")
+        review_tab = page.locator(REVIEW_TAB_LINK)
+        if review_tab.count() > 0 and review_tab.first.is_visible():
+            review_tab.first.click()
+            page.wait_for_timeout(1000)
+            print(f"    [OK] Bewertungs-Tab geoeffnet")
+        else:
+            # Zum Tab-Bereich scrollen und erneut versuchen
+            page.evaluate("document.querySelector('.product-detail-tabs')?.scrollIntoView()")
+            page.wait_for_timeout(1000)
+            review_tab = page.locator(REVIEW_TAB_LINK)
+            assert review_tab.count() > 0, "Bewertungs-Tab nicht gefunden"
+            review_tab.first.click()
+            page.wait_for_timeout(1000)
+
+        # [4] Bewertungsformular ausfuellen
+        print(f"    Step 4: Bewertungsformular ausfuellen")
+
+        # Sternbewertung (5 Sterne)
+        rating_select = page.locator(REVIEW_RATING_SELECT)
+        if rating_select.count() > 0 and rating_select.is_visible():
+            rating_select.select_option("5")
+            print(f"    Bewertung: 5 Sterne")
+        else:
+            print(f"    [WARN] Rating-Select nicht gefunden, versuche alternatives Rating")
+            # Fallback: Klick auf letzten Stern
+            stars = page.locator(".product-detail-review-form .product-review-point")
+            if stars.count() > 0:
+                stars.last.click()
+                print(f"    Bewertung via Stern-Klick gesetzt")
+
+        # Titel (optional, aber ausfuellen wenn vorhanden)
+        title_input = page.locator(REVIEW_TITLE_INPUT)
+        if title_input.count() > 0 and title_input.is_visible():
+            title_input.fill("Tolles Produkt")
+            print(f"    Titel: 'Tolles Produkt'")
+
+        # Bewertungstext
+        content_textarea = page.locator(REVIEW_CONTENT_TEXTAREA)
+        assert content_textarea.count() > 0, "Bewertungs-Textfeld nicht gefunden"
+        content_textarea.fill(review_text)
+        print(f"    Text: '{review_text}'")
+
+        # [5] Bewertung absenden
+        print(f"    Step 5: Bewertung absenden")
+        submit_btn = page.locator(REVIEW_SUBMIT_BUTTON)
+        assert submit_btn.count() > 0, "Absenden-Button nicht gefunden"
+        submit_btn.first.click()
+        page.wait_for_load_state("domcontentloaded")
+        page.wait_for_timeout(2000)
+
+        # [6] Bewertung verifizieren
+        print(f"    Step 6: Bewertung in der Liste verifizieren")
+
+        # Erfolgs-Meldung pruefen (manche Shops zeigen "Bewertung gespeichert")
+        success_alert = page.locator(".alert-success")
+        if success_alert.count() > 0 and success_alert.first.is_visible():
+            print(f"    [OK] Erfolgsmeldung: {success_alert.first.inner_text().strip()[:80]}")
+
+        # Bewertungs-Tab sicherstellen (Seite koennte neu geladen haben)
+        review_tab = page.locator(REVIEW_TAB_LINK)
+        if review_tab.count() > 0 and review_tab.first.is_visible():
+            review_tab.first.click()
+            page.wait_for_timeout(1000)
+
+        # Bewertungstext in der Liste suchen
+        review_items = page.locator(REVIEW_ITEM_CONTENT)
+        found = False
+        if review_items.count() > 0:
+            for i in range(review_items.count()):
+                item_text = review_items.nth(i).inner_text().strip()
+                if review_text in item_text:
+                    found = True
+                    print(f"    [OK] Bewertung gefunden in Liste: '{item_text[:80]}'")
+                    break
+
+        if not found:
+            # Fallback: Im gesamten Tab-Pane suchen
+            tab_pane = page.locator(REVIEW_TAB_PANE)
+            if tab_pane.count() > 0:
+                pane_text = tab_pane.first.inner_text()
+                if review_text in pane_text:
+                    found = True
+                    print(f"    [OK] Bewertung im Tab-Bereich gefunden")
+
+        if not found:
+            # Bewertung evtl. noch nicht freigegeben (Admin-Moderation)
+            print(f"    [INFO] Bewertung nicht sofort sichtbar - evtl. Admin-Freigabe noetig")
+            # Trotzdem als bestanden werten wenn Erfolgsmeldung kam
+            if success_alert.count() > 0:
+                print(f"    [OK] Bewertung wurde erfolgreich eingereicht (Moderation aktiv)")
+            else:
+                page.screenshot(path="error_pdp_TC-PDP-006.png")
+                assert False, (
+                    f"Bewertung '{review_text}' nicht gefunden und keine Erfolgsmeldung"
+                )
+
+        print(f"    [OK] Produktbewertung Test abgeschlossen")
+
+    except Exception as e:
+        take_error_screenshot(page, "TC-PDP-006")
         raise

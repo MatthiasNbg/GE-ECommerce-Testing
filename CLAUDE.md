@@ -45,7 +45,7 @@ Beispiele:
 | TC-SHIP-COST-* | Versandkosten-Validierung | TC-SHIP-COST-AT-003 / TC-SHIP-COST-DE-003 |
 | TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-008 |
 | TC-NAV-* | Navigation/Menue/Laenderwechsel | TC-NAV-006 |
-| TC-PDP-* | Produktdetailseite | TC-PDP-006 |
+| TC-PDP-* | Produktdetailseite | TC-PDP-007 |
 | TC-LISTING-* | Kategorie/Listing/Filter | TC-LISTING-005 |
 | TC-NEWSLETTER-* | Newsletter | TC-NEWSLETTER-003 |
 | TC-TECH-* | Technisch (Cookie/Responsive/A11y) | TC-TECH-011 |
@@ -113,5 +113,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 232 Dateien, 0 fehlerhaft, Exit-Code 0.
-(39 neue Contracts: 5 NAV + 5 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST)
+Erwartetes Ergebnis: 233 Dateien, 0 fehlerhaft, Exit-Code 0.
+(40 neue Contracts: 5 NAV + 6 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST)
