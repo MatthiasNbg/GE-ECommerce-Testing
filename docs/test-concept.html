@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>271 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>272 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -1570,6 +1570,14 @@
 <td>AT</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-ACCOUNT-013</td>
+<td>E-Mail-Adresse auf neue Adresse ändern (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>Staging</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -1629,7 +1637,7 @@
 <li><strong>Schritte:</strong> Adressverwaltung aufrufen → Übersicht prüfen → neue Adresse hinzufügen → speichern → in der Liste prüfen</li>
 <li><strong>Erwartet:</strong> Adressübersicht zeigt alle Adressen, Hinzufügen/Bearbeiten/Löschen funktioniert</li>
 </ul>
-<h4 id="e-mail-verwaltung-1-test">E-Mail-Verwaltung (1 Test)</h4>
+<h4 id="e-mail-verwaltung-2-tests">E-Mail-Verwaltung (2 Tests)</h4>
 
 <strong>TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern wird abgelehnt</strong>
 <ul>
@@ -1637,8 +1645,26 @@
 <li><strong>Schritte:</strong> Profil-Seite aufrufen → E-Mail auf bereits registrierte DE-Kunden-Adresse ändern → Passwort bestätigen → absenden</li>
 <li><strong>Erwartet:</strong> Fehlermeldung erscheint, E-Mail bleibt unverändert, Benutzer bleibt auf Profil-Seite</li>
 </ul>
+<strong>TC-ACCOUNT-013: E-Mail-Adresse auf neue Adresse ändern (manuell)</strong> 🖐️
+<ul>
+<li><strong>Nur Staging</strong> — manueller Test, da Bestätigungs-E-Mails nicht automatisiert empfangen werden können</li>
+<li><strong>Vorbedingung:</strong> Kunde auf Staging eingeloggt</li>
+<li><strong>Schritte:</strong></li>
+</ul>
+<ol>
+<li>E-Mail-Feld auf eine neue, noch nicht registrierte Adresse ändern</li>
+<li>Aktuelles Passwort zur Bestätigung eingeben</li>
+<li>Änderung absenden</li>
+<li>Postfach der <strong>neuen</strong> E-Mail-Adresse prüfen: Bestätigungs-E-Mail mit Bestätigungslink muss eingegangen sein</li>
+<li>Postfach der <strong>alten</strong> E-Mail-Adresse prüfen: Benachrichtigungs-E-Mail über die angeforderte Änderung muss eingegangen sein</li>
+<li>Bestätigungslink in der E-Mail (neue Adresse) anklicken</li>
+<li>Erneut einloggen mit der neuen E-Mail-Adresse</li>
+<ul>
+<li><strong>Erwartet:</strong> Erfolgshinweis nach Absenden, <strong>zwei E-Mails</strong> werden versendet (Bestätigung an neue Adresse, Benachrichtigung an alte Adresse), nach Bestätigung ist Login mit neuer E-Mail möglich, alte E-Mail funktioniert nicht mehr</li>
+<li><strong>Warum manuell:</strong> E-Mail-Empfang kann in der Testautomatisierung nicht verifiziert werden</li>
+</ul>
 <h4 id="adresse-checkout-1-test">Adresse & Checkout (1 Test)</h4>
-
+</ol>
 <strong>TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren</strong>
 <ul>
 <li><strong>Vorbedingung:</strong> AT-Kunde eingeloggt, mindestens eine Adresse vorhanden</li>
@@ -5678,7 +5704,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 16:07 Uhr</p>
+            <p>Generiert am 06.02.2026 um 16:24 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

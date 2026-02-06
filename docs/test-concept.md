@@ -499,10 +499,11 @@ Die 9 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
   2. E-Mail-Feld auf eine neue, noch nicht registrierte Adresse ändern
   3. Aktuelles Passwort zur Bestätigung eingeben
   4. Änderung absenden
-  5. Bestätigungs-E-Mail im Postfach prüfen (manuell)
-  6. Bestätigungslink in der E-Mail anklicken
-  7. Erneut einloggen mit der neuen E-Mail-Adresse
-- **Erwartet:** Erfolgshinweis nach Absenden, Bestätigungs-E-Mail wird zugestellt, nach Bestätigung ist Login mit neuer E-Mail möglich, alte E-Mail funktioniert nicht mehr
+  5. Postfach der **neuen** E-Mail-Adresse prüfen: Bestätigungs-E-Mail mit Bestätigungslink muss eingegangen sein
+  6. Postfach der **alten** E-Mail-Adresse prüfen: Benachrichtigungs-E-Mail über die angeforderte Änderung muss eingegangen sein
+  7. Bestätigungslink in der E-Mail (neue Adresse) anklicken
+  8. Erneut einloggen mit der neuen E-Mail-Adresse
+- **Erwartet:** Erfolgshinweis nach Absenden, **zwei E-Mails** werden versendet (Bestätigung an neue Adresse, Benachrichtigung an alte Adresse), nach Bestätigung ist Login mit neuer E-Mail möglich, alte E-Mail funktioniert nicht mehr
 - **Warum manuell:** E-Mail-Empfang kann in der Testautomatisierung nicht verifiziert werden
 
 #### Adresse & Checkout (1 Test)

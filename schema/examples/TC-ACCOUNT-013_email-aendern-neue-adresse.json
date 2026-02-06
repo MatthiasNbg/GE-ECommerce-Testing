@@ -1,0 +1,99 @@
+{
+  "test_id": "TC-ACCOUNT-013",
+  "name": "E-Mail-Adresse auf neue Adresse aendern (manuell)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Account E-Mail-Verwaltung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar (Staging)",
+    "Kunde ist eingeloggt",
+    "Neue E-Mail-Adresse ist noch nicht registriert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Profil-Seite aufrufen",
+      "expected": "Profil-Seite wird geladen mit aktuellem E-Mail-Feld",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/profile"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "E-Mail-Feld auf neue, noch nicht registrierte Adresse aendern",
+      "expected": "Neues E-Mail-Feld ist ausgefuellt",
+      "selector_hint": "input[name='email']"
+    },
+    {
+      "step": 3,
+      "action": "Aktuelles Passwort zur Bestaetigung eingeben",
+      "expected": "Passwort-Feld ist ausgefuellt",
+      "selector_hint": "input[name='password']"
+    },
+    {
+      "step": 4,
+      "action": "Aenderung absenden",
+      "expected": "Erfolgshinweis wird angezeigt, zwei E-Mails werden versendet"
+    },
+    {
+      "step": 5,
+      "action": "Postfach der neuen E-Mail-Adresse pruefen (manuell)",
+      "expected": "Bestaetigungs-E-Mail mit Bestaetigungslink ist eingegangen"
+    },
+    {
+      "step": 6,
+      "action": "Postfach der alten E-Mail-Adresse pruefen (manuell)",
+      "expected": "Benachrichtigungs-E-Mail ueber die angeforderte Aenderung ist eingegangen"
+    },
+    {
+      "step": 7,
+      "action": "Bestaetigungslink in der E-Mail (neue Adresse) anklicken",
+      "expected": "E-Mail-Aenderung wird bestaetigt, Shop zeigt Erfolgsmeldung"
+    },
+    {
+      "step": 8,
+      "action": "Erneut einloggen mit der neuen E-Mail-Adresse",
+      "expected": "Login mit neuer E-Mail ist erfolgreich, alte E-Mail funktioniert nicht mehr"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "Staging"
+    }
+  ],
+  "automation": {
+    "status": "manual",
+    "framework": "manuell",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "account",
+      "email",
+      "manual",
+      "staging"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
