@@ -245,7 +245,7 @@ payment_method_aliases:
 # Quelle: GlobalPayments Developer Documentation
 #
 credit_card_test_data:
-  # Erfolgreiche Testkarten
+  # Erfolgreiche Testkarten (Quelle: https://developer.globalpayments.com/resources/test-card-numbers)
   visa:
     number: "4263970000005262"
     expiry: "08/28"
@@ -253,19 +253,43 @@ credit_card_test_data:
     holder: "Test Kunde"
   mastercard:
     number: "5425230000004415"
-    expiry: "12/27"
+    expiry: "08/28"
     cvv: "123"
     holder: "Test Kunde"
-  # Karte fuer 3D-Secure Tests (falls benoetigt)
-  visa_3ds:
-    number: "4012001038443335"
-    expiry: "12/27"
+  amex:
+    number: "374101000000608"
+    expiry: "08/28"
+    cvv: "1234"
+    holder: "Test Kunde"
+  diners:
+    number: "36256000000725"
+    expiry: "08/28"
     cvv: "123"
     holder: "Test Kunde"
-  # Karte die abgelehnt wird (fuer Negativtests)
-  declined:
+  discover:
+    number: "6011000000000087"
+    expiry: "08/28"
+    cvv: "123"
+    holder: "Test Kunde"
+  jcb:
+    number: "3566000000000000"
+    expiry: "08/28"
+    cvv: "123"
+    holder: "Test Kunde"
+  uatp:
+    number: "135400000007187"
+    expiry: "08/28"
+    cvv: "123"
+    holder: "Test Kunde"
+  # Karten die abgelehnt werden (fuer Negativtests)
+  declined_visa:
     number: "4000120000001154"
-    expiry: "12/27"
+    expiry: "08/28"
+    cvv: "123"
+    holder: "Test Kunde"
+  declined_mastercard:
+    number: "5114610000004778"
+    expiry: "08/28"
     cvv: "123"
     holder: "Test Kunde"
 
