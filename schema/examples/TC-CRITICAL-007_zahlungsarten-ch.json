@@ -1,0 +1,84 @@
+{
+  "test_id": "TC-CRITICAL-007",
+  "name": "Zahlungsarten verfügbar (CH)",
+  "category": "e2e",
+  "priority": "P0",
+  "functional_area": "Feature Critical Path",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Testprodukt ist verfügbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Zur Checkout-Seite navigieren und Adressdaten für CH eingeben",
+      "expected": "Checkout-Seite wird geladen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Zur Kasse')"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zahlungsarten-Bereich prüfen",
+      "expected": "Alle für CH konfigurierten Zahlungsarten sind sichtbar"
+    },
+    {
+      "step": 4,
+      "action": "Jede Zahlungsart auswählen",
+      "expected": "Zahlungsarten sind auswählbar ohne Fehler"
+    }
+  ],
+  "postconditions": [
+    "Alle Zahlungsarten werden korrekt angezeigt"
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_payment_methods_available.py",
+    "function_name": "test_payment_methods_available[CH]",
+    "tags": [
+      "critical-path",
+      "zahlungsarten"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-03",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}
