@@ -1,0 +1,162 @@
+{
+  "test_id": "TC-CART-GIFT-002",
+  "name": "Bundle-Produkt kann nicht zu Warenkorb mit Einkaufsgutschein hinzugefügt werden",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Feature Warenkorb",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutschein-Produkt ist verfügbar",
+    "Bundle-Produkt ist verfügbar",
+    "Warenkorb ist leer"
+  ],
+  "postconditions": [
+    "Nur Einkaufsgutschein bleibt im Warenkorb",
+    "Bundle-Produkt wurde NICHT hinzugefügt",
+    "Fehlermeldung wurde angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Einkaufsgutschein-Produktseite aufrufen",
+      "expected": "Produktseite für Einkaufsgutschein lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufügen",
+      "expected": "Gutschein wird zum Warenkorb hinzugefügt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Offcanvas-Cart schließen",
+      "expected": "Cart wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".offcanvas-close, .btn-close"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Bundle-Produkt aufrufen",
+      "expected": "Produktseite lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/bundle-produkt/ge-p-BUNDLE"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Bundle-Produkt zum Warenkorb hinzufügen versuchen",
+      "expected": "Produkt wird NICHT hinzugefügt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Fehlermeldung im Offcanvas-Cart prüfen",
+      "expected": "Fehlermeldung wird angezeigt: 'Einkaufsgutscheine können nur separat gekauft werden. Bitte schließen Sie den Kauf ab oder entfernen Sie die Einkaufsgutscheine von Ihrem Warenkorb.'",
+      "selector_hint": ".offcanvas-cart .alert",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".offcanvas-cart .alert",
+          "message": "Fehlermeldung muss im Offcanvas-Cart sichtbar sein"
+        },
+        {
+          "type": "element_contains_text",
+          "selector": ".offcanvas-cart .alert",
+          "expected": "Einkaufsgutscheine können nur separat gekauft werden",
+          "message": "Korrekte Fehlermeldung muss angezeigt werden"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Warenkorb-Inhalt prüfen",
+      "expected": "Nur Einkaufsgutschein ist im Warenkorb, Bundle-Produkt fehlt",
+      "selector_hint": ".offcanvas-cart .line-item"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "product",
+      "name": "gift_card",
+      "path": "p/einkaufsgutschein/ge-p-GUTSCHEIN",
+      "product_name": "Einkaufsgutschein"
+    },
+    {
+      "type": "product",
+      "name": "bundle",
+      "path": "p/bundle-produkt/ge-p-BUNDLE",
+      "product_name": "Bundle-Produkt"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart_gift_voucher.py",
+    "function_name": "test_bundle_product_blocked_when_gift_card_in_cart",
+    "tags": [
+      "regression",
+      "cart",
+      "gift-voucher",
+      "bundle",
+      "validation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-05",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}

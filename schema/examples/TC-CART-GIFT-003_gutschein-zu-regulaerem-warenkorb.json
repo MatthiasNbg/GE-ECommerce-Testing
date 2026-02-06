@@ -1,0 +1,167 @@
+{
+  "test_id": "TC-CART-GIFT-003",
+  "name": "Einkaufsgutschein kann nicht zu Warenkorb mit regulären Produkten hinzugefügt werden",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Warenkorb",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Reguläres Testprodukt ist verfügbar",
+    "Einkaufsgutschein-Produkt ist verfügbar",
+    "Warenkorb ist leer"
+  ],
+  "postconditions": [
+    "Nur reguläres Produkt bleibt im Warenkorb",
+    "Einkaufsgutschein wurde NICHT hinzugefügt",
+    "Fehlermeldung wurde angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Reguläres Produkt aufrufen",
+      "expected": "Produktseite lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Reguläres Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt wird zum Warenkorb hinzugefügt, Offcanvas-Cart öffnet sich",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Offcanvas-Cart schließen",
+      "expected": "Cart wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".offcanvas-close, .btn-close"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Einkaufsgutschein-Produktseite aufrufen",
+      "expected": "Produktseite für Einkaufsgutschein lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufügen versuchen",
+      "expected": "Gutschein wird NICHT hinzugefügt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Fehlermeldung im Offcanvas-Cart prüfen",
+      "expected": "Fehlermeldung wird angezeigt: 'Einkaufsgutscheine können nur separat gekauft werden. Bitte entfernen Sie zunächst die Produkte im Warenkorb, um die Einkaufsgutscheine kaufen zu können.'",
+      "selector_hint": ".offcanvas-cart .alert, .offcanvas-cart .flash-message",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".offcanvas-cart .alert",
+          "message": "Fehlermeldung muss im Offcanvas-Cart sichtbar sein"
+        },
+        {
+          "type": "element_contains_text",
+          "selector": ".offcanvas-cart .alert",
+          "expected": "Einkaufsgutscheine können nur separat gekauft werden",
+          "message": "Korrekte Fehlermeldung muss angezeigt werden"
+        },
+        {
+          "type": "element_contains_text",
+          "selector": ".offcanvas-cart .alert",
+          "expected": "Bitte entfernen Sie zunächst die Produkte",
+          "message": "Hinweis zum Entfernen der Produkte muss angezeigt werden"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Warenkorb-Inhalt prüfen",
+      "expected": "Nur reguläres Produkt ist im Warenkorb, Einkaufsgutschein fehlt",
+      "selector_hint": ".offcanvas-cart .line-item"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "product",
+      "name": "regular",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    },
+    {
+      "type": "product",
+      "name": "gift_card",
+      "path": "p/einkaufsgutschein/ge-p-GUTSCHEIN",
+      "product_name": "Einkaufsgutschein"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart_gift_voucher.py",
+    "function_name": "test_gift_card_blocked_when_regular_products_in_cart",
+    "tags": [
+      "regression",
+      "cart",
+      "gift-voucher",
+      "validation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-05",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}

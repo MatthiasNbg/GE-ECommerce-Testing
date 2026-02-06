@@ -11894,6 +11894,193 @@
   },
   {
     "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-007",
+    "name": "Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "DE"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-06",
+    "description": "Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Deutschland",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = DE",
+      "Warenkorb enthält sowohl Postartikel als auch Speditionsartikel",
+      "Beide Versandarten werden im Checkout angezeigt"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Postartikel zum Warenkorb hinzufügen",
+        "expected": "Postartikel ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Speditionsartikel zum Warenkorb hinzufügen",
+        "expected": "Speditionsartikel ist im Warenkorb"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass beide Versandarten im Checkout erscheinen",
+        "expected": "Postversand und Speditionsversand werden separat angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Versandkostenfrei-Promocode für Post eingeben",
+        "expected": "Nur Postversandkosten werden auf 0 reduziert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Speditionskosten unverändert bleiben",
+        "expected": "Speditionskosten bleiben unverändert"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "versandkostenfrei",
+      "gemischter-warenkorb",
+      "post-spedi",
+      "DE"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-008",
+    "name": "Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "AT"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-06",
+    "description": "Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Österreich",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = AT",
+      "Warenkorb enthält sowohl Postartikel als auch Speditionsartikel",
+      "Beide Versandarten werden im Checkout angezeigt"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Postartikel zum Warenkorb hinzufügen",
+        "expected": "Postartikel ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Speditionsartikel zum Warenkorb hinzufügen",
+        "expected": "Speditionsartikel ist im Warenkorb"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass beide Versandarten im Checkout erscheinen",
+        "expected": "Postversand AT und Spedi-Versand AT werden separat angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Versandkostenfrei-Promocode für Post eingeben",
+        "expected": "Nur Postversandkosten (5,95 EUR) werden auf 0 reduziert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Speditionskosten unverändert bleiben",
+        "expected": "Speditionskosten bleiben unverändert"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "versandkostenfrei",
+      "gemischter-warenkorb",
+      "post-spedi",
+      "AT"
+    ]
+  },
+  {
+    "schema_version": "2.0",
+    "test_id": "TC-PROMO-SHIP-009",
+    "name": "Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH",
+    "category": "versandkostenfrei",
+    "priority": "P1",
+    "status": "defined",
+    "channels": [
+      "CH"
+    ],
+    "author": "claude",
+    "last_modified": "2026-02-06",
+    "description": "Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Schweiz",
+    "preconditions": [
+      "Shop ist erreichbar",
+      "Land = CH",
+      "Warenkorb enthält sowohl Postartikel als auch Speditionsartikel",
+      "Beide Versandarten werden im Checkout angezeigt",
+      "Preise in CHF"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "action": "Postartikel zum Warenkorb hinzufügen",
+        "expected": "Postartikel ist im Warenkorb"
+      },
+      {
+        "step": 2,
+        "action": "Speditionsartikel zum Warenkorb hinzufügen",
+        "expected": "Speditionsartikel ist im Warenkorb"
+      },
+      {
+        "step": 3,
+        "action": "Prüfen, dass beide Versandarten im Checkout erscheinen",
+        "expected": "Postversand CH und Spedi-Versand CH werden separat angezeigt"
+      },
+      {
+        "step": 4,
+        "action": "Versandkostenfrei-Promocode für Post eingeben",
+        "expected": "Nur Postversandkosten (6,95 CHF) werden auf 0 reduziert"
+      },
+      {
+        "step": 5,
+        "action": "Prüfen, dass Speditionskosten unverändert bleiben",
+        "expected": "Speditionskosten bleiben unverändert"
+      }
+    ],
+    "cleanup": [
+      "Warenkorb leeren"
+    ],
+    "automation": {
+      "playwright": null,
+      "cypress": null,
+      "manual": true
+    },
+    "references": [],
+    "tags": [
+      "versandkostenfrei",
+      "gemischter-warenkorb",
+      "post-spedi",
+      "CH"
+    ]
+  },
+  {
+    "schema_version": "2.0",
     "test_id": "TC-PROMO-CAT-001",
     "name": "Promo auf Produktkategorie via advertising_material_id",
     "category": "produktkategorien",
@@ -12254,150 +12441,6 @@
       "mengenrabatt",
       "teuerstes-produkt",
       "prozentual",
-      "promotion"
-    ]
-  },
-  {
-    "schema_version": "2.0",
-    "test_id": "TC-PROMO-QTY-002",
-    "name": "Mengenrabatt nur auf 1 Produkt",
-    "category": "mengenrabatt",
-    "priority": "P1",
-    "status": "defined",
-    "channels": [
-      "AT",
-      "DE",
-      "CH"
-    ],
-    "author": "claude",
-    "last_modified": "2026-02-03",
-    "description": "Prüft, dass ein Mengenrabatt (z.B. \"ab 3 Stück 10% Rabatt\") nur auf das qualifizierte Produkt angewendet wird, nicht auf den gesamten Warenkorb",
-    "preconditions": [
-      "Shop ist erreichbar",
-      "Warenkorb ist leer",
-      "Promotion mit Mengenbedingung (z.B. ab 3 Stück)",
-      "Warenkorb mit qualifiziertem Produkt (ausreichende Menge) + weitere Produkte"
-    ],
-    "steps": [
-      {
-        "step": 1,
-        "action": "Produkt A 3x zum Warenkorb hinzufügen (qualifiziert für Mengenrabatt)",
-        "expected": "Mengenrabatt wird nur auf das qualifizierte Produkt angewendet"
-      },
-      {
-        "step": 2,
-        "action": "Produkt B 1x hinzufügen (nicht qualifiziert)",
-        "expected": "Andere Produkte im Warenkorb bleiben unrabattiert"
-      },
-      {
-        "step": 3,
-        "action": "Promotion-Code eingeben (oder automatische Promotion)",
-        "expected": "Bei Unterschreitung der Mindestmenge entfällt der Rabatt"
-      },
-      {
-        "step": 4,
-        "action": "Prüfen, dass Rabatt nur auf Produkt A angewendet wird",
-        "expected": "Anzeige ist korrekt"
-      },
-      {
-        "step": 5,
-        "action": "Prüfen, dass Produkt B zum vollen Preis bleibt",
-        "expected": "Anzeige ist korrekt"
-      },
-      {
-        "step": 6,
-        "action": "Menge von Produkt A auf 2 reduzieren",
-        "expected": "Rabatt entfällt"
-      }
-    ],
-    "cleanup": [
-      "Warenkorb leeren"
-    ],
-    "automation": {
-      "playwright": null,
-      "cypress": null,
-      "manual": true
-    },
-    "references": [],
-    "tags": [
-      "mengenrabatt",
-      "mengenbedingung",
-      "einzelprodukt",
-      "promotion"
-    ]
-  },
-  {
-    "schema_version": "2.0",
-    "test_id": "TC-PROMO-QTY-003",
-    "name": "3x gleiches Produkt - nur 1x rabattiert",
-    "category": "mengenrabatt",
-    "priority": "P1",
-    "status": "defined",
-    "channels": [
-      "AT",
-      "DE",
-      "CH"
-    ],
-    "author": "claude",
-    "last_modified": "2026-02-03",
-    "description": "Prüft \"Nimm 3, zahl 2\"-Logik: Bei 3 gleichen Produkten wird nur 1 Stück rabattiert (kostenlos)",
-    "preconditions": [
-      "Shop ist erreichbar",
-      "Warenkorb ist leer",
-      "Promotion mit Regel \"bei 3 gleichen Produkten ist das günstigste/ein Stück gratis\"",
-      "Gleiches Produkt 3x im Warenkorb"
-    ],
-    "steps": [
-      {
-        "step": 1,
-        "action": "Gleiches Produkt 3x zum Warenkorb hinzufügen",
-        "expected": "Bei 3 Stück: Genau 1 Stück wird rabattiert"
-      },
-      {
-        "step": 2,
-        "action": "Promotion-Code eingeben (oder automatische Promotion)",
-        "expected": "Gesamtpreis = Menge - Gratisartikel × Einzelpreis"
-      },
-      {
-        "step": 3,
-        "action": "Prüfen, dass genau 1 Stück als 100% rabattiert angezeigt wird",
-        "expected": "Rabatt wird als separater Nachlass im Warenkorb angezeigt"
-      },
-      {
-        "step": 4,
-        "action": "Prüfen, dass die anderen 2 Stück zum vollen Preis bleiben",
-        "expected": "Staffelung bei höherer Menge (falls konfiguriert)"
-      },
-      {
-        "step": 5,
-        "action": "Gesamtsumme validieren (= 2x Einzelpreis)",
-        "expected": "Anzeige ist korrekt"
-      },
-      {
-        "step": 6,
-        "action": "4. Stück hinzufügen",
-        "expected": "Weiterhin nur 1x rabattiert"
-      },
-      {
-        "step": 7,
-        "action": "6 Stück testen",
-        "expected": "Prüfen ob 2x rabattiert (je nach Promo-Logik)"
-      }
-    ],
-    "cleanup": [
-      "Warenkorb leeren"
-    ],
-    "automation": {
-      "playwright": null,
-      "cypress": null,
-      "manual": true
-    },
-    "references": [],
-    "tags": [
-      "mengenrabatt",
-      "nimm3-zahl2",
-      "gratisartikel",
-      "staffelung",
       "promotion"
     ]
   },
@@ -12799,7 +12842,7 @@
   {
     "schema_version": "2.0",
     "test_id": "TC-PROMO-BUNDLE-001",
-    "name": "Nimm 5 zahl 4",
+    "name": "Nimm 3 zahl 2",
     "category": "bundle",
     "priority": "P1",
     "status": "defined",
@@ -12864,75 +12907,6 @@
       "nimm5-zahl4",
       "mengen-aktion",
       "gratisartikel",
-      "promotion"
-    ]
-  },
-  {
-    "schema_version": "2.0",
-    "test_id": "TC-PROMO-BUNDLE-002",
-    "name": "Produkt A + Gratisprodukt",
-    "category": "bundle",
-    "priority": "P1",
-    "status": "defined",
-    "channels": [
-      "AT",
-      "DE",
-      "CH"
-    ],
-    "author": "claude",
-    "last_modified": "2026-02-03",
-    "description": "Prüft Bundle-Promotion, bei der beim Kauf von Produkt A ein bestimmtes Gratisprodukt automatisch hinzugefügt wird",
-    "preconditions": [
-      "Shop ist erreichbar",
-      "Warenkorb ist leer",
-      "Promotion: Beim Kauf von Produkt A → Produkt B gratis",
-      "Produkte A und B müssen konfiguriert sein"
-    ],
-    "steps": [
-      {
-        "step": 1,
-        "action": "Produkt A zum Warenkorb hinzufügen",
-        "expected": "Gratisprodukt wird automatisch zum Warenkorb hinzugefügt"
-      },
-      {
-        "step": 2,
-        "action": "Prüfen, ob Gratisprodukt B automatisch hinzugefügt wird (oder Code eingeben)",
-        "expected": "Gratisprodukt wird mit 0 EUR/CHF angezeigt"
-      },
-      {
-        "step": 3,
-        "action": "Prüfen, dass Gratisprodukt mit Preis 0 angezeigt wird",
-        "expected": "Entfernung von Produkt A entfernt auch das Gratisprodukt"
-      },
-      {
-        "step": 4,
-        "action": "Prüfen, dass Gratisprodukt nicht einzeln entfernt werden kann (optional)",
-        "expected": "Gesamtpreis = nur Preis von Produkt A"
-      },
-      {
-        "step": 5,
-        "action": "Produkt A entfernen",
-        "expected": "Gratisprodukt wird ebenfalls entfernt"
-      },
-      {
-        "step": 6,
-        "action": "Gesamtpreis validieren",
-        "expected": "Anzeige ist korrekt"
-      }
-    ],
-    "cleanup": [
-      "Warenkorb leeren"
-    ],
-    "automation": {
-      "playwright": null,
-      "cypress": null,
-      "manual": true
-    },
-    "references": [],
-    "tags": [
-      "bundle",
-      "gratisprodukt",
-      "automatisch",
       "promotion"
     ]
   },
@@ -13010,7 +12984,7 @@
   {
     "schema_version": "2.0",
     "test_id": "TC-PROMO-BUNDLE-004",
-    "name": "Pro Kissen ein Schonbezug gratis",
+    "name": "Pro Kissen ein Schonbezug gratis bei allen im Artikel",
     "category": "bundle",
     "priority": "P1",
     "status": "defined",

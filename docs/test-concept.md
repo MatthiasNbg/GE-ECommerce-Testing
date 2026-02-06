@@ -844,6 +844,9 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | TC-PROMO-SHIP-004 | Versandkostenfrei nur Spedi (CH) | P1 | ○ | CH |
 | TC-PROMO-SHIP-005 | Versandkostenfrei Post ab MBW EUR 50 (DE/AT) | P1 | ○ | AT, DE |
 | TC-PROMO-SHIP-006 | Versandkostenfrei Post ab MBW CHF 50 (CH) | P1 | ○ | CH |
+| TC-PROMO-SHIP-007 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE | P1 | ○ | DE |
+| TC-PROMO-SHIP-008 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT | P1 | ○ | AT |
+| TC-PROMO-SHIP-009 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH | P1 | ○ | CH |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -990,6 +993,67 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - [Shopware-Regel](https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0c9ba2724d8f118c3f01db846d/base)
   - [Promotion Template](https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec13f89e7197b69879ce36d3da5c/base)
 
+**TC-PROMO-SHIP-007: Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE**
+- **Beschreibung:** Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Deutschland
+- **Bedingungen:**
+  - Land = DE
+  - Warenkorb enthält sowohl Postartikel als auch Speditionsartikel
+  - Beide Versandarten werden im Checkout angezeigt
+- **Testschritte:**
+  1. Postartikel zum Warenkorb hinzufügen (z.B. Textil, kleines Produkt)
+  2. Speditionsartikel zum Warenkorb hinzufügen (z.B. Möbel, großes Produkt)
+  3. Prüfen, dass beide Versandarten im Checkout erscheinen
+  4. Versandkostenfrei-Promocode für Post eingeben (TC-PROMO-SHIP-001)
+  5. Prüfen, dass nur Postversandkosten auf 0 reduziert werden
+  6. Prüfen, dass Speditionskosten unverändert bleiben
+  7. Alternativ: Versandkostenfrei-Promocode für Spedi eingeben (TC-PROMO-SHIP-003)
+  8. Prüfen, dass nur Speditionskosten auf 0 reduziert werden
+- **Erwartetes Verhalten:**
+  - Post-Promotion reduziert nur Postversandkosten
+  - Spedi-Promotion reduziert nur Speditionskosten
+  - Beide Versandarten werden separat berechnet und angezeigt
+  - Korrekte Berechnung der Gesamtversandkosten
+
+**TC-PROMO-SHIP-008: Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT**
+- **Beschreibung:** Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Österreich
+- **Bedingungen:**
+  - Land = AT
+  - Warenkorb enthält sowohl Postartikel als auch Speditionsartikel
+  - Beide Versandarten werden im Checkout angezeigt
+- **Testschritte:**
+  1. Postartikel zum Warenkorb hinzufügen
+  2. Speditionsartikel zum Warenkorb hinzufügen
+  3. Prüfen, dass beide Versandarten im Checkout erscheinen
+  4. Versandkostenfrei-Promocode für Post eingeben (TC-PROMO-SHIP-001)
+  5. Prüfen, dass nur Postversandkosten (5,95 EUR) auf 0 reduziert werden
+  6. Prüfen, dass Speditionskosten unverändert bleiben
+  7. Alternativ: Versandkostenfrei-Promocode für Spedi eingeben (TC-PROMO-SHIP-003)
+  8. Prüfen, dass nur Speditionskosten auf 0 reduziert werden
+- **Erwartetes Verhalten:**
+  - Analog zu TC-PROMO-SHIP-007, aber für AT-Kanal
+  - Postversand AT und Spedi-Versand AT separat behandelt
+
+**TC-PROMO-SHIP-009: Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH**
+- **Beschreibung:** Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Schweiz
+- **Bedingungen:**
+  - Land = CH
+  - Warenkorb enthält sowohl Postartikel als auch Speditionsartikel
+  - Beide Versandarten werden im Checkout angezeigt
+  - Preise in CHF
+- **Testschritte:**
+  1. Postartikel zum Warenkorb hinzufügen
+  2. Speditionsartikel zum Warenkorb hinzufügen
+  3. Prüfen, dass beide Versandarten im Checkout erscheinen
+  4. Versandkostenfrei-Promocode für Post eingeben (TC-PROMO-SHIP-002)
+  5. Prüfen, dass nur Postversandkosten (6,95 CHF) auf 0 reduziert werden
+  6. Prüfen, dass Speditionskosten unverändert bleiben
+  7. Alternativ: Versandkostenfrei-Promocode für Spedi eingeben (TC-PROMO-SHIP-004)
+  8. Prüfen, dass nur Speditionskosten auf 0 reduziert werden
+- **Erwartetes Verhalten:**
+  - Post-Promotion reduziert nur Postversandkosten (6,95 CHF)
+  - Spedi-Promotion reduziert nur Speditionskosten
+  - Korrekte CHF-Berechnung der Gesamtversandkosten
+
 #### Produktkategorien-Promotions
 
 | Test-ID | Name | Priorität | Status | Länder |
@@ -1094,8 +1158,6 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
 | TC-PROMO-QTY-001 | % auf teuerstes Produkt | P1 | ○ | AT, DE, CH |
-| TC-PROMO-QTY-002 | Mengenrabatt nur auf 1 Produkt | P1 | ○ | AT, DE, CH |
-| TC-PROMO-QTY-003 | 3x gleiches Produkt - nur 1x rabattiert | P1 | ○ | AT, DE, CH |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1116,42 +1178,6 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Bei gleich teuren Produkten: Rabatt auf eines davon
   - Prozentuale Berechnung ist korrekt
   - Andere Produkte bleiben unverändert
-
-**TC-PROMO-QTY-002: Mengenrabatt nur auf 1 Produkt**
-- **Beschreibung:** Prüft, dass ein Mengenrabatt (z.B. "ab 3 Stück 10% Rabatt") nur auf das qualifizierte Produkt angewendet wird, nicht auf den gesamten Warenkorb
-- **Bedingung:**
-  - Promotion mit Mengenbedingung (z.B. ab 3 Stück)
-  - Warenkorb mit qualifiziertem Produkt (ausreichende Menge) + weitere Produkte
-- **Testschritte:**
-  1. Produkt A 3x zum Warenkorb hinzufügen (qualifiziert für Mengenrabatt)
-  2. Produkt B 1x hinzufügen (nicht qualifiziert)
-  3. Promotion-Code eingeben (oder automatische Promotion)
-  4. Prüfen, dass Rabatt nur auf Produkt A angewendet wird
-  5. Prüfen, dass Produkt B zum vollen Preis bleibt
-  6. Menge von Produkt A auf 2 reduzieren → Rabatt sollte entfallen
-- **Erwartetes Verhalten:**
-  - Mengenrabatt wird nur auf das qualifizierte Produkt angewendet
-  - Andere Produkte im Warenkorb bleiben unrabattiert
-  - Bei Unterschreitung der Mindestmenge entfällt der Rabatt
-
-**TC-PROMO-QTY-003: 3x gleiches Produkt - nur 1x rabattiert**
-- **Beschreibung:** Prüft "Nimm 3, zahl 2"-Logik: Bei 3 gleichen Produkten wird nur 1 Stück rabattiert (kostenlos)
-- **Bedingung:**
-  - Promotion mit Regel "bei 3 gleichen Produkten ist das günstigste/ein Stück gratis"
-  - Gleiches Produkt 3x im Warenkorb
-- **Testschritte:**
-  1. Gleiches Produkt 3x zum Warenkorb hinzufügen
-  2. Promotion-Code eingeben (oder automatische Promotion)
-  3. Prüfen, dass genau 1 Stück als 100% rabattiert angezeigt wird
-  4. Prüfen, dass die anderen 2 Stück zum vollen Preis bleiben
-  5. Gesamtsumme validieren (= 2x Einzelpreis)
-  6. 4. Stück hinzufügen → weiterhin nur 1x rabattiert
-  7. 6 Stück testen → prüfen ob 2x rabattiert (je nach Promo-Logik)
-- **Erwartetes Verhalten:**
-  - Bei 3 Stück: Genau 1 Stück wird rabattiert
-  - Gesamtpreis = Menge - Gratisartikel × Einzelpreis
-  - Rabatt wird als separater Nachlass im Warenkorb angezeigt
-  - Staffelung bei höherer Menge (falls konfiguriert)
 
 #### Aktionspreis-Promotions
 
@@ -1282,14 +1308,13 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 | Test-ID | Name | Priorität | Status | Länder |
 |---------|------|-----------|--------|--------|
-| TC-PROMO-BUNDLE-001 | Nimm 5 zahl 4 | P1 | ○ | AT, DE, CH |
-| TC-PROMO-BUNDLE-002 | Produkt A + Gratisprodukt | P1 | ○ | AT, DE, CH |
+| TC-PROMO-BUNDLE-001 | Nimm 3 zahl 2 | P1 | ○ | AT, DE, CH |
 | TC-PROMO-BUNDLE-003 | Kissen + Schonbezug gratis | P1 | ○ | AT, DE, CH |
-| TC-PROMO-BUNDLE-004 | Pro Kissen ein Schonbezug gratis | P1 | ○ | AT, DE, CH |
+| TC-PROMO-BUNDLE-004 | Pro Kissen ein Schonbezug gratis bei allen im Artikel | P1 | ○ | AT, DE, CH |
 
 **Detaillierte Testbeschreibungen:**
 
-**TC-PROMO-BUNDLE-001: Nimm 5 zahl 4**
+**TC-PROMO-BUNDLE-001: Nimm 3 zahl 2**
 - **Beschreibung:** Prüft die "Nimm 5, zahl 4"-Aktion – bei 5 gleichen Produkten wird das günstigste kostenlos
 - **Bedingung:**
   - Promotion mit Regel "5 kaufen, 4 bezahlen"
@@ -1307,24 +1332,6 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Gesamtpreis = 4 × Einzelpreis
   - Unter 5 Stück: Kein Rabatt
   - Rabatt wird als separate Promotion-Zeile angezeigt
-
-**TC-PROMO-BUNDLE-002: Produkt A + Gratisprodukt**
-- **Beschreibung:** Prüft Bundle-Promotion, bei der beim Kauf von Produkt A ein bestimmtes Gratisprodukt automatisch hinzugefügt wird
-- **Bedingung:**
-  - Promotion: Beim Kauf von Produkt A → Produkt B gratis
-  - Produkte A und B müssen konfiguriert sein
-- **Testschritte:**
-  1. Produkt A zum Warenkorb hinzufügen
-  2. Prüfen, ob Gratisprodukt B automatisch hinzugefügt wird (oder Code eingeben)
-  3. Prüfen, dass Gratisprodukt mit Preis 0 angezeigt wird
-  4. Prüfen, dass Gratisprodukt nicht einzeln entfernt werden kann (optional)
-  5. Produkt A entfernen → Gratisprodukt sollte ebenfalls entfernt werden
-  6. Gesamtpreis validieren
-- **Erwartetes Verhalten:**
-  - Gratisprodukt wird automatisch zum Warenkorb hinzugefügt
-  - Gratisprodukt wird mit 0 EUR/CHF angezeigt
-  - Entfernung von Produkt A entfernt auch das Gratisprodukt
-  - Gesamtpreis = nur Preis von Produkt A
 
 **TC-PROMO-BUNDLE-003: Kissen + Schonbezug gratis**
 - **Beschreibung:** Prüft spezifische Bundle-Aktion: Beim Kauf eines Kissens wird ein passender Schonbezug gratis hinzugefügt
@@ -1344,7 +1351,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Korrekte Zuordnung Kissen → Schonbezug
   - Entfernung des Kissens entfernt auch den Schonbezug
 
-**TC-PROMO-BUNDLE-004: Pro Kissen ein Schonbezug gratis**
+**TC-PROMO-BUNDLE-004: Pro Kissen ein Schonbezug gratis bei allen im Artikel**
 - **Beschreibung:** Prüft die Mengenstaffelung bei Bundle-Aktionen: Pro gekauftem Kissen wird jeweils ein Schonbezug gratis hinzugefügt
 - **Bedingung:**
   - Promotion: Pro Kissen 1x Schonbezug gratis (Mengenstaffelung)
@@ -1577,7 +1584,7 @@ Die folgenden Testdaten werden für die automatisierten Tests verwendet.
 | Artikel-ID | Name | Bundle-Typ | Gratisprodukt | Status |
 |------------|------|------------|---------------|--------|
 | TBD | Kissen (mit Schonbezug gratis) | A + B gratis | Schonbezug | ❌ Fehlend |
-| TBD | Nimm 5 zahl 4 Testprodukt | Mengenrabatt | - | ❌ Fehlend |
+| TBD | Nimm 3 zahl 2 Testprodukt | Mengenrabatt | - | ❌ Fehlend |
 
 **Produkte mit advertising_material_id:**
 

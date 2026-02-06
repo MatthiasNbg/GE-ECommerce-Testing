@@ -1,0 +1,174 @@
+{
+  "test_id": "TC-CART-GIFT-005",
+  "name": "Promocode wird abgelehnt wenn Einkaufsgutschein im Warenkorb ist",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Warenkorb",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutschein-Produkt ist verfügbar",
+    "Gültiger Promocode ist vorhanden",
+    "Warenkorb ist leer"
+  ],
+  "postconditions": [
+    "Einkaufsgutschein ist im Warenkorb",
+    "Promocode wurde abgelehnt",
+    "Hilfreiche Fehlermeldung wurde angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Einkaufsgutschein-Produktseite aufrufen",
+      "expected": "Produktseite für Einkaufsgutschein lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufügen",
+      "expected": "Gutschein wird zum Warenkorb hinzugefügt, Offcanvas-Cart öffnet sich",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Zur Warenkorb-Seite navigieren",
+      "expected": "Warenkorb-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Promocode-Eingabefeld suchen und Code eingeben",
+      "expected": "Promocode-Feld ist sichtbar und Code kann eingegeben werden",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode'], .promotion-code-input",
+          "value": "TESTRABATT10"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Promocode absenden",
+      "expected": "Code wird an Backend gesendet",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.promotion-code-submit, .btn-promotion"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Fehlermeldung prüfen",
+      "expected": "Hilfreiche Fehlermeldung wird angezeigt, dass Promocodes bei Einkaufsgutscheinen nicht anwendbar sind",
+      "selector_hint": ".alert, .flash-message, .promotion-error",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".alert-danger, .alert-warning, .promotion-error",
+          "message": "Fehlermeldung muss sichtbar sein"
+        },
+        {
+          "type": "page_contains_text",
+          "values": [
+            "Gutschein",
+            "nicht",
+            "anwendbar"
+          ],
+          "message": "Fehlermeldung muss auf Gutschein-Einschränkung hinweisen"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Prüfen dass kein Rabatt angewendet wurde",
+      "expected": "Warenkorb-Summe zeigt keinen Rabatt an",
+      "selector_hint": ".cart-discount, .promotion-discount",
+      "assert": [
+        {
+          "type": "element_hidden",
+          "selector": ".cart-discount, .promotion-discount",
+          "message": "Kein Rabatt darf angezeigt werden"
+        }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "product",
+      "name": "gift_card",
+      "path": "p/einkaufsgutschein/ge-p-GUTSCHEIN",
+      "product_name": "Einkaufsgutschein"
+    },
+    {
+      "type": "promocode",
+      "name": "test_discount",
+      "code": "TESTRABATT10",
+      "discount_type": "percentage",
+      "discount_value": 10
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart_gift_voucher.py",
+    "function_name": "test_promocode_refused_with_gift_card_in_cart",
+    "tags": [
+      "regression",
+      "cart",
+      "gift-voucher",
+      "promotions",
+      "validation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-05",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}

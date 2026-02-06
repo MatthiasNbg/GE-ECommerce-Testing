@@ -1,0 +1,186 @@
+{
+  "test_id": "TC-CART-GIFT-004",
+  "name": "Einkaufsgutschein im Warenkorb entfernt alle aktiven Promotions",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Warenkorb",
+  "schema_version": "2.2.0",
+  "scope": {
+    "channels": [
+      "AT",
+      "DE",
+      "CH"
+    ],
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutschein-Produkt ist verfügbar",
+    "Gültiger Promocode ist vorhanden und aktiv",
+    "Warenkorb ist leer"
+  ],
+  "postconditions": [
+    "Einkaufsgutschein ist im Warenkorb",
+    "Kein Promocode/Voucher ist mehr aktiv",
+    "Keine Rabatte werden angezeigt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Reguläres Produkt aufrufen",
+      "expected": "Produktseite lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Cookie-Banner akzeptieren falls vorhanden",
+      "expected": "Banner wird geschlossen",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button#accept"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Reguläres Produkt zum Warenkorb hinzufügen",
+      "expected": "Produkt wird zum Warenkorb hinzugefügt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Promocode eingeben und aktivieren",
+      "expected": "Promocode wird akzeptiert, Rabatt wird angezeigt",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode'], .promotion-code-input",
+          "value": "TESTRABATT10"
+        },
+        {
+          "action": "click",
+          "selector": "button.promotion-code-submit, .btn-promotion"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Rabattanzeige prüfen",
+      "expected": "Rabatt wird im Warenkorb angezeigt",
+      "selector_hint": ".cart-discount, .promotion-discount",
+      "assert": [
+        {
+          "type": "element_visible",
+          "selector": ".cart-discount, .promotion-discount",
+          "message": "Rabatt muss sichtbar sein"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Reguläres Produkt aus Warenkorb entfernen",
+      "expected": "Warenkorb ist leer",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": ".line-item-remove, .btn-remove"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Einkaufsgutschein-Produktseite aufrufen",
+      "expected": "Produktseite für Einkaufsgutschein lädt korrekt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufügen",
+      "expected": "Gutschein wird zum Warenkorb hinzugefügt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "action": "Prüfen ob Promocode/Rabatt entfernt wurde",
+      "expected": "Kein Rabatt wird angezeigt, Promocode wurde automatisch entfernt",
+      "selector_hint": ".cart-discount, .promotion-discount",
+      "assert": [
+        {
+          "type": "element_hidden",
+          "selector": ".cart-discount, .promotion-discount",
+          "message": "Kein Rabatt darf bei Einkaufsgutschein angezeigt werden"
+        }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "product",
+      "name": "regular",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+    },
+    {
+      "type": "product",
+      "name": "gift_card",
+      "path": "p/einkaufsgutschein/ge-p-GUTSCHEIN",
+      "product_name": "Einkaufsgutschein"
+    },
+    {
+      "type": "promocode",
+      "name": "test_discount",
+      "code": "TESTRABATT10",
+      "discount_type": "percentage",
+      "discount_value": 10
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_cart_gift_voucher.py",
+    "function_name": "test_gift_card_removes_promotions",
+    "tags": [
+      "regression",
+      "cart",
+      "gift-voucher",
+      "promotions",
+      "validation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 90,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-05",
+    "last_modified": "2026-02-05",
+    "version": "1.0"
+  }
+}

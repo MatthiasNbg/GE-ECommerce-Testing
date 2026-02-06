@@ -31,6 +31,7 @@ Beispiele:
 |---------|-----------|-------------------|
 | TC-SMOKE-* | Smoke Tests | TC-SMOKE-007 |
 | TC-CART-* | Warenkorb | TC-CART-009 |
+| TC-CART-GIFT-* | Einkaufsgutschein/Warenkorb | TC-CART-GIFT-006 |
 | TC-CHECKOUT-* | Checkout-Massentests | TC-CHECKOUT-006 |
 | TC-CRITICAL-* | Kritischer Pfad | TC-CRITICAL-009 |
 | TC-REG-* | Regression | TC-REG-016 |

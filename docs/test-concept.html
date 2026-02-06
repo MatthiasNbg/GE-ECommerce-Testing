@@ -174,16 +174,6 @@
             color: #333;
         }
 
-        .badge-env-staging {
-            background: #6f42c1;
-            color: white;
-        }
-
-        .badge-env-both {
-            background: #20c997;
-            color: white;
-        }
-
         .table-wrapper {
             overflow-x: auto;
             margin: 20px 0;
@@ -271,54 +261,6 @@
 
         .metadata strong {
             color: var(--text-color);
-        }
-
-        details {
-            background: #f8f9fa;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin: 15px 0;
-            padding: 0;
-        }
-
-        details summary {
-            cursor: pointer;
-            padding: 12px 18px;
-            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-            border-radius: 8px;
-            font-size: 0.95em;
-            color: var(--primary-color);
-            list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        details summary::-webkit-details-marker {
-            display: none;
-        }
-
-        details summary::before {
-            content: "\25B6";
-            font-size: 0.75em;
-            transition: transform 0.2s;
-        }
-
-        details[open] summary::before {
-            transform: rotate(90deg);
-        }
-
-        details summary:hover {
-            background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%);
-        }
-
-        details[open] {
-            padding-bottom: 15px;
-        }
-
-        details > *:not(summary) {
-            padding-left: 18px;
-            padding-right: 18px;
         }
 
         .summary-box {
@@ -496,8 +438,8 @@
             <h1 id="test-konzept-gruene-erde-e-commerce-shop">Test-Konzept: Grüne Erde E-Commerce Shop</h1>
 
 <strong>Projekt:</strong> GE-ECommerce-Testing
-<strong>Datum:</strong> 2026-02-05
-<strong>Version:</strong> 1.07
+<strong>Datum:</strong> 2026-02-04
+<strong>Version:</strong> 1.06
 <strong>Status:</strong> Entwurf zur Abstimmung
 
 <hr>
@@ -536,7 +478,6 @@
 <thead><tr>
 <th>Funktionsbereich</th>
 <th>Tests</th>
-<th>Umgebung</th>
 <th>Status</th>
 <th>Priorität</th>
 <th>Was wird geprüft?</th>
@@ -544,7 +485,6 @@
 <tr>
 <td>🏠 **Smoke Tests**</td>
 <td>5</td>
-<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 5/5</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
 <td>Homepage, Produktseiten, Navigation</td>
@@ -552,7 +492,6 @@
 <tr>
 <td>🛒 **Critical Path Tests**</td>
 <td>8</td>
-<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
 <td>Gast-Checkout, Registrierter Checkout, Zahlungsarten</td>
@@ -560,7 +499,6 @@
 <tr>
 <td>🛍️ **Feature Tests - Warenkorb**</td>
 <td>8</td>
-<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produkte hinzufügen, Mengen ändern, Preis-Berechnung</td>
@@ -568,7 +506,6 @@
 <tr>
 <td>🔍 **Feature Tests - Suche**</td>
 <td>9</td>
-<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 9/9</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Produktsuche, Filter, Autocomplete, Kategorien</td>
@@ -576,7 +513,6 @@
 <tr>
 <td>👤 **Feature Tests - Account**</td>
 <td>8</td>
-<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 8/8</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Registrierung, Login, Profil, Adressen</td>
@@ -584,7 +520,6 @@
 <tr>
 <td>📦 **Feature Tests - Versandarten**</td>
 <td>98</td>
-<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-success">✓ Abgeschlossen</span> 98/98</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Post, Spedition, PLZ-Bereiche, Logistikpartner</td>
@@ -592,7 +527,6 @@
 <tr>
 <td>🎟️ **Feature Tests - Promotions**</td>
 <td>47</td>
-<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 0/47</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows</td>
@@ -600,7 +534,6 @@
 <tr>
 <td>📊 **Data Validation Tests**</td>
 <td>15</td>
-<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 0/15</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
 <td>Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten</td>
@@ -608,7 +541,6 @@
 <tr>
 <td>🔄 **Regression Tests**</td>
 <td>15</td>
-<td><span class="badge badge-env-both">Staging + Prod</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 3/15</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Regression-Tests nach Änderungen</td>
@@ -616,15 +548,12 @@
 <tr>
 <td>⚡ **Load Tests**</td>
 <td>5</td>
-<td><span class="badge badge-env-staging">Nur Staging</span></td>
 <td><span class="badge badge-warning">⚠ Teilweise</span> 3/5</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Load-Tests, Response-Zeiten, Race Conditions</td>
 </tr>
 </tbody></table></div>
-<strong>Legende Status:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Implementiert | <span class="badge badge-defined">○ Definiert</span> Definiert | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
-
-<strong>Legende Umgebung:</strong> <span class="badge badge-env-staging">Nur Staging</span> Tests geben Bestellungen auf - nur auf Staging erlaubt | <span class="badge badge-env-both">Staging + Prod</span> Sichere Tests ohne Bestellungen
+<strong>Legende:</strong> <span class="badge badge-success">✓ Abgeschlossen</span> Implementiert | <span class="badge badge-defined">○ Definiert</span> Definiert | <span class="badge badge-warning">⚠ Teilweise</span> Teilweise | <span class="badge badge-error">✗ Fehlend</span> Fehlend
 
 <hr>
 
@@ -865,74 +794,65 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-
 <details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
 <p>Die 8 Warenkorb-Tests prüfen alle wesentlichen Funktionen des Warenkorbs: Hinzufügen, Entfernen, Mengenänderung, Preisberechnung und Persistenz. Alle Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH).</p>
 
-<h4>Produkte verwalten (4 Tests)</h4>
+<h4 id="produkte-verwalten-4-tests">Produkte verwalten (4 Tests)</h4>
 
 <strong>TC-CART-001: Produkt zum Warenkorb hinzufügen</strong>
 <ul>
 <li><strong>Schritte:</strong> Produktdetailseite aufrufen → „In den Warenkorb" klicken → Warenkorb öffnen → Produktname und Preis prüfen</li>
 <li><strong>Erwartet:</strong> Produkt wird im Warenkorb angezeigt, Name und Preis stimmen mit der Produktseite überein, Menge ist 1</li>
 </ul>
-
 <strong>TC-CART-004: Produkt entfernen aktualisiert Warenkorb</strong>
 <ul>
 <li><strong>Schritte:</strong> Zwei Produkte hinzufügen → Warenkorb öffnen → erstes Produkt entfernen → Inhalt und Gesamtpreis prüfen</li>
 <li><strong>Erwartet:</strong> Nur noch ein Produkt im Warenkorb, Gesamtpreis und Zähler aktualisiert</li>
 </ul>
-
 <strong>TC-CART-005: Leerer Warenkorb zeigt Meldung</strong>
 <ul>
 <li><strong>Schritte:</strong> Sicherstellen dass Warenkorb leer ist → Warenkorb-Seite aufrufen → Meldung prüfen</li>
 <li><strong>Erwartet:</strong> Hinweismeldung (z.B. „Ihr Warenkorb ist leer"), Weiter-Einkaufen-Link vorhanden</li>
 </ul>
-
 <strong>TC-CART-007: Mehrere Produkte hinzufügen</strong>
 <ul>
 <li><strong>Schritte:</strong> Drei verschiedene Produkte nacheinander hinzufügen → Warenkorb öffnen → alle Produkte und Gesamtpreis prüfen</li>
 <li><strong>Erwartet:</strong> Alle drei Produkte mit korrekten Einzelpreisen, Gesamtpreis ist die Summe</li>
 </ul>
-
-<h4>Preisberechnung (2 Tests)</h4>
+<h4 id="preisberechnung-2-tests">Preisberechnung (2 Tests)</h4>
 
 <strong>TC-CART-003: Menge ändern aktualisiert Gesamtpreis</strong>
 <ul>
 <li><strong>Schritte:</strong> Produkt hinzufügen → Warenkorb öffnen, Einzelpreis notieren → Menge auf 2 erhöhen → Gesamtpreis prüfen</li>
 <li><strong>Erwartet:</strong> Gesamtpreis ist doppelter Einzelpreis, Zwischensumme wird ebenfalls aktualisiert</li>
 </ul>
-
 <strong>TC-CART-008: Preisberechnung korrekt</strong>
 <ul>
 <li><strong>Schritte:</strong> Mehrere Produkte mit unterschiedlichen Mengen hinzufügen → Einzelpreise prüfen → Zeilenpreise prüfen (Einzelpreis × Menge) → Gesamtpreis prüfen</li>
 <li><strong>Erwartet:</strong> Einzelpreise stimmen mit Produktseiten überein, Zeilenpreise und Gesamtsumme mathematisch korrekt</li>
 </ul>
-
-<h4>Zähler &amp; Persistenz (2 Tests)</h4>
+<h4 id="zaehler-persistenz-2-tests">Zähler & Persistenz (2 Tests)</h4>
 
 <strong>TC-CART-002: Warenkorb-Zähler aktualisiert sich</strong>
 <ul>
 <li><strong>Schritte:</strong> Zähler im Header prüfen (0/leer) → Produkt hinzufügen → Zähler prüfen (1) → weiteres Produkt hinzufügen → Zähler prüfen (2)</li>
 <li><strong>Erwartet:</strong> Zähler aktualisiert sich nach jedem Hinzufügen und zeigt korrekte Anzahl</li>
 </ul>
-
 <strong>TC-CART-006: Warenkorb bleibt zwischen Seiten erhalten</strong>
 <ul>
 <li><strong>Schritte:</strong> Produkt hinzufügen → zu Kategorie-Seite navigieren → Zähler prüfen → zur Homepage navigieren → Warenkorb öffnen</li>
 <li><strong>Erwartet:</strong> Warenkorb-Inhalt und Zähler bleiben bei Navigation zwischen Seiten erhalten</li>
 </ul>
-
 <strong>Automation:</strong>
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_cart.py</code></li>
 <li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-CART-001 bis TC-CART-008)</li>
 <li><strong>Cleanup:</strong> Warenkorb wird nach jedem Test geleert</li>
 </ul>
-
 </details>
+
 <hr>
 
 <h3 id="feature-tests-suche">🔍 Feature Tests - Suche</h3>
@@ -1015,80 +935,70 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-
 <details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
 <p>Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomplete-Dropdown, Suchergebnisseite und Negativtests. Alle Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH).</p>
 
-<h4>Autocomplete / Suchvorschläge (6 Tests)</h4>
+<h4 id="autocomplete-suchvorschlaege-6-tests">Autocomplete / Suchvorschläge (6 Tests)</h4>
 
 <strong>TC-SEARCH-001: Autocomplete zeigt korrektes Produkt</strong>
 <ul>
 <li><strong>Schritte:</strong> Suchfeld anklicken → bekannten Produktnamen eingeben (mind. 3 Zeichen) → Autocomplete-Dropdown prüfen</li>
 <li><strong>Erwartet:</strong> Das gesuchte Produkt erscheint in den Vorschlägen</li>
 </ul>
-
 <strong>TC-SEARCH-002: Autocomplete-Klick navigiert zu Produkt</strong>
 <ul>
 <li><strong>Schritte:</strong> Suchbegriff eingeben → auf Produktvorschlag im Dropdown klicken → Produktdetailseite prüfen</li>
 <li><strong>Erwartet:</strong> Navigation zur korrekten Produktseite</li>
 </ul>
-
 <strong>TC-SEARCH-006: Suchvorschläge erscheinen bei Eingabe</strong>
 <ul>
 <li><strong>Schritte:</strong> Suchfeld anklicken → langsam Buchstabe für Buchstabe eingeben → Dropdown prüfen</li>
 <li><strong>Erwartet:</strong> Suchvorschläge erscheinen automatisch nach wenigen Zeichen</li>
 </ul>
-
 <strong>TC-SEARCH-007: Suchvorschläge zeigen Kategorien</strong>
 <ul>
 <li><strong>Schritte:</strong> Generischen Suchbegriff eingeben (z.B. „Bett", „Decke") → Dropdown prüfen</li>
 <li><strong>Erwartet:</strong> Neben Produkten werden auch Kategorien angezeigt, visuell unterscheidbar</li>
 </ul>
-
 <strong>TC-SEARCH-008: Autocomplete zeigt Produktbilder</strong>
 <ul>
 <li><strong>Schritte:</strong> Suchbegriff eingeben → Produktvorschläge im Dropdown prüfen → Bildladung prüfen</li>
 <li><strong>Erwartet:</strong> Jeder Produktvorschlag enthält ein korrekt geladenes Produktbild</li>
 </ul>
-
 <strong>TC-SEARCH-009: Autocomplete Produktinfo vollständig</strong>
 <ul>
 <li><strong>Schritte:</strong> Suchbegriff eingeben → Produktname, Preis und Bild in jedem Vorschlag prüfen</li>
 <li><strong>Erwartet:</strong> Alle drei Informationen (Name, Preis, Bild) sind sichtbar und korrekt</li>
 </ul>
-
-<h4>Suchergebnisseite (2 Tests)</h4>
+<h4 id="suchergebnisseite-2-tests">Suchergebnisseite (2 Tests)</h4>
 
 <strong>TC-SEARCH-003: Suchergebnisseite zeigt korrektes Produkt</strong>
 <ul>
 <li><strong>Schritte:</strong> Bekannten Produktnamen eingeben → Suche absenden (Enter) → Ergebnisse prüfen</li>
 <li><strong>Erwartet:</strong> Suchergebnisseite wird geladen, das korrekte Produkt erscheint mit Name und Preis</li>
 </ul>
-
 <strong>TC-SEARCH-004: Suchergebnis-Klick navigiert zu Produkt</strong>
 <ul>
 <li><strong>Schritte:</strong> Suche durchführen → auf ein Suchergebnis klicken → Produktdetailseite prüfen</li>
 <li><strong>Erwartet:</strong> Navigation zur korrekten Produktseite mit Name und Preis</li>
 </ul>
-
-<h4>Negativtest (1 Test)</h4>
+<h4 id="negativtest-1-test">Negativtest (1 Test)</h4>
 
 <strong>TC-SEARCH-005: Keine Ergebnisse bei ungültigem Artikel</strong>
 <ul>
 <li><strong>Schritte:</strong> Nicht existierenden Suchbegriff eingeben (z.B. „xyzabc123") → Suche absenden → Ergebnisseite prüfen</li>
 <li><strong>Erwartet:</strong> Keine Suchergebnisse, passende Hinweismeldung (z.B. „Keine Ergebnisse gefunden")</li>
 </ul>
-
 <strong>Automation:</strong>
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_search.py</code></li>
 <li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-SEARCH-001 bis TC-SEARCH-009)</li>
 <li><strong>Hinweis:</strong> Suchtests sind abhängig von aktuellen Produktdaten im Staging-Katalog</li>
 </ul>
-
 </details>
+
 <hr>
 
 <h3 id="feature-tests-account">👤 Feature Tests - Account</h3>
@@ -1164,13 +1074,12 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-
 <details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
 <p>Die 8 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, Login und Profilverwaltung. Die Tests laufen in allen 3 Verkaufskanälen (AT, DE, CH) und sind in zwei funktionale Gruppen unterteilt.</p>
 
-<h4>Registrierung (4 Tests)</h4>
+<h4 id="registrierung-4-tests">Registrierung (4 Tests)</h4>
 
 <strong>TC-ACCOUNT-001: Registrierung erfolgreich</strong>
 <ul>
@@ -1178,29 +1087,25 @@
 <li><strong>Schritte:</strong> Registrierungsseite aufrufen → Anrede, Vorname, Nachname eingeben → gültige E-Mail → sicheres Passwort → absenden → Bestätigung prüfen</li>
 <li><strong>Erwartet:</strong> Registrierung erfolgreich, Benutzer wird eingeloggt oder erhält Bestätigung</li>
 </ul>
-
 <strong>TC-ACCOUNT-002: Registrierung mit existierender E-Mail schlägt fehl</strong>
 <ul>
 <li><strong>Ziel:</strong> Doppelte Registrierung wird verhindert</li>
 <li><strong>Schritte:</strong> Registrierungsformular mit bereits registrierter E-Mail ausfüllen → absenden</li>
 <li><strong>Erwartet:</strong> Fehlermeldung, kein doppelter Account wird angelegt</li>
 </ul>
-
 <strong>TC-ACCOUNT-003: Registrierung mit ungültiger E-Mail zeigt Fehler</strong>
 <ul>
 <li><strong>Ziel:</strong> Formular-Validierung erkennt ungültige E-Mail-Formate</li>
 <li><strong>Schritte:</strong> Ungültige E-Mail eingeben (z.B. „test@", „test.de", „@domain.com") → absenden</li>
 <li><strong>Erwartet:</strong> Validierungsfehler beim E-Mail-Feld, Registrierung wird nicht abgeschickt</li>
 </ul>
-
 <strong>TC-ACCOUNT-004: Schwaches Passwort wird abgelehnt</strong>
 <ul>
 <li><strong>Ziel:</strong> Passwort-Richtlinien werden durchgesetzt</li>
 <li><strong>Schritte:</strong> Gültige Daten mit schwachem Passwort (z.B. „123") eingeben → absenden</li>
 <li><strong>Erwartet:</strong> Fehlermeldung mit Passwort-Anforderungen, Registrierung wird nicht abgeschlossen</li>
 </ul>
-
-<h4>Login (2 Tests)</h4>
+<h4 id="login-2-tests">Login (2 Tests)</h4>
 
 <strong>TC-ACCOUNT-005: Login erfolgreich</strong>
 <ul>
@@ -1208,14 +1113,12 @@
 <li><strong>Schritte:</strong> Login-Seite aufrufen → E-Mail und Passwort eingeben → absenden → Dashboard prüfen</li>
 <li><strong>Erwartet:</strong> Benutzer ist eingeloggt, Dashboard wird angezeigt, Name/Anrede im Header sichtbar</li>
 </ul>
-
 <strong>TC-ACCOUNT-006: Login mit falschen Daten schlägt fehl</strong>
 <ul>
 <li><strong>Schritte:</strong> Login-Seite aufrufen → gültige E-Mail + falsches Passwort → absenden</li>
 <li><strong>Erwartet:</strong> Fehlermeldung, Benutzer bleibt auf der Login-Seite</li>
 </ul>
-
-<h4>Profilverwaltung (2 Tests)</h4>
+<h4 id="profilverwaltung-2-tests">Profilverwaltung (2 Tests)</h4>
 
 <strong>TC-ACCOUNT-007: Profil anzeigen und bearbeiten</strong>
 <ul>
@@ -1223,22 +1126,20 @@
 <li><strong>Schritte:</strong> Zur Profilseite navigieren → Daten prüfen (Name, E-Mail) → Wert ändern (z.B. Vorname) → speichern → Seite neu laden → Änderung prüfen</li>
 <li><strong>Erwartet:</strong> Daten werden korrekt angezeigt, Änderungen werden gespeichert und persistiert</li>
 </ul>
-
 <strong>TC-ACCOUNT-008: Adressverwaltung</strong>
 <ul>
 <li><strong>Vorbedingung:</strong> Bestehender Kundenaccount, eingeloggt</li>
 <li><strong>Schritte:</strong> Adressverwaltung aufrufen → Übersicht prüfen → neue Adresse hinzufügen → speichern → in der Liste prüfen</li>
 <li><strong>Erwartet:</strong> Adressübersicht zeigt alle Adressen, Hinzufügen/Bearbeiten/Löschen funktioniert</li>
 </ul>
-
 <strong>Automation:</strong>
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_account.py</code></li>
 <li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-ACCOUNT-001 bis TC-ACCOUNT-008)</li>
 <li><strong>Hinweis:</strong> Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen</li>
 </ul>
-
 </details>
+
 <hr>
 
 <h3 id="feature-tests-versandarten">📦 Feature Tests - Versandarten</h3>
@@ -1944,9 +1845,8 @@
 <td>CH</td>
 </tr>
 </tbody></table></div>
-
 <details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
 <p>Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern zu PLZ-Bereichen im Checkout. Jeder Test prüft für eine bestimmte PLZ, ob der erwartete Versandpartner und das korrekte Versandart-Label angezeigt werden. Pro PLZ-Bereich werden jeweils Minimum- und Maximum-PLZ getestet (Grenzwertanalyse).</p>
 
@@ -1956,7 +1856,6 @@
 <li><strong>Vollständige Abdeckung:</strong> Alle Logistikpartner in allen 3 Ländern (AT, DE, CH) werden abgedeckt</li>
 <li><strong>Identischer Testablauf:</strong> Jeder Test folgt demselben 4-Schritt-Ablauf</li>
 </ul>
-
 <strong>Testablauf (alle 98 Tests identisch):</strong>
 <ol>
 <li><strong>Speditionsprodukt zum Warenkorb hinzufügen</strong> → Produkt ist im Warenkorb</li>
@@ -1964,15 +1863,13 @@
 <li><strong>PLZ als Lieferadresse eingeben</strong> → PLZ wird akzeptiert</li>
 <li><strong>Versandart-Anzeige prüfen</strong> → Korrekter Versandpartner und Label werden angezeigt</li>
 </ol>
-
 <strong>Vorbedingungen:</strong>
 <ul>
 <li>Shop ist erreichbar</li>
 <li>Speditionsprodukt im Warenkorb</li>
 <li>Lieferadresse im jeweiligen Land</li>
 </ul>
-
-<h4>Österreich (AT) — 26 Tests, 5 Logistikpartner</h4>
+<h4 id="oesterreich-at-26-tests-5-logistikpartner">Österreich (AT) — 26 Tests, 5 Logistikpartner</h4>
 
 <strong>Post AT</strong> — 2 Tests
 <ul>
@@ -1980,36 +1877,31 @@
 <li>Label: „Postversand"</li>
 <li>Tests: TC-SHIP-AT-POST-001 (Min: 0000), TC-SHIP-AT-POST-002 (Max: 9999)</li>
 </ul>
-
 <strong>Wetsch AT</strong> — 2 Tests
 <ul>
 <li>PLZ-Bereich: 6000–6999 (Tirol/Vorarlberg)</li>
 <li>Label: „Spedition Wetsch"</li>
 <li>Tests: TC-SHIP-AT-WETSCH-001 (Min: 6000), TC-SHIP-AT-WETSCH-002 (Max: 6999)</li>
 </ul>
-
 <strong>Thurner AT</strong> — 2 Tests
 <ul>
 <li>PLZ-Bereich: 4700–5799 (Oberösterreich/Salzburg)</li>
 <li>Label: „Spedition Thurner"</li>
 <li>Tests: TC-SHIP-AT-THURNER-001 (Min: 4700), TC-SHIP-AT-THURNER-002 (Max: 5799)</li>
 </ul>
-
 <strong>Fink AT</strong> — 10 Tests
 <ul>
 <li>PLZ-Bereiche: 1000–1199, 3000–3399, 3600–3699, 4000–4699, 8000–9999</li>
 <li>Label: „Spedition Fink"</li>
 <li>Tests: TC-SHIP-AT-FINK-001 bis TC-SHIP-AT-FINK-010 (je Min/Max pro Bereich)</li>
 </ul>
-
 <strong>Cargoe AT</strong> — 10 Tests
 <ul>
 <li>PLZ-Bereiche: 1200–1399, 2000–2999, 3400–3599, 3700–3999, 7000–7999</li>
 <li>Label: „Spedition Cargoe"</li>
 <li>Tests: TC-SHIP-AT-CARGOE-001 bis TC-SHIP-AT-CARGOE-010 (je Min/Max pro Bereich)</li>
 </ul>
-
-<h4>Deutschland (DE) — 68 Tests, 6 Logistikpartner</h4>
+<h4 id="deutschland-de-68-tests-6-logistikpartner">Deutschland (DE) — 68 Tests, 6 Logistikpartner</h4>
 
 <strong>Post DE</strong> — 2 Tests
 <ul>
@@ -2017,43 +1909,37 @@
 <li>Label: „Postversand"</li>
 <li>Tests: TC-SHIP-DE-POST-001 (Min: 00000), TC-SHIP-DE-POST-002 (Max: 99999)</li>
 </ul>
-
 <strong>Logsens Nord</strong> — 18 Tests
 <ul>
 <li>PLZ-Bereiche: 19000–29999, 30000–32999, 34000–37139, 37140–37199, 37200–37399, 37400–39174, 39326–39499, 39500–39699, 49000–49999</li>
 <li>Label: „Spedition Logsens Nord"</li>
 <li>Tests: TC-SHIP-DE-LNORD-001 bis TC-SHIP-DE-LNORD-018 (je Min/Max pro Bereich)</li>
 </ul>
-
 <strong>Logsens Ost</strong> — 12 Tests
 <ul>
 <li>PLZ-Bereiche: 00000–09999, 10000–15999, 16000–18999, 39175–39319, 95000–96999, 98000–99999</li>
 <li>Label: „Spedition Logsens Ost"</li>
 <li>Tests: TC-SHIP-DE-LOST-001 bis TC-SHIP-DE-LOST-012 (je Min/Max pro Bereich)</li>
 </ul>
-
 <strong>Logsens Sued</strong> — 12 Tests
 <ul>
 <li>PLZ-Bereiche: 54000–54999, 56000–56999, 66000–67999, 72000–72999, 75000–79999, 80000–89999</li>
 <li>Label: „Spedition Logsens Sued"</li>
 <li>Tests: TC-SHIP-DE-LSUED-001 bis TC-SHIP-DE-LSUED-012 (je Min/Max pro Bereich)</li>
 </ul>
-
 <strong>Logsens West</strong> — 12 Tests
 <ul>
 <li>PLZ-Bereiche: 33000–33999, 41000–41999, 42000–48999, 50000–53999, 57000–57999, 58000–59999</li>
 <li>Label: „Spedition Logsens West"</li>
 <li>Tests: TC-SHIP-DE-LWEST-001 bis TC-SHIP-DE-LWEST-012 (je Min/Max pro Bereich)</li>
 </ul>
-
 <strong>Thurner DE</strong> — 12 Tests
 <ul>
 <li>PLZ-Bereiche: 55000–55999, 60000–65999, 68000–71999, 73000–74999, 90000–94999, 97000–97999</li>
 <li>Label: „Spedition Thurner"</li>
 <li>Tests: TC-SHIP-DE-THURNER-001 bis TC-SHIP-DE-THURNER-012 (je Min/Max pro Bereich)</li>
 </ul>
-
-<h4>Schweiz (CH) — 4 Tests, 2 Logistikpartner</h4>
+<h4 id="schweiz-ch-4-tests-2-logistikpartner">Schweiz (CH) — 4 Tests, 2 Logistikpartner</h4>
 
 <strong>Post CH</strong> — 2 Tests
 <ul>
@@ -2061,14 +1947,12 @@
 <li>Label: „Postversand"</li>
 <li>Tests: TC-SHIP-CH-001 (Min: 1000), TC-SHIP-CH-002 (Max: 9658)</li>
 </ul>
-
 <strong>Kuoni CH</strong> — 2 Tests
 <ul>
 <li>PLZ-Bereich: 1000–9658 (ganze Schweiz)</li>
 <li>Label: „Spedition Kuoni"</li>
 <li>Tests: TC-SHIP-CH-003 (Min: 1000), TC-SHIP-CH-004 (Max: 9658)</li>
 </ul>
-
 <strong>Automation:</strong>
 <ul>
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_shipping_plz.py</code></li>
@@ -2076,8 +1960,8 @@
 <li><strong>Parametrisiert:</strong> Alle 98 Tests laufen datengetrieben aus der JSON-Datei</li>
 <li><strong>CI/CD:</strong> Automatische Ausführung vor Feature-Releases</li>
 </ul>
-
 </details>
+
 <hr>
 
 <h3 id="feature-tests-promotions">🎟️ Feature Tests - Promotions</h3>
@@ -2134,8 +2018,7 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
 <strong>TC-PROMO-CART-PERCENT-001: Prozentuale Aktion auf Warenkorb mit Ausschlüssen</strong>
 <ul>
@@ -2181,7 +2064,86 @@
 <li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019beaf9d194714dbe77b182ea9a1a02/base">Shopware-Regel Template</a></li>
 <li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019beaf618b376a9b82416a15d3fc0c8/base">Promotion Template</a></li>
 </ul>
-</details>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass Artikel mit nicht_rabattierbar = true von prozentualen und absoluten Warenkorb-Promotions ausgeschlossen werden</li>
+<li><strong>Bedingung:</strong></li>
+<li>Produkt mit Odoo-Eigenschaft nicht_rabattierbar = true (Variante 639046)</li>
+<li>Aktive Warenkorb-Promotion (prozentual oder absolut)</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Optional: Weiteres rabattierbares Produkt hinzufügen</li>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt NICHT auf das nicht-rabattierbare Produkt angewendet wird</li>
+<li>Prüfen, dass Rabatt korrekt nur auf rabattierbare Produkte berechnet wird</li>
+<li>Gesamtsumme validieren</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Nicht-rabattierbarer Artikel bleibt zum vollen Preis im Warenkorb</li>
+<li>Rabatt wird nur auf rabattierbare Artikel angewendet</li>
+<li>Gesamtsumme = voller Preis nicht-rabattierbar + rabattierter Preis der übrigen Artikel</li>
+<li>Keine Fehlermeldung – Promotion wird akzeptiert, aber nicht auf ausgeschlossene Produkte angewendet</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass bereits reduzierte Artikel (Aktionspreis/SALE) von zusätzlichen Promotions ausgeschlossen werden</li>
+<li><strong>Bedingung:</strong></li>
+<li>Produkt mit Aktionspreis (SALE-Preis aktiv)</li>
+<li>Aktive Warenkorb-Promotion mit Ausschluss von Aktionspreisen</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Reguläres Produkt (ohne Aktionspreis) zum Warenkorb hinzufügen</li>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt nur auf das reguläre Produkt angewendet wird</li>
+<li>Prüfen, dass das SALE-Produkt zum Aktionspreis bleibt</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Artikel mit Aktionspreis werden vom Promotion-Rabatt ausgeschlossen</li>
+<li>Rabatt wird nur auf reguläre Artikel angewendet</li>
+<li>Doppelrabattierung wird verhindert</li>
+<li>Aktionspreis bleibt unverändert</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass Einkaufsgutscheine im Warenkorb von Promotion-Rabatten ausgeschlossen werden</li>
+<li><strong>Bedingung:</strong></li>
+<li>Einkaufsgutschein im Warenkorb (z.B. 50€ Gutschein, HC Code 6609)</li>
+<li>Aktive Warenkorb-Promotion</li>
+<li>Shopware-Regel: [GE-Template-Warenkorb] mit Gutschein-Ausschluss</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt NICHT auf den Gutschein angewendet wird</li>
+<li>Gutscheinpreis bleibt unverändert</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Einkaufsgutscheine werden vom Promotion-Rabatt ausgeschlossen</li>
+<li>Gutscheinpreis bleibt beim Nennwert (z.B. 50€)</li>
+<li>Promotion wird ggf. auf andere rabattierbare Artikel angewendet</li>
+<li>Kein Rabatt auf den Gutschein selbst</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass Wertgutscheine (Geschenkgutscheine) grundsätzlich von allen Rabattaktionen ausgeschlossen sind</li>
+<li><strong>Bedingung:</strong></li>
+<li>Wertgutschein im Warenkorb</li>
+<li>Beliebige aktive Promotion (prozentual, absolut, automatisch)</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Verschiedene Promotion-Codes eingeben (prozentual, absolut)</li>
+<li>Prüfen, dass kein Rabatt auf den Wertgutschein angewendet wird</li>
+<li>Automatische Promotions prüfen – ebenfalls kein Rabatt</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Wertgutscheine sind von ALLEN Rabattaktionen ausgeschlossen</li>
+<li>Kein Rabatt wird angewendet, weder manuell noch automatisch</li>
+<li>Gutschein-Nennwert bleibt unverändert</li>
+<li>Promotion-Code kann eingegeben werden, aber Rabatt greift nicht auf den Gutschein</li>
+</ul>
 <h4 id="gutschein-sicherheit-brute-force-tests">Gutschein-Sicherheit (Brute-Force Tests)</h4>
 </ol>
 <div class="table-wrapper"><table class="test-table">
@@ -2221,8 +2183,90 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<h4 id="gutschein-checkout-flows">Gutschein-Checkout-Flows</h4>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
+<strong>TC-PROMO-SEC-001: Ausnutzungsmöglichkeiten Kaufgutscheine</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft potenzielle Ausnutzungsmöglichkeiten beim Kauf von Einkaufsgutscheinen (z.B. Rabatt auf Gutschein anwenden, dann vollen Wert einlösen)</li>
+<li><strong>Bedingung:</strong></li>
+<li>Einkaufsgutscheine verfügbar (verschiedene Nennwerte)</li>
+<li>Verschiedene aktive Promotions vorhanden</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Versuchen, Promotion-Code auf Gutschein-Kauf anzuwenden</li>
+<li>Versuchen, automatische Promotions auf Gutschein anzuwenden</li>
+<li>Prüfen, ob rabattiert gekaufter Gutschein vollen Nennwert behält</li>
+<li>Verschiedene Gutschein-Nennwerte testen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Keine Promotion kann auf Gutschein-Kauf angewendet werden</li>
+<li>Gutscheine können nicht unter Nennwert erworben werden</li>
+<li>System verhindert Arbitrage-Möglichkeiten</li>
+<li>Alle Schutzmechanismen greifen unabhängig vom Gutschein-Nennwert</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, ob durch Kombination von Einlösegutscheinen und Promotions ein kostenloser Warenkorb erreicht werden kann</li>
+<li><strong>Bedingung:</strong></li>
+<li>Einlösegutschein mit Guthaben vorhanden</li>
+<li>Aktive Warenkorb-Promotion</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Einlösegutschein eingeben (Guthaben > Warenwert)</li>
+<li>Zusätzlich Promotion-Code eingeben</li>
+<li>Prüfen, dass Endsumme nicht negativ wird</li>
+<li>Prüfen, dass kein Guthaben über den Warenwert hinaus erstattet wird</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Warenkorb kann maximal auf 0 EUR reduziert werden</li>
+<li>Kein negativer Warenkorbwert möglich</li>
+<li>Überschüssiges Guthaben bleibt auf dem Gutschein</li>
+<li>Promotion und Gutschein werden korrekt verrechnet</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, ob Einlösegutscheine fälschlicherweise zum Mindestbestellwert (MBW) gezählt werden</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit Mindestbestellwert-Bedingung</li>
+<li>Warenkorb unter MBW</li>
+<li>Einlösegutschein verfügbar</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Einlösegutschein eingeben</li>
+<li>Prüfen, ob MBW-Promotion nun verfügbar ist</li>
+<li>MBW-Code eingeben</li>
+<li>Validieren, dass Gutschein-Guthaben NICHT zum MBW gezählt wird</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Gutschein-Guthaben wird NICHT zum Warenwert für MBW-Berechnung addiert</li>
+<li>MBW wird nur aus tatsächlichen Produktpreisen berechnet</li>
+<li>Promotion wird weiterhin abgelehnt, wenn Produktwert unter MBW liegt</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Systematischer Test aller möglichen Gutschein-Promotion-Kombinationen</li>
+<li><strong>Bedingung:</strong></li>
+<li>Alle verfügbaren Gutschein-Typen (Einkaufsgutschein, Einlösegutschein, Wertgutschein)</li>
+<li>Alle verfügbaren Promotion-Typen (prozentual, absolut, Versandkostenfrei, automatisch)</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Jede Kombination einzeln testen</li>
+<li>Mehrfach-Kombinationen testen (2+ Gutscheine + Promotion)</li>
+<li>Reihenfolge variieren (erst Gutschein, dann Promotion und umgekehrt)</li>
+<li>Ergebnisse dokumentieren</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Keine Kombination führt zu negativem Warenwert</li>
+<li>Alle Ausschlussregeln greifen konsistent</li>
+<li>Reihenfolge der Eingabe hat keinen Einfluss auf das Ergebnis</li>
+<li>Fehlermeldungen sind eindeutig und korrekt</li>
+</ul>
+<h4 id="gutschein-checkout-flows">Gutschein-Checkout-Flows</h4>
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2267,8 +2311,7 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
 <strong>TC-PROMO-CHK-001: Gutschein zu regulärem Warenkorb blockiert</strong>
 <ul>
@@ -2330,7 +2373,6 @@
 <li>Checkout ist möglich</li>
 <li>Gesamtpreis: 150€</li>
 </ul>
-</details>
 <h4 id="versandkostenfrei-promotions">Versandkostenfrei-Promotions</h4>
 
 <div class="table-wrapper"><table class="test-table">
@@ -2383,9 +2425,29 @@
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>CH</td>
 </tr>
+<tr>
+<td>TC-PROMO-SHIP-007</td>
+<td>Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>DE</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-008</td>
+<td>Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+</tr>
+<tr>
+<td>TC-PROMO-SHIP-009</td>
+<td>Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>CH</td>
+</tr>
 </tbody></table></div>
-<details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
 <strong>TC-PROMO-SHIP-001: Versandkostenfrei nur Post (DE/AT)</strong>
 <ul>
@@ -2542,9 +2604,78 @@
 <li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/settings/rule/detail/019bec0c9ba2724d8f118c3f01db846d/base">Shopware-Regel</a></li>
 <li><a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019bec13f89e7197b69879ce36d3da5c/base">Promotion Template</a></li>
 </ul>
-</details>
+<strong>TC-PROMO-SHIP-007: Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Deutschland</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = DE</li>
+<li>Warenkorb enthält sowohl Postartikel als auch Speditionsartikel</li>
+<li>Beide Versandarten werden im Checkout angezeigt</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Speditionsartikel zum Warenkorb hinzufügen (z.B. Möbel, großes Produkt)</li>
+<li>Prüfen, dass beide Versandarten im Checkout erscheinen</li>
+<li>Versandkostenfrei-Promocode für Post eingeben (TC-PROMO-SHIP-001)</li>
+<li>Prüfen, dass nur Postversandkosten auf 0 reduziert werden</li>
+<li>Prüfen, dass Speditionskosten unverändert bleiben</li>
+<li>Alternativ: Versandkostenfrei-Promocode für Spedi eingeben (TC-PROMO-SHIP-003)</li>
+<li>Prüfen, dass nur Speditionskosten auf 0 reduziert werden</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Post-Promotion reduziert nur Postversandkosten</li>
+<li>Spedi-Promotion reduziert nur Speditionskosten</li>
+<li>Beide Versandarten werden separat berechnet und angezeigt</li>
+<li>Korrekte Berechnung der Gesamtversandkosten</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Österreich</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = AT</li>
+<li>Warenkorb enthält sowohl Postartikel als auch Speditionsartikel</li>
+<li>Beide Versandarten werden im Checkout angezeigt</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Speditionsartikel zum Warenkorb hinzufügen</li>
+<li>Prüfen, dass beide Versandarten im Checkout erscheinen</li>
+<li>Versandkostenfrei-Promocode für Post eingeben (TC-PROMO-SHIP-001)</li>
+<li>Prüfen, dass nur Postversandkosten (5,95 EUR) auf 0 reduziert werden</li>
+<li>Prüfen, dass Speditionskosten unverändert bleiben</li>
+<li>Alternativ: Versandkostenfrei-Promocode für Spedi eingeben (TC-PROMO-SHIP-003)</li>
+<li>Prüfen, dass nur Speditionskosten auf 0 reduziert werden</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Analog zu TC-PROMO-SHIP-007, aber für AT-Kanal</li>
+<li>Postversand AT und Spedi-Versand AT separat behandelt</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft Versandkostenfrei-Promotion bei gemischtem Warenkorb mit Post- und Speditionsartikeln für Schweiz</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Land = CH</li>
+<li>Warenkorb enthält sowohl Postartikel als auch Speditionsartikel</li>
+<li>Beide Versandarten werden im Checkout angezeigt</li>
+<li>Preise in CHF</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Speditionsartikel zum Warenkorb hinzufügen</li>
+<li>Prüfen, dass beide Versandarten im Checkout erscheinen</li>
+<li>Versandkostenfrei-Promocode für Post eingeben (TC-PROMO-SHIP-002)</li>
+<li>Prüfen, dass nur Postversandkosten (6,95 CHF) auf 0 reduziert werden</li>
+<li>Prüfen, dass Speditionskosten unverändert bleiben</li>
+<li>Alternativ: Versandkostenfrei-Promocode für Spedi eingeben (TC-PROMO-SHIP-004)</li>
+<li>Prüfen, dass nur Speditionskosten auf 0 reduziert werden</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Post-Promotion reduziert nur Postversandkosten (6,95 CHF)</li>
+<li>Spedi-Promotion reduziert nur Speditionskosten</li>
+<li>Korrekte CHF-Berechnung der Gesamtversandkosten</li>
+</ul>
 <h4 id="produktkategorien-promotions">Produktkategorien-Promotions</h4>
-
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2568,10 +2699,30 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
-<strong>TC-PROMO-AUTO-001: Automatisierte Promo auf Werbemittel ID 70</strong>
+<strong>TC-PROMO-CAT-001: Promo auf Produktkategorie via advertising_material_id</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass eine Promotion nur auf Produkte einer bestimmten Kategorie angewendet wird, identifiziert über advertising_material_id</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit Produktfilter auf bestimmte advertising_material_id</li>
+<li>Produkte mit und ohne passende advertising_material_id vorhanden</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Produkt OHNE passende advertising_material_id zum Warenkorb hinzufügen</li>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt nur auf das Produkt mit passender ID angewendet wird</li>
+<li>Prüfen, dass das andere Produkt zum vollen Preis bleibt</li>
+<li>Test in allen Verkaufskanälen (AT, DE, CH) durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Rabatt wird nur auf Produkte mit passender advertising_material_id angewendet</li>
+<li>Produkte ohne passende ID bleiben unrabattiert</li>
+<li>Prozentuale oder absolute Berechnung ist korrekt</li>
+<li>Funktioniert in allen DACH-Verkaufskanälen</li>
+</ul>
+</ol>
 <ul>
 <li><strong>Beschreibung:</strong> Vorlage für Promohuelse (automatisierte Promo) - prüft automatische Rabattanwendung auf Produkte mit Werbemittel ID 70</li>
 <li><strong>Bedingung:</strong> Nur Produkte mit Werbemittel ID 70, keine Shopware-Regel notwendig</li>
@@ -2600,7 +2751,6 @@
 <li>Funktioniert in allen DACH-Verkaufskanälen</li>
 <li><strong>Referenz:</strong> <a href="https://grueneerde.scalecommerce.cloud/admin#/sw/promotion/v2/detail/019be5f25363722483455ea500fee356/base">Shopware Promotion Template</a></li>
 </ul>
-</details>
 <h4 id="mindestbestellwert-promotions">Mindestbestellwert-Promotions</h4>
 </ol>
 <div class="table-wrapper"><table class="test-table">
@@ -2626,8 +2776,53 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<h4 id="mengenrabatt-promotions">Mengenrabatt-Promotions</h4>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
+<strong>TC-PROMO-MOV-001: EUR-Rabatt ab Mindestbestellwert</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft absolute EUR-Rabatte, die erst ab einem bestimmten Mindestbestellwert (MBW) greifen</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit absolutem EUR-Rabatt (z.B. 10 EUR Rabatt)</li>
+<li>Mindestbestellwert-Bedingung (z.B. ab 50 EUR)</li>
+<li>Shopware-Regel mit MBW-Bedingung</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben → sollte abgelehnt werden</li>
+<li>Warenkorb auf über MBW erhöhen (z.B. 55 EUR)</li>
+<li>Promotion-Code erneut eingeben → sollte akzeptiert werden</li>
+<li>Prüfen, dass absoluter Rabatt korrekt abgezogen wird</li>
+<li>MBW-Grenzwert testen (exakt MBW-Betrag)</li>
+<li>Test in AT, DE, CH durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Unter MBW: Promotion wird abgelehnt mit Hinweis auf MBW</li>
+<li>Ab MBW: Promotion wird akzeptiert</li>
+<li>Absoluter Rabatt wird korrekt abgezogen (Endsumme = Warenwert - Rabatt + Versand)</li>
+<li>MBW wird nur auf Produktwert berechnet (ohne Versandkosten)</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass der Mindestbestellwert nur auf den Warenkorb-Produktwert berechnet wird, nicht auf Versandkosten oder Gutscheine</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit MBW-Bedingung</li>
+<li>Warenkorb mit Produkten + Versandkosten</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Prüfen, dass Versandkosten NICHT zum MBW gezählt werden</li>
+<li>Prüfen, dass Einlösegutscheine NICHT den Warenwert für MBW reduzieren</li>
+<li>Prüfen, dass nur Netto-Produktwerte für MBW zählen</li>
+<li>Produkt hinzufügen, bis MBW erreicht</li>
+<li>Promotion-Code eingeben → sollte akzeptiert werden</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>MBW wird ausschließlich aus Produktpreisen berechnet</li>
+<li>Versandkosten, Gutschein-Guthaben und Rabatte fließen nicht in MBW-Berechnung ein</li>
+<li>Korrekte Berechnung auch bei gemischtem Warenkorb (Post + Spedition)</li>
+</ul>
+<h4 id="mengenrabatt-promotions">Mengenrabatt-Promotions</h4>
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2643,23 +2838,32 @@
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
 </tr>
-<tr>
-<td>TC-PROMO-QTY-002</td>
-<td>Mengenrabatt nur auf 1 Produkt</td>
-<td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
-<td>AT, DE, CH</td>
-</tr>
-<tr>
-<td>TC-PROMO-QTY-003</td>
-<td>3x gleiches Produkt - nur 1x rabattiert</td>
-<td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
-<td>AT, DE, CH</td>
-</tr>
 </tbody></table></div>
-<h4 id="aktionspreis-promotions">Aktionspreis-Promotions</h4>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
+<strong>TC-PROMO-QTY-001: % auf teuerstes Produkt</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft prozentuale Promotion, die nur auf das teuerste Produkt im Warenkorb angewendet wird</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit Rabatt-Anwendung auf "teuersten Artikel"</li>
+<li>Warenkorb mit mehreren Produkten unterschiedlicher Preise</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt nur auf das teuerste Produkt (80€) angewendet wird</li>
+<li>Prüfen, dass die günstigeren Produkte zum vollen Preis bleiben</li>
+<li>Prozentuale Berechnung validieren (z.B. 20% von 80€ = 16€ Rabatt)</li>
+<li>Gesamtsumme validieren</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Rabatt wird nur auf das teuerste Produkt angewendet</li>
+<li>Bei gleich teuren Produkten: Rabatt auf eines davon</li>
+<li>Prozentuale Berechnung ist korrekt</li>
+<li>Andere Produkte bleiben unverändert</li>
+</ul>
+<h4 id="aktionspreis-promotions">Aktionspreis-Promotions</h4>
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2697,8 +2901,91 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<h4 id="mitarbeiterrabatt">Mitarbeiterrabatt</h4>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
+<strong>TC-PROMO-SALE-001: Rabatt auf Lieblingsprodukt (Aktionspreis)</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft die "Lieblingsprodukt"-Promotion, bei der ein prozentualer Rabatt auf ein einzelnes, vom Kunden gewähltes Produkt angewendet wird (z.B. Code "Liebling20" für 20% auf teuerstes Produkt)</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion-Code: Liebling20 (oder je nach Kampagne)</li>
+<li>Rabatt: Prozentual auf teuerstes Produkt</li>
+<li>Aktive Kampagne mit gültigem Zeitraum</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion-Code "Liebling20" eingeben</li>
+<li>Prüfen, dass Rabatt auf das teuerste Produkt angewendet wird</li>
+<li>Aktionspreis-Berechnung validieren (20% von Einzelpreis)</li>
+<li>Prüfen, dass durchgestrichener Originalpreis angezeigt wird</li>
+<li>Test in allen Verkaufskanälen (AT, DE, CH) durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>20% Rabatt wird auf das teuerste Produkt angewendet</li>
+<li>Originalpreis wird durchgestrichen angezeigt</li>
+<li>Aktionspreis wird korrekt berechnet</li>
+<li>Andere Produkte bleiben unverändert</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass eine Promotion über die advertising_material_id gezielt auf bestimmte Produkte angewendet wird</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit Produktfilter über advertising_material_id</li>
+<li>Produkte mit und ohne passende advertising_material_id</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Produkt ohne passende ID hinzufügen</li>
+<li>Promotion-Code eingeben</li>
+<li>Prüfen, dass Rabatt nur auf Produkt mit passender ID angewendet wird</li>
+<li>Rabattberechnung validieren</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Rabatt wird nur auf Produkte mit passender advertising_material_id angewendet</li>
+<li>Andere Produkte bleiben unverändert</li>
+<li>Filterung über advertising_material_id funktioniert korrekt</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass eine Promotion mit leerer oder fehlender advertising_material_id nicht angewendet werden kann (Schutz vor Fehlkonfiguration)</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion ohne advertising_material_id oder mit leerer ID</li>
+<li>Beliebige Produkte im Warenkorb</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Promotion ohne gültige advertising_material_id versuchen anzuwenden</li>
+<li>Prüfen, dass keine Fehlkonfiguration zu unbeabsichtigten Rabatten führt</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Promotion mit leerer ID wird nicht angewendet</li>
+<li>Fehlermeldung oder stille Ablehnung</li>
+<li>Kein unbeabsichtigter Rabatt auf alle Produkte</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft die korrekte Frontend-Darstellung von SALE/Aktionspreisen (durchgestrichener Originalpreis, SALE-Badge, Rabatt-Prozent)</li>
+<li><strong>Bedingung:</strong></li>
+<li>Produkt mit aktivem Aktionspreis (SALE)</li>
+<li>Aktionspreis in Shopware konfiguriert</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Prüfen, dass Originalpreis durchgestrichen angezeigt wird</li>
+<li>Prüfen, dass Aktionspreis prominent angezeigt wird</li>
+<li>Prüfen, dass SALE-Badge/Label vorhanden ist</li>
+<li>Prüfen, dass Preise in Listing/Kategorie-Übersicht korrekt angezeigt werden</li>
+<li>Prüfen, dass Aktionspreis im Warenkorb und Checkout korrekt übernommen wird</li>
+<li>Test in allen Verkaufskanälen (AT: EUR, DE: EUR, CH: CHF) durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Originalpreis wird durchgestrichen angezeigt</li>
+<li>Aktionspreis ist hervorgehoben (andere Farbe/Größe)</li>
+<li>SALE-Badge ist auf PDP und in Listings sichtbar</li>
+<li>Preise sind in Warenkorb und Checkout konsistent</li>
+<li>Währungsformatierung ist je Verkaufskanal korrekt (EUR/CHF)</li>
+</ul>
+<h4 id="mitarbeiterrabatt">Mitarbeiterrabatt</h4>
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2722,8 +3009,52 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<h4 id="bundle-promotions">Bundle-Promotions</h4>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
+<strong>TC-PROMO-EMP-001: Mitarbeiterrabatt nur auf Basispreis</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass der Mitarbeiterrabatt auf den regulären Basispreis berechnet wird, nicht auf bereits reduzierte Preise</li>
+<li><strong>Bedingung:</strong></li>
+<li>Eingeloggter Mitarbeiter-Account (spezielle Kundengruppe)</li>
+<li>Automatische Mitarbeiter-Promotion aktiv</li>
+<li>Produkte mit regulärem Preis im Warenkorb</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Reguläres Produkt (ohne Aktionspreis) zum Warenkorb hinzufügen</li>
+<li>Prüfen, dass Mitarbeiterrabatt automatisch angewendet wird</li>
+<li>Rabatt-Berechnung validieren (% vom Basispreis)</li>
+<li>Verschiedene Produktkategorien testen (Kleidung, Kosmetik, Möbel)</li>
+<li>Test in AT, DE und CH durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Mitarbeiterrabatt wird automatisch auf Basispreis angewendet</li>
+<li>Rabatt-Prozentsatz ist je Kategorie korrekt</li>
+<li>Anzeige im Warenkorb: Originalpreis + Mitarbeiterrabatt-Zeile</li>
+<li>Kein manueller Code erforderlich</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass der Mitarbeiterrabatt NICHT auf bereits reduzierte Aktionspreise (SALE) angewendet wird – keine Doppelrabattierung</li>
+<li><strong>Bedingung:</strong></li>
+<li>Eingeloggter Mitarbeiter-Account</li>
+<li>Produkt mit aktivem Aktionspreis (SALE)</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Produkt mit Aktionspreis zum Warenkorb hinzufügen</li>
+<li>Prüfen, dass KEIN zusätzlicher Mitarbeiterrabatt auf den Aktionspreis angewendet wird</li>
+<li>Prüfen, ob der Aktionspreis oder der Mitarbeiterrabatt günstiger ist</li>
+<li>Gemischter Warenkorb: Aktionspreis-Produkt + reguläres Produkt → Mitarbeiterrabatt nur auf reguläres</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Kein Mitarbeiterrabatt auf Aktionspreise (keine Doppelrabattierung)</li>
+<li>Produkt wird zum Aktionspreis berechnet</li>
+<li>Bei gemischtem Warenkorb: Mitarbeiterrabatt nur auf reguläre Produkte</li>
+<li>Alternativ: Der günstigere Preis (Aktionspreis vs. Mitarbeiterrabatt) wird angewendet</li>
+</ul>
+<h4 id="bundle-promotions">Bundle-Promotions</h4>
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2734,14 +3065,7 @@
 </tr></thead><tbody>
 <tr>
 <td>TC-PROMO-BUNDLE-001</td>
-<td>Nimm 5 zahl 4</td>
-<td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
-<td>AT, DE, CH</td>
-</tr>
-<tr>
-<td>TC-PROMO-BUNDLE-002</td>
-<td>Produkt A + Gratisprodukt</td>
+<td>Nimm 3 zahl 2</td>
 <td>P1</td>
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
@@ -2755,14 +3079,80 @@
 </tr>
 <tr>
 <td>TC-PROMO-BUNDLE-004</td>
-<td>Pro Kissen ein Schonbezug gratis</td>
+<td>Pro Kissen ein Schonbezug gratis bei allen im Artikel</td>
 <td>P1</td>
 <td><span class="badge badge-defined">○ Definiert</span></td>
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<h4 id="promo-kombinationen">Promo-Kombinationen</h4>
+<strong>Detaillierte Testbeschreibungen:</strong>
 
+<strong>TC-PROMO-BUNDLE-001: Nimm 3 zahl 2</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft die "Nimm 5, zahl 4"-Aktion – bei 5 gleichen Produkten wird das günstigste kostenlos</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion mit Regel "5 kaufen, 4 bezahlen"</li>
+<li>Mindestmenge: 5 gleiche Produkte</li>
+<li>Automatisch oder per Code</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Prüfen, dass automatisch 1 Stück als Gratis markiert wird (oder Code eingeben)</li>
+<li>Gesamtpreis validieren (= 4x Einzelpreis)</li>
+<li>Mit 4 Stück testen → kein Rabatt</li>
+<li>Mit 6 Stück testen → weiterhin nur 1x gratis (oder 2x bei 10 Stück)</li>
+<li>Rabatt-Anzeige im Warenkorb prüfen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Bei 5 Stück: 1 Stück wird als 100% rabattiert angezeigt</li>
+<li>Gesamtpreis = 4 × Einzelpreis</li>
+<li>Unter 5 Stück: Kein Rabatt</li>
+<li>Rabatt wird als separate Promotion-Zeile angezeigt</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft spezifische Bundle-Aktion: Beim Kauf eines Kissens wird ein passender Schonbezug gratis hinzugefügt</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion: Kissen-Kauf → Schonbezug gratis</li>
+<li>Kissen und Schonbezug als Bundle konfiguriert</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Prüfen, ob Schonbezug automatisch als Gratisartikel erscheint</li>
+<li>Prüfen, dass Schonbezug mit 0 EUR/CHF angezeigt wird</li>
+<li>Prüfen, dass nur der passende Schonbezug hinzugefügt wird</li>
+<li>Anderes Kissen testen → anderer Schonbezug</li>
+<li>Kissen entfernen → Schonbezug wird ebenfalls entfernt</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Passender Schonbezug wird automatisch gratis hinzugefügt</li>
+<li>Schonbezug mit Preis 0 im Warenkorb</li>
+<li>Korrekte Zuordnung Kissen → Schonbezug</li>
+<li>Entfernung des Kissens entfernt auch den Schonbezug</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft die Mengenstaffelung bei Bundle-Aktionen: Pro gekauftem Kissen wird jeweils ein Schonbezug gratis hinzugefügt</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion: Pro Kissen 1x Schonbezug gratis (Mengenstaffelung)</li>
+<li>Mehrere Kissen im Warenkorb</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>2x Kissen hinzufügen → 2x Schonbezug gratis</li>
+<li>3x Kissen hinzufügen → 3x Schonbezug gratis</li>
+<li>Kissen-Menge reduzieren → Schonbezug-Menge passt sich an</li>
+<li>Gesamtpreis validieren (nur Kissen-Preise, keine Schonbezug-Kosten)</li>
+<li>Verschiedene Kissen-Varianten testen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Anzahl Gratis-Schonbezüge = Anzahl Kissen</li>
+<li>Mengenstaffelung funktioniert korrekt in beide Richtungen (erhöhen/reduzieren)</li>
+<li>Gesamtpreis enthält nur Kissen-Preise</li>
+<li>Bei Mischung verschiedener Kissen: jeweils passender Schonbezug</li>
+</ul>
+<h4 id="promo-kombinationen">Promo-Kombinationen</h4>
+</ol>
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -2786,7 +3176,54 @@
 <td>AT, DE, CH</td>
 </tr>
 </tbody></table></div>
-<hr>
+<strong>Detaillierte Testbeschreibungen:</strong>
+
+<strong>TC-PROMO-COMBO-001: Zwei Promotions kombinierbar</strong>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, ob zwei unabhängige Promotions gleichzeitig auf denselben Warenkorb angewendet werden können</li>
+<li><strong>Bedingung:</strong></li>
+<li>Zwei aktive, kombinierbare Promotions</li>
+<li>Shopware-Promotion-Einstellung: "Kombination erlaubt" = true</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Ersten Promotion-Code eingeben → wird akzeptiert</li>
+<li>Zweiten Promotion-Code eingeben → wird akzeptiert</li>
+<li>Prüfen, dass beide Rabatte im Warenkorb angezeigt werden</li>
+<li>Prüfen, dass beide Rabatte korrekt berechnet werden</li>
+<li>Gesamtpreis validieren (beide Rabatte abgezogen)</li>
+<li>Reihenfolge umkehren und erneut testen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Beide Promotions werden gleichzeitig angewendet</li>
+<li>Beide Rabatte erscheinen als separate Zeilen</li>
+<li>Gesamtpreis ist korrekt (beide Rabatte berücksichtigt)</li>
+<li>Reihenfolge der Eingabe hat keinen Einfluss auf Ergebnis</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft die Kombination einer kategoriespezifischen Promotion (20% auf Kleidung) mit einer allgemeinen Promotion (5% auf alles)</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion 1: 20% auf Kleidung (automatisch oder per Code)</li>
+<li>Promotion 2: 5% auf gesamten Warenkorb</li>
+<li>Warenkorb mit Kleidung + Nicht-Kleidung</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Nicht-Kleidungsprodukt hinzufügen (z.B. Kosmetik)</li>
+<li>Beide Promotions aktivieren</li>
+<li>Kleidungsprodukt: Prüfen ob 20% + 5% = 25% oder sequenziell (20% dann 5% auf Rest)</li>
+<li>Nicht-Kleidungsprodukt: Nur 5% Rabatt</li>
+<li>Rabattberechnung validieren (additiv vs. sequenziell)</li>
+<li>Gesamtpreis prüfen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Kleidung erhält beide Rabatte (20% + 5%)</li>
+<li>Nicht-Kleidung erhält nur 5%</li>
+<li>Berechnung ist je nach Shopware-Konfiguration additiv oder sequenziell</li>
+<li>Gesamtpreis ist korrekt berechnet</li>
+</ul>
+</ol>
 
 <h3 id="data-validation-tests">📊 Data Validation Tests</h3>
 
@@ -3337,7 +3774,7 @@
 </tr>
 <tr>
 <td>TBD</td>
-<td>Nimm 5 zahl 4 Testprodukt</td>
+<td>Nimm 3 zahl 2 Testprodukt</td>
 <td>Mengenrabatt</td>
 <td>-</td>
 <td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
@@ -3631,13 +4068,12 @@
 <td><span class="badge badge-error">✗ Fehlend</span> Fehlend</td>
 </tr>
 </tbody></table></div>
-
 <details>
-<summary><strong>Detaillierte Testbeschreibungen</strong> (aufklappen)</summary>
+<summary><strong>Detaillierte Testbeschreibungen</strong></summary>
 
 <p>Die Gutscheine und Rabattcodes werden in den Promotion-Testfällen (Abschnitt „Feature Tests – Promotions") verwendet. Hier ist dokumentiert, welche konkreten Codes für welche Testfälle benötigt werden, welcher Typ jeweils vorliegt und welche Sicherheitsmechanismen getestet werden.</p>
 
-<h4>Kaufgutscheine (Einkaufsgutscheine)</h4>
+<h4 id="kaufgutscheine-einkaufsgutscheine">Kaufgutscheine (Einkaufsgutscheine)</h4>
 
 <p>Kaufgutscheine sind Artikel, die im Shop erworben werden. Sie haben einen festen Nennwert und werden nach Kauf als Einlösegutschein aktiviert.</p>
 
@@ -3645,23 +4081,18 @@
 <ul>
 <li><strong>Verwendung:</strong> Checkout-Flow Tests (TC-PROMO-CHK-001 bis TC-PROMO-CHK-004)</li>
 <li><strong>Status:</strong> Vorhanden</li>
-<li><strong>Testszenarien:</strong>
-  <ul>
-  <li>Gutschein zu regulärem Warenkorb hinzufügen → muss blockiert werden (TC-PROMO-CHK-001)</li>
-  <li>Reguläres Produkt zu Gutschein-Warenkorb hinzufügen → muss blockiert werden (TC-PROMO-CHK-002)</li>
-  <li>Promotion auf Gutschein-Kauf anwenden → muss verhindert werden (TC-PROMO-CHK-003)</li>
-  <li>Gemischter Warenkorb im Checkout → muss durch CartValidator blockiert werden (TC-PROMO-CHK-004)</li>
-  </ul>
-</li>
+<li><strong>Testszenarien:</strong></li>
+<li>Gutschein zu regulärem Warenkorb hinzufügen → muss blockiert werden (TC-PROMO-CHK-001)</li>
+<li>Reguläres Produkt zu Gutschein-Warenkorb hinzufügen → muss blockiert werden (TC-PROMO-CHK-002)</li>
+<li>Promotion auf Gutschein-Kauf anwenden → muss verhindert werden (TC-PROMO-CHK-003)</li>
+<li>Gemischter Warenkorb im Checkout → muss durch CartValidator blockiert werden (TC-PROMO-CHK-004)</li>
 </ul>
-
 <strong>Weitere Kaufgutscheine (noch anzulegen):</strong>
 <ul>
 <li><strong>100 EUR Einkaufsgutschein:</strong> Für Checkout-Flow Tests mit höherem Nennwert</li>
 <li><strong>10 EUR / 25 EUR Kaufgutscheine:</strong> Für Sicherheitstests – prüfen, dass Promotions nicht auf Gutschein-Käufe angewendet werden können (TC-PROMO-SEC-001: Arbitrage-Verhinderung)</li>
 </ul>
-
-<h4>Wertgutscheine (Einlösegutscheine)</h4>
+<h4 id="wertgutscheine-einloesegutscheine">Wertgutscheine (Einlösegutscheine)</h4>
 
 <p>Wertgutscheine haben ein Guthaben, das beim Checkout als Zahlungsmittel eingelöst wird. Sie sind keine Produkte, sondern werden als Zahlungsabzug verrechnet.</p>
 
@@ -3670,14 +4101,12 @@
 <li><strong>25 EUR Wertgutschein:</strong> Für Tests unter Mindestbestellwert-Grenze (TC-PROMO-SEC-003: Gutschein darf nicht zum MBW gezählt werden)</li>
 <li><strong>50 EUR Wertgutschein:</strong> Für Kombinations-Tests (TC-PROMO-SEC-002: Gutschein + Promotion darf Warenkorb nicht unter 0 bringen)</li>
 </ul>
-
 <strong>Sicherheitsrelevante Testfälle:</strong>
 <ul>
-<li><strong>TC-PROMO-SEC-002:</strong> Einlösegutschein (Guthaben &gt; Warenwert) + Promotion → Endsumme darf nicht negativ werden</li>
+<li><strong>TC-PROMO-SEC-002:</strong> Einlösegutschein (Guthaben > Warenwert) + Promotion → Endsumme darf nicht negativ werden</li>
 <li><strong>TC-PROMO-SEC-003:</strong> Einlösegutschein darf nicht zum Mindestbestellwert gezählt werden → MBW basiert nur auf Produktpreisen</li>
 </ul>
-
-<h4>Rabattcodes (Promotion-Codes)</h4>
+<h4 id="rabattcodes-promotion-codes">Rabattcodes (Promotion-Codes)</h4>
 
 <p>Rabattcodes werden im Warenkorb oder Checkout eingegeben und aktivieren eine Shopware-Promotion. Die Codes sind an Regeln gebunden (Mindestbestellwert, Produktausschlüsse, Länderbeschränkung).</p>
 
@@ -3687,7 +4116,6 @@
 <li><strong>15 EUR auf Warenkorb (MBW 100 EUR):</strong> Allgemeiner Testcode für absolute Warenkorb-Promotions</li>
 <li><strong>20% auf Warenkorb:</strong> Template-Test (TC-PROMO-CART-PERCENT-001) – mit Ausschluss nicht-rabattierbarer Artikel + Einkaufsgutscheine, 1x global / 5x pro Kunde</li>
 </ul>
-
 <strong>Versandkostenfrei-Codes:</strong>
 <ul>
 <li><strong>Post DE/AT frei (5,95 EUR absolut):</strong> TC-PROMO-SHIP-001 – nur Postversand, keine Spedition</li>
@@ -3697,7 +4125,6 @@
 <li><strong>Post DE/AT frei ab MBW 50 EUR:</strong> TC-PROMO-SHIP-005 – mit Mindestbestellwert-Bedingung</li>
 <li><strong>Post CH frei ab MBW 50 CHF:</strong> TC-PROMO-SHIP-006 – mit Mindestbestellwert-Bedingung</li>
 </ul>
-
 <strong>Spezial-Codes:</strong>
 <ul>
 <li><strong>20% auf Produktkategorie:</strong> Über advertising_material_id gefiltert – nur bestimmte Produkte rabattiert</li>
@@ -3706,7 +4133,6 @@
 <li><strong>5% auf alles (kombinierbar):</strong> Niedrigster Rabatt, kombinierbar mit kategoriespezifischen Codes</li>
 <li><strong>SOMMER20:</strong> Testcode für TC-PROMO-CHK-003 (Promotion auf Gutschein-Warenkorb muss blockiert werden)</li>
 </ul>
-
 <strong>Hinweise zur Einrichtung:</strong>
 <ul>
 <li>Alle Codes mit „TBD" müssen noch im Shopware-Admin angelegt werden</li>
@@ -3714,7 +4140,6 @@
 <li>Nutzungslimits beachten: Nach Testdurchläufen ggf. Zähler zurücksetzen</li>
 <li>Shopware-Regeln (z.B. GE_Promo_Lieferland-DA_nurPostversand) müssen vor den Promotions existieren</li>
 </ul>
-
 </details>
 
 <h3 id="mitarbeiter-accounts">👥 Mitarbeiter-Accounts</h3>
@@ -3779,7 +4204,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 26.01.2026 um 17:34 Uhr</p>
+            <p>Generiert am 06.02.2026 um 08:11 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
