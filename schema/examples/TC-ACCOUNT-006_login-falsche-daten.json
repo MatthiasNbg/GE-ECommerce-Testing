@@ -39,7 +39,7 @@
         {
           "action": "fill",
           "selector": "#loginMail",
-          "value": "nicht-existierend@example.com"
+          "value_ref": "login:invalid_user.email"
         }
       ]
     },
@@ -51,7 +51,7 @@
         {
           "action": "fill",
           "selector": "#loginPassword",
-          "value": "FalschesPasswort123!"
+          "value_ref": "login:invalid_user.password"
         }
       ]
     },
@@ -88,6 +88,11 @@
     {
       "type": "extra",
       "name": "default",
+      "email": "nicht-existierend@example.com"
+    },
+    {
+      "type": "login",
+      "name": "invalid_user",
       "email": "nicht-existierend@example.com",
       "password": "FalschesPasswort123!"
     }

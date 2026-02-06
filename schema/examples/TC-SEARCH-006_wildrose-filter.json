@@ -30,7 +30,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "wildrose"
+          "value_ref": "search:product_name.term"
         }
       ]
     },
@@ -79,6 +79,11 @@
         "brush",
         "pinsel"
       ]
+    },
+    {
+      "type": "search",
+      "name": "product_name",
+      "term": "wildrose"
     }
   ],
   "automation": {

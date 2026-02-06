@@ -44,17 +44,17 @@
         {
           "action": "select",
           "selector": "#personalSalutation",
-          "value": "mr"
+          "value_ref": "address:billing.salutation"
         },
         {
           "action": "fill",
           "selector": "#personalFirstName",
-          "value": "Test"
+          "value_ref": "address:billing.first_name"
         },
         {
           "action": "fill",
           "selector": "#personalLastName",
-          "value": "Kunde"
+          "value_ref": "address:billing.last_name"
         }
       ]
     },
@@ -66,17 +66,17 @@
         {
           "action": "fill",
           "selector": "#personalMail",
-          "value": "test@example.com"
+          "value_ref": "login:guest.email"
         },
         {
           "action": "fill",
           "selector": "#personalPassword",
-          "value": "TestPasswort123!"
+          "value_ref": "login:guest.password"
         },
         {
           "action": "fill",
           "selector": "#personalPasswordConfirmation",
-          "value": "TestPasswort123!"
+          "value_ref": "login:guest.password"
         }
       ]
     },
@@ -88,22 +88,22 @@
         {
           "action": "fill",
           "selector": "#billingAddressAddressStreet",
-          "value": "Teststrasse 1"
+          "value_ref": "address:billing.street"
         },
         {
           "action": "fill",
           "selector": "#billingAddressAddressZipcode",
-          "value": "4020"
+          "value_ref": "address:billing.zip"
         },
         {
           "action": "fill",
           "selector": "#billingAddressAddressCity",
-          "value": "Linz"
+          "value_ref": "address:billing.city"
         },
         {
           "action": "select",
           "selector": "#billingAddressAddressCountry",
-          "value": "AT"
+          "value_ref": "address:billing.country"
         }
       ]
     },
@@ -135,14 +135,19 @@
     },
     {
       "type": "address",
-      "name": "default",
+      "name": "billing",
       "zip": "4020",
       "city": "Linz",
-      "country": "AT"
+      "country": "AT",
+      "salutation": "mr",
+      "first_name": "Test",
+      "last_name": "Kunde",
+      "street": "Teststrasse 1"
     },
     {
-      "type": "extra",
-      "name": "default",
+      "type": "login",
+      "name": "guest",
+      "email": "test@example.com",
       "password": "TestPasswort123!"
     }
   ],

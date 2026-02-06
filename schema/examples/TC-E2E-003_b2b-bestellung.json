@@ -6,7 +6,9 @@
   "functional_area": "E2E Tests - Checkout",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -24,7 +26,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:post_product.path"
         },
         {
           "action": "click",
@@ -59,7 +61,7 @@
         {
           "action": "select",
           "selector": "#-accountType",
-          "value": "Gewerblich"
+          "value_ref": "address:billing.account_type"
         }
       ]
     },
@@ -71,12 +73,12 @@
         {
           "action": "fill",
           "selector": "#billingAddresscompany",
-          "value": "Testfirma GmbH"
+          "value_ref": "address:billing.company"
         },
         {
           "action": "fill",
           "selector": "#vatIds",
-          "value": "ATU12345678"
+          "value_ref": "address:billing.vat_id"
         }
       ]
     },
@@ -88,32 +90,32 @@
         {
           "action": "fill",
           "selector": "#billingAddress-personalFirstName",
-          "value": "B2B"
+          "value_ref": "address:billing.first_name"
         },
         {
           "action": "fill",
           "selector": "#billingAddress-personalLastName",
-          "value": "Test"
+          "value_ref": "address:billing.last_name"
         },
         {
           "action": "fill",
           "selector": "#personalMail",
-          "value": "b2b-test@example.com"
+          "value_ref": "login:b2b_customer.email"
         },
         {
           "action": "fill",
           "selector": "#billingAddress-AddressStreet",
-          "value": "Teststrasse 123"
+          "value_ref": "address:billing.street"
         },
         {
           "action": "fill",
           "selector": "#billingAddressAddressZipcode",
-          "value": "4020"
+          "value_ref": "address:billing.zip"
         },
         {
           "action": "fill",
           "selector": "#billingAddressAddressCity",
-          "value": "Linz"
+          "value_ref": "address:billing.city"
         }
       ]
     },
@@ -177,9 +179,27 @@
       "total_variants": 3,
       "parameters": {
         "variants": [
-          {"id": "B2B-01", "country": "AT", "payment": "prepayment", "company": "Testfirma GmbH", "vat_id": "ATU12345678"},
-          {"id": "B2B-02", "country": "DE", "payment": "invoice", "company": "Testfirma GmbH", "vat_id": "DE123456789"},
-          {"id": "B2B-03", "country": "CH", "payment": "prepayment", "company": "Testfirma AG", "vat_id": "CHE-123.456.789"}
+          {
+            "id": "B2B-01",
+            "country": "AT",
+            "payment": "prepayment",
+            "company": "Testfirma GmbH",
+            "vat_id": "ATU12345678"
+          },
+          {
+            "id": "B2B-02",
+            "country": "DE",
+            "payment": "invoice",
+            "company": "Testfirma GmbH",
+            "vat_id": "DE123456789"
+          },
+          {
+            "id": "B2B-03",
+            "country": "CH",
+            "payment": "prepayment",
+            "company": "Testfirma AG",
+            "vat_id": "CHE-123.456.789"
+          }
         ]
       }
     },
@@ -187,7 +207,27 @@
       "type": "product",
       "name": "post_product",
       "product_id": "ge-p-862990",
-      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)",
+      "path": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "article_number": "862990"
+    },
+    {
+      "type": "login",
+      "name": "b2b_customer",
+      "email": "b2b-test@example.com",
+      "password": "TestPasswort123!"
+    },
+    {
+      "type": "address",
+      "name": "billing",
+      "account_type": "Gewerblich",
+      "company": "Testfirma GmbH",
+      "vat_id": "ATU12345678",
+      "first_name": "B2B",
+      "last_name": "Test",
+      "street": "Teststrasse 123",
+      "zip": "4020",
+      "city": "Linz"
     }
   ],
   "automation": {

@@ -28,7 +28,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/bademantel-raute-fuer-damen-und-herren/ge-p-410933"
+          "value_ref": "product:default.path"
         },
         {
           "action": "click",
@@ -62,7 +62,7 @@
         {
           "action": "fill",
           "selector": "input[name='quantity']",
-          "value": "3"
+          "value_ref": "extra:config.quantity"
         }
       ]
     },
@@ -90,13 +90,19 @@
       "type": "product",
       "name": "default",
       "path": "p/bademantel-raute-fuer-damen-und-herren/ge-p-410933",
-      "product_name": "Bademantel Raute für Damen und Herren"
+      "product_name": "Bademantel Raute für Damen und Herren",
+      "article_number": "410933"
     },
     {
       "type": "extra",
       "name": "default",
       "new_quantity": 3,
       "price_tolerance_percent": 1
+    },
+    {
+      "type": "extra",
+      "name": "config",
+      "quantity": "3"
     }
   ],
   "automation": {

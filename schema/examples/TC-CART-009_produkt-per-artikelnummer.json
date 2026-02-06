@@ -40,7 +40,7 @@
         {
           "action": "fill",
           "selector": "#addProductInput",
-          "value": "862990"
+          "value_ref": "product:default.article_number"
         }
       ]
     },

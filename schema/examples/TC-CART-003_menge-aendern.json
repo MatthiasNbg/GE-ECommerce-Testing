@@ -28,7 +28,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:default.path"
         },
         {
           "action": "click",
@@ -62,7 +62,7 @@
         {
           "action": "fill",
           "selector": "input[name='quantity']",
-          "value": "2"
+          "value_ref": "extra:config.quantity"
         }
       ]
     },
@@ -90,12 +90,18 @@
       "type": "product",
       "name": "default",
       "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+      "article_number": "862990"
     },
     {
       "type": "extra",
       "name": "default",
       "new_quantity": 2
+    },
+    {
+      "type": "extra",
+      "name": "config",
+      "quantity": "2"
     }
   ],
   "automation": {

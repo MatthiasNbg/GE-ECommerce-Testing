@@ -48,7 +48,7 @@
         {
           "action": "fill",
           "selector": "#personalMail",
-          "value": "test@example.com"
+          "value_ref": "login:guest.email"
         }
       ]
     },
@@ -90,5 +90,13 @@
     "created": "2026-02-06",
     "last_modified": "2026-02-06",
     "version": "1.0"
-  }
+  },
+  "test_data": [
+    {
+      "type": "login",
+      "name": "guest",
+      "email": "test@example.com",
+      "password": "TestPasswort123!"
+    }
+  ]
 }

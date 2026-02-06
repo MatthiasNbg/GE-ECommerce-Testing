@@ -30,7 +30,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+          "value_ref": "product:gift_card.path"
         }
       ]
     },
@@ -75,7 +75,7 @@
         {
           "action": "fill",
           "selector": "input[name='promotionCode'], .promotion-code-input",
-          "value": "TESTRABATT10"
+          "value_ref": "promo:test_rabatt_10.code"
         }
       ]
     },
@@ -151,6 +151,12 @@
       "code": "TESTRABATT10",
       "discount_type": "percentage",
       "discount_value": 10
+    },
+    {
+      "type": "promo",
+      "name": "test_rabatt_10",
+      "code": "TESTRABATT10",
+      "description": "Testrabatt 10%"
     }
   ],
   "automation": {

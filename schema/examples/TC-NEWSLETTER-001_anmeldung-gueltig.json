@@ -41,7 +41,7 @@
         {
           "action": "fill",
           "selector": "input[type='email']",
-          "value": "test-newsletter@example.com"
+          "value_ref": "newsletter:newsletter_test.email"
         }
       ]
     },
@@ -83,5 +83,12 @@
     "created": "2026-02-06",
     "last_modified": "2026-02-06",
     "version": "1.0"
-  }
+  },
+  "test_data": [
+    {
+      "type": "newsletter",
+      "name": "newsletter_test",
+      "email": "test-newsletter@example.com"
+    }
+  ]
 }

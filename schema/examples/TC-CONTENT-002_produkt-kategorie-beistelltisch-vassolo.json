@@ -30,7 +30,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/beistelltisch-vassolo-durchmesser-42-cm/ge-p-21008"
+          "value_ref": "product:beistelltisch_vassolo.path"
         }
       ]
     },

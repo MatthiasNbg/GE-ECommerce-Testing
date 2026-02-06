@@ -30,7 +30,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+          "value_ref": "product:gift_card.path"
         }
       ]
     },
@@ -74,7 +74,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:regular.path"
         }
       ]
     },
@@ -145,7 +145,8 @@
       "type": "product",
       "name": "regular",
       "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+      "article_number": "862990"
     }
   ],
   "automation": {

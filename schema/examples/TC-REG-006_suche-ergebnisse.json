@@ -27,7 +27,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "test"
+          "value_ref": "search:generic.term"
         }
       ],
       "expected": "Suchseite wird geladen"
@@ -60,6 +60,11 @@
         "Kissen",
         "49415"
       ]
+    },
+    {
+      "type": "search",
+      "name": "generic",
+      "term": "test"
     }
   ],
   "automation": {

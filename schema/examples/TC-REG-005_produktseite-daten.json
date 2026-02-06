@@ -22,7 +22,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/duftkissen-lavendel/ge-p-49415"
+          "value_ref": "product:default.path"
         }
       ],
       "expected": "Seite wird geladen"
@@ -68,7 +68,8 @@
     {
       "type": "product",
       "name": "default",
-      "path": "p/duftkissen-lavendel/ge-p-49415"
+      "path": "p/duftkissen-lavendel/ge-p-49415",
+      "article_number": "49415"
     },
     {
       "type": "product",

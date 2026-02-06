@@ -30,7 +30,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:regular.path"
         }
       ]
     },
@@ -64,7 +64,7 @@
         {
           "action": "fill",
           "selector": "input[name='promotionCode'], .promotion-code-input",
-          "value": "TESTRABATT10"
+          "value_ref": "promo:test_rabatt_10.code"
         },
         {
           "action": "click",
@@ -103,7 +103,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+          "value_ref": "product:gift_card.path"
         }
       ]
     },
@@ -149,7 +149,8 @@
       "type": "product",
       "name": "regular",
       "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+      "article_number": "862990"
     },
     {
       "type": "product",
@@ -163,6 +164,12 @@
       "code": "TESTRABATT10",
       "discount_type": "percentage",
       "discount_value": 10
+    },
+    {
+      "type": "promo",
+      "name": "test_rabatt_10",
+      "code": "TESTRABATT10",
+      "description": "Testrabatt 10%"
     }
   ],
   "automation": {

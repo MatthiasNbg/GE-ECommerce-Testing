@@ -6,7 +6,9 @@
   "functional_area": "Merkliste/Wishlist",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -24,10 +26,24 @@
       "action": "Login-Seite aufrufen und einloggen",
       "expected": "Login erfolgreich",
       "inputs": [
-        { "action": "navigate", "value": "/account/login" },
-        { "action": "fill", "selector": "#loginMail", "value": "ge-at-1@matthias-sax.de" },
-        { "action": "fill", "selector": "#loginPassword", "value": "scharnsteinAT" },
-        { "action": "click", "selector": "button:has-text('Anmelden')" }
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value_ref": "login:at_customer.email"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value_ref": "login:at_customer.password"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
       ]
     },
     {
@@ -35,8 +51,14 @@
       "action": "Produkt zur Merkliste hinzufuegen",
       "expected": "Herz-Button wird aktiv",
       "inputs": [
-        { "action": "navigate", "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990" },
-        { "action": "click", "selector": "[data-add-to-wishlist]" }
+        {
+          "action": "navigate",
+          "value_ref": "product:default.path"
+        },
+        {
+          "action": "click",
+          "selector": "[data-add-to-wishlist]"
+        }
       ]
     },
     {
@@ -44,7 +66,10 @@
       "action": "Merklisten-Seite aufrufen",
       "expected": "Produkt ist auf der Merkliste sichtbar",
       "inputs": [
-        { "action": "navigate", "value": "/wishlist" }
+        {
+          "action": "navigate",
+          "value": "/wishlist"
+        }
       ]
     },
     {
@@ -67,13 +92,15 @@
     {
       "type": "login",
       "name": "at_customer",
-      "email": "ge-at-1@matthias-sax.de"
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
     },
     {
       "type": "product",
       "name": "default",
       "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+      "article_number": "862990"
     }
   ],
   "automation": {
@@ -82,7 +109,11 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_wishlist.py",
     "function_name": "test_remove_product_from_wishlist",
-    "tags": ["regression", "wishlist", "feature"]
+    "tags": [
+      "regression",
+      "wishlist",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

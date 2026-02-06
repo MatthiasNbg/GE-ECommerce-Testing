@@ -38,7 +38,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "xyznonexistent123"
+          "value_ref": "search:no_results.term"
         }
       ]
     },
@@ -76,6 +76,11 @@
       "type": "extra",
       "name": "default",
       "invalid_article": "99999999"
+    },
+    {
+      "type": "search",
+      "name": "no_results",
+      "term": "xyznonexistent123"
     }
   ],
   "automation": {

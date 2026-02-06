@@ -30,7 +30,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/einkaufsgutschein/ge-p-GUTSCHEIN"
+          "value_ref": "product:gift_card.path"
         }
       ]
     },
@@ -74,7 +74,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/bundle-produkt/ge-p-BUNDLE"
+          "value_ref": "product:bundle.path"
         }
       ]
     },

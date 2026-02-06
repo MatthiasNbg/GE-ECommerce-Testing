@@ -28,7 +28,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/moebel/"
+          "value_ref": "category:moebel.path"
         }
       ]
     },
@@ -56,7 +56,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/bett-almeno/"
+          "value_ref": "product:almeno_bett.path"
         }
       ]
     },

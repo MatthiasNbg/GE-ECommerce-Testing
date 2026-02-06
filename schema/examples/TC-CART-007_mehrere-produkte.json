@@ -28,7 +28,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:default.path"
         },
         {
           "action": "click",
@@ -44,7 +44,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/duftkissen-lavendel/ge-p-49415"
+          "value_ref": "product:cushion_lavender.path"
         },
         {
           "action": "click",
@@ -87,13 +87,21 @@
       "type": "product",
       "name": "default",
       "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
-      "product_name": "Kurzarmshirt aus Bio-Baumwolle"
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+      "article_number": "862990"
     },
     {
       "type": "extra",
       "name": "default",
       "second_product_path": "p/duftkissen-lavendel/ge-p-49415",
       "second_product_name": "Duftkissen Lavendel"
+    },
+    {
+      "type": "product",
+      "name": "cushion_lavender",
+      "path": "/p/duftkissen-lavendel/ge-p-49415",
+      "product_name": "Duftkissen Lavendel",
+      "article_number": "49415"
     }
   ],
   "automation": {

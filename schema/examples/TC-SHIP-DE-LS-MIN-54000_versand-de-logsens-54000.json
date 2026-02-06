@@ -25,7 +25,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/polsterbett-almeno/ge-p-693278"
+          "value_ref": "product:bed_almeno.path"
         },
         {
           "action": "click",
@@ -66,42 +66,42 @@
         {
           "action": "select",
           "selector": "#personalSalutation",
-          "value": "mr"
+          "value_ref": "address:billing.salutation"
         },
         {
           "action": "fill",
           "selector": "#billingAddress-personalFirstName",
-          "value": "Test"
+          "value_ref": "address:billing.first_name"
         },
         {
           "action": "fill",
           "selector": "#billingAddress-personalLastName",
-          "value": "Kunde"
+          "value_ref": "address:billing.last_name"
         },
         {
           "action": "fill",
           "selector": "#personalMail",
-          "value": "test@example.com"
+          "value_ref": "login:guest.email"
         },
         {
           "action": "fill",
           "selector": "#billingAddress-AddressStreet",
-          "value": "Teststrasse 1"
+          "value_ref": "address:billing.street"
         },
         {
           "action": "fill",
           "selector": "#billingAddressAddressZipcode",
-          "value": "54000"
+          "value_ref": "address:billing.zip"
         },
         {
           "action": "fill",
           "selector": "#billingAddressAddressCity",
-          "value": "Trier"
+          "value_ref": "address:billing.city"
         },
         {
           "action": "select",
           "selector": "#billingAddressAddressCountry",
-          "value": "DE"
+          "value_ref": "address:billing.country"
         }
       ]
     },
@@ -143,6 +143,30 @@
       "expected_label": "Spedition Logsens",
       "grenzwert": "minimum",
       "product_path": "p/polsterbett-almeno/ge-p-693278"
+    },
+    {
+      "type": "login",
+      "name": "guest",
+      "email": "test@example.com",
+      "password": "TestPasswort123!"
+    },
+    {
+      "type": "address",
+      "name": "billing",
+      "salutation": "mr",
+      "first_name": "Test",
+      "last_name": "Kunde",
+      "street": "Teststrasse 1",
+      "zip": "54000",
+      "city": "Trier",
+      "country": "DE"
+    },
+    {
+      "type": "product",
+      "name": "bed_almeno",
+      "path": "/p/polsterbett-almeno/ge-p-693278",
+      "product_name": "Polsterbett Almeno",
+      "article_number": "693278"
     }
   ],
   "automation": {

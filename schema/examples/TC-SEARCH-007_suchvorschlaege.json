@@ -38,7 +38,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "be"
+          "value_ref": "search:autocomplete_prefix.term"
         }
       ]
     },
@@ -72,6 +72,11 @@
       "type": "extra",
       "name": "default",
       "search_term": "be"
+    },
+    {
+      "type": "search",
+      "name": "autocomplete_prefix",
+      "term": "be"
     }
   ],
   "automation": {

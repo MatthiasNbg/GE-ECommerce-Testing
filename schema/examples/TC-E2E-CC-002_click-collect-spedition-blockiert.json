@@ -6,7 +6,9 @@
   "functional_area": "E2E Tests - Click & Collect",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -34,7 +36,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/polsterbett-almeno/ge-p-693278"
+          "value_ref": "product:spedition_product.path"
         },
         {
           "action": "click",
@@ -71,8 +73,20 @@
       "total_variants": 2,
       "parameters": {
         "variants": [
-          {"id": "CC-NEG-1", "country": "AT", "plz": "4020", "city": "Linz", "product": "spedition"},
-          {"id": "CC-NEG-2", "country": "DE", "plz": "80331", "city": "Muenchen", "product": "spedition"}
+          {
+            "id": "CC-NEG-1",
+            "country": "AT",
+            "plz": "4020",
+            "city": "Linz",
+            "product": "spedition"
+          },
+          {
+            "id": "CC-NEG-2",
+            "country": "DE",
+            "plz": "80331",
+            "city": "Muenchen",
+            "product": "spedition"
+          }
         ]
       }
     },
@@ -80,7 +94,9 @@
       "type": "product",
       "name": "spedition_product",
       "product_id": "ge-p-693278",
-      "description": "Polsterbett Almeno (Speditionsversand)"
+      "description": "Polsterbett Almeno (Speditionsversand)",
+      "path": "/p/polsterbett-almeno/ge-p-693278",
+      "article_number": "693278"
     }
   ],
   "automation": {

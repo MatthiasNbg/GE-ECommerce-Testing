@@ -41,7 +41,7 @@
         {
           "action": "fill",
           "selector": "input[type='email']",
-          "value": "ungueltige-email"
+          "value_ref": "newsletter:default.email"
         }
       ]
     },
@@ -83,5 +83,12 @@
     "created": "2026-02-06",
     "last_modified": "2026-02-06",
     "version": "1.0"
-  }
+  },
+  "test_data": [
+    {
+      "type": "newsletter",
+      "name": "default",
+      "email": "ungueltige-email"
+    }
+  ]
 }

@@ -6,7 +6,9 @@
   "functional_area": "E2E Tests - Checkout",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -36,7 +38,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:post_product.path"
         },
         {
           "action": "click",
@@ -111,21 +113,45 @@
       "description": "24 Varianten: Land x Zahlungsart x Versandart x Account-Typ",
       "total_variants": 24,
       "parameters": {
-        "countries": ["AT", "DE", "CH"],
+        "countries": [
+          "AT",
+          "DE",
+          "CH"
+        ],
         "payment_methods": {
-          "AT": ["prepayment", "invoice", "credit_card"],
-          "DE": ["prepayment", "invoice", "credit_card"],
-          "CH": ["prepayment", "credit_card"]
+          "AT": [
+            "prepayment",
+            "invoice",
+            "credit_card"
+          ],
+          "DE": [
+            "prepayment",
+            "invoice",
+            "credit_card"
+          ],
+          "CH": [
+            "prepayment",
+            "credit_card"
+          ]
         },
-        "shipping_types": ["post", "spedition", "mixed"],
-        "account_types": ["new_registration", "existing_account"]
+        "shipping_types": [
+          "post",
+          "spedition",
+          "mixed"
+        ],
+        "account_types": [
+          "new_registration",
+          "existing_account"
+        ]
       }
     },
     {
       "type": "product",
       "name": "post_product",
       "product_id": "ge-p-862990",
-      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)",
+      "path": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "article_number": "862990"
     },
     {
       "type": "product",

@@ -6,7 +6,9 @@
   "functional_area": "E2E Tests - Click & Collect",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -34,7 +36,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:post_product.path"
         },
         {
           "action": "click",
@@ -109,10 +111,30 @@
       "total_variants": 4,
       "parameters": {
         "variants": [
-          {"country": "AT", "plz": "1010", "city": "Wien", "product": "post"},
-          {"country": "AT", "plz": "4020", "city": "Linz", "product": "spedition"},
-          {"country": "DE", "plz": "80331", "city": "Muenchen", "product": "post"},
-          {"country": "DE", "plz": "10115", "city": "Berlin", "product": "post"}
+          {
+            "country": "AT",
+            "plz": "1010",
+            "city": "Wien",
+            "product": "post"
+          },
+          {
+            "country": "AT",
+            "plz": "4020",
+            "city": "Linz",
+            "product": "spedition"
+          },
+          {
+            "country": "DE",
+            "plz": "80331",
+            "city": "Muenchen",
+            "product": "post"
+          },
+          {
+            "country": "DE",
+            "plz": "10115",
+            "city": "Berlin",
+            "product": "post"
+          }
         ]
       }
     },
@@ -120,7 +142,9 @@
       "type": "product",
       "name": "post_product",
       "product_id": "ge-p-862990",
-      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)"
+      "description": "Kurzarmshirt Bio-Baumwolle (Postversand)",
+      "path": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "article_number": "862990"
     },
     {
       "type": "product",

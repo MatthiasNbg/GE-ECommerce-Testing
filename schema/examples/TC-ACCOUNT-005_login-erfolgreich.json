@@ -39,7 +39,7 @@
         {
           "action": "fill",
           "selector": "#loginMail",
-          "value": "test@example.com"
+          "value_ref": "login:guest.email"
         }
       ]
     },
@@ -51,7 +51,7 @@
         {
           "action": "fill",
           "selector": "#loginPassword",
-          "value": "TestPasswort123!"
+          "value_ref": "login:guest.password"
         }
       ]
     },
@@ -106,6 +106,12 @@
     {
       "type": "channel",
       "name": "CH"
+    },
+    {
+      "type": "login",
+      "name": "guest",
+      "email": "test@example.com",
+      "password": "TestPasswort123!"
     }
   ]
 }

@@ -6,7 +6,9 @@
   "functional_area": "Merkliste/Wishlist",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [
@@ -23,10 +25,24 @@
       "action": "Login-Seite aufrufen und einloggen",
       "expected": "Login erfolgreich",
       "inputs": [
-        { "action": "navigate", "value": "/account/login" },
-        { "action": "fill", "selector": "#loginMail", "value": "ge-at-1@matthias-sax.de" },
-        { "action": "fill", "selector": "#loginPassword", "value": "scharnsteinAT" },
-        { "action": "click", "selector": "button:has-text('Anmelden')" }
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value_ref": "login:at_customer.email"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value_ref": "login:at_customer.password"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
       ]
     },
     {
@@ -39,7 +55,10 @@
       "action": "Merklisten-Seite aufrufen",
       "expected": "Seite zeigt Leer-Hinweis oder keine Produktliste",
       "inputs": [
-        { "action": "navigate", "value": "/wishlist" }
+        {
+          "action": "navigate",
+          "value": "/wishlist"
+        }
       ]
     }
   ],
@@ -51,7 +70,8 @@
     {
       "type": "login",
       "name": "at_customer",
-      "email": "ge-at-1@matthias-sax.de"
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
     }
   ],
   "automation": {
@@ -60,7 +80,11 @@
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_wishlist.py",
     "function_name": "test_empty_wishlist_shows_message",
-    "tags": ["regression", "wishlist", "feature"]
+    "tags": [
+      "regression",
+      "wishlist",
+      "feature"
+    ]
   },
   "orchestration": {
     "parallel_safe": false,

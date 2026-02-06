@@ -38,7 +38,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "862990"
+          "value_ref": "search:article_number.term"
         }
       ]
     },
@@ -85,6 +85,11 @@
         "74157",
         "410933"
       ]
+    },
+    {
+      "type": "search",
+      "name": "article_number",
+      "term": "862990"
     }
   ],
   "automation": {

@@ -38,7 +38,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "Baumwolle"
+          "value_ref": "search:material.term"
         }
       ]
     },
@@ -104,6 +104,11 @@
     {
       "type": "channel",
       "name": "CH"
+    },
+    {
+      "type": "search",
+      "name": "material",
+      "term": "Baumwolle"
     }
   ]
 }

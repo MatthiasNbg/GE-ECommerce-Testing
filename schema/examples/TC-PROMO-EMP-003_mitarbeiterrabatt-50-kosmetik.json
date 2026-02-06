@@ -28,7 +28,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/lippenbalsam-mit-bio-bienenwachs/ge-p-60780"
+          "value_ref": "product:lip_balm.path"
         },
         {
           "action": "click",
@@ -55,7 +55,7 @@
         {
           "action": "fill",
           "selector": "input[name='promotionCode']",
-          "value": "MA-KOSMETIK50"
+          "value_ref": "promo:employee_kosmetik.code"
         },
         {
           "action": "click",
@@ -92,6 +92,19 @@
       "path": "p/lippenbalsam-mit-bio-bienenwachs/ge-p-60780",
       "product_name": "Lippenbalsam mit Bio-Bienenwachs",
       "category": "Kosmetik"
+    },
+    {
+      "type": "product",
+      "name": "lip_balm",
+      "path": "/p/lippenbalsam-mit-bio-bienenwachs/ge-p-60780",
+      "product_name": "Lippenbalsam mit Bio-Bienenwachs",
+      "article_number": "60780"
+    },
+    {
+      "type": "promo",
+      "name": "employee_kosmetik",
+      "code": "MA-KOSMETIK50",
+      "description": "Mitarbeiterrabatt 50% Kosmetik"
     }
   ],
   "automation": {

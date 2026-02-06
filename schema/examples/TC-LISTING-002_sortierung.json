@@ -37,7 +37,7 @@
         {
           "action": "select",
           "selector": "select.sorting",
-          "value": "price-asc"
+          "value_ref": "extra:config.sorting"
         }
       ]
     },
@@ -73,5 +73,12 @@
     "created": "2026-02-06",
     "last_modified": "2026-02-06",
     "version": "1.0"
-  }
+  },
+  "test_data": [
+    {
+      "type": "extra",
+      "name": "config",
+      "sorting": "price-asc"
+    }
+  ]
 }

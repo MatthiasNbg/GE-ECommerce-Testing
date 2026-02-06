@@ -38,7 +38,7 @@
         {
           "action": "fill",
           "selector": "input#header-main-search-input",
-          "value": "bett"
+          "value_ref": "search:category_term.term"
         }
       ]
     },
@@ -77,6 +77,11 @@
       "type": "extra",
       "name": "default",
       "search_term": "bett"
+    },
+    {
+      "type": "search",
+      "name": "category_term",
+      "term": "bett"
     }
   ],
   "automation": {

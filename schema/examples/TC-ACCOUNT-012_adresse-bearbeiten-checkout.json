@@ -41,12 +41,12 @@
         {
           "action": "fill",
           "selector": "#loginMail",
-          "value": "ge-at-1@matthias-sax.de"
+          "value_ref": "login:at_customer.email"
         },
         {
           "action": "fill",
           "selector": "#loginPassword",
-          "value": "scharnsteinAT"
+          "value_ref": "login:at_customer.password"
         },
         {
           "action": "click",
@@ -77,7 +77,7 @@
         {
           "action": "fill",
           "selector": "#addressAddressStreet",
-          "value": "Teststraße 99"
+          "value_ref": "address:billing.street"
         },
         {
           "action": "click",
@@ -97,7 +97,7 @@
       "inputs": [
         {
           "action": "navigate",
-          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+          "value_ref": "product:shirt_bio.path"
         },
         {
           "action": "click",
@@ -137,7 +137,7 @@
         {
           "action": "fill",
           "selector": "#addressAddressStreet",
-          "value": "Teststraße 1"
+          "value_ref": "address:billing.street"
         },
         {
           "action": "click",
@@ -166,6 +166,24 @@
       "type": "extra",
       "name": "product",
       "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+    },
+    {
+      "type": "login",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
+    },
+    {
+      "type": "address",
+      "name": "billing",
+      "street": "Teststraße 1"
+    },
+    {
+      "type": "product",
+      "name": "shirt_bio",
+      "path": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "product_name": "Kurzarmshirt aus Bio-Baumwolle",
+      "article_number": "862990"
     }
   ],
   "automation": {

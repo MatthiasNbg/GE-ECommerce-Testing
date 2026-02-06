@@ -40,12 +40,12 @@
         {
           "action": "fill",
           "selector": "#loginMail",
-          "value": "ge-at-1@matthias-sax.de"
+          "value_ref": "login:at_customer.email"
         },
         {
           "action": "fill",
           "selector": "#loginPassword",
-          "value": "scharnsteinAT"
+          "value_ref": "login:de_customer.password"
         },
         {
           "action": "click",
@@ -87,17 +87,17 @@
         {
           "action": "fill",
           "selector": "#personalMail",
-          "value": "ge-de-1@matthias-sax.de"
+          "value_ref": "login:de_customer.email"
         },
         {
           "action": "fill",
           "selector": "#personalMailConfirmation",
-          "value": "ge-de-1@matthias-sax.de"
+          "value_ref": "login:de_customer.email"
         },
         {
           "action": "fill",
           "selector": "#personalMailPasswordCurrent",
-          "value": "scharnsteinAT"
+          "value_ref": "login:de_customer.password"
         }
       ]
     },
@@ -138,6 +138,18 @@
       "type": "extra",
       "name": "de_customer_email",
       "email": "ge-de-1@matthias-sax.de"
+    },
+    {
+      "type": "login",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
+    },
+    {
+      "type": "login",
+      "name": "de_customer",
+      "email": "ge-de-1@matthias-sax.de",
+      "password": "scharnsteinAT"
     }
   ],
   "automation": {
