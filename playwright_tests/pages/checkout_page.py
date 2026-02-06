@@ -145,6 +145,10 @@ class CheckoutPage(BasePage):
     # CONFIRM-SEITE Selektoren (/checkout/confirm)
     # =========================================================================
 
+    # --- Adress-Anzeige auf Confirm-Seite ---
+    CONFIRM_SHIPPING_ADDRESS = ".confirm-shipping-address .address"
+    CONFIRM_BILLING_ADDRESS = ".confirm-billing-address .address"
+
     # --- Adresse ändern ---
     CHANGE_ADDRESS_BUTTON = "button:has-text('Lieferadresse ändern')"
 
@@ -780,6 +784,20 @@ class CheckoutPage(BasePage):
         total = self.page.locator(self.TOTAL)
         if await total.count() > 0:
             return await total.text_content()
+        return None
+
+    async def get_shipping_address_text(self) -> Optional[str]:
+        """Gibt den Text der Lieferadresse auf der Confirm-Seite zurück."""
+        addr = self.page.locator(self.CONFIRM_SHIPPING_ADDRESS)
+        if await addr.count() > 0:
+            return await addr.first.text_content()
+        return None
+
+    async def get_billing_address_text(self) -> Optional[str]:
+        """Gibt den Text der Rechnungsadresse auf der Confirm-Seite zurück."""
+        addr = self.page.locator(self.CONFIRM_BILLING_ADDRESS)
+        if await addr.count() > 0:
+            return await addr.first.text_content()
         return None
 
     async def has_form_errors(self) -> bool:

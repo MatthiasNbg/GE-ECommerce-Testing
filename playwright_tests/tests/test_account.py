@@ -11,6 +11,7 @@ Testet:
 - TC-ACC-007: Profil anzeigen und bearbeiten
 - TC-ACC-008: Adressverwaltung
 - TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern wird abgelehnt
+- TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren
 """
 import os
 import pytest
@@ -18,6 +19,8 @@ from playwright.async_api import async_playwright
 
 from ..conftest import accept_cookie_banner_async
 from ..pages.account_page import AccountPage, RegistrationData
+from ..pages.cart_page import CartPage
+from ..pages.checkout_page import CheckoutPage
 
 
 # =============================================================================
@@ -792,5 +795,134 @@ async def test_email_change_to_existing_email(config, request):
             print("=== TC-ACCOUNT-011: BESTANDEN ===")
 
         finally:
+            await context.close()
+            await browser.close()
+
+
+# =============================================================================
+# TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren
+# =============================================================================
+
+@pytest.mark.asyncio
+@pytest.mark.account
+@pytest.mark.feature
+async def test_address_edit_checkout_display(config, request):
+    """
+    TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren.
+
+    1. Login mit AT-Kunde
+    2. Adresse bearbeiten (Straße auf "Teststraße 99")
+    3. Produkt in Warenkorb legen
+    4. Auf /checkout/confirm prüfen: Adresse enthält "Teststraße 99"
+    5. Cleanup: Straße zurücksetzen
+    """
+    print("\n=== TC-ACCOUNT-012: Adresse bearbeiten und im Checkout verifizieren ===")
+
+    email, password = get_test_customer_credentials(config, country="AT")
+    headed = request.config.getoption("--headed", default=False)
+
+    test_street = "Teststraße 99"
+    original_street = None
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(
+            headless=not headed,
+            slow_mo=200 if headed else 0
+        )
+
+        context_args = {"viewport": {"width": 1920, "height": 1080}}
+        if config.htaccess_user and config.htaccess_password:
+            context_args["http_credentials"] = {
+                "username": config.htaccess_user,
+                "password": config.htaccess_password,
+            }
+
+        context = await browser.new_context(**context_args)
+        page = await context.new_page()
+
+        try:
+            account = AccountPage(page, config.base_url)
+            cart = CartPage(page, config.base_url)
+            checkout = CheckoutPage(page, config.base_url)
+
+            # [1] Login
+            print("[1] Login als AT-Kunde...")
+            await account.goto_login()
+            await accept_cookie_banner_async(page)
+            success = await account.login(email, password)
+            assert success, "Login fehlgeschlagen"
+
+            # [2] Zur Adressverwaltung und aktuelle Straße merken
+            print("[2] Zur Adressverwaltung navigieren...")
+            await account.goto_addresses()
+            await page.wait_for_timeout(1000)
+
+            # Aktuelle Straße aus erster Adresskarte auslesen (für Cleanup)
+            address_cards = page.locator(account.ADDRESS_CARD)
+            card_count = await address_cards.count()
+            assert card_count > 0, "Mindestens eine Adresse muss vorhanden sein"
+
+            first_card_text = await address_cards.first.text_content()
+            print(f"   Erste Adresse (Text): {first_card_text[:100]}...")
+
+            # [3] Adresse bearbeiten
+            print(f"[3] Erste Adresse bearbeiten: Straße → '{test_street}'...")
+            edit_success = await account.edit_address(0, street=test_street)
+            print(f"   Bearbeitung: {'Erfolgreich' if edit_success else 'Keine explizite Bestätigung'}")
+
+            # Nach Bearbeitung Adressseite neu laden und prüfen
+            await account.goto_addresses()
+            await page.wait_for_timeout(1000)
+
+            updated_card_text = await address_cards.first.text_content()
+            assert test_street in updated_card_text, \
+                f"Adresse sollte '{test_street}' enthalten, gefunden: {updated_card_text[:100]}"
+            print(f"   Adresse enthält '{test_street}' ✓")
+
+            # Originale Straße aus dem alten Text extrahieren (für Cleanup)
+            # Wir merken uns den Zustand vor der Änderung
+            original_street = first_card_text
+
+            # [4] Produkt in Warenkorb legen
+            print("[4] Produkt in Warenkorb legen...")
+            added = await cart.add_product_to_cart("p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990")
+            assert added, "Produkt konnte nicht in den Warenkorb gelegt werden"
+            print("   Produkt hinzugefügt ✓")
+
+            # [5] Checkout-Confirm aufrufen und Adresse prüfen
+            print("[5] Checkout-Confirm aufrufen...")
+            await checkout.goto_confirm()
+            await page.wait_for_timeout(2000)
+
+            shipping_text = await checkout.get_shipping_address_text()
+            billing_text = await checkout.get_billing_address_text()
+
+            print(f"   Lieferadresse: {shipping_text[:100] if shipping_text else 'N/A'}")
+            print(f"   Rechnungsadresse: {billing_text[:100] if billing_text else 'N/A'}")
+
+            # Mindestens eine Adresse sollte die geänderte Straße enthalten
+            address_found = False
+            if shipping_text and test_street in shipping_text:
+                address_found = True
+            if billing_text and test_street in billing_text:
+                address_found = True
+
+            assert address_found, \
+                f"'{test_street}' sollte in Liefer- oder Rechnungsadresse erscheinen"
+            print(f"   Adresse im Checkout enthält '{test_street}' ✓")
+
+            print("=== TC-ACCOUNT-012: BESTANDEN ===")
+
+        finally:
+            # [Cleanup] Straße zurücksetzen
+            try:
+                print("[Cleanup] Straße zurücksetzen...")
+                await account.goto_addresses()
+                await page.wait_for_timeout(1000)
+                await account.edit_address(0, street="Teststraße 1")
+                print("   Cleanup erfolgreich")
+            except Exception as cleanup_error:
+                print(f"   Cleanup-Fehler: {cleanup_error}")
+
             await context.close()
             await browser.close()

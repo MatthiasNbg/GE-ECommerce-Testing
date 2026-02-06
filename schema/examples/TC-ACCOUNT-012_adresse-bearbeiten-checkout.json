@@ -1,0 +1,193 @@
+{
+  "test_id": "TC-ACCOUNT-012",
+  "name": "Adresse bearbeiten und im Checkout verifizieren",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Account",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "AT-Kunde (ge-at-1@matthias-sax.de) existiert und ist eingeloggt",
+    "Mindestens eine Adresse ist im Account hinterlegt",
+    "Produkt ge-p-862990 ist verfuegbar"
+  ],
+  "postconditions": [
+    "Adresse wird im Checkout korrekt angezeigt",
+    "Adresse wird nach Test auf Originalwert zurueckgesetzt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Login-Seite aufrufen",
+      "expected": "Login-Formular wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Als AT-Kunde einloggen",
+      "expected": "Login erfolgreich, Weiterleitung zum Account-Dashboard",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#loginMail",
+          "value": "ge-at-1@matthias-sax.de"
+        },
+        {
+          "action": "fill",
+          "selector": "#loginPassword",
+          "value": "scharnsteinAT"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Anmelden')"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zur Adressverwaltung navigieren",
+      "expected": "Adressliste wird angezeigt mit mindestens einer Adresse",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/address"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Erste Adresse bearbeiten - Strasse aendern",
+      "expected": "Adress-Formular oeffnet sich mit vorausgefuellten Daten",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "a:has-text('Bearbeiten'), button:has-text('Bearbeiten')"
+        },
+        {
+          "action": "fill",
+          "selector": "#addressAddressStreet",
+          "value": "Teststraße 99"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Adresse speichern'), button[type='submit']"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Adressaenderung in der Liste verifizieren",
+      "expected": "Adressliste zeigt 'Teststraße 99' in der ersten Adresse"
+    },
+    {
+      "step": 6,
+      "action": "Produkt in den Warenkorb legen",
+      "expected": "Produkt wird erfolgreich zum Warenkorb hinzugefuegt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy, [data-add-to-cart]"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "action": "Checkout-Confirm-Seite aufrufen",
+      "expected": "Bestaetigungsseite wird angezeigt mit Adressdaten",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/confirm"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Adresse im Checkout verifizieren",
+      "expected": "Liefer- oder Rechnungsadresse enthaelt 'Teststraße 99'"
+    },
+    {
+      "step": 9,
+      "action": "Cleanup: Adresse auf Originalwert zuruecksetzen",
+      "expected": "Adresse ist wieder auf dem urspruenglichen Wert",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/address"
+        },
+        {
+          "action": "click",
+          "selector": "a:has-text('Bearbeiten'), button:has-text('Bearbeiten')"
+        },
+        {
+          "action": "fill",
+          "selector": "#addressAddressStreet",
+          "value": "Teststraße 1"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Adresse speichern'), button[type='submit']"
+        }
+      ]
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "extra",
+      "name": "at_customer",
+      "email": "ge-at-1@matthias-sax.de",
+      "password": "scharnsteinAT"
+    },
+    {
+      "type": "extra",
+      "name": "test_street",
+      "value": "Teststraße 99"
+    },
+    {
+      "type": "extra",
+      "name": "product",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_account.py",
+    "function_name": "test_address_edit_checkout_display",
+    "tags": [
+      "account",
+      "feature"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 90,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

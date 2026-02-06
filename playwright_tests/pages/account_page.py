@@ -567,6 +567,62 @@ class AccountPage(BasePage):
         success = self.page.locator(self.PROFILE_SUCCESS_MESSAGE)
         return await success.count() > 0
 
+    async def edit_address(self, index: int = 0, **fields) -> bool:
+        """
+        Bearbeitet eine bestehende Adresse.
+
+        Args:
+            index: Index der Adresse (0-basiert)
+            **fields: Felder zum Aktualisieren (street, zip_code, city, first_name, last_name, country)
+
+        Returns:
+            True wenn erfolgreich
+        """
+        addresses = self.page.locator(self.ADDRESS_CARD)
+        count = await addresses.count()
+
+        if index >= count:
+            return False
+
+        address_card = addresses.nth(index)
+        edit_btn = address_card.locator(self.EDIT_ADDRESS_BUTTON)
+
+        if await edit_btn.count() == 0:
+            return False
+
+        await edit_btn.first.click()
+        await self.page.wait_for_timeout(1000)
+
+        # Felder ausfüllen
+        field_map = {
+            "first_name": self.ADDRESS_FORM_FIRST_NAME,
+            "last_name": self.ADDRESS_FORM_LAST_NAME,
+            "street": self.ADDRESS_FORM_STREET,
+            "zip_code": self.ADDRESS_FORM_ZIP,
+            "city": self.ADDRESS_FORM_CITY,
+        }
+
+        for key, selector in field_map.items():
+            if key in fields:
+                await self.fill(selector, fields[key])
+
+        if "country" in fields:
+            country_label = self.COUNTRY_MAP.get(fields["country"], fields["country"])
+            country_select = self.page.locator(self.ADDRESS_FORM_COUNTRY)
+            if await country_select.count() > 0:
+                await self.select_option_by_label(self.ADDRESS_FORM_COUNTRY, country_label)
+
+        # Speichern
+        save_btn = self.page.locator(self.ADDRESS_FORM_SAVE)
+        if await save_btn.count() > 0:
+            await save_btn.first.click()
+            await self.page.wait_for_load_state("domcontentloaded")
+            await self.page.wait_for_timeout(1000)
+
+        # Erfolgsmeldung
+        success = self.page.locator(self.PROFILE_SUCCESS_MESSAGE)
+        return await success.count() > 0
+
     async def delete_address(self, index: int = 0) -> bool:
         """
         Löscht eine Adresse.
