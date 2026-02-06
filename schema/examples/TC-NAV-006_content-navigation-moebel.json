@@ -1,0 +1,100 @@
+{
+  "test_id": "TC-NAV-006",
+  "name": "Content-Navigation Moebel - Kategoriebaum validieren",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Navigation Kategoriebaum",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Hauptnavigation ist sichtbar",
+    "Moebel-Kategorie ist im Mega-Menue vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Homepage laden",
+      "expected": "Homepage wird geladen, Navigation ist sichtbar",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Ueber Moebel-Link in der Hauptnavigation hovern",
+      "expected": "Mega-Menue-Flyout oeffnet sich mit Unterkategorien",
+      "selector_hint": ".main-navigation-link"
+    },
+    {
+      "step": 3,
+      "action": "Alle Links im Mega-Menue-Flyout auslesen (Name + URL)",
+      "expected": "Liste aller sichtbaren Kategorien und Unterkategorien wird erstellt"
+    },
+    {
+      "step": 4,
+      "action": "UK1-Kategorien gegen Soll-Liste pruefen (Betten, Sofas & Couches, Wohnschraenke, Regale, Kleiderschraenke, Tische, Stuehle & Baenke, Polstersessel & Hocker, Lampen & Leuchten, Teppiche)",
+      "expected": "Alle 10 UK1-Kategorien sind vorhanden mit korrekten URLs"
+    },
+    {
+      "step": 5,
+      "action": "UK2-Unterkategorien gegen Soll-Liste pruefen (pro UK1)",
+      "expected": "Alle UK2-Kategorien mit bekannten URLs sind vorhanden und korrekt, Filter-Kategorien werden informativ gemeldet"
+    },
+    {
+      "step": 6,
+      "action": "Zusaetzliche Kategorien identifizieren (im Flyout vorhanden aber nicht in Soll-Liste)",
+      "expected": "Bericht ueber zusaetzliche Kategorien wird erstellt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "navigation",
+      "name": "moebel_kategoriebaum",
+      "uk1_count": 10,
+      "uk2_count_total": 53,
+      "categories": [
+        "Betten", "Sofas & Couches", "Wohnschraenke", "Regale & Regalsysteme",
+        "Kleiderschraenke", "Tische", "Stuehle & Baenke",
+        "Polstersessel & Hocker", "Lampen & Leuchten", "Teppiche"
+      ]
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_content_navigation_moebel.py",
+    "function_name": "test_content_navigation_moebel",
+    "tags": [
+      "navigation",
+      "content",
+      "moebel",
+      "mega-menu",
+      "kategoriebaum"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

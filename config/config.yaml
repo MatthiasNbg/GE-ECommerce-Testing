@@ -2,11 +2,11 @@
 # SYSTEMÜBERSICHT - Grüne Erde E-Commerce
 # =============================================================================
 #
-# SHOPWARE:
+# SHOPWARE (neues System - Scalecommerce):
 #   Staging:
 #     - Frontend: https://grueneerde-stage.scalecommerce.cloud/
 #     - Admin:    https://grueneerde-stage.scalecommerce.cloud/admin#/
-#   Produktiv:
+#   Produktiv (zukuenftiges PROD, bereits mit Prod-Systemen verbunden):
 #     - Frontend: https://grueneerde.scalecommerce.cloud/
 #     - Admin:    https://grueneerde.scalecommerce.cloud/admin#/login/
 #
@@ -14,14 +14,14 @@
 #   Staging:  https://www.stage-y77w3ti-ob4ojmskgxsxg.de-2.platformsh.site/admin/
 #   Produktiv: https://www.main-bvxea6i-ob4ojmskgxsxg.de-2.platformsh.site/admin/login
 #
-# ⚠️  WICHTIG: Auf PRODUKTIV dürfen KEINE Bestellungen oder Kunden angelegt werden!
-#     Alle Tests müssen auf Staging durchgeführt werden!
+# ⚠️  WICHTIG: Auf PRODUKTIV duerfen KEINE Bestellungen oder Kunden angelegt werden!
+#     Alle Tests muessen auf Staging durchgefuehrt werden!
 #
 # =============================================================================
 
 profiles:
   # ---------------------------------------------------------------------------
-  # STAGING - Testumgebung (alle Tests hier ausführen!)
+  # STAGING - Testumgebung (alle Tests hier ausfuehren!)
   # ---------------------------------------------------------------------------
   staging:
     base_url: https://grueneerde-stage.scalecommerce.cloud
@@ -51,7 +51,8 @@ profiles:
       # CH hat KEINE Rechnung als Zahlungsart
 
   # ---------------------------------------------------------------------------
-  # PRODUKTIV - NUR LESENDE TESTS! KEINE Bestellungen/Kunden anlegen!
+  # PRODUKTIV - Zukuenftiges PROD (bereits mit Prod-Systemen verbunden)
+  # NUR LESENDE TESTS! KEINE Bestellungen/Kunden anlegen!
   # ---------------------------------------------------------------------------
   production:
     base_url: https://grueneerde.scalecommerce.cloud
@@ -60,7 +61,7 @@ profiles:
     parallel_workers: 2
     headless: true
     slow_mo: 0
-    # ⚠️  WARNUNG: Keine Checkout-Tests auf Produktiv ausführen!
+    # ⚠️  WARNUNG: Keine Checkout-Tests auf Produktiv ausfuehren!
   local:
     base_url: http://localhost:8000
     timeout: 15000

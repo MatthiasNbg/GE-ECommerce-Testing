@@ -1,0 +1,134 @@
+{
+  "test_id": "TC-PROMO-CAT-001",
+  "name": "Promo auf Produktkategorie via advertising_material_id (10% Kleidung)",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit Produktfilter auf advertising_material_id (Sortimentsbereich Kleidung) ist aktiv",
+    "Produkt mit passender advertising_material_id ist verfuegbar",
+    "Produkt ohne passende advertising_material_id ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kleidungs-Produkt (mit passender advertising_material_id) zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/UPDATETHIS-kleidung-produkt/ge-p-UPDATETHIS"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Nicht-Kleidungs-Produkt (ohne passende advertising_material_id) zum Warenkorb hinzufuegen",
+      "expected": "Zweites Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/duftkissen-lavendel/ge-p-49415"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zum Warenkorb navigieren",
+      "expected": "Warenkorb zeigt beide Produkte",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Promotion-Code fuer 10% auf Kleidung eingeben",
+      "expected": "Promotion wird angewendet",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value": "UPDATETHISCODE"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit']:has-text('Einloesen')"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Rabatt nur auf Kleidungs-Produkt angewendet",
+      "expected": "Rabatt-Zeile sichtbar, Betrag entspricht 10% des Kleidungs-Produkts (nicht des Gesamtwarenkorbs)"
+    },
+    {
+      "step": 6,
+      "action": "Pruefen: Nicht-Kleidungs-Produkt bleibt zum vollen Preis",
+      "expected": "Nicht-Kleidungs-Produkt ist nicht rabattiert"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "extra",
+      "name": "default",
+      "promo_code": "UPDATETHISCODE",
+      "clothing_product": "UPDATETHIS",
+      "non_clothing_product": "49415",
+      "discount_percent": 10
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_category_clothing_applied",
+    "tags": [
+      "promotions",
+      "category",
+      "advertising-material-id"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

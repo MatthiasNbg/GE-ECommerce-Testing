@@ -37,9 +37,20 @@ TEST_PROMO_CODES = {
     "free_shipping_spedi": "SPEDIFREI",  # Versandkostenfrei Spedition
     "min_order_50": "MBW50TEST",  # Mindestbestellwert 50 EUR
     "invalid": "UNGUELTIG123",  # Ungültiger Code
+    # Kategorie-Promo (via advertising_material_id / Sortimentsbereich)
+    "category_clothing_10": "UPDATETHISCODE",  # 10% auf Kleidung (Sortimentsbereich)
     # Mitarbeiterrabatt-Codes (Staging)
     "employee_50_cosmetics": "MA-KOSMETIK50",  # 50% auf Kosmetik (via Werbemittel-ID)
     "employee_20_all": "MA-ALLES20",  # 20% auf Alles
+}
+
+# Testprodukte für Kategorie-Promo (advertising_material_id / Sortimentsbereich "Kleidung")
+# TODO: Echte Produkte einsetzen, die advertising_material_id für Kleidung haben
+CATEGORY_PROMO_PRODUCTS = {
+    # Produkt MIT passender advertising_material_id (Kleidung/Sortimentsbereich)
+    "clothing": "p/UPDATETHIS-kleidung-produkt/ge-p-UPDATETHIS",
+    # Produkt OHNE passende advertising_material_id (z.B. Möbel, Accessoire)
+    "non_clothing": "p/duftkissen-lavendel/ge-p-49415",
 }
 
 # Testprodukte für Mitarbeiterrabatt
@@ -770,4 +781,78 @@ def test_employee_discount_not_on_sale(page: Page, base_url: str):
             f"Rabatt ({discount:.2f}) entspricht ca. 20% des Gesamtwarenkorbs "
             f"({full_cart_20_discount:.2f}) - SALE-Produkt wurde wahrscheinlich "
             f"fälschlicherweise rabattiert"
+        )
+
+
+# =============================================================================
+# Kategorie-Promotion-Tests (advertising_material_id / Sortimentsbereich)
+# =============================================================================
+
+@pytest.mark.promotions
+def test_promo_category_clothing_applied(page: Page, base_url: str):
+    """
+    TC-PROMO-CAT-001: Promo auf Produktkategorie via advertising_material_id.
+
+    Prüft, dass eine Promotion "10% Rabatt auf Kleidung" nur auf Produkte
+    mit passender advertising_material_id (Sortimentsbereich Kleidung)
+    angewendet wird.
+
+    Positiv: Kleidungs-Produkt erhält Rabatt.
+    Negativ: Nicht-Kleidungs-Produkt bleibt unrabattiert.
+    """
+    clothing_product = CATEGORY_PROMO_PRODUCTS["clothing"]
+    non_clothing_product = CATEGORY_PROMO_PRODUCTS["non_clothing"]
+    promo_code = TEST_PROMO_CODES["category_clothing_10"]
+
+    # 1. Kleidungs-Produkt (mit passender advertising_material_id) hinzufügen
+    add_product_to_cart(page, base_url, clothing_product)
+
+    # 2. Nicht-Kleidungs-Produkt (ohne passende advertising_material_id) hinzufügen
+    add_product_to_cart(page, base_url, non_clothing_product)
+
+    # 3. Zum Warenkorb navigieren
+    navigate_to_cart(page, base_url)
+
+    # 4. Preise vor Rabatt erfassen
+    items_before = _get_line_item_prices(page)
+    assert len(items_before) >= 2, (
+        f"Erwartet mindestens 2 Produkte im Warenkorb, gefunden: {len(items_before)}"
+    )
+
+    total_before = get_cart_total(page)
+    price_before = _parse_price(total_before)
+    assert price_before > 0, f"Ungültiger Gesamtpreis vor Rabatt: {total_before}"
+
+    # 5. Promotion-Code "10% auf Kleidung" einlösen
+    success = apply_promo_code(page, promo_code)
+
+    if not success:
+        pytest.skip(
+            f"Promotion-Code {promo_code} ist nicht im System konfiguriert. "
+            "Bitte Code in TEST_PROMO_CODES['category_clothing_10'] aktualisieren."
+        )
+
+    # 6. Positiv: Rabatt muss sichtbar sein
+    has_discount = has_promotion_discount(page)
+    assert has_discount, (
+        "Kein Promotion-Rabatt sichtbar nach Eingabe des Kleidung-Promo-Codes"
+    )
+
+    # 7. Gesamtpreis muss niedriger sein
+    total_after = get_cart_total(page)
+    price_after = _parse_price(total_after)
+    assert price_after < price_before, (
+        f"Gesamtpreis hat sich nach Kategorie-Rabatt nicht verringert: "
+        f"vorher={total_before}, nachher={total_after}"
+    )
+
+    # 8. Negativ: Rabatt darf NICHT dem Rabatt auf den vollen Warenkorb entsprechen
+    # (sonst wurde auch das Nicht-Kleidungs-Produkt rabattiert)
+    discount = _get_discount_amount(page)
+    full_cart_10_discount = price_before * 0.10
+    if discount > 0 and full_cart_10_discount > 0:
+        assert discount < full_cart_10_discount * 0.95, (
+            f"Rabatt ({discount:.2f}) entspricht ca. 10% des Gesamtwarenkorbs "
+            f"({full_cart_10_discount:.2f}) - Nicht-Kleidungs-Produkt wurde "
+            f"wahrscheinlich fälschlicherweise rabattiert"
         )
