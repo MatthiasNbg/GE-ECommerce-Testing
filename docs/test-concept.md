@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **267 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **272 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -49,7 +49,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 📋 **Feature Tests - Produktlisting** | 4 | ○ 0/4 | 🟠 P1 | Produktfilter, Sortierung, Pagination, SALE |
 | 🧭 **Feature Tests - Navigation** | 5 | ○ 0/5 | 🟠 P1 | Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
-| 🎟️ **Feature Tests - Promotions** | 47 | ⚠️ 0/47 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
+| 🎟️ **Feature Tests - Promotions** | 51 | ⚠️ 4/51 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
 | 📄 **Content Tests** | 7 | ○ 0/7 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel |
 | 📰 **Feature Tests - Newsletter** | 2 | ○ 0/2 | 🟡 P2 | Newsletter-Anmeldung, Validierung |
@@ -432,6 +432,7 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 | TC-ACCOUNT-010 | Bestellhistorie einsehen | P1 | ○ | AT, DE, CH | 1 |
 | TC-ACCOUNT-011 | E-Mail auf bestehende Adresse ändern wird abgelehnt | P1 | ✅ | AT | 1 |
 | TC-ACCOUNT-012 | Adresse bearbeiten und im Checkout verifizieren | P1 | ✅ | AT | 1 |
+| TC-ACCOUNT-013 | E-Mail-Adresse auf neue Adresse ändern (manuell) | P1 | 🖐️ | Staging | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -483,12 +484,26 @@ Die 9 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
 - **Schritte:** Adressverwaltung aufrufen → Übersicht prüfen → neue Adresse hinzufügen → speichern → in der Liste prüfen
 - **Erwartet:** Adressübersicht zeigt alle Adressen, Hinzufügen/Bearbeiten/Löschen funktioniert
 
-#### E-Mail-Verwaltung (1 Test)
+#### E-Mail-Verwaltung (2 Tests)
 
 **TC-ACCOUNT-011: E-Mail auf bestehende Adresse ändern wird abgelehnt**
 - **Vorbedingung:** AT-Kunde eingeloggt, DE-Kunde existiert als separater Account
 - **Schritte:** Profil-Seite aufrufen → E-Mail auf bereits registrierte DE-Kunden-Adresse ändern → Passwort bestätigen → absenden
 - **Erwartet:** Fehlermeldung erscheint, E-Mail bleibt unverändert, Benutzer bleibt auf Profil-Seite
+
+**TC-ACCOUNT-013: E-Mail-Adresse auf neue Adresse ändern (manuell)** 🖐️
+- **Nur Staging** — manueller Test, da Bestätigungs-E-Mails nicht automatisiert empfangen werden können
+- **Vorbedingung:** Kunde auf Staging eingeloggt
+- **Schritte:**
+  1. Profil-Seite aufrufen (/account/profile)
+  2. E-Mail-Feld auf eine neue, noch nicht registrierte Adresse ändern
+  3. Aktuelles Passwort zur Bestätigung eingeben
+  4. Änderung absenden
+  5. Bestätigungs-E-Mail im Postfach prüfen (manuell)
+  6. Bestätigungslink in der E-Mail anklicken
+  7. Erneut einloggen mit der neuen E-Mail-Adresse
+- **Erwartet:** Erfolgshinweis nach Absenden, Bestätigungs-E-Mail wird zugestellt, nach Bestätigung ist Login mit neuer E-Mail möglich, alte E-Mail funktioniert nicht mehr
+- **Warum manuell:** E-Mail-Empfang kann in der Testautomatisierung nicht verifiziert werden
 
 #### Adresse & Checkout (1 Test)
 
@@ -1549,6 +1564,10 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 |---------|------|-----------|--------|--------|-----------|
 | TC-PROMO-EMP-001 | Mitarbeiterrabatt nur auf Basispreis | P1 | ○ | AT, DE, CH | 1 |
 | TC-PROMO-EMP-002 | Mitarbeiterrabatt nicht auf Aktionspreis | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-EMP-003 | Mitarbeiterrabatt 50% auf Kosmetik einzeln einlösen | P1 | ● | AT | 1 |
+| TC-PROMO-EMP-004 | Mitarbeiterrabatt 20% auf Alles einzeln einlösen | P1 | ● | AT | 1 |
+| TC-PROMO-EMP-005 | Mitarbeiterrabatt 50% Kosmetik + 20% Alles gemeinsam | P1 | ● | AT | 1 |
+| TC-PROMO-EMP-006 | Mitarbeiterrabatt nicht auf Aktionspreis (sale flag) | P1 | ● | AT | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1587,6 +1606,69 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Produkt wird zum Aktionspreis berechnet
   - Bei gemischtem Warenkorb: Mitarbeiterrabatt nur auf reguläre Produkte
   - Alternativ: Der günstigere Preis (Aktionspreis vs. Mitarbeiterrabatt) wird angewendet
+
+**TC-PROMO-EMP-003: Mitarbeiterrabatt 50% auf Kosmetik einzeln einlösen**
+- **Beschreibung:** Prüft, dass der 50%-Mitarbeiterrabatt-Code korrekt auf ein Kosmetik-Produkt (via Werbemittel-ID) angewendet wird
+- **Bedingung:**
+  - Promotion-Code MA-KOSMETIK50 ist aktiv (50% auf Kosmetik via Werbemittel-ID)
+  - Kosmetik-Produkt mit passender advertising_material_id verfügbar
+- **Testschritte:**
+  1. Kosmetik-Produkt zum Warenkorb hinzufügen
+  2. Preis vor Rabatt erfassen
+  3. Mitarbeiterrabatt-Code 50% Kosmetik einlösen
+  4. Rabattzeile im Warenkorb prüfen
+  5. Preisänderung validieren (50% Rabatt, Toleranz 5%)
+- **Erwartetes Verhalten:**
+  - 50%-Rabatt wird korrekt auf Kosmetik-Produkt angewendet
+  - Rabattberechnung ist korrekt
+
+**TC-PROMO-EMP-004: Mitarbeiterrabatt 20% auf Alles einzeln einlösen**
+- **Beschreibung:** Prüft, dass der 20%-Mitarbeiterrabatt-Code auf ein reguläres Produkt (nicht Kosmetik, kein Aktionspreis) angewendet wird
+- **Bedingung:**
+  - Promotion-Code MA-ALLES20 ist aktiv (20% auf alle Produkte)
+  - Reguläres Produkt ohne Aktionspreis verfügbar
+- **Testschritte:**
+  1. Reguläres Produkt zum Warenkorb hinzufügen
+  2. Preis vor Rabatt erfassen
+  3. Mitarbeiterrabatt-Code 20% auf Alles einlösen
+  4. Rabattzeile im Warenkorb prüfen
+  5. Preisänderung validieren (20% Rabatt, Toleranz 5%)
+- **Erwartetes Verhalten:**
+  - 20%-Rabatt wird korrekt auf reguläres Produkt angewendet
+
+**TC-PROMO-EMP-005: Mitarbeiterrabatt 50% Kosmetik + 20% Alles gemeinsam einlösen**
+- **Beschreibung:** Prüft, dass beide Mitarbeiterrabatt-Codes gleichzeitig auf einen gemischten Warenkorb (Kosmetik + reguläres Produkt) angewendet werden
+- **Bedingung:**
+  - Beide Promotion-Codes (MA-KOSMETIK50, MA-ALLES20) sind aktiv und kombinierbar
+  - Kosmetik-Produkt und reguläres Produkt verfügbar
+- **Testschritte:**
+  1. Kosmetik-Produkt und reguläres Produkt zum Warenkorb hinzufügen
+  2. Gesamtpreis vor Rabatt erfassen
+  3. Ersten Code einlösen: 50% Kosmetik
+  4. Zweiten Code einlösen: 20% auf Alles
+  5. Rabattzeilen prüfen
+  6. Gesamtpreis validieren
+- **Erwartetes Verhalten:**
+  - Beide Rabatte werden gleichzeitig angewendet
+  - Kosmetik erhält 50%, reguläres Produkt erhält 20%
+  - Gesamtpreis ist niedriger als vor beiden Rabatten
+
+**TC-PROMO-EMP-006: Mitarbeiterrabatt nicht auf Aktionspreis (sale flag = JA)**
+- **Beschreibung:** Prüft, dass der Mitarbeiterrabatt NICHT auf Produkte mit Aktionspreis (sale flag = JA) angewendet wird – keine Doppelrabattierung
+- **Bedingung:**
+  - Promotion-Code MA-ALLES20 ist aktiv
+  - Produkt mit Aktionspreis (sale flag = JA) im Warenkorb
+  - Reguläres Produkt (ohne SALE) im Warenkorb
+- **Testschritte:**
+  1. SALE-Produkt und reguläres Produkt zum Warenkorb hinzufügen
+  2. Preise vor Rabatt erfassen
+  3. Mitarbeiterrabatt-Code 20% einlösen
+  4. Prüfen: Rabatt nur auf reguläres Produkt
+  5. Rabattbetrag validieren (kleiner als 20% vom Gesamtwarenkorb)
+- **Erwartetes Verhalten:**
+  - Kein Mitarbeiterrabatt auf SALE-Produkte
+  - Rabatt wird nur auf reguläres Produkt angewendet
+  - Keine Doppelrabattierung
 
 #### Bundle-Promotions
 
@@ -1898,7 +1980,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | phase_5b | Phase 5b - PDP, Listing, Navigation | ⏳ | 14 | -% |
 | phase_5c | Phase 5c - Einkaufsgutschein/Warenkorb | ⏳ | 5 | -% |
 | phase_5d | Phase 5d - Technische Tests | ⏳ | 10 | -% |
-| phase_6 | Phase 6 - Promotions | ⏳ | 47 | 60% |
+| phase_6 | Phase 6 - Promotions | ⏳ | 51 | 60% |
 | phase_7 | Phase 7 - Data Validation | ⏳ | 15 | 70% |
 | phase_7a | Phase 7a - Content & Newsletter | ⏳ | 9 | -% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |

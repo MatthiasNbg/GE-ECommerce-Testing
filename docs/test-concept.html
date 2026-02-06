@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>267 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>271 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -574,8 +574,8 @@
 </tr>
 <tr>
 <td>🎟️ **Feature Tests - Promotions**</td>
-<td>47</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 0/47</td>
+<td>51</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 4/51</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows</td>
 </tr>
@@ -4012,6 +4012,38 @@
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-PROMO-EMP-003</td>
+<td>Mitarbeiterrabatt 50% auf Kosmetik einzeln einlösen</td>
+<td>P1</td>
+<td>●</td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PROMO-EMP-004</td>
+<td>Mitarbeiterrabatt 20% auf Alles einzeln einlösen</td>
+<td>P1</td>
+<td>●</td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PROMO-EMP-005</td>
+<td>Mitarbeiterrabatt 50% Kosmetik + 20% Alles gemeinsam</td>
+<td>P1</td>
+<td>●</td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-PROMO-EMP-006</td>
+<td>Mitarbeiterrabatt nicht auf Aktionspreis (sale flag)</td>
+<td>P1</td>
+<td>●</td>
+<td>AT</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <strong>Detaillierte Testbeschreibungen:</strong>
 
@@ -4056,6 +4088,81 @@
 <li>Produkt wird zum Aktionspreis berechnet</li>
 <li>Bei gemischtem Warenkorb: Mitarbeiterrabatt nur auf reguläre Produkte</li>
 <li>Alternativ: Der günstigere Preis (Aktionspreis vs. Mitarbeiterrabatt) wird angewendet</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass der 50%-Mitarbeiterrabatt-Code korrekt auf ein Kosmetik-Produkt (via Werbemittel-ID) angewendet wird</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion-Code MA-KOSMETIK50 ist aktiv (50% auf Kosmetik via Werbemittel-ID)</li>
+<li>Kosmetik-Produkt mit passender advertising_material_id verfügbar</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Preis vor Rabatt erfassen</li>
+<li>Mitarbeiterrabatt-Code 50% Kosmetik einlösen</li>
+<li>Rabattzeile im Warenkorb prüfen</li>
+<li>Preisänderung validieren (50% Rabatt, Toleranz 5%)</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>50%-Rabatt wird korrekt auf Kosmetik-Produkt angewendet</li>
+<li>Rabattberechnung ist korrekt</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass der 20%-Mitarbeiterrabatt-Code auf ein reguläres Produkt (nicht Kosmetik, kein Aktionspreis) angewendet wird</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion-Code MA-ALLES20 ist aktiv (20% auf alle Produkte)</li>
+<li>Reguläres Produkt ohne Aktionspreis verfügbar</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Preis vor Rabatt erfassen</li>
+<li>Mitarbeiterrabatt-Code 20% auf Alles einlösen</li>
+<li>Rabattzeile im Warenkorb prüfen</li>
+<li>Preisänderung validieren (20% Rabatt, Toleranz 5%)</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>20%-Rabatt wird korrekt auf reguläres Produkt angewendet</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass beide Mitarbeiterrabatt-Codes gleichzeitig auf einen gemischten Warenkorb (Kosmetik + reguläres Produkt) angewendet werden</li>
+<li><strong>Bedingung:</strong></li>
+<li>Beide Promotion-Codes (MA-KOSMETIK50, MA-ALLES20) sind aktiv und kombinierbar</li>
+<li>Kosmetik-Produkt und reguläres Produkt verfügbar</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Gesamtpreis vor Rabatt erfassen</li>
+<li>Ersten Code einlösen: 50% Kosmetik</li>
+<li>Zweiten Code einlösen: 20% auf Alles</li>
+<li>Rabattzeilen prüfen</li>
+<li>Gesamtpreis validieren</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Beide Rabatte werden gleichzeitig angewendet</li>
+<li>Kosmetik erhält 50%, reguläres Produkt erhält 20%</li>
+<li>Gesamtpreis ist niedriger als vor beiden Rabatten</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass der Mitarbeiterrabatt NICHT auf Produkte mit Aktionspreis (sale flag = JA) angewendet wird – keine Doppelrabattierung</li>
+<li><strong>Bedingung:</strong></li>
+<li>Promotion-Code MA-ALLES20 ist aktiv</li>
+<li>Produkt mit Aktionspreis (sale flag = JA) im Warenkorb</li>
+<li>Reguläres Produkt (ohne SALE) im Warenkorb</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Preise vor Rabatt erfassen</li>
+<li>Mitarbeiterrabatt-Code 20% einlösen</li>
+<li>Prüfen: Rabatt nur auf reguläres Produkt</li>
+<li>Rabattbetrag validieren (kleiner als 20% vom Gesamtwarenkorb)</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Kein Mitarbeiterrabatt auf SALE-Produkte</li>
+<li>Rabatt wird nur auf reguläres Produkt angewendet</li>
+<li>Keine Doppelrabattierung</li>
 </ul>
 <h4 id="bundle-promotions">Bundle-Promotions</h4>
 </ol>
@@ -4861,7 +4968,7 @@
 <td>phase_6</td>
 <td>Phase 6 - Promotions</td>
 <td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>47</td>
+<td>51</td>
 <td>60%</td>
 </tr>
 <tr>
@@ -5571,7 +5678,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 06.02.2026 um 15:59 Uhr</p>
+            <p>Generiert am 06.02.2026 um 16:07 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

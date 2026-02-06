@@ -1,0 +1,131 @@
+{
+  "test_id": "TC-PROMO-EMP-006",
+  "name": "Mitarbeiterrabatt nicht auf Aktionspreis (sale flag = JA)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar (Staging)",
+    "Promotion-Code MA-ALLES20 ist aktiv (20% auf Alles)",
+    "Produkt mit Aktionspreis (sale flag = JA) ist verfuegbar",
+    "Regulaeres Produkt (ohne Aktionspreis) ist verfuegbar"
+  ],
+  "postconditions": [
+    "Mitarbeiterrabatt wird NICHT auf SALE-Produkt angewendet",
+    "Mitarbeiterrabatt wird nur auf regulaeres Produkt angewendet",
+    "Keine Doppelrabattierung"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "SALE-Produkt (Aktionspreis) zum Warenkorb hinzufuegen",
+      "expected": "SALE-Produkt ist im Warenkorb zum Aktionspreis"
+    },
+    {
+      "step": 2,
+      "action": "Regulaeres Produkt zum Warenkorb hinzufuegen",
+      "expected": "Beide Produkte im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zum Warenkorb navigieren und Preise erfassen",
+      "expected": "Mindestens 2 Produkte mit gueltigem Gesamtpreis",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Mitarbeiterrabatt-Code 20% einloesen",
+      "expected": "Code wird akzeptiert, Rabatt nur auf regulaeres Produkt",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value": "MA-ALLES20"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Einloesen')"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Rabattzeile pruefen",
+      "expected": "Rabatt wird nur auf regulaeres Produkt angewendet"
+    },
+    {
+      "step": 6,
+      "action": "Rabattbetrag validieren",
+      "expected": "Rabatt ist kleiner als 20% vom Gesamtwarenkorb (SALE-Produkt ausgeschlossen)"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "extra",
+      "name": "promo_code",
+      "code": "MA-ALLES20",
+      "discount_percentage": 20,
+      "target": "all_products_except_sale"
+    },
+    {
+      "type": "extra",
+      "name": "product_sale",
+      "path": "p/sale-produkt/ge-p-SALE",
+      "sale_flag": true,
+      "note": "TODO: Echtes SALE-Produkt einsetzen"
+    },
+    {
+      "type": "extra",
+      "name": "product_regular",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_employee_discount_not_on_sale",
+    "tags": [
+      "promotions",
+      "mitarbeiterrabatt"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "test_id": "TC-PROMO-EMP-005",
+  "name": "Mitarbeiterrabatt 50% Kosmetik + 20% Alles gemeinsam einloesen",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar (Staging)",
+    "Promotion-Code MA-KOSMETIK50 ist aktiv (50% auf Kosmetik)",
+    "Promotion-Code MA-ALLES20 ist aktiv (20% auf Alles)",
+    "Beide Codes sind kombinierbar",
+    "Kosmetik-Produkt und regulaeres Produkt sind verfuegbar"
+  ],
+  "postconditions": [
+    "Beide Rabatte werden gleichzeitig angewendet",
+    "Kosmetik-Produkt erhaelt 50%, regulaeres Produkt erhaelt 20%",
+    "Gesamtpreis ist niedriger als vor beiden Rabatten"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kosmetik-Produkt zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/lippenbalsam-mit-bio-bienenwachs/ge-p-60780"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Regulaeres Produkt zum Warenkorb hinzufuegen",
+      "expected": "Beide Produkte im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zum Warenkorb navigieren und Gesamtpreis erfassen",
+      "expected": "Warenkorb zeigt mindestens 2 Produkte mit gueltigem Gesamtpreis",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Ersten Code einloesen: 50% Kosmetik",
+      "expected": "Code wird akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value": "MA-KOSMETIK50"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Einloesen')"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Zweiten Code einloesen: 20% auf Alles",
+      "expected": "Code wird akzeptiert, beide Rabattzeilen sichtbar",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value": "MA-ALLES20"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Einloesen')"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Rabattzeilen im Warenkorb pruefen",
+      "expected": "Mindestens eine Rabattzeile sichtbar"
+    },
+    {
+      "step": 7,
+      "action": "Gesamtpreis validieren",
+      "expected": "Gesamtpreis ist niedriger als vor beiden Rabatten"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "extra",
+      "name": "promo_code_50",
+      "code": "MA-KOSMETIK50",
+      "discount_percentage": 50,
+      "target": "cosmetics_only"
+    },
+    {
+      "type": "extra",
+      "name": "promo_code_20",
+      "code": "MA-ALLES20",
+      "discount_percentage": 20,
+      "target": "all_products"
+    },
+    {
+      "type": "extra",
+      "name": "product_cosmetics",
+      "path": "p/lippenbalsam-mit-bio-bienenwachs/ge-p-60780",
+      "category": "Kosmetik"
+    },
+    {
+      "type": "extra",
+      "name": "product_regular",
+      "path": "p/kurzarmshirt-aus-bio-baumwolle/ge-p-862990",
+      "category": "Kleidung"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_employee_discount_combined",
+    "tags": [
+      "promotions",
+      "mitarbeiterrabatt"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-06",
+    "last_modified": "2026-02-06",
+    "version": "1.0"
+  }
+}
