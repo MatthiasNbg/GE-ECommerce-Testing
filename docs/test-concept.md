@@ -94,8 +94,8 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 270 Tests
-- ✅ Implementiert: 153
+**Gesamt:** 271 Tests
+- ✅ Implementiert: 154
 - ❌ Fehlend: 111
 - ⚠️ Teilweise: 0
 - **Abdeckung:** 57%
@@ -1446,7 +1446,8 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
 | TC-PROMO-CAT-001 | Promo auf Produktkategorie via advertising_material_id | P1 | ✅ | AT, DE, CH | 1 |
-| TC-PROMO-AUTO-001 | Automatisierte Promo auf Werbemittel ID 70 | P1 | ○ | AT, DE, CH | 1 |
+| TC-PROMO-ADVID-001 | Promo auf Werbemittel ID 70 mit manueller Code-Eingabe | P1 | ✅ | AT, DE, CH | 1 |
+| TC-PROMO-ADVID-002 | Automatisierte Promo auf Werbemittel ID 70 | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1470,7 +1471,28 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 - **Automation:** `test_promo_category_clothing_applied` in `test_promotions.py`
 - **Hinweis:** Promo-Code und Kleidungs-Produkt sind Platzhalter (UPDATETHISCODE / UPDATETHIS) — müssen mit echten Staging-Daten befüllt werden
 
-**TC-PROMO-AUTO-001: Automatisierte Promo auf Werbemittel ID 70**
+**TC-PROMO-ADVID-001: Promo auf Werbemittel ID 70 mit manueller Code-Eingabe**
+- **Beschreibung:** Prüft, dass eine Promotion per manuellem Code auf Produkte mit advertising_material_id = 70 angewendet wird. Kein automatischer Rabatt — Code muss im Gutscheinfeld eingegeben werden.
+- **Bedingung:**
+  - Promotion mit Code für advertising_material_id = 70 ist im Backend aktiv
+  - Produkte mit und ohne advertising_material_id = 70 vorhanden
+- **Testschritte:**
+  1. Produkt mit advertising_material_id = 70 zum Warenkorb hinzufügen
+  2. Produkt OHNE advertising_material_id = 70 zum Warenkorb hinzufügen
+  3. Zum Warenkorb navigieren
+  4. Prüfen: Kein automatischer Rabatt vorhanden
+  5. Promotion-Code manuell im Gutscheinfeld eingeben
+  6. Prüfen: Rabatt nur auf Produkt mit advid 70 angewendet
+  7. Prüfen: Produkt ohne advid 70 bleibt zum vollen Preis
+- **Erwartetes Verhalten:**
+  - Vor Code-Eingabe kein Rabatt sichtbar
+  - Nach Code-Eingabe: Rabatt nur auf Produkte mit advertising_material_id = 70
+  - Produkte ohne passende ID bleiben unrabattiert
+  - Funktioniert in allen DACH-Verkaufskanälen (AT, DE, CH)
+- **Automation:** `test_promo_advid_70_manual_code` in `test_promotions.py`
+- **Hinweis:** Promo-Code und Produkt mit advid 70 sind Platzhalter (UPDATETHISCODE / UPDATETHIS) — müssen mit echten Staging-Daten befüllt werden
+
+**TC-PROMO-ADVID-002: Automatisierte Promo auf Werbemittel ID 70**
 - **Beschreibung:** Vorlage für Promohuelse (automatisierte Promo) - prüft automatische Rabattanwendung auf Produkte mit Werbemittel ID 70
 - **Bedingung:** Nur Produkte mit Werbemittel ID 70, keine Shopware-Regel notwendig
 - **Promo-Konfiguration:**
@@ -2156,7 +2178,7 @@ Die folgenden Testdaten werden für die automatisierten Tests verwendet.
 
 | Artikel-ID | Name | advertising_material_id | Kategorie | Verwendung | Status |
 |------------|------|------------------------|-----------|------------|--------|
-| TBD | Testprodukt Werbemittel | 70 | Promo-Werbemittel | TC-PROMO-AUTO-001 (Automatisierte Promo) | ❌ Fehlend |
+| TBD | Testprodukt Werbemittel | 70 | Promo-Werbemittel | TC-PROMO-ADVID-001 (manuell) / TC-PROMO-ADVID-002 (automatisch) | ❌ Fehlend |
 | TBD | Testprodukt Kategorie 1 | TBD | TBD | Allgemeine Kategorietests | ❌ Fehlend |
 | TBD | Testprodukt Kategorie 2 | TBD | TBD | Allgemeine Kategorietests | ❌ Fehlend |
 

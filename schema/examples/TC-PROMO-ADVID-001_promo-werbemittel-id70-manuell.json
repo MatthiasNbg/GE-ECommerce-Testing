@@ -1,0 +1,151 @@
+{
+  "test_id": "TC-PROMO-ADVID-001",
+  "name": "Promo auf Werbemittel ID 70 mit manueller Code-Eingabe",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit Code fuer advertising_material_id = 70 ist aktiv",
+    "Produkt mit advertising_material_id = 70 ist verfuegbar",
+    "Produkt ohne advertising_material_id = 70 ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt mit advertising_material_id = 70 zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value_ref": "product:advid70_product.path"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Produkt ohne advertising_material_id = 70 zum Warenkorb hinzufuegen",
+      "expected": "Zweites Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value_ref": "product:cushion_lavender.path"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Zum Warenkorb navigieren",
+      "expected": "Warenkorb zeigt beide Produkte, kein automatischer Rabatt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Kein automatischer Rabatt vorhanden",
+      "expected": "Keine Promotion-Zeile sichtbar vor Code-Eingabe"
+    },
+    {
+      "step": 5,
+      "action": "Promotion-Code manuell eingeben",
+      "expected": "Promotion wird angewendet",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[name='promotionCode']",
+          "value_ref": "promo:advid70_code.code"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit']:has-text('Einloesen')"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Pruefen: Rabatt nur auf Produkt mit advid 70 angewendet",
+      "expected": "Rabatt sichtbar, nur auf Werbemittel-Produkt, nicht auf Gesamtwarenkorb"
+    },
+    {
+      "step": 7,
+      "action": "Pruefen: Produkt ohne advid 70 bleibt zum vollen Preis",
+      "expected": "Nicht-Werbemittel-Produkt ist nicht rabattiert"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "product",
+      "name": "advid70_product",
+      "path": "/p/UPDATETHIS-werbemittel70-produkt/ge-p-UPDATETHIS",
+      "product_name": "Platzhalter-Produkt (advertising_material_id=70)",
+      "advertising_material_id": 70
+    },
+    {
+      "type": "product",
+      "name": "cushion_lavender",
+      "path": "/p/duftkissen-lavendel/ge-p-49415",
+      "product_name": "Duftkissen Lavendel",
+      "article_number": "49415"
+    },
+    {
+      "type": "promo",
+      "name": "advid70_code",
+      "code": "UPDATETHISCODE",
+      "description": "Platzhalter-Code fuer Werbemittel ID 70 Promo"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_advid_70_manual_code",
+    "tags": [
+      "promotions",
+      "advertising-material-id",
+      "manual-code"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

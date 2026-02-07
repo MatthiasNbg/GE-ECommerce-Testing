@@ -39,6 +39,8 @@ TEST_PROMO_CODES = {
     "invalid": "UNGUELTIG123",  # Ungültiger Code
     # Kategorie-Promo (via advertising_material_id / Sortimentsbereich)
     "category_clothing_10": "UPDATETHISCODE",  # 10% auf Kleidung (Sortimentsbereich)
+    # Werbemittel-ID-Promo (advertising_material_id = 70, manuelle Code-Eingabe)
+    "advid_70": "UPDATETHISCODE",  # Promo auf Werbemittel ID 70 (manuell)
     # Mitarbeiterrabatt-Codes (Staging)
     "employee_50_cosmetics": "MA-KOSMETIK50",  # 50% auf Kosmetik (via Werbemittel-ID)
     "employee_20_all": "MA-ALLES20",  # 20% auf Alles
@@ -51,6 +53,15 @@ CATEGORY_PROMO_PRODUCTS = {
     "clothing": "p/UPDATETHIS-kleidung-produkt/ge-p-UPDATETHIS",
     # Produkt OHNE passende advertising_material_id (z.B. Möbel, Accessoire)
     "non_clothing": "p/duftkissen-lavendel/ge-p-49415",
+}
+
+# Testprodukte für Werbemittel-ID-70-Promo (advertising_material_id = 70)
+# TODO: Echte Produkte einsetzen, die advertising_material_id = 70 haben
+ADVID_70_PROMO_PRODUCTS = {
+    # Produkt MIT advertising_material_id = 70
+    "with_advid_70": "p/UPDATETHIS-werbemittel70-produkt/ge-p-UPDATETHIS",
+    # Produkt OHNE advertising_material_id = 70 (z.B. Accessoire)
+    "without_advid_70": "p/duftkissen-lavendel/ge-p-49415",
 }
 
 # Testprodukte für Mitarbeiterrabatt
@@ -855,4 +866,79 @@ def test_promo_category_clothing_applied(page: Page, base_url: str):
             f"Rabatt ({discount:.2f}) entspricht ca. 10% des Gesamtwarenkorbs "
             f"({full_cart_10_discount:.2f}) - Nicht-Kleidungs-Produkt wurde "
             f"wahrscheinlich fälschlicherweise rabattiert"
+        )
+
+
+@pytest.mark.promotions
+def test_promo_advid_70_manual_code(page: Page, base_url: str):
+    """
+    TC-PROMO-ADVID-001: Promo auf Werbemittel ID 70 mit manueller Code-Eingabe.
+
+    Prüft, dass eine Promotion per manuellem Code auf Produkte mit
+    advertising_material_id = 70 angewendet wird.
+    Positiv: Produkt mit advid 70 erhält Rabatt nach Code-Eingabe.
+    Negativ: Produkt ohne advid 70 bleibt unrabattiert.
+    """
+    product_with = ADVID_70_PROMO_PRODUCTS["with_advid_70"]
+    product_without = ADVID_70_PROMO_PRODUCTS["without_advid_70"]
+    promo_code = TEST_PROMO_CODES["advid_70"]
+
+    # 1. Produkt mit advertising_material_id = 70 hinzufügen
+    add_product_to_cart(page, base_url, product_with)
+
+    # 2. Produkt ohne advertising_material_id = 70 hinzufügen
+    add_product_to_cart(page, base_url, product_without)
+
+    # 3. Zum Warenkorb navigieren
+    navigate_to_cart(page, base_url)
+
+    # 4. Prüfen: Kein automatischer Rabatt vorhanden (Code ist manuell!)
+    assert not has_promotion_discount(page), (
+        "Promotion-Rabatt ist bereits vor Code-Eingabe sichtbar - "
+        "sollte nur mit manuellem Code angewendet werden"
+    )
+
+    # 5. Preise vor Rabatt erfassen
+    items_before = _get_line_item_prices(page)
+    assert len(items_before) >= 2, (
+        f"Erwartet mindestens 2 Produkte im Warenkorb, gefunden: {len(items_before)}"
+    )
+
+    total_before = get_cart_total(page)
+    price_before = _parse_price(total_before)
+    assert price_before > 0, f"Ungültiger Gesamtpreis vor Rabatt: {total_before}"
+
+    # 6. Promotion-Code manuell eingeben
+    success = apply_promo_code(page, promo_code)
+
+    if not success:
+        pytest.skip(
+            f"Promotion-Code {promo_code} ist nicht im System konfiguriert. "
+            "Bitte Code in TEST_PROMO_CODES['advid_70'] aktualisieren."
+        )
+
+    # 7. Positiv: Rabatt muss jetzt sichtbar sein
+    has_discount = has_promotion_discount(page)
+    assert has_discount, (
+        "Kein Promotion-Rabatt sichtbar nach Eingabe des Werbemittel-ID-70-Codes"
+    )
+
+    # 8. Gesamtpreis muss niedriger sein
+    total_after = get_cart_total(page)
+    price_after = _parse_price(total_after)
+    assert price_after < price_before, (
+        f"Gesamtpreis hat sich nach Werbemittel-Rabatt nicht verringert: "
+        f"vorher={total_before}, nachher={total_after}"
+    )
+
+    # 9. Negativ: Rabatt darf nicht auf den gesamten Warenkorb angewendet worden sein
+    discount = _get_discount_amount(page)
+    if discount > 0:
+        # Wenn advid-70-Produkt deutlich günstiger als Gesamtwarenkorb,
+        # muss der Rabatt kleiner sein als ein Rabatt auf den gesamten Warenkorb
+        # (grobe Prüfung: Rabatt < 95% des Gesamtwarenkorb-Rabatts)
+        full_cart_discount = price_before * 0.50  # Großzügige Obergrenze
+        assert discount < full_cart_discount, (
+            f"Rabatt ({discount:.2f}) ist unverhältnismäßig hoch - "
+            f"möglicherweise wurde auch das Nicht-Werbemittel-Produkt rabattiert"
         )

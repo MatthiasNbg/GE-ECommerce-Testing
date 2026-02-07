@@ -113,5 +113,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 244 Dateien, 0 fehlerhaft, Exit-Code 0.
-(51 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 3 E2E)
+Erwartetes Ergebnis: 245 Dateien, 0 fehlerhaft, Exit-Code 0.
+(52 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 1 PROMO-ADVID + 3 E2E)

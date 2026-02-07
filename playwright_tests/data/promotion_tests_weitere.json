@@ -69,7 +69,7 @@
   },
   {
     "schema_version": "2.0",
-    "test_id": "TC-PROMO-AUTO-001",
+    "test_id": "TC-PROMO-ADVID-002",
     "name": "Automatisierte Promo auf Werbemittel ID 70",
     "category": "produktkategorien",
     "priority": "P1",
