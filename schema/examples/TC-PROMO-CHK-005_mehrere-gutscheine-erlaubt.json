@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-PROMO-CHK-005",
+  "name": "Mehrere Gutscheine erlaubt",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutscheine in verschiedenen Nennwerten verfuegbar (50 EUR, 100 EUR)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Gutschein 50 EUR zum Warenkorb hinzufuegen",
+      "expected": "Gutschein 50 EUR im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Gutschein 100 EUR zum Warenkorb hinzufuegen",
+      "expected": "BeforeLineItemAddedEvent: Neues Item ist Gutschein + Warenkorb enthaelt nur Gutscheine"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Beide Gutscheine im Warenkorb",
+      "expected": "Warenkorb zeigt 50 EUR + 100 EUR"
+    },
+    {
+      "step": 4,
+      "action": "Checkout ist moeglich",
+      "expected": "Gesamtpreis: 150 EUR"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_chk_005",
+    "tags": [
+      "promotions",
+      "checkout",
+      "gift-voucher"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

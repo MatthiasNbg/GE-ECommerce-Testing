@@ -1,0 +1,88 @@
+{
+  "test_id": "TC-PROMO-MOV-002",
+  "name": "MBW nur auf Warenkorb angewendet",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit MBW-Bedingung aktiv",
+    "Warenkorb mit Produkten + Versandkosten"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkte knapp unter MBW in den Warenkorb legen",
+      "expected": "Warenwert knapp unter MBW"
+    },
+    {
+      "step": 2,
+      "action": "Pruefen: Versandkosten NICHT zum MBW gezaehlt",
+      "expected": "MBW basiert nur auf Produktpreisen"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Einloesegutscheine NICHT den Warenwert fuer MBW reduzieren",
+      "expected": "Gutschein-Guthaben fliesst nicht in MBW ein"
+    },
+    {
+      "step": 4,
+      "action": "Produkt hinzufuegen bis MBW erreicht",
+      "expected": "MBW-Schwelle ueberschritten"
+    },
+    {
+      "step": 5,
+      "action": "Promotion-Code eingeben",
+      "expected": "Promotion wird akzeptiert"
+    },
+    {
+      "step": 6,
+      "action": "Korrekte Berechnung bei gemischtem Warenkorb pruefen",
+      "expected": "MBW ausschliesslich aus Produktpreisen berechnet"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_mov_002",
+    "tags": [
+      "promotions",
+      "minimum-order-value",
+      "cart-calculation"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

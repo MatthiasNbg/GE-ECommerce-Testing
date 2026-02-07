@@ -1,0 +1,84 @@
+{
+  "test_id": "TC-PROMO-SEC-001",
+  "name": "Ausnutzungsmoeglichkeiten Kaufgutscheine",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Security",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutscheine in verschiedenen Nennwerten verfuegbar",
+    "Verschiedene aktive Promotions vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufuegen",
+      "expected": "Gutschein im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Versuchen Promotion-Code auf Gutschein-Kauf anzuwenden",
+      "expected": "Keine Promotion auf Gutschein-Kauf anwendbar"
+    },
+    {
+      "step": 3,
+      "action": "Versuchen automatische Promotions auf Gutschein anzuwenden",
+      "expected": "Automatische Promotions greifen nicht auf Gutscheine"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Gutschein kann nicht unter Nennwert erworben werden",
+      "expected": "System verhindert Arbitrage-Moeglichkeiten"
+    },
+    {
+      "step": 5,
+      "action": "Verschiedene Gutschein-Nennwerte testen",
+      "expected": "Alle Schutzmechanismen greifen unabhaengig vom Nennwert"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_sec_001",
+    "tags": [
+      "promotions",
+      "security",
+      "gift-voucher",
+      "brute-force"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 120,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

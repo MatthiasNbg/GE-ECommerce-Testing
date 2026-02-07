@@ -1,0 +1,79 @@
+{
+  "test_id": "TC-PROMO-CHK-004",
+  "name": "Gemischter Warenkorb im Checkout blockiert",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Gemischter Warenkorb (Gutschein + regulaeres Produkt) durch API/Manipulation erstellt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Gemischten Warenkorb mit Gutschein und regulaerem Produkt erstellen",
+      "expected": "Warenkorb enthaelt beides"
+    },
+    {
+      "step": 2,
+      "action": "Zur Kasse klicken",
+      "expected": "CartVerifyPersistEvent wird gefeuert"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Checkout wird verhindert (BlockingError)",
+      "expected": "User wird zu Warenkorb zurueckgeleitet"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Fehlermeldung wird angezeigt",
+      "expected": "User muss Warenkorb bereinigen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_chk_004",
+    "tags": [
+      "promotions",
+      "checkout",
+      "gift-voucher",
+      "blocking",
+      "security"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

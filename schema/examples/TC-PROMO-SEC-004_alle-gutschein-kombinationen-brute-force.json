@@ -1,0 +1,85 @@
+{
+  "test_id": "TC-PROMO-SEC-004",
+  "name": "Alle Gutschein-Kombinationen (Brute-Force)",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Security",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Alle Gutschein-Typen verfuegbar (Einkaufsgutschein, Einloesegutschein, Wertgutschein)",
+    "Alle Promotion-Typen verfuegbar (prozentual, absolut, versandkostenfrei, automatisch)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Matrix aufbauen: Gutschein-Typen x Promotion-Typen",
+      "expected": "Testmatrix erstellt"
+    },
+    {
+      "step": 2,
+      "action": "Jede Kombination einzeln testen",
+      "expected": "Alle Kombinationen getestet"
+    },
+    {
+      "step": 3,
+      "action": "Mehrfach-Kombinationen testen (2+ Gutscheine + Promotion)",
+      "expected": "Keine Kombination fuehrt zu negativem Warenwert"
+    },
+    {
+      "step": 4,
+      "action": "Reihenfolge variieren (erst Gutschein dann Promotion und umgekehrt)",
+      "expected": "Reihenfolge hat keinen Einfluss auf Ergebnis"
+    },
+    {
+      "step": 5,
+      "action": "Ergebnisse dokumentieren",
+      "expected": "Alle Ausschlussregeln greifen konsistent"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_sec_004",
+    "tags": [
+      "promotions",
+      "security",
+      "gift-voucher",
+      "brute-force",
+      "matrix-test"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 300,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

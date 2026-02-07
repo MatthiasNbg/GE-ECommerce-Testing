@@ -1,0 +1,93 @@
+{
+  "test_id": "TC-PROMO-SALE-004",
+  "name": "SALE-Anzeige bei Aktionspreis korrekt",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt mit aktivem Aktionspreis (SALE) in Shopware konfiguriert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite mit Aktionspreis aufrufen",
+      "expected": "PDP zeigt Aktionspreis"
+    },
+    {
+      "step": 2,
+      "action": "Pruefen: Originalpreis durchgestrichen angezeigt",
+      "expected": "Originalpreis ist durchgestrichen"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Aktionspreis prominent angezeigt",
+      "expected": "Aktionspreis hervorgehoben (andere Farbe/Groesse)"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: SALE-Badge/Label vorhanden",
+      "expected": "SALE-Badge auf PDP und in Listings sichtbar"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Preise in Listing/Kategorie korrekt",
+      "expected": "Aktionspreis auch in Uebersicht korrekt"
+    },
+    {
+      "step": 6,
+      "action": "Pruefen: Aktionspreis in Warenkorb und Checkout korrekt",
+      "expected": "Preise konsistent in Warenkorb und Checkout"
+    },
+    {
+      "step": 7,
+      "action": "Test in allen Verkaufskanaelen (AT EUR, DE EUR, CH CHF)",
+      "expected": "Waehrungsformatierung je Kanal korrekt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_sale_004",
+    "tags": [
+      "promotions",
+      "sale-price",
+      "display",
+      "frontend"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

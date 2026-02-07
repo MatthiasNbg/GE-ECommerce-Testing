@@ -1,0 +1,99 @@
+{
+  "test_id": "TC-PROMO-001",
+  "name": "Nicht-rabattierbarer Artikel (639046)",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt mit nicht_rabattierbar = true (Variante 639046) ist verfuegbar",
+    "Aktive Warenkorb-Promotion (prozentual oder absolut) vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Nicht-rabattierbares Produkt (639046) zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Optional: Weiteres rabattierbares Produkt hinzufuegen",
+      "expected": "Beide Produkte im Warenkorb"
+    },
+    {
+      "step": 3,
+      "action": "Promotion-Code eingeben",
+      "expected": "Code wird akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#addPromotionInput",
+          "value": "UPDATETHISCODE"
+        },
+        {
+          "action": "click",
+          "selector": "#addPromotionButton"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Rabatt NICHT auf nicht-rabattierbares Produkt angewendet",
+      "expected": "Nicht-rabattierbarer Artikel bleibt zum vollen Preis"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Rabatt korrekt nur auf rabattierbare Produkte berechnet",
+      "expected": "Gesamtsumme = voller Preis nicht-rabattierbar + rabattierter Preis der uebrigen"
+    },
+    {
+      "step": 6,
+      "action": "Test in allen Verkaufskanaelen (AT, DE, CH) durchfuehren",
+      "expected": "Ergebnis konsistent in allen Kanaelen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_001",
+    "tags": [
+      "promotions",
+      "exclusion",
+      "nicht-rabattierbar"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

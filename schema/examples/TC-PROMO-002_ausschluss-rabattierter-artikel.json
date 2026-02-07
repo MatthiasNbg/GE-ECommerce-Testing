@@ -1,0 +1,94 @@
+{
+  "test_id": "TC-PROMO-002",
+  "name": "Ausschluss Kauf rabattierter Artikel",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt mit Aktionspreis (SALE) verfuegbar",
+    "Aktive Warenkorb-Promotion mit Ausschluss von Aktionspreisen"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt mit Aktionspreis zum Warenkorb hinzufuegen",
+      "expected": "SALE-Produkt im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Regulaeres Produkt (ohne Aktionspreis) zum Warenkorb hinzufuegen",
+      "expected": "Beide Produkte im Warenkorb"
+    },
+    {
+      "step": 3,
+      "action": "Promotion-Code eingeben",
+      "expected": "Code wird akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#addPromotionInput",
+          "value": "UPDATETHISCODE"
+        },
+        {
+          "action": "click",
+          "selector": "#addPromotionButton"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Rabatt nur auf regulaeres Produkt angewendet",
+      "expected": "Rabatt nur auf regulaeres Produkt"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: SALE-Produkt bleibt zum Aktionspreis",
+      "expected": "Keine Doppelrabattierung"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_002",
+    "tags": [
+      "promotions",
+      "exclusion",
+      "sale-price"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

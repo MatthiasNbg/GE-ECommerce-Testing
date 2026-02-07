@@ -1,0 +1,82 @@
+{
+  "test_id": "TC-PROMO-SHIP-008",
+  "name": "Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Land = AT",
+    "Postartikel und Speditionsartikel verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Postartikel zum Warenkorb hinzufuegen",
+      "expected": "Postartikel im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Speditionsartikel zum Warenkorb hinzufuegen",
+      "expected": "Beide Versandarten im Checkout"
+    },
+    {
+      "step": 3,
+      "action": "Versandkostenfrei-Promocode fuer Post eingeben",
+      "expected": "Nur Postversandkosten (5,95 EUR) auf 0 reduziert"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Speditionskosten unveraendert",
+      "expected": "Speditionskosten bleiben bestehen"
+    },
+    {
+      "step": 5,
+      "action": "Alternativ: Versandkostenfrei-Promocode fuer Spedi eingeben",
+      "expected": "Nur Speditionskosten auf 0 reduziert"
+    },
+    {
+      "step": 6,
+      "action": "Pruefen: Gesamtversandkosten korrekt berechnet",
+      "expected": "Postversand AT und Spedi-Versand AT separat behandelt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_ship_008",
+    "tags": [
+      "promotions",
+      "shipping",
+      "free-shipping",
+      "mixed-cart",
+      "at"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

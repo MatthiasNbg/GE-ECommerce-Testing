@@ -1,0 +1,88 @@
+{
+  "test_id": "TC-PROMO-COMBO-001",
+  "name": "Zwei Promotions kombinierbar",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Zwei aktive kombinierbare Promotions vorhanden",
+    "Shopware-Promotion-Einstellung: Kombination erlaubt = true"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkte zum Warenkorb hinzufuegen",
+      "expected": "Produkte im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Ersten Promotion-Code eingeben",
+      "expected": "Erster Code wird akzeptiert"
+    },
+    {
+      "step": 3,
+      "action": "Zweiten Promotion-Code eingeben",
+      "expected": "Zweiter Code wird akzeptiert"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Beide Rabatte im Warenkorb angezeigt",
+      "expected": "Beide Rabatte als separate Zeilen"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Beide Rabatte korrekt berechnet",
+      "expected": "Gesamtpreis korrekt (beide Rabatte abgezogen)"
+    },
+    {
+      "step": 6,
+      "action": "Reihenfolge umkehren und erneut testen",
+      "expected": "Reihenfolge der Eingabe hat keinen Einfluss auf Ergebnis"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_combo_001",
+    "tags": [
+      "promotions",
+      "combination",
+      "multiple-codes"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

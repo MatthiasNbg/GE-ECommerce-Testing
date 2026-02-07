@@ -1,0 +1,89 @@
+{
+  "test_id": "TC-PROMO-BUNDLE-003",
+  "name": "Kissen + Schonbezug gratis",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion: Kissen-Kauf ergibt Schonbezug gratis",
+    "Kissen und Schonbezug als Bundle konfiguriert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kissen zum Warenkorb hinzufuegen",
+      "expected": "Kissen im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Pruefen: Schonbezug automatisch als Gratisartikel",
+      "expected": "Passender Schonbezug wird automatisch gratis hinzugefuegt"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Schonbezug mit 0 EUR/CHF angezeigt",
+      "expected": "Schonbezug mit Preis 0 im Warenkorb"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Nur passender Schonbezug hinzugefuegt",
+      "expected": "Korrekte Zuordnung Kissen -> Schonbezug"
+    },
+    {
+      "step": 5,
+      "action": "Anderes Kissen testen -> anderer Schonbezug",
+      "expected": "Andere Kissen-Variante erhaelt passenden Schonbezug"
+    },
+    {
+      "step": 6,
+      "action": "Kissen entfernen -> Schonbezug wird ebenfalls entfernt",
+      "expected": "Entfernung des Kissens entfernt auch den Schonbezug"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_bundle_003",
+    "tags": [
+      "promotions",
+      "bundle",
+      "free-gift",
+      "pillow-cover"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

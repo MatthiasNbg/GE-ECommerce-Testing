@@ -1,0 +1,84 @@
+{
+  "test_id": "TC-PROMO-SEC-002",
+  "name": "Gutschein-Kombination fuer kostenlosen Warenkorb",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Security",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einloesegutschein mit Guthaben vorhanden",
+    "Aktive Warenkorb-Promotion vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Guenstiges Produkt zum Warenkorb hinzufuegen",
+      "expected": "Produkt im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Einloesegutschein eingeben (Guthaben > Warenwert)",
+      "expected": "Gutschein wird eingeloest"
+    },
+    {
+      "step": 3,
+      "action": "Zusaetzlich Promotion-Code eingeben",
+      "expected": "Promotion wird verarbeitet"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Endsumme nicht negativ",
+      "expected": "Warenkorb kann maximal auf 0 EUR reduziert werden"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Kein Guthaben ueber Warenwert hinaus erstattet",
+      "expected": "Ueberschuessiges Guthaben bleibt auf Gutschein"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_sec_002",
+    "tags": [
+      "promotions",
+      "security",
+      "gift-voucher",
+      "zero-cart"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

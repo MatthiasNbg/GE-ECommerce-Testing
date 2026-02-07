@@ -1,0 +1,84 @@
+{
+  "test_id": "TC-PROMO-EMP-002",
+  "name": "Mitarbeiterrabatt nicht auf Aktionspreis",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Eingeloggter Mitarbeiter-Account",
+    "Produkt mit aktivem Aktionspreis (SALE) verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Mit Mitarbeiter-Account einloggen",
+      "expected": "Mitarbeiter eingeloggt"
+    },
+    {
+      "step": 2,
+      "action": "Produkt mit Aktionspreis zum Warenkorb hinzufuegen",
+      "expected": "SALE-Produkt im Warenkorb"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: KEIN zusaetzlicher Mitarbeiterrabatt auf Aktionspreis",
+      "expected": "Keine Doppelrabattierung"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Aktionspreis oder Mitarbeiterrabatt - guenstigerer Preis wird verwendet",
+      "expected": "Produkt wird zum Aktionspreis berechnet"
+    },
+    {
+      "step": 5,
+      "action": "Gemischter Warenkorb: Aktionspreis-Produkt + regulaeres Produkt",
+      "expected": "Mitarbeiterrabatt nur auf regulaeres Produkt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_emp_002",
+    "tags": [
+      "promotions",
+      "employee-discount",
+      "sale-price",
+      "no-double-discount"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "test_id": "TC-PROMO-004",
+  "name": "Kein Rabatt auf Wertgutschein",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Wertgutschein (Geschenkgutschein) verfuegbar",
+    "Beliebige aktive Promotion vorhanden (prozentual, absolut, automatisch)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Wertgutschein zum Warenkorb hinzufuegen",
+      "expected": "Wertgutschein im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Verschiedene Promotion-Codes eingeben (prozentual, absolut)",
+      "expected": "Kein Rabatt auf Wertgutschein"
+    },
+    {
+      "step": 3,
+      "action": "Automatische Promotions pruefen",
+      "expected": "Ebenfalls kein Rabatt"
+    },
+    {
+      "step": 4,
+      "action": "Gutschein-Nennwert validieren",
+      "expected": "Wertgutschein ist von ALLEN Rabattaktionen ausgeschlossen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_004",
+    "tags": [
+      "promotions",
+      "exclusion",
+      "value-voucher"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

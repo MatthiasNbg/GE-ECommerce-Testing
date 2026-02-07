@@ -1,0 +1,85 @@
+{
+  "test_id": "TC-PROMO-SEC-003",
+  "name": "Gutscheine zum Erreichen von MBW",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Security",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit Mindestbestellwert-Bedingung vorhanden",
+    "Warenkorb unter MBW",
+    "Einloesegutschein verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkte unter MBW-Grenze zum Warenkorb hinzufuegen",
+      "expected": "Warenwert unter MBW"
+    },
+    {
+      "step": 2,
+      "action": "Einloesegutschein eingeben",
+      "expected": "Gutschein wird eingeloest"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen ob MBW-Promotion nun verfuegbar ist",
+      "expected": "MBW-Promotion nicht verfuegbar"
+    },
+    {
+      "step": 4,
+      "action": "MBW-Code eingeben",
+      "expected": "Promotion wird abgelehnt"
+    },
+    {
+      "step": 5,
+      "action": "Validieren: Gutschein-Guthaben NICHT zum MBW gezaehlt",
+      "expected": "MBW wird nur aus tatsaechlichen Produktpreisen berechnet"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_sec_003",
+    "tags": [
+      "promotions",
+      "security",
+      "gift-voucher",
+      "minimum-order-value"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

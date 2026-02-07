@@ -1,0 +1,95 @@
+{
+  "test_id": "TC-PROMO-COMBO-002",
+  "name": "20% Kleidung + 5% Alles",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion 1: 20% auf Kleidung (automatisch oder per Code) aktiv",
+    "Promotion 2: 5% auf gesamten Warenkorb aktiv",
+    "Warenkorb mit Kleidung + Nicht-Kleidung"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Kleidungsprodukt zum Warenkorb hinzufuegen",
+      "expected": "Kleidung im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Nicht-Kleidungsprodukt hinzufuegen (z.B. Kosmetik)",
+      "expected": "Gemischter Warenkorb"
+    },
+    {
+      "step": 3,
+      "action": "Beide Promotions aktivieren",
+      "expected": "Beide Promotions angewendet"
+    },
+    {
+      "step": 4,
+      "action": "Kleidungsprodukt: Pruefen ob 20% + 5% oder sequenziell",
+      "expected": "Kleidung erhaelt beide Rabatte"
+    },
+    {
+      "step": 5,
+      "action": "Nicht-Kleidungsprodukt: Nur 5% Rabatt",
+      "expected": "Nicht-Kleidung erhaelt nur 5%"
+    },
+    {
+      "step": 6,
+      "action": "Rabattberechnung validieren (additiv vs. sequenziell)",
+      "expected": "Berechnung je nach Shopware-Konfiguration korrekt"
+    },
+    {
+      "step": 7,
+      "action": "Gesamtpreis pruefen",
+      "expected": "Gesamtpreis korrekt berechnet"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_combo_002",
+    "tags": [
+      "promotions",
+      "combination",
+      "category-discount",
+      "percentage"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

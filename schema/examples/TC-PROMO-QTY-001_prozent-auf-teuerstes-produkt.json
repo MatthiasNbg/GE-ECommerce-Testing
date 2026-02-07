@@ -1,0 +1,99 @@
+{
+  "test_id": "TC-PROMO-QTY-001",
+  "name": "Prozent auf teuerstes Produkt",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit Rabatt-Anwendung auf teuersten Artikel aktiv",
+    "Mehrere Produkte mit unterschiedlichen Preisen verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Mehrere Produkte mit unterschiedlichen Preisen zum Warenkorb hinzufuegen (z.B. 30, 50, 80 EUR)",
+      "expected": "Alle Produkte im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Promotion-Code eingeben",
+      "expected": "Code wird akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#addPromotionInput",
+          "value": "UPDATETHISCODE"
+        },
+        {
+          "action": "click",
+          "selector": "#addPromotionButton"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Rabatt nur auf teuerstes Produkt (80 EUR) angewendet",
+      "expected": "Rabatt nur auf teuerstes Produkt"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Guenstigere Produkte zum vollen Preis",
+      "expected": "Andere Produkte unveraendert"
+    },
+    {
+      "step": 5,
+      "action": "Prozentuale Berechnung validieren (z.B. 20% von 80 EUR = 16 EUR)",
+      "expected": "Rabattberechnung korrekt"
+    },
+    {
+      "step": 6,
+      "action": "Gesamtsumme validieren",
+      "expected": "Gesamtsumme korrekt berechnet"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_qty_001",
+    "tags": [
+      "promotions",
+      "quantity-discount",
+      "highest-price"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

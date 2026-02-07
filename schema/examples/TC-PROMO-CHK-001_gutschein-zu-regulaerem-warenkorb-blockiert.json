@@ -1,0 +1,79 @@
+{
+  "test_id": "TC-PROMO-CHK-001",
+  "name": "Gutschein zu regulaerem Warenkorb blockiert",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Regulaeres Produkt im Warenkorb",
+    "Einkaufsgutschein (Artikel 736675, HC Code 6609) verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Regulaeres Produkt zum Warenkorb hinzufuegen (z.B. Bett Somnia)",
+      "expected": "Produkt im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Versuchen Gutschein (736675) hinzuzufuegen",
+      "expected": "BeforeLineItemAddedEvent wird gefeuert"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Gutschein wird NICHT hinzugefuegt",
+      "expected": "Fehlermeldung: Einkaufsgutscheine koennen nur separat gekauft werden"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: User bleibt auf PDP oder wird zu Cart geleitet",
+      "expected": "Warenkorb enthaelt nur regulaeres Produkt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_chk_001",
+    "tags": [
+      "promotions",
+      "checkout",
+      "gift-voucher",
+      "blocking"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

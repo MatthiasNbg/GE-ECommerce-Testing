@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-DATA-012",
+  "name": "Nicht verfuegbare Produkte nicht bestellbar",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Datenvalidierung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt mit Status nicht verfuegbar vorhanden"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite mit nicht-verfuegbarem Produkt aufrufen",
+      "expected": "PDP zeigt nicht-verfuegbar-Status"
+    },
+    {
+      "step": 2,
+      "action": "Pruefen: In-den-Warenkorb-Button ist deaktiviert oder nicht vorhanden",
+      "expected": "Produkt kann nicht in den Warenkorb gelegt werden"
+    },
+    {
+      "step": 3,
+      "action": "Versuchen: Produkt per URL/API zum Warenkorb hinzufuegen",
+      "expected": "System verhindert Hinzufuegen"
+    },
+    {
+      "step": 4,
+      "action": "Test in allen Verkaufskanaelen (AT, DE, CH)",
+      "expected": "Konsistentes Verhalten"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_data_validation.py",
+    "function_name": "test_tc_data_012",
+    "tags": [
+      "data-validation",
+      "availability",
+      "order-blocking"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

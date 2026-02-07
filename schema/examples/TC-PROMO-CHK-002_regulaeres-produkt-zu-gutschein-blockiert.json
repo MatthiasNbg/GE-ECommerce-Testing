@@ -1,0 +1,78 @@
+{
+  "test_id": "TC-PROMO-CHK-002",
+  "name": "Regulaeres Produkt zu Gutschein-Warenkorb blockiert",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutschein 50 EUR (Artikel 736675) im Warenkorb"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufuegen",
+      "expected": "Gutschein im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Versuchen regulaeres Produkt (z.B. Kissen) hinzuzufuegen",
+      "expected": "BeforeLineItemAddedEvent wird gefeuert"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Produkt wird NICHT hinzugefuegt",
+      "expected": "Fehlermeldung: Einkaufsgutscheine koennen nur separat gekauft werden. Bitte schliessen Sie den Kauf ab oder entfernen Sie die Einkaufsgutscheine"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Warenkorb enthaelt nur Gutschein",
+      "expected": "Nur Gutschein im Warenkorb"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_chk_002",
+    "tags": [
+      "promotions",
+      "checkout",
+      "gift-voucher",
+      "blocking"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

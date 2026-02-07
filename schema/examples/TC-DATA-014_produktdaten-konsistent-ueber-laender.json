@@ -1,0 +1,82 @@
+{
+  "test_id": "TC-DATA-014",
+  "name": "Produktdaten konsistent ueber Laender",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Datenvalidierung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Stichprobe von Produkten fuer Cross-Country-Check ausgewaehlt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktdaten (Name, Beschreibung, Bilder) in AT-Kanal erfassen",
+      "expected": "Daten in AT erfasst"
+    },
+    {
+      "step": 2,
+      "action": "Gleiches Produkt in DE-Kanal pruefen",
+      "expected": "Name und Beschreibung konsistent (ggf. uebersetzt)"
+    },
+    {
+      "step": 3,
+      "action": "Gleiches Produkt in CH-Kanal pruefen",
+      "expected": "Name und Beschreibung konsistent"
+    },
+    {
+      "step": 4,
+      "action": "Preise vergleichen (EUR vs CHF)",
+      "expected": "Preise sind je Waehrung plausibel"
+    },
+    {
+      "step": 5,
+      "action": "Bilder und Produktmedien vergleichen",
+      "expected": "Gleiche Bilder in allen Kanaelen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_data_validation.py",
+    "function_name": "test_tc_data_014",
+    "tags": [
+      "data-validation",
+      "cross-country",
+      "consistency"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

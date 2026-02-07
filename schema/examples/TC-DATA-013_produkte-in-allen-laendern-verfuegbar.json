@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-DATA-013",
+  "name": "Produkte in allen Laendern verfuegbar",
+  "category": "regression",
+  "priority": "P2",
+  "functional_area": "Datenvalidierung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Stichprobe von Produkten fuer Cross-Country-Check ausgewaehlt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produktseite in AT-Kanal aufrufen",
+      "expected": "Produkt ist in AT verfuegbar"
+    },
+    {
+      "step": 2,
+      "action": "Gleiches Produkt in DE-Kanal aufrufen",
+      "expected": "Produkt ist in DE verfuegbar"
+    },
+    {
+      "step": 3,
+      "action": "Gleiches Produkt in CH-Kanal aufrufen",
+      "expected": "Produkt ist in CH verfuegbar"
+    },
+    {
+      "step": 4,
+      "action": "Stichprobe mit mehreren Produkten wiederholen",
+      "expected": "Alle Stichproben-Produkte in allen Laendern verfuegbar"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_data_validation.py",
+    "function_name": "test_tc_data_013",
+    "tags": [
+      "data-validation",
+      "cross-country",
+      "availability"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

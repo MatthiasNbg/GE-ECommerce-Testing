@@ -1,0 +1,88 @@
+{
+  "test_id": "TC-PROMO-BUNDLE-001",
+  "name": "Nimm 3 zahl 2",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit Regel 5 kaufen 4 bezahlen aktiv",
+    "Mindestmenge: 5 gleiche Produkte"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "5x gleiches Produkt zum Warenkorb hinzufuegen",
+      "expected": "5 Stueck im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Pruefen: Automatisch 1 Stueck als Gratis markiert (oder Code eingeben)",
+      "expected": "1 Stueck wird als 100% rabattiert angezeigt"
+    },
+    {
+      "step": 3,
+      "action": "Gesamtpreis validieren (= 4x Einzelpreis)",
+      "expected": "Gesamtpreis = 4 x Einzelpreis"
+    },
+    {
+      "step": 4,
+      "action": "Mit 4 Stueck testen",
+      "expected": "Kein Rabatt bei unter 5 Stueck"
+    },
+    {
+      "step": 5,
+      "action": "Mit 6 Stueck testen",
+      "expected": "Weiterhin nur 1x gratis (oder 2x bei 10 Stueck)"
+    },
+    {
+      "step": 6,
+      "action": "Rabatt-Anzeige im Warenkorb pruefen",
+      "expected": "Rabatt als separate Promotion-Zeile angezeigt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_bundle_001",
+    "tags": [
+      "promotions",
+      "bundle",
+      "buy-x-get-y"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "test_id": "TC-PROMO-MOV-001",
+  "name": "EUR-Rabatt ab Mindestbestellwert",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit absolutem EUR-Rabatt (z.B. 10 EUR) aktiv",
+    "Mindestbestellwert-Bedingung (z.B. ab 50 EUR)",
+    "Shopware-Regel mit MBW-Bedingung konfiguriert"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Warenkorb mit Produkten unter MBW befuellen (z.B. 40 EUR)",
+      "expected": "Warenwert unter MBW"
+    },
+    {
+      "step": 2,
+      "action": "Promotion-Code eingeben",
+      "expected": "Promotion wird abgelehnt mit Hinweis auf MBW"
+    },
+    {
+      "step": 3,
+      "action": "Warenkorb auf ueber MBW erhoehen (z.B. 55 EUR)",
+      "expected": "Warenwert ueber MBW"
+    },
+    {
+      "step": 4,
+      "action": "Promotion-Code erneut eingeben",
+      "expected": "Promotion wird akzeptiert"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Absoluter Rabatt korrekt abgezogen",
+      "expected": "Endsumme = Warenwert - Rabatt + Versand"
+    },
+    {
+      "step": 6,
+      "action": "MBW-Grenzwert testen (exakt MBW-Betrag)",
+      "expected": "Grenzwert wird korrekt behandelt"
+    },
+    {
+      "step": 7,
+      "action": "Test in AT, DE, CH durchfuehren",
+      "expected": "Konsistentes Verhalten in allen Kanaelen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_mov_001",
+    "tags": [
+      "promotions",
+      "minimum-order-value",
+      "absolute-discount"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

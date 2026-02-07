@@ -1,0 +1,88 @@
+{
+  "test_id": "TC-PROMO-SHIP-005",
+  "name": "Versandkostenfrei Post ab MBW EUR 50 (DE/AT)",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Land = DE oder AT",
+    "Postversand als Versandart",
+    "Shopware-Regel GE_Promo_MBW50_LieferlandDA_nurPostversand aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Warenkorb mit Postartikeln unter 50 EUR befuellen",
+      "expected": "Warenwert unter MBW"
+    },
+    {
+      "step": 2,
+      "action": "Promotion-Code eingeben",
+      "expected": "Promotion wird abgelehnt (unter MBW)"
+    },
+    {
+      "step": 3,
+      "action": "Warenkorb auf ueber 50 EUR erhoehen",
+      "expected": "Warenwert ueber MBW"
+    },
+    {
+      "step": 4,
+      "action": "Promotion-Code erneut eingeben",
+      "expected": "Code wird akzeptiert"
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Versandkosten auf 0 reduziert",
+      "expected": "Rabatt von 5,95 EUR auf Versandkosten"
+    },
+    {
+      "step": 6,
+      "action": "MBW-Grenze testen (49,99 EUR vs 50,00 EUR)",
+      "expected": "Exakter MBW-Grenzwert funktioniert korrekt"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_ship_005",
+    "tags": [
+      "promotions",
+      "shipping",
+      "free-shipping",
+      "minimum-order-value",
+      "at",
+      "de"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "test_id": "TC-PROMO-SALE-002",
+  "name": "Promo mit Produkt-ID via advertising_material_id",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Promotion mit Produktfilter ueber advertising_material_id aktiv",
+    "Produkte mit und ohne passende advertising_material_id verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt mit passender advertising_material_id zum Warenkorb hinzufuegen",
+      "expected": "Produkt im Warenkorb"
+    },
+    {
+      "step": 2,
+      "action": "Produkt ohne passende ID hinzufuegen",
+      "expected": "Beide Produkte im Warenkorb"
+    },
+    {
+      "step": 3,
+      "action": "Promotion-Code eingeben",
+      "expected": "Code wird akzeptiert"
+    },
+    {
+      "step": 4,
+      "action": "Pruefen: Rabatt nur auf Produkt mit passender ID",
+      "expected": "Filterung ueber advertising_material_id funktioniert"
+    },
+    {
+      "step": 5,
+      "action": "Rabattberechnung validieren",
+      "expected": "Andere Produkte bleiben unveraendert"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_sale_002",
+    "tags": [
+      "promotions",
+      "sale-price",
+      "advertising-material-id"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

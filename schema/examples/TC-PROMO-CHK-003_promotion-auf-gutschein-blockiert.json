@@ -1,0 +1,101 @@
+{
+  "test_id": "TC-PROMO-CHK-003",
+  "name": "Promotion auf Gutschein blockiert (Checkout-Flow)",
+  "category": "regression",
+  "priority": "P0",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Einkaufsgutschein 100 EUR im Warenkorb",
+    "Beliebiger Promotion-Code verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Einkaufsgutschein zum Warenkorb hinzufuegen",
+      "expected": "Gutschein im Warenkorb",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#addProductInput",
+          "value": "736675"
+        },
+        {
+          "action": "click",
+          "selector": "#addProductButton"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Promo-Code-Handling pruefen",
+      "expected": "Promo-Input ausgeblendet oder Code wird abgelehnt"
+    },
+    {
+      "step": 3,
+      "action": "Falls Promo-Input sichtbar: Code eingeben und pruefen",
+      "expected": "Kein Rabatt angewendet (kein .line-item-promotion sichtbar)"
+    },
+    {
+      "step": 4,
+      "action": "Zur Kasse navigieren",
+      "expected": "Checkout-Seite wird geladen",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/confirm"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Pruefen: Kein Promotion-Rabatt in Bestellzusammenfassung",
+      "expected": "Kein Rabatt in Bestelluebersicht sichtbar"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "automated",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_blocked_on_gift_voucher_checkout",
+    "tags": [
+      "promotions",
+      "checkout",
+      "gift-voucher",
+      "blocking"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

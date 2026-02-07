@@ -40,7 +40,7 @@ Beispiele:
 | TC-SEARCH-* | Suche | TC-SEARCH-011 |
 | TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-014 |
 | TC-PROMO-* | Promotions/Gutscheine | Kontextabhaengig |
-| TC-DATA-* | Datenvalidierung | TC-DATA-011 |
+| TC-DATA-* | Datenvalidierung | TC-DATA-016 |
 | TC-PERF-* | Performance | TC-PERF-004 |
 | TC-PAY-* | Zahlung | TC-PAY-003 |
 | TC-SHIP-* | Versand/Spedition | Via generate_shipping_contracts.py |
@@ -115,5 +115,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 246 Dateien, 0 fehlerhaft, Exit-Code 0.
+Erwartetes Ergebnis: 285 Dateien, 0 fehlerhaft, Exit-Code 0.
 (53 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)

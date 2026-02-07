@@ -1,0 +1,89 @@
+{
+  "test_id": "TC-PROMO-EMP-001",
+  "name": "Mitarbeiterrabatt nur auf Basispreis",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Eingeloggter Mitarbeiter-Account (spezielle Kundengruppe)",
+    "Automatische Mitarbeiter-Promotion aktiv",
+    "Produkte mit regulaerem Preis verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Mit Mitarbeiter-Account einloggen",
+      "expected": "Mitarbeiter eingeloggt"
+    },
+    {
+      "step": 2,
+      "action": "Regulaeres Produkt (ohne Aktionspreis) zum Warenkorb hinzufuegen",
+      "expected": "Produkt im Warenkorb"
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Mitarbeiterrabatt automatisch angewendet",
+      "expected": "Automatischer Rabatt ohne Code sichtbar"
+    },
+    {
+      "step": 4,
+      "action": "Rabatt-Berechnung validieren (Prozent vom Basispreis)",
+      "expected": "Rabatt-Prozentsatz je Kategorie korrekt"
+    },
+    {
+      "step": 5,
+      "action": "Verschiedene Produktkategorien testen (Kleidung, Kosmetik, Moebel)",
+      "expected": "Rabatt in jeder Kategorie korrekt"
+    },
+    {
+      "step": 6,
+      "action": "Test in AT, DE und CH durchfuehren",
+      "expected": "Konsistentes Verhalten in allen Kanaelen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_tc_promo_emp_001",
+    "tags": [
+      "promotions",
+      "employee-discount",
+      "base-price"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}
