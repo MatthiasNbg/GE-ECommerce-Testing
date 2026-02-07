@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>276 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>283 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -594,11 +594,11 @@
 <td>Kategorie-Zuordnung, Footer-Links, Trust-Siegel</td>
 </tr>
 <tr>
-<td>📰 **Feature Tests - Newsletter**</td>
-<td>2</td>
-<td><span class="badge badge-defined">○ Definiert</span> 0/2</td>
+<td>📰 **Feature Tests - Newsletter & Freundeskreis**</td>
+<td>9</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/9</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
-<td>Newsletter-Anmeldung, Validierung</td>
+<td>Newsletter-Anmeldung, Freundeskreis, Emarsys-Verifizierung</td>
 </tr>
 <tr>
 <td>🔧 **Technische Tests**</td>
@@ -647,7 +647,7 @@
 <li><a href="#feature-tests-promotions">Feature Tests - Promotions</a> - (47 Tests)</li>
 <li><a href="#data-validation-tests">Data Validation Tests</a> - (15 Tests)</li>
 <li><a href="#content-tests">Content Tests</a> - (7 Tests)</li>
-<li><a href="#feature-tests-newsletter">Feature Tests - Newsletter</a> - (2 Tests)</li>
+<li><a href="#feature-tests-newsletter--freundeskreis">Feature Tests - Newsletter & Freundeskreis</a> - (9 Tests)</li>
 <li><a href="#technische-tests">Technische Tests</a> - (10 Tests)</li>
 <li><a href="#regression-tests">Regression Tests</a> - (15-20 Tests)</li>
 <li><a href="#load-tests">Load Tests</a> - (5 Tests)</li>
@@ -660,7 +660,7 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 271 Tests
+<strong>Gesamt:</strong> 278 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 154</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 111</li>
@@ -4946,13 +4946,13 @@
 </ul>
 </ol>
 
-<h3 id="feature-tests-newsletter">📰 Feature Tests - Newsletter</h3>
+<h3 id="feature-tests-newsletter-freundeskreis">📰 Feature Tests - Newsletter & Freundeskreis</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 0/2 geplant
-<strong>Beschreibung:</strong> Newsletter-Anmeldung und Validierung
-<strong>Dauer:</strong> 2-5 Min
-<strong>Ausführung:</strong> Nach Änderungen am Newsletter-Formular
+<strong>Tests:</strong> 0/9 geplant
+<strong>Beschreibung:</strong> Newsletter-Anmeldung, Validierung, Freundeskreis-Registrierung, Emarsys-E-Mail-Verifizierung
+<strong>Dauer:</strong> 2-5 Min (automatisiert), 10-15 Min (manuelle Emarsys-Prüfung)
+<strong>Ausführung:</strong> Nach Änderungen am Newsletter-/Freundeskreis-Formular oder Emarsys-Integration
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -4979,7 +4979,109 @@
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-NEWSLETTER-003</td>
+<td>Newsletter bei Registrierung → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-004</td>
+<td>Newsletter im Account-Bereich → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-005</td>
+<td>Newsletter im Checkout → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-006</td>
+<td>Newsletter im Footer → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-007</td>
+<td>Freundeskreis bei Registrierung → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-008</td>
+<td>Freundeskreis im Account-Bereich → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-NEWSLETTER-009</td>
+<td>Freundeskreis im Checkout → Emarsys-E-Mail</td>
+<td>P2</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
+<details>
+<summary><strong>Manuelle Testfälle: Newsletter & Freundeskreis (Emarsys)</strong></summary>
+
+<p>Die folgenden 7 Testfälle (TC-NEWSLETTER-003 bis 009) sind <strong>manuelle Tests</strong>, da die Verifizierung der Emarsys-E-Mail-Zustellung nicht automatisiert werden kann.</p>
+
+<h4 id="newsletter-registrierung-4-einstiegspunkte">Newsletter-Registrierung (4 Einstiegspunkte)</h4>
+
+<strong>TC-NEWSLETTER-003: Newsletter bei Registrierung</strong>
+<ul>
+<li><strong>Schritte:</strong> Account-Registrierung → Newsletter-Checkbox (<code>#acceptedNewsletter</code>) aktivieren → Registrierung absenden</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+<strong>TC-NEWSLETTER-004: Newsletter im Account-Bereich</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Account-Profil/Newsletter-Bereich → Newsletter aktivieren → Speichern</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+<strong>TC-NEWSLETTER-005: Newsletter im Checkout</strong>
+<ul>
+<li><strong>Schritte:</strong> Produkt in Warenkorb → Checkout-Register-Seite → Newsletter-Checkbox (<code>#acceptedNewsletter</code>) aktivieren → Checkout absenden</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+<strong>TC-NEWSLETTER-006: Newsletter im Footer</strong>
+<ul>
+<li><strong>Schritte:</strong> Startseite → Footer-Newsletter-Formular → E-Mail eingeben → Absenden</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+<h4 id="freundeskreis-registrierung-3-einstiegspunkte">Freundeskreis-Registrierung (3 Einstiegspunkte)</h4>
+
+<strong>TC-NEWSLETTER-007: Freundeskreis bei Registrierung</strong>
+<ul>
+<li><strong>Schritte:</strong> Account-Registrierung → Freundeskreis-Checkbox (<code>#acceptedFriendscircle</code>) aktivieren → Registrierung absenden</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Freundeskreis-Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+<strong>TC-NEWSLETTER-008: Freundeskreis im Account-Bereich</strong>
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Account-Profil → Freundeskreis aktivieren → Speichern</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Freundeskreis-Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+<strong>TC-NEWSLETTER-009: Freundeskreis im Checkout</strong>
+<ul>
+<li><strong>Schritte:</strong> Produkt in Warenkorb → Checkout-Register-Seite → Freundeskreis-Checkbox (<code>#acceptedFriendscircle</code>) aktivieren → Checkout absenden</li>
+<li><strong>Ergebnis:</strong> Manuell prüfen: Freundeskreis-Bestätigungs-E-Mail von Emarsys im Postfach</li>
+</ul>
+</details>
+
 <hr>
 
 <h3 id="technische-tests">🔧 Technische Tests</h3>
@@ -5270,9 +5372,9 @@
 </tr>
 <tr>
 <td>phase_7a</td>
-<td>Phase 7a - Content & Newsletter</td>
+<td>Phase 7a - Content & Newsletter & Freundeskreis</td>
 <td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>9</td>
+<td>16</td>
 <td>-%</td>
 </tr>
 <tr>
@@ -5968,7 +6070,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 07.02.2026 um 12:02 Uhr</p>
+            <p>Generiert am 07.02.2026 um 12:21 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

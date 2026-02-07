@@ -49,7 +49,7 @@ Beispiele:
 | TC-NAV-* | Navigation/Menue/Laenderwechsel | TC-NAV-007 |
 | TC-PDP-* | Produktdetailseite | TC-PDP-008 |
 | TC-LISTING-* | Kategorie/Listing/Filter | TC-LISTING-005 |
-| TC-NEWSLETTER-* | Newsletter | TC-NEWSLETTER-003 |
+| TC-NEWSLETTER-* | Newsletter/Freundeskreis | TC-NEWSLETTER-010 |
 | TC-TECH-* | Technisch (Cookie/Responsive/A11y) | TC-TECH-011 |
 | TC-E2E-* | E2E Checkout | TC-E2E-004 |
 | TC-E2E-CC-* | Click & Collect | TC-E2E-CC-003 |
@@ -115,5 +115,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 286 Dateien, 0 fehlerhaft, Exit-Code 0.
-(53 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)
+Erwartetes Ergebnis: 293 Dateien, 0 fehlerhaft, Exit-Code 0.
+(60 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 9 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)

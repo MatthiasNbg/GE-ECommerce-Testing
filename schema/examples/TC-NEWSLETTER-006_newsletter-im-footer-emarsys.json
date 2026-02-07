@@ -1,0 +1,86 @@
+{
+  "test_id": "TC-NEWSLETTER-006",
+  "name": "Newsletter-Anmeldung im Footer (Emarsys)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Feature Newsletter",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Newsletter-Formular ist im Footer sichtbar",
+    "Emarsys-Integration ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Startseite aufrufen und zum Footer scrollen",
+      "expected": "Newsletter-Formular im Footer ist sichtbar",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "E-Mail-Adresse in das Newsletter-Footer-Formular eingeben",
+      "expected": "E-Mail wird ins Feld eingetragen",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "input[type='email']",
+          "value": "newsletter-footer-test@example.com"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Formular absenden",
+      "expected": "Erfolgsmeldung wird angezeigt",
+      "inputs": [
+        {
+          "action": "click",
+          "selector": "button[type='submit']"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Newsletter-Bestaetigungs-E-Mail von Emarsys ist eingegangen"
+    }
+  ],
+  "postconditions": [
+    "E-Mail von Emarsys wurde empfangen",
+    "Newsletter-Anmeldung ist im Emarsys-System hinterlegt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "newsletter",
+      "emarsys",
+      "manual"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

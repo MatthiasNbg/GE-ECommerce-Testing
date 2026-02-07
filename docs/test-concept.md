@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **276 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **283 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -52,7 +52,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 🎟️ **Feature Tests - Promotions** | 52 | ⚠️ 4/52 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
 | 📄 **Content Tests** | 7 | ○ 0/7 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel |
-| 📰 **Feature Tests - Newsletter** | 2 | ○ 0/2 | 🟡 P2 | Newsletter-Anmeldung, Validierung |
+| 📰 **Feature Tests - Newsletter & Freundeskreis** | 9 | ○ 0/9 | 🟡 P2 | Newsletter-Anmeldung, Freundeskreis, Emarsys-Verifizierung |
 | 🔧 **Technische Tests** | 10 | ○ 0/10 | 🟠 P1 | Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
@@ -81,7 +81,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 16. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
 17. [Data Validation Tests](#data-validation-tests) - (15 Tests)
 18. [Content Tests](#content-tests) - (7 Tests)
-19. [Feature Tests - Newsletter](#feature-tests-newsletter) - (2 Tests)
+19. [Feature Tests - Newsletter & Freundeskreis](#feature-tests-newsletter--freundeskreis) - (9 Tests)
 20. [Technische Tests](#technische-tests) - (10 Tests)
 21. [Regression Tests](#regression-tests) - (15-20 Tests)
 22. [Load Tests](#load-tests) - (5 Tests)
@@ -94,7 +94,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 271 Tests
+**Gesamt:** 278 Tests
 - ✅ Implementiert: 154
 - ❌ Fehlend: 111
 - ⚠️ Teilweise: 0
@@ -2019,18 +2019,64 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 
 ---
 
-### 📰 Feature Tests - Newsletter
+### 📰 Feature Tests - Newsletter & Freundeskreis
 
 **Priorität:** P2
-**Tests:** 0/2 geplant
-**Beschreibung:** Newsletter-Anmeldung und Validierung
-**Dauer:** 2-5 Min
-**Ausführung:** Nach Änderungen am Newsletter-Formular
+**Tests:** 0/9 geplant
+**Beschreibung:** Newsletter-Anmeldung, Validierung, Freundeskreis-Registrierung, Emarsys-E-Mail-Verifizierung
+**Dauer:** 2-5 Min (automatisiert), 10-15 Min (manuelle Emarsys-Prüfung)
+**Ausführung:** Nach Änderungen am Newsletter-/Freundeskreis-Formular oder Emarsys-Integration
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
 | TC-NEWSLETTER-001 | Newsletter-Anmeldung mit gültiger E-Mail | P2 | ○ | AT, DE, CH | 1 |
 | TC-NEWSLETTER-002 | Newsletter-Anmeldung mit ungültiger E-Mail | P2 | ○ | AT, DE, CH | 1 |
+| TC-NEWSLETTER-003 | Newsletter bei Registrierung → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+| TC-NEWSLETTER-004 | Newsletter im Account-Bereich → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+| TC-NEWSLETTER-005 | Newsletter im Checkout → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+| TC-NEWSLETTER-006 | Newsletter im Footer → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+| TC-NEWSLETTER-007 | Freundeskreis bei Registrierung → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+| TC-NEWSLETTER-008 | Freundeskreis im Account-Bereich → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+| TC-NEWSLETTER-009 | Freundeskreis im Checkout → Emarsys-E-Mail | P2 | ○ | AT | 1 |
+
+<details>
+<summary><strong>Manuelle Testfälle: Newsletter & Freundeskreis (Emarsys)</strong></summary>
+
+Die folgenden 7 Testfälle (TC-NEWSLETTER-003 bis 009) sind **manuelle Tests**, da die Verifizierung der Emarsys-E-Mail-Zustellung nicht automatisiert werden kann.
+
+#### Newsletter-Registrierung (4 Einstiegspunkte)
+
+**TC-NEWSLETTER-003: Newsletter bei Registrierung**
+- **Schritte:** Account-Registrierung → Newsletter-Checkbox (`#acceptedNewsletter`) aktivieren → Registrierung absenden
+- **Ergebnis:** Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach
+
+**TC-NEWSLETTER-004: Newsletter im Account-Bereich**
+- **Schritte:** Einloggen → Account-Profil/Newsletter-Bereich → Newsletter aktivieren → Speichern
+- **Ergebnis:** Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach
+
+**TC-NEWSLETTER-005: Newsletter im Checkout**
+- **Schritte:** Produkt in Warenkorb → Checkout-Register-Seite → Newsletter-Checkbox (`#acceptedNewsletter`) aktivieren → Checkout absenden
+- **Ergebnis:** Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach
+
+**TC-NEWSLETTER-006: Newsletter im Footer**
+- **Schritte:** Startseite → Footer-Newsletter-Formular → E-Mail eingeben → Absenden
+- **Ergebnis:** Manuell prüfen: Bestätigungs-E-Mail von Emarsys im Postfach
+
+#### Freundeskreis-Registrierung (3 Einstiegspunkte)
+
+**TC-NEWSLETTER-007: Freundeskreis bei Registrierung**
+- **Schritte:** Account-Registrierung → Freundeskreis-Checkbox (`#acceptedFriendscircle`) aktivieren → Registrierung absenden
+- **Ergebnis:** Manuell prüfen: Freundeskreis-Bestätigungs-E-Mail von Emarsys im Postfach
+
+**TC-NEWSLETTER-008: Freundeskreis im Account-Bereich**
+- **Schritte:** Einloggen → Account-Profil → Freundeskreis aktivieren → Speichern
+- **Ergebnis:** Manuell prüfen: Freundeskreis-Bestätigungs-E-Mail von Emarsys im Postfach
+
+**TC-NEWSLETTER-009: Freundeskreis im Checkout**
+- **Schritte:** Produkt in Warenkorb → Checkout-Register-Seite → Freundeskreis-Checkbox (`#acceptedFriendscircle`) aktivieren → Checkout absenden
+- **Ergebnis:** Manuell prüfen: Freundeskreis-Bestätigungs-E-Mail von Emarsys im Postfach
+
+</details>
 
 ---
 
@@ -2116,7 +2162,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | phase_5d | Phase 5d - Technische Tests | ⏳ | 10 | -% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 52 | 60% |
 | phase_7 | Phase 7 - Data Validation | ⏳ | 15 | 70% |
-| phase_7a | Phase 7a - Content & Newsletter | ⏳ | 9 | -% |
+| phase_7a | Phase 7a - Content & Newsletter & Freundeskreis | ⏳ | 16 | -% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |
 | phase_9 | Phase 9 - Load Tests | ⏳ | 5 | 90% |
 

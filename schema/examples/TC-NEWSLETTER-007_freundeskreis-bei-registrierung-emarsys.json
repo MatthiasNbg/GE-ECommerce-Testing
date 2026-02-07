@@ -1,0 +1,79 @@
+{
+  "test_id": "TC-NEWSLETTER-007",
+  "name": "Freundeskreis-Anmeldung bei Registrierung (Emarsys)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Feature Newsletter",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Freundeskreis-Checkbox ist im Registrierungsformular sichtbar",
+    "Emarsys-Integration ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Registrierungsseite aufrufen",
+      "expected": "Registrierungsformular wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Registrierungsformular ausfuellen und Freundeskreis-Checkbox aktivieren",
+      "expected": "Freundeskreis-Checkbox ist aktiviert",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedFriendscircle"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Registrierung absenden",
+      "expected": "Account wird erfolgreich erstellt"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Freundeskreis-Bestaetigungs-E-Mail von Emarsys ist eingegangen"
+    }
+  ],
+  "postconditions": [
+    "E-Mail von Emarsys wurde empfangen",
+    "Freundeskreis-Anmeldung ist im Emarsys-System hinterlegt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "freundeskreis",
+      "emarsys",
+      "manual"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

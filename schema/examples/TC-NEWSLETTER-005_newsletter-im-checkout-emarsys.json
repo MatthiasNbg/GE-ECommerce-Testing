@@ -1,0 +1,80 @@
+{
+  "test_id": "TC-NEWSLETTER-005",
+  "name": "Newsletter-Anmeldung im Checkout (Emarsys)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Feature Newsletter",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Produkt ist im Warenkorb",
+    "Newsletter-Checkbox ist auf der Checkout-Register-Seite sichtbar",
+    "Emarsys-Integration ist aktiv"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Checkout-Register-Seite aufrufen (Gast oder Neuregistrierung)",
+      "expected": "Checkout-Register-Formular wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/register"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Newsletter-Checkbox im Checkout aktivieren",
+      "expected": "Newsletter-Checkbox ist aktiviert",
+      "inputs": [
+        {
+          "action": "check",
+          "selector": "#acceptedNewsletter"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Checkout-Formular ausfuellen und absenden",
+      "expected": "Checkout wird fortgesetzt"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Newsletter-Bestaetigungs-E-Mail von Emarsys ist eingegangen"
+    }
+  ],
+  "postconditions": [
+    "E-Mail von Emarsys wurde empfangen",
+    "Newsletter-Anmeldung ist im Emarsys-System hinterlegt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "newsletter",
+      "emarsys",
+      "manual"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}
