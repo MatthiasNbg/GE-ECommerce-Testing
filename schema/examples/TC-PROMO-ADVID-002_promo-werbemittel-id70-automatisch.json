@@ -1,0 +1,106 @@
+{
+  "test_id": "TC-PROMO-ADVID-002",
+  "name": "Automatisierte Promo auf Werbemittel ID 70",
+  "category": "regression",
+  "priority": "P1",
+  "functional_area": "Feature Promotion",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": [
+      "staging"
+    ],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Automatische Promotion fuer advertising_material_id = 70 ist aktiv (kein Code erforderlich)",
+    "Produkt mit advertising_material_id = 70 ist verfuegbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Produkt mit advertising_material_id = 70 zum Warenkorb hinzufuegen",
+      "expected": "Produkt ist im Warenkorb",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value_ref": "product:advid70_product.path"
+        },
+        {
+          "action": "click",
+          "selector": "button.btn-buy"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Zum Warenkorb navigieren",
+      "expected": "Warenkorb zeigt Produkt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/checkout/cart"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Pruefen: Automatische Promotion wurde angewendet (kein Code erforderlich)",
+      "expected": "Promotion-Rabatt ist automatisch sichtbar ohne Code-Eingabe"
+    },
+    {
+      "step": 4,
+      "action": "Prozentuale Rabatt-Berechnung validieren",
+      "expected": "Rabatt entspricht dem konfigurierten Prozentsatz"
+    },
+    {
+      "step": 5,
+      "action": "Test in allen Verkaufskanaelen (AT, DE, CH) durchfuehren",
+      "expected": "Ergebnis ist konsistent in allen Kanaelen"
+    }
+  ],
+  "test_data": [
+    {
+      "type": "channel",
+      "name": "AT"
+    },
+    {
+      "type": "channel",
+      "name": "DE"
+    },
+    {
+      "type": "channel",
+      "name": "CH"
+    },
+    {
+      "type": "product",
+      "name": "advid70_product",
+      "path": "/p/UPDATETHIS-werbemittel70-produkt/ge-p-UPDATETHIS",
+      "product_name": "Platzhalter-Produkt (advertising_material_id=70)",
+      "advertising_material_id": 70
+    }
+  ],
+  "automation": {
+    "status": "planned",
+    "framework": "Playwright + pytest",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "playwright_tests/tests/test_promotions.py",
+    "function_name": "test_promo_advid_70_automatic",
+    "tags": [
+      "promotions",
+      "advertising-material-id",
+      "automatic"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 60,
+    "retry_count": 1
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

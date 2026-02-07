@@ -14,6 +14,8 @@ Automatisiertes Testing-Framework fuer Gruene Erde Onlineshops (AT, DE, CH) auf 
 
 Bei jeder neuen Testfunktion in `playwright_tests/tests/` MUSS ein zugehoeriger Test-Contract in `schema/examples/` erstellt werden.
 
+**Wichtig:** Auch bei Umbenennungen oder Neuanlage von Test-IDs in `docs/test-concept.md` MUSS ein v3.0-Contract in `schema/examples/` erstellt werden — auch wenn der Test noch nicht implementiert ist (dann `automation.status: "planned"`).
+
 ### Dateinamen-Konvention
 
 ```
@@ -113,5 +115,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 245 Dateien, 0 fehlerhaft, Exit-Code 0.
-(52 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 1 PROMO-ADVID + 3 E2E)
+Erwartetes Ergebnis: 246 Dateien, 0 fehlerhaft, Exit-Code 0.
+(53 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 2 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)
