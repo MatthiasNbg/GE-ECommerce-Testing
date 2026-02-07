@@ -66,6 +66,7 @@ SELECTOR_MAP = {
 
     # Promo-Code
     "#promotionCode": ("promo", "code"),
+    "#addPromotionInput": ("promo", "code"),
 
     # Suche
     "input#header-main-search-input": ("search", "term"),

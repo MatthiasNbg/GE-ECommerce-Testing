@@ -30,7 +30,7 @@
         {
           "action": "fill",
           "selector": "#addPromotionInput",
-          "value": "UPDATETHISCODE"
+          "value_ref": "promo:update_placeholder.code"
         },
         {
           "action": "click",
@@ -71,6 +71,12 @@
     {
       "type": "channel",
       "name": "CH"
+    },
+    {
+      "type": "promo",
+      "name": "update_placeholder",
+      "code": "UPDATETHISCODE",
+      "description": "Platzhalter-Code (muss aktualisiert werden)"
     }
   ],
   "automation": {

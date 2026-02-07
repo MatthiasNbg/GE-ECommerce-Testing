@@ -25,7 +25,7 @@
         {
           "action": "fill",
           "selector": "#addProductInput",
-          "value": "736675"
+          "value_ref": "product:gift_voucher_736675.article_number"
         },
         {
           "action": "click",
@@ -72,6 +72,12 @@
     {
       "type": "channel",
       "name": "CH"
+    },
+    {
+      "type": "product",
+      "name": "gift_voucher_736675",
+      "article_number": "736675",
+      "product_name": "Einkaufsgutschein"
     }
   ],
   "automation": {
