@@ -38,14 +38,14 @@ Beispiele:
 | TC-CRITICAL-* | Kritischer Pfad | TC-CRITICAL-009 |
 | TC-REG-* | Regression | TC-REG-016 |
 | TC-SEARCH-* | Suche | TC-SEARCH-011 |
-| TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-014 |
+| TC-ACCOUNT-* | Account/Registrierung | TC-ACCOUNT-021 |
 | TC-PROMO-* | Promotions/Gutscheine | Kontextabhaengig |
 | TC-DATA-* | Datenvalidierung | TC-DATA-016 |
 | TC-PERF-* | Performance | TC-PERF-004 |
 | TC-PAY-* | Zahlung | TC-PAY-003 |
 | TC-SHIP-* | Versand/Spedition | Via generate_shipping_contracts.py |
 | TC-SHIP-COST-* | Versandkosten-Validierung | TC-SHIP-COST-AT-003 / TC-SHIP-COST-DE-003 |
-| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-008 |
+| TC-CONTENT-* | Content/Kategorie-Zuordnung | TC-CONTENT-009 |
 | TC-NAV-* | Navigation/Menue/Laenderwechsel | TC-NAV-007 |
 | TC-PDP-* | Produktdetailseite | TC-PDP-008 |
 | TC-LISTING-* | Kategorie/Listing/Filter | TC-LISTING-005 |
@@ -115,5 +115,5 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 python schema/validate.py schema/examples/
 ```
 
-Erwartetes Ergebnis: 293 Dateien, 0 fehlerhaft, Exit-Code 0.
-(60 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 9 NEWSLETTER + 3 ACCOUNT + 5 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)
+Erwartetes Ergebnis: 301 Dateien, 0 fehlerhaft, Exit-Code 0.
+(68 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 9 NEWSLETTER + 10 ACCOUNT + 6 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)

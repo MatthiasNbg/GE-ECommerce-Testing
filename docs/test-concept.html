@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>283 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>291 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -525,10 +525,10 @@
 </tr>
 <tr>
 <td>👤 **Feature Tests - Account**</td>
-<td>12</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 10/12</td>
+<td>20</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 10/20</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
-<td>Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie</td>
+<td>Registrierung, Login, Profil, Adressen, Kontotyp, Transaktionsmails (Emarsys)</td>
 </tr>
 <tr>
 <td>❤️ **Feature Tests - Merkliste**</td>
@@ -588,10 +588,10 @@
 </tr>
 <tr>
 <td>📄 **Content Tests**</td>
-<td>7</td>
-<td><span class="badge badge-defined">○ Definiert</span> 0/7</td>
+<td>8</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/8</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
-<td>Kategorie-Zuordnung, Footer-Links, Trust-Siegel</td>
+<td>Kategorie-Zuordnung, Footer-Links, Trust-Siegel, Contentprüfung</td>
 </tr>
 <tr>
 <td>📰 **Feature Tests - Newsletter & Freundeskreis**</td>
@@ -637,7 +637,7 @@
 <li><a href="#e2e-tests-click--collect">E2E Tests - Click & Collect</a> - (2 Tests, 6 Varianten)</li>
 <li><a href="#feature-tests-warenkorb">Feature Tests - Warenkorb</a> - (9 Tests)</li>
 <li><a href="#feature-tests-suche">Feature Tests - Suche</a> - (9 Tests)</li>
-<li><a href="#feature-tests-account">Feature Tests - Account</a> - (11 Tests)</li>
+<li><a href="#feature-tests-account">Feature Tests - Account</a> - (20 Tests)</li>
 <li><a href="#feature-tests-merklistewishlist">Feature Tests - Merkliste/Wishlist</a> - (5 Tests)</li>
 <li><a href="#feature-tests-einkaufsgutscheinwarenkorb">Feature Tests - Einkaufsgutschein/Warenkorb</a> - (5 Tests)</li>
 <li><a href="#feature-tests-produktdetailseite-pdp">Feature Tests - Produktdetailseite (PDP)</a> - (7 Tests)</li>
@@ -646,7 +646,7 @@
 <li><a href="#feature-tests-versandarten">Feature Tests - Versandarten</a> - (98 Tests)</li>
 <li><a href="#feature-tests-promotions">Feature Tests - Promotions</a> - (47 Tests)</li>
 <li><a href="#data-validation-tests">Data Validation Tests</a> - (15 Tests)</li>
-<li><a href="#content-tests">Content Tests</a> - (7 Tests)</li>
+<li><a href="#content-tests">Content Tests</a> - (8 Tests)</li>
 <li><a href="#feature-tests-newsletter--freundeskreis">Feature Tests - Newsletter & Freundeskreis</a> - (9 Tests)</li>
 <li><a href="#technische-tests">Technische Tests</a> - (10 Tests)</li>
 <li><a href="#regression-tests">Regression Tests</a> - (15-20 Tests)</li>
@@ -660,7 +660,7 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 278 Tests
+<strong>Gesamt:</strong> 286 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 154</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 111</li>
@@ -1658,10 +1658,10 @@
 <h3 id="feature-tests-account">👤 Feature Tests - Account</h3>
 
 <strong>Priorität:</strong> P1
-<strong>Tests:</strong> 10/12 implementiert
-<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung, Adresse im Checkout
-<strong>Dauer:</strong> 10-20 Min
-<strong>Ausführung:</strong> In CI/CD, vor Feature-Release
+<strong>Tests:</strong> 10/20 implementiert
+<strong>Beschreibung:</strong> Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung, Kontotyp-Wechsel, Transaktionsmails (Emarsys)
+<strong>Dauer:</strong> 10-20 Min (automatisiert), 15-30 Min (manuelle Emarsys-Prüfung)
+<strong>Ausführung:</strong> In CI/CD, vor Feature-Release; manuelle Tests nach Deployments
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -1776,6 +1776,62 @@
 <td>Staging</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-ACCOUNT-014</td>
+<td>Kundenkonto-Daten prüfen (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-015</td>
+<td>Änderungen im Benutzerkonto werden korrekt übernommen (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-016</td>
+<td>Kontotyp von Privat auf Gewerblich ändern (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>Staging</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-017</td>
+<td>Transaktionsmail Registrierung → Emarsys-E-Mail (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>Staging</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-018</td>
+<td>Transaktionsmail Bestellbestätigung → Emarsys-E-Mail (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>Staging</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-019</td>
+<td>Transaktionsmail Passwort wiederherstellen → Emarsys-E-Mail (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>Staging</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-ACCOUNT-020</td>
+<td>Transaktionsmail Passwort-Änderung → Emarsys-E-Mail (manuell)</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>Staging</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -1874,6 +1930,48 @@
 <li><strong>Playwright-Testdatei:</strong> <code>playwright_tests/tests/test_account.py</code></li>
 <li><strong>Testdaten:</strong> <code>playwright_tests/data/tests_basis.json</code> (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011, TC-ACCOUNT-012)</li>
 <li><strong>Hinweis:</strong> Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen</li>
+</ul>
+<h4 id="manuelle-tests-kundenkonto-kontotyp-3-tests">Manuelle Tests: Kundenkonto & Kontotyp (3 Tests) 🖐️</h4>
+
+<strong>TC-ACCOUNT-014: Kundenkonto-Daten prüfen</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> Account-Übersicht aufrufen → Persönliche Daten prüfen (Name, E-Mail, Anrede) → Rechnungsadresse prüfen → Lieferadresse prüfen → Bestellhistorie prüfen</li>
+<li><strong>Erwartet:</strong> Alle Kundenkonto-Daten sind korrekt und vollständig</li>
+</ul>
+<strong>TC-ACCOUNT-015: Änderungen im Benutzerkonto</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> Profil bearbeiten (Name, Adresse) → Speichern → Account-Übersicht prüfen → Checkout aufrufen → Geänderte Daten prüfen → Cleanup</li>
+<li><strong>Erwartet:</strong> Alle Änderungen werden sofort und überall korrekt übernommen</li>
+</ul>
+<strong>TC-ACCOUNT-016: Kontotyp von Privat auf Gewerblich ändern</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> Profil aufrufen → Kontotyp auf "Gewerblich" ändern → Firma + USt-ID eingeben (z.B. ATU12345678) → Speichern → Profil neu laden → Checkout prüfen → Cleanup</li>
+<li><strong>Erwartet:</strong> Geschäftskunden-Daten werden überall korrekt angezeigt</li>
+<li><strong>Hinweis:</strong> Evtl. automatisierbar</li>
+</ul>
+<h4 id="manuelle-tests-transaktionsmails-emarsys-4-tests">Manuelle Tests: Transaktionsmails / Emarsys (4 Tests) 🖐️</h4>
+
+<strong>Hinweis:</strong> Emarsys-E-Mails werden direkt versendet. Diese Tests können nicht automatisiert werden, müssen aber als JSON-Schema verfügbar sein.
+
+<strong>TC-ACCOUNT-017: Transaktionsmail Registrierung</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> Neuen Account registrieren → E-Mail-Postfach prüfen</li>
+<li><strong>Erwartet:</strong> Registrierungsbestätigungs-E-Mail von Emarsys eingegangen, Inhalt korrekt (Anrede, Name, ggf. Bestätigungslink)</li>
+</ul>
+<strong>TC-ACCOUNT-018: Transaktionsmail Bestellbestätigung</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> Bestellung durchführen → E-Mail-Postfach prüfen</li>
+<li><strong>Erwartet:</strong> Bestellbestätigungs-E-Mail von Emarsys eingegangen, enthält Bestellnummer, Produkte, Preise, Lieferadresse, Zahlungsart</li>
+</ul>
+<strong>TC-ACCOUNT-019: Transaktionsmail Passwort wiederherstellen</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> "Passwort vergessen" → E-Mail eingeben → Postfach prüfen → Reset-Link klicken → Neues Passwort setzen</li>
+<li><strong>Erwartet:</strong> Passwort-Reset-E-Mail von Emarsys eingegangen, Reset-Link funktioniert</li>
+</ul>
+<strong>TC-ACCOUNT-020: Transaktionsmail Passwort-Änderung</strong> 🖐️
+<ul>
+<li><strong>Schritte:</strong> Einloggen → Profil → Passwort ändern → Postfach prüfen</li>
+<li><strong>Erwartet:</strong> Bestätigungs-E-Mail über Passwort-Änderung von Emarsys eingegangen</li>
 </ul>
 </details>
 
@@ -4922,6 +5020,14 @@
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-CONTENT-008</td>
+<td>Allgemeine Contentprüfung (manuell)</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <strong>Detaillierte Testbeschreibungen:</strong>
 
@@ -6070,7 +6176,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 07.02.2026 um 12:21 Uhr</p>
+            <p>Generiert am 07.02.2026 um 13:56 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

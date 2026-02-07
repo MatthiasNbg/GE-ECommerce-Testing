@@ -1,0 +1,64 @@
+{
+  "test_id": "TC-ACCOUNT-018",
+  "name": "Transaktionsmail Bestellbestaetigung (Emarsys)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Transaktionsmails",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Emarsys-Integration ist aktiv",
+    "E-Mail-Postfach ist zugaenglich",
+    "Bestellung wurde erfolgreich aufgegeben"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Bestellung durchfuehren (Gast oder registriert)",
+      "expected": "Bestellbestaetigung wird im Shop angezeigt"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Bestellbestaetigungs-E-Mail von Emarsys ist eingegangen"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: E-Mail-Inhalt pruefen",
+      "expected": "E-Mail enthaelt Bestellnummer, bestellte Produkte, Preise, Lieferadresse und Zahlungsart"
+    }
+  ],
+  "postconditions": [
+    "Bestellbestaetigungs-E-Mail von Emarsys wurde empfangen",
+    "E-Mail enthaelt alle relevanten Bestellinformationen"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "transaktionsmail",
+      "emarsys",
+      "manual",
+      "bestellung"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

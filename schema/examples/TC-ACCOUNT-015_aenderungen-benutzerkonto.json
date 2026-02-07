@@ -1,0 +1,83 @@
+{
+  "test_id": "TC-ACCOUNT-015",
+  "name": "Aenderungen im Benutzerkonto werden korrekt uebernommen (manuell)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Account-Verwaltung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Kunde ist eingeloggt",
+    "Kundenkonto enthaelt Stammdaten"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Profil-Seite aufrufen",
+      "expected": "Profil-Seite wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/profile"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Persoenliche Daten aendern (z.B. Nachname, Anrede)",
+      "expected": "Aenderung wird gespeichert, Erfolgsmeldung erscheint"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Adresse aendern (z.B. Strasse, PLZ)",
+      "expected": "Adressaenderung wird gespeichert, Erfolgsmeldung erscheint"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Account-Uebersicht pruefen",
+      "expected": "Alle Aenderungen werden korrekt in der Uebersicht angezeigt"
+    },
+    {
+      "step": 5,
+      "action": "MANUELL: Checkout aufrufen und geaenderte Daten pruefen",
+      "expected": "Geaenderte Daten werden im Checkout korrekt angezeigt"
+    },
+    {
+      "step": 6,
+      "action": "MANUELL: Aenderungen rueckgaengig machen (Cleanup)",
+      "expected": "Originaldaten sind wiederhergestellt"
+    }
+  ],
+  "postconditions": [
+    "Aenderungen im Benutzerkonto werden sofort und ueberall korrekt uebernommen",
+    "Originaldaten sind wiederhergestellt (Cleanup)"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "account",
+      "manual",
+      "data-change"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

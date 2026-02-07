@@ -1,0 +1,108 @@
+{
+  "test_id": "TC-ACCOUNT-016",
+  "name": "Kontotyp von Privat auf Gewerblich aendern (manuell)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Account-Verwaltung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Kunde ist eingeloggt mit Kontotyp 'Privat'",
+    "Kontotyp-Aenderung ist im Profil moeglich"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Profil-Seite aufrufen",
+      "expected": "Profil-Seite wird angezeigt, Kontotyp ist 'Privat'",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/profile"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Kontotyp auf 'Gewerblich' aendern",
+      "expected": "Felder fuer Firma und USt-ID werden angezeigt",
+      "inputs": [
+        {
+          "action": "select",
+          "selector": "#-accountType",
+          "value": "Gewerblich"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Firmenname und USt-ID eingeben",
+      "expected": "Geschaeftskunden-Felder werden akzeptiert",
+      "inputs": [
+        {
+          "action": "fill",
+          "selector": "#billingAddresscompany",
+          "value": "Testfirma GmbH"
+        },
+        {
+          "action": "fill",
+          "selector": "#vatIds",
+          "value": "ATU12345678"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Aenderung speichern",
+      "expected": "Erfolgsmeldung wird angezeigt"
+    },
+    {
+      "step": 5,
+      "action": "MANUELL: Profil-Seite neu laden und pruefen",
+      "expected": "Kontotyp 'Gewerblich', Firma und USt-ID werden korrekt angezeigt"
+    },
+    {
+      "step": 6,
+      "action": "MANUELL: Checkout aufrufen und pruefen",
+      "expected": "Geschaeftskunden-Daten werden im Checkout korrekt angezeigt"
+    },
+    {
+      "step": 7,
+      "action": "MANUELL: Cleanup - Kontotyp zurueck auf Privat setzen",
+      "expected": "Originaldaten sind wiederhergestellt"
+    }
+  ],
+  "postconditions": [
+    "Kontotyp wurde erfolgreich von Privat auf Gewerblich geaendert",
+    "Firma und USt-ID werden ueberall korrekt angezeigt",
+    "Cleanup: Originaldaten wiederhergestellt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test (evtl. automatisierbar)",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "account",
+      "b2b",
+      "manual"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": false,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

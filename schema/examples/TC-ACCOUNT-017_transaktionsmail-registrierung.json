@@ -1,0 +1,69 @@
+{
+  "test_id": "TC-ACCOUNT-017",
+  "name": "Transaktionsmail Registrierung (Emarsys)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Transaktionsmails",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Emarsys-Integration ist aktiv",
+    "E-Mail-Postfach ist zugaenglich"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Neuen Account registrieren",
+      "expected": "Account wird erfolgreich erstellt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/login"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Registrierungsbestaetigungs-E-Mail von Emarsys ist eingegangen"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: E-Mail-Inhalt pruefen",
+      "expected": "E-Mail enthaelt korrekte Anrede, Namen, und ggf. Bestaetigungslink"
+    }
+  ],
+  "postconditions": [
+    "Registrierungs-E-Mail von Emarsys wurde empfangen",
+    "E-Mail-Inhalt ist korrekt und vollstaendig"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "transaktionsmail",
+      "emarsys",
+      "manual",
+      "registrierung"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "test_id": "TC-ACCOUNT-020",
+  "name": "Transaktionsmail Passwort-Aenderung (Emarsys)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Transaktionsmails",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Emarsys-Integration ist aktiv",
+    "E-Mail-Postfach ist zugaenglich",
+    "Kunde ist eingeloggt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Profil-Seite aufrufen und Passwort aendern",
+      "expected": "Passwort-Aenderung wird durchgefuehrt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/profile"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Bestaetigungs-E-Mail ueber Passwort-Aenderung von Emarsys ist eingegangen"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: E-Mail-Inhalt pruefen",
+      "expected": "E-Mail enthaelt Hinweis auf die Passwort-Aenderung und ggf. Sicherheitshinweise"
+    }
+  ],
+  "postconditions": [
+    "Passwort-Aenderungs-E-Mail von Emarsys wurde empfangen",
+    "E-Mail-Inhalt ist korrekt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "transaktionsmail",
+      "emarsys",
+      "manual",
+      "passwort"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

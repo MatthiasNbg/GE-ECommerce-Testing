@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **283 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **291 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -42,7 +42,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 🏬 **E2E Tests - Click & Collect** | 2 | ○ 0/2 | 🟠 P1 | Abholung im Shop (4 Var.), Spedition blockiert (2 Var.) |
 | 🛍️ **Feature Tests - Warenkorb** | 9 | ✅ 9/9 | 🟠 P1 | Produkte hinzufügen, Mengen ändern, Preis-Berechnung |
 | 🔍 **Feature Tests - Suche** | 9 | ✅ 9/9 | 🟠 P1 | Produktsuche, Filter, Autocomplete, Kategorien |
-| 👤 **Feature Tests - Account** | 12 | ⚠️ 10/12 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie |
+| 👤 **Feature Tests - Account** | 20 | ⚠️ 10/20 | 🟠 P1 | Registrierung, Login, Profil, Adressen, Kontotyp, Transaktionsmails (Emarsys) |
 | ❤️ **Feature Tests - Merkliste** | 5 | ✅ 5/5 | 🟠 P1 | Hinzufügen, Entfernen, in Warenkorb legen |
 | 🎁 **Feature Tests - Einkaufsgutschein** | 5 | ○ 0/5 | 🟠 P1 | Gutschein/reguläres Produkt Trennung, Promo-Blockierung |
 | 🏷️ **Feature Tests - PDP** | 7 | ⚠️ 2/7 | 🟠 P1 | Produktbilder, Varianten, Beschreibung, Verfügbarkeit, Bewertungen |
@@ -51,7 +51,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 52 | ⚠️ 4/52 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
-| 📄 **Content Tests** | 7 | ○ 0/7 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel |
+| 📄 **Content Tests** | 8 | ○ 0/8 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel, Contentprüfung |
 | 📰 **Feature Tests - Newsletter & Freundeskreis** | 9 | ○ 0/9 | 🟡 P2 | Newsletter-Anmeldung, Freundeskreis, Emarsys-Verifizierung |
 | 🔧 **Technische Tests** | 10 | ○ 0/10 | 🟠 P1 | Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
@@ -71,7 +71,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 6. [E2E Tests - Click & Collect](#e2e-tests-click--collect) - (2 Tests, 6 Varianten)
 7. [Feature Tests - Warenkorb](#feature-tests-warenkorb) - (9 Tests)
 8. [Feature Tests - Suche](#feature-tests-suche) - (9 Tests)
-9. [Feature Tests - Account](#feature-tests-account) - (11 Tests)
+9. [Feature Tests - Account](#feature-tests-account) - (20 Tests)
 10. [Feature Tests - Merkliste/Wishlist](#feature-tests-merklistewishlist) - (5 Tests)
 11. [Feature Tests - Einkaufsgutschein/Warenkorb](#feature-tests-einkaufsgutscheinwarenkorb) - (5 Tests)
 12. [Feature Tests - Produktdetailseite (PDP)](#feature-tests-produktdetailseite-pdp) - (7 Tests)
@@ -80,7 +80,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 15. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
 16. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
 17. [Data Validation Tests](#data-validation-tests) - (15 Tests)
-18. [Content Tests](#content-tests) - (7 Tests)
+18. [Content Tests](#content-tests) - (8 Tests)
 19. [Feature Tests - Newsletter & Freundeskreis](#feature-tests-newsletter--freundeskreis) - (9 Tests)
 20. [Technische Tests](#technische-tests) - (10 Tests)
 21. [Regression Tests](#regression-tests) - (15-20 Tests)
@@ -94,7 +94,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 278 Tests
+**Gesamt:** 286 Tests
 - ✅ Implementiert: 154
 - ❌ Fehlend: 111
 - ⚠️ Teilweise: 0
@@ -500,10 +500,10 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 ### 👤 Feature Tests - Account
 
 **Priorität:** P1
-**Tests:** 10/12 implementiert
-**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung, Adresse im Checkout
-**Dauer:** 10-20 Min
-**Ausführung:** In CI/CD, vor Feature-Release
+**Tests:** 10/20 implementiert
+**Beschreibung:** Registrierung, Login, Profil, Adressen, Passwort-Reset, Bestellhistorie, E-Mail-Änderung, Kontotyp-Wechsel, Transaktionsmails (Emarsys)
+**Dauer:** 10-20 Min (automatisiert), 15-30 Min (manuelle Emarsys-Prüfung)
+**Ausführung:** In CI/CD, vor Feature-Release; manuelle Tests nach Deployments
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
@@ -520,6 +520,13 @@ Die 9 Suchtests validieren die Shopware-Suchfunktion in drei Bereichen: Autocomp
 | TC-ACCOUNT-011 | E-Mail auf bestehende Adresse ändern wird abgelehnt | P1 | ✅ | AT | 1 |
 | TC-ACCOUNT-012 | Adresse bearbeiten und im Checkout verifizieren | P1 | ✅ | AT | 1 |
 | TC-ACCOUNT-013 | E-Mail-Adresse auf neue Adresse ändern (manuell) | P1 | 🖐️ | Staging | 1 |
+| TC-ACCOUNT-014 | Kundenkonto-Daten prüfen (manuell) | P1 | 🖐️ | AT, DE, CH | 1 |
+| TC-ACCOUNT-015 | Änderungen im Benutzerkonto werden korrekt übernommen (manuell) | P1 | 🖐️ | AT, DE, CH | 1 |
+| TC-ACCOUNT-016 | Kontotyp von Privat auf Gewerblich ändern (manuell) | P1 | 🖐️ | Staging | 1 |
+| TC-ACCOUNT-017 | Transaktionsmail Registrierung → Emarsys-E-Mail (manuell) | P1 | 🖐️ | Staging | 1 |
+| TC-ACCOUNT-018 | Transaktionsmail Bestellbestätigung → Emarsys-E-Mail (manuell) | P1 | 🖐️ | Staging | 1 |
+| TC-ACCOUNT-019 | Transaktionsmail Passwort wiederherstellen → Emarsys-E-Mail (manuell) | P1 | 🖐️ | Staging | 1 |
+| TC-ACCOUNT-020 | Transaktionsmail Passwort-Änderung → Emarsys-E-Mail (manuell) | P1 | 🖐️ | Staging | 1 |
 
 <details>
 <summary><strong>Detaillierte Testbeschreibungen</strong></summary>
@@ -604,6 +611,41 @@ Die 9 Account-Tests decken den gesamten Benutzerlebenszyklus ab: Registrierung, 
 - **Playwright-Testdatei:** `playwright_tests/tests/test_account.py`
 - **Testdaten:** `playwright_tests/data/tests_basis.json` (TC-ACCOUNT-001 bis TC-ACCOUNT-008), config.yaml (TC-ACCOUNT-011, TC-ACCOUNT-012)
 - **Hinweis:** Registrierungstests erzeugen Testaccounts – nach Testlauf ggf. bereinigen
+
+#### Manuelle Tests: Kundenkonto & Kontotyp (3 Tests) 🖐️
+
+**TC-ACCOUNT-014: Kundenkonto-Daten prüfen** 🖐️
+- **Schritte:** Account-Übersicht aufrufen → Persönliche Daten prüfen (Name, E-Mail, Anrede) → Rechnungsadresse prüfen → Lieferadresse prüfen → Bestellhistorie prüfen
+- **Erwartet:** Alle Kundenkonto-Daten sind korrekt und vollständig
+
+**TC-ACCOUNT-015: Änderungen im Benutzerkonto** 🖐️
+- **Schritte:** Profil bearbeiten (Name, Adresse) → Speichern → Account-Übersicht prüfen → Checkout aufrufen → Geänderte Daten prüfen → Cleanup
+- **Erwartet:** Alle Änderungen werden sofort und überall korrekt übernommen
+
+**TC-ACCOUNT-016: Kontotyp von Privat auf Gewerblich ändern** 🖐️
+- **Schritte:** Profil aufrufen → Kontotyp auf "Gewerblich" ändern → Firma + USt-ID eingeben (z.B. ATU12345678) → Speichern → Profil neu laden → Checkout prüfen → Cleanup
+- **Erwartet:** Geschäftskunden-Daten werden überall korrekt angezeigt
+- **Hinweis:** Evtl. automatisierbar
+
+#### Manuelle Tests: Transaktionsmails / Emarsys (4 Tests) 🖐️
+
+**Hinweis:** Emarsys-E-Mails werden direkt versendet. Diese Tests können nicht automatisiert werden, müssen aber als JSON-Schema verfügbar sein.
+
+**TC-ACCOUNT-017: Transaktionsmail Registrierung** 🖐️
+- **Schritte:** Neuen Account registrieren → E-Mail-Postfach prüfen
+- **Erwartet:** Registrierungsbestätigungs-E-Mail von Emarsys eingegangen, Inhalt korrekt (Anrede, Name, ggf. Bestätigungslink)
+
+**TC-ACCOUNT-018: Transaktionsmail Bestellbestätigung** 🖐️
+- **Schritte:** Bestellung durchführen → E-Mail-Postfach prüfen
+- **Erwartet:** Bestellbestätigungs-E-Mail von Emarsys eingegangen, enthält Bestellnummer, Produkte, Preise, Lieferadresse, Zahlungsart
+
+**TC-ACCOUNT-019: Transaktionsmail Passwort wiederherstellen** 🖐️
+- **Schritte:** "Passwort vergessen" → E-Mail eingeben → Postfach prüfen → Reset-Link klicken → Neues Passwort setzen
+- **Erwartet:** Passwort-Reset-E-Mail von Emarsys eingegangen, Reset-Link funktioniert
+
+**TC-ACCOUNT-020: Transaktionsmail Passwort-Änderung** 🖐️
+- **Schritte:** Einloggen → Profil → Passwort ändern → Postfach prüfen
+- **Erwartet:** Bestätigungs-E-Mail über Passwort-Änderung von Emarsys eingegangen
 
 </details>
 
@@ -1998,6 +2040,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 |---------|------|-----------|--------|--------|-----------|
 | TC-CONTENT-006 | Matratzen-Berater erreichbar | P2 | ○ | AT, DE, CH | 1 |
 | TC-CONTENT-007 | Online-Katalog aufrufbar | P3 | ○ | AT, DE, CH | 1 |
+| TC-CONTENT-008 | Allgemeine Contentprüfung (manuell) | P2 | 🖐️ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 

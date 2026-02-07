@@ -1,0 +1,75 @@
+{
+  "test_id": "TC-ACCOUNT-019",
+  "name": "Transaktionsmail Passwort wiederherstellen (Emarsys)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Transaktionsmails",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Emarsys-Integration ist aktiv",
+    "E-Mail-Postfach ist zugaenglich",
+    "Account existiert mit bekannter E-Mail-Adresse"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "'Passwort vergessen' aufrufen und E-Mail eingeben",
+      "expected": "Erfolgsmeldung wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account/recover"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: E-Mail-Postfach pruefen",
+      "expected": "Passwort-Wiederherstellungs-E-Mail von Emarsys ist eingegangen"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: E-Mail-Inhalt pruefen",
+      "expected": "E-Mail enthaelt Passwort-Reset-Link der funktioniert"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Reset-Link anklicken und neues Passwort setzen",
+      "expected": "Passwort wird erfolgreich geaendert, Login mit neuem Passwort moeglich"
+    }
+  ],
+  "postconditions": [
+    "Passwort-Reset-E-Mail von Emarsys wurde empfangen",
+    "Reset-Link funktioniert und Passwort kann geaendert werden"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "transaktionsmail",
+      "emarsys",
+      "manual",
+      "passwort"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

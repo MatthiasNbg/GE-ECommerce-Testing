@@ -1,0 +1,77 @@
+{
+  "test_id": "TC-ACCOUNT-014",
+  "name": "Kundenkonto-Daten pruefen (manuell)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Account-Verwaltung",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Kunde ist eingeloggt",
+    "Kundenkonto enthaelt Stammdaten (Name, Adresse, E-Mail)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "Account-Uebersichtsseite aufrufen",
+      "expected": "Account-Dashboard wird angezeigt",
+      "inputs": [
+        {
+          "action": "navigate",
+          "value": "/account"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Persoenliche Daten pruefen (Name, E-Mail, Anrede)",
+      "expected": "Alle persoenlichen Daten stimmen mit den eingegebenen Daten ueberein"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Rechnungsadresse pruefen (Strasse, PLZ, Ort, Land)",
+      "expected": "Rechnungsadresse ist vollstaendig und korrekt"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Lieferadresse pruefen (falls abweichend)",
+      "expected": "Lieferadresse ist korrekt oder identisch mit Rechnungsadresse"
+    },
+    {
+      "step": 5,
+      "action": "MANUELL: Bestellhistorie pruefen",
+      "expected": "Bisherige Bestellungen werden korrekt angezeigt"
+    }
+  ],
+  "postconditions": [
+    "Alle Kundenkonto-Daten sind korrekt und vollstaendig"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "account",
+      "manual",
+      "data-check"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

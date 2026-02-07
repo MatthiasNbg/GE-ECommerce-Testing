@@ -1,0 +1,71 @@
+{
+  "test_id": "TC-CONTENT-008",
+  "name": "Allgemeine Contentpruefung (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["staging", "production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Alle Verkaufskanaele (AT, DE, CH) sind erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Startseite pruefen (Texte, Bilder, Links, Layout)",
+      "expected": "Alle Inhalte sind korrekt, keine Platzhalter, keine Fehler"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Hauptkategorieseiten pruefen (Moebel, Kleidung, Kosmetik etc.)",
+      "expected": "Kategoriebeschreibungen, Bilder und Produktzuordnungen sind korrekt"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Produktdetailseiten stichprobenartig pruefen",
+      "expected": "Produktbeschreibungen, Bilder, Preise und Verfuegbarkeit sind korrekt"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Footer-Links pruefen (AGB, Datenschutz, Impressum, Kontakt)",
+      "expected": "Alle Footer-Seiten sind erreichbar und inhaltlich korrekt"
+    },
+    {
+      "step": 5,
+      "action": "MANUELL: Laenderwechsel pruefen (AT, DE, CH)",
+      "expected": "Inhalte werden pro Land korrekt angezeigt (Waehrung, Texte, Preise)"
+    }
+  ],
+  "postconditions": [
+    "Keine inhaltlichen Fehler, fehlenden Bilder oder Platzhalter gefunden",
+    "Alle Links funktionieren"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "visual-check"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 600,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}
