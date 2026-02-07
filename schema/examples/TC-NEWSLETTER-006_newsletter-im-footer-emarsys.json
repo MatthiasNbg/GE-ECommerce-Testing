@@ -34,7 +34,7 @@
         {
           "action": "fill",
           "selector": "input[type='email']",
-          "value": "newsletter-footer-test@example.com"
+          "value_ref": "newsletter:footer_test.email"
         }
       ]
     },
@@ -59,7 +59,13 @@
     "E-Mail von Emarsys wurde empfangen",
     "Newsletter-Anmeldung ist im Emarsys-System hinterlegt"
   ],
-  "test_data": [],
+  "test_data": [
+    {
+      "type": "newsletter",
+      "name": "footer_test",
+      "email": "newsletter-footer-test@example.com"
+    }
+  ],
   "automation": {
     "status": "manual",
     "framework": "Manueller Test",

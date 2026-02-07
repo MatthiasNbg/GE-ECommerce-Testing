@@ -34,7 +34,7 @@
         {
           "action": "select",
           "selector": "#-accountType",
-          "value": "Gewerblich"
+          "value_ref": "account:b2b.account_type"
         }
       ]
     },
@@ -46,12 +46,12 @@
         {
           "action": "fill",
           "selector": "#billingAddresscompany",
-          "value": "Testfirma GmbH"
+          "value_ref": "account:b2b.company"
         },
         {
           "action": "fill",
           "selector": "#vatIds",
-          "value": "ATU12345678"
+          "value_ref": "account:b2b.vat_id"
         }
       ]
     },
@@ -81,7 +81,15 @@
     "Firma und USt-ID werden ueberall korrekt angezeigt",
     "Cleanup: Originaldaten wiederhergestellt"
   ],
-  "test_data": [],
+  "test_data": [
+    {
+      "type": "account",
+      "name": "b2b",
+      "account_type": "Gewerblich",
+      "company": "Testfirma GmbH",
+      "vat_id": "ATU12345678"
+    }
+  ],
   "automation": {
     "status": "manual",
     "framework": "Manueller Test (evtl. automatisierbar)",
