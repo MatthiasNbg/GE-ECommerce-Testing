@@ -173,7 +173,7 @@
     },
     {
       "type": "payment",
-      "name": "default",
+      "name": "prepayment",
       "method": "prepayment"
     },
     {

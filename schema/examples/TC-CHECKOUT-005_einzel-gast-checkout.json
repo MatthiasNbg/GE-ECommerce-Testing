@@ -186,8 +186,8 @@
     },
     {
       "type": "payment",
-      "name": "default",
-      "method": "Rechnung"
+      "name": "invoice",
+      "method": "invoice"
     },
     {
       "type": "login",

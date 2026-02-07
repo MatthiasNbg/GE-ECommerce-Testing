@@ -104,7 +104,7 @@
     },
     {
       "type": "payment",
-      "name": "default",
+      "name": "invoice",
       "method": "invoice"
     },
     {
