@@ -13,13 +13,13 @@
   },
   "preconditions": [
     "Shop ist erreichbar",
-    "Guenstiges Produkt (< 50 EUR) ist verfuegbar",
-    "Promotion-Code MBW50TEST ist aktiv"
+    "Guenstiges Produkt (< 100 EUR) ist verfuegbar",
+    "Promotion-Code MBW100TEST ist aktiv (10 EUR Rabatt ab 100 EUR MBW)"
   ],
   "steps": [
     {
       "step": 1,
-      "action": "Guenstiges Produkt hinzufuegen (unter 50 EUR)",
+      "action": "Guenstiges Produkt hinzufuegen (unter 100 EUR)",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
         {
@@ -34,7 +34,7 @@
     },
     {
       "step": 2,
-      "action": "Code MBW50TEST eingeben",
+      "action": "Code MBW100TEST eingeben",
       "expected": "Schritt erfolgreich ausgefuehrt",
       "inputs": [
         {
@@ -70,8 +70,10 @@
     {
       "type": "extra",
       "name": "default",
-      "promo_code": "MBW50TEST",
-      "min_order_value": 50
+      "promo_code": "MBW100TEST",
+      "min_order_value": 100,
+      "discount_value": 10,
+      "discount_type": "absolute_eur"
     },
     {
       "type": "product",
@@ -83,8 +85,8 @@
     {
       "type": "promo",
       "name": "mbw_test",
-      "code": "MBW50TEST",
-      "description": "Mindestbestellwert-Test"
+      "code": "MBW100TEST",
+      "description": "10 EUR Rabatt ab 100 EUR Mindestbestellwert"
     }
   ],
   "automation": {
