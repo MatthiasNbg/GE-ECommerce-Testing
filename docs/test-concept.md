@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **275 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **276 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -49,7 +49,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 📋 **Feature Tests - Produktlisting** | 4 | ○ 0/4 | 🟠 P1 | Produktfilter, Sortierung, Pagination, SALE |
 | 🧭 **Feature Tests - Navigation** | 5 | ○ 0/5 | 🟠 P1 | Hauptnavigation, Mega-Menü, Breadcrumbs, Länderwechsel |
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
-| 🎟️ **Feature Tests - Promotions** | 51 | ⚠️ 4/51 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
+| 🎟️ **Feature Tests - Promotions** | 52 | ⚠️ 4/52 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
 | 📄 **Content Tests** | 7 | ○ 0/7 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel |
 | 📰 **Feature Tests - Newsletter** | 2 | ○ 0/2 | 🟡 P2 | Newsletter-Anmeldung, Validierung |
@@ -948,7 +948,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 ### 🎟️ Feature Tests - Promotions
 
 **Priorität:** P2
-**Tests:** 0/47 implementiert
+**Tests:** 0/48 implementiert
 **Beschreibung:** Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Mengenrabatte, Promo-Kombinationen, Gutschein-Checkout-Flows, Automatisierte Promotions, Warenkorb-Rabatte
 **Dauer:** 60-120 Min
 **Ausführung:** In CI/CD, vor Feature-Release
@@ -1234,6 +1234,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | TC-PROMO-SHIP-007 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE | P1 | ○ | DE | 1 |
 | TC-PROMO-SHIP-008 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) AT | P1 | ○ | AT | 1 |
 | TC-PROMO-SHIP-009 | Versandkostenfrei gemischter Warenkorb (Post + Spedi) CH | P1 | ○ | CH | 1 |
+| TC-PROMO-SHIP-010 | Versandkostenfrei bleibt bei Einlösegutschein (MBW auf Produktwert) | P1 | ○ | AT, DE, CH | 1 |
 
 **Detaillierte Testbeschreibungen:**
 
@@ -1440,6 +1441,27 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Post-Promotion reduziert nur Postversandkosten (6,95 CHF)
   - Spedi-Promotion reduziert nur Speditionskosten
   - Korrekte CHF-Berechnung der Gesamtversandkosten
+
+**TC-PROMO-SHIP-010: Versandkostenfrei bleibt bei Einlösegutschein (MBW auf Produktwert)**
+- **Beschreibung:** Prüft, dass die Versandkostenfrei-Promotion weiterhin greift, wenn ein Einlösegutschein eingelöst wird — der Gutschein reduziert nur den Zahlbetrag, nicht den Produktwert für die MBW-Berechnung
+- **Bedingungen:**
+  - Versandkostenfrei-Promotion mit MBW-Bedingung aktiv (z.B. ab 50 EUR/CHF)
+  - Warenkorb mit Produktwert >= MBW
+  - Einlösegutschein (Wertgutschein) mit Guthaben vorhanden
+- **Testschritte:**
+  1. Postartikel zum Warenkorb hinzufügen (Produktwert >= MBW, z.B. 60 EUR)
+  2. Versandkostenfrei-Promocode eingeben → Versandkosten = 0
+  3. Einlösegutschein eingeben (z.B. 25 EUR Guthaben)
+  4. Prüfen: Zahlbetrag wird um Gutschein-Guthaben reduziert (z.B. 35 EUR statt 60 EUR)
+  5. Prüfen: Versandkosten bleiben weiterhin 0 (Versandkostenfrei greift noch)
+  6. Prüfen: Produktwert für MBW-Berechnung ist unverändert (60 EUR, nicht 35 EUR)
+  7. Test in AT (EUR), DE (EUR) und CH (CHF) durchführen
+- **Erwartetes Verhalten:**
+  - Einlösegutschein reduziert nur den Zahlbetrag, nicht den Produktwert
+  - MBW wird weiterhin auf Basis der Produktpreise berechnet (vor Gutschein-Abzug)
+  - Versandkostenfrei-Promotion bleibt aktiv
+  - Kein erneutes Berechnen der Versandkosten nach Gutschein-Einlösung
+  - Funktioniert konsistent in allen DACH-Verkaufskanälen
 
 #### Produktkategorien-Promotions
 
@@ -2092,7 +2114,7 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | phase_5b | Phase 5b - PDP, Listing, Navigation | ⏳ | 14 | -% |
 | phase_5c | Phase 5c - Einkaufsgutschein/Warenkorb | ⏳ | 5 | -% |
 | phase_5d | Phase 5d - Technische Tests | ⏳ | 10 | -% |
-| phase_6 | Phase 6 - Promotions | ⏳ | 51 | 60% |
+| phase_6 | Phase 6 - Promotions | ⏳ | 52 | 60% |
 | phase_7 | Phase 7 - Data Validation | ⏳ | 15 | 70% |
 | phase_7a | Phase 7a - Content & Newsletter | ⏳ | 9 | -% |
 | phase_8 | Phase 8 - Regression | ⏳ | 15-20 | 85% |

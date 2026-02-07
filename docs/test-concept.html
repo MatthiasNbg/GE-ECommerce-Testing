@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>275 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>276 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -574,8 +574,8 @@
 </tr>
 <tr>
 <td>🎟️ **Feature Tests - Promotions**</td>
-<td>51</td>
-<td><span class="badge badge-warning">⚠ Teilweise</span> 4/51</td>
+<td>52</td>
+<td><span class="badge badge-warning">⚠ Teilweise</span> 4/52</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
 <td>Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows</td>
 </tr>
@@ -3151,7 +3151,7 @@
 <h3 id="feature-tests-promotions">🎟️ Feature Tests - Promotions</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 0/47 implementiert
+<strong>Tests:</strong> 0/48 implementiert
 <strong>Beschreibung:</strong> Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Mengenrabatte, Promo-Kombinationen, Gutschein-Checkout-Flows, Automatisierte Promotions, Warenkorb-Rabatte
 <strong>Dauer:</strong> 60-120 Min
 <strong>Ausführung:</strong> In CI/CD, vor Feature-Release
@@ -3658,6 +3658,14 @@
 <td>CH</td>
 <td>1</td>
 </tr>
+<tr>
+<td>TC-PROMO-SHIP-010</td>
+<td>Versandkostenfrei bleibt bei Einlösegutschein (MBW auf Produktwert)</td>
+<td>P1</td>
+<td><span class="badge badge-defined">○ Definiert</span></td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
 </tbody></table></div>
 <strong>Detaillierte Testbeschreibungen:</strong>
 
@@ -3885,6 +3893,30 @@
 <li>Post-Promotion reduziert nur Postversandkosten (6,95 CHF)</li>
 <li>Spedi-Promotion reduziert nur Speditionskosten</li>
 <li>Korrekte CHF-Berechnung der Gesamtversandkosten</li>
+</ul>
+</ol>
+<ul>
+<li><strong>Beschreibung:</strong> Prüft, dass die Versandkostenfrei-Promotion weiterhin greift, wenn ein Einlösegutschein eingelöst wird — der Gutschein reduziert nur den Zahlbetrag, nicht den Produktwert für die MBW-Berechnung</li>
+<li><strong>Bedingungen:</strong></li>
+<li>Versandkostenfrei-Promotion mit MBW-Bedingung aktiv (z.B. ab 50 EUR/CHF)</li>
+<li>Warenkorb mit Produktwert >= MBW</li>
+<li>Einlösegutschein (Wertgutschein) mit Guthaben vorhanden</li>
+<li><strong>Testschritte:</strong></li>
+</ul>
+<ol>
+<li>Versandkostenfrei-Promocode eingeben → Versandkosten = 0</li>
+<li>Einlösegutschein eingeben (z.B. 25 EUR Guthaben)</li>
+<li>Prüfen: Zahlbetrag wird um Gutschein-Guthaben reduziert (z.B. 35 EUR statt 60 EUR)</li>
+<li>Prüfen: Versandkosten bleiben weiterhin 0 (Versandkostenfrei greift noch)</li>
+<li>Prüfen: Produktwert für MBW-Berechnung ist unverändert (60 EUR, nicht 35 EUR)</li>
+<li>Test in AT (EUR), DE (EUR) und CH (CHF) durchführen</li>
+<ul>
+<li><strong>Erwartetes Verhalten:</strong></li>
+<li>Einlösegutschein reduziert nur den Zahlbetrag, nicht den Produktwert</li>
+<li>MBW wird weiterhin auf Basis der Produktpreise berechnet (vor Gutschein-Abzug)</li>
+<li>Versandkostenfrei-Promotion bleibt aktiv</li>
+<li>Kein erneutes Berechnen der Versandkosten nach Gutschein-Einlösung</li>
+<li>Funktioniert konsistent in allen DACH-Verkaufskanälen</li>
 </ul>
 <h4 id="produktkategorien-promotions">Produktkategorien-Promotions</h4>
 </ol>
@@ -5226,7 +5258,7 @@
 <td>phase_6</td>
 <td>Phase 6 - Promotions</td>
 <td><span class="badge badge-pending">⏳ Offen</span></td>
-<td>51</td>
+<td>52</td>
 <td>60%</td>
 </tr>
 <tr>
@@ -5936,7 +5968,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 07.02.2026 um 11:17 Uhr</p>
+            <p>Generiert am 07.02.2026 um 12:02 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>
