@@ -1,0 +1,61 @@
+{
+  "test_id": "TC-CONTENT-015",
+  "name": "Beteiligungsmodell-Seite pruefen (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Beteiligungsmodell-Seite ist im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Beteiligungsmodell-Seite aufrufen",
+      "expected": "Seite laedt korrekt, keine Fehlermeldung"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Inhalt pruefen (Beschreibung des Beteiligungsmodells, Konditionen)",
+      "expected": "Informationen zum Beteiligungsmodell sind vollstaendig und verstaendlich"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Links und Downloads pruefen (ggf. PDF-Dokumente)",
+      "expected": "Alle verlinkten Dokumente und weiterführenden Links funktionieren"
+    }
+  ],
+  "postconditions": [
+    "Beteiligungsmodell-Seite ist erreichbar und inhaltlich korrekt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "beteiligungsmodell",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

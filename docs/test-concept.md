@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **291 Testfällen** in 19 Kategorien.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **299 Testfällen** in 19 Kategorien.
 Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 **Aktuelle Situation:**
@@ -51,7 +51,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 📦 **Feature Tests - Versandarten** | 98 | ✅ 98/98 | 🟠 P1 | Post, Spedition, PLZ-Bereiche, Logistikpartner |
 | 🎟️ **Feature Tests - Promotions** | 52 | ⚠️ 4/52 | 🟡 P2 | Rabattcodes, Mindestbestellwert, Versandkostenfrei, Gutscheine, Checkout-Flows |
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
-| 📄 **Content Tests** | 8 | ○ 0/8 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel, Contentprüfung |
+| 📄 **Content Tests** | 16 | ○ 0/16 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel, CMS, Legal, Filialen, Beratung |
 | 📰 **Feature Tests - Newsletter & Freundeskreis** | 9 | ○ 0/9 | 🟡 P2 | Newsletter-Anmeldung, Freundeskreis, Emarsys-Verifizierung |
 | 🔧 **Technische Tests** | 10 | ○ 0/10 | 🟠 P1 | Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
@@ -80,7 +80,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 15. [Feature Tests - Versandarten](#feature-tests-versandarten) - (98 Tests)
 16. [Feature Tests - Promotions](#feature-tests-promotions) - (47 Tests)
 17. [Data Validation Tests](#data-validation-tests) - (15 Tests)
-18. [Content Tests](#content-tests) - (8 Tests)
+18. [Content Tests](#content-tests) - (16 Tests)
 19. [Feature Tests - Newsletter & Freundeskreis](#feature-tests-newsletter--freundeskreis) - (9 Tests)
 20. [Technische Tests](#technische-tests) - (10 Tests)
 21. [Regression Tests](#regression-tests) - (15-20 Tests)
@@ -94,7 +94,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Gesamtübersicht
 
-**Gesamt:** 286 Tests
+**Gesamt:** 294 Tests
 - ✅ Implementiert: 154
 - ❌ Fehlend: 111
 - ⚠️ Teilweise: 0
@@ -2014,8 +2014,8 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 ### 📄 Content Tests
 
 **Priorität:** P2
-**Tests:** 0/7 geplant
-**Beschreibung:** Prüfung der korrekten Kategorie-Zuordnung, Content-Darstellung, Footer-Links und Trust-Elemente
+**Tests:** 0/16 geplant
+**Beschreibung:** Prüfung der korrekten Kategorie-Zuordnung, Content-Darstellung, Footer-Links, Trust-Elemente, CMS-Seiten, Legal-Seiten, Filialen, Karriere und Beratung
 **Dauer:** 5-15 Min
 **Ausführung:** Nach Content-Updates, bei neuen Produkten
 
@@ -2042,6 +2042,19 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
 | TC-CONTENT-007 | Online-Katalog aufrufbar | P3 | ○ | AT, DE, CH | 1 |
 | TC-CONTENT-008 | Allgemeine Contentprüfung (manuell) | P2 | 🖐️ | AT, DE, CH | 1 |
 
+#### Manuelle Content-Prüfungen (Production)
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-CONTENT-009 | Content CMS Seiten prüfen | P2 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-010 | AGB vorhanden und inhaltlich korrekt | P1 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-011 | Datenschutzerklärung vorhanden und korrekt | P1 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-012 | Zahlungsarten-Informationsseite | P2 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-013 | Filialseiten erreichbar und korrekt | P2 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-014 | Bewerberseite und Stelleninserate | P2 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-015 | Beteiligungsmodell-Seite | P2 | 🖐️ | AT, DE, CH | 1 |
+| TC-CONTENT-016 | Beratungstermine (Matratzen, Kissen, Möbel) | P2 | 🖐️ | AT, DE, CH | 1 |
+
 **Detaillierte Testbeschreibungen:**
 
 **TC-CONTENT-001: Bett Almeno wird in Kategorie Möbel angezeigt**
@@ -2059,6 +2072,46 @@ Die 98 Versandarten-Tests validieren die korrekte Zuordnung von Logistikpartnern
   - Produkt ist in der Kategorieliste sichtbar
   - Breadcrumb zeigt korrekte Hierarchie: Home > Möbel > ...
   - Produkt ist der richtigen Kategorie zugeordnet
+
+<details>
+<summary><strong>Manuelle Testfälle: Content-Prüfungen Production (TC-CONTENT-009 bis 016)</strong></summary>
+
+Die folgenden 8 Testfälle sind **manuelle Tests**, die auf **Production** ausgeführt werden (Prüfung nach "Sinn und Verstand").
+
+**TC-CONTENT-009: Content CMS Seiten prüfen**
+- **Schritte:** CMS-Seiten (Erlebniswelten, Landingpages, Info-Seiten) aufrufen → Texte, Bilder, Layout prüfen → Interne Links prüfen → In allen Kanälen (AT, DE, CH) prüfen
+- **Erwartung:** Alle CMS-Seiten sind vollständig, keine Platzhalter, keine 404-Fehler
+
+**TC-CONTENT-010: AGB vorhanden und inhaltlich korrekt**
+- **Schritte:** AGB-Seite über Footer aufrufen → Inhalt auf Vollständigkeit und Aktualität prüfen → In allen Kanälen prüfen (AT, DE, CH)
+- **Erwartung:** AGB sind vorhanden, vollständig und pro Land korrekt
+
+**TC-CONTENT-011: Datenschutzerklärung vorhanden und korrekt**
+- **Schritte:** Datenschutz-Seite über Footer aufrufen → DSGVO-Konformität prüfen (Cookies, Tracking, Rechte) → In allen Kanälen prüfen
+- **Erwartung:** Datenschutzerklärung ist vollständig und DSGVO-konform
+
+**TC-CONTENT-012: Zahlungsarten-Informationsseite**
+- **Schritte:** Zahlungsarten-Seite aufrufen → Verfügbare Zahlungsarten prüfen (Vorkasse, Rechnung, Kreditkarte) → Länderspezifische Unterschiede prüfen (CH ohne Rechnung)
+- **Erwartung:** Zahlungsarten-Informationen sind korrekt und vollständig
+
+**TC-CONTENT-013: Filialseiten erreichbar und korrekt**
+- **Schritte:** Filialen-Übersichtsseite aufrufen → Einzelne Filialseiten stichprobenartig prüfen → Adressen, Öffnungszeiten, Kontaktdaten, Bilder und Karten prüfen
+- **Erwartung:** Alle Filialseiten sind erreichbar mit aktuellen Informationen
+
+**TC-CONTENT-014: Bewerberseite und Stelleninserate**
+- **Zielgruppe:** HR-Abteilung
+- **Schritte:** Bewerberseite/Karriereseite aufrufen → Stelleninserate prüfen → Einzelnes Inserat aufrufen → Bewerbungsformular oder Kontaktweg prüfen
+- **Erwartung:** Stelleninserate sind aufrufbar, Bewerbungsweg ist klar ersichtlich
+
+**TC-CONTENT-015: Beteiligungsmodell-Seite**
+- **Schritte:** Beteiligungsmodell-Seite aufrufen → Inhalt prüfen (Beschreibung, Konditionen) → Links und Downloads prüfen
+- **Erwartung:** Informationen zum Beteiligungsmodell sind vollständig und verständlich
+
+**TC-CONTENT-016: Beratungstermine (Matratzen, Kissen, Möbel)**
+- **Schritte:** Beratungstermin-Seite für Matratzen aufrufen → Beratungstermin-Seite für Kissen aufrufen → Beratungstermin-Seite für Möbelberatung aufrufen → Terminbuchungs-Funktionalität prüfen
+- **Erwartung:** Alle Beratungstermin-Seiten sind erreichbar, Terminbuchung ist möglich
+
+</details>
 
 ---
 

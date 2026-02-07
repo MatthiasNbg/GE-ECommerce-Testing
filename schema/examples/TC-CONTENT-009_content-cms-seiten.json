@@ -1,0 +1,67 @@
+{
+  "test_id": "TC-CONTENT-009",
+  "name": "Content CMS Seiten pruefen (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Alle Verkaufskanaele (AT, DE, CH) sind erreichbar"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: CMS-Seiten aufrufen (Erlebniswelten, Landingpages, Info-Seiten)",
+      "expected": "Alle CMS-Seiten laden korrekt, keine leeren Seiten oder Fehlermeldungen"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Texte, Bilder und Layout der CMS-Seiten pruefen",
+      "expected": "Inhalte sind vollstaendig, keine Platzhalter, Bilder werden korrekt angezeigt"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Interne Links auf CMS-Seiten pruefen",
+      "expected": "Alle Links fuehren zu den richtigen Zielseiten, keine 404-Fehler"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: CMS-Seiten in allen Verkaufskanaelen pruefen (AT, DE, CH)",
+      "expected": "Inhalte sind pro Kanal korrekt lokalisiert (Waehrung, Texte)"
+    }
+  ],
+  "postconditions": [
+    "Alle CMS-Seiten sind inhaltlich korrekt und fehlerfrei",
+    "Keine fehlenden Bilder oder Platzhalter"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "cms",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 600,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

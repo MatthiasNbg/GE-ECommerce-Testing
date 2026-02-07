@@ -1,0 +1,68 @@
+{
+  "test_id": "TC-CONTENT-014",
+  "name": "Bewerberseite und Stelleninserate aufrufbar (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Bewerberseite / Karriereseite ist im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Bewerberseite / Karriereseite aufrufen",
+      "expected": "Seite laedt korrekt, keine Fehlermeldung"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Stelleninserate pruefen (mindestens ein Inserat vorhanden)",
+      "expected": "Stelleninserate sind aufgelistet, Titel und Beschreibung sind vorhanden"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Einzelnes Stelleninserat aufrufen",
+      "expected": "Inserat-Detailseite laedt korrekt mit Stellenbeschreibung und Bewerbungsmoeglichkeit"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Bewerbungsformular oder Kontaktmoeglichkeit pruefen",
+      "expected": "Bewerbungsweg ist klar ersichtlich (Formular, E-Mail-Link oder externer Link)"
+    }
+  ],
+  "postconditions": [
+    "Bewerberseite ist erreichbar und Stelleninserate lassen sich aufrufen",
+    "Zielgruppe: HR-Abteilung"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "karriere",
+      "hr",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

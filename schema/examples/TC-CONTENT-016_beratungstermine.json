@@ -1,0 +1,69 @@
+{
+  "test_id": "TC-CONTENT-016",
+  "name": "Beratungstermine fuer Matratzen, Kissen und Moebel (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Beratungstermin-Seiten sind im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Beratungstermin-Seite fuer Matratzen aufrufen",
+      "expected": "Seite laedt korrekt, Terminbuchung oder Kontaktmoeglichkeit ist vorhanden"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Beratungstermin-Seite fuer Kissen aufrufen",
+      "expected": "Seite laedt korrekt, Terminbuchung oder Kontaktmoeglichkeit ist vorhanden"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Beratungstermin-Seite fuer Moebelberatung aufrufen",
+      "expected": "Seite laedt korrekt, Terminbuchung oder Kontaktmoeglichkeit ist vorhanden"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Terminbuchungs-Funktionalitaet pruefen (Formular, Kalender oder Kontaktweg)",
+      "expected": "Terminbuchung ist moeglich oder Kontaktweg ist klar ersichtlich"
+    }
+  ],
+  "postconditions": [
+    "Alle Beratungstermin-Seiten sind erreichbar und funktional"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "beratung",
+      "matratzen",
+      "kissen",
+      "moebel",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 600,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

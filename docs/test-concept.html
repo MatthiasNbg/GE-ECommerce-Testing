@@ -446,7 +446,7 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>291 Testfällen</strong> in 19 Kategorien.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>299 Testfällen</strong> in 19 Kategorien.</p>
 <p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
@@ -588,10 +588,10 @@
 </tr>
 <tr>
 <td>📄 **Content Tests**</td>
-<td>8</td>
-<td><span class="badge badge-defined">○ Definiert</span> 0/8</td>
+<td>16</td>
+<td><span class="badge badge-defined">○ Definiert</span> 0/16</td>
 <td><span class="badge badge-priority-p2">P2 Mittel</span></td>
-<td>Kategorie-Zuordnung, Footer-Links, Trust-Siegel, Contentprüfung</td>
+<td>Kategorie-Zuordnung, Footer-Links, Trust-Siegel, CMS, Legal, Filialen, Beratung</td>
 </tr>
 <tr>
 <td>📰 **Feature Tests - Newsletter & Freundeskreis**</td>
@@ -646,7 +646,7 @@
 <li><a href="#feature-tests-versandarten">Feature Tests - Versandarten</a> - (98 Tests)</li>
 <li><a href="#feature-tests-promotions">Feature Tests - Promotions</a> - (47 Tests)</li>
 <li><a href="#data-validation-tests">Data Validation Tests</a> - (15 Tests)</li>
-<li><a href="#content-tests">Content Tests</a> - (8 Tests)</li>
+<li><a href="#content-tests">Content Tests</a> - (16 Tests)</li>
 <li><a href="#feature-tests-newsletter--freundeskreis">Feature Tests - Newsletter & Freundeskreis</a> - (9 Tests)</li>
 <li><a href="#technische-tests">Technische Tests</a> - (10 Tests)</li>
 <li><a href="#regression-tests">Regression Tests</a> - (15-20 Tests)</li>
@@ -660,7 +660,7 @@
 
 <h3 id="gesamtuebersicht">Gesamtübersicht</h3>
 
-<strong>Gesamt:</strong> 286 Tests
+<strong>Gesamt:</strong> 294 Tests
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 154</li>
 <li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 111</li>
@@ -4924,8 +4924,8 @@
 <h3 id="content-tests">📄 Content Tests</h3>
 
 <strong>Priorität:</strong> P2
-<strong>Tests:</strong> 0/7 geplant
-<strong>Beschreibung:</strong> Prüfung der korrekten Kategorie-Zuordnung, Content-Darstellung, Footer-Links und Trust-Elemente
+<strong>Tests:</strong> 0/16 geplant
+<strong>Beschreibung:</strong> Prüfung der korrekten Kategorie-Zuordnung, Content-Darstellung, Footer-Links, Trust-Elemente, CMS-Seiten, Legal-Seiten, Filialen, Karriere und Beratung
 <strong>Dauer:</strong> 5-15 Min
 <strong>Ausführung:</strong> Nach Content-Updates, bei neuen Produkten
 
@@ -5029,6 +5029,82 @@
 <td>1</td>
 </tr>
 </tbody></table></div>
+<h4 id="manuelle-content-pruefungen-production">Manuelle Content-Prüfungen (Production)</h4>
+
+<div class="table-wrapper"><table class="test-table">
+<thead><tr>
+<th>Test-ID</th>
+<th>Name</th>
+<th>Priorität</th>
+<th>Status</th>
+<th>Länder</th>
+<th>Varianten</th>
+</tr></thead><tbody>
+<tr>
+<td>TC-CONTENT-009</td>
+<td>Content CMS Seiten prüfen</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-010</td>
+<td>AGB vorhanden und inhaltlich korrekt</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-011</td>
+<td>Datenschutzerklärung vorhanden und korrekt</td>
+<td>P1</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-012</td>
+<td>Zahlungsarten-Informationsseite</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-013</td>
+<td>Filialseiten erreichbar und korrekt</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-014</td>
+<td>Bewerberseite und Stelleninserate</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-015</td>
+<td>Beteiligungsmodell-Seite</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TC-CONTENT-016</td>
+<td>Beratungstermine (Matratzen, Kissen, Möbel)</td>
+<td>P2</td>
+<td>🖐️</td>
+<td>AT, DE, CH</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
 <strong>Detaillierte Testbeschreibungen:</strong>
 
 <strong>TC-CONTENT-001: Bett Almeno wird in Kategorie Möbel angezeigt</strong>
@@ -5051,6 +5127,54 @@
 <li>Produkt ist der richtigen Kategorie zugeordnet</li>
 </ul>
 </ol>
+<summary><strong>Manuelle Testfälle: Content-Prüfungen Production (TC-CONTENT-009 bis 016)</strong></summary>
+
+<p>Die folgenden 8 Testfälle sind <strong>manuelle Tests</strong>, die auf <strong>Production</strong> ausgeführt werden (Prüfung nach "Sinn und Verstand").</p>
+
+<strong>TC-CONTENT-009: Content CMS Seiten prüfen</strong>
+<ul>
+<li><strong>Schritte:</strong> CMS-Seiten (Erlebniswelten, Landingpages, Info-Seiten) aufrufen → Texte, Bilder, Layout prüfen → Interne Links prüfen → In allen Kanälen (AT, DE, CH) prüfen</li>
+<li><strong>Erwartung:</strong> Alle CMS-Seiten sind vollständig, keine Platzhalter, keine 404-Fehler</li>
+</ul>
+<strong>TC-CONTENT-010: AGB vorhanden und inhaltlich korrekt</strong>
+<ul>
+<li><strong>Schritte:</strong> AGB-Seite über Footer aufrufen → Inhalt auf Vollständigkeit und Aktualität prüfen → In allen Kanälen prüfen (AT, DE, CH)</li>
+<li><strong>Erwartung:</strong> AGB sind vorhanden, vollständig und pro Land korrekt</li>
+</ul>
+<strong>TC-CONTENT-011: Datenschutzerklärung vorhanden und korrekt</strong>
+<ul>
+<li><strong>Schritte:</strong> Datenschutz-Seite über Footer aufrufen → DSGVO-Konformität prüfen (Cookies, Tracking, Rechte) → In allen Kanälen prüfen</li>
+<li><strong>Erwartung:</strong> Datenschutzerklärung ist vollständig und DSGVO-konform</li>
+</ul>
+<strong>TC-CONTENT-012: Zahlungsarten-Informationsseite</strong>
+<ul>
+<li><strong>Schritte:</strong> Zahlungsarten-Seite aufrufen → Verfügbare Zahlungsarten prüfen (Vorkasse, Rechnung, Kreditkarte) → Länderspezifische Unterschiede prüfen (CH ohne Rechnung)</li>
+<li><strong>Erwartung:</strong> Zahlungsarten-Informationen sind korrekt und vollständig</li>
+</ul>
+<strong>TC-CONTENT-013: Filialseiten erreichbar und korrekt</strong>
+<ul>
+<li><strong>Schritte:</strong> Filialen-Übersichtsseite aufrufen → Einzelne Filialseiten stichprobenartig prüfen → Adressen, Öffnungszeiten, Kontaktdaten, Bilder und Karten prüfen</li>
+<li><strong>Erwartung:</strong> Alle Filialseiten sind erreichbar mit aktuellen Informationen</li>
+</ul>
+<strong>TC-CONTENT-014: Bewerberseite und Stelleninserate</strong>
+<ul>
+<li><strong>Zielgruppe:</strong> HR-Abteilung</li>
+<li><strong>Schritte:</strong> Bewerberseite/Karriereseite aufrufen → Stelleninserate prüfen → Einzelnes Inserat aufrufen → Bewerbungsformular oder Kontaktweg prüfen</li>
+<li><strong>Erwartung:</strong> Stelleninserate sind aufrufbar, Bewerbungsweg ist klar ersichtlich</li>
+</ul>
+<strong>TC-CONTENT-015: Beteiligungsmodell-Seite</strong>
+<ul>
+<li><strong>Schritte:</strong> Beteiligungsmodell-Seite aufrufen → Inhalt prüfen (Beschreibung, Konditionen) → Links und Downloads prüfen</li>
+<li><strong>Erwartung:</strong> Informationen zum Beteiligungsmodell sind vollständig und verständlich</li>
+</ul>
+<strong>TC-CONTENT-016: Beratungstermine (Matratzen, Kissen, Möbel)</strong>
+<ul>
+<li><strong>Schritte:</strong> Beratungstermin-Seite für Matratzen aufrufen → Beratungstermin-Seite für Kissen aufrufen → Beratungstermin-Seite für Möbelberatung aufrufen → Terminbuchungs-Funktionalität prüfen</li>
+<li><strong>Erwartung:</strong> Alle Beratungstermin-Seiten sind erreichbar, Terminbuchung ist möglich</li>
+</ul>
+</details>
+
+<hr>
 
 <h3 id="feature-tests-newsletter-freundeskreis">📰 Feature Tests - Newsletter & Freundeskreis</h3>
 
@@ -6176,7 +6300,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 07.02.2026 um 13:56 Uhr</p>
+            <p>Generiert am 07.02.2026 um 14:15 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

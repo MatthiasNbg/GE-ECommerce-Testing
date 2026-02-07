@@ -1,0 +1,66 @@
+{
+  "test_id": "TC-CONTENT-013",
+  "name": "Filialseiten erreichbar und korrekt (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Filialseiten sind im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Filialen-Uebersichtsseite aufrufen",
+      "expected": "Uebersichtsseite laedt korrekt, alle Filialen sind aufgelistet"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Einzelne Filialseiten aufrufen (stichprobenartig)",
+      "expected": "Filialseiten laden korrekt mit Adresse, Oeffnungszeiten, Kontaktdaten"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Filial-Informationen auf Plausibilitaet pruefen",
+      "expected": "Adressen, Oeffnungszeiten und Telefonnummern sind aktuell und korrekt"
+    },
+    {
+      "step": 4,
+      "action": "MANUELL: Bilder und Karten auf Filialseiten pruefen",
+      "expected": "Bilder werden angezeigt, Karteneinbindung funktioniert"
+    }
+  ],
+  "postconditions": [
+    "Alle Filialseiten sind erreichbar und inhaltlich korrekt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "filialen",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 600,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "test_id": "TC-CONTENT-011",
+  "name": "Datenschutzerklaerung vorhanden und inhaltlich korrekt (manuell)",
+  "category": "e2e",
+  "priority": "P1",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Datenschutz-Seite ist im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Datenschutzerklaerung ueber Footer-Link aufrufen",
+      "expected": "Datenschutz-Seite laedt korrekt, kein 404-Fehler"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Datenschutzerklaerung-Inhalt pruefen (Vollstaendigkeit, DSGVO-Konformitaet)",
+      "expected": "Datenschutzerklaerung ist vollstaendig, enthaelt alle relevanten Abschnitte (Cookies, Tracking, Rechte der Betroffenen)"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Datenschutzerklaerung in allen Verkaufskanaelen pruefen (AT, DE, CH)",
+      "expected": "Datenschutzerklaerung ist pro Land korrekt vorhanden"
+    }
+  ],
+  "postconditions": [
+    "Datenschutzerklaerung ist auf allen Kanaelen vorhanden und inhaltlich korrekt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "datenschutz",
+      "legal",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}

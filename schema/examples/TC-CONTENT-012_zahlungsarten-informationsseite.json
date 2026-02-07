@@ -1,0 +1,61 @@
+{
+  "test_id": "TC-CONTENT-012",
+  "name": "Zahlungsarten-Informationsseite pruefen (manuell)",
+  "category": "e2e",
+  "priority": "P2",
+  "functional_area": "Content",
+  "schema_version": "3.0.0",
+  "scope": {
+    "environments": ["production"],
+    "shop_system": "Shopware 6"
+  },
+  "preconditions": [
+    "Shop ist erreichbar",
+    "Zahlungsarten-Informationsseite ist im Shop verlinkt"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "MANUELL: Zahlungsarten-Seite aufrufen (Footer oder Service-Navigation)",
+      "expected": "Zahlungsarten-Seite laedt korrekt"
+    },
+    {
+      "step": 2,
+      "action": "MANUELL: Angezeigte Zahlungsarten pruefen (Vorkasse, Rechnung, Kreditkarte)",
+      "expected": "Alle verfuegbaren Zahlungsarten sind korrekt beschrieben"
+    },
+    {
+      "step": 3,
+      "action": "MANUELL: Zahlungsarten pro Land pruefen (AT, DE, CH)",
+      "expected": "Laenderspezifische Unterschiede sind korrekt dargestellt (z.B. CH ohne Rechnung)"
+    }
+  ],
+  "postconditions": [
+    "Zahlungsarten-Informationen sind vollstaendig und korrekt"
+  ],
+  "test_data": [],
+  "automation": {
+    "status": "manual",
+    "framework": "Manueller Test",
+    "repo": "GE-ECommerce-Testing",
+    "spec_file": "",
+    "function_name": "",
+    "tags": [
+      "content",
+      "manual",
+      "zahlungsarten",
+      "production"
+    ]
+  },
+  "orchestration": {
+    "parallel_safe": true,
+    "timeout_seconds": 300,
+    "retry_count": 0
+  },
+  "meta": {
+    "author": "QA Team",
+    "created": "2026-02-07",
+    "last_modified": "2026-02-07",
+    "version": "1.0"
+  }
+}
