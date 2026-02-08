@@ -68,12 +68,7 @@
       "expected": "Login mit neuer E-Mail ist erfolgreich, alte E-Mail funktioniert nicht mehr"
     }
   ],
-  "test_data": [
-    {
-      "type": "channel",
-      "name": "Staging"
-    }
-  ],
+  "test_data": [],
   "automation": {
     "status": "manual",
     "framework": "manuell",
