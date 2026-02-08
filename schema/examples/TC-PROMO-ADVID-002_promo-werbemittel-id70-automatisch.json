@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-ADVID-002",
   "name": "Automatisierte Promo auf Werbemittel ID 70",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

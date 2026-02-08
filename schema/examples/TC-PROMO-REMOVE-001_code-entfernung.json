@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-REMOVE-001",
   "name": "Promotion-Code wird bei Warenkorb-Leerung entfernt",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-EMP-003",
   "name": "Mitarbeiterrabatt 50% auf Kosmetik einzeln einloesen",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

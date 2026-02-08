@@ -1,7 +1,9 @@
 {
   "test_id": "TC-E2E-003",
   "name": "B2B-Bestellung als Geschaeftskunde (Gast)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "E2E Tests - Checkout",
   "schema_version": "3.0.0",

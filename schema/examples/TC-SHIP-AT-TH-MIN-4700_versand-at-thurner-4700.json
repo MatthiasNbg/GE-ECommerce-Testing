@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-AT-TH-MIN-4700",
   "name": "Versandart Thurner AT fuer PLZ 4700 (Schwanenstadt) - Minimum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-COMBO-002",
   "name": "20% Kleidung + 5% Alles",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

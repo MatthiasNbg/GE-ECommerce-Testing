@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-CAT-001",
   "name": "Promo auf Produktkategorie via advertising_material_id (10% Kleidung)",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-007",
   "name": "Mehrere Produkte zum Warenkorb hinzufügen",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P0",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

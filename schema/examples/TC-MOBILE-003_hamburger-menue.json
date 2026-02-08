@@ -1,7 +1,9 @@
 {
   "test_id": "TC-MOBILE-003",
   "name": "Mobile Hamburger-Menue funktioniert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Responsive/Navigation",
   "schema_version": "2.2.0",

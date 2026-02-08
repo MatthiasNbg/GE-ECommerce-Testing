@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-BUNDLE-001",
   "name": "Nimm 3 zahl 2",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

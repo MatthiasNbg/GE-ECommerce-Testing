@@ -1,7 +1,9 @@
 {
   "test_id": "TC-DATA-014",
   "name": "Produktdaten konsistent ueber Laender",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P2",
   "functional_area": "Datenvalidierung",
   "schema_version": "3.0.0",

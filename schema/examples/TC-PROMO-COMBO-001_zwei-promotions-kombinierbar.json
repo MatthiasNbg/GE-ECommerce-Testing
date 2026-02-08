@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-COMBO-001",
   "name": "Zwei Promotions kombinierbar",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

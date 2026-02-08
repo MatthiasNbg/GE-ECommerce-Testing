@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PERF-002",
   "name": "Performance-Schnelltest: 30 Bestellungen",
-  "category": "performance",
+  "category": [
+    "performance"
+  ],
   "priority": "P2",
   "functional_area": "Feature Performance",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-E2E-002",
   "name": "Gast-Checkout ohne Account-Erstellung",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "E2E Tests - Checkout",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SEC-002",
   "name": "Gutschein-Kombination fuer kostenlosen Warenkorb",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P0",
   "functional_area": "Security",
   "schema_version": "3.0.0",

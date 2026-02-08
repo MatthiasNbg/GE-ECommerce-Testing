@@ -1,12 +1,16 @@
 {
   "test_id": "TC-ACCOUNT-016",
   "name": "Kontotyp von Privat auf Gewerblich aendern (manuell)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Account-Verwaltung",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [

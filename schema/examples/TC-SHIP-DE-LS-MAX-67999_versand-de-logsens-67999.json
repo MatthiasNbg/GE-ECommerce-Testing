@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-DE-LS-MAX-67999",
   "name": "Versandart Logsens Sued fuer PLZ 67999 (Kaiserslautern) - Maximum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

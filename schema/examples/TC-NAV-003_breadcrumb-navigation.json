@@ -1,7 +1,9 @@
 {
   "test_id": "TC-NAV-003",
   "name": "Breadcrumb-Navigation",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Navigation",
   "schema_version": "2.2.0",

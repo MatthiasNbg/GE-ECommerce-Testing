@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-001",
   "name": "Produktbilder-Galerie und Zoom",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "PDP",
   "schema_version": "2.2.0",

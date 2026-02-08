@@ -1,7 +1,9 @@
 {
   "test_id": "TC-DATA-001",
   "name": "Preis auf Produktdetailseite stimmt mit Warenkorb ueberein",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Datenvalidierung",
   "schema_version": "3.0.0",

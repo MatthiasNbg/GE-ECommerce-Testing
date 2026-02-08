@@ -1,7 +1,9 @@
 {
   "test_id": "TC-WISH-001",
   "name": "Produkt zur Merkliste hinzufuegen",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Merkliste/Wishlist",
   "schema_version": "3.0.0",

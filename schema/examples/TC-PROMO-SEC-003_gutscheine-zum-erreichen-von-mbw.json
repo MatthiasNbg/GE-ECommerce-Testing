@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SEC-003",
   "name": "Gutscheine zum Erreichen von MBW",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Security",
   "schema_version": "3.0.0",

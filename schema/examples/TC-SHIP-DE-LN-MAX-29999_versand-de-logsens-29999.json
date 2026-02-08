@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-DE-LN-MAX-29999",
   "name": "Versandart Logsens Nord fuer PLZ 29999 (Lueneburg) - Maximum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

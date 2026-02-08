@@ -1,7 +1,9 @@
 {
   "test_id": "TC-LISTING-002",
   "name": "Sortierung funktioniert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Listing",
   "schema_version": "2.2.0",

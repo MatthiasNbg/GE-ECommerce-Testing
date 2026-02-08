@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-GIFT-005",
   "name": "Promocode wird abgelehnt wenn Einkaufsgutschein im Warenkorb ist",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CRITICAL-005",
   "name": "Zahlungsarten verfügbar (AT)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "Feature Critical Path",
   "schema_version": "3.0.0",

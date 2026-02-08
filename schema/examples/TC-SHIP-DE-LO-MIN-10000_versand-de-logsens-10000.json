@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-DE-LO-MIN-10000",
   "name": "Versandart Logsens Ost fuer PLZ 10000 (Berlin) - Minimum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

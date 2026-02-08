@@ -1,12 +1,16 @@
 {
   "test_id": "TC-CONTENT-010",
   "name": "AGB vorhanden und inhaltlich korrekt (manuell)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Content",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["production"],
+    "environments": [
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [

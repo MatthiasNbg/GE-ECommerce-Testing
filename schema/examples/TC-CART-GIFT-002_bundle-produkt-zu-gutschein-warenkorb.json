@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-GIFT-002",
   "name": "Bundle-Produkt kann nicht zu Warenkorb mit Einkaufsgutschein hinzugefügt werden",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P2",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

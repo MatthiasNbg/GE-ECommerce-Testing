@@ -1,7 +1,9 @@
 {
   "test_id": "TC-COOKIE-001",
   "name": "Cookie-Banner erscheint beim Erstbesuch",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "Cookie/Consent",
   "schema_version": "2.2.0",

@@ -1,12 +1,17 @@
 {
   "test_id": "TC-ACCOUNT-015",
   "name": "Aenderungen im Benutzerkonto werden korrekt uebernommen (manuell)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Account-Verwaltung",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging", "production"],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [

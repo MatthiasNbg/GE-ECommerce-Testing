@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-COST-DE-002",
   "name": "Versandkosten Spedition DE Menge 5 - Hoher Warenwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandkosten",
   "schema_version": "3.0.0",

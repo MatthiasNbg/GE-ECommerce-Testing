@@ -1,7 +1,9 @@
 {
   "test_id": "TC-MOBILE-002",
   "name": "Checkout im mobilen Viewport",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Responsive/Mobile",
   "schema_version": "2.2.0",

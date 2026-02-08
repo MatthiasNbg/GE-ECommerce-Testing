@@ -1,7 +1,9 @@
 {
   "test_id": "TC-ACCOUNT-003",
   "name": "Registrierung mit ungültiger E-Mail zeigt Fehler",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Account",
   "schema_version": "3.0.0",

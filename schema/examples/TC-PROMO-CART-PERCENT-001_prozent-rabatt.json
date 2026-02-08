@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-CART-PERCENT-001",
   "name": "Prozentualer Warenkorb-Rabatt mit Code",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-NEWSLETTER-001",
   "name": "Newsletter-Anmeldung mit gueltiger E-Mail",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Feature Newsletter",
   "schema_version": "2.2.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-003",
   "name": "Mengenänderung aktualisiert Gesamtpreis im Warenkorb",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P0",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

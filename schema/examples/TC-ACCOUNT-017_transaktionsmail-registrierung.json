@@ -1,12 +1,16 @@
 {
   "test_id": "TC-ACCOUNT-017",
   "name": "Transaktionsmail Registrierung (Emarsys)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Transaktionsmails",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging"],
+    "environments": [
+      "staging"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [

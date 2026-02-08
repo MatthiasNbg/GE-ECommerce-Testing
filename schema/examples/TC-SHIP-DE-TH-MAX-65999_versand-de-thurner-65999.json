@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-DE-TH-MAX-65999",
   "name": "Versandart Thurner DE fuer PLZ 65999 (Wiesbaden) - Maximum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

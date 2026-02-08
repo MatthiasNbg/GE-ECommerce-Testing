@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-COST-DE-001",
   "name": "Versandkosten Spedition DE Menge 1 - Standardberechnung",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandkosten",
   "schema_version": "3.0.0",

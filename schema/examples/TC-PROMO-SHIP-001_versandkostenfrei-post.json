@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SHIP-001",
   "name": "Versandkostenfrei fuer Postartikel mit Code",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

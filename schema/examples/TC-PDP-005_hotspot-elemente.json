@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-005",
   "name": "Hotspot-Elemente auf Bildern",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "PDP",
   "schema_version": "2.2.0",

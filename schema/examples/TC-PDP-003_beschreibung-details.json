@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-003",
   "name": "Beschreibung und Details sichtbar",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "PDP",
   "schema_version": "2.2.0",

@@ -1,12 +1,17 @@
 {
   "test_id": "TC-NEWSLETTER-008",
   "name": "Freundeskreis-Anmeldung im Account-Bereich (Emarsys)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Feature Newsletter",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["staging", "production"],
+    "environments": [
+      "staging",
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [

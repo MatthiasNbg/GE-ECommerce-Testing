@@ -1,7 +1,9 @@
 {
   "test_id": "TC-E2E-001",
   "name": "E2E Checkout komplett (Neuregistrierung + Login, alle Zahlungs-/Versandarten)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "E2E Tests - Checkout",
   "schema_version": "3.0.0",

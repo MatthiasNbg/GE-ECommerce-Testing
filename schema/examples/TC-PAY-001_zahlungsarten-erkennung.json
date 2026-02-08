@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PAY-001",
   "name": "Zahlungsarten automatisch erkennen (Discovery)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Zahlung",
   "schema_version": "3.0.0",

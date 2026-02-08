@@ -1,7 +1,9 @@
 {
   "test_id": "TC-NAV-004",
   "name": "Laenderwechsel AT/DE/CH",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Navigation",
   "schema_version": "2.2.0",

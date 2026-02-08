@@ -1,7 +1,9 @@
 {
   "test_id": "TC-ACCOUNT-012",
   "name": "Adresse bearbeiten und im Checkout verifizieren",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Account",
   "schema_version": "3.0.0",

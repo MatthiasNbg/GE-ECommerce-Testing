@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-006",
   "name": "Produktbewertung abgeben und verifizieren",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "PDP",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-WISH-003",
   "name": "Produkt von der Merkliste entfernen",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Merkliste/Wishlist",
   "schema_version": "3.0.0",

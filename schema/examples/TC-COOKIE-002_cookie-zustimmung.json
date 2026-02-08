@@ -1,7 +1,9 @@
 {
   "test_id": "TC-COOKIE-002",
   "name": "Cookie-Zustimmung funktioniert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "Cookie/Consent",
   "schema_version": "2.2.0",

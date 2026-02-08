@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-004",
   "name": "Nicht-auf-Lager-Verhalten",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "PDP",
   "schema_version": "2.2.0",

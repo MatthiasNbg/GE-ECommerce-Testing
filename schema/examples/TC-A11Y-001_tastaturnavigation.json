@@ -1,7 +1,9 @@
 {
   "test_id": "TC-A11Y-001",
   "name": "Tastaturnavigation auf Hauptseiten",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P3",
   "functional_area": "Accessibility",
   "schema_version": "2.2.0",

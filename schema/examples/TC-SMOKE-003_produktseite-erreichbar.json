@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SMOKE-003",
   "name": "Produktseite erreichbar",
-  "category": "smoke",
+  "category": [
+    "smoke"
+  ],
   "priority": "P0",
   "functional_area": "Feature Smoke",
   "schema_version": "3.0.0",

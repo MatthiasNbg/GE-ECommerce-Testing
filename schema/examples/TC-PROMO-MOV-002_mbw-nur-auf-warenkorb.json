@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-MOV-002",
   "name": "MBW nur auf Warenkorb angewendet",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

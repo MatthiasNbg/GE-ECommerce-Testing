@@ -1,7 +1,9 @@
 {
   "test_id": "TC-ERROR-002",
   "name": "Fehlerseite bei Server-Fehler",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Fehlerseiten",
   "schema_version": "2.2.0",

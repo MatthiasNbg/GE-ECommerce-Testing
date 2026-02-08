@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-QTY-001",
   "name": "Prozent auf teuerstes Produkt",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

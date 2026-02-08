@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SHIP-010",
   "name": "Versandkostenfrei bleibt bei Einloesegutschein (MBW auf Produktwert)",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

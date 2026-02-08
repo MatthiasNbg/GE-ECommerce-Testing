@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SEARCH-004",
   "name": "Klick auf Suchergebnis navigiert zur Produktseite",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Suche",
   "schema_version": "3.0.0",

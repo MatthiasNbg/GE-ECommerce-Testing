@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-EMP-005",
   "name": "Mitarbeiterrabatt 50% Kosmetik + 20% Alles gemeinsam einloesen",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

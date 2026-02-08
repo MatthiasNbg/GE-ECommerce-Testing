@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-INVALID-001",
   "name": "Ungueltiger Promotion-Code wird abgelehnt",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

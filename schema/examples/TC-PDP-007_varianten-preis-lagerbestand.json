@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-007",
   "name": "Produktvarianten-Auswahl aendert Preis und Verfuegbarkeit",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "PDP",
   "schema_version": "3.0.0",

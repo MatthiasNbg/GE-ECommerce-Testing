@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-GIFT-004",
   "name": "Einkaufsgutschein im Warenkorb entfernt alle aktiven Promotions",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

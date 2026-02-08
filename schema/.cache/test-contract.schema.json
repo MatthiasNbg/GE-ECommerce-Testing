@@ -19,9 +19,14 @@
       "description": "Menschenlesbarer Testname"
     },
     "category": {
-      "type": "string",
-      "enum": ["smoke", "regression", "e2e", "integration", "performance"],
-      "description": "Testkategorie"
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["smoke", "regression", "e2e", "integration", "performance"]
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Testkategorien (eine oder mehrere)"
     },
     "functional_area": {
       "type": "string",

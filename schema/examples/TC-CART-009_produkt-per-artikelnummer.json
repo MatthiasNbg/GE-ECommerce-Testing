@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-009",
   "name": "Produkt per Artikelnummer im Warenkorb hinzufügen",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

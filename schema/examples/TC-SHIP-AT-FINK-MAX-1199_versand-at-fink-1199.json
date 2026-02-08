@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-AT-FINK-MAX-1199",
   "name": "Versandart Fink AT fuer PLZ 1199 (Wien) - Maximum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

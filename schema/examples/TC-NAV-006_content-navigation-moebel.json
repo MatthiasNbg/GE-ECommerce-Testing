@@ -1,7 +1,9 @@
 {
   "test_id": "TC-NAV-006",
   "name": "Content-Navigation Moebel - Kategoriebaum validieren",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Navigation Kategoriebaum",
   "schema_version": "3.0.0",
@@ -66,9 +68,16 @@
       "uk1_count": 10,
       "uk2_count_total": 53,
       "categories": [
-        "Betten", "Sofas & Couches", "Wohnschraenke", "Regale & Regalsysteme",
-        "Kleiderschraenke", "Tische", "Stuehle & Baenke",
-        "Polstersessel & Hocker", "Lampen & Leuchten", "Teppiche"
+        "Betten",
+        "Sofas & Couches",
+        "Wohnschraenke",
+        "Regale & Regalsysteme",
+        "Kleiderschraenke",
+        "Tische",
+        "Stuehle & Baenke",
+        "Polstersessel & Hocker",
+        "Lampen & Leuchten",
+        "Teppiche"
       ]
     }
   ],

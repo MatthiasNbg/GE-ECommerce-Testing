@@ -1,7 +1,10 @@
 {
   "test_id": "TC-REG-013",
   "name": "Footer vorhanden",
-  "category": "regression",
+  "category": [
+    "regression",
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Regression",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-E2E-CC-001",
   "name": "Click & Collect - Abholung im Shop",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "E2E Tests - Click & Collect",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-ACCOUNT-009",
   "name": "Passwort vergessen",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "Feature Account",
   "schema_version": "2.2.0",

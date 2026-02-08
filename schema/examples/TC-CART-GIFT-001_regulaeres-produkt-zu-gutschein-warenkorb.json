@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-GIFT-001",
   "name": "Reguläres Produkt kann nicht zu Warenkorb mit Einkaufsgutschein hinzugefügt werden",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

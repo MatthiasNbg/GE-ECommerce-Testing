@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CONTENT-001",
   "name": "Bett Almeno wird in Kategorie Möbel angezeigt",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P2",
   "functional_area": "Feature Content",
   "schema_version": "3.0.0",

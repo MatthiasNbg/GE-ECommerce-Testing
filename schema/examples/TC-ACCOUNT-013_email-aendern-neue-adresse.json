@@ -1,7 +1,9 @@
 {
   "test_id": "TC-ACCOUNT-013",
   "name": "E-Mail-Adresse auf neue Adresse aendern (manuell)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Account E-Mail-Verwaltung",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SHIP-007",
   "name": "Versandkostenfrei gemischter Warenkorb (Post + Spedi) DE",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Promotion",
   "schema_version": "3.0.0",

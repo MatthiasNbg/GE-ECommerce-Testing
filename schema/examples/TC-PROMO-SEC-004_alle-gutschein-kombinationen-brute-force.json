@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SEC-004",
   "name": "Alle Gutschein-Kombinationen (Brute-Force)",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Security",
   "schema_version": "3.0.0",

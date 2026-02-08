@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-AT-WETSCH-MAX-6999",
   "name": "Versandart Wetsch AT fuer PLZ 6999 (Bregenz) - Maximum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

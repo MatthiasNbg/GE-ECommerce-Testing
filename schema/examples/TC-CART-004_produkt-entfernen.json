@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CART-004",
   "name": "Produkt aus dem Warenkorb entfernen",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P0",
   "functional_area": "Feature Warenkorb",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-DATA-013",
   "name": "Produkte in allen Laendern verfuegbar",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P2",
   "functional_area": "Datenvalidierung",
   "schema_version": "3.0.0",

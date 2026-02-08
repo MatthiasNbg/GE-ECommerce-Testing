@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CHECKOUT-003",
   "name": "Massentest Checkout Stresstest",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Feature Checkout",
   "schema_version": "3.0.0",

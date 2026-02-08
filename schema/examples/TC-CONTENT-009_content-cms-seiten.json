@@ -1,12 +1,16 @@
 {
   "test_id": "TC-CONTENT-009",
   "name": "Content CMS Seiten pruefen (manuell)",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Content",
   "schema_version": "3.0.0",
   "scope": {
-    "environments": ["production"],
+    "environments": [
+      "production"
+    ],
     "shop_system": "Shopware 6"
   },
   "preconditions": [

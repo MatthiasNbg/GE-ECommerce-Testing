@@ -1,7 +1,9 @@
 {
   "test_id": "TC-DATA-003",
   "name": "MwSt-Berechnung fuer AT (20%) pruefen",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P1",
   "functional_area": "Feature Datenvalidierung",
   "schema_version": "3.0.0",

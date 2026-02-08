@@ -1,7 +1,9 @@
 {
   "test_id": "TC-LISTING-003",
   "name": "Pagination",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P2",
   "functional_area": "Feature Listing",
   "schema_version": "2.2.0",

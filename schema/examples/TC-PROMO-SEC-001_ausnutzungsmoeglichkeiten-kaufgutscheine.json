@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PROMO-SEC-001",
   "name": "Ausnutzungsmoeglichkeiten Kaufgutscheine",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P0",
   "functional_area": "Security",
   "schema_version": "3.0.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-ERROR-001",
   "name": "404-Seite bei ungueltiger URL",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Fehlerseiten",
   "schema_version": "2.2.0",

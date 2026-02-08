@@ -1,7 +1,9 @@
 {
   "test_id": "TC-CONTENT-006",
   "name": "Matratzen-Berater erreichbar",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P2",
   "functional_area": "Feature Content",
   "schema_version": "2.2.0",

@@ -1,7 +1,9 @@
 {
   "test_id": "TC-WISH-005",
   "name": "Leere Merkliste zeigt Hinweis",
-  "category": "regression",
+  "category": [
+    "regression"
+  ],
   "priority": "P2",
   "functional_area": "Merkliste/Wishlist",
   "schema_version": "3.0.0",

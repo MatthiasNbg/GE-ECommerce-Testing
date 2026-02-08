@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SHIP-AT-CARGO-MIN-3400",
   "name": "Versandart Cargoe AT fuer PLZ 3400 (Klosterneuburg) - Minimum Grenzwert",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Versandarten",
   "schema_version": "3.0.0",

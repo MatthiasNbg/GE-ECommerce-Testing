@@ -1,7 +1,9 @@
 {
   "test_id": "TC-SEARCH-009",
   "name": "Autocomplete zeigt Produktbilder in Vorschlägen",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P1",
   "functional_area": "Feature Suche",
   "schema_version": "3.0.0",

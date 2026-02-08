@@ -1,7 +1,9 @@
 {
   "test_id": "TC-PDP-002",
   "name": "Varianten-Auswahl",
-  "category": "e2e",
+  "category": [
+    "e2e"
+  ],
   "priority": "P0",
   "functional_area": "PDP",
   "schema_version": "2.2.0",
