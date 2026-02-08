@@ -1,8 +1,13 @@
 """
-Technical Tests - TC-TECH-001 bis TC-TECH-010
+Technical Tests - Cookie, Fehlerseiten, Mobile, Accessibility
 Tests fuer Cookie/Consent, Fehlerseiten, Responsive/Mobile, Accessibility
 
-Test-IDs: TC-TECH-001 bis TC-TECH-010
+Test-IDs:
+  Cookie/Consent:      TC-COOKIE-001 bis TC-COOKIE-003
+  Fehlerseiten:        TC-ERROR-001 bis TC-ERROR-002
+  Mobile/Responsive:   TC-MOBILE-001 bis TC-MOBILE-003
+  Barrierefreiheit:    TC-A11Y-001 bis TC-A11Y-002
+
 Phase: Technical/Infrastructure
 Prioritaet: P0-P3
 """
@@ -95,12 +100,12 @@ def _accept_uc_cookie_banner(page, timeout=5000):
 
 
 # =============================================================================
-# Cookie/Consent Tests (TC-TECH-001 bis TC-TECH-003)
+# Cookie/Consent Tests (TC-COOKIE-001 bis TC-COOKIE-003)
 # =============================================================================
 
 def test_cookie_banner_appears_on_first_visit(base_url):
-    """TC-TECH-001: Cookie-Banner erscheint beim Erstbesuch."""
-    print("\n[TC-TECH-001] Starte Cookie-Banner Test...")
+    """TC-COOKIE-001: Cookie-Banner erscheint beim Erstbesuch."""
+    print("\n[TC-COOKIE-001] Starte Cookie-Banner Test...")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -136,8 +141,8 @@ def test_cookie_banner_appears_on_first_visit(base_url):
 
 
 def test_cookie_consent_accept_works(base_url):
-    """TC-TECH-002: Cookie-Zustimmung funktioniert."""
-    print("\n[TC-TECH-002] Starte Cookie-Zustimmung Test...")
+    """TC-COOKIE-002: Cookie-Zustimmung funktioniert."""
+    print("\n[TC-COOKIE-002] Starte Cookie-Zustimmung Test...")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -183,8 +188,8 @@ def test_cookie_consent_accept_works(base_url):
 
 
 def test_cookie_preferences_persist(base_url):
-    """TC-TECH-003: Cookie-Praeferenzen persistent nach Reload."""
-    print("\n[TC-TECH-003] Starte Cookie-Persistenz Test...")
+    """TC-COOKIE-003: Cookie-Praeferenzen persistent nach Reload."""
+    print("\n[TC-COOKIE-003] Starte Cookie-Persistenz Test...")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -235,12 +240,12 @@ def test_cookie_preferences_persist(base_url):
 
 
 # =============================================================================
-# Fehlerseiten Tests (TC-TECH-004 bis TC-TECH-005)
+# Fehlerseiten Tests (TC-ERROR-001 bis TC-ERROR-002)
 # =============================================================================
 
 def test_404_error_page(page: Page, base_url: str):
-    """TC-TECH-004: 404-Seite bei ungueltiger URL."""
-    print("\n[TC-TECH-004] Starte 404-Seite Test...")
+    """TC-ERROR-001: 404-Seite bei ungueltiger URL."""
+    print("\n[TC-ERROR-001] Starte 404-Seite Test...")
 
     page.goto(base_url)
     page.wait_for_load_state("domcontentloaded")
@@ -276,8 +281,8 @@ def test_404_error_page(page: Page, base_url: str):
 
 
 def test_error_page_handling(page: Page, base_url: str):
-    """TC-TECH-005: Fehlerseite bei Server-Fehler."""
-    print("\n[TC-TECH-005] Starte Fehlerseiten-Handling Test...")
+    """TC-ERROR-002: Fehlerseite bei Server-Fehler."""
+    print("\n[TC-ERROR-002] Starte Fehlerseiten-Handling Test...")
 
     page.goto(base_url)
     page.wait_for_load_state("domcontentloaded")
@@ -316,12 +321,12 @@ def test_error_page_handling(page: Page, base_url: str):
 
 
 # =============================================================================
-# Responsive/Mobile Tests (TC-TECH-006 bis TC-TECH-008)
+# Responsive/Mobile Tests (TC-MOBILE-001 bis TC-MOBILE-003)
 # =============================================================================
 
 def test_homepage_mobile_viewport(base_url):
-    """TC-TECH-006: Homepage korrekt im mobilen Viewport."""
-    print("\n[TC-TECH-006] Starte Mobile-Homepage Test...")
+    """TC-MOBILE-001: Homepage korrekt im mobilen Viewport."""
+    print("\n[TC-MOBILE-001] Starte Mobile-Homepage Test...")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -373,8 +378,8 @@ def test_homepage_mobile_viewport(base_url):
 
 
 def test_checkout_mobile_viewport(base_url, test_product_id):
-    """TC-TECH-007: Checkout im mobilen Viewport."""
-    print("\n[TC-TECH-007] Starte Mobile-Checkout Test...")
+    """TC-MOBILE-002: Checkout im mobilen Viewport."""
+    print("\n[TC-MOBILE-002] Starte Mobile-Checkout Test...")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -452,8 +457,8 @@ def test_checkout_mobile_viewport(base_url, test_product_id):
 
 
 def test_mobile_hamburger_menu(base_url):
-    """TC-TECH-008: Mobile Hamburger-Menue funktioniert."""
-    print("\n[TC-TECH-008] Starte Hamburger-Menue Test...")
+    """TC-MOBILE-003: Mobile Hamburger-Menue funktioniert."""
+    print("\n[TC-MOBILE-003] Starte Hamburger-Menue Test...")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -523,12 +528,12 @@ def test_mobile_hamburger_menu(base_url):
 
 
 # =============================================================================
-# Accessibility Tests (TC-TECH-009 bis TC-TECH-010)
+# Accessibility Tests (TC-A11Y-001 bis TC-A11Y-002)
 # =============================================================================
 
 def test_keyboard_navigation(page: Page, base_url: str):
-    """TC-TECH-009: Tastaturnavigation auf Hauptseiten."""
-    print("\n[TC-TECH-009] Starte Tastaturnavigation Test...")
+    """TC-A11Y-001: Tastaturnavigation auf Hauptseiten."""
+    print("\n[TC-A11Y-001] Starte Tastaturnavigation Test...")
 
     print(f"  Schritt 1: Navigiere zu {base_url}")
     page.goto(base_url)
@@ -620,8 +625,8 @@ def test_keyboard_navigation(page: Page, base_url: str):
 
 
 def test_product_image_alt_texts(page: Page, base_url: str, test_product_id: str):
-    """TC-TECH-010: Alt-Texte auf Produktbildern vorhanden."""
-    print("\n[TC-TECH-010] Starte Alt-Text Test...")
+    """TC-A11Y-002: Alt-Texte auf Produktbildern vorhanden."""
+    print("\n[TC-A11Y-002] Starte Alt-Text Test...")
 
     product_url = f"{base_url}/{test_product_id}"
     print(f"  Schritt 1: Navigiere zu Produktseite: {product_url}")

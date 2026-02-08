@@ -1,5 +1,5 @@
 {
-  "test_id": "TC-TECH-003",
+  "test_id": "TC-COOKIE-003",
   "name": "Cookie-Praeferenzen persistent nach Reload",
   "category": "e2e",
   "priority": "P1",
@@ -58,14 +58,15 @@
     }
   ],
   "automation": {
-    "status": "planned",
+    "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_technical.py",
     "function_name": "test_cookie_preferences_persist",
     "tags": [
-      "technical",
-      "consent"
+      "cookie",
+      "consent",
+      "persistence"
     ]
   },
   "orchestration": {
@@ -76,7 +77,7 @@
   "meta": {
     "author": "QA Team",
     "created": "2026-02-06",
-    "last_modified": "2026-02-06",
-    "version": "1.0"
+    "last_modified": "2026-02-08",
+    "version": "1.1"
   }
 }

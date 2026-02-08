@@ -446,15 +446,16 @@
 
 <h2 id="executive-summary">Executive Summary</h2>
 
-<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>299 Testfällen</strong> in 19 Kategorien.</p>
-<p>Der aktuelle Implementierungsstand liegt bei <strong>~57%</strong>.</p>
+<p>Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit <strong>299 Testfällen</strong> in 22 Kategorien.</p>
+<p>Der aktuelle Implementierungsstand liegt bei <strong>~61%</strong>.</p>
 
 <strong>Aktuelle Situation:</strong>
 <ul>
 <li><span class="badge badge-success">✓ Abgeschlossen</span> Basis-Tests (Smoke: 6/6) implementiert</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Critical Path (8/8) implementiert</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Feature-Tests (129/177 implementiert)</li>
-<li><span class="badge badge-warning">⚠ Teilweise</span> Weitere Kategorien (Newsletter, PDP, Listing, Navigation, Tech) definiert</li>
+<li><span class="badge badge-warning">⚠ Teilweise</span> Weitere Kategorien (Newsletter, PDP, Listing, Navigation) definiert</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Technische Tests (Cookie, Fehlerseiten, Mobile, A11y: 10/10) implementiert</li>
 </ul>
 <strong>Prioritäten:</strong>
 <ol>
@@ -471,7 +472,7 @@
 
 <h3 id="nach-funktionsbereichen">Nach Funktionsbereichen</h3>
 
-<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>150</strong> von <strong>266</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 56%;"></div></div><div class="progress-percent">56%</div></div>
+<div class="progress-container"><div class="progress-header"><span class="progress-title">Testfall-Definition</span><span class="progress-stats"><strong>164</strong> von <strong>294</strong> Testfällen definiert</span></div><div class="progress-bar-wrapper"><div class="progress-bar" style="width: 56%;"></div></div><div class="progress-percent">56%</div></div>
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -601,11 +602,32 @@
 <td>Newsletter-Anmeldung, Freundeskreis, Emarsys-Verifizierung</td>
 </tr>
 <tr>
-<td>🔧 **Technische Tests**</td>
-<td>10</td>
-<td><span class="badge badge-defined">○ Definiert</span> 0/10</td>
+<td>🍪 **Cookie/Consent Tests**</td>
+<td>3</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 3/3</td>
+<td><span class="badge badge-priority-p0">P0 Kritisch</span></td>
+<td>Cookie-Banner, Zustimmung, Persistenz</td>
+</tr>
+<tr>
+<td><span class="badge badge-warning">⚠ Teilweise</span> **Fehlerseiten Tests**</td>
+<td>2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 2/2</td>
 <td><span class="badge badge-priority-p1">P1 Hoch</span></td>
-<td>Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit</td>
+<td>404-Seite, Server-Fehler</td>
+</tr>
+<tr>
+<td>📱 **Mobile/Responsive Tests**</td>
+<td>3</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 3/3</td>
+<td><span class="badge badge-priority-p1">P1 Hoch</span></td>
+<td>Homepage mobil, Checkout mobil, Hamburger-Menü</td>
+</tr>
+<tr>
+<td>♿ **Barrierefreiheit Tests**</td>
+<td>2</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span> 2/2</td>
+<td>🟡 P3</td>
+<td>Tastaturnavigation, Alt-Texte</td>
 </tr>
 <tr>
 <td>🔄 **Regression Tests**</td>
@@ -648,7 +670,10 @@
 <li><a href="#data-validation-tests">Data Validation Tests</a> - (15 Tests)</li>
 <li><a href="#content-tests">Content Tests</a> - (16 Tests)</li>
 <li><a href="#feature-tests-newsletter--freundeskreis">Feature Tests - Newsletter & Freundeskreis</a> - (9 Tests)</li>
-<li><a href="#technische-tests">Technische Tests</a> - (10 Tests)</li>
+<li><a href="#cookieconsent-tests">Cookie/Consent Tests</a> - (3 Tests)</li>
+<li><a href="#fehlerseiten-tests">Fehlerseiten Tests</a> - (2 Tests)</li>
+<li><a href="#mobileresponsive-tests">Mobile/Responsive Tests</a> - (3 Tests)</li>
+<li><a href="#barrierefreiheit-tests">Barrierefreiheit Tests</a> - (2 Tests)</li>
 <li><a href="#regression-tests">Regression Tests</a> - (15-20 Tests)</li>
 <li><a href="#load-tests">Load Tests</a> - (5 Tests)</li>
 <li><a href="#testdaten">Testdaten</a> - Testprodukte, Adressen, Gutscheine</li>
@@ -662,10 +687,10 @@
 
 <strong>Gesamt:</strong> 294 Tests
 <ul>
-<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 154</li>
-<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 111</li>
+<li><span class="badge badge-success">✓ Abgeschlossen</span> Implementiert: 164</li>
+<li><span class="badge badge-error">✗ Fehlend</span> Fehlend: 101</li>
 <li><span class="badge badge-warning">⚠ Teilweise</span> Teilweise: 0</li>
-<li><strong>Abdeckung:</strong> 57%</li>
+<li><strong>Abdeckung:</strong> 61%</li>
 </ul>
 <hr>
 
@@ -5314,16 +5339,14 @@
 
 <hr>
 
-<h3 id="technische-tests">🔧 Technische Tests</h3>
+<h3 id="cookieconsent-tests">🍪 Cookie/Consent Tests</h3>
 
-<strong>Priorität:</strong> P1
-<strong>Tests:</strong> 0/10 geplant
-<strong>Beschreibung:</strong> Cookie-Banner, Fehlerseiten, Mobile Responsive, Barrierefreiheit
-<strong>Dauer:</strong> 10-20 Min
+<strong>Priorität:</strong> P0
+<strong>Tests:</strong> 3/3 implementiert
+<strong>Beschreibung:</strong> Cookie-Banner (Usercentrics), Zustimmung, Persistenz
+<strong>Dauer:</strong> 2-5 Min
 <strong>Ausführung:</strong> In CI/CD, vor Deployments
 
-<h4 id="cookie-handling">Cookie-Handling</h4>
-
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
 <th>Test-ID</th>
@@ -5334,31 +5357,39 @@
 <th>Varianten</th>
 </tr></thead><tbody>
 <tr>
-<td>TC-TECH-001</td>
+<td>TC-COOKIE-001</td>
 <td>Cookie-Banner erscheint beim Erstbesuch</td>
 <td>P0</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 <tr>
-<td>TC-TECH-002</td>
+<td>TC-COOKIE-002</td>
 <td>Cookie-Zustimmung funktioniert</td>
 <td>P0</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 <tr>
-<td>TC-TECH-003</td>
+<td>TC-COOKIE-003</td>
 <td>Cookie-Präferenzen persistent nach Reload</td>
 <td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 </tbody></table></div>
-<h4 id="fehlerseiten">Fehlerseiten</h4>
+<hr>
+
+<h3 id="span-classbadge-badge-warning-teilweisespan-fehlerseiten-tests"><span class="badge badge-warning">⚠ Teilweise</span> Fehlerseiten Tests</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 2/2 implementiert
+<strong>Beschreibung:</strong> 404-Seite, Server-Fehler-Handling
+<strong>Dauer:</strong> 1-3 Min
+<strong>Ausführung:</strong> In CI/CD, vor Deployments
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -5370,23 +5401,31 @@
 <th>Varianten</th>
 </tr></thead><tbody>
 <tr>
-<td>TC-TECH-004</td>
+<td>TC-ERROR-001</td>
 <td>404-Seite bei ungültiger URL</td>
 <td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 <tr>
-<td>TC-TECH-005</td>
+<td>TC-ERROR-002</td>
 <td>Fehlerseite bei Server-Fehler</td>
 <td>P2</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 </tbody></table></div>
-<h4 id="mobile-responsive">Mobile Responsive</h4>
+<hr>
+
+<h3 id="mobileresponsive-tests">📱 Mobile/Responsive Tests</h3>
+
+<strong>Priorität:</strong> P1
+<strong>Tests:</strong> 3/3 implementiert
+<strong>Beschreibung:</strong> Homepage mobil, Checkout mobil, Hamburger-Menü
+<strong>Dauer:</strong> 3-5 Min
+<strong>Ausführung:</strong> In CI/CD, vor Deployments
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -5398,31 +5437,39 @@
 <th>Varianten</th>
 </tr></thead><tbody>
 <tr>
-<td>TC-TECH-006</td>
+<td>TC-MOBILE-001</td>
 <td>Homepage korrekt im mobilen Viewport</td>
 <td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 <tr>
-<td>TC-TECH-007</td>
+<td>TC-MOBILE-002</td>
 <td>Checkout im mobilen Viewport</td>
 <td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 <tr>
-<td>TC-TECH-008</td>
+<td>TC-MOBILE-003</td>
 <td>Mobile Hamburger-Menü funktioniert</td>
 <td>P1</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 </tbody></table></div>
-<h4 id="barrierefreiheit">Barrierefreiheit</h4>
+<hr>
+
+<h3 id="barrierefreiheit-tests">♿ Barrierefreiheit Tests</h3>
+
+<strong>Priorität:</strong> P3
+<strong>Tests:</strong> 2/2 implementiert
+<strong>Beschreibung:</strong> Tastaturnavigation, Alt-Texte auf Produktbildern
+<strong>Dauer:</strong> 2-5 Min
+<strong>Ausführung:</strong> In CI/CD, vor Deployments
 
 <div class="table-wrapper"><table class="test-table">
 <thead><tr>
@@ -5434,18 +5481,18 @@
 <th>Varianten</th>
 </tr></thead><tbody>
 <tr>
-<td>TC-TECH-009</td>
+<td>TC-A11Y-001</td>
 <td>Tastaturnavigation auf Hauptseiten</td>
 <td>P3</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
 <tr>
-<td>TC-TECH-010</td>
+<td>TC-A11Y-002</td>
 <td>Alt-Texte auf Produktbildern vorhanden</td>
 <td>P3</td>
-<td><span class="badge badge-defined">○ Definiert</span></td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>AT, DE, CH</td>
 <td>1</td>
 </tr>
@@ -5581,8 +5628,8 @@
 </tr>
 <tr>
 <td>phase_5d</td>
-<td>Phase 5d - Technische Tests</td>
-<td><span class="badge badge-pending">⏳ Offen</span></td>
+<td>Phase 5d - Cookie, Fehlerseiten, Mobile, A11y</td>
+<td><span class="badge badge-success">✓ Abgeschlossen</span></td>
 <td>10</td>
 <td>-%</td>
 </tr>
@@ -6300,7 +6347,7 @@
         </main>
 
         <footer class="footer">
-            <p>Generiert am 08.02.2026 um 13:31 Uhr</p>
+            <p>Generiert am 08.02.2026 um 14:48 Uhr</p>
             <p>GE-ECommerce-Testing © 2026</p>
         </footer>
     </div>

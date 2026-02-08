@@ -50,7 +50,10 @@ Beispiele:
 | TC-PDP-* | Produktdetailseite | TC-PDP-008 |
 | TC-LISTING-* | Kategorie/Listing/Filter | TC-LISTING-005 |
 | TC-NEWSLETTER-* | Newsletter/Freundeskreis | TC-NEWSLETTER-010 |
-| TC-TECH-* | Technisch (Cookie/Responsive/A11y) | TC-TECH-011 |
+| TC-COOKIE-* | Cookie/Consent | TC-COOKIE-004 |
+| TC-ERROR-* | Fehlerseiten | TC-ERROR-003 |
+| TC-MOBILE-* | Mobile/Responsive | TC-MOBILE-004 |
+| TC-A11Y-* | Barrierefreiheit | TC-A11Y-003 |
 | TC-E2E-* | E2E Checkout | TC-E2E-004 |
 | TC-E2E-CC-* | Click & Collect | TC-E2E-CC-003 |
 | TC-WISH-* | Merkliste/Wishlist | TC-WISH-006 |
@@ -121,4 +124,4 @@ python schema/validate.py schema/examples/
 ```
 
 Erwartetes Ergebnis: 309 Dateien, 0 fehlerhaft, Exit-Code 0.
-(68 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 9 NEWSLETTER + 10 ACCOUNT + 6 CONTENT + 10 TECH + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)
+(68 neue Contracts: 6 NAV + 7 PDP + 4 LISTING + 9 NEWSLETTER + 10 ACCOUNT + 6 CONTENT + 3 COOKIE + 2 ERROR + 3 MOBILE + 2 A11Y + 1 CART + 4 SHIP-COST + 1 PROMO-CHK + 4 PROMO-EMP + 1 PROMO-CAT + 2 PROMO-ADVID + 3 E2E)

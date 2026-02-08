@@ -1,5 +1,5 @@
 {
-  "test_id": "TC-TECH-004",
+  "test_id": "TC-ERROR-001",
   "name": "404-Seite bei ungueltiger URL",
   "category": "e2e",
   "priority": "P1",
@@ -39,14 +39,14 @@
     }
   ],
   "automation": {
-    "status": "planned",
+    "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_technical.py",
     "function_name": "test_404_error_page",
     "tags": [
-      "technical",
-      "error"
+      "error",
+      "404"
     ]
   },
   "orchestration": {
@@ -57,7 +57,7 @@
   "meta": {
     "author": "QA Team",
     "created": "2026-02-06",
-    "last_modified": "2026-02-06",
-    "version": "1.0"
+    "last_modified": "2026-02-08",
+    "version": "1.1"
   }
 }

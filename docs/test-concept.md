@@ -9,14 +9,15 @@
 
 ## Executive Summary
 
-Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **299 Testfällen** in 19 Kategorien.
-Der aktuelle Implementierungsstand liegt bei **~57%**.
+Dieses Dokument beschreibt die Teststrategie für den Grüne Erde Online-Shop mit **299 Testfällen** in 22 Kategorien.
+Der aktuelle Implementierungsstand liegt bei **~61%**.
 
 **Aktuelle Situation:**
 - ✅ Basis-Tests (Smoke: 6/6) implementiert
 - ⚠️ Critical Path (8/8) implementiert
 - ⚠️ Feature-Tests (129/177 implementiert)
-- ⚠️ Weitere Kategorien (Newsletter, PDP, Listing, Navigation, Tech) definiert
+- ⚠️ Weitere Kategorien (Newsletter, PDP, Listing, Navigation) definiert
+- ✅ Technische Tests (Cookie, Fehlerseiten, Mobile, A11y: 10/10) implementiert
 
 **Prioritäten:**
 1. **Kritische Business-Flows** (Gast-Checkout, Zahlungsarten) → Phase 1
@@ -32,7 +33,7 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 
 ### Nach Funktionsbereichen
 
-<!-- PROGRESS_BAR:150:266:56 -->
+<!-- PROGRESS_BAR:164:294:56 -->
 
 | Funktionsbereich | Tests | Status | Priorität | Was wird geprüft? |
 |------------------|-------|--------|-----------|-------------------|
@@ -53,7 +54,10 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 | 📊 **Data Validation Tests** | 15 | ⚠️ 0/15 | 🟠 P1 | Preise, Versandkosten, MwSt., Verfügbarkeit, Produktdaten |
 | 📄 **Content Tests** | 16 | ○ 0/16 | 🟡 P2 | Kategorie-Zuordnung, Footer-Links, Trust-Siegel, CMS, Legal, Filialen, Beratung |
 | 📰 **Feature Tests - Newsletter & Freundeskreis** | 9 | ○ 0/9 | 🟡 P2 | Newsletter-Anmeldung, Freundeskreis, Emarsys-Verifizierung |
-| 🔧 **Technische Tests** | 10 | ○ 0/10 | 🟠 P1 | Cookie-Banner, Fehlerseiten, Mobile, Barrierefreiheit |
+| 🍪 **Cookie/Consent Tests** | 3 | ✅ 3/3 | 🔴 P0 | Cookie-Banner, Zustimmung, Persistenz |
+| ⚠️ **Fehlerseiten Tests** | 2 | ✅ 2/2 | 🟠 P1 | 404-Seite, Server-Fehler |
+| 📱 **Mobile/Responsive Tests** | 3 | ✅ 3/3 | 🟠 P1 | Homepage mobil, Checkout mobil, Hamburger-Menü |
+| ♿ **Barrierefreiheit Tests** | 2 | ✅ 2/2 | 🟡 P3 | Tastaturnavigation, Alt-Texte |
 | 🔄 **Regression Tests** | 15 | ⚠️ 3/15 | 🟡 P2 | Regression-Tests nach Änderungen |
 | ⚡ **Load Tests** | 5 | ⚠️ 3/5 | 🟡 P2 | Load-Tests, Response-Zeiten, Race Conditions |
 
@@ -82,11 +86,14 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 17. [Data Validation Tests](#data-validation-tests) - (15 Tests)
 18. [Content Tests](#content-tests) - (16 Tests)
 19. [Feature Tests - Newsletter & Freundeskreis](#feature-tests-newsletter--freundeskreis) - (9 Tests)
-20. [Technische Tests](#technische-tests) - (10 Tests)
-21. [Regression Tests](#regression-tests) - (15-20 Tests)
-22. [Load Tests](#load-tests) - (5 Tests)
-23. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
-24. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
+20. [Cookie/Consent Tests](#cookieconsent-tests) - (3 Tests)
+21. [Fehlerseiten Tests](#fehlerseiten-tests) - (2 Tests)
+22. [Mobile/Responsive Tests](#mobileresponsive-tests) - (3 Tests)
+23. [Barrierefreiheit Tests](#barrierefreiheit-tests) - (2 Tests)
+24. [Regression Tests](#regression-tests) - (15-20 Tests)
+25. [Load Tests](#load-tests) - (5 Tests)
+26. [Testdaten](#testdaten) - Testprodukte, Adressen, Gutscheine
+27. [Implementierungs-Roadmap](#implementierungs-roadmap) - Welche Reihenfolge?
 
 ---
 
@@ -95,10 +102,10 @@ Der aktuelle Implementierungsstand liegt bei **~57%**.
 ### Gesamtübersicht
 
 **Gesamt:** 294 Tests
-- ✅ Implementiert: 154
-- ❌ Fehlend: 111
+- ✅ Implementiert: 164
+- ❌ Fehlend: 101
 - ⚠️ Teilweise: 0
-- **Abdeckung:** 57%
+- **Abdeckung:** 61%
 
 ---
 
@@ -2176,43 +2183,65 @@ Die folgenden 7 Testfälle (TC-NEWSLETTER-003 bis 009) sind **manuelle Tests**, 
 
 ---
 
-### 🔧 Technische Tests
+### 🍪 Cookie/Consent Tests
 
-**Priorität:** P1
-**Tests:** 0/10 geplant
-**Beschreibung:** Cookie-Banner, Fehlerseiten, Mobile Responsive, Barrierefreiheit
-**Dauer:** 10-20 Min
+**Priorität:** P0
+**Tests:** 3/3 implementiert
+**Beschreibung:** Cookie-Banner (Usercentrics), Zustimmung, Persistenz
+**Dauer:** 2-5 Min
 **Ausführung:** In CI/CD, vor Deployments
 
-#### Cookie-Handling
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-COOKIE-001 | Cookie-Banner erscheint beim Erstbesuch | P0 | ✅ | AT, DE, CH | 1 |
+| TC-COOKIE-002 | Cookie-Zustimmung funktioniert | P0 | ✅ | AT, DE, CH | 1 |
+| TC-COOKIE-003 | Cookie-Präferenzen persistent nach Reload | P1 | ✅ | AT, DE, CH | 1 |
+
+---
+
+### ⚠️ Fehlerseiten Tests
+
+**Priorität:** P1
+**Tests:** 2/2 implementiert
+**Beschreibung:** 404-Seite, Server-Fehler-Handling
+**Dauer:** 1-3 Min
+**Ausführung:** In CI/CD, vor Deployments
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
-| TC-TECH-001 | Cookie-Banner erscheint beim Erstbesuch | P0 | ○ | AT, DE, CH | 1 |
-| TC-TECH-002 | Cookie-Zustimmung funktioniert | P0 | ○ | AT, DE, CH | 1 |
-| TC-TECH-003 | Cookie-Präferenzen persistent nach Reload | P1 | ○ | AT, DE, CH | 1 |
+| TC-ERROR-001 | 404-Seite bei ungültiger URL | P1 | ✅ | AT, DE, CH | 1 |
+| TC-ERROR-002 | Fehlerseite bei Server-Fehler | P2 | ✅ | AT, DE, CH | 1 |
 
-#### Fehlerseiten
+---
 
-| Test-ID | Name | Priorität | Status | Länder | Varianten |
-|---------|------|-----------|--------|--------|-----------|
-| TC-TECH-004 | 404-Seite bei ungültiger URL | P1 | ○ | AT, DE, CH | 1 |
-| TC-TECH-005 | Fehlerseite bei Server-Fehler | P2 | ○ | AT, DE, CH | 1 |
+### 📱 Mobile/Responsive Tests
 
-#### Mobile Responsive
-
-| Test-ID | Name | Priorität | Status | Länder | Varianten |
-|---------|------|-----------|--------|--------|-----------|
-| TC-TECH-006 | Homepage korrekt im mobilen Viewport | P1 | ○ | AT, DE, CH | 1 |
-| TC-TECH-007 | Checkout im mobilen Viewport | P1 | ○ | AT, DE, CH | 1 |
-| TC-TECH-008 | Mobile Hamburger-Menü funktioniert | P1 | ○ | AT, DE, CH | 1 |
-
-#### Barrierefreiheit
+**Priorität:** P1
+**Tests:** 3/3 implementiert
+**Beschreibung:** Homepage mobil, Checkout mobil, Hamburger-Menü
+**Dauer:** 3-5 Min
+**Ausführung:** In CI/CD, vor Deployments
 
 | Test-ID | Name | Priorität | Status | Länder | Varianten |
 |---------|------|-----------|--------|--------|-----------|
-| TC-TECH-009 | Tastaturnavigation auf Hauptseiten | P3 | ○ | AT, DE, CH | 1 |
-| TC-TECH-010 | Alt-Texte auf Produktbildern vorhanden | P3 | ○ | AT, DE, CH | 1 |
+| TC-MOBILE-001 | Homepage korrekt im mobilen Viewport | P1 | ✅ | AT, DE, CH | 1 |
+| TC-MOBILE-002 | Checkout im mobilen Viewport | P1 | ✅ | AT, DE, CH | 1 |
+| TC-MOBILE-003 | Mobile Hamburger-Menü funktioniert | P1 | ✅ | AT, DE, CH | 1 |
+
+---
+
+### ♿ Barrierefreiheit Tests
+
+**Priorität:** P3
+**Tests:** 2/2 implementiert
+**Beschreibung:** Tastaturnavigation, Alt-Texte auf Produktbildern
+**Dauer:** 2-5 Min
+**Ausführung:** In CI/CD, vor Deployments
+
+| Test-ID | Name | Priorität | Status | Länder | Varianten |
+|---------|------|-----------|--------|--------|-----------|
+| TC-A11Y-001 | Tastaturnavigation auf Hauptseiten | P3 | ✅ | AT, DE, CH | 1 |
+| TC-A11Y-002 | Alt-Texte auf Produktbildern vorhanden | P3 | ✅ | AT, DE, CH | 1 |
 
 ---
 
@@ -2255,7 +2284,7 @@ Die folgenden 7 Testfälle (TC-NEWSLETTER-003 bis 009) sind **manuelle Tests**, 
 | phase_5a | Phase 5a - Merkliste | ✅ | 5 | -% |
 | phase_5b | Phase 5b - PDP, Listing, Navigation | ⏳ | 14 | -% |
 | phase_5c | Phase 5c - Einkaufsgutschein/Warenkorb | ⏳ | 5 | -% |
-| phase_5d | Phase 5d - Technische Tests | ⏳ | 10 | -% |
+| phase_5d | Phase 5d - Cookie, Fehlerseiten, Mobile, A11y | ✅ | 10 | -% |
 | phase_6 | Phase 6 - Promotions | ⏳ | 52 | 60% |
 | phase_7 | Phase 7 - Data Validation | ⏳ | 15 | 70% |
 | phase_7a | Phase 7a - Content & Newsletter & Freundeskreis | ⏳ | 16 | -% |

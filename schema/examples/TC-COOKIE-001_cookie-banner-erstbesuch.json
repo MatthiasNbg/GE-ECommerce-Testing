@@ -1,6 +1,6 @@
 {
-  "test_id": "TC-TECH-002",
-  "name": "Cookie-Zustimmung funktioniert",
+  "test_id": "TC-COOKIE-001",
+  "name": "Cookie-Banner erscheint beim Erstbesuch",
   "category": "e2e",
   "priority": "P0",
   "functional_area": "Cookie/Consent",
@@ -35,36 +35,19 @@
     },
     {
       "step": 3,
-      "action": "Pruefen ob Cookie-Banner sichtbar ist",
+      "action": "Usercentrics Cookie-Banner pruefen",
       "expected": "Cookie-Banner (#usercentrics-cmp-ui) ist sichtbar",
       "selector_hint": "#usercentrics-cmp-ui"
-    },
-    {
-      "step": 4,
-      "action": "Alle akzeptieren Button klicken (Shadow DOM)",
-      "expected": "Button wird erfolgreich geklickt",
-      "selector_hint": "button[data-testid='uc-accept-all-button']",
-      "inputs": [
-        {
-          "action": "click",
-          "selector": "button[data-testid='uc-accept-all-button']"
-        }
-      ]
-    },
-    {
-      "step": 5,
-      "action": "Pruefen ob Cookie-Banner verschwindet",
-      "expected": "Cookie-Banner ist nicht mehr sichtbar"
     }
   ],
   "automation": {
-    "status": "planned",
+    "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_technical.py",
-    "function_name": "test_cookie_consent_accept_works",
+    "function_name": "test_cookie_banner_appears_on_first_visit",
     "tags": [
-      "technical",
+      "cookie",
       "consent"
     ]
   },
@@ -76,7 +59,7 @@
   "meta": {
     "author": "QA Team",
     "created": "2026-02-06",
-    "last_modified": "2026-02-06",
-    "version": "1.0"
+    "last_modified": "2026-02-08",
+    "version": "1.1"
   }
 }

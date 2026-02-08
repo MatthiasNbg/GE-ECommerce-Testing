@@ -1,5 +1,5 @@
 {
-  "test_id": "TC-TECH-008",
+  "test_id": "TC-MOBILE-003",
   "name": "Mobile Hamburger-Menue funktioniert",
   "category": "e2e",
   "priority": "P1",
@@ -64,13 +64,13 @@
     }
   ],
   "automation": {
-    "status": "planned",
+    "status": "automated",
     "framework": "Playwright + pytest",
     "repo": "GE-ECommerce-Testing",
     "spec_file": "playwright_tests/tests/test_technical.py",
     "function_name": "test_mobile_hamburger_menu",
     "tags": [
-      "technical",
+      "mobile",
       "responsive",
       "navigation"
     ]
@@ -86,7 +86,7 @@
   "meta": {
     "author": "QA Team",
     "created": "2026-02-06",
-    "last_modified": "2026-02-06",
-    "version": "1.0"
+    "last_modified": "2026-02-08",
+    "version": "1.1"
   }
 }
