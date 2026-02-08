@@ -89,6 +89,11 @@ Jeder Step kann ein `inputs`-Array enthalten, das die maschinell ausfuehrbaren A
 - `selector` (optional): CSS-Selektor des Zielelements
 - `value` (optional): Wert fuer fill/select/navigate
 
+### Regeln fuer `test_data`-Eintraege
+
+- Bei `"type": "payment"` MUSS `"name"` dem Wert von `"method"` entsprechen (z.B. `"name": "invoice", "method": "invoice"`). NIEMALS `"name": "default"` verwenden — das verursacht Deduplizierungsprobleme in TestHubPro2000.
+- `validate.py` prueft diese Regel automatisch und schlaegt fehl bei Verstoss.
+
 ### Regeln fuer `inputs` vs. `selector_hint`
 
 - `selector_hint`: Bleibt als menschenlesbarer Hinweis bestehen (Legacy)

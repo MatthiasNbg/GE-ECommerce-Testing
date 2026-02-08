@@ -42,6 +42,28 @@ def load_json(path: Path) -> dict:
         return json.load(f)
 
 
+def validate_semantic(instance: dict) -> list[str]:
+    """Semantische Prüfungen, die über das JSON-Schema hinausgehen."""
+    errors = []
+    for i, entry in enumerate(instance.get("test_data") or []):
+        entry_type = entry.get("type", "")
+        entry_name = entry.get("name", "")
+        # payment-Einträge: name muss dem method-Wert entsprechen, nicht "default"
+        if entry_type == "payment":
+            method = entry.get("method", "")
+            if entry_name == "default":
+                errors.append(
+                    f'  - test_data[{i}]: payment "name" ist "default", '
+                    f'muss dem method-Wert entsprechen (z.B. "{method}")'
+                )
+            elif method and entry_name != method:
+                errors.append(
+                    f'  - test_data[{i}]: payment "name" ({entry_name}) '
+                    f'weicht von "method" ({method}) ab'
+                )
+    return errors
+
+
 def validate_file(schema: dict, file_path: Path) -> list[str]:
     """Validiert eine einzelne JSON-Datei. Gibt Liste von Fehlern zurück."""
     try:
@@ -51,10 +73,12 @@ def validate_file(schema: dict, file_path: Path) -> list[str]:
 
     validator = Draft202012Validator(schema)
     errors = sorted(validator.iter_errors(instance), key=lambda e: list(e.path))
-    return [
+    result = [
         f"  - {'.'.join(str(p) for p in err.absolute_path) or '(root)'}: {err.message}"
         for err in errors
     ]
+    result.extend(validate_semantic(instance))
+    return result
 
 
 def main():
